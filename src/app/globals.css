@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+:root {
+  --navy: #00205c;
+  --blue: #0066b3;
+  --blue-light: #e8f0f8;
+  --red: #da291c;
+  --red-hover: #b71c1c;
+  --white: #ffffff;
+  --gray-50: #f8fafb;
+  --gray-100: #f1f3f5;
+  --gray-200: #e2e5e9;
+  --gray-400: #9ca3af;
+  --gray-600: #4a5568;
+  --gray-900: #1a202c;
+  --gold: #f5c518;
+}
+
+@theme inline {
+  --color-navy: var(--navy);
+  --color-blue: var(--blue);
+  --color-blue-light: var(--blue-light);
+  --color-red: var(--red);
+  --color-red-hover: var(--red-hover);
+  --color-white: var(--white);
+  --color-gray-50: var(--gray-50);
+  --color-gray-100: var(--gray-100);
+  --color-gray-200: var(--gray-200);
+  --color-gray-400: var(--gray-400);
+  --color-gray-600: var(--gray-600);
+  --color-gray-900: var(--gray-900);
+  --color-gold: var(--gold);
+  --font-sans: var(--font-dm-sans);
+  --font-display: var(--font-plus-jakarta);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--white);
+  color: var(--gray-600);
+  font-family: var(--font-dm-sans), sans-serif;
+}
+
+h1,
+ h2,
+ h3,
+ h4,
+ h5,
+ h6 {
+  font-family: var(--font-plus-jakarta), sans-serif;
+}
+
+a,
+button,
+input,
+select,
+textarea {
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+::selection {
+  background: rgba(0, 102, 179, 0.16);
+}

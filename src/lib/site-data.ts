@@ -1,0 +1,484 @@
+export type ProductSlug =
+  | "home"
+  | "auto"
+  | "renters"
+  | "life"
+  | "umbrella"
+  | "condo"
+  | "business"
+  | "general-liability"
+  | "workers-comp"
+  | "commercial-property"
+  | "commercial-auto"
+  | "professional-liability"
+  | "specialty-coverage"
+  | "other";
+
+export type ProductCategory = "personal" | "commercial";
+
+export type Product = {
+  slug: ProductSlug;
+  name: string;
+  shortName: string;
+  description: string;
+  icon: IconName;
+  category: ProductCategory;
+};
+
+export type IconName =
+  | "house"
+  | "car"
+  | "key"
+  | "heartPulse"
+  | "umbrella"
+  | "building2"
+  | "shield"
+  | "hardHat"
+  | "warehouse"
+  | "truck"
+  | "briefcase"
+  | "sparkles"
+  | "shieldCheck"
+  | "slidersHorizontal"
+  | "users"
+  | "star";
+
+export type Agent = {
+  slug: "erin" | "brahm" | "dakota";
+  name: string;
+  firstName: string;
+  title: string;
+  phone: string;
+  email: string;
+  bio: string;
+  accent: "blue" | "navy" | "red";
+  initials: string;
+  specialties: string[];
+  license?: string;
+};
+
+export type BlogPost = {
+  slug: string;
+  title: string;
+  excerpt: string;
+  publishedAt: string;
+  readingTime: string;
+  tags: string[];
+  intro: string;
+  sections: Array<{
+    heading: string;
+    body: string;
+    bullets?: string[];
+  }>;
+};
+
+export const agency = {
+  name: "Allsberry Insurance Agency",
+  fullName: "Allsberry Insurance Agency Inc",
+  phone: "(951) 739-5959",
+  phoneHref: "tel:+19517395959",
+  email: "erin@allsberryagency.com",
+  emailHref: "mailto:erin@allsberryagency.com",
+  addressLine1: "355 N Sheridan St Ste 100",
+  cityStateZip: "Corona, CA 92878",
+  fullAddress: "355 N Sheridan St Ste 100, Corona, CA 92878",
+  hours: "Monday–Friday, 8:00 AM – 5:00 PM",
+  licenses: "CA #0E91043, Agency #6001414",
+  ownerLicense: "CA License #0E91043",
+  agencyLicense: "Agency #6001414",
+  socials: {
+    facebook: "https://facebook.com/AllsberryInsuranceagency",
+    instagram: "https://instagram.com/allsberry_insurance",
+    linkedin: "https://linkedin.com/in/erin-allsberry-2845a819",
+  },
+  founded: 1994,
+  erinSince: 2009,
+  domain: "https://allsberryagency.com",
+  geo: {
+    latitude: 33.8753,
+    longitude: -117.5664,
+  },
+} as const;
+
+export const navigation = [
+  { label: "Personal Insurance", href: "/#personal-insurance" },
+  { label: "Commercial Insurance", href: "/#commercial-insurance" },
+  { label: "About", href: "/about" },
+  { label: "Blog", href: "/blog" },
+  { label: "Contact", href: "/contact" },
+] as const;
+
+export const valueProps = [
+  {
+    title: "Seamless Experience",
+    description: "Clear guidance, fast follow-up, and a smooth process from quote to coverage.",
+    icon: "shieldCheck",
+  },
+  {
+    title: "Personalized Coverage",
+    description: "Protection tailored around your home, vehicles, business, and long-term goals.",
+    icon: "slidersHorizontal",
+  },
+  {
+    title: "Expert Advice",
+    description: "Straight answers from a team that helps you compare options with confidence.",
+    icon: "users",
+  },
+  {
+    title: "Top-Rated Support",
+    description: "Responsive service before, during, and after claims so you never feel on your own.",
+    icon: "star",
+  },
+] as const;
+
+export const products: Product[] = [
+  {
+    slug: "home",
+    name: "Home Insurance",
+    shortName: "Home",
+    description: "Protect your home, belongings, and peace of mind with dependable coverage.",
+    icon: "house",
+    category: "personal",
+  },
+  {
+    slug: "auto",
+    name: "Auto Insurance",
+    shortName: "Auto",
+    description: "Coverage built for your vehicle, your commute, and the unexpected.",
+    icon: "car",
+    category: "personal",
+  },
+  {
+    slug: "renters",
+    name: "Renters Insurance",
+    shortName: "Renters",
+    description: "Affordable protection for your stuff, liability, and temporary living costs.",
+    icon: "key",
+    category: "personal",
+  },
+  {
+    slug: "life",
+    name: "Life Insurance",
+    shortName: "Life",
+    description: "Create a safety net for the people who matter most to you.",
+    icon: "heartPulse",
+    category: "personal",
+  },
+  {
+    slug: "umbrella",
+    name: "Umbrella Insurance",
+    shortName: "Umbrella",
+    description: "Extra liability protection that kicks in when standard policies run out.",
+    icon: "umbrella",
+    category: "personal",
+  },
+  {
+    slug: "condo",
+    name: "Condo Insurance",
+    shortName: "Condo",
+    description: "Designed for condo owners who want coverage beyond the HOA master policy.",
+    icon: "building2",
+    category: "personal",
+  },
+  {
+    slug: "general-liability",
+    name: "General Liability",
+    shortName: "General Liability",
+    description: "Foundational business protection for claims tied to injury, damage, or advertising.",
+    icon: "shield",
+    category: "commercial",
+  },
+  {
+    slug: "workers-comp",
+    name: "Workers Compensation",
+    shortName: "Workers Comp",
+    description: "Help protect your employees and keep your business compliant.",
+    icon: "hardHat",
+    category: "commercial",
+  },
+  {
+    slug: "commercial-property",
+    name: "Commercial Property",
+    shortName: "Commercial Property",
+    description: "Safeguard your building, equipment, inventory, and daily operations.",
+    icon: "warehouse",
+    category: "commercial",
+  },
+  {
+    slug: "commercial-auto",
+    name: "Commercial Auto",
+    shortName: "Commercial Auto",
+    description: "Coverage for company vehicles, drivers, cargo, and the miles that keep you moving.",
+    icon: "truck",
+    category: "commercial",
+  },
+  {
+    slug: "professional-liability",
+    name: "Professional Liability",
+    shortName: "Professional Liability",
+    description: "Reduce risk from client claims tied to professional services or advice.",
+    icon: "briefcase",
+    category: "commercial",
+  },
+  {
+    slug: "specialty-coverage",
+    name: "Specialty Coverage",
+    shortName: "Specialty Coverage",
+    description: "Flexible solutions for unique industries, specialty property, and hard-to-fit risks.",
+    icon: "sparkles",
+    category: "commercial",
+  },
+  {
+    slug: "business",
+    name: "Business Insurance",
+    shortName: "Business",
+    description: "A custom package for growing companies that need layered commercial protection.",
+    icon: "briefcase",
+    category: "commercial",
+  },
+  {
+    slug: "other",
+    name: "Other Coverage",
+    shortName: "Other",
+    description: "Tell us what you need and we will point you in the right direction.",
+    icon: "sparkles",
+    category: "personal",
+  },
+];
+
+export const heroProductSlugs: ProductSlug[] = ["home", "auto", "life", "business"];
+
+export const personalProducts = products.filter((product) =>
+  ["home", "auto", "renters", "life", "umbrella", "condo"].includes(product.slug),
+);
+
+export const commercialProducts = products.filter((product) =>
+  [
+    "general-liability",
+    "workers-comp",
+    "commercial-property",
+    "commercial-auto",
+    "professional-liability",
+    "specialty-coverage",
+  ].includes(product.slug),
+);
+
+export const productSelectionOptions = [
+  "home",
+  "auto",
+  "business",
+  "workers-comp",
+  "life",
+  "renters",
+  "condo",
+  "umbrella",
+  "other",
+] as const satisfies ProductSlug[];
+
+export const referralSources = [
+  "Real Estate Agent",
+  "Online Search",
+  "Referral",
+  "Social Media",
+  "Other",
+] as const;
+
+export const employeeOptions = ["1-5", "6-15", "16-50", "51-100", "100+"] as const;
+
+export const reviews = [
+  {
+    name: "Maria G.",
+    body: "Erin and her team made switching our homeowners insurance so easy. They found us better coverage at a lower rate. Highly recommend!",
+  },
+  {
+    name: "James T.",
+    body: "We needed commercial insurance for our restaurant and had no idea where to start. Brahm walked us through everything. Outstanding service.",
+  },
+  {
+    name: "Patricia L.",
+    body: "After years of overpaying for auto insurance, I finally called Allsberry. They saved me over $800 a year. Wish I had called sooner.",
+  },
+  {
+    name: "Robert K.",
+    body: "Professional, responsive, and genuinely caring. When we had a claim, Erin personally guided us through every step.",
+  },
+] as const;
+
+export const carrierPartners = [
+  "Farmers",
+  "Travelers",
+  "The Hartford",
+  "Progressive",
+  "Liberty Mutual",
+  "Chubb",
+  "MetLife",
+  "Zurich",
+  "Nationwide",
+  "Safeco",
+  "Foremost",
+  "Bristol West",
+  "National General",
+  "Hagerty",
+  "SageSure",
+  "Prudential",
+  "AmTrust",
+  "Protective",
+  "Markel",
+  "Mutual of Omaha",
+] as const;
+
+export const agents: Agent[] = [
+  {
+    slug: "erin",
+    name: "Erin Allsberry",
+    firstName: "Erin",
+    title: "Agency Owner & Principal Agent",
+    phone: agency.phone,
+    email: "erin@allsberryagency.com",
+    bio: "With over 24 years of experience, Erin founded Allsberry Insurance Agency to provide personalized insurance solutions to families and businesses in Corona and the Inland Empire. She believes in making insurance straightforward and stress-free, so you can focus on what matters most.",
+    initials: "EA",
+    accent: "blue",
+    specialties: ["Home Insurance", "Auto Insurance", "Agency Leadership"],
+    license: agency.ownerLicense,
+  },
+  {
+    slug: "brahm",
+    name: "Brahm Shank",
+    firstName: "Brahm",
+    title: "Licensed Insurance Agent",
+    phone: agency.phone,
+    email: "brahm@allsberryagency.com",
+    bio: "Brahm specializes in helping clients find the right coverage at the right price, with a focus on building lasting relationships. His dedication to client service ensures every policy is tailored to your unique situation.",
+    initials: "BS",
+    accent: "navy",
+    specialties: ["Commercial Insurance", "Restaurant Coverage", "Client Strategy"],
+  },
+  {
+    slug: "dakota",
+    name: "Dakota",
+    firstName: "Dakota",
+    title: "Licensed Insurance Agent",
+    phone: agency.phone,
+    email: "dakota@allsberryagency.com",
+    bio: "Dakota brings energy and dedication to every client interaction, ensuring a smooth and personalized insurance experience. Whether you need home, auto, or business coverage, Dakota is here to help.",
+    initials: "D",
+    accent: "red",
+    specialties: ["Home Insurance", "Auto Insurance", "Fast Follow-Up"],
+  },
+];
+
+export const blogPosts: BlogPost[] = [
+  {
+    slug: "save-on-homeowners-insurance-california",
+    title: "How to Save on Homeowners Insurance in California",
+    excerpt:
+      "Smart ways to lower your premium without giving up the protection your home needs.",
+    publishedAt: "2026-02-10",
+    readingTime: "4 min read",
+    tags: ["Home Insurance", "California", "Savings Tips"],
+    intro:
+      "California homeowners are balancing rising costs, wildfire questions, and coverage changes. The good news: there are still practical ways to improve value without sacrificing protection.",
+    sections: [
+      {
+        heading: "Bundle wherever it makes sense",
+        body: "Pairing home and auto often opens the door to meaningful discounts. Bundling also makes your coverage easier to manage because one agency can review gaps across multiple policies.",
+        bullets: [
+          "Ask for a side-by-side quote with and without bundling.",
+          "Compare deductibles and liability limits together, not just price.",
+          "Review whether umbrella coverage makes sense once policies are bundled.",
+        ],
+      },
+      {
+        heading: "Revisit replacement cost and endorsements",
+        body: "The cheapest policy is not a win if rebuilding costs outpace your coverage. A strong review should balance affordability with realistic rebuild numbers and the endorsements your property actually needs.",
+      },
+      {
+        heading: "Look for credits you may be missing",
+        body: "Alarm systems, newer roofs, gated communities, and recent renovations can all affect your premium. A quick policy review can uncover credits that were never applied when your current policy was written.",
+      },
+    ],
+  },
+  {
+    slug: "understanding-commercial-insurance-small-businesses",
+    title: "Understanding Commercial Insurance for Small Businesses",
+    excerpt:
+      "A practical primer on the core coverages most small businesses should review before they open their doors.",
+    publishedAt: "2026-01-22",
+    readingTime: "5 min read",
+    tags: ["Business Insurance", "Commercial Insurance"],
+    intro:
+      "Commercial insurance is not one product. It is a set of coverages that work together to protect your operations, team, property, and reputation.",
+    sections: [
+      {
+        heading: "Start with your risk profile",
+        body: "Your industry, contract requirements, payroll size, building setup, and customer traffic all influence the right mix of coverage. A restaurant, contractor, and consultant may all need business insurance, but not the same package.",
+      },
+      {
+        heading: "The coverages business owners ask about most",
+        body: "General liability, workers compensation, commercial property, and commercial auto show up in a lot of conversations because they protect the parts of your business that get exposed first.",
+        bullets: [
+          "General liability for bodily injury, property damage, and advertising claims.",
+          "Workers compensation for employee injuries and wage replacement obligations.",
+          "Commercial property for buildings, inventory, furniture, and equipment.",
+          "Commercial auto for owned, leased, or hired vehicles used for business.",
+        ],
+      },
+      {
+        heading: "Review coverage before growth outpaces it",
+        body: "Hiring staff, moving locations, adding equipment, or landing bigger contracts can change your insurance needs quickly. An annual review is a minimum; fast-growing businesses should check in more often.",
+      },
+    ],
+  },
+  {
+    slug: "why-bundle-your-policies",
+    title: "Why Bundle Your Policies?",
+    excerpt:
+      "Bundling is about more than discounts. It can simplify your protection and make claims easier to navigate.",
+    publishedAt: "2025-12-18",
+    readingTime: "3 min read",
+    tags: ["Auto Insurance", "Home Insurance", "Bundle"],
+    intro:
+      "When your policies work together, your coverage story usually gets stronger. That matters when life gets messy and you need your insurance to respond cleanly.",
+    sections: [
+      {
+        heading: "One agency, clearer coverage",
+        body: "Bundling makes it easier to spot overlaps and gaps. If multiple policies are in play, one coordinated review can save time and reduce confusion.",
+      },
+      {
+        heading: "Discounts are real, but not the only benefit",
+        body: "Lower premiums are great, but the bigger win is usually simplification: fewer billing headaches, easier policy reviews, and less scrambling during claims.",
+      },
+      {
+        heading: "Bundle strategically",
+        body: "The right bundle should improve both value and protection. That means checking limits, deductibles, liability, and service expectations instead of chasing the lowest number on the page.",
+      },
+    ],
+  },
+];
+
+export const quickLinks = [
+  { label: "Get a Quote", href: "/quote" },
+  { label: "Meet Our Team", href: "/#team" },
+  { label: "Blog", href: "/blog" },
+  { label: "Contact", href: "/contact" },
+] as const;
+
+export const footerProducts = [
+  { label: "Home Insurance", href: "/quote?product=home" },
+  { label: "Auto Insurance", href: "/quote?product=auto" },
+  { label: "Business Insurance", href: "/quote?product=business" },
+  { label: "Workers Comp", href: "/quote?product=workers-comp" },
+  { label: "Life Insurance", href: "/quote?product=life" },
+] as const;
+
+export function getAgentBySlug(slug: string) {
+  return agents.find((agent) => agent.slug === slug);
+}
+
+export function getBlogPostBySlug(slug: string) {
+  return blogPosts.find((post) => post.slug === slug);
+}
+
+export function getProductBySlug(slug: string) {
+  return products.find((product) => product.slug === slug);
+}
