@@ -14,15 +14,15 @@ export function ReviewsSection() {
         <SectionHeading
           eyebrow="Social proof"
           title="What Our Clients Say"
-          description="Reviews matter because trust matters. We are keeping them prominent now, then we can wire in the live feed later."
+          description="Reviews matter because trust matters. This section keeps client feedback prominent, clean, and easy to scan."
           align="center"
         />
         <div className="mt-8 rounded-[2rem] border border-gray-100 bg-[linear-gradient(180deg,#ffffff_0%,#f8fafb_100%)] p-6 shadow-[0_24px_50px_-44px_rgba(0,32,92,0.45)]">
           <div className="grid gap-6 md:grid-cols-[0.75fr_1.25fr] md:items-center">
             <div className="rounded-[1.5rem] bg-blue-light p-5 text-center md:text-left">
-              <p className="text-sm font-semibold uppercase tracking-[0.28em] text-blue">Average client love</p>
+              <p className="text-sm font-semibold uppercase tracking-[0.28em] text-blue">Client confidence</p>
               <div className="mt-3 flex items-center justify-center gap-3 md:justify-start">
-                <span className="font-display text-4xl font-extrabold text-navy">4.9</span>
+                <span className="font-display text-4xl font-extrabold text-navy">5★</span>
                 <div className="flex items-center gap-1 text-gold">
                   {Array.from({ length: 5 }).map((_, index) => (
                     <Star key={index} className="h-5 w-5 fill-current" />
@@ -32,10 +32,10 @@ export function ReviewsSection() {
             </div>
             <div className="flex flex-wrap items-center justify-center gap-3 md:justify-end">
               <span className="rounded-full border border-gray-100 bg-white px-4 py-2 text-sm font-semibold text-gray-600 shadow-sm">
-                Over 500 five-star reviews
+                Trusted local guidance
               </span>
               <span className="rounded-full border border-gray-100 bg-white px-4 py-2 text-sm font-semibold text-gray-600 shadow-sm">
-                Responsive service
+                Fast follow-up
               </span>
               <span className="rounded-full border border-gray-100 bg-white px-4 py-2 text-sm font-semibold text-gray-600 shadow-sm">
                 Claims guidance

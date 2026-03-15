@@ -55,6 +55,10 @@ export type Agent = {
   initials: string;
   specialties: string[];
   license?: string;
+  photo?: {
+    src: string;
+    alt: string;
+  };
 };
 
 export type BlogPost = {
@@ -95,9 +99,81 @@ export const agency = {
   erinSince: 2009,
   domain: "https://allsberryagency.com",
   geo: {
-    latitude: 33.8753,
-    longitude: -117.5664,
+    latitude: 33.88454,
+    longitude: -117.56837,
   },
+} as const;
+
+// Publicly available media captured from Erin Allsberry's official Farmers profile
+// on March 15, 2026.
+export const officialProfile = {
+  sourceUrl: "https://agents.farmers.com/ca/corona/erin-allsberry/",
+  sourceLabel: "Official Erin Allsberry Farmers profile",
+  headshot: {
+    src: "/media/farmers/erin-allsberry-headshot.jpg",
+    alt: "Erin Allsberry profile photo from the public Farmers agent page",
+  },
+  highlights: [
+    { label: "Location", value: "Corona, CA" },
+    { label: "Phone", value: agency.phone },
+    { label: "Coverage", value: "Home • Auto • Business • Life" },
+  ],
+  recognition: [
+    {
+      title: "Business Leadership Training",
+      description: "Public profile image that adds real local context to the site.",
+      image: {
+        src: "/media/farmers/business-leadership-training.jpg",
+        alt: "Business Leadership Training photo from Erin Allsberry's public Farmers profile",
+      },
+    },
+    {
+      title: "District 30 2020 Agency of the Year",
+      description: "Award image published on Erin's public Farmers profile.",
+      image: {
+        src: "/media/farmers/district-30-award.jpg",
+        alt: "District 30 2020 Agency of the Year award from Erin Allsberry's public Farmers profile",
+      },
+    },
+  ],
+  badges: [
+    {
+      title: "Topper Club Award",
+      image: {
+        src: "/media/farmers/topper-club-award.png",
+        alt: "Topper Club Award logo from the Farmers profile",
+      },
+    },
+    {
+      title: "Prime Award",
+      image: {
+        src: "/media/farmers/prime-award.png",
+        alt: "Prime Award logo from the Farmers profile",
+      },
+    },
+  ],
+  productIcons: [
+    {
+      label: "Home",
+      src: "/media/farmers/icon-home.svg",
+      alt: "Home insurance icon from the Farmers profile",
+    },
+    {
+      label: "Auto",
+      src: "/media/farmers/icon-auto.svg",
+      alt: "Auto insurance icon from the Farmers profile",
+    },
+    {
+      label: "Business",
+      src: "/media/farmers/icon-business.svg",
+      alt: "Business insurance icon from the Farmers profile",
+    },
+    {
+      label: "Life",
+      src: "/media/farmers/icon-life.svg",
+      alt: "Life insurance icon from the Farmers profile",
+    },
+  ],
 } as const;
 
 export const navigation = [
@@ -327,6 +403,13 @@ export const carrierPartners = [
   "Mutual of Omaha",
 ] as const;
 
+export const agentMicrositeFeatures = [
+  "Direct tap-to-call and email access",
+  "QR code ready for print leave-behinds and text follow-up",
+  "Lead form routed through the agency, not a generic directory",
+  "SEO-ready branded page structure for each producer",
+] as const;
+
 export const agents: Agent[] = [
   {
     slug: "erin",
@@ -340,6 +423,7 @@ export const agents: Agent[] = [
     accent: "blue",
     specialties: ["Home Insurance", "Auto Insurance", "Agency Leadership"],
     license: agency.ownerLicense,
+    photo: officialProfile.headshot,
   },
   {
     slug: "brahm",

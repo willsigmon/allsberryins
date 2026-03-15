@@ -7,14 +7,14 @@ import { ArrowRight, BadgeCheck, CheckCircle2, MapPin, ShieldCheck, Sparkles, St
 import { useMemo, useState } from "react";
 
 import { getIcon } from "@/components/ui/icon-registry";
-import { agency, heroProductSlugs, products } from "@/lib/site-data";
+import { agency, heroProductSlugs, officialProfile, products } from "@/lib/site-data";
 import { cn } from "@/lib/utils";
 
 const heroProducts = products.filter((product) => heroProductSlugs.includes(product.slug));
 const heroStats = [
   { label: "Serving Inland Empire", value: "Since 1994" },
-  { label: "Five-star trust", value: "500+ Reviews" },
-  { label: "Specialized focus", value: "Home • Auto • Business" },
+  { label: "Official public profile", value: "Corona, CA" },
+  { label: "Specialized focus", value: "Home • Auto • Business • Life" },
 ];
 
 export function HeroSection() {
@@ -185,42 +185,138 @@ export function HeroSection() {
           <div className="absolute -left-6 top-10 hidden h-24 w-24 rounded-full bg-blue/10 blur-2xl sm:block" />
           <div className="absolute -right-6 bottom-10 hidden h-28 w-28 rounded-full bg-red/12 blur-3xl sm:block" />
           <div className="relative overflow-hidden rounded-[2rem] border border-white/70 bg-[linear-gradient(145deg,#0d2f73_0%,#0066b3_55%,#dbeafe_100%)] p-6 shadow-[0_35px_90px_-48px_rgba(0,32,92,0.8)] sm:p-8 lg:p-10">
-            <div className="relative min-h-[24rem] rounded-[1.65rem] border border-white/20 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.32),transparent_28%),linear-gradient(180deg,rgba(255,255,255,0.24),rgba(255,255,255,0.08))] p-6 text-white backdrop-blur-sm sm:min-h-[28rem]">
-              <div className="flex items-center gap-2 rounded-full bg-white/14 px-4 py-2 text-sm font-semibold backdrop-blur-sm w-fit">
-                <MapPin className="h-4 w-4" />
-                Corona, California
-              </div>
-              <div className="mt-8 sm:mt-10">
-                <div className="overflow-hidden rounded-[1.75rem] border border-white/14 bg-white/10 p-3 shadow-[0_24px_60px_-34px_rgba(0,0,0,0.45)] backdrop-blur">
-                  <div className="relative overflow-hidden rounded-[1.35rem] bg-white/70">
-                    <Image
-                      src="/illustrations/team-scene.svg"
-                      alt="Illustrated team scene for Allsberry Insurance Agency"
-                      width={900}
-                      height={760}
-                      priority
-                      className="h-auto w-full"
-                    />
-                  </div>
+            <div className="relative rounded-[1.65rem] border border-white/20 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.32),transparent_28%),linear-gradient(180deg,rgba(255,255,255,0.24),rgba(255,255,255,0.08))] p-5 text-white backdrop-blur-sm sm:p-6">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <div className="flex items-center gap-2 rounded-full bg-white/14 px-4 py-2 text-sm font-semibold backdrop-blur-sm">
+                  <MapPin className="h-4 w-4" />
+                  Corona, California
+                </div>
+                <div className="rounded-full border border-white/18 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-white/80">
+                  Public profile highlights
                 </div>
               </div>
-              <div className="absolute left-6 top-20 rounded-2xl border border-white/18 bg-white/10 px-4 py-3 text-left shadow-xl backdrop-blur sm:left-auto sm:right-6 sm:top-8">
-                <p className="text-xs font-semibold uppercase tracking-[0.26em] text-white/68">Agency focus</p>
-                <p className="mt-1 font-display text-lg font-bold text-white">Simple. Affordable. Tailored for You.</p>
+
+              <div className="mt-5 grid gap-4 lg:grid-cols-[1.08fr_0.92fr]">
+                <div className="relative overflow-hidden rounded-[1.8rem] border border-white/14 bg-white/10 p-3 shadow-[0_24px_60px_-34px_rgba(0,0,0,0.45)] backdrop-blur">
+                  <div className="relative overflow-hidden rounded-[1.45rem]">
+                    <Image
+                      src={officialProfile.headshot.src}
+                      alt={officialProfile.headshot.alt}
+                      width={500}
+                      height={500}
+                      priority
+                      className="h-[23rem] w-full object-cover sm:h-[25rem]"
+                    />
+                    <div className="absolute inset-x-0 bottom-0 bg-[linear-gradient(180deg,rgba(0,32,92,0)_0%,rgba(0,32,92,0.88)_74%,rgba(0,32,92,0.96)_100%)] p-5">
+                      <p className="text-xs font-semibold uppercase tracking-[0.26em] text-white/70">
+                        Agency leadership
+                      </p>
+                      <p className="mt-2 font-display text-2xl font-extrabold text-white">
+                        Erin Allsberry
+                      </p>
+                      <p className="mt-1 text-sm font-medium text-white/78">
+                        Owner & Principal Agent
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="grid gap-4">
+                  {officialProfile.recognition.map((item) => (
+                    <div
+                      key={item.title}
+                      className="overflow-hidden rounded-[1.55rem] border border-white/14 bg-white/10 p-3 shadow-[0_18px_45px_-30px_rgba(0,0,0,0.45)] backdrop-blur"
+                    >
+                      <div className="overflow-hidden rounded-[1.2rem]">
+                        <Image
+                          src={item.image.src}
+                          alt={item.image.alt}
+                          width={item.title.includes("District") ? 2395 : 3264}
+                          height={item.title.includes("District") ? 2252 : 1958}
+                          className="h-36 w-full object-cover"
+                        />
+                      </div>
+                      <p className="mt-4 text-xs font-semibold uppercase tracking-[0.22em] text-white/72">
+                        Public media
+                      </p>
+                      <p className="mt-2 font-display text-lg font-bold text-white">{item.title}</p>
+                      <p className="mt-2 text-sm leading-6 text-white/78">{item.description}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
-              <div className="absolute bottom-7 left-7 rounded-2xl bg-white px-4 py-3 text-left shadow-xl">
-                <p className="text-xs font-semibold uppercase tracking-[0.26em] text-gray-500">Serving</p>
-                <p className="mt-1 font-display text-lg font-bold text-gray-900">Clients in Corona & the Inland Empire</p>
+
+              <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                {officialProfile.badges.map((badge) => (
+                  <div
+                    key={badge.title}
+                    className="flex items-center gap-4 rounded-[1.5rem] border border-white/14 bg-white/10 px-4 py-3 shadow-[0_16px_38px_-30px_rgba(0,0,0,0.45)] backdrop-blur"
+                  >
+                    <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-white/95 p-2">
+                      <Image
+                        src={badge.image.src}
+                        alt={badge.image.alt}
+                        width={badge.title.includes("Prime") ? 5111 : 1258}
+                        height={badge.title.includes("Prime") ? 5037 : 658}
+                        className="h-full w-full object-contain"
+                      />
+                    </div>
+                    <div>
+                      <p className="text-xs font-semibold uppercase tracking-[0.24em] text-white/68">
+                        Recognition
+                      </p>
+                      <p className="mt-1 font-display text-lg font-bold text-white">
+                        {badge.title}
+                      </p>
+                    </div>
+                  </div>
+                ))}
               </div>
-              <div className="absolute bottom-7 right-7 rounded-2xl border border-white/16 bg-white/10 px-4 py-3 text-left shadow-xl backdrop-blur">
-                <p className="text-xs font-semibold uppercase tracking-[0.26em] text-white/68">Coverage mix</p>
-                <p className="mt-1 font-display text-lg font-bold text-white">Home • Auto • Business</p>
+
+              <div className="mt-4 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+                {officialProfile.productIcons.map((icon) => (
+                  <div
+                    key={icon.label}
+                    className="flex items-center gap-3 rounded-2xl border border-white/14 bg-white/10 px-4 py-3 text-left shadow-[0_16px_38px_-30px_rgba(0,0,0,0.45)] backdrop-blur"
+                  >
+                    <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/92">
+                      <Image
+                        src={icon.src}
+                        alt={icon.alt}
+                        width={30}
+                        height={30}
+                        className="h-7 w-7 object-contain"
+                      />
+                    </div>
+                    <div>
+                      <p className="text-xs font-semibold uppercase tracking-[0.24em] text-white/65">
+                        Quote line
+                      </p>
+                      <p className="mt-1 font-semibold text-white">{icon.label}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-5 grid gap-3 sm:grid-cols-3">
+                {officialProfile.highlights.map((highlight) => (
+                  <div
+                    key={highlight.label}
+                    className="rounded-2xl border border-white/14 bg-white/10 px-4 py-3 shadow-[0_16px_38px_-30px_rgba(0,0,0,0.45)] backdrop-blur"
+                  >
+                    <p className="text-xs font-semibold uppercase tracking-[0.24em] text-white/68">
+                      {highlight.label}
+                    </p>
+                    <p className="mt-1 font-display text-lg font-bold text-white">{highlight.value}</p>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
           <div className="mt-5 flex flex-wrap items-center gap-3 text-sm text-gray-600">
             <span className="rounded-full bg-white px-4 py-2 shadow-sm">{agency.fullName}</span>
             <span className="rounded-full bg-white px-4 py-2 shadow-sm">Farmers Insurance agency in Corona, California</span>
+            <span className="rounded-full bg-white px-4 py-2 shadow-sm">Official profile highlights and recognition</span>
           </div>
         </motion.div>
       </div>
