@@ -1,5 +1,9 @@
 import { ImageResponse } from "next/og";
 
+import { siteUrl } from "@/lib/utils";
+
+const safeDomain = new URL(siteUrl).host;
+
 export const size = {
   width: 1200,
   height: 630,
@@ -17,7 +21,7 @@ export default function OpenGraphImage() {
           width: "100%",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "linear-gradient(135deg, #00205C 0%, #00448F 48%, #E8F0F8 100%)",
+          background: "linear-gradient(135deg, #00205C 0%, #00448F 52%, #E8F0F8 100%)",
           color: "white",
           padding: "56px",
           fontFamily: "sans-serif",
@@ -34,37 +38,56 @@ export default function OpenGraphImage() {
           <div
             style={{
               display: "flex",
-              height: "88px",
-              width: "88px",
-              alignItems: "center",
+              flexDirection: "column",
               justifyContent: "center",
-              borderRadius: "28px",
-              background: "rgba(255,255,255,0.14)",
+              borderRadius: "24px",
+              background: "rgba(255,255,255,0.12)",
               border: "1px solid rgba(255,255,255,0.25)",
-              fontSize: "36px",
-              fontWeight: 800,
+              padding: "20px 24px",
             }}
           >
-            A
+            <div style={{ fontSize: "30px", fontWeight: 800, letterSpacing: "0.08em" }}>ALLSBERRY</div>
+            <div
+              style={{
+                marginTop: "4px",
+                fontSize: "15px",
+                fontWeight: 600,
+                letterSpacing: "0.28em",
+                textTransform: "uppercase",
+                color: "rgba(255,255,255,0.82)",
+              }}
+            >
+              Insurance Agency
+            </div>
           </div>
           <div
             style={{
-              fontSize: "24px",
-              fontWeight: 700,
-              letterSpacing: "0.35em",
+              fontSize: "21px",
+              letterSpacing: "0.32em",
+              color: "rgba(255,255,255,0.82)",
               textTransform: "uppercase",
-              color: "rgba(255,255,255,0.72)",
             }}
           >
-            Corona, California
+            {safeDomain}
           </div>
         </div>
-        <div style={{ display: "flex", flexDirection: "column", gap: "20px", maxWidth: "820px" }}>
-          <div style={{ fontSize: "68px", fontWeight: 800, lineHeight: 1.05 }}>Allsberry Insurance Agency</div>
-          <div style={{ fontSize: "28px", lineHeight: 1.45, color: "rgba(255,255,255,0.86)" }}>
-            Personalized home, auto, life, and business insurance guidance for Corona and the Inland Empire.
+
+        <div style={{ display: "flex", flexDirection: "column", gap: "20px", maxWidth: "870px" }}>
+          <div style={{ fontSize: "62px", fontWeight: 800, lineHeight: 1.05 }}>
+            Allsberry Insurance Agency
+          </div>
+          <div
+            style={{
+              fontSize: "28px",
+              lineHeight: 1.45,
+              color: "rgba(255,255,255,0.88)",
+              maxWidth: "780px",
+            }}
+          >
+            Personalized home, auto, life, and business insurance coverage for Corona and the Inland Empire.
           </div>
         </div>
+
         <div
           style={{
             display: "flex",
@@ -82,7 +105,7 @@ export default function OpenGraphImage() {
               justifyContent: "center",
               borderRadius: "999px",
               background: "#DA291C",
-              padding: "16px 28px",
+              padding: "14px 24px",
             }}
           >
             Get a Quote

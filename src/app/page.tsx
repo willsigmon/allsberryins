@@ -4,7 +4,6 @@ import { HeroSection } from "@/components/sections/hero-section";
 import { ProductGridSection } from "@/components/sections/product-grid-section";
 import { ReviewsSection } from "@/components/sections/reviews-section";
 import { TeamSection } from "@/components/sections/team-section";
-import { TrustBar } from "@/components/sections/trust-bar";
 import { ValuePropsSection } from "@/components/sections/value-props-section";
 import { StructuredData } from "@/components/seo/structured-data";
 import { agency } from "@/lib/site-data";
@@ -53,7 +52,6 @@ export default function Home() {
     <>
       <StructuredData data={insuranceAgencySchema} />
       <HeroSection />
-      <TrustBar />
       <ValuePropsSection />
       <ReviewsSection />
       <ProductGridSection />

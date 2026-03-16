@@ -3,30 +3,14 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoaderCircle } from "lucide-react";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { type DefaultValues, useForm } from "react-hook-form";
 
-const helpTopics = [
-  "Home Insurance",
-  "Auto Insurance",
-  "Business Insurance",
-  "Workers Comp",
-  "Life Insurance",
-  "Other",
-] as const;
-
-const agentContactSchema = z.object({
-  name: z.string().min(2, "Your name is required."),
-  phone: z
-    .string()
-    .min(10, "Phone number is required.")
-    .regex(/^[0-9()+\-\s]{10,}$/, "Enter a valid phone number."),
-  email: z.email("Enter a valid email address."),
-  helpTopic: z.enum(helpTopics, { error: "Select how the agent can help." }),
-  message: z.string().max(1000, "Keep the message under 1000 characters.").optional(),
-});
-
-type AgentContactValues = z.infer<typeof agentContactSchema>;
+import {
+  agentContactSchema,
+  helpTopics,
+  honeypotFieldName,
+  type AgentContactValues,
+} from "@/lib/lead-schemas";
 
 type AgentContactFormProps = {
   agentName: string;
@@ -39,6 +23,7 @@ export function AgentContactForm({ agentName, agentSlug }: AgentContactFormProps
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm<AgentContactValues>({
     resolver: zodResolver(agentContactSchema),
@@ -46,9 +31,9 @@ export function AgentContactForm({ agentName, agentSlug }: AgentContactFormProps
       name: "",
       phone: "",
       email: "",
-      helpTopic: undefined,
       message: "",
-    },
+      honeypot: "",
+    } satisfies DefaultValues<AgentContactValues>,
   });
 
   const onSubmit = handleSubmit(async (values) => {
@@ -74,6 +59,7 @@ export function AgentContactForm({ agentName, agentSlug }: AgentContactFormProps
       }
 
       setSuccessMessage(`Thanks for reaching out. ${agentName} or someone from the team will be in touch shortly.`);
+      reset();
     } catch (error) {
       console.error("Agent contact form submission failed", error);
       setErrorMessage("We couldn't send that request just now. Please call the office at (951) 739-5959.");
@@ -82,14 +68,41 @@ export function AgentContactForm({ agentName, agentSlug }: AgentContactFormProps
 
   return (
     <form className="grid gap-5" onSubmit={onSubmit} noValidate>
+      <div aria-hidden="true" className="sr-only">
+        <label htmlFor={`agent-${honeypotFieldName}`}>Leave this field empty</label>
+        <input
+          id={`agent-${honeypotFieldName}`}
+          tabIndex={-1}
+          autoComplete="off"
+          {...register("honeypot")}
+        />
+      </div>
       <Field label="Name" error={errors.name?.message}>
-        <input {...register("name")} className={inputClassName} placeholder="Your full name" />
+        <input
+          {...register("name")}
+          autoComplete="name"
+          className={inputClassName}
+          placeholder="Your full name"
+        />
       </Field>
       <Field label="Phone" error={errors.phone?.message}>
-        <input {...register("phone")} className={inputClassName} placeholder="(555) 555-5555" />
+        <input
+          {...register("phone")}
+          type="tel"
+          autoComplete="tel"
+          inputMode="tel"
+          className={inputClassName}
+          placeholder="(555) 555-5555"
+        />
       </Field>
       <Field label="Email" error={errors.email?.message}>
-        <input {...register("email")} className={inputClassName} placeholder="you@example.com" />
+        <input
+          {...register("email")}
+          type="email"
+          autoComplete="email"
+          className={inputClassName}
+          placeholder="you@example.com"
+        />
       </Field>
       <Field label="How can I help?" error={errors.helpTopic?.message}>
         <select {...register("helpTopic")} className={inputClassName} defaultValue="">
@@ -120,12 +133,18 @@ export function AgentContactForm({ agentName, agentSlug }: AgentContactFormProps
         Send Request
       </button>
       {successMessage ? (
-        <p className="rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-semibold text-emerald-700">
+        <p
+          aria-live="polite"
+          className="rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-semibold text-emerald-700"
+        >
           {successMessage}
         </p>
       ) : null}
       {errorMessage ? (
-        <p className="rounded-2xl border border-red/15 bg-red/6 px-4 py-3 text-sm font-semibold text-red">
+        <p
+          aria-live="assertive"
+          className="rounded-2xl border border-red/15 bg-red/6 px-4 py-3 text-sm font-semibold text-red"
+        >
           {errorMessage}
         </p>
       ) : null}

@@ -3,51 +3,20 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoaderCircle } from "lucide-react";
 import { useMemo, useState } from "react";
-import { useForm, useWatch } from "react-hook-form";
-import { z } from "zod";
+import { type DefaultValues, useForm, useWatch } from "react-hook-form";
 
 import {
-  employeeOptions,
-  productSelectionOptions,
-  products,
-  referralSources,
-} from "@/lib/site-data";
+  honeypotFieldName,
+  leadEmployeeOptions,
+  leadReferralSources,
+  quoteFormSchema,
+  quoteProductSelectionOptions,
+  type QuoteFormValues,
+} from "@/lib/lead-schemas";
+import { products } from "@/lib/site-data";
 import { cn } from "@/lib/utils";
 
-type QuoteProductSlug = (typeof productSelectionOptions)[number];
-
-const quoteSchema = z
-  .object({
-    products: z.array(z.enum(productSelectionOptions)).min(1, "Select at least one coverage type."),
-    firstName: z.string().min(2, "First name is required."),
-    lastName: z.string().min(2, "Last name is required."),
-    phone: z
-      .string()
-      .min(10, "Phone number is required.")
-      .regex(/^[0-9()+\-\s]{10,}$/, "Enter a valid phone number."),
-    email: z.email("Enter a valid email address."),
-    zipCode: z.string().regex(/^\d{5}$/, "Enter a valid 5-digit ZIP code."),
-    referralSource: z.enum(referralSources, {
-      error: "Please tell us how you heard about us.",
-    }),
-    employees: z.enum(employeeOptions).optional(),
-    message: z.string().max(1000, "Keep the message under 1000 characters.").optional(),
-  })
-  .superRefine((values, ctx) => {
-    const needsEmployees = values.products.some(
-      (product) => product === "business" || product === "workers-comp",
-    );
-
-    if (needsEmployees && !values.employees) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        path: ["employees"],
-        message: "Please choose the number of employees.",
-      });
-    }
-  });
-
-type QuoteFormValues = z.infer<typeof quoteSchema>;
+type QuoteProductSlug = (typeof quoteProductSelectionOptions)[number];
 
 type QuoteFormProps = {
   initialProduct?: string;
@@ -59,30 +28,35 @@ export function QuoteForm({ initialProduct, initialZip }: QuoteFormProps) {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const normalizedInitialProduct = useMemo(() => {
-    return productSelectionOptions.includes(initialProduct as QuoteProductSlug)
+    return quoteProductSelectionOptions.includes(initialProduct as QuoteProductSlug)
       ? (initialProduct as QuoteProductSlug)
       : undefined;
   }, [initialProduct]);
 
-  const {
-    control,
-    register,
-    handleSubmit,
-    setValue,
-    formState: { errors, isSubmitting },
-  } = useForm<QuoteFormValues>({
-    resolver: zodResolver(quoteSchema),
-    defaultValues: {
+  const defaultValues = useMemo<DefaultValues<QuoteFormValues>>(
+    () => ({
       products: normalizedInitialProduct ? [normalizedInitialProduct] : ["home"],
       firstName: "",
       lastName: "",
       phone: "",
       email: "",
       zipCode: initialZip && /^\d{5}$/.test(initialZip) ? initialZip : "",
-      referralSource: undefined,
-      employees: undefined,
       message: "",
-    },
+      honeypot: "",
+    }),
+    [initialZip, normalizedInitialProduct],
+  );
+
+  const {
+    control,
+    register,
+    handleSubmit,
+    reset,
+    setValue,
+    formState: { errors, isSubmitting },
+  } = useForm<QuoteFormValues>({
+    resolver: zodResolver(quoteFormSchema),
+    defaultValues,
   });
 
   const selectedProducts = useWatch({
@@ -114,6 +88,7 @@ export function QuoteForm({ initialProduct, initialZip }: QuoteFormProps) {
       }
 
       setSuccessMessage("Thank you! We'll be in touch within 24 hours.");
+      reset(defaultValues);
     } catch (error) {
       console.error("Quote form submission failed", error);
       setErrorMessage("Something went wrong sending your request. Please call us at (951) 739-5959.");
@@ -134,12 +109,12 @@ export function QuoteForm({ initialProduct, initialZip }: QuoteFormProps) {
   return (
     <div className="rounded-[2rem] border border-gray-100 bg-white p-6 shadow-[0_28px_70px_-50px_rgba(0,32,92,0.5)] sm:p-8">
       <form className="grid gap-6" onSubmit={onSubmit} noValidate>
-        <div>
-          <label className="text-sm font-semibold uppercase tracking-[0.22em] text-gray-500">
+        <fieldset className="grid gap-3">
+          <legend className="text-sm font-semibold uppercase tracking-[0.22em] text-gray-500">
             Products
-          </label>
+          </legend>
           <div className="mt-3 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
-            {productSelectionOptions.map((productSlug) => {
+            {quoteProductSelectionOptions.map((productSlug) => {
               const product = products.find((item) => item.slug === productSlug);
               const selected = selectedProducts?.includes(productSlug);
 
@@ -165,25 +140,59 @@ export function QuoteForm({ initialProduct, initialZip }: QuoteFormProps) {
             })}
           </div>
           {errors.products ? <p className="mt-2 text-sm text-red">{errors.products.message}</p> : null}
+        </fieldset>
+
+        <div aria-hidden="true" className="sr-only">
+          <label htmlFor={`quote-${honeypotFieldName}`}>Leave this field empty</label>
+          <input
+            id={`quote-${honeypotFieldName}`}
+            tabIndex={-1}
+            autoComplete="off"
+            {...register("honeypot")}
+          />
         </div>
 
         <div className="grid gap-6 sm:grid-cols-2">
           <Field label="First Name" error={errors.firstName?.message}>
-            <input {...register("firstName")} className={inputClassName} placeholder="First name" />
+            <input
+              {...register("firstName")}
+              autoComplete="given-name"
+              className={inputClassName}
+              placeholder="First name"
+            />
           </Field>
           <Field label="Last Name" error={errors.lastName?.message}>
-            <input {...register("lastName")} className={inputClassName} placeholder="Last name" />
+            <input
+              {...register("lastName")}
+              autoComplete="family-name"
+              className={inputClassName}
+              placeholder="Last name"
+            />
           </Field>
           <Field label="Phone" error={errors.phone?.message}>
-            <input {...register("phone")} className={inputClassName} placeholder="(555) 555-5555" />
+            <input
+              {...register("phone")}
+              type="tel"
+              autoComplete="tel"
+              inputMode="tel"
+              className={inputClassName}
+              placeholder="(555) 555-5555"
+            />
           </Field>
           <Field label="Email" error={errors.email?.message}>
-            <input {...register("email")} className={inputClassName} placeholder="you@example.com" />
+            <input
+              {...register("email")}
+              type="email"
+              autoComplete="email"
+              className={inputClassName}
+              placeholder="you@example.com"
+            />
           </Field>
           <Field label="ZIP Code" error={errors.zipCode?.message}>
             <input
               {...register("zipCode")}
               inputMode="numeric"
+              autoComplete="postal-code"
               className={inputClassName}
               placeholder="92878"
             />
@@ -193,7 +202,7 @@ export function QuoteForm({ initialProduct, initialZip }: QuoteFormProps) {
               <option value="" disabled>
                 Select one
               </option>
-              {referralSources.map((source) => (
+              {leadReferralSources.map((source) => (
                 <option key={source} value={source}>
                   {source}
                 </option>
@@ -208,7 +217,7 @@ export function QuoteForm({ initialProduct, initialZip }: QuoteFormProps) {
               <option value="" disabled>
                 Select one
               </option>
-              {employeeOptions.map((option) => (
+              {leadEmployeeOptions.map((option) => (
                 <option key={option} value={option}>
                   {option}
                 </option>
@@ -241,12 +250,18 @@ export function QuoteForm({ initialProduct, initialZip }: QuoteFormProps) {
         </div>
 
         {successMessage ? (
-          <p className="rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-semibold text-emerald-700">
+          <p
+            aria-live="polite"
+            className="rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-semibold text-emerald-700"
+          >
             {successMessage}
           </p>
         ) : null}
         {errorMessage ? (
-          <p className="rounded-2xl border border-red/15 bg-red/6 px-4 py-3 text-sm font-semibold text-red">
+          <p
+            aria-live="assertive"
+            className="rounded-2xl border border-red/15 bg-red/6 px-4 py-3 text-sm font-semibold text-red"
+          >
             {errorMessage}
           </p>
         ) : null}

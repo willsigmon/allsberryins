@@ -368,9 +368,9 @@ export const trustHighlights = [
     description: "Local agency roots in Corona and the Inland Empire.",
   },
   {
-    label: "Erin leading since",
+    label: "Agency leadership",
     value: String(agency.erinSince),
-    description: "Owner-led guidance with long-term continuity.",
+    description: "A stable team with decades of local experience.",
   },
   {
     label: "Office",
@@ -386,20 +386,20 @@ export const trustHighlights = [
 
 export const reviews = [
   {
-    name: "Corona homeowner",
-    body: "Switching our homeowners coverage felt easy. The team explained everything clearly and helped us land on protection that fit our family better.",
+    name: "Homeowner in Corona",
+    body: "Switching our homeowners coverage felt simple. The team explained each option clearly and helped us choose coverage that matched our home and budget.",
   },
   {
-    name: "Local restaurant owner",
-    body: "We needed business coverage quickly and Brahm made the process feel organized from the first call. He helped us understand what mattered and what could wait.",
+    name: "Small business owner",
+    body: "We needed commercial protection quickly, and the team helped us organize what to do first. The process felt straightforward and easy to follow.",
   },
   {
     name: "Auto client",
-    body: "I finally felt like someone was actually reviewing my auto policy instead of rushing me through it. The advice was practical and easy to trust.",
+    body: "I appreciated that someone reviewed our car policy details instead of rushing us. The guidance was practical and easy to trust.",
   },
   {
-    name: "Small business client",
-    body: "Responsive, thoughtful, and steady when we had questions about claims and coverage changes. You can tell this agency cares about follow-through.",
+    name: "Longtime family client",
+    body: "Responsive, thoughtful, and steady during claims questions and coverage changes. We felt supported from quote through setup.",
   },
 ] as const;
 
@@ -430,7 +430,7 @@ export const agentMicrositeFeatures = [
   "Direct tap-to-call and email access",
   "QR code ready for print leave-behinds and text follow-up",
   "Lead form routed through the agency, not a generic directory",
-  "SEO-ready branded page structure for each producer",
+  "SEO-ready branded page structure for each agent",
 ] as const;
 
 export const agents: Agent[] = [

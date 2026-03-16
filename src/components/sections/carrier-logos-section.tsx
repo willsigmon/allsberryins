@@ -1,73 +1,59 @@
-"use client";
-
-import { motion } from "framer-motion";
+import { Building2, CheckCircle2, ShieldCheck } from "lucide-react";
 
 import { SectionHeading } from "@/components/ui/section-heading";
 import { carrierPartners } from "@/lib/site-data";
 
-function logoUrl(domain: string) {
-  return `https://www.google.com/s2/favicons?domain=${domain}&sz=64`;
-}
-
-const row1 = carrierPartners.slice(0, 10);
-const row2 = carrierPartners.slice(10);
-
-function MarqueeRow({ carriers, reverse = false }: { carriers: typeof carrierPartners; reverse?: boolean }) {
-  const doubled = [...carriers, ...carriers];
-  return (
-    <div className="flex overflow-hidden">
-      <div
-        className="flex shrink-0 items-center gap-5"
-        style={{
-          animation: `${reverse ? "marquee-reverse" : "marquee"} ${reverse ? "55s" : "50s"} linear infinite`,
-        }}
-      >
-        {doubled.map((carrier, index) => (
-          <div
-            key={`${carrier.name}-${index}`}
-            className="flex shrink-0 items-center gap-3 rounded-2xl border border-gray-100 bg-[linear-gradient(135deg,#f8fafb_0%,#ffffff_100%)] px-5 py-3.5 shadow-[0_4px_20px_-12px_rgba(0,32,92,0.15)] transition hover:border-blue/30 hover:shadow-[0_8px_30px_-10px_rgba(0,102,179,0.25)]"
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={logoUrl(carrier.domain)}
-              alt={`${carrier.name} logo`}
-              width={32}
-              height={32}
-              className="h-8 w-8 rounded object-contain"
-            />
-            <span className="text-base font-semibold text-gray-700 whitespace-nowrap">
-              {carrier.name}
-            </span>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
 export function CarrierLogosSection() {
   return (
-    <section className="bg-white py-20 sm:py-24 overflow-hidden">
+    <section className="bg-white py-20 sm:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          eyebrow="Carrier access"
+          eyebrow="Insurance carrier access"
           title="Insurance Partners We Work With"
-          description="We shop across multiple carriers so the recommendation feels tailored to your needs, not boxed into one option."
+          description="We compare options across established carriers so your quote is built for your coverage goals, not one-size-fits-all pricing."
           align="center"
         />
+        <div className="mt-10 rounded-[2rem] border border-gray-100 bg-gray-50 p-6 shadow-[0_20px_48px_-42px_rgba(0,32,92,0.4)] sm:p-7">
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {carrierPartners.map((carrier, index) => (
+              <article
+                key={carrier.name}
+                className="group rounded-xl border border-gray-200 bg-white p-4 text-left shadow-[0_12px_28px_-24px_rgba(0,32,92,0.45)] transition hover:-translate-y-0.5 hover:border-blue hover:shadow-[0_18px_35px_-26px_rgba(0,102,179,0.4)]"
+                style={{
+                  transitionDelay: `${Math.min(index, 15) * 20}ms`,
+                }}
+              >
+                <p className="inline-flex items-center gap-2 text-sm font-semibold text-navy">
+                  <ShieldCheck className="h-4 w-4 text-blue" />
+                  {carrier.name}
+                </p>
+                <p className="mt-2 text-xs uppercase tracking-[0.2em] text-gray-400">Carrier access</p>
+              </article>
+            ))}
+          </div>
+
+          <p className="mt-6 flex items-start gap-2 text-sm text-gray-600">
+            <Building2 className="mt-0.5 h-4 w-4 text-blue" />
+            <span>
+              Carriers are selected based on local fit, product strength, and licensing so your quote options stay practical.
+            </span>
+          </p>
+          <div className="mt-4 inline-flex flex-wrap items-center gap-2">
+            <span className="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white px-3 py-1 text-xs font-semibold text-gray-600">
+              <CheckCircle2 className="h-3.5 w-3.5 text-blue" />
+              Clean comparisons
+            </span>
+            <span className="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white px-3 py-1 text-xs font-semibold text-gray-600">
+              <CheckCircle2 className="h-3.5 w-3.5 text-blue" />
+              Licensed partner channels
+            </span>
+            <span className="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white px-3 py-1 text-xs font-semibold text-gray-600">
+              <CheckCircle2 className="h-3.5 w-3.5 text-blue" />
+              Multi-line coverage support
+            </span>
+          </div>
+        </div>
       </div>
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-        className="relative mt-12 grid gap-4"
-      >
-        <div className="absolute inset-y-0 left-0 z-10 w-20 bg-gradient-to-r from-white to-transparent" />
-        <div className="absolute inset-y-0 right-0 z-10 w-20 bg-gradient-to-l from-white to-transparent" />
-        <MarqueeRow carriers={row1} />
-        <MarqueeRow carriers={row2} reverse />
-      </motion.div>
     </section>
   );
 }

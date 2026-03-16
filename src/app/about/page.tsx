@@ -20,16 +20,14 @@ export default function AboutPage() {
       <section className="mx-auto max-w-7xl px-4 pb-18 sm:px-6 lg:px-8">
         <div className="grid gap-10 lg:grid-cols-[1fr_0.96fr] lg:items-center">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.28em] text-blue">
-              About the agency
-            </p>
+            <p className="text-sm font-semibold uppercase tracking-[0.28em] text-blue">About the agency</p>
             <h1 className="mt-5 font-display text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">
               Local guidance, clean communication, and coverage that fits real life.
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-gray-600">
-              Allsberry Insurance Agency has served Corona and the Inland Empire since 1994. Erin
-              has led the agency since 2009 with a simple belief: insurance should feel tailored,
-              understandable, and genuinely helpful.
+              Allsberry Insurance Agency has served Corona and the Inland Empire since 1994. Erin has led the
+              agency since 2009 with a simple belief: insurance should feel tailored, understandable, and genuinely
+              helpful.
             </p>
             <div className="mt-8 grid gap-4 sm:grid-cols-3">
               {[
@@ -44,9 +42,7 @@ export default function AboutPage() {
                   <p className="text-sm font-semibold uppercase tracking-[0.22em] text-gray-500">
                     {stat.label}
                   </p>
-                  <p className="mt-3 font-display text-2xl font-bold text-gray-900">
-                    {stat.value}
-                  </p>
+                  <p className="mt-3 font-display text-2xl font-bold text-gray-900">{stat.value}</p>
                 </div>
               ))}
             </div>
@@ -68,12 +64,8 @@ export default function AboutPage() {
                   <p className="text-sm font-semibold uppercase tracking-[0.24em] text-blue">
                     Agency leadership
                   </p>
-                  <h2 className="mt-2 font-display text-2xl font-bold text-gray-900">
-                    Erin Allsberry
-                  </h2>
-                  <p className="mt-1 text-sm font-medium text-gray-600">
-                    Owner & Principal Agent
-                  </p>
+                  <h2 className="mt-2 font-display text-2xl font-bold text-gray-900">Erin Allsberry</h2>
+                  <p className="mt-1 text-sm font-medium text-gray-600">Owner & Principal Agent</p>
                 </div>
               </div>
 
@@ -94,15 +86,13 @@ export default function AboutPage() {
                   {
                     title: "Local context",
                     description:
-                      "An agency that knows Corona, Inland Empire growth, and the realities behind California insurance decisions.",
+                      "An agency that knows Corona and the Inland Empire realities behind California insurance decisions.",
                     icon: MapPin,
                   },
                 ].map((item) => (
                   <div key={item.title} className="rounded-2xl border border-gray-100 p-5">
                     <item.icon className="h-6 w-6 text-blue" />
-                    <h3 className="mt-4 font-display text-xl font-bold text-gray-900">
-                      {item.title}
-                    </h3>
+                    <h3 className="mt-4 font-display text-xl font-bold text-gray-900">{item.title}</h3>
                     <p className="mt-2 text-sm leading-7 text-gray-600">{item.description}</p>
                   </div>
                 ))}
@@ -124,9 +114,7 @@ export default function AboutPage() {
                       />
                     </div>
                     <div>
-                      <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gray-500">
-                        Recognition
-                      </p>
+                      <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gray-500">Recognition</p>
                       <p className="mt-1 text-sm font-semibold text-gray-900">{badge.title}</p>
                     </div>
                   </div>
@@ -142,7 +130,7 @@ export default function AboutPage() {
           <SectionHeading
             eyebrow="Our team"
             title="The people clients actually work with"
-            description="Insurance works best when you know who you are working with. Here are the people behind your coverage."
+            description="Insurance works best when you know who is on the other side of the call. Here is the team supporting your coverage journey."
             align="center"
           />
           <div className="mt-12 grid gap-6 lg:grid-cols-3">
@@ -184,6 +172,31 @@ export default function AboutPage() {
                 </Link>
               </div>
             ))}
+          </div>
+
+          <div className="mt-12 rounded-[2rem] border border-gray-100 bg-white p-8 text-center">
+            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue">Ready to start</p>
+            <h2 className="mt-4 font-display text-4xl font-extrabold text-gray-900">Let&apos;s find your next policy fit</h2>
+            <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-gray-600">
+              Skip the generic web forms and talk to the right team member for home, auto, or business coverage.
+              Share your ZIP and priorities to begin a clean review in minutes.
+            </p>
+            <div className="mt-7 flex flex-wrap justify-center gap-3">
+              <Link
+                href="/quote"
+                className="inline-flex items-center gap-2 rounded-full bg-red px-6 py-3 text-sm font-bold text-white transition hover:bg-red-hover"
+              >
+                Start a Free Quote
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 rounded-full border border-gray-200 px-6 py-3 text-sm font-bold text-navy transition hover:border-blue hover:text-blue"
+              >
+                Contact the Team
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
           </div>
         </div>
       </section>

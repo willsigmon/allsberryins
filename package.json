@@ -2,11 +2,18 @@
   "name": "allsberryins",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=22.17.0 <23"
+  },
   "scripts": {
+    "setup": "bash ./scripts/bootstrap-local.sh",
+    "clean": "bash ./scripts/clean-local.sh",
     "dev": "next dev --webpack",
-    "build": "next build --webpack",
+    "build": "npm run clean && next build --webpack",
     "start": "next start",
-    "lint": "eslint src --ext .ts,.tsx"
+    "lint": "eslint src --ext .ts,.tsx",
+    "typecheck": "tsc --noEmit --pretty false",
+    "check": "npm run lint && npm run typecheck"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

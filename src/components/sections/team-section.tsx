@@ -3,10 +3,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, Mail, Phone } from "lucide-react";
+import { Mail, ArrowRight, Phone } from "lucide-react";
 
-import { SectionHeading } from "@/components/ui/section-heading";
-import { agents, type Agent } from "@/lib/site-data";
+import { Agent } from "@/lib/site-data";
+import { agents } from "@/lib/site-data";
 import { cn } from "@/lib/utils";
 
 const accentClasses = {
@@ -26,12 +26,16 @@ export function TeamSection() {
   return (
     <section className="bg-gray-50 py-20 sm:py-24" id="team">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <SectionHeading
-          eyebrow="Meet our team"
-          title="Local Agents Who Know Your Coverage"
-          description="Every client gets a dedicated agent who listens, explains your options clearly, and stays with you from quote through claims."
-          align="center"
-        />
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="text-sm font-semibold uppercase tracking-[0.28em] text-blue">Meet our team</p>
+          <h2 className="mt-3 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+            Licensed Agents Across Corona and the Inland Empire
+          </h2>
+          <p className="mt-3 text-base leading-7 text-gray-600">
+            Every policy gets a local point of contact, clear communication, and a smooth handoff from quote to
+            coverage.
+          </p>
+        </div>
 
         <div className="mt-12 grid gap-6 lg:grid-cols-2">
           <motion.article
@@ -47,7 +51,7 @@ export function TeamSection() {
                 <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-full border-2 border-white/30 shadow-xl lg:h-28 lg:w-28">
                   <Image
                     src={featuredAgent.photo.src}
-                    alt={featuredAgent.photo.alt}
+                    alt={`${featuredAgent.name} photo`}
                     width={112}
                     height={112}
                     className="h-full w-full object-cover"
@@ -64,22 +68,17 @@ export function TeamSection() {
                 </div>
               )}
 
-              <div>
-                <p className="inline-flex items-center rounded-full border border-white/14 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-white/74">
-                  Featured example of the scalable producer-page pattern
-                </p>
-                <h3 className="font-display text-3xl font-extrabold tracking-tight sm:text-4xl">
-                  {featuredAgent.name}
-                </h3>
+                <div>
+                  <p className="inline-flex items-center rounded-full border border-white/14 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-white/74">
+                    Featured agent
+                  </p>
+                <h3 className="font-display text-3xl font-extrabold tracking-tight sm:text-4xl">{featuredAgent.name}</h3>
                 <p className="mt-2 text-sm font-semibold uppercase tracking-[0.24em] text-white/74">
                   {featuredAgent.title}
                 </p>
-                <p className="mt-5 max-w-2xl text-base leading-8 text-white/82">
-                  {featuredAgent.bio}
-                </p>
-                <p className="mt-4 max-w-2xl text-sm leading-7 text-white/70">
-                  A dedicated page like Brahm&apos;s can scale across Erin&apos;s broader 10-agent licensed
-                  team, giving each producer a direct link, QR code, and lead capture flow.
+                <p className="mt-5 max-w-2xl text-base leading-8 text-white/82">{featuredAgent.bio}</p>
+                <p className="mt-4 max-w-2xl text-sm leading-7 text-white/74">
+                  Reach Brahm directly for business coverage questions, renewal support, and side-by-side quote guidance.
                 </p>
 
                 <div className="mt-6 flex flex-wrap gap-2">
@@ -112,7 +111,7 @@ export function TeamSection() {
                     href="/quote?product=business"
                     className="inline-flex items-center gap-2 rounded-full border border-white/24 px-5 py-3 text-sm font-bold text-white transition hover:bg-white/10"
                   >
-                    Start a Commercial Quote
+                    Start a Business Quote
                     <Phone className="h-4 w-4" />
                   </Link>
                 </div>
@@ -144,7 +143,7 @@ function SupportingAgentCard({ agent, index }: { agent: Agent; index: number }) 
         <div className="relative h-20 w-20 overflow-hidden rounded-full border border-white shadow-xl">
           <Image
             src={agent.photo.src}
-            alt={agent.photo.alt}
+            alt={`${agent.name} photo`}
             width={80}
             height={80}
             className="h-full w-full object-cover"

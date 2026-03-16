@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { absoluteUrl } from "@/lib/utils";
+import { absoluteUrl, shouldIndexSite, siteUrl } from "@/lib/utils";
 
 const defaultDescription =
   "Allsberry Insurance Agency provides personalized home, auto, business, and life insurance solutions in Corona, CA. Get a free quote today. Serving the Inland Empire since 1994.";
@@ -15,7 +15,7 @@ const defaultKeywords = [
 ];
 
 export const sharedMetadata: Metadata = {
-  metadataBase: new URL("https://allsberryagency.com"),
+  metadataBase: new URL(siteUrl),
   title: {
     default: "Allsberry Insurance Agency | Corona, CA",
     template: "%s | Allsberry Insurance Agency | Corona, CA",
@@ -25,7 +25,7 @@ export const sharedMetadata: Metadata = {
   openGraph: {
     title: "Allsberry Insurance Agency | Corona, CA",
     description: defaultDescription,
-    url: absoluteUrl(),
+    url: siteUrl,
     siteName: "Allsberry Insurance Agency",
     locale: "en_US",
     type: "website",
@@ -44,6 +44,10 @@ export const sharedMetadata: Metadata = {
     description: defaultDescription,
     images: [absoluteUrl("/twitter-image")],
   },
+  robots: {
+    index: shouldIndexSite,
+    follow: shouldIndexSite,
+  },
 };
 
 export function createPageMetadata(options: {
@@ -59,7 +63,7 @@ export function createPageMetadata(options: {
     description,
     keywords: keywords ?? defaultKeywords,
     alternates: {
-      canonical: path,
+      canonical: absoluteUrl(path),
     },
     openGraph: {
       title: `${title} | Allsberry Insurance Agency | Corona, CA`,
@@ -78,6 +82,10 @@ export function createPageMetadata(options: {
       title: `${title} | Allsberry Insurance Agency | Corona, CA`,
       description,
       images: [absoluteUrl("/twitter-image")],
+    },
+    robots: {
+      index: shouldIndexSite,
+      follow: shouldIndexSite,
     },
   };
 }
