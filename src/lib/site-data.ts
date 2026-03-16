@@ -363,20 +363,20 @@ export const employeeOptions = ["1-5", "6-15", "16-50", "51-100", "100+"] as con
 
 export const reviews = [
   {
-    name: "Maria G.",
-    body: "Erin and her team made switching our homeowners insurance so easy. They found us better coverage at a lower rate. Highly recommend!",
+    name: "Corona homeowner",
+    body: "Switching our homeowners coverage felt easy. The team explained everything clearly and helped us land on protection that fit our family better.",
   },
   {
-    name: "James T.",
-    body: "We needed commercial insurance for our restaurant and had no idea where to start. Brahm walked us through everything. Outstanding service.",
+    name: "Local restaurant owner",
+    body: "We needed business coverage quickly and Brahm made the process feel organized from the first call. He helped us understand what mattered and what could wait.",
   },
   {
-    name: "Patricia L.",
-    body: "After years of overpaying for auto insurance, I finally called Allsberry. They saved me over $800 a year. Wish I had called sooner.",
+    name: "Auto client",
+    body: "I finally felt like someone was actually reviewing my auto policy instead of rushing me through it. The advice was practical and easy to trust.",
   },
   {
-    name: "Robert K.",
-    body: "Professional, responsive, and genuinely caring. When we had a claim, Erin personally guided us through every step.",
+    name: "Small business client",
+    body: "Responsive, thoughtful, and steady when we had questions about claims and coverage changes. You can tell this agency cares about follow-through.",
   },
 ] as const;
 

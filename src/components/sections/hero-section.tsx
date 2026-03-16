@@ -68,7 +68,7 @@ export function HeroSection() {
             transition={{ duration: 0.45, ease: "easeOut", delay: 0.16 }}
             className="mt-5 max-w-2xl text-lg leading-8 text-gray-600"
           >
-            What are you looking to protect? Pick the coverage you need and we will point you toward a quote that feels tailored, not templated.
+            Tell us what you are protecting and we will guide you into a quote flow that feels clear, fast, and tailored to your situation.
           </motion.p>
 
           <motion.div

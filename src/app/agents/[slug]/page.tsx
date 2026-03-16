@@ -85,7 +85,7 @@ export default async function AgentPage({ params }: AgentPageProps) {
               {isFeaturedMicrosite ? (
                 <div className="inline-flex items-center gap-2 rounded-full border border-blue/10 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-blue shadow-sm">
                   <ShieldCheck className="h-4 w-4" />
-                  Featured producer page example
+                  Direct agent page
                 </div>
               ) : (
                 <div className="inline-flex items-center gap-2 rounded-full border border-blue/10 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-blue shadow-sm">
@@ -241,8 +241,8 @@ export default async function AgentPage({ params }: AgentPageProps) {
           </h2>
           <p className="mt-4 max-w-3xl text-base leading-8 text-gray-600">
             Share the basics and {agent.firstName} or another licensed member of the team will
-            follow up. This keeps the page useful as a real producer microsite instead of just a
-            directory listing.
+            follow up. The goal is to make this page feel like a real extension of the agency,
+            not just a thin directory listing.
           </p>
           <div className="mt-8">
             <AgentContactForm agentName={agent.name} agentSlug={agent.slug} />

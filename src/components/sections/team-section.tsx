@@ -30,7 +30,7 @@ export function TeamSection() {
         <SectionHeading
           eyebrow="Meet our team"
           title="Agency-first branding with premium producer pages built in"
-          description="Brahm&apos;s page is positioned as the example sub-page: a clean, mobile-ready producer landing page Erin could scale across a larger team without losing the Allsberry brand."
+          description="Brahm&apos;s page shows how a dedicated agent page can stay clean, mobile-ready, and quote-focused while still feeling fully anchored to the Allsberry brand."
           align="center"
         />
 
@@ -46,7 +46,7 @@ export function TeamSection() {
             <div className="grid gap-8 lg:grid-cols-[0.94fr_1.06fr] lg:items-center">
               <div>
                 <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-white/90 backdrop-blur">
-                  Featured sub-page example
+                  Featured agent page
                 </div>
                 <h3 className="mt-6 font-display text-4xl font-extrabold tracking-tight sm:text-[2.7rem]">
                   {featuredAgent.name}
@@ -55,8 +55,8 @@ export function TeamSection() {
                   {featuredAgent.title}
                 </p>
                 <p className="mt-5 max-w-2xl text-base leading-8 text-white/82">
-                  {featuredAgent.bio} This is the producer-page pattern we can point Erin to tomorrow:
-                  direct contact, QR-ready, quote-focused, and still visually anchored to the agency site.
+                  {featuredAgent.bio} The page structure keeps direct contact, QR-sharing, and
+                  lead capture front and center without making the agency brand feel fragmented.
                 </p>
 
                 <div className="mt-6 flex flex-wrap gap-2">
