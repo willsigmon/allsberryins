@@ -12,15 +12,15 @@ export function ReviewsSection() {
     <section className="bg-white py-20 sm:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          eyebrow="Social proof"
+          eyebrow="Client experience"
           title="What Our Clients Say"
-          description="Real feedback from real clients across Corona and the Inland Empire."
+          description="Clear explanations, responsive follow-up, and personal support are the themes clients remember most."
           align="center"
         />
         <div className="mt-8 rounded-[2rem] border border-gray-100 bg-[linear-gradient(180deg,#ffffff_0%,#f8fafb_100%)] p-6 shadow-[0_24px_50px_-44px_rgba(0,32,92,0.45)]">
           <div className="grid gap-6 md:grid-cols-[0.75fr_1.25fr] md:items-center">
             <div className="rounded-[1.5rem] bg-blue-light p-5 text-center md:text-left">
-              <p className="text-sm font-semibold uppercase tracking-[0.28em] text-blue">Client confidence</p>
+              <p className="text-sm font-semibold uppercase tracking-[0.28em] text-blue">Five-star feel</p>
               <div className="mt-3 flex items-center justify-center gap-3 md:justify-start">
                 <span className="font-display text-4xl font-extrabold text-navy">5★</span>
                 <div className="flex items-center gap-1 text-gold">
@@ -32,13 +32,13 @@ export function ReviewsSection() {
             </div>
             <div className="flex flex-wrap items-center justify-center gap-3 md:justify-end">
               <span className="rounded-full border border-gray-100 bg-white px-4 py-2 text-sm font-semibold text-gray-600 shadow-sm">
-                Trusted local guidance
+                Clear advice
               </span>
               <span className="rounded-full border border-gray-100 bg-white px-4 py-2 text-sm font-semibold text-gray-600 shadow-sm">
                 Fast follow-up
               </span>
               <span className="rounded-full border border-gray-100 bg-white px-4 py-2 text-sm font-semibold text-gray-600 shadow-sm">
-                Claims guidance
+                Claims support
               </span>
             </div>
           </div>
@@ -77,7 +77,7 @@ export function ReviewsSection() {
             rel="noreferrer"
             className="inline-flex items-center gap-2 font-semibold text-blue transition hover:text-navy"
           >
-            See More Reviews →
+            See Public Reviews →
           </Link>
         </div>
       </div>

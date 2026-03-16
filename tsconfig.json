@@ -16,33 +16,34 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "react-jsx",
-    "incremental": true,
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ],
+    "incremental": false,
     "paths": {
       "@/*": [
         "./src/*"
       ]
-    }
+    },
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
   "include": [
     "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.mts",
     ".next/types/**/*.ts",
-    ".next/dev/types/**/*.ts",
-    "**/*.mts",
     ".next-build/types/**/*.ts",
-    ".next-build/dev/types/**/*.ts",
-    ".app-build/types/**/*.ts",
-    ".app-build/dev/types/**/*.ts",
-    ".next-demo-build/types/**/*.ts",
-    ".next-demo-build/dev/types/**/*.ts"
+    ".next-build/dev/types/**/*.ts"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "node_modules_old",
+    "node_modules_broken_20260316_1523",
+    "node_modules_partial_20260316_1526",
+    ".next-build",
+    ".next-demo-build",
+    ".app-build"
   ]
 }

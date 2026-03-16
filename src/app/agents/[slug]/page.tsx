@@ -132,6 +132,12 @@ export default async function AgentPage({ params }: AgentPageProps) {
               </div>
 
               <p className="mt-8 text-lg leading-8 text-gray-600">{agent.bio}</p>
+              {isFeaturedMicrosite ? (
+                <p className="mt-4 max-w-2xl text-sm leading-7 text-gray-500">
+                  This page shows how Allsberry can give each producer on the broader team a dedicated,
+                  SEO-friendly landing page with direct contact, QR sharing, and routed lead capture.
+                </p>
+              ) : null}
               {agent.license ? (
                 <p className="mt-5 text-sm font-semibold text-blue">{agent.license}</p>
               ) : null}

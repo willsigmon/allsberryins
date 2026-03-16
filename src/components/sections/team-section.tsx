@@ -65,6 +65,9 @@ export function TeamSection() {
               )}
 
               <div>
+                <p className="inline-flex items-center rounded-full border border-white/14 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-white/74">
+                  Featured example of the scalable producer-page pattern
+                </p>
                 <h3 className="font-display text-3xl font-extrabold tracking-tight sm:text-4xl">
                   {featuredAgent.name}
                 </h3>
@@ -73,6 +76,10 @@ export function TeamSection() {
                 </p>
                 <p className="mt-5 max-w-2xl text-base leading-8 text-white/82">
                   {featuredAgent.bio}
+                </p>
+                <p className="mt-4 max-w-2xl text-sm leading-7 text-white/70">
+                  A dedicated page like Brahm&apos;s can scale across Erin&apos;s broader 10-agent licensed
+                  team, giving each producer a direct link, QR code, and lead capture flow.
                 </p>
 
                 <div className="mt-6 flex flex-wrap gap-2">

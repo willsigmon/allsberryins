@@ -322,7 +322,7 @@ export const products: Product[] = [
   },
 ];
 
-export const heroProductSlugs: ProductSlug[] = ["home", "auto", "life", "business", "renters", "umbrella"];
+export const heroProductSlugs: ProductSlug[] = ["home", "auto", "life", "business"];
 
 export const personalProducts = products.filter((product) =>
   ["home", "auto", "renters", "life", "umbrella", "condo"].includes(product.slug),
@@ -360,6 +360,29 @@ export const referralSources = [
 ] as const;
 
 export const employeeOptions = ["1-5", "6-15", "16-50", "51-100", "100+"] as const;
+
+export const trustHighlights = [
+  {
+    label: "Serving since",
+    value: String(agency.founded),
+    description: "Local agency roots in Corona and the Inland Empire.",
+  },
+  {
+    label: "Erin leading since",
+    value: String(agency.erinSince),
+    description: "Owner-led guidance with long-term continuity.",
+  },
+  {
+    label: "Office",
+    value: "Corona, CA",
+    description: "355 N Sheridan St, Ste 100.",
+  },
+  {
+    label: "Coverage focus",
+    value: "Home • Auto • Business • Life",
+    description: "Personal and commercial protection under one roof.",
+  },
+] as const;
 
 export const reviews = [
   {

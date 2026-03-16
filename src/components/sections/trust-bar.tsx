@@ -1,67 +1,45 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
+import { CalendarRange, MapPin, ShieldCheck, Users } from "lucide-react";
 
-const stats = [
-  { end: 30, suffix: "+", unit: "Years", label: "Serving the Inland Empire" },
-  { end: 5, suffix: "★", unit: "Stars", label: "Client rating" },
-  { end: 1000, suffix: "+", unit: "Families", label: "Protected across Corona" },
-  { end: 20, suffix: "+", unit: "Carriers", label: "We shop for you" },
-];
+import { trustHighlights } from "@/lib/site-data";
 
-function CountUp({ end, duration = 1.6 }: { end: number; duration?: number }) {
-  const [count, setCount] = useState(0);
-  const [hasStarted, setHasStarted] = useState(false);
-  const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-50px" });
-
-  useEffect(() => {
-    if (!inView || hasStarted) return;
-    setHasStarted(true);
-
-    const startTime = performance.now();
-    const animate = (now: number) => {
-      const elapsed = now - startTime;
-      const progress = Math.min(elapsed / (duration * 1000), 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      setCount(Math.floor(eased * end));
-      if (progress < 1) {
-        requestAnimationFrame(animate);
-      } else {
-        setCount(end);
-      }
-    };
-    requestAnimationFrame(animate);
-  }, [inView, hasStarted, end, duration]);
-
-  return <span ref={ref}>{count}</span>;
-}
+const icons = [CalendarRange, Users, MapPin, ShieldCheck] as const;
 
 export function TrustBar() {
   return (
-    <section className="relative overflow-hidden border-y border-navy/8 bg-[linear-gradient(90deg,#00205c_0%,#0041a0_50%,#00205c_100%)] py-6">
-      <div className="absolute inset-0 mesh-bg opacity-40" />
-      <div className="relative mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-12 gap-y-4 px-4 sm:px-6 lg:justify-between lg:px-8">
-        {stats.map((stat, index) => (
-          <motion.div
-            key={stat.label}
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: index * 0.1 }}
-            className="flex items-center gap-3 text-white"
-          >
-            <div className="font-display text-3xl font-extrabold tracking-tight sm:text-4xl">
-              <CountUp end={stat.end} />
-              {stat.suffix}
-            </div>
-            <div className="text-left">
-              <p className="text-sm font-bold text-white/90">{stat.unit}</p>
-              <p className="text-xs text-white/55">{stat.label}</p>
-            </div>
-          </motion.div>
-        ))}
+    <section className="relative overflow-hidden border-y border-navy/8 bg-[linear-gradient(90deg,#00205c_0%,#0041a0_50%,#00205c_100%)] py-6 sm:py-8">
+      <div className="absolute inset-0 mesh-bg opacity-35" />
+      <div className="relative mx-auto grid max-w-7xl gap-4 px-4 sm:grid-cols-2 sm:px-6 xl:grid-cols-4 lg:px-8">
+        {trustHighlights.map((highlight, index) => {
+          const Icon = icons[index];
+          return (
+            <motion.div
+              key={highlight.label}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: index * 0.1 }}
+              className="rounded-[1.65rem] border border-white/10 bg-white/8 p-5 text-white backdrop-blur-sm"
+            >
+              <div className="flex items-start gap-4">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white/12 text-white">
+                  <Icon className="h-5 w-5" />
+                </div>
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.24em] text-white/58">
+                    {highlight.label}
+                  </p>
+                  <p className="mt-2 font-display text-2xl font-extrabold tracking-tight text-white">
+                    {highlight.value}
+                  </p>
+                  <p className="mt-2 text-sm leading-6 text-white/72">{highlight.description}</p>
+                </div>
+              </div>
+            </motion.div>
+          );
+        })}
       </div>
     </section>
   );

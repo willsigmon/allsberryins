@@ -2,27 +2,26 @@
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { AnimatePresence, motion } from "framer-motion";
-import { ArrowRight, BadgeCheck, MapPin, ShieldCheck, Sparkles, Star } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+import { motion } from "framer-motion";
+import { ArrowRight, BadgeCheck, CheckCircle2, MapPin, ShieldCheck, Sparkles } from "lucide-react";
+import { useState } from "react";
 
 import { getIcon } from "@/components/ui/icon-registry";
-import { agency, heroProductSlugs, officialProfile, products } from "@/lib/site-data";
+import { heroProductSlugs, officialProfile, products } from "@/lib/site-data";
 import { cn } from "@/lib/utils";
 
 const heroProducts = products.filter((p) => heroProductSlugs.includes(p.slug));
-const CYCLING_WORDS = ["Home", "Auto", "Life", "Business"] as const;
+const heroProductArtwork = {
+  home: officialProfile.productIcons.find((icon) => icon.label === "Home"),
+  auto: officialProfile.productIcons.find((icon) => icon.label === "Auto"),
+  life: officialProfile.productIcons.find((icon) => icon.label === "Life"),
+  business: officialProfile.productIcons.find((icon) => icon.label === "Business"),
+} as const;
 
 export function HeroSection() {
   const router = useRouter();
   const [selectedProduct, setSelectedProduct] = useState(heroProducts[0]?.slug ?? "home");
   const [zipCode, setZipCode] = useState("");
-  const [wordIndex, setWordIndex] = useState(0);
-
-  useEffect(() => {
-    const id = setInterval(() => setWordIndex((i) => (i + 1) % CYCLING_WORDS.length), 2500);
-    return () => clearInterval(id);
-  }, []);
 
   const startQuote = () => {
     const p = new URLSearchParams();
@@ -54,23 +53,9 @@ export function HeroSection() {
           transition={{ duration: 0.55, delay: 0.08 }}
           className="mt-3 font-display text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl"
         >
-          We Specialize in{" "}
-          <span className="relative inline-flex h-[1.18em] items-baseline overflow-hidden align-baseline">
-            <AnimatePresence mode="popLayout" initial={false}>
-              <motion.span
-                key={CYCLING_WORDS[wordIndex]}
-                className="text-gradient"
-                style={{ WebkitTextFillColor: "transparent" }}
-                initial={{ opacity: 0, y: "100%" }}
-                animate={{ opacity: 1, y: "0%" }}
-                exit={{ opacity: 0, y: "-100%" }}
-                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-              >
-                {CYCLING_WORDS[wordIndex]}
-              </motion.span>
-            </AnimatePresence>
-          </span>{" "}
-          Insurance
+          We Specialize in <span className="text-blue">Home</span>,{" "}
+          <span className="text-blue">Auto</span>, and{" "}
+          <span className="text-blue">Business</span> Insurance
         </motion.h1>
 
         {/* ── Subtitle + trust pills ── */}
@@ -81,49 +66,86 @@ export function HeroSection() {
           className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-3"
         >
           <p className="max-w-xl text-lg leading-8 text-gray-600">
-            Tell us what you need and we will guide you to the right coverage.
+            What are you looking to protect? Choose a coverage type below and we’ll guide you to the
+            right next step.
           </p>
           <div className="flex flex-wrap gap-3">
             <div className="inline-flex items-center gap-2 rounded-full border border-gray-100 bg-white px-4 py-2 text-sm font-semibold text-navy shadow-sm">
               <Sparkles className="h-4 w-4 text-blue" />
               Corona families & businesses
             </div>
-            <div className="inline-flex items-center gap-2 rounded-full border border-gold/20 bg-white px-4 py-2 text-sm font-semibold text-navy shadow-sm">
-              <Star className="h-4 w-4 fill-gold text-gold" />
-              Fast follow-up
+            <div className="inline-flex items-center gap-2 rounded-full border border-blue/10 bg-white px-4 py-2 text-sm font-semibold text-navy shadow-sm">
+              <ShieldCheck className="h-4 w-4 text-blue" />
+              Personalized guidance
             </div>
           </div>
         </motion.div>
 
-        {/* ── Two-column: pills+CTA left, profile card right ── */}
+        {/* ── Two-column: selector left, profile card right ── */}
         <div className="mt-8 grid gap-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-start">
-          {/* Left: product pills + helper text */}
+          {/* Left: product cards + helper text */}
           <div>
             <motion.div
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.35, delay: 0.22 }}
-              className="flex flex-wrap gap-2"
+              className="grid gap-4 sm:grid-cols-2"
             >
-              {heroProducts.map((product) => {
+              {heroProducts.map((product, index) => {
                 const Icon = getIcon(product.icon);
                 const isActive = selectedProduct === product.slug;
+                const artwork = heroProductArtwork[product.slug as keyof typeof heroProductArtwork];
                 return (
-                  <button
+                  <motion.button
                     key={product.slug}
                     type="button"
                     aria-pressed={isActive}
                     onClick={() => setSelectedProduct(product.slug)}
+                    initial={{ opacity: 0, y: 18 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.35, delay: 0.28 + index * 0.08 }}
                     className={cn(
-                      "inline-flex items-center gap-2 rounded-full border px-4 py-2.5 text-sm font-semibold transition-all duration-200",
+                      "group relative overflow-hidden rounded-[1.75rem] border p-5 text-left transition-all duration-200",
                       isActive
-                        ? "border-blue bg-navy text-white shadow-[0_8px_24px_-10px_rgba(0,32,92,0.6)]"
-                        : "border-gray-200 bg-white text-gray-700 hover:border-blue hover:text-blue",
+                        ? "border-blue bg-navy text-white shadow-[0_24px_55px_-32px_rgba(0,32,92,0.7)]"
+                        : "border-gray-100 bg-white text-gray-700 shadow-[0_16px_36px_-30px_rgba(0,32,92,0.35)] hover:-translate-y-0.5 hover:border-blue/35 hover:shadow-[0_24px_50px_-30px_rgba(0,102,179,0.26)]",
                     )}
                   >
-                    <Icon className="h-4 w-4" />
-                    {product.shortName}
-                  </button>
+                    <div className="flex items-start justify-between gap-4">
+                      <div
+                        className={cn(
+                          "flex h-14 w-14 items-center justify-center rounded-2xl border transition",
+                          isActive
+                            ? "border-white/14 bg-white/10"
+                            : "border-blue/10 bg-blue-light text-blue",
+                        )}
+                      >
+                        {artwork ? (
+                          <Image
+                            src={artwork.src}
+                            alt={artwork.alt}
+                            width={34}
+                            height={34}
+                            className={cn("h-8 w-8 object-contain", isActive ? "brightness-[2.4]" : "")}
+                          />
+                        ) : (
+                          <Icon className="h-6 w-6" />
+                        )}
+                      </div>
+                      <CheckCircle2
+                        className={cn(
+                          "h-5 w-5 transition",
+                          isActive ? "text-white" : "text-gray-300 group-hover:text-blue/50",
+                        )}
+                      />
+                    </div>
+                    <p className={cn("mt-5 font-display text-xl font-bold", isActive ? "text-white" : "text-gray-900")}>
+                      {product.shortName}
+                    </p>
+                    <p className={cn("mt-2 text-sm leading-7", isActive ? "text-white/76" : "text-gray-600")}>
+                      {product.description}
+                    </p>
+                  </motion.button>
                 );
               })}
             </motion.div>
@@ -134,11 +156,44 @@ export function HeroSection() {
               transition={{ duration: 0.4, delay: 0.35 }}
               className="mt-5 max-w-lg text-base leading-7 text-gray-500"
             >
-              Select a coverage type and enter your ZIP to start a personalized quote in under two minutes.
+              Select a product card, enter your ZIP code, and we’ll route you into a quote flow with that
+              coverage already selected.
             </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.42, delay: 0.42 }}
+              className="mt-5 rounded-[2rem] border border-gray-100 bg-white p-5 shadow-[0_20px_60px_-42px_rgba(0,32,92,0.6)]"
+            >
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-end">
+                <label className="grid flex-1 gap-2 text-sm font-semibold text-gray-900">
+                  ZIP Code
+                  <input
+                    value={zipCode}
+                    onChange={(e) => setZipCode(e.target.value)}
+                    inputMode="numeric"
+                    placeholder="Enter ZIP code"
+                    className="h-13 rounded-2xl border border-gray-200 px-4 text-base text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-blue focus:ring-4 focus:ring-blue/10"
+                  />
+                </label>
+                <button
+                  type="button"
+                  onClick={startQuote}
+                  className="cta-glow inline-flex h-13 items-center justify-center gap-2 rounded-2xl bg-red px-8 text-base font-bold text-white transition hover:bg-red-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red focus-visible:ring-offset-2"
+                >
+                  Start Quote
+                  <ArrowRight className="h-4 w-4" />
+                </button>
+              </div>
+              <p className="mt-3 inline-flex items-center gap-2 text-sm font-medium text-blue">
+                <BadgeCheck className="h-4 w-4" />
+                Savings Tip: Save more when you bundle!
+              </p>
+            </motion.div>
           </div>
 
-          {/* Right: profile card + ZIP */}
+          {/* Right: profile card */}
           <motion.div
             initial={{ opacity: 0, scale: 0.94 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -199,29 +254,6 @@ export function HeroSection() {
                 </div>
               </div>
             </div>
-
-            {/* ZIP Code form */}
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.42, delay: 0.58 }}
-              className="mt-5 rounded-[2rem] border border-gray-100 bg-white p-5 shadow-[0_20px_60px_-42px_rgba(0,32,92,0.6)]"
-            >
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-end">
-                <label className="grid flex-1 gap-2 text-sm font-semibold text-gray-900">
-                  ZIP Code
-                  <input value={zipCode} onChange={(e) => setZipCode(e.target.value)} inputMode="numeric" placeholder="Enter ZIP code" className="h-13 rounded-2xl border border-gray-200 px-4 text-base text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-blue focus:ring-4 focus:ring-blue/10" />
-                </label>
-                <button type="button" onClick={startQuote} className="cta-glow inline-flex h-13 items-center justify-center gap-2 rounded-2xl bg-red px-8 text-base font-bold text-white transition hover:bg-red-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red focus-visible:ring-offset-2">
-                  Start Quote
-                  <ArrowRight className="h-4 w-4" />
-                </button>
-              </div>
-              <p className="mt-3 inline-flex items-center gap-2 text-sm font-medium text-blue">
-                <BadgeCheck className="h-4 w-4" />
-                Savings Tip: Save more when you bundle!
-              </p>
-            </motion.div>
           </motion.div>
         </div>
       </div>
