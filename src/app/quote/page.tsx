@@ -28,7 +28,7 @@ export default async function QuotePage({ searchParams }: QuotePageProps) {
             <SectionHeading
               eyebrow="Get a quote"
               title="Start simple. We’ll handle the details with you."
-              description="The form is intentionally light so mobile traffic converts cleanly, especially from QR scans and local referrals."
+              description="Tell us what you need and a licensed agent will follow up with options tailored to your situation."
             />
             <div className="mt-8 rounded-[2rem] border border-blue/10 bg-white p-6 shadow-[0_20px_60px_-46px_rgba(0,32,92,0.45)]">
               <p className="text-sm font-semibold uppercase tracking-[0.24em] text-blue">What happens next</p>

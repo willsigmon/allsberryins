@@ -182,7 +182,7 @@ export default async function AgentPage({ params }: AgentPageProps) {
                     </h2>
                     <p className="mt-4 text-base leading-8 text-gray-600">
                       Great for print materials, desk signage, referrals, or follow-up texts.
-                      Mobile traffic was called out as important, so this keeps the flow fast.
+                      Scan from your phone to save {agent.firstName}&apos;s contact info instantly.
                     </p>
                     <Link
                       href={`/quote?product=${agent.slug === "brahm" ? "business" : "home"}`}
@@ -210,23 +210,23 @@ export default async function AgentPage({ params }: AgentPageProps) {
 
               <div className="rounded-[2.2rem] border border-gray-100 bg-[linear-gradient(180deg,#ffffff_0%,#f8fafb_100%)] p-8 shadow-[0_30px_70px_-52px_rgba(0,32,92,0.45)]">
                 <p className="text-sm font-semibold uppercase tracking-[0.24em] text-blue">
-                  Why this page works
+                  Working with {agent.firstName}
                 </p>
                 <h2 className="mt-3 font-display text-3xl font-extrabold text-gray-900">
-                  Built for mobile and quick trust
+                  What to expect
                 </h2>
                 <div className="mt-6 grid gap-3">
                   <div className="rounded-[1.4rem] border border-gray-100 bg-white px-4 py-4 text-sm leading-7 text-gray-600">
-                    Direct contact info sits above the fold so a prospect can call or email without
-                    hunting around.
+                    Call, email, or fill out the form below and {agent.firstName} will follow up
+                    within one business day.
                   </div>
                   <div className="rounded-[1.4rem] border border-gray-100 bg-white px-4 py-4 text-sm leading-7 text-gray-600">
-                    The QR code makes the page easy to share from print, referrals, and in-person
-                    conversations.
+                    {agent.firstName} will review your situation, explain your options in plain
+                    language, and help you compare coverage side by side.
                   </div>
                   <div className="rounded-[1.4rem] border border-gray-100 bg-white px-4 py-4 text-sm leading-7 text-gray-600">
-                    The lead form is simple by design so the agency gets more starts and fewer
-                    abandoned visits.
+                    Once you choose a plan, {agent.firstName} stays with you through binding,
+                    renewals, and any claims that come up.
                   </div>
                 </div>
               </div>
@@ -241,8 +241,7 @@ export default async function AgentPage({ params }: AgentPageProps) {
           </h2>
           <p className="mt-4 max-w-3xl text-base leading-8 text-gray-600">
             Share the basics and {agent.firstName} or another licensed member of the team will
-            follow up. The goal is to make this page feel like a real extension of the agency,
-            not just a thin directory listing.
+            follow up within one business day.
           </p>
           <div className="mt-8">
             <AgentContactForm agentName={agent.name} agentSlug={agent.slug} />

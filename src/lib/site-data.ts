@@ -322,7 +322,7 @@ export const products: Product[] = [
   },
 ];
 
-export const heroProductSlugs: ProductSlug[] = ["home", "auto", "life", "business"];
+export const heroProductSlugs: ProductSlug[] = ["home", "auto", "life", "business", "renters", "umbrella"];
 
 export const personalProducts = products.filter((product) =>
   ["home", "auto", "renters", "life", "umbrella", "condo"].includes(product.slug),
@@ -381,26 +381,26 @@ export const reviews = [
 ] as const;
 
 export const carrierPartners = [
-  "Farmers",
-  "Travelers",
-  "The Hartford",
-  "Progressive",
-  "Liberty Mutual",
-  "Chubb",
-  "MetLife",
-  "Zurich",
-  "Nationwide",
-  "Safeco",
-  "Foremost",
-  "Bristol West",
-  "National General",
-  "Hagerty",
-  "SageSure",
-  "Prudential",
-  "AmTrust",
-  "Protective",
-  "Markel",
-  "Mutual of Omaha",
+  { name: "Farmers", domain: "farmers.com" },
+  { name: "Travelers", domain: "travelers.com" },
+  { name: "The Hartford", domain: "thehartford.com" },
+  { name: "Progressive", domain: "progressive.com" },
+  { name: "Liberty Mutual", domain: "libertymutual.com" },
+  { name: "Chubb", domain: "chubb.com" },
+  { name: "MetLife", domain: "metlife.com" },
+  { name: "Zurich", domain: "zurichna.com" },
+  { name: "Nationwide", domain: "nationwide.com" },
+  { name: "Safeco", domain: "safeco.com" },
+  { name: "Foremost", domain: "foremostinsurance.com" },
+  { name: "Bristol West", domain: "bristolwest.com" },
+  { name: "National General", domain: "nationalgeneral.com" },
+  { name: "Hagerty", domain: "hagerty.com" },
+  { name: "SageSure", domain: "sagesure.com" },
+  { name: "Prudential", domain: "prudential.com" },
+  { name: "AmTrust", domain: "amtrustfinancial.com" },
+  { name: "Protective", domain: "protective.com" },
+  { name: "Markel", domain: "markel.com" },
+  { name: "Mutual of Omaha", domain: "mutualofomaha.com" },
 ] as const;
 
 export const agentMicrositeFeatures = [
@@ -436,6 +436,10 @@ export const agents: Agent[] = [
     initials: "BS",
     accent: "navy",
     specialties: ["Commercial Insurance", "Restaurant Coverage", "Client Strategy"],
+    photo: {
+      src: "/media/agents/brahm-shank.jpg",
+      alt: "Brahm Shank, Licensed Insurance Agent at Allsberry Insurance Agency",
+    },
   },
   {
     slug: "dakota",

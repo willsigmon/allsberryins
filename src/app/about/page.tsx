@@ -142,7 +142,7 @@ export default function AboutPage() {
           <SectionHeading
             eyebrow="Our team"
             title="The people clients actually work with"
-            description="Agency-first branding was non-negotiable, but trust still grows faster when faces, names, and strengths are easy to find. Brahm&apos;s page shows how this can scale into a stronger dedicated agent experience."
+            description="Insurance works best when you know who you are working with. Here are the people behind your coverage."
             align="center"
           />
           <div className="mt-12 grid gap-6 lg:grid-cols-3">
