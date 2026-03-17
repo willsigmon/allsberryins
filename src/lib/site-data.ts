@@ -322,7 +322,7 @@ export const products: Product[] = [
   },
 ];
 
-export const heroProductSlugs: ProductSlug[] = ["home", "auto", "life", "business"];
+export const heroProductSlugs: ProductSlug[] = ["home", "auto", "life", "business", "renters", "umbrella"];
 
 export const personalProducts = products.filter((product) =>
   ["home", "auto", "renters", "life", "umbrella", "condo"].includes(product.slug),
@@ -361,45 +361,22 @@ export const referralSources = [
 
 export const employeeOptions = ["1-5", "6-15", "16-50", "51-100", "100+"] as const;
 
-export const trustHighlights = [
-  {
-    label: "Serving since",
-    value: String(agency.founded),
-    description: "Local agency roots in Corona and the Inland Empire.",
-  },
-  {
-    label: "Agency leadership",
-    value: String(agency.erinSince),
-    description: "A stable team with decades of local experience.",
-  },
-  {
-    label: "Office",
-    value: "Corona, CA",
-    description: "355 N Sheridan St, Ste 100.",
-  },
-  {
-    label: "Coverage focus",
-    value: "Home • Auto • Business • Life",
-    description: "Personal and commercial protection under one roof.",
-  },
-] as const;
-
 export const reviews = [
   {
-    name: "Homeowner in Corona",
-    body: "Switching our homeowners coverage felt simple. The team explained each option clearly and helped us choose coverage that matched our home and budget.",
+    name: "Corona homeowner",
+    body: "Switching our homeowners coverage felt easy. The team explained everything clearly and helped us land on protection that fit our family better.",
   },
   {
-    name: "Small business owner",
-    body: "We needed commercial protection quickly, and the team helped us organize what to do first. The process felt straightforward and easy to follow.",
+    name: "Local restaurant owner",
+    body: "We needed business coverage quickly and Brahm made the process feel organized from the first call. He helped us understand what mattered and what could wait.",
   },
   {
     name: "Auto client",
-    body: "I appreciated that someone reviewed our car policy details instead of rushing us. The guidance was practical and easy to trust.",
+    body: "I finally felt like someone was actually reviewing my auto policy instead of rushing me through it. The advice was practical and easy to trust.",
   },
   {
-    name: "Longtime family client",
-    body: "Responsive, thoughtful, and steady during claims questions and coverage changes. We felt supported from quote through setup.",
+    name: "Small business client",
+    body: "Responsive, thoughtful, and steady when we had questions about claims and coverage changes. You can tell this agency cares about follow-through.",
   },
 ] as const;
 
@@ -430,7 +407,7 @@ export const agentMicrositeFeatures = [
   "Direct tap-to-call and email access",
   "QR code ready for print leave-behinds and text follow-up",
   "Lead form routed through the agency, not a generic directory",
-  "SEO-ready branded page structure for each agent",
+  "SEO-ready branded page structure for each producer",
 ] as const;
 
 export const agents: Agent[] = [

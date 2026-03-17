@@ -1,9 +1,9 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { ArrowRight, Mail, Phone, QrCode, ShieldCheck } from "lucide-react";
 import { QRCodeSVG } from "qrcode.react";
-import { notFound } from "next/navigation";
 
 import { AgentContactForm } from "@/components/forms/agent-contact-form";
 import { StructuredData } from "@/components/seo/structured-data";
@@ -43,47 +43,20 @@ export default async function AgentPage({ params }: AgentPageProps) {
     notFound();
   }
 
-  const agentUrl = absoluteUrl(`/agents/${agent.slug}`);
-
   const personSchema = {
     "@context": "https://schema.org",
     "@type": "Person",
     name: agent.name,
     jobTitle: agent.title,
-    telephone: agent.phone,
-    email: agent.email,
-    url: agentUrl,
-    image: agent.photo?.src,
-    description: agent.bio,
     worksFor: {
-      "@type": "Organization",
+      "@type": "InsuranceAgency",
       name: agency.fullName,
       url: agency.domain,
-      telephone: agency.phone,
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: agency.addressLine1,
-        addressLocality: "Corona",
-        addressRegion: "CA",
-        postalCode: "92878",
-        addressCountry: "US",
-      },
     },
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: agency.addressLine1,
-      addressLocality: "Corona",
-      addressRegion: "CA",
-      postalCode: "92878",
-      addressCountry: "US",
-    },
-    knowsAbout: agent.specialties,
-    areaServed: {
-      "@type": "Place",
-      name: "Corona, California",
-    },
-    hasCredential: agent.license ? agent.license : undefined,
-    sameAs: [agency.socials.facebook, agency.socials.instagram, agency.socials.linkedin],
+    telephone: agent.phone,
+    email: agent.email,
+    url: absoluteUrl(`/agents/${agent.slug}`),
+    description: agent.bio,
   };
 
   const isFeaturedMicrosite = agent.slug === "brahm";
@@ -109,10 +82,17 @@ export default async function AgentPage({ params }: AgentPageProps) {
         <div className="rounded-[2.75rem] bg-[linear-gradient(145deg,#0b2f72_0%,#0e4b94_48%,#dcecff_100%)] p-2 shadow-[0_35px_95px_-58px_rgba(0,32,92,0.85)]">
           <div className="grid gap-8 rounded-[2.35rem] bg-white p-6 lg:grid-cols-[1.02fr_0.98fr] lg:p-8">
             <div className="rounded-[2.2rem] border border-gray-100 bg-[linear-gradient(180deg,#ffffff_0%,#eef6fd_100%)] p-8 shadow-[0_30px_70px_-52px_rgba(0,32,92,0.4)]">
-              <div className="inline-flex items-center gap-2 rounded-full border border-blue/10 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-blue shadow-sm">
-                <ShieldCheck className="h-4 w-4" />
-                {isFeaturedMicrosite ? "Direct agent page" : "Agent profile"}
-              </div>
+              {isFeaturedMicrosite ? (
+                <div className="inline-flex items-center gap-2 rounded-full border border-blue/10 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-blue shadow-sm">
+                  <ShieldCheck className="h-4 w-4" />
+                  Direct agent page
+                </div>
+              ) : (
+                <div className="inline-flex items-center gap-2 rounded-full border border-blue/10 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-blue shadow-sm">
+                  <ShieldCheck className="h-4 w-4" />
+                  Agent profile
+                </div>
+              )}
 
               <div className="mt-8 flex flex-col gap-6 sm:flex-row sm:items-center">
                 {agent.photo ? (
@@ -152,12 +132,9 @@ export default async function AgentPage({ params }: AgentPageProps) {
               </div>
 
               <p className="mt-8 text-lg leading-8 text-gray-600">{agent.bio}</p>
-              {isFeaturedMicrosite ? (
-                <p className="mt-4 max-w-2xl text-sm leading-7 text-gray-500">
-                  Business owners can reach Brahm directly for quick answers, clearer comparisons, and a clean path from quote to coverage.
-                </p>
+              {agent.license ? (
+                <p className="mt-5 text-sm font-semibold text-blue">{agent.license}</p>
               ) : null}
-              {agent.license ? <p className="mt-5 text-sm font-semibold text-blue">{agent.license}</p> : null}
 
               <div className="mt-8 grid gap-4 sm:grid-cols-2">
                 <Link
@@ -185,7 +162,9 @@ export default async function AgentPage({ params }: AgentPageProps) {
                     <p className="text-xs font-semibold uppercase tracking-[0.22em] text-gray-500">
                       {highlight.label}
                     </p>
-                    <p className="mt-2 text-sm font-semibold leading-6 text-gray-900">{highlight.value}</p>
+                    <p className="mt-2 text-sm font-semibold leading-6 text-gray-900">
+                      {highlight.value}
+                    </p>
                   </div>
                 ))}
               </div>
@@ -195,13 +174,15 @@ export default async function AgentPage({ params }: AgentPageProps) {
               <div className="rounded-[2.2rem] border border-gray-100 bg-white p-8 shadow-[0_30px_70px_-52px_rgba(0,32,92,0.45)]">
                 <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
                   <div>
-                    <p className="text-sm font-semibold uppercase tracking-[0.24em] text-blue">Direct link</p>
+                    <p className="text-sm font-semibold uppercase tracking-[0.24em] text-blue">
+                      Direct link
+                    </p>
                     <h2 className="mt-3 font-display text-3xl font-extrabold text-gray-900">
                       Scan to visit {agent.firstName}&apos;s page
                     </h2>
                     <p className="mt-4 text-base leading-8 text-gray-600">
-                      Great for print, desk signage, referrals, or follow-up texts. Scan from a phone and save
-                      {agent.firstName}&apos;s contact info instantly.
+                      Great for print materials, desk signage, referrals, or follow-up texts.
+                      Scan from your phone to save {agent.firstName}&apos;s contact info instantly.
                     </p>
                     <Link
                       href={`/quote?product=${agent.slug === "brahm" ? "business" : "home"}`}
@@ -213,7 +194,7 @@ export default async function AgentPage({ params }: AgentPageProps) {
                   </div>
                   <div className="rounded-[2rem] border border-gray-100 bg-gray-50 p-4">
                     <QRCodeSVG
-                      value={agentUrl}
+                      value={absoluteUrl(`/agents/${agent.slug}`)}
                       size={160}
                       fgColor="#00205C"
                       bgColor="#ffffff"
@@ -228,17 +209,24 @@ export default async function AgentPage({ params }: AgentPageProps) {
               </div>
 
               <div className="rounded-[2.2rem] border border-gray-100 bg-[linear-gradient(180deg,#ffffff_0%,#f8fafb_100%)] p-8 shadow-[0_30px_70px_-52px_rgba(0,32,92,0.45)]">
-                <p className="text-sm font-semibold uppercase tracking-[0.24em] text-blue">Working with {agent.firstName}</p>
-                <h2 className="mt-3 font-display text-3xl font-extrabold text-gray-900">What to expect</h2>
+                <p className="text-sm font-semibold uppercase tracking-[0.24em] text-blue">
+                  Working with {agent.firstName}
+                </p>
+                <h2 className="mt-3 font-display text-3xl font-extrabold text-gray-900">
+                  What to expect
+                </h2>
                 <div className="mt-6 grid gap-3">
                   <div className="rounded-[1.4rem] border border-gray-100 bg-white px-4 py-4 text-sm leading-7 text-gray-600">
-                    Call, email, or fill out the form below and {agent.firstName} will follow up within one business day.
+                    Call, email, or fill out the form below and {agent.firstName} will follow up
+                    within one business day.
                   </div>
                   <div className="rounded-[1.4rem] border border-gray-100 bg-white px-4 py-4 text-sm leading-7 text-gray-600">
-                    {agent.firstName} will review your situation, explain options clearly, and help compare coverage side by side.
+                    {agent.firstName} will review your situation, explain your options in plain
+                    language, and help you compare coverage side by side.
                   </div>
                   <div className="rounded-[1.4rem] border border-gray-100 bg-white px-4 py-4 text-sm leading-7 text-gray-600">
-                    Once a plan is selected, support continues through binding, renewals, and any claims.
+                    Once you choose a plan, {agent.firstName} stays with you through binding,
+                    renewals, and any claims that come up.
                   </div>
                 </div>
               </div>
@@ -248,10 +236,12 @@ export default async function AgentPage({ params }: AgentPageProps) {
 
         <div className="mt-8 rounded-[2.4rem] border border-gray-100 bg-white p-8 shadow-[0_30px_70px_-52px_rgba(0,32,92,0.45)]">
           <p className="text-sm font-semibold uppercase tracking-[0.24em] text-blue">Lead form</p>
-          <h2 className="mt-3 font-display text-3xl font-extrabold text-gray-900">Get Started with {agent.firstName}</h2>
+          <h2 className="mt-3 font-display text-3xl font-extrabold text-gray-900">
+            Get Started with {agent.firstName}
+          </h2>
           <p className="mt-4 max-w-3xl text-base leading-8 text-gray-600">
-            Share the basics and {agent.firstName} or another licensed team member will follow up within one business
-            day.
+            Share the basics and {agent.firstName} or another licensed member of the team will
+            follow up within one business day.
           </p>
           <div className="mt-8">
             <AgentContactForm agentName={agent.name} agentSlug={agent.slug} />

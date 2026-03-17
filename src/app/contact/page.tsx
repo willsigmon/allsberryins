@@ -13,14 +13,7 @@ export const metadata: Metadata = createPageMetadata({
   path: "/contact",
 });
 
-type ContactItem = {
-  title: string;
-  body: string;
-  icon: React.ElementType;
-  href?: string;
-};
-
-const contactItems: ContactItem[] = [
+const contactItems = [
   { title: "Call us", body: agency.phone, href: agency.phoneHref, icon: Phone },
   { title: "Email", body: agency.email, href: agency.emailHref, icon: Mail },
   {
@@ -29,7 +22,7 @@ const contactItems: ContactItem[] = [
     href: "https://maps.google.com/?q=355+N+Sheridan+St+Ste+100+Corona+CA+92878",
     icon: MapPin,
   },
-  { title: "Hours", body: agency.hours, icon: Clock3 },
+  { title: "Hours", body: agency.hours, href: "/quote", icon: Clock3 },
 ] as const;
 
 const socialItems = [
@@ -45,51 +38,33 @@ export default function ContactPage() {
         <SectionHeading
           eyebrow="Contact"
           title="Reach the Allsberry team"
-          description="Call, email, or request a quote in one step."
+          description="Call us, email us, or jump straight into a quote."
         />
 
         <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {contactItems.map((item) => {
-            const content = (
-              <>
-                <item.icon className="h-5 w-5 text-blue" />
-                <h2 className="mt-3 font-display text-lg font-bold text-gray-900">{item.title}</h2>
-                <p className="mt-1 text-sm leading-6 text-gray-600">{item.body}</p>
-              </>
-            );
-
-            if (!item.href) {
-              return (
-                <div
-                  key={item.title}
-                  className="rounded-2xl border border-gray-100 bg-gray-50 p-5"
-                  aria-label={`${item.title}: ${item.body}`}
-                >
-                  {content}
-                </div>
-              );
-            }
-
-            return (
-              <Link
-                key={item.title}
-                href={item.href}
-                target={item.href.startsWith("http") ? "_blank" : undefined}
-                rel={item.href.startsWith("http") ? "noreferrer" : undefined}
-                className="rounded-2xl border border-gray-100 bg-gray-50 p-5 transition hover:-translate-y-1 hover:border-blue/45 hover:bg-white hover:shadow-lg"
-              >
-                {content}
-              </Link>
-            );
-          })}
+          {contactItems.map((item) => (
+            <Link
+              key={item.title}
+              href={item.href}
+              target={item.href.startsWith("http") ? "_blank" : undefined}
+              rel={item.href.startsWith("http") ? "noreferrer" : undefined}
+              className="rounded-2xl border border-gray-100 bg-gray-50 p-5 transition hover:-translate-y-1 hover:border-blue/45 hover:bg-white hover:shadow-lg"
+            >
+              <item.icon className="h-5 w-5 text-blue" />
+              <h2 className="mt-3 font-display text-lg font-bold text-gray-900">{item.title}</h2>
+              <p className="mt-1 text-sm leading-6 text-gray-600">{item.body}</p>
+            </Link>
+          ))}
         </div>
 
         <div className="mt-10 grid gap-6 lg:grid-cols-[1.3fr_0.7fr]">
           <div className="rounded-[2rem] border border-gray-100 bg-[linear-gradient(180deg,#ffffff_0%,#eef6fd_100%)] p-8 shadow-[0_28px_70px_-52px_rgba(0,32,92,0.55)]">
-            <h2 className="font-display text-3xl font-extrabold text-gray-900">Need coverage help fast?</h2>
+            <h2 className="font-display text-3xl font-extrabold text-gray-900">
+              Need coverage help fast?
+            </h2>
             <p className="mt-3 max-w-xl text-base leading-7 text-gray-600">
-              The quote flow is the quickest way to share what you need. Pick a product and tell us where you
-              are located. A licensed agent will follow up with options that fit your policy, budget, and timeline.
+              The quote flow is the quickest way to tell us what you need. Pick a product and a
+              licensed agent will follow up within one business day.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <Link
@@ -108,7 +83,9 @@ export default function ContactPage() {
           </div>
 
           <div className="rounded-[2rem] border border-gray-100 bg-white p-6">
-            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-gray-500">Connect with us</p>
+            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-gray-500">
+              Connect with us
+            </p>
             <div className="mt-4 grid gap-3">
               {socialItems.map((item) => (
                 <Link

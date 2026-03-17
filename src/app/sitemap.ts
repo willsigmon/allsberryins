@@ -1,27 +1,21 @@
 import type { MetadataRoute } from "next";
 
 import { agents, blogPosts } from "@/lib/site-data";
-import { absoluteUrl, shouldIndexSite } from "@/lib/utils";
-
-const siteUpdatedAt = new Date("2026-03-16");
+import { absoluteUrl } from "@/lib/utils";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  if (!shouldIndexSite) {
-    return [];
-  }
-
-  const staticRoutes = ["", "/about", "/contact", "/quote", "/blog"] as const;
+  const staticRoutes = ["", "/about", "/contact", "/quote", "/blog"];
 
   return [
     ...staticRoutes.map((path) => ({
       url: absoluteUrl(path),
-      lastModified: siteUpdatedAt,
+      lastModified: new Date(),
       changeFrequency: path === "" ? ("weekly" as const) : ("monthly" as const),
       priority: path === "" ? 1 : 0.8,
     })),
     ...agents.map((agent) => ({
       url: absoluteUrl(`/agents/${agent.slug}`),
-      lastModified: siteUpdatedAt,
+      lastModified: new Date(),
       changeFrequency: "monthly" as const,
       priority: 0.7,
     })),
