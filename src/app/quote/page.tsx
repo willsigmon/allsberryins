@@ -7,7 +7,7 @@ import { createPageMetadata } from "@/lib/metadata";
 export const metadata: Metadata = createPageMetadata({
   title: "Get a Quote",
   description:
-    "Request a quote from Allsberry Insurance Agency for home, auto, life, business, renters, condo, umbrella, and workers compensation coverage in Corona, CA.",
+    "Request a quote from Allsberry Insurance Agency for home, auto, life, business, renters, condo, umbrella, and workers compensation coverage across Southern California.",
   path: "/quote",
 });
 

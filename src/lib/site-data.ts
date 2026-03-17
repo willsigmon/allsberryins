@@ -363,7 +363,7 @@ export const employeeOptions = ["1-5", "6-15", "16-50", "51-100", "100+"] as con
 
 export const reviews = [
   {
-    name: "Corona homeowner",
+    name: "Corona, CA homeowner",
     body: "Switching our homeowners coverage felt easy. The team explained everything clearly and helped us land on protection that fit our family better.",
   },
   {
@@ -418,7 +418,7 @@ export const agents: Agent[] = [
     title: "Agency Owner & Principal Agent",
     phone: agency.phone,
     email: "erin@allsberryagency.com",
-    bio: "With over 24 years of experience, Erin founded Allsberry Insurance Agency to provide personalized insurance solutions to families and businesses in Corona and the Inland Empire. She believes in making insurance straightforward and stress-free, so you can focus on what matters most.",
+    bio: "With over 24 years of experience, Erin founded Allsberry Insurance Agency to provide personalized insurance solutions to families and businesses across Southern California. She believes in making insurance straightforward and stress-free, so you can focus on what matters most.",
     initials: "EA",
     accent: "blue",
     specialties: ["Home Insurance", "Auto Insurance", "Agency Leadership"],

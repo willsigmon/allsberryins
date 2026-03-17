@@ -3,14 +3,14 @@ import type { Metadata } from "next";
 import { absoluteUrl } from "@/lib/utils";
 
 const defaultDescription =
-  "Allsberry Insurance Agency provides personalized home, auto, business, and life insurance solutions in Corona, CA. Get a free quote today. Serving the Inland Empire since 1994.";
+  "Allsberry Insurance Agency provides personalized home, auto, business, and life insurance solutions across Southern California. Based in Corona, CA. Get a free quote today.";
 
 const defaultKeywords = [
   "insurance agency Corona CA",
   "home insurance Corona",
   "auto insurance Corona",
   "Farmers Insurance agent Corona",
-  "business insurance Inland Empire",
+  "business insurance Southern California",
   "life insurance Corona CA",
 ];
 

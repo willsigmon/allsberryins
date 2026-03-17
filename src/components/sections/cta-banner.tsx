@@ -29,7 +29,7 @@ export function CtaBanner() {
                 Home • Auto • Life • Business
               </span>
               <span className="rounded-full border border-white/14 bg-white/8 px-4 py-2 text-sm font-semibold text-white/88">
-                Corona & Inland Empire
+                Southern California
               </span>
             </div>
           </div>

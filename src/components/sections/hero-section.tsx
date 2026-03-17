@@ -2,12 +2,11 @@
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, BadgeCheck, MapPin, ShieldCheck, Sparkles, Star } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { getIcon } from "@/components/ui/icon-registry";
-import { agency, heroProductSlugs, officialProfile, products } from "@/lib/site-data";
+import { heroProductSlugs, officialProfile, products } from "@/lib/site-data";
 import { cn } from "@/lib/utils";
 
 const heroProducts = products.filter((p) => heroProductSlugs.includes(p.slug));
@@ -36,75 +35,43 @@ export function HeroSection() {
       <div className="absolute inset-x-0 top-0 h-[38rem] bg-[radial-gradient(circle_at_top_right,rgba(0,102,179,0.18),transparent_34%),radial-gradient(circle_at_top_left,rgba(0,32,92,0.08),transparent_32%)]" />
 
       <div className="relative mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8 lg:pb-16">
-        {/* ── Badge ── */}
-        <motion.div
-          initial={{ opacity: 0, x: -24 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.45 }}
-          className="inline-flex items-center gap-2 rounded-full border border-blue/10 bg-white/90 px-4 py-2 text-sm font-semibold text-navy shadow-sm"
-        >
+        {/* Badge */}
+        <div className="inline-flex items-center gap-2 rounded-full border border-blue/10 bg-white/90 px-4 py-2 text-sm font-semibold text-navy shadow-sm">
           <ShieldCheck className="h-4 w-4 text-blue" />
-          Serving clients across Corona & the Inland Empire
-        </motion.div>
+          Serving families and businesses across Southern California
+        </div>
 
-        {/* ── Headline ── */}
-        <motion.h1
-          initial={{ opacity: 0, x: -28 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.55, delay: 0.08 }}
-          className="mt-3 font-display text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl"
-        >
+        {/* Headline with word cycler */}
+        <h1 className="mt-3 font-display text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl">
           We Specialize in{" "}
-          <span className="relative inline-flex h-[1.18em] items-baseline overflow-hidden align-baseline">
-            <AnimatePresence mode="popLayout" initial={false}>
-              <motion.span
-                key={CYCLING_WORDS[wordIndex]}
-                className="text-gradient"
-                style={{ WebkitTextFillColor: "transparent" }}
-                initial={{ opacity: 0, y: "100%" }}
-                animate={{ opacity: 1, y: "0%" }}
-                exit={{ opacity: 0, y: "-100%" }}
-                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-              >
-                {CYCLING_WORDS[wordIndex]}
-              </motion.span>
-            </AnimatePresence>
+          <span key={CYCLING_WORDS[wordIndex]} className="text-gradient transition-opacity duration-300" style={{ WebkitTextFillColor: "transparent" }}>
+            {CYCLING_WORDS[wordIndex]}
           </span>{" "}
           Insurance
-        </motion.h1>
+        </h1>
 
-        {/* ── Subtitle + trust pills ── */}
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.45, delay: 0.16 }}
-          className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-3"
-        >
+        {/* Subtitle + trust pills */}
+        <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-3">
           <p className="max-w-xl text-lg leading-8 text-gray-600">
             Tell us what you need and we will guide you to the right coverage.
           </p>
           <div className="flex flex-wrap gap-3">
             <div className="inline-flex items-center gap-2 rounded-full border border-gray-100 bg-white px-4 py-2 text-sm font-semibold text-navy shadow-sm">
               <Sparkles className="h-4 w-4 text-blue" />
-              Corona families & businesses
+              SoCal families & businesses
             </div>
             <div className="inline-flex items-center gap-2 rounded-full border border-gold/20 bg-white px-4 py-2 text-sm font-semibold text-navy shadow-sm">
               <Star className="h-4 w-4 fill-gold text-gold" />
               Fast follow-up
             </div>
           </div>
-        </motion.div>
+        </div>
 
-        {/* ── Two-column: pills+CTA left, profile card right ── */}
+        {/* Two-column: pills left, profile card + ZIP right */}
         <div className="mt-8 grid gap-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-start">
-          {/* Left: product pills + helper text */}
+          {/* Left */}
           <div>
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.35, delay: 0.22 }}
-              className="flex flex-wrap gap-2"
-            >
+            <div className="flex flex-wrap gap-2">
               {heroProducts.map((product) => {
                 const Icon = getIcon(product.icon);
                 const isActive = selectedProduct === product.slug;
@@ -126,35 +93,24 @@ export function HeroSection() {
                   </button>
                 );
               })}
-            </motion.div>
-
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.4, delay: 0.35 }}
-              className="mt-5 max-w-lg text-base leading-7 text-gray-500"
-            >
+            </div>
+            <p className="mt-5 max-w-lg text-base leading-7 text-gray-500">
               Select a coverage type and enter your ZIP to start a personalized quote in under two minutes.
-            </motion.p>
+            </p>
           </div>
 
           {/* Right: profile card + ZIP */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.94 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.55, delay: 0.2 }}
-            className="relative"
-          >
+          <div className="relative">
             <div className="animate-float absolute -left-6 top-10 hidden h-24 w-24 rounded-full bg-blue/10 blur-2xl sm:block" />
             <div className="animate-float-delayed absolute -right-6 bottom-10 hidden h-28 w-28 rounded-full bg-red/12 blur-3xl sm:block" />
 
-            {/* Shimmer border wrapper */}
+            {/* Shimmer border */}
             <div className="shimmer-border relative overflow-hidden rounded-[2rem] p-[3px] shadow-[0_35px_90px_-48px_rgba(0,32,92,0.8)]">
               <div className="relative overflow-hidden rounded-[1.85rem] bg-[linear-gradient(145deg,#0d2f73_0%,#0066b3_55%,#dbeafe_100%)] p-5 sm:p-6">
                 <div className="relative rounded-[1.65rem] border border-white/20 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.32),transparent_28%),linear-gradient(180deg,rgba(255,255,255,0.24),rgba(255,255,255,0.08))] p-5 text-white backdrop-blur-sm">
                   <div className="flex items-center gap-2 rounded-full bg-white/14 px-4 py-2 text-sm font-semibold backdrop-blur-sm w-fit">
                     <MapPin className="h-4 w-4" />
-                    Corona, California
+                    Southern California
                   </div>
 
                   <div className="mt-5 flex items-center gap-5">
@@ -201,12 +157,7 @@ export function HeroSection() {
             </div>
 
             {/* ZIP Code form */}
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.42, delay: 0.58 }}
-              className="mt-5 rounded-[2rem] border border-gray-100 bg-white p-5 shadow-[0_20px_60px_-42px_rgba(0,32,92,0.6)]"
-            >
+            <div className="mt-5 rounded-[2rem] border border-gray-100 bg-white p-5 shadow-[0_20px_60px_-42px_rgba(0,32,92,0.6)]">
               <div className="flex flex-col gap-3 sm:flex-row sm:items-end">
                 <label className="grid flex-1 gap-2 text-sm font-semibold text-gray-900">
                   ZIP Code
@@ -221,8 +172,8 @@ export function HeroSection() {
                 <BadgeCheck className="h-4 w-4" />
                 Savings Tip: Save more when you bundle!
               </p>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

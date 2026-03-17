@@ -56,13 +56,13 @@ export default function OpenGraphImage() {
               color: "rgba(255,255,255,0.72)",
             }}
           >
-            Corona, California
+            Southern California
           </div>
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: "20px", maxWidth: "820px" }}>
           <div style={{ fontSize: "68px", fontWeight: 800, lineHeight: 1.05 }}>Allsberry Insurance Agency</div>
           <div style={{ fontSize: "28px", lineHeight: 1.45, color: "rgba(255,255,255,0.86)" }}>
-            Personalized home, auto, life, and business insurance guidance for Corona and the Inland Empire.
+            Personalized home, auto, life, and business insurance guidance for Southern California families and businesses.
           </div>
         </div>
         <div

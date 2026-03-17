@@ -14,7 +14,7 @@ export function ReviewsSection() {
         <SectionHeading
           eyebrow="Social proof"
           title="What Our Clients Say"
-          description="Real feedback from real clients across Corona and the Inland Empire."
+          description="Real feedback from real clients across Southern California."
           align="center"
         />
         <div className="mt-8 rounded-[2rem] border border-gray-100 bg-[linear-gradient(180deg,#ffffff_0%,#f8fafb_100%)] p-6 shadow-[0_24px_50px_-44px_rgba(0,32,92,0.45)]">

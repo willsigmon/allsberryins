@@ -45,7 +45,7 @@ const insuranceAgencySchema = {
   ],
   sameAs: [agency.socials.facebook, agency.socials.instagram, agency.socials.linkedin],
   slogan: "Simple. Affordable. Tailored for You.",
-  areaServed: ["Corona", "Riverside County", "Inland Empire"],
+  areaServed: ["Southern California", "Corona", "Riverside County", "Los Angeles County", "Orange County", "San Bernardino County"],
 };
 
 export default function Home() {

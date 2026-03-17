@@ -4,9 +4,9 @@ import { motion, useInView } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
 const stats = [
-  { end: 30, suffix: "+", unit: "Years", label: "Serving the Inland Empire" },
+  { end: 30, suffix: "+", unit: "Years", label: "Serving Southern California" },
   { end: 5, suffix: "★", unit: "Stars", label: "Client rating" },
-  { end: 1000, suffix: "+", unit: "Families", label: "Protected across Corona" },
+  { end: 1000, suffix: "+", unit: "Families", label: "Protected across SoCal" },
   { end: 20, suffix: "+", unit: "Carriers", label: "We shop for you" },
 ];
 

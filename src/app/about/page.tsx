@@ -10,7 +10,7 @@ import { agency, agents, officialProfile } from "@/lib/site-data";
 export const metadata: Metadata = createPageMetadata({
   title: "About",
   description:
-    "Learn more about Allsberry Insurance Agency, our Corona roots, and the team helping Inland Empire families and businesses protect what matters most.",
+    "Learn more about Allsberry Insurance Agency, our roots in Corona, CA, and the team helping Southern California families and businesses protect what matters most.",
   path: "/about",
 });
 
@@ -27,7 +27,7 @@ export default function AboutPage() {
               Local guidance, clean communication, and coverage that fits real life.
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-gray-600">
-              Allsberry Insurance Agency has served Corona and the Inland Empire since 1994. Erin
+              Allsberry Insurance Agency has served Southern California since 1994, rooted in Corona, CA. Erin
               has led the agency since 2009 with a simple belief: insurance should feel tailored,
               understandable, and genuinely helpful.
             </p>
@@ -94,7 +94,7 @@ export default function AboutPage() {
                   {
                     title: "Local context",
                     description:
-                      "An agency that knows Corona, Inland Empire growth, and the realities behind California insurance decisions.",
+                      "An agency that knows Southern California growth, local markets, and the realities behind California insurance decisions.",
                     icon: MapPin,
                   },
                 ].map((item) => (

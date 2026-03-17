@@ -9,7 +9,7 @@ import { blogPosts } from "@/lib/site-data";
 export const metadata: Metadata = createPageMetadata({
   title: "Blog",
   description:
-    "Helpful insurance articles from Allsberry Insurance Agency covering home, auto, business, and life insurance topics for Corona, CA clients.",
+    "Helpful insurance articles from Allsberry Insurance Agency covering home, auto, business, and life insurance topics for Southern California clients.",
   path: "/blog",
 });
 
