@@ -12,7 +12,7 @@ function logoUrl(domain: string) {
 const row1 = carrierPartners.slice(0, 10);
 const row2 = carrierPartners.slice(10);
 
-function MarqueeRow({ carriers, reverse = false }: { carriers: typeof carrierPartners; reverse?: boolean }) {
+function MarqueeRow({ carriers, reverse = false }: { carriers: readonly { readonly name: string; readonly domain: string }[]; reverse?: boolean }) {
   const doubled = [...carriers, ...carriers];
   return (
     <div className="flex overflow-hidden">
