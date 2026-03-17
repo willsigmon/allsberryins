@@ -140,15 +140,8 @@ export const officialProfile = {
     {
       title: "Topper Club Award",
       image: {
-        src: "/media/farmers/topper-club-award.png",
+        src: "/media/farmers/topper-club-award.webp",
         alt: "Topper Club Award logo from the Farmers profile",
-      },
-    },
-    {
-      title: "Prime Award",
-      image: {
-        src: "/media/farmers/prime-award.png",
-        alt: "Prime Award logo from the Farmers profile",
       },
     },
   ],

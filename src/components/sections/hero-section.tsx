@@ -128,7 +128,7 @@ export function HeroSection() {
                     {officialProfile.badges.map((badge) => (
                       <div key={badge.title} className="flex items-center gap-3 rounded-[1.2rem] border border-white/14 bg-white/10 px-4 py-3 backdrop-blur">
                         <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white/95 p-1.5">
-                          <Image src={badge.image.src} alt={badge.image.alt} width={badge.title.includes("Prime") ? 5111 : 1258} height={badge.title.includes("Prime") ? 5037 : 658} className="h-full w-full object-contain" />
+                          <Image src={badge.image.src} alt={badge.image.alt} width={1258} height={658} className="h-full w-full object-contain" />
                         </div>
                         <p className="font-display text-sm font-bold text-white">{badge.title}</p>
                       </div>
