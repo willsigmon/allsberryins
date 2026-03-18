@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Facebook, Instagram, Linkedin, MapPin, Phone } from "lucide-react";
 
@@ -8,7 +9,16 @@ export function SiteFooter() {
     <footer className="bg-navy text-white">
       <div className="mx-auto grid max-w-7xl gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[1.2fr_0.8fr_0.8fr_1fr] lg:px-8">
         <div>
-          <h2 className="font-display text-2xl font-extrabold tracking-tight">Allsberry Insurance Agency</h2>
+          <div className="flex items-center gap-3">
+            <Image
+              src="/media/brand/aia-logo.png"
+              alt="Allsberry Insurance Agency logo"
+              width={40}
+              height={40}
+              className="h-10 w-10 object-contain brightness-0 invert"
+            />
+            <h2 className="font-display text-2xl font-extrabold tracking-tight">Allsberry Insurance Agency</h2>
+          </div>
           <p className="mt-4 max-w-sm text-sm leading-7 text-white/75">
             Personalized home, auto, life, and business insurance solutions for families and companies across Southern California.
           </p>

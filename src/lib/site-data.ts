@@ -110,8 +110,8 @@ export const officialProfile = {
   sourceUrl: "https://agents.farmers.com/ca/corona/erin-allsberry/",
   sourceLabel: "Official Erin Allsberry Farmers profile",
   headshot: {
-    src: "/media/farmers/erin-allsberry-headshot.jpg",
-    alt: "Erin Allsberry profile photo from the public Farmers agent page",
+    src: "/media/agents/erin-allsberry.png",
+    alt: "Erin Allsberry, Agency Owner at Allsberry Insurance Agency",
   },
   highlights: [
     { label: "Location", value: "Corona, CA" },
@@ -430,7 +430,7 @@ export const agents: Agent[] = [
     accent: "navy",
     specialties: ["Commercial Insurance", "Restaurant Coverage", "Client Strategy"],
     photo: {
-      src: "/media/agents/brahm-shank.jpg",
+      src: "/media/agents/brahm-shank.png",
       alt: "Brahm Shank, Licensed Insurance Agent at Allsberry Insurance Agency",
     },
   },
@@ -445,6 +445,10 @@ export const agents: Agent[] = [
     initials: "D",
     accent: "red",
     specialties: ["Home Insurance", "Auto Insurance", "Fast Follow-Up"],
+    photo: {
+      src: "/media/agents/dakota-allsberry.png",
+      alt: "Dakota Allsberry, Licensed Insurance Agent at Allsberry Insurance Agency",
+    },
   },
 ];
 

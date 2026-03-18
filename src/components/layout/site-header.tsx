@@ -1,8 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, Phone, Shield, X } from "lucide-react";
+import { Menu, Phone, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { agency, navigation } from "@/lib/site-data";
@@ -43,13 +44,19 @@ export function SiteHeader() {
         <Link href="/" className="flex items-center gap-3" aria-label="Allsberry Insurance Agency home">
           <div
             className={cn(
-              "flex h-12 w-12 items-center justify-center rounded-2xl border shadow-lg backdrop-blur",
+              "flex h-12 w-12 items-center justify-center rounded-2xl border shadow-lg backdrop-blur overflow-hidden",
               solidHeader
-                ? "border-white/20 bg-white/12 text-white"
-                : "border-white bg-white/95 text-blue",
+                ? "border-white/20 bg-white/12"
+                : "border-white bg-white/95",
             )}
           >
-            <Shield className="h-6 w-6" />
+            <Image
+              src="/media/brand/aia-logo.png"
+              alt="Allsberry Insurance Agency logo"
+              width={36}
+              height={36}
+              className={cn("h-9 w-9 object-contain", solidHeader ? "brightness-0 invert" : "")}
+            />
           </div>
           <div>
             <p className={cn("font-display text-xl font-extrabold tracking-[0.18em] sm:text-2xl", textClassName)}>
