@@ -206,21 +206,21 @@ export function HeroSection() {
                 );
               })}
             </div>
-            <p className="mt-5 max-w-2xl text-base leading-7 text-gray-400">
-              These shortcuts now drive the panel below too, and this browser will drift toward the
-              product people click most so the hero lands on the likeliest next step.
+            <p className="mt-4 max-w-2xl text-sm leading-6 text-gray-400">
+              These shortcuts also tune the panel below, and this browser will gradually default to
+              the coverage people use most.
             </p>
 
-            <div className="surface-card-strong mt-8 rounded-[2rem] border border-gray-100 p-5 shadow-[0_20px_60px_-42px_rgba(0,32,92,0.22)]">
-              <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,24rem)] lg:items-end">
+            <div className="surface-card-strong mt-6 rounded-[2rem] border border-gray-100 p-4 shadow-[0_20px_60px_-42px_rgba(0,32,92,0.22)] sm:p-5">
+              <div className="grid gap-3 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,24rem)] lg:items-end">
                 <div>
                   <p className="text-sm font-semibold uppercase tracking-[0.22em] text-blue">
                     How can we help?
                   </p>
-                  <h2 className="mt-3 font-display text-3xl font-extrabold text-gray-900">
+                  <h2 className="mt-2 font-display text-2xl font-extrabold text-gray-900 sm:text-[2rem]">
                     {selectedHelpContent.headline}
                   </h2>
-                  <p className="mt-3 max-w-2xl text-base leading-7 text-gray-600">
+                  <p className="mt-2 max-w-2xl text-sm leading-6 text-gray-600 sm:text-[15px]">
                     {selectedHelpContent.description}
                   </p>
                 </div>
@@ -242,14 +242,14 @@ export function HeroSection() {
                           aria-checked={active}
                           onClick={() => setSupportMode(mode.id)}
                           className={cn(
-                            "min-h-[5.5rem] rounded-[1.4rem] border px-4 py-3 text-left transition",
+                            "min-h-[4.75rem] rounded-[1.25rem] border px-3.5 py-2.5 text-left transition",
                             active
                               ? "border-blue bg-blue-light text-gray-900 shadow-[0_18px_36px_-28px_rgba(0,102,179,0.3)]"
                               : "border-gray-200 bg-white text-gray-600 hover:border-blue/35 hover:text-gray-900",
                           )}
                         >
                           <span className="block text-sm font-bold">{mode.label}</span>
-                          <span className="mt-1 block text-xs leading-5 text-gray-400">
+                          <span className="mt-1 block text-[11px] leading-4 text-gray-400">
                             {mode.description}
                           </span>
                         </button>
@@ -259,15 +259,15 @@ export function HeroSection() {
                 </fieldset>
               </div>
 
-              <div className="mt-5 rounded-[1.5rem] border border-blue/10 bg-blue-light p-4">
+              <div className="mt-4 rounded-[1.35rem] border border-blue/10 bg-blue-light px-3.5 py-3">
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue">
                   {selectedProductDetails?.shortName ?? "Coverage"} quick starts
                 </p>
-                <div className="mt-3 flex flex-wrap gap-2">
+                <div className="mt-2.5 flex flex-wrap gap-2">
                   {selectedHelpContent.quickReasons.map((reason) => (
                     <span
                       key={reason}
-                      className="rounded-full border border-white/12 bg-white/70 px-3 py-1.5 text-xs font-semibold text-gray-900"
+                      className="rounded-full border border-white/12 bg-white/70 px-2.5 py-1 text-[11px] font-semibold text-gray-900"
                     >
                       {reason}
                     </span>
@@ -275,7 +275,7 @@ export function HeroSection() {
                 </div>
               </div>
 
-              <ul className="mt-6 grid auto-rows-fr gap-4 md:grid-cols-3" role="list">
+              <ul className="mt-4 grid auto-rows-fr gap-3 md:grid-cols-3" role="list">
                 {selectedHelpContent.cards.map((card) => {
                   const Icon = getIcon(card.icon);
                   const action = supportMode === "quote" ? card.quote : card.proof;
@@ -290,18 +290,18 @@ export function HeroSection() {
                     <li key={card.id}>
                       <Link
                         href={href}
-                        className="surface-card group flex h-full flex-col rounded-[1.8rem] border border-gray-100 p-5 shadow-[0_18px_44px_-36px_rgba(0,32,92,0.38)] transition hover:-translate-y-1 hover:border-blue/30 hover:shadow-[0_24px_50px_-34px_rgba(0,102,179,0.3)]"
+                        className="surface-card group flex h-full flex-col rounded-[1.55rem] border border-gray-100 p-4 shadow-[0_18px_44px_-36px_rgba(0,32,92,0.38)] transition hover:-translate-y-1 hover:border-blue/30 hover:shadow-[0_24px_50px_-34px_rgba(0,102,179,0.3)]"
                       >
-                        <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-light text-blue">
-                          <Icon className="h-6 w-6" />
+                        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-light text-blue">
+                          <Icon className="h-5 w-5" />
                         </div>
-                        <h3 className="mt-5 font-display text-2xl font-bold text-gray-900">
+                        <h3 className="mt-4 font-display text-xl font-bold leading-tight text-gray-900">
                           {card.title}
                         </h3>
-                        <p className="mt-3 flex-1 text-sm leading-7 text-gray-600">
+                        <p className="mt-2.5 flex-1 text-sm leading-6 text-gray-600">
                           {card.description}
                         </p>
-                        <div className="mt-6 inline-flex items-center gap-2 pt-1 text-sm font-semibold text-blue transition group-hover:gap-3">
+                        <div className="mt-4 inline-flex items-center gap-2 pt-1 text-[13px] font-semibold text-blue transition group-hover:gap-3">
                           {ctaLabel}
                           <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                         </div>
@@ -311,20 +311,20 @@ export function HeroSection() {
                 })}
               </ul>
 
-              <div className="mt-5 grid gap-3 lg:grid-cols-[1.15fr_0.85fr]">
-                <div className="rounded-[1.5rem] border border-gray-100 bg-white/70 p-4">
+              <div className="mt-4 grid gap-3 lg:grid-cols-[1.15fr_0.85fr]">
+                <div className="rounded-[1.35rem] border border-gray-100 bg-white/70 p-3.5">
                   <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue">
                     Most common next step
                   </p>
-                  <p className="mt-3 text-sm leading-7 text-gray-600">
+                  <p className="mt-2 text-xs leading-6 text-gray-600 sm:text-sm">
                     {selectedHelpContent.helperText}
                   </p>
                 </div>
-                <div className="surface-card rounded-[1.5rem] border border-gray-100 p-4">
+                <div className="surface-card rounded-[1.35rem] border border-gray-100 p-3.5">
                   <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue">
                     Selected line
                   </p>
-                  <p className="mt-3 text-sm leading-7 text-gray-600">
+                  <p className="mt-2 text-xs leading-6 text-gray-600 sm:text-sm">
                     We&apos;ll keep the quote flow centered on{" "}
                     <span className="font-semibold text-gray-900">
                       {selectedProductDetails?.name ?? "the selected coverage"}
