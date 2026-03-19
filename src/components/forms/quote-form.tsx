@@ -2,8 +2,8 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoaderCircle } from "lucide-react";
-import { useMemo, useState } from "react";
-import { useForm, useWatch } from "react-hook-form";
+import { useId, useMemo, useState } from "react";
+import { type DefaultValues, useForm, useWatch } from "react-hook-form";
 
 import {
   employeeOptions,
@@ -12,6 +12,7 @@ import {
   referralSources,
 } from "@/lib/site-data";
 import { quoteFormSchema, type QuoteFormValues } from "@/lib/lead-schemas";
+import { readStoredMarketingAttribution } from "@/lib/tracking";
 import { cn } from "@/lib/utils";
 
 type QuoteProductSlug = (typeof productSelectionOptions)[number];
@@ -29,6 +30,7 @@ export function QuoteForm({
   initialProduct,
   initialZip,
 }: QuoteFormProps) {
+  const formId = useId();
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
@@ -38,16 +40,11 @@ export function QuoteForm({
       : undefined;
   }, [initialProduct]);
 
-  const {
-    control,
-    register,
-    handleSubmit,
-    setValue,
-    formState: { errors, isSubmitting },
-  } = useForm<QuoteFormValues>({
-    resolver: zodResolver(quoteFormSchema),
-    defaultValues: {
-      products: normalizedInitialProduct ? [normalizedInitialProduct] : ["home"],
+  const defaultValues = useMemo<DefaultValues<QuoteFormValues>>(
+    () => ({
+      products: normalizedInitialProduct
+        ? [normalizedInitialProduct]
+        : (["home"] as QuoteProductSlug[]),
       firstName: "",
       lastName: "",
       phone: "",
@@ -57,7 +54,20 @@ export function QuoteForm({
       employees: undefined,
       message: "",
       honeypot: "",
-    },
+    }),
+    [initialZip, normalizedInitialProduct],
+  );
+
+  const {
+    control,
+    register,
+    handleSubmit,
+    reset,
+    setValue,
+    formState: { errors, isSubmitting },
+  } = useForm<QuoteFormValues>({
+    resolver: zodResolver(quoteFormSchema),
+    defaultValues,
   });
 
   const selectedProducts = useWatch({
@@ -82,6 +92,7 @@ export function QuoteForm({
           type: "quote-request",
           assignedAgentSlug,
           entryPoint,
+          ...readStoredMarketingAttribution(),
           ...values,
         }),
       });
@@ -90,7 +101,8 @@ export function QuoteForm({
         throw new Error("Unable to submit quote request.");
       }
 
-      setSuccessMessage("Thank you! We'll be in touch within 24 hours.");
+      reset(defaultValues);
+      setSuccessMessage("Thank you! We'll be in touch within one business day.");
     } catch (error) {
       console.error("Quote form submission failed", error);
       setErrorMessage("Something went wrong sending your request. Please call us at (951) 739-5959.");
@@ -111,10 +123,13 @@ export function QuoteForm({
   return (
     <div className="rounded-[2rem] border border-gray-100 bg-white p-6 shadow-[0_28px_70px_-50px_rgba(0,32,92,0.5)] sm:p-8">
       <form className="grid gap-6" onSubmit={onSubmit} noValidate>
-        <div>
-          <label className="text-sm font-semibold uppercase tracking-[0.22em] text-gray-500">
+        <fieldset
+          aria-describedby={errors.products ? `${formId}-products-error` : undefined}
+          className="min-w-0"
+        >
+          <legend className="text-sm font-semibold uppercase tracking-[0.22em] text-gray-500">
             Products
-          </label>
+          </legend>
           <div className="mt-3 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
             {productSelectionOptions.map((productSlug) => {
               const product = products.find((item) => item.slug === productSlug);
@@ -128,6 +143,8 @@ export function QuoteForm({
                 <button
                   key={product.slug}
                   type="button"
+                  role="checkbox"
+                  aria-checked={selected}
                   onClick={() => toggleProduct(productSlug)}
                   className={cn(
                     "rounded-2xl border px-4 py-3 text-left text-sm font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2",
@@ -141,32 +158,100 @@ export function QuoteForm({
               );
             })}
           </div>
-          {errors.products ? <p className="mt-2 text-sm text-red">{errors.products.message}</p> : null}
-        </div>
+          {errors.products ? (
+            <p
+              id={`${formId}-products-error`}
+              role="alert"
+              className="mt-2 text-sm text-red"
+            >
+              {errors.products.message}
+            </p>
+          ) : null}
+        </fieldset>
 
         <div className="grid gap-6 sm:grid-cols-2">
-          <Field label="First Name" error={errors.firstName?.message}>
-            <input {...register("firstName")} className={inputClassName} placeholder="First name" />
+          <Field
+            label="First Name"
+            error={errors.firstName?.message}
+            inputId={`${formId}-first-name`}
+          >
+            <input
+              {...register("firstName")}
+              id={`${formId}-first-name`}
+              autoComplete="given-name"
+              aria-describedby={errors.firstName ? `${formId}-first-name-error` : undefined}
+              aria-invalid={Boolean(errors.firstName)}
+              className={inputClassName}
+              placeholder="First name"
+            />
           </Field>
-          <Field label="Last Name" error={errors.lastName?.message}>
-            <input {...register("lastName")} className={inputClassName} placeholder="Last name" />
+          <Field
+            label="Last Name"
+            error={errors.lastName?.message}
+            inputId={`${formId}-last-name`}
+          >
+            <input
+              {...register("lastName")}
+              id={`${formId}-last-name`}
+              autoComplete="family-name"
+              aria-describedby={errors.lastName ? `${formId}-last-name-error` : undefined}
+              aria-invalid={Boolean(errors.lastName)}
+              className={inputClassName}
+              placeholder="Last name"
+            />
           </Field>
-          <Field label="Phone" error={errors.phone?.message}>
-            <input {...register("phone")} className={inputClassName} placeholder="(555) 555-5555" />
+          <Field label="Phone" error={errors.phone?.message} inputId={`${formId}-phone`}>
+            <input
+              {...register("phone")}
+              id={`${formId}-phone`}
+              autoComplete="tel"
+              aria-describedby={errors.phone ? `${formId}-phone-error` : undefined}
+              aria-invalid={Boolean(errors.phone)}
+              className={inputClassName}
+              inputMode="tel"
+              placeholder="(555) 555-5555"
+              type="tel"
+            />
           </Field>
-          <Field label="Email" error={errors.email?.message}>
-            <input {...register("email")} className={inputClassName} placeholder="you@example.com" />
+          <Field label="Email" error={errors.email?.message} inputId={`${formId}-email`}>
+            <input
+              {...register("email")}
+              id={`${formId}-email`}
+              autoComplete="email"
+              aria-describedby={errors.email ? `${formId}-email-error` : undefined}
+              aria-invalid={Boolean(errors.email)}
+              className={inputClassName}
+              placeholder="you@example.com"
+              type="email"
+            />
           </Field>
-          <Field label="ZIP Code" error={errors.zipCode?.message}>
+          <Field label="ZIP Code" error={errors.zipCode?.message} inputId={`${formId}-zip`}>
             <input
               {...register("zipCode")}
+              id={`${formId}-zip`}
+              autoComplete="postal-code"
+              aria-describedby={errors.zipCode ? `${formId}-zip-error` : undefined}
+              aria-invalid={Boolean(errors.zipCode)}
               inputMode="numeric"
               className={inputClassName}
               placeholder="92878"
             />
           </Field>
-          <Field label="How did you hear about us?" error={errors.referralSource?.message}>
-            <select {...register("referralSource")} className={inputClassName} defaultValue="">
+          <Field
+            label="How did you hear about us?"
+            error={errors.referralSource?.message}
+            inputId={`${formId}-referral-source`}
+          >
+            <select
+              {...register("referralSource")}
+              id={`${formId}-referral-source`}
+              aria-describedby={
+                errors.referralSource ? `${formId}-referral-source-error` : undefined
+              }
+              aria-invalid={Boolean(errors.referralSource)}
+              className={inputClassName}
+              defaultValue=""
+            >
               <option value="" disabled>
                 Select one
               </option>
@@ -180,8 +265,19 @@ export function QuoteForm({
         </div>
 
         {needsEmployees ? (
-          <Field label="Number of Employees" error={errors.employees?.message}>
-            <select {...register("employees")} className={inputClassName} defaultValue="">
+          <Field
+            label="Number of Employees"
+            error={errors.employees?.message}
+            inputId={`${formId}-employees`}
+          >
+            <select
+              {...register("employees")}
+              id={`${formId}-employees`}
+              aria-describedby={errors.employees ? `${formId}-employees-error` : undefined}
+              aria-invalid={Boolean(errors.employees)}
+              className={inputClassName}
+              defaultValue=""
+            >
               <option value="" disabled>
                 Select one
               </option>
@@ -202,10 +298,17 @@ export function QuoteForm({
           aria-hidden="true"
         />
 
-        <Field label="Message (optional)" error={errors.message?.message}>
+        <Field
+          label="Message (optional)"
+          error={errors.message?.message}
+          inputId={`${formId}-message`}
+        >
           <textarea
             {...register("message")}
+            id={`${formId}-message`}
             rows={5}
+            aria-describedby={errors.message ? `${formId}-message-error` : undefined}
+            aria-invalid={Boolean(errors.message)}
             className={cn(inputClassName, "min-h-32 py-3")}
             placeholder="Tell us anything helpful about your coverage needs."
           />
@@ -226,12 +329,20 @@ export function QuoteForm({
         </div>
 
         {successMessage ? (
-          <p className="rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-semibold text-emerald-700">
+          <p
+            aria-live="polite"
+            className="rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-semibold text-emerald-700"
+            role="status"
+          >
             {successMessage}
           </p>
         ) : null}
         {errorMessage ? (
-          <p className="rounded-2xl border border-red/15 bg-red/6 px-4 py-3 text-sm font-semibold text-red">
+          <p
+            aria-live="assertive"
+            className="rounded-2xl border border-red/15 bg-red/6 px-4 py-3 text-sm font-semibold text-red"
+            role="alert"
+          >
             {errorMessage}
           </p>
         ) : null}
@@ -243,18 +354,24 @@ export function QuoteForm({
 function Field({
   label,
   error,
+  inputId,
   children,
 }: {
   label: string;
   error?: string;
+  inputId: string;
   children: React.ReactNode;
 }) {
   return (
-    <label className="grid gap-2 text-sm font-semibold text-gray-900">
-      {label}
+    <div className="grid gap-2 text-sm font-semibold text-gray-900">
+      <label htmlFor={inputId}>{label}</label>
       {children}
-      {error ? <span className="text-sm font-medium text-red">{error}</span> : null}
-    </label>
+      {error ? (
+        <span id={`${inputId}-error`} role="alert" className="text-sm font-medium text-red">
+          {error}
+        </span>
+      ) : null}
+    </div>
   );
 }
 

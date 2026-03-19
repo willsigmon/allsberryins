@@ -3,9 +3,11 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { ArrowRight, BadgeCheck, MapPin, ShieldCheck } from "lucide-react";
 
+import { StructuredData } from "@/components/seo/structured-data";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { createPageMetadata } from "@/lib/metadata";
 import { agency, agents, officialProfile } from "@/lib/site-data";
+import { createBreadcrumbSchema, organizationSchema } from "@/lib/seo";
 import { buildTrackedHref } from "@/lib/tracking";
 
 export const metadata: Metadata = createPageMetadata({
@@ -15,9 +17,28 @@ export const metadata: Metadata = createPageMetadata({
   path: "/about",
 });
 
+const aboutPageDescription =
+  "Learn more about Allsberry Insurance Agency, our roots in Corona, CA, and the team helping Southern California families and businesses protect what matters most.";
+
 export default function AboutPage() {
+  const breadcrumbSchema = createBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "About", path: "/about" },
+  ]);
+  const aboutPageSchema = {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    name: "About Allsberry Insurance Agency",
+    url: "https://allsberryagency.com/about",
+    description: aboutPageDescription,
+    about: {
+      "@id": organizationSchema["@id"],
+    },
+  };
+
   return (
     <div className="bg-white pt-32">
+      <StructuredData data={[breadcrumbSchema, aboutPageSchema]} />
       <section className="mx-auto max-w-7xl px-4 pb-18 sm:px-6 lg:px-8">
         <div className="grid gap-10 lg:grid-cols-[1fr_0.96fr] lg:items-center">
           <div>

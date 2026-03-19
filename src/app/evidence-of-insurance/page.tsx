@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 
 import { EvidenceRequestForm } from "@/components/forms/evidence-request-form";
+import { PageFaqSection } from "@/components/sections/page-faq-section";
 import { StructuredData } from "@/components/seo/structured-data";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { createPageMetadata } from "@/lib/metadata";
 import { agency, getAgentBySlug } from "@/lib/site-data";
 import { normalizeAgentSlug } from "@/lib/tracking";
+import { createBreadcrumbSchema, organizationSchema } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Proof of Insurance",
@@ -34,33 +36,59 @@ export default async function EvidenceOfInsurancePage({
   const assignedAgentSlug =
     typeof params.agent === "string" ? normalizeAgentSlug(params.agent) : undefined;
   const assignedAgent = assignedAgentSlug ? getAgentBySlug(assignedAgentSlug) : undefined;
+  const pageFaqs = [
+    {
+      question: "Can I request proof of insurance online?",
+      answer:
+        "Yes. Share the basics here and the agency can follow up with the right evidence of insurance, COI details, or mortgagee update.",
+    },
+    {
+      question: "What kinds of documentation can Allsberry Insurance Agency help with?",
+      answer:
+        "The team can help with evidence of insurance, certificates of insurance, escrow or closing requests, and mortgagee or loss payee updates.",
+    },
+    {
+      question: "What helps the team turn around my request faster?",
+      answer:
+        "Include who needs the document, any due date, and any mortgagee, escrow, property, or certificate notes you already have so the request can be routed cleanly.",
+    },
+  ];
 
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: [
-      {
-        "@type": "Question",
-        name: "Can I request proof of insurance online?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Yes. Share the basics here and the agency can follow up with the right evidence of insurance, COI details, or mortgagee update.",
-        },
+    mainEntity: pageFaqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
       },
-      {
-        "@type": "Question",
-        name: "What kinds of documentation can Allsberry Insurance Agency help with?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "The team can help with evidence of insurance, certificates of insurance, escrow or closing requests, and mortgagee or loss payee updates.",
-        },
-      },
-    ],
+    })),
+  };
+  const breadcrumbSchema = createBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Proof of Insurance", path: "/evidence-of-insurance" },
+  ]);
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: "Proof of Insurance Request",
+    serviceType: "Evidence of insurance and COI request",
+    provider: {
+      "@id": organizationSchema["@id"],
+    },
+    areaServed: organizationSchema.areaServed,
+    availableChannel: {
+      "@type": "ServiceChannel",
+      serviceUrl: "https://allsberryagency.com/evidence-of-insurance",
+      servicePhone: "+1-951-739-5959",
+    },
   };
 
   return (
     <div className="pt-32" style={{ backgroundImage: "var(--hero-bg)" }}>
-      <StructuredData data={faqSchema} />
+      <StructuredData data={[breadcrumbSchema, serviceSchema, faqSchema]} />
       <section className="mx-auto max-w-7xl px-4 pb-20 sm:px-6 lg:px-8">
         <div className="grid gap-10 lg:grid-cols-[0.78fr_1.22fr] lg:items-start">
           <div className="lg:sticky lg:top-28">
@@ -94,6 +122,21 @@ export default async function EvidenceOfInsurancePage({
             entryPoint={entryPoint}
           />
         </div>
+        <PageFaqSection
+          title="Documentation questions we can answer right here"
+          description="This page now matches the FAQ schema with visible answers, which is cleaner for users and safer for search engines."
+          faqs={pageFaqs}
+          ctas={[
+            {
+              href: assignedAgentSlug ? `/agents/${assignedAgentSlug}` : "/contact",
+              label: assignedAgent ? `Work with ${assignedAgent.firstName}` : "Talk to the team",
+            },
+            {
+              href: "/quote?product=business",
+              label: "Start a coverage quote instead",
+            },
+          ]}
+        />
       </section>
     </div>
   );

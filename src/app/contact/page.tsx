@@ -2,9 +2,11 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { Clock3, Facebook, Instagram, Linkedin, Mail, MapPin, Phone } from "lucide-react";
 
+import { StructuredData } from "@/components/seo/structured-data";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { createPageMetadata } from "@/lib/metadata";
 import { agency } from "@/lib/site-data";
+import { createBreadcrumbSchema, organizationSchema } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Contact",
@@ -32,8 +34,25 @@ const socialItems = [
 ] as const;
 
 export default function ContactPage() {
+  const breadcrumbSchema = createBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Contact", path: "/contact" },
+  ]);
+  const contactPageSchema = {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    name: "Contact Allsberry Insurance Agency",
+    url: "https://allsberryagency.com/contact",
+    description:
+      "Call, email, or visit Allsberry Insurance Agency in Corona, CA for quote help, policy reviews, and proof-of-insurance requests.",
+    mainEntity: {
+      "@id": organizationSchema["@id"],
+    },
+  };
+
   return (
     <div className="bg-white pt-32">
+      <StructuredData data={[breadcrumbSchema, contactPageSchema]} />
       <section className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8">
         <SectionHeading
           eyebrow="Contact"

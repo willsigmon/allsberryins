@@ -35,6 +35,24 @@ const optionalTrackingFieldSchema = z
   .trim()
   .max(120, "Tracking context must stay under 120 characters.")
   .optional();
+const optionalTrackingUrlSchema = z
+  .string()
+  .trim()
+  .max(500, "Tracking URL must stay under 500 characters.")
+  .optional();
+
+const leadAttributionSchema = {
+  fbclid: optionalTrackingFieldSchema,
+  gclid: optionalTrackingFieldSchema,
+  landingPage: optionalTrackingUrlSchema,
+  msclkid: optionalTrackingFieldSchema,
+  referrer: optionalTrackingUrlSchema,
+  utmCampaign: optionalTrackingFieldSchema,
+  utmContent: optionalTrackingFieldSchema,
+  utmMedium: optionalTrackingFieldSchema,
+  utmSource: optionalTrackingFieldSchema,
+  utmTerm: optionalTrackingFieldSchema,
+} satisfies Record<string, z.ZodTypeAny>;
 
 export const quoteFormSchema = z
   .object({
@@ -114,6 +132,7 @@ export const leadsApiSchema = z.discriminatedUnion("type", [
     type: z.literal("quote-request"),
     assignedAgentSlug: optionalTrackingFieldSchema,
     entryPoint: optionalTrackingFieldSchema,
+    ...leadAttributionSchema,
     ...quoteFormSchema.shape,
   }),
   z.object({
@@ -121,6 +140,7 @@ export const leadsApiSchema = z.discriminatedUnion("type", [
     entryPoint: optionalTrackingFieldSchema,
     agentSlug: z.string().trim().min(1),
     agentName: z.string().trim().min(1),
+    ...leadAttributionSchema,
     ...agentContactSchema.shape,
   }),
   z.object({
@@ -128,6 +148,7 @@ export const leadsApiSchema = z.discriminatedUnion("type", [
     assignedAgentSlug: optionalTrackingFieldSchema,
     audience: z.string().trim().optional(),
     entryPoint: optionalTrackingFieldSchema,
+    ...leadAttributionSchema,
     ...evidenceRequestSchema.shape,
   }),
 ]);

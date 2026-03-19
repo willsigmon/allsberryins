@@ -9,14 +9,10 @@ import { TrustBar } from "@/components/sections/trust-bar";
 import { ValuePropsSection } from "@/components/sections/value-props-section";
 import { StructuredData } from "@/components/seo/structured-data";
 import { agency, homePageFaqs, products } from "@/lib/site-data";
+import { organizationSchema } from "@/lib/seo";
 
 const insuranceAgencySchema = {
-  "@context": "https://schema.org",
-  "@type": "InsuranceAgency",
-  name: agency.fullName,
-  url: agency.domain,
-  telephone: agency.phone,
-  email: agency.email,
+  ...organizationSchema,
   contactPoint: {
     "@type": "ContactPoint",
     telephone: agency.phone,
@@ -24,36 +20,7 @@ const insuranceAgencySchema = {
     areaServed: "Southern California",
     availableLanguage: "English",
   },
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: agency.addressLine1,
-    addressLocality: "Corona",
-    addressRegion: "CA",
-    postalCode: "92878",
-    addressCountry: "US",
-  },
-  geo: {
-    "@type": "GeoCoordinates",
-    latitude: agency.geo.latitude,
-    longitude: agency.geo.longitude,
-  },
-  openingHoursSpecification: [
-    {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-      ],
-      opens: "08:00",
-      closes: "17:00",
-    },
-  ],
-  sameAs: [agency.socials.facebook, agency.socials.instagram, agency.socials.linkedin],
   slogan: "Simple. Affordable. Tailored for You.",
-  areaServed: ["Southern California", "Corona", "Riverside County", "Los Angeles County", "Orange County", "San Bernardino County"],
   knowsAbout: [
     "Home insurance",
     "Auto insurance",

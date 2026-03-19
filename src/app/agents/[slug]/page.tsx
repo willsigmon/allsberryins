@@ -9,6 +9,7 @@ import { AgentContactForm } from "@/components/forms/agent-contact-form";
 import { StructuredData } from "@/components/seo/structured-data";
 import { createPageMetadata } from "@/lib/metadata";
 import { agency, agents, getAgentBySlug } from "@/lib/site-data";
+import { createBreadcrumbSchema, organizationSchema } from "@/lib/seo";
 import { buildTrackedHref } from "@/lib/tracking";
 import { absoluteUrl } from "@/lib/utils";
 
@@ -60,15 +61,27 @@ export default async function AgentPage({ params, searchParams }: AgentPageProps
     name: agent.name,
     jobTitle: agent.title,
     worksFor: {
-      "@type": "InsuranceAgency",
-      name: agency.fullName,
-      url: agency.domain,
+      "@id": organizationSchema["@id"],
     },
     telephone: agent.phone,
     email: agent.email,
     url: absoluteUrl(`/agents/${agent.slug}`),
     description: agent.bio,
+    image: agent.photo ? absoluteUrl(agent.photo.src) : undefined,
+    knowsAbout: agent.specialties,
   };
+  const profilePageSchema = {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    name: `${agent.name} | Allsberry Insurance Agency`,
+    url: absoluteUrl(`/agents/${agent.slug}`),
+    mainEntity: personSchema,
+  };
+  const breadcrumbSchema = createBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "About", path: "/about" },
+    { name: agent.name, path: `/agents/${agent.slug}` },
+  ]);
 
   const agentHighlights = [
     {
@@ -88,7 +101,7 @@ export default async function AgentPage({ params, searchParams }: AgentPageProps
 
   return (
     <div className="pt-32 pb-20" style={{ backgroundImage: "var(--hero-bg)" }}>
-      <StructuredData data={personSchema} />
+      <StructuredData data={[breadcrumbSchema, profilePageSchema]} />
       <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div
           className="rounded-[2.75rem] p-2 shadow-[0_35px_95px_-58px_rgba(0,32,92,0.85)]"

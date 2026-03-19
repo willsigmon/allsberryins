@@ -2,10 +2,11 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoaderCircle } from "lucide-react";
-import { useState } from "react";
+import { useId, useState } from "react";
 import { useForm } from "react-hook-form";
 
 import { agentContactSchema, helpTopics, type AgentContactValues } from "@/lib/lead-schemas";
+import { readStoredMarketingAttribution } from "@/lib/tracking";
 
 type AgentContactFormProps = {
   entryPoint?: string;
@@ -18,11 +19,13 @@ export function AgentContactForm({
   agentSlug,
   entryPoint,
 }: AgentContactFormProps) {
+  const formId = useId();
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm<AgentContactValues>({
     resolver: zodResolver(agentContactSchema),
@@ -51,6 +54,7 @@ export function AgentContactForm({
           entryPoint,
           agentSlug,
           agentName,
+          ...readStoredMarketingAttribution(),
           ...values,
         }),
       });
@@ -59,6 +63,7 @@ export function AgentContactForm({
         throw new Error("Unable to send your request.");
       }
 
+      reset();
       setSuccessMessage(`Thanks for reaching out. ${agentName} or someone from the team will be in touch shortly.`);
     } catch (error) {
       console.error("Agent contact form submission failed", error);
@@ -68,17 +73,55 @@ export function AgentContactForm({
 
   return (
     <form className="grid gap-5" onSubmit={onSubmit} noValidate>
-      <Field label="Name" error={errors.name?.message}>
-        <input {...register("name")} className={inputClassName} placeholder="Your full name" />
+      <Field label="Name" error={errors.name?.message} inputId={`${formId}-name`}>
+        <input
+          {...register("name")}
+          id={`${formId}-name`}
+          autoComplete="name"
+          aria-describedby={errors.name ? `${formId}-name-error` : undefined}
+          aria-invalid={Boolean(errors.name)}
+          className={inputClassName}
+          placeholder="Your full name"
+        />
       </Field>
-      <Field label="Phone" error={errors.phone?.message}>
-        <input {...register("phone")} className={inputClassName} placeholder="(555) 555-5555" />
+      <Field label="Phone" error={errors.phone?.message} inputId={`${formId}-phone`}>
+        <input
+          {...register("phone")}
+          id={`${formId}-phone`}
+          autoComplete="tel"
+          aria-describedby={errors.phone ? `${formId}-phone-error` : undefined}
+          aria-invalid={Boolean(errors.phone)}
+          className={inputClassName}
+          inputMode="tel"
+          placeholder="(555) 555-5555"
+          type="tel"
+        />
       </Field>
-      <Field label="Email" error={errors.email?.message}>
-        <input {...register("email")} className={inputClassName} placeholder="you@example.com" />
+      <Field label="Email" error={errors.email?.message} inputId={`${formId}-email`}>
+        <input
+          {...register("email")}
+          id={`${formId}-email`}
+          autoComplete="email"
+          aria-describedby={errors.email ? `${formId}-email-error` : undefined}
+          aria-invalid={Boolean(errors.email)}
+          className={inputClassName}
+          placeholder="you@example.com"
+          type="email"
+        />
       </Field>
-      <Field label="How can I help?" error={errors.helpTopic?.message}>
-        <select {...register("helpTopic")} className={inputClassName} defaultValue="">
+      <Field
+        label="How can I help?"
+        error={errors.helpTopic?.message}
+        inputId={`${formId}-help-topic`}
+      >
+        <select
+          {...register("helpTopic")}
+          id={`${formId}-help-topic`}
+          aria-describedby={errors.helpTopic ? `${formId}-help-topic-error` : undefined}
+          aria-invalid={Boolean(errors.helpTopic)}
+          className={inputClassName}
+          defaultValue=""
+        >
           <option value="" disabled>
             Select one
           </option>
@@ -89,10 +132,17 @@ export function AgentContactForm({
           ))}
         </select>
       </Field>
-      <Field label="Message (optional)" error={errors.message?.message}>
+      <Field
+        label="Message (optional)"
+        error={errors.message?.message}
+        inputId={`${formId}-message`}
+      >
         <textarea
           {...register("message")}
           rows={4}
+          id={`${formId}-message`}
+          aria-describedby={errors.message ? `${formId}-message-error` : undefined}
+          aria-invalid={Boolean(errors.message)}
           className={`${inputClassName} min-h-28 py-3`}
           placeholder={`Tell ${agentName.split(" ")[0]} a little bit about what you need.`}
         />
@@ -113,12 +163,20 @@ export function AgentContactForm({
         Send Request
       </button>
       {successMessage ? (
-        <p className="rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-semibold text-emerald-700">
+        <p
+          aria-live="polite"
+          className="rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-semibold text-emerald-700"
+          role="status"
+        >
           {successMessage}
         </p>
       ) : null}
       {errorMessage ? (
-        <p className="rounded-2xl border border-red/15 bg-red/6 px-4 py-3 text-sm font-semibold text-red">
+        <p
+          aria-live="assertive"
+          className="rounded-2xl border border-red/15 bg-red/6 px-4 py-3 text-sm font-semibold text-red"
+          role="alert"
+        >
           {errorMessage}
         </p>
       ) : null}
@@ -129,18 +187,24 @@ export function AgentContactForm({
 function Field({
   label,
   error,
+  inputId,
   children,
 }: {
   label: string;
   error?: string;
+  inputId: string;
   children: React.ReactNode;
 }) {
   return (
-    <label className="grid gap-2 text-sm font-semibold text-gray-900">
-      {label}
+    <div className="grid gap-2 text-sm font-semibold text-gray-900">
+      <label htmlFor={inputId}>{label}</label>
       {children}
-      {error ? <span className="text-sm font-medium text-red">{error}</span> : null}
-    </label>
+      {error ? (
+        <span id={`${inputId}-error`} role="alert" className="text-sm font-medium text-red">
+          {error}
+        </span>
+      ) : null}
+    </div>
   );
 }
 

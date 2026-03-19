@@ -18,6 +18,19 @@ export type TeamTrackingContext = {
   product?: string;
 };
 
+export type MarketingAttribution = {
+  fbclid?: string;
+  gclid?: string;
+  landingPage?: string;
+  msclkid?: string;
+  referrer?: string;
+  utmCampaign?: string;
+  utmContent?: string;
+  utmMedium?: string;
+  utmSource?: string;
+  utmTerm?: string;
+};
+
 export const defaultSiteLeadsConfig: SiteLeadsConfig = {
   labelId: "82456636",
   scriptId: "px-grabber",
@@ -25,6 +38,7 @@ export const defaultSiteLeadsConfig: SiteLeadsConfig = {
 };
 
 export const siteLeadsSessionKey = "allsberry-siteleads-context";
+export const marketingAttributionSessionKey = "allsberry-marketing-attribution";
 
 const knownAgentSlugs = new Set(agents.map((agent) => agent.slug));
 
@@ -40,6 +54,24 @@ function sanitizeToken(value?: string | null) {
     .replace(/^-+|-+$/g, "");
 
   return sanitized || undefined;
+}
+
+function sanitizeText(value?: string | null, maxLength = 160) {
+  if (!value) {
+    return undefined;
+  }
+
+  const sanitized = value.trim();
+
+  if (!sanitized) {
+    return undefined;
+  }
+
+  return sanitized.slice(0, maxLength);
+}
+
+function sanitizeUrl(value?: string | null) {
+  return sanitizeText(value, 500);
 }
 
 export function normalizeAgentSlug(value?: string | null) {
@@ -129,6 +161,46 @@ export function mergeTeamTrackingContext(
   };
 }
 
+export function createMarketingAttribution(
+  pathname: string,
+  searchString = "",
+  href?: string,
+  referrer?: string,
+): MarketingAttribution {
+  const searchParams = new URLSearchParams(searchString);
+
+  return {
+    fbclid: sanitizeText(searchParams.get("fbclid")),
+    gclid: sanitizeText(searchParams.get("gclid")),
+    landingPage: sanitizeUrl(href ?? pathname),
+    msclkid: sanitizeText(searchParams.get("msclkid")),
+    referrer: sanitizeUrl(referrer),
+    utmCampaign: sanitizeText(searchParams.get("utm_campaign")),
+    utmContent: sanitizeText(searchParams.get("utm_content")),
+    utmMedium: sanitizeText(searchParams.get("utm_medium")),
+    utmSource: sanitizeText(searchParams.get("utm_source")),
+    utmTerm: sanitizeText(searchParams.get("utm_term")),
+  };
+}
+
+export function mergeMarketingAttribution(
+  currentAttribution: MarketingAttribution,
+  storedAttribution?: MarketingAttribution,
+): MarketingAttribution {
+  return {
+    fbclid: storedAttribution?.fbclid ?? currentAttribution.fbclid,
+    gclid: storedAttribution?.gclid ?? currentAttribution.gclid,
+    landingPage: storedAttribution?.landingPage ?? currentAttribution.landingPage,
+    msclkid: storedAttribution?.msclkid ?? currentAttribution.msclkid,
+    referrer: storedAttribution?.referrer ?? currentAttribution.referrer,
+    utmCampaign: storedAttribution?.utmCampaign ?? currentAttribution.utmCampaign,
+    utmContent: storedAttribution?.utmContent ?? currentAttribution.utmContent,
+    utmMedium: storedAttribution?.utmMedium ?? currentAttribution.utmMedium,
+    utmSource: storedAttribution?.utmSource ?? currentAttribution.utmSource,
+    utmTerm: storedAttribution?.utmTerm ?? currentAttribution.utmTerm,
+  };
+}
+
 export function buildSiteLeadsLabel(labelId: string, context: TeamTrackingContext) {
   const parts = [
     labelId,
@@ -143,6 +215,52 @@ export function buildSiteLeadsLabel(labelId: string, context: TeamTrackingContex
   ].filter(Boolean);
 
   return parts.join("|");
+}
+
+export function readSessionJsonValue<T>(sessionKey: string) {
+  if (typeof window === "undefined") {
+    return undefined;
+  }
+
+  try {
+    const rawValue = window.sessionStorage.getItem(sessionKey);
+
+    if (!rawValue) {
+      return undefined;
+    }
+
+    return JSON.parse(rawValue) as T;
+  } catch {
+    return undefined;
+  }
+}
+
+export function storeSessionJsonValue(sessionKey: string, value: unknown) {
+  if (typeof window === "undefined") {
+    return;
+  }
+
+  try {
+    window.sessionStorage.setItem(sessionKey, JSON.stringify(value));
+  } catch {
+    // Ignore storage errors in private mode or locked-down browsers.
+  }
+}
+
+export function readStoredTeamTrackingContext() {
+  return readSessionJsonValue<TeamTrackingContext>(siteLeadsSessionKey);
+}
+
+export function storeTeamTrackingContext(context: TeamTrackingContext) {
+  storeSessionJsonValue(siteLeadsSessionKey, context);
+}
+
+export function readStoredMarketingAttribution() {
+  return readSessionJsonValue<MarketingAttribution>(marketingAttributionSessionKey);
+}
+
+export function storeMarketingAttribution(attribution: MarketingAttribution) {
+  storeSessionJsonValue(marketingAttributionSessionKey, attribution);
 }
 
 export function buildTrackedHref(

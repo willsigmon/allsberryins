@@ -4,18 +4,19 @@ import { agents, blogPosts } from "@/lib/site-data";
 import { absoluteUrl } from "@/lib/utils";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticRoutes = ["", "/about", "/contact", "/quote", "/blog"];
+  const siteUpdatedAt = "2026-03-18T00:00:00.000Z";
+  const staticRoutes = ["", "/about", "/contact", "/quote", "/evidence-of-insurance", "/blog"];
 
   return [
     ...staticRoutes.map((path) => ({
       url: absoluteUrl(path),
-      lastModified: new Date(),
+      lastModified: new Date(siteUpdatedAt),
       changeFrequency: path === "" ? ("weekly" as const) : ("monthly" as const),
-      priority: path === "" ? 1 : 0.8,
+      priority: path === "" ? 1 : path === "/evidence-of-insurance" || path === "/quote" ? 0.9 : 0.8,
     })),
     ...agents.map((agent) => ({
       url: absoluteUrl(`/agents/${agent.slug}`),
-      lastModified: new Date(),
+      lastModified: new Date(siteUpdatedAt),
       changeFrequency: "monthly" as const,
       priority: 0.7,
     })),

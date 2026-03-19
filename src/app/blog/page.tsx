@@ -2,9 +2,12 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { ArrowRight } from "lucide-react";
 
+import { StructuredData } from "@/components/seo/structured-data";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { createPageMetadata } from "@/lib/metadata";
 import { blogPosts } from "@/lib/site-data";
+import { createBreadcrumbSchema } from "@/lib/seo";
+import { absoluteUrl } from "@/lib/utils";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Blog",
@@ -14,8 +17,37 @@ export const metadata: Metadata = createPageMetadata({
 });
 
 export default function BlogPage() {
+  const breadcrumbSchema = createBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Blog", path: "/blog" },
+  ]);
+  const collectionSchema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: "Insurance articles and practical answers",
+    url: absoluteUrl("/blog"),
+    hasPart: blogPosts.map((post) => ({
+      "@type": "BlogPosting",
+      headline: post.title,
+      url: absoluteUrl(`/blog/${post.slug}`),
+      datePublished: post.publishedAt,
+      keywords: post.tags.join(", "),
+    })),
+  };
+  const itemListSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    itemListElement: blogPosts.map((post, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      url: absoluteUrl(`/blog/${post.slug}`),
+      name: post.title,
+    })),
+  };
+
   return (
     <div className="bg-white pt-32">
+      <StructuredData data={[breadcrumbSchema, collectionSchema, itemListSchema]} />
       <section className="mx-auto max-w-7xl px-4 pb-20 sm:px-6 lg:px-8">
         <SectionHeading
           eyebrow="Insights"
@@ -52,6 +84,38 @@ export default function BlogPage() {
             </article>
           ))}
         </div>
+
+        <section className="mt-16 rounded-[2.5rem] border border-blue/10 bg-[linear-gradient(180deg,var(--white)_0%,var(--gray-50)_100%)] p-8 shadow-[0_26px_60px_-44px_rgba(0,32,92,0.45)]">
+          <p className="text-sm font-semibold uppercase tracking-[0.22em] text-blue">
+            Keep moving
+          </p>
+          <h2 className="mt-4 font-display text-3xl font-extrabold text-gray-900">
+            Turn reading into the next right action.
+          </h2>
+          <div className="mt-8 grid gap-3 md:grid-cols-3">
+            <Link
+              href="/quote?product=home"
+              className="inline-flex items-center justify-between rounded-2xl border border-gray-200 bg-white px-5 py-4 text-sm font-bold text-navy transition hover:border-blue hover:text-blue"
+            >
+              Start a home or auto quote
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+            <Link
+              href="/quote?product=business"
+              className="inline-flex items-center justify-between rounded-2xl border border-gray-200 bg-white px-5 py-4 text-sm font-bold text-navy transition hover:border-blue hover:text-blue"
+            >
+              Review business coverage
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+            <Link
+              href="/evidence-of-insurance"
+              className="inline-flex items-center justify-between rounded-2xl border border-gray-200 bg-white px-5 py-4 text-sm font-bold text-navy transition hover:border-blue hover:text-blue"
+            >
+              Request proof of insurance
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+        </section>
       </section>
     </div>
   );

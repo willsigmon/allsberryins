@@ -19,8 +19,10 @@ import {
   createTeamTrackingContext,
   defaultSiteLeadsConfig,
   mergeTeamTrackingContext,
-  siteLeadsSessionKey,
+  readStoredMarketingAttribution,
+  readStoredTeamTrackingContext,
   type SiteLeadsConfig,
+  type MarketingAttribution,
   type TeamTrackingContext,
 } from "@/lib/tracking";
 
@@ -41,23 +43,10 @@ type DebugState = {
   activeContext: TeamTrackingContext;
   currentContext: TeamTrackingContext;
   label: string;
+  marketingAttribution?: MarketingAttribution;
   storedContext?: TeamTrackingContext;
   trackerConfig: SiteLeadsConfig;
 };
-
-function readStoredTrackingContext() {
-  try {
-    const rawValue = window.sessionStorage.getItem(siteLeadsSessionKey);
-
-    if (!rawValue) {
-      return undefined;
-    }
-
-    return JSON.parse(rawValue) as TeamTrackingContext;
-  } catch {
-    return undefined;
-  }
-}
 
 function getTrackerConfig() {
   const appWindow = window as Window & {
@@ -232,6 +221,11 @@ export function AttributionWorkbench({ agents }: AttributionWorkbenchProps) {
               value={JSON.stringify(debugState?.storedContext ?? {}, null, 2)}
               mono
             />
+            <DebugTile
+              label="Stored marketing attribution"
+              value={JSON.stringify(debugState?.marketingAttribution ?? {}, null, 2)}
+              mono
+            />
           </div>
         </div>
       </section>
@@ -305,10 +299,12 @@ function subscribeToBrowserState(callback: () => void) {
   }
 
   window.addEventListener("storage", callback);
+  window.addEventListener("pageshow", callback);
   window.addEventListener("popstate", callback);
 
   return () => {
     window.removeEventListener("storage", callback);
+    window.removeEventListener("pageshow", callback);
     window.removeEventListener("popstate", callback);
   };
 }
@@ -324,7 +320,7 @@ function getDebugSnapshot(): DebugState | null {
     url.searchParams.toString(),
     window.location.href,
   );
-  const storedContext = readStoredTrackingContext();
+  const storedContext = readStoredTeamTrackingContext();
   const activeContext = mergeTeamTrackingContext(currentContext, storedContext);
   const trackerConfig = getTrackerConfig();
 
@@ -332,6 +328,7 @@ function getDebugSnapshot(): DebugState | null {
     activeContext,
     currentContext,
     label: buildSiteLeadsLabel(trackerConfig.labelId, activeContext),
+    marketingAttribution: readStoredMarketingAttribution(),
     storedContext,
     trackerConfig,
   };
@@ -410,6 +407,7 @@ function buildWorkbookExport(debugState: DebugState, agents: AgentLinkSet[]) {
     contexts: {
       active: debugState.activeContext,
       current: debugState.currentContext,
+      marketing: debugState.marketingAttribution ?? null,
       stored: debugState.storedContext ?? null,
     },
     agents: agents.map((agent) => ({

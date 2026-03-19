@@ -3,12 +3,17 @@
 import { useEffect } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 
-import type { SiteLeadsConfig, TeamTrackingContext } from "@/lib/tracking";
+import type { SiteLeadsConfig } from "@/lib/tracking";
 import {
   buildSiteLeadsLabel,
+  createMarketingAttribution,
   createTeamTrackingContext,
+  mergeMarketingAttribution,
   mergeTeamTrackingContext,
-  siteLeadsSessionKey,
+  readStoredMarketingAttribution,
+  readStoredTeamTrackingContext,
+  storeMarketingAttribution,
+  storeTeamTrackingContext,
 } from "@/lib/tracking";
 
 declare global {
@@ -18,28 +23,6 @@ declare global {
       render: () => void;
       setOptions: (options: { Label: string }) => void;
     };
-  }
-}
-
-function readStoredTrackingContext() {
-  try {
-    const rawValue = window.sessionStorage.getItem(siteLeadsSessionKey);
-
-    if (!rawValue) {
-      return undefined;
-    }
-
-    return JSON.parse(rawValue) as TeamTrackingContext;
-  } catch {
-    return undefined;
-  }
-}
-
-function storeTrackingContext(context: TeamTrackingContext) {
-  try {
-    window.sessionStorage.setItem(siteLeadsSessionKey, JSON.stringify(context));
-  } catch {
-    // Ignore storage errors in private mode or locked-down browsers.
   }
 }
 
@@ -56,10 +39,24 @@ export function TrackingPageView() {
     }
 
     const currentContext = createTeamTrackingContext(pathname, searchString, window.location.href);
-    const trackingContext = mergeTeamTrackingContext(currentContext, readStoredTrackingContext());
+    const trackingContext = mergeTeamTrackingContext(
+      currentContext,
+      readStoredTeamTrackingContext(),
+    );
+    const currentMarketingAttribution = createMarketingAttribution(
+      pathname,
+      searchString,
+      window.location.href,
+      document.referrer,
+    );
+    const marketingAttribution = mergeMarketingAttribution(
+      currentMarketingAttribution,
+      readStoredMarketingAttribution(),
+    );
     const label = buildSiteLeadsLabel(config.labelId, trackingContext);
 
-    storeTrackingContext(trackingContext);
+    storeTeamTrackingContext(trackingContext);
+    storeMarketingAttribution(marketingAttribution);
 
     let cancelled = false;
     let attempts = 0;
