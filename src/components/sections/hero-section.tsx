@@ -181,8 +181,8 @@ export function HeroSection() {
           </div>
         </div>
 
-        <div className="mt-8 grid gap-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-start">
-          <div>
+        <div className="mt-8 grid gap-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-stretch">
+          <div className="flex flex-col">
             <div className="flex flex-wrap gap-2">
               {heroProducts.map((product) => {
                 const Icon = getIcon(product.icon);
@@ -211,7 +211,7 @@ export function HeroSection() {
               the coverage people use most.
             </p>
 
-            <div className="surface-card-strong mt-6 rounded-[2rem] border border-gray-100 p-4 shadow-[0_20px_60px_-42px_rgba(0,32,92,0.22)] sm:p-5">
+            <div className="surface-card-strong mt-6 flex flex-1 flex-col rounded-[2rem] border border-gray-100 p-4 shadow-[0_20px_60px_-42px_rgba(0,32,92,0.22)] sm:p-5">
               <div className="grid gap-3 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,24rem)] lg:items-start">
                 <div className="lg:min-h-[10.5rem]">
                   <p className="text-sm font-semibold uppercase tracking-[0.22em] text-blue">
@@ -336,13 +336,13 @@ export function HeroSection() {
             </div>
           </div>
 
-          <div className="relative">
+          <div className="relative flex flex-col lg:h-full">
             <div className="animate-float absolute -left-6 top-10 hidden h-24 w-24 rounded-full bg-blue/10 blur-2xl sm:block" />
             <div className="animate-float-delayed absolute -right-6 bottom-10 hidden h-28 w-28 rounded-full bg-red/12 blur-3xl sm:block" />
 
-            <div className="shimmer-border relative overflow-hidden rounded-[2rem] p-[3px] shadow-[0_35px_90px_-48px_rgba(0,32,92,0.8)]">
-              <div className="relative overflow-hidden rounded-[1.85rem] bg-[linear-gradient(145deg,#0d2f73_0%,#0066b3_55%,#dbeafe_100%)] p-5 sm:p-6">
-                <div className="relative rounded-[1.65rem] border border-white/20 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.32),transparent_28%),linear-gradient(180deg,rgba(255,255,255,0.24),rgba(255,255,255,0.08))] p-5 text-white backdrop-blur-sm">
+            <div className="shimmer-border relative flex-1 overflow-hidden rounded-[2rem] p-[3px] shadow-[0_35px_90px_-48px_rgba(0,32,92,0.8)]">
+              <div className="relative h-full overflow-hidden rounded-[1.85rem] bg-[linear-gradient(145deg,#0d2f73_0%,#0066b3_55%,#dbeafe_100%)] p-5 sm:p-6">
+                <div className="relative flex h-full flex-col rounded-[1.65rem] border border-white/20 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.32),transparent_28%),linear-gradient(180deg,rgba(255,255,255,0.24),rgba(255,255,255,0.08))] p-5 text-white backdrop-blur-sm">
                   <div className="flex items-center gap-2 rounded-full bg-white/14 px-4 py-2 text-sm font-semibold backdrop-blur-sm w-fit">
                     <MapPin className="h-4 w-4" />
                     Southern California
@@ -423,7 +423,7 @@ export function HeroSection() {
                     ))}
                   </div>
 
-                  <div className="mt-5 flex flex-wrap gap-3">
+                  <div className="mt-auto flex flex-wrap gap-3 pt-5">
                     <Link
                       href={buildTrackedHref("/agents/erin", {
                         agent: "erin",
