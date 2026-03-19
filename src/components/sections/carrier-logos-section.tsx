@@ -3,10 +3,15 @@
 import { motion } from "framer-motion";
 
 import { SectionHeading } from "@/components/ui/section-heading";
-import { carrierPartners } from "@/lib/site-data";
+import { carrierAccessStat, carrierPartners } from "@/lib/site-data";
 
-function logoUrl(domain: string) {
-  return `https://www.google.com/s2/favicons?domain=${domain}&sz=64`;
+function carrierBadge(name: string) {
+  return name
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0]?.toUpperCase() ?? "")
+    .join("");
 }
 
 const row1 = carrierPartners.slice(0, 10);
@@ -27,14 +32,9 @@ function MarqueeRow({ carriers, reverse = false }: { carriers: readonly { readon
             key={`${carrier.name}-${index}`}
             className="flex shrink-0 items-center gap-3 rounded-2xl border border-gray-100 bg-[linear-gradient(135deg,#f8fafb_0%,#ffffff_100%)] px-5 py-3.5 shadow-[0_4px_20px_-12px_rgba(0,32,92,0.15)] transition hover:border-blue/30 hover:shadow-[0_8px_30px_-10px_rgba(0,102,179,0.25)]"
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={logoUrl(carrier.domain)}
-              alt={`${carrier.name} logo`}
-              width={32}
-              height={32}
-              className="h-8 w-8 rounded object-contain"
-            />
+            <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-blue-light text-xs font-bold tracking-[0.18em] text-blue">
+              {carrierBadge(carrier.name)}
+            </div>
             <span className="text-base font-semibold text-gray-700 whitespace-nowrap">
               {carrier.name}
             </span>
@@ -51,8 +51,8 @@ export function CarrierLogosSection() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           eyebrow="Carrier access"
-          title="Insurance Partners We Work With"
-          description="We shop across multiple carriers so the recommendation feels tailored to your needs, not boxed into one option."
+          title="A Sample of the Markets We Can Shop"
+          description={`These logos show a representative sample of the carrier access available through the agency. The full market access goes well beyond the ${carrierAccessStat}+ options shown in the trust bar.`}
           align="center"
         />
       </div>

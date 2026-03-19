@@ -4,29 +4,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { LoaderCircle } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
 
-const helpTopics = [
-  "Home Insurance",
-  "Auto Insurance",
-  "Business Insurance",
-  "Workers Comp",
-  "Life Insurance",
-  "Other",
-] as const;
-
-const agentContactSchema = z.object({
-  name: z.string().min(2, "Your name is required."),
-  phone: z
-    .string()
-    .min(10, "Phone number is required.")
-    .regex(/^[0-9()+\-\s]{10,}$/, "Enter a valid phone number."),
-  email: z.email("Enter a valid email address."),
-  helpTopic: z.enum(helpTopics, { error: "Select how the agent can help." }),
-  message: z.string().max(1000, "Keep the message under 1000 characters.").optional(),
-});
-
-type AgentContactValues = z.infer<typeof agentContactSchema>;
+import { agentContactSchema, helpTopics, type AgentContactValues } from "@/lib/lead-schemas";
 
 type AgentContactFormProps = {
   agentName: string;
@@ -48,6 +27,7 @@ export function AgentContactForm({ agentName, agentSlug }: AgentContactFormProps
       email: "",
       helpTopic: undefined,
       message: "",
+      honeypot: "",
     },
   });
 
@@ -111,6 +91,13 @@ export function AgentContactForm({ agentName, agentSlug }: AgentContactFormProps
           placeholder={`Tell ${agentName.split(" ")[0]} a little bit about what you need.`}
         />
       </Field>
+      <input
+        {...register("honeypot")}
+        tabIndex={-1}
+        autoComplete="off"
+        className="hidden"
+        aria-hidden="true"
+      />
       <button
         type="submit"
         disabled={isSubmitting}

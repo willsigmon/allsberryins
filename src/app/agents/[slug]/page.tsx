@@ -59,7 +59,6 @@ export default async function AgentPage({ params }: AgentPageProps) {
     description: agent.bio,
   };
 
-  const isFeaturedMicrosite = agent.slug === "brahm";
   const agentHighlights = [
     {
       label: "Coverage focus",
@@ -74,25 +73,25 @@ export default async function AgentPage({ params }: AgentPageProps) {
       value: "Tap to call, scan, or start a quote online",
     },
   ];
+  const phoneHref = agent.phoneHref ?? agency.phoneHref;
 
   return (
-    <div className="bg-[linear-gradient(180deg,#ffffff_0%,#f7fbff_100%)] pt-32 pb-20">
+    <div className="pt-32 pb-20" style={{ backgroundImage: "var(--hero-bg)" }}>
       <StructuredData data={personSchema} />
       <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="rounded-[2.75rem] bg-[linear-gradient(145deg,#0b2f72_0%,#0e4b94_48%,#dcecff_100%)] p-2 shadow-[0_35px_95px_-58px_rgba(0,32,92,0.85)]">
+        <div
+          className="rounded-[2.75rem] p-2 shadow-[0_35px_95px_-58px_rgba(0,32,92,0.85)]"
+          style={{ backgroundImage: "var(--agent-shell-gradient)" }}
+        >
           <div className="grid gap-8 rounded-[2.35rem] bg-white p-6 lg:grid-cols-[1.02fr_0.98fr] lg:p-8">
-            <div className="rounded-[2.2rem] border border-gray-100 bg-[linear-gradient(180deg,#ffffff_0%,#eef6fd_100%)] p-8 shadow-[0_30px_70px_-52px_rgba(0,32,92,0.4)]">
-              {isFeaturedMicrosite ? (
-                <div className="inline-flex items-center gap-2 rounded-full border border-blue/10 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-blue shadow-sm">
-                  <ShieldCheck className="h-4 w-4" />
-                  Direct agent page
-                </div>
-              ) : (
-                <div className="inline-flex items-center gap-2 rounded-full border border-blue/10 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-blue shadow-sm">
-                  <ShieldCheck className="h-4 w-4" />
-                  Agent profile
-                </div>
-              )}
+            <div
+              className="rounded-[2.2rem] border border-gray-100 p-8 shadow-[0_30px_70px_-52px_rgba(0,32,92,0.4)]"
+              style={{ backgroundImage: "var(--panel-gradient)" }}
+            >
+              <div className="inline-flex items-center gap-2 rounded-full border border-blue/10 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-blue shadow-sm">
+                <ShieldCheck className="h-4 w-4" />
+                Direct agent page
+              </div>
 
               <div className="mt-8 flex flex-col gap-6 sm:flex-row sm:items-center">
                 {agent.photo ? (
@@ -138,7 +137,7 @@ export default async function AgentPage({ params }: AgentPageProps) {
 
               <div className="mt-8 grid gap-4 sm:grid-cols-2">
                 <Link
-                  href={agency.phoneHref}
+                  href={phoneHref}
                   className="rounded-[1.6rem] border border-gray-200 bg-white px-5 py-4 text-sm font-semibold text-gray-900 transition hover:border-blue hover:text-blue"
                 >
                   <Phone className="mb-3 h-5 w-5 text-blue" />
@@ -208,7 +207,10 @@ export default async function AgentPage({ params }: AgentPageProps) {
                 </p>
               </div>
 
-              <div className="rounded-[2.2rem] border border-gray-100 bg-[linear-gradient(180deg,#ffffff_0%,#f8fafb_100%)] p-8 shadow-[0_30px_70px_-52px_rgba(0,32,92,0.45)]">
+              <div
+                className="rounded-[2.2rem] border border-gray-100 p-8 shadow-[0_30px_70px_-52px_rgba(0,32,92,0.45)]"
+                style={{ backgroundImage: "var(--surface-gradient)" }}
+              >
                 <p className="text-sm font-semibold uppercase tracking-[0.24em] text-blue">
                   Working with {agent.firstName}
                 </p>

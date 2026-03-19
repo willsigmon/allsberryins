@@ -21,7 +21,7 @@ export default async function QuotePage({ searchParams }: QuotePageProps) {
   const zip = typeof params.zip === "string" ? params.zip : undefined;
 
   return (
-    <div className="bg-[linear-gradient(180deg,#ffffff_0%,#eef6fd_100%)] pt-32">
+    <div className="pt-32" style={{ backgroundImage: "var(--hero-bg)" }}>
       <section className="mx-auto max-w-7xl px-4 pb-20 sm:px-6 lg:px-8">
         <div className="grid gap-10 lg:grid-cols-[0.78fr_1.22fr] lg:items-start">
           <div className="lg:sticky lg:top-28">
@@ -37,6 +37,13 @@ export default async function QuotePage({ searchParams }: QuotePageProps) {
                 <li>• An agent follows up within 24 hours.</li>
                 <li>• We help compare coverage options and answer questions clearly.</li>
               </ul>
+              <p className="mt-5 text-sm leading-7 text-gray-500">
+                Need a certificate or proof of insurance instead of a quote? Use the dedicated{" "}
+                <a className="font-semibold text-blue hover:text-navy" href="/evidence-of-insurance">
+                  proof request flow
+                </a>
+                .
+              </p>
             </div>
           </div>
           <QuoteForm initialProduct={product} initialZip={zip} />

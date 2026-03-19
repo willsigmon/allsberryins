@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, Mail, Phone } from "lucide-react";
+import { Handshake, Mail, Phone } from "lucide-react";
 
 import { SectionHeading } from "@/components/ui/section-heading";
 import { agents, type Agent } from "@/lib/site-data";
@@ -29,7 +29,7 @@ export function TeamSection() {
         <SectionHeading
           eyebrow="Meet our team"
           title="Local Agents Who Know Your Coverage"
-          description="Every client gets a dedicated agent who listens, explains your options clearly, and stays with you from quote through claims."
+          description="Every client gets a dedicated agent who listens, explains the tradeoffs clearly, and now has a direct shareable profile page for follow-up."
           align="center"
         />
 
@@ -99,7 +99,7 @@ export function TeamSection() {
                     className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-bold text-navy transition hover:bg-blue-light"
                   >
                     Meet {featuredAgent.firstName}
-                    <ArrowRight className="h-4 w-4" />
+                    <Handshake className="h-4 w-4" />
                   </Link>
                   <Link
                     href="/quote?product=business"
@@ -181,7 +181,7 @@ function SupportingAgentCard({ agent, index }: { agent: Agent; index: number }) 
           href={`/agents/${agent.slug}`}
           className="inline-flex items-center gap-2 rounded-full bg-navy px-4 py-2 text-sm font-semibold text-white transition hover:bg-blue"
         >
-          <Phone className="h-4 w-4" />
+          <Handshake className="h-4 w-4" />
           Meet {agent.firstName}
         </Link>
       </div>

@@ -49,6 +49,7 @@ export type Agent = {
   firstName: string;
   title: string;
   phone: string;
+  phoneHref?: string;
   email: string;
   bio: string;
   accent: "blue" | "navy" | "red";
@@ -74,6 +75,11 @@ export type BlogPost = {
     body: string;
     bullets?: string[];
   }>;
+};
+
+export type HomePageFaq = {
+  question: string;
+  answer: string;
 };
 
 export const agency = {
@@ -354,6 +360,14 @@ export const referralSources = [
 
 export const employeeOptions = ["1-5", "6-15", "16-50", "51-100", "100+"] as const;
 
+export const evidenceRequestTypes = [
+  "Evidence of Insurance",
+  "Certificate of Insurance (COI)",
+  "Mortgagee / Loss Payee Update",
+  "Closing / Escrow Request",
+  "Other",
+] as const;
+
 export const reviews = [
   {
     name: "Corona, CA homeowner",
@@ -396,6 +410,8 @@ export const carrierPartners = [
   { name: "Mutual of Omaha", domain: "mutualofomaha.com" },
 ] as const;
 
+export const carrierAccessStat = 200;
+
 export const agentMicrositeFeatures = [
   "Direct tap-to-call and email access",
   "QR code ready for print leave-behinds and text follow-up",
@@ -410,6 +426,7 @@ export const agents: Agent[] = [
     firstName: "Erin",
     title: "Agency Owner & Principal Agent",
     phone: agency.phone,
+    phoneHref: agency.phoneHref,
     email: "erin@allsberryagency.com",
     bio: "With over 24 years of experience, Erin founded Allsberry Insurance Agency to provide personalized insurance solutions to families and businesses across Southern California. She believes in making insurance straightforward and stress-free, so you can focus on what matters most.",
     initials: "EA",
@@ -423,12 +440,18 @@ export const agents: Agent[] = [
     name: "Brahm Shank",
     firstName: "Brahm",
     title: "Licensed Insurance Agent",
-    phone: agency.phone,
+    phone: "(951) 266-2019",
+    phoneHref: "tel:+19512662019",
     email: "brahm@allsberryagency.com",
     bio: "Brahm specializes in helping clients find the right coverage at the right price, with a focus on building lasting relationships. His dedication to client service ensures every policy is tailored to your unique situation.",
     initials: "BS",
     accent: "navy",
-    specialties: ["Commercial Insurance", "Restaurant Coverage", "Client Strategy"],
+    specialties: [
+      "Commercial Insurance",
+      "Restaurant Coverage",
+      "Client Strategy",
+      "Financial Planning",
+    ],
     photo: {
       src: "/media/agents/brahm-shank.png",
       alt: "Brahm Shank, Licensed Insurance Agent at Allsberry Insurance Agency",
@@ -440,6 +463,7 @@ export const agents: Agent[] = [
     firstName: "Dakota",
     title: "Licensed Insurance Agent",
     phone: agency.phone,
+    phoneHref: agency.phoneHref,
     email: "dakota@allsberryagency.com",
     bio: "Dakota brings energy and dedication to every client interaction, ensuring a smooth and personalized insurance experience. Whether you need home, auto, or business coverage, Dakota is here to help.",
     initials: "D",
@@ -449,6 +473,29 @@ export const agents: Agent[] = [
       src: "/media/agents/dakota-allsberry.png",
       alt: "Dakota Allsberry, Licensed Insurance Agent at Allsberry Insurance Agency",
     },
+  },
+];
+
+export const homePageFaqs: HomePageFaq[] = [
+  {
+    question: "What types of insurance can Allsberry Insurance Agency help me quote?",
+    answer:
+      "We help Southern California clients compare home, auto, renters, condo, umbrella, life, business, workers compensation, commercial property, professional liability, and specialty coverage options.",
+  },
+  {
+    question: "How fast will someone follow up after I request a quote?",
+    answer:
+      "A licensed team member follows up within one business day, often sooner when the request is straightforward and we already have the basics we need.",
+  },
+  {
+    question: "Can you help with evidence of insurance or certificates of insurance?",
+    answer:
+      "Yes. We can help with proof of insurance, mortgagee updates, COI requests, and escrow or closing-related documentation so the right party gets the right evidence quickly.",
+  },
+  {
+    question: "Do I need to bundle home and auto insurance to work with the agency?",
+    answer:
+      "No. Bundling is often worth reviewing, but the agency can quote a single policy or build a custom mix if that is the better fit for your budget and coverage goals.",
   },
 ];
 
@@ -543,8 +590,9 @@ export const blogPosts: BlogPost[] = [
 
 export const quickLinks = [
   { label: "Get a Quote", href: "/quote" },
+  { label: "Proof of Insurance", href: "/evidence-of-insurance" },
   { label: "Meet Our Team", href: "/#team" },
-  { label: "Blog", href: "/blog" },
+  { label: "Commercial Coverage", href: "/#commercial-insurance" },
   { label: "Contact", href: "/contact" },
 ] as const;
 

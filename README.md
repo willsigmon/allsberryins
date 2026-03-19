@@ -34,6 +34,16 @@ Custom Next.js website prototype for **Allsberry Insurance Agency** in Corona, C
   - JSON-LD
   - robots.txt
   - sitemap
+- Sunset-aware theme system:
+  - Auto / Light / Dark theme toggle
+  - Auto mode can follow local sunset when location is available
+- Evidence-of-insurance request flow:
+  - dedicated `/evidence-of-insurance` page
+  - lender / escrow / COI-oriented request form
+- SEO / AIO content upgrades:
+  - FAQ section + FAQ schema
+  - expanded InsuranceAgency schema
+  - stronger internal linking for quotes, proof requests, and agent pages
 
 ## Local scripts
 
@@ -58,3 +68,7 @@ npm run start
   files from prior sessions. Vercel still uses the default build output.
 - `/api/leads` currently logs submissions and includes a TODO for AgencyZoom integration.
 - `/api/chat` currently returns placeholder text and includes a TODO for chatbot integration.
+- To inject the client tracking snippet, add the raw embed code to either:
+  - `SITELEADS_EMBED_CODE`
+  - or `NEXT_PUBLIC_SITELEADS_EMBED_CODE`
+- `.env.example` is included for that handoff.

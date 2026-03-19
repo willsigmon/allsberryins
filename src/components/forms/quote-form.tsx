@@ -4,7 +4,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { LoaderCircle } from "lucide-react";
 import { useMemo, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
-import { z } from "zod";
 
 import {
   employeeOptions,
@@ -12,42 +11,10 @@ import {
   products,
   referralSources,
 } from "@/lib/site-data";
+import { quoteFormSchema, type QuoteFormValues } from "@/lib/lead-schemas";
 import { cn } from "@/lib/utils";
 
 type QuoteProductSlug = (typeof productSelectionOptions)[number];
-
-const quoteSchema = z
-  .object({
-    products: z.array(z.enum(productSelectionOptions)).min(1, "Select at least one coverage type."),
-    firstName: z.string().min(2, "First name is required."),
-    lastName: z.string().min(2, "Last name is required."),
-    phone: z
-      .string()
-      .min(10, "Phone number is required.")
-      .regex(/^[0-9()+\-\s]{10,}$/, "Enter a valid phone number."),
-    email: z.email("Enter a valid email address."),
-    zipCode: z.string().regex(/^\d{5}$/, "Enter a valid 5-digit ZIP code."),
-    referralSource: z.enum(referralSources, {
-      error: "Please tell us how you heard about us.",
-    }),
-    employees: z.enum(employeeOptions).optional(),
-    message: z.string().max(1000, "Keep the message under 1000 characters.").optional(),
-  })
-  .superRefine((values, ctx) => {
-    const needsEmployees = values.products.some(
-      (product) => product === "business" || product === "workers-comp",
-    );
-
-    if (needsEmployees && !values.employees) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        path: ["employees"],
-        message: "Please choose the number of employees.",
-      });
-    }
-  });
-
-type QuoteFormValues = z.infer<typeof quoteSchema>;
 
 type QuoteFormProps = {
   initialProduct?: string;
@@ -71,7 +38,7 @@ export function QuoteForm({ initialProduct, initialZip }: QuoteFormProps) {
     setValue,
     formState: { errors, isSubmitting },
   } = useForm<QuoteFormValues>({
-    resolver: zodResolver(quoteSchema),
+    resolver: zodResolver(quoteFormSchema),
     defaultValues: {
       products: normalizedInitialProduct ? [normalizedInitialProduct] : ["home"],
       firstName: "",
@@ -82,6 +49,7 @@ export function QuoteForm({ initialProduct, initialZip }: QuoteFormProps) {
       referralSource: undefined,
       employees: undefined,
       message: "",
+      honeypot: "",
     },
   });
 
@@ -216,6 +184,14 @@ export function QuoteForm({ initialProduct, initialZip }: QuoteFormProps) {
             </select>
           </Field>
         ) : null}
+
+        <input
+          {...register("honeypot")}
+          tabIndex={-1}
+          autoComplete="off"
+          className="hidden"
+          aria-hidden="true"
+        />
 
         <Field label="Message (optional)" error={errors.message?.message}>
           <textarea

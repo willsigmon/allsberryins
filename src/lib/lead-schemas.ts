@@ -1,6 +1,11 @@
 import { z } from "zod";
 
-import { employeeOptions, productSelectionOptions, referralSources } from "@/lib/site-data";
+import {
+  employeeOptions,
+  evidenceRequestTypes,
+  productSelectionOptions,
+  referralSources,
+} from "@/lib/site-data";
 
 export const honeypotFieldName = "website";
 
@@ -78,6 +83,27 @@ export const agentContactSchema = z.object({
 
 export type AgentContactValues = z.infer<typeof agentContactSchema>;
 
+export const evidenceRequestSchema = z.object({
+  name: z.string().trim().min(2, "Your name is required."),
+  companyOrAgency: z.string().trim().min(2, "Company, lender, or agency name is required."),
+  phone: z
+    .string()
+    .trim()
+    .min(10, "Phone number is required.")
+    .regex(/^[0-9()+\-\s]{10,}$/, "Enter a valid phone number."),
+  email: z.string().trim().email("Enter a valid email address."),
+  zipCode: z.string().trim().regex(/^\d{5}$/, "Enter a valid 5-digit ZIP code."),
+  requestType: z.enum(evidenceRequestTypes, {
+    error: "Select the type of request.",
+  }),
+  requestedFor: z.string().trim().min(2, "Tell us who the proof is for."),
+  dueDate: z.string().trim().max(40).optional().or(z.literal("")),
+  message: optionalMessageSchema,
+  honeypot: honeypotSchema,
+});
+
+export type EvidenceRequestValues = z.infer<typeof evidenceRequestSchema>;
+
 export const leadsApiSchema = z.discriminatedUnion("type", [
   z.object({
     type: z.literal("quote-request"),
@@ -88,6 +114,11 @@ export const leadsApiSchema = z.discriminatedUnion("type", [
     agentSlug: z.string().trim().min(1),
     agentName: z.string().trim().min(1),
     ...agentContactSchema.shape,
+  }),
+  z.object({
+    type: z.literal("evidence-request"),
+    audience: z.string().trim().optional(),
+    ...evidenceRequestSchema.shape,
   }),
 ]);
 

@@ -5,6 +5,8 @@ import "./globals.css";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SkipLink } from "@/components/layout/skip-link";
+import { TrackingScripts } from "@/components/seo/tracking-scripts";
+import { ThemeScript } from "@/components/theme/theme-script";
 import { sharedMetadata } from "@/lib/metadata";
 
 const dmSans = DM_Sans({
@@ -29,7 +31,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" data-theme="light" data-theme-mode="auto" suppressHydrationWarning>
+      <head>
+        <ThemeScript />
+        <TrackingScripts />
+      </head>
       <body className={`${dmSans.variable} ${plusJakartaSans.variable} bg-white font-sans text-gray-600 antialiased`}>
         <SkipLink />
         <div className="flex min-h-screen flex-col">

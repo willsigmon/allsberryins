@@ -58,7 +58,10 @@ export default function ContactPage() {
         </div>
 
         <div className="mt-10 grid gap-6 lg:grid-cols-[1.3fr_0.7fr]">
-          <div className="rounded-[2rem] border border-gray-100 bg-[linear-gradient(180deg,#ffffff_0%,#eef6fd_100%)] p-8 shadow-[0_28px_70px_-52px_rgba(0,32,92,0.55)]">
+          <div
+            className="rounded-[2rem] border border-gray-100 p-8 shadow-[0_28px_70px_-52px_rgba(0,32,92,0.55)]"
+            style={{ backgroundImage: "var(--panel-gradient)" }}
+          >
             <h2 className="font-display text-3xl font-extrabold text-gray-900">
               Need coverage help fast?
             </h2>
@@ -72,6 +75,12 @@ export default function ContactPage() {
                 className="cta-glow inline-flex items-center justify-center rounded-full bg-red px-6 py-3 text-sm font-bold text-white transition hover:bg-red-hover"
               >
                 Start Your Quote
+              </Link>
+              <Link
+                href="/evidence-of-insurance"
+                className="inline-flex items-center justify-center rounded-full border border-gray-200 px-6 py-3 text-sm font-bold text-navy transition hover:border-blue hover:text-blue"
+              >
+                Request Proof
               </Link>
               <Link
                 href={agency.phoneHref}

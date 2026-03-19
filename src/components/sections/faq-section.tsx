@@ -1,0 +1,69 @@
+"use client";
+
+import { motion } from "framer-motion";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+
+import { SectionHeading } from "@/components/ui/section-heading";
+import { homePageFaqs } from "@/lib/site-data";
+
+export function FaqSection() {
+  return (
+    <section className="bg-white py-20 sm:py-24" id="faq">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <SectionHeading
+          eyebrow="Frequently asked"
+          title="Straight answers for quotes, coverage, and proof requests"
+          description="This section is written for real client questions, which also makes the site easier for search engines and AI answer engines to understand."
+          align="center"
+        />
+
+        <div className="mt-12 grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
+          <div className="grid gap-4">
+            {homePageFaqs.map((faq, index) => (
+              <motion.article
+                key={faq.question}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.35, ease: "easeOut", delay: index * 0.06 }}
+                className="rounded-[1.8rem] border border-gray-100 bg-[linear-gradient(180deg,var(--white)_0%,var(--gray-50)_100%)] p-6 shadow-[0_22px_45px_-38px_rgba(0,32,92,0.4)]"
+              >
+                <h3 className="font-display text-xl font-bold text-gray-900">{faq.question}</h3>
+                <p className="mt-3 text-sm leading-7 text-gray-600">{faq.answer}</p>
+              </motion.article>
+            ))}
+          </div>
+
+          <div className="rounded-[2rem] border border-blue/10 bg-[linear-gradient(180deg,var(--white)_0%,var(--gray-50)_100%)] p-8 shadow-[0_26px_60px_-44px_rgba(0,32,92,0.45)]">
+            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-blue">
+              Need the fast path?
+            </p>
+            <h3 className="mt-4 font-display text-3xl font-extrabold text-gray-900">
+              Start with the right request.
+            </h3>
+            <p className="mt-4 text-base leading-8 text-gray-600">
+              Use the quote flow if you are shopping coverage. Use the proof request flow if escrow, a lender, or a vendor needs documentation.
+            </p>
+            <div className="mt-8 grid gap-3">
+              <Link
+                href="/quote?product=business"
+                className="inline-flex items-center justify-between rounded-2xl border border-gray-200 bg-white px-5 py-4 text-sm font-bold text-navy transition hover:border-blue hover:text-blue"
+              >
+                Start a quote
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+              <Link
+                href="/evidence-of-insurance"
+                className="inline-flex items-center justify-between rounded-2xl border border-gray-200 bg-white px-5 py-4 text-sm font-bold text-navy transition hover:border-blue hover:text-blue"
+              >
+                Request proof of insurance
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

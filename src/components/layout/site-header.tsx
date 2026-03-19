@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { Menu, Phone, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
+import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { agency, navigation } from "@/lib/site-data";
 import { cn } from "@/lib/utils";
 
@@ -13,6 +14,7 @@ export function SiteHeader() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [resolvedTheme, setResolvedTheme] = useState<"light" | "dark">("light");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 80);
@@ -21,15 +23,31 @@ export function SiteHeader() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    const syncTheme = () => {
+      setResolvedTheme(document.documentElement.dataset.theme === "dark" ? "dark" : "light");
+    };
+
+    syncTheme();
+    window.addEventListener("themechange", syncTheme as EventListener);
+
+    return () => window.removeEventListener("themechange", syncTheme as EventListener);
+  }, []);
+
   const solidHeader = pathname !== "/" || scrolled || menuOpen;
-  const textClassName = solidHeader ? "text-white" : "text-navy";
-  const subtextClassName = solidHeader ? "text-white/80" : "text-navy/70";
-  const phoneClassName = solidHeader
+  const shouldUseLightChrome = solidHeader || resolvedTheme === "dark";
+  const phoneClassName = shouldUseLightChrome
     ? "border-white/18 text-white hover:border-white/35 hover:bg-white/8"
     : "border-navy/10 bg-white/85 text-navy hover:border-blue/35 hover:text-blue";
-  const menuButtonClassName = solidHeader
+  const menuButtonClassName = shouldUseLightChrome
     ? "border-white/18 text-white"
     : "border-navy/10 bg-white/85 text-navy shadow-sm";
+  const themeButtonClassName = shouldUseLightChrome
+    ? "border-white/18 text-white hover:border-white/35 hover:bg-white/8 focus-visible:ring-white focus-visible:ring-offset-navy"
+    : "border-navy/10 bg-white/85 text-navy shadow-sm hover:border-blue/35 hover:text-blue focus-visible:ring-blue focus-visible:ring-offset-white";
+  const logoSrc = shouldUseLightChrome
+    ? "/media/brand/logos/allsberry-starlight.png"
+    : "/media/brand/logos/allsberry-deep-blue.png";
 
   return (
     <header
@@ -41,31 +59,15 @@ export function SiteHeader() {
       )}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
-        <Link href="/" className="flex items-center gap-3" aria-label="Allsberry Insurance Agency home">
-          <div
-            className={cn(
-              "flex h-12 w-12 items-center justify-center rounded-2xl border shadow-lg backdrop-blur overflow-hidden",
-              solidHeader
-                ? "border-white/20 bg-white/12"
-                : "border-white bg-white/95",
-            )}
-          >
-            <Image
-              src="/media/brand/aia-logo.png"
-              alt="Allsberry Insurance Agency logo"
-              width={36}
-              height={36}
-              className={cn("h-9 w-9 object-contain", solidHeader ? "brightness-0 invert" : "")}
-            />
-          </div>
-          <div>
-            <p className={cn("font-display text-xl font-extrabold tracking-[0.18em] sm:text-2xl", textClassName)}>
-              ALLSBERRY
-            </p>
-            <p className={cn("text-[0.68rem] font-semibold uppercase tracking-[0.32em]", subtextClassName)}>
-              Insurance Agency
-            </p>
-          </div>
+        <Link href="/" className="flex items-center" aria-label="Allsberry Insurance Agency home">
+          <Image
+            src={logoSrc}
+            alt="Allsberry Insurance Agency logo"
+            width={260}
+            height={86}
+            priority
+            className="h-12 w-auto sm:h-14 lg:h-16"
+          />
         </Link>
 
         <nav className="hidden items-center gap-7 md:flex">
@@ -75,7 +77,7 @@ export function SiteHeader() {
               href={item.href}
               className={cn(
                 "text-sm font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
-                solidHeader
+                shouldUseLightChrome
                   ? "text-white/92 hover:text-white focus-visible:ring-white focus-visible:ring-offset-navy"
                   : "text-navy/86 hover:text-blue focus-visible:ring-blue focus-visible:ring-offset-white",
               )}
@@ -86,9 +88,13 @@ export function SiteHeader() {
         </nav>
 
         <div className="hidden items-center gap-3 md:flex">
+          <ThemeToggle className={themeButtonClassName} />
           <Link
             href={agency.phoneHref}
-            className={cn("inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold transition", phoneClassName)}
+            className={cn(
+              "inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold transition",
+              phoneClassName,
+            )}
           >
             <Phone className="h-4 w-4" />
             {agency.phone}
@@ -134,6 +140,7 @@ export function SiteHeader() {
                 <Phone className="h-4 w-4" />
                 {agency.phone}
               </Link>
+              <ThemeToggle className="inline-flex justify-center border-white/12 bg-white/6 text-white hover:border-white/25 hover:bg-white/10 focus-visible:ring-white focus-visible:ring-offset-navy" />
               <Link
                 href="/quote"
                 onClick={() => setMenuOpen(false)}

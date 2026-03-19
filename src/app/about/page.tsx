@@ -52,7 +52,10 @@ export default function AboutPage() {
             </div>
           </div>
 
-          <div className="rounded-[2rem] border border-gray-100 bg-[linear-gradient(160deg,#f8fafb_0%,#e8f0f8_100%)] p-8 shadow-[0_25px_70px_-52px_rgba(0,32,92,0.5)]">
+          <div
+            className="rounded-[2rem] border border-gray-100 p-8 shadow-[0_25px_70px_-52px_rgba(0,32,92,0.5)]"
+            style={{ backgroundImage: "var(--elevated-shell-gradient)" }}
+          >
             <div className="grid gap-6 rounded-[1.8rem] bg-white p-6">
               <div className="flex items-center gap-5">
                 <div className="relative h-24 w-24 overflow-hidden rounded-full border-4 border-white shadow-lg">

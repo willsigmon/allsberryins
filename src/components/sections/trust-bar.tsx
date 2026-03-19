@@ -1,24 +1,24 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+
+import { carrierAccessStat } from "@/lib/site-data";
 
 const stats = [
   { end: 30, suffix: "+", unit: "Years", label: "Serving Southern California" },
   { end: 5, suffix: "★", unit: "Stars", label: "Client rating" },
   { end: 1000, suffix: "+", unit: "Families", label: "Protected across SoCal" },
-  { end: 20, suffix: "+", unit: "Carriers", label: "We shop for you" },
+  { end: carrierAccessStat, suffix: "+", unit: "Carriers", label: "Markets we can shop" },
 ];
 
 function CountUp({ end, duration = 1.6 }: { end: number; duration?: number }) {
   const [count, setCount] = useState(0);
-  const [hasStarted, setHasStarted] = useState(false);
-  const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-50px" });
+  const hasStartedRef = useRef(false);
 
   useEffect(() => {
-    if (!inView || hasStarted) return;
-    setHasStarted(true);
+    if (hasStartedRef.current) return;
+    hasStartedRef.current = true;
 
     const startTime = performance.now();
     const animate = (now: number) => {
@@ -33,9 +33,9 @@ function CountUp({ end, duration = 1.6 }: { end: number; duration?: number }) {
       }
     };
     requestAnimationFrame(animate);
-  }, [inView, hasStarted, end, duration]);
+  }, [end, duration]);
 
-  return <span ref={ref}>{count}</span>;
+  return <span>{count}</span>;
 }
 
 export function TrustBar() {

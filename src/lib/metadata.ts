@@ -12,6 +12,9 @@ const defaultKeywords = [
   "Farmers Insurance agent Corona",
   "business insurance Southern California",
   "life insurance Corona CA",
+  "certificate of insurance Corona",
+  "evidence of insurance request",
+  "commercial insurance Corona CA",
 ];
 
 export const sharedMetadata: Metadata = {
@@ -22,6 +25,21 @@ export const sharedMetadata: Metadata = {
   },
   description: defaultDescription,
   keywords: defaultKeywords,
+  alternates: {
+    canonical: "/",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+  category: "Insurance",
   openGraph: {
     title: "Allsberry Insurance Agency | Corona, CA",
     description: defaultDescription,
