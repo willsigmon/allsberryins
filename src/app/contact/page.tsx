@@ -2,11 +2,13 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { Clock3, Facebook, Instagram, Linkedin, Mail, MapPin, Phone } from "lucide-react";
 
+import { PageFaqSection } from "@/components/sections/page-faq-section";
 import { StructuredData } from "@/components/seo/structured-data";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { createPageMetadata } from "@/lib/metadata";
 import { agency } from "@/lib/site-data";
 import { createBreadcrumbSchema, organizationSchema } from "@/lib/seo";
+import { buildTrackedHref } from "@/lib/tracking";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Contact",
@@ -33,6 +35,24 @@ const socialItems = [
   { label: "LinkedIn", href: agency.socials.linkedin, icon: Linkedin },
 ] as const;
 
+const contactPageFaqs: Array<{ question: string; answer: string }> = [
+  {
+    question: "What is the fastest way to reach the Allsberry team?",
+    answer:
+      "Calling the office is the quickest path when something is time-sensitive. If it is not urgent, the quote or proof-of-insurance form usually gives the team the cleanest context to respond quickly.",
+  },
+  {
+    question: "How quickly will someone follow up after I reach out?",
+    answer:
+      "A licensed team member typically follows up within one business day, and straightforward requests are often reviewed sooner.",
+  },
+  {
+    question: "Can I use this contact page for quotes and proof requests too?",
+    answer:
+      "Yes. The contact page is a good starting point, but the quote flow and proof-of-insurance flow are faster when you already know what you need.",
+  },
+];
+
 export default function ContactPage() {
   const breadcrumbSchema = createBreadcrumbSchema([
     { name: "Home", path: "/" },
@@ -49,10 +69,22 @@ export default function ContactPage() {
       "@id": organizationSchema["@id"],
     },
   };
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: contactPageFaqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  };
 
   return (
     <div className="bg-white pt-32">
-      <StructuredData data={[breadcrumbSchema, contactPageSchema]} />
+      <StructuredData data={[organizationSchema, breadcrumbSchema, contactPageSchema, faqSchema]} />
       <section className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8">
         <SectionHeading
           eyebrow="Contact"
@@ -90,13 +122,17 @@ export default function ContactPage() {
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <Link
-                href="/quote"
+                href={buildTrackedHref("/quote", {
+                  entry: "contact-page-primary-quote",
+                })}
                 className="cta-glow inline-flex items-center justify-center rounded-full bg-red px-6 py-3 text-sm font-bold text-white transition hover:bg-red-hover"
               >
                 Start Your Quote
               </Link>
               <Link
-                href="/evidence-of-insurance"
+                href={buildTrackedHref("/evidence-of-insurance", {
+                  entry: "contact-page-proof",
+                })}
                 className="inline-flex items-center justify-center rounded-full border border-gray-200 px-6 py-3 text-sm font-bold text-navy transition hover:border-blue hover:text-blue"
               >
                 Request Proof
@@ -130,6 +166,26 @@ export default function ContactPage() {
             </div>
           </div>
         </div>
+
+        <PageFaqSection
+          title="Contact questions we hear most often"
+          description="These answers make the page more useful for visitors and give search engines and AI systems clearer context about how the agency works."
+          faqs={contactPageFaqs}
+          ctas={[
+            {
+              href: buildTrackedHref("/quote", {
+                entry: "contact-faq-quote-cta",
+              }),
+              label: "Start a quote",
+            },
+            {
+              href: buildTrackedHref("/evidence-of-insurance", {
+                entry: "contact-faq-proof-cta",
+              }),
+              label: "Request proof of insurance",
+            },
+          ]}
+        />
       </section>
     </div>
   );

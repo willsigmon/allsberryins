@@ -186,33 +186,42 @@ export function HeroSection() {
                     Start with the path that fits your situation.
                   </h2>
                 </div>
-                <div className="grid gap-2 sm:grid-cols-2">
-                  {supportModes.map((mode) => {
-                    const active = supportMode === mode.id;
+                <fieldset>
+                  <legend className="sr-only">Choose the type of help you need</legend>
+                  <div
+                    role="radiogroup"
+                    aria-label="Choose the type of help you need"
+                    className="grid gap-2 sm:grid-cols-2"
+                  >
+                    {supportModes.map((mode) => {
+                      const active = supportMode === mode.id;
 
-                    return (
-                      <button
-                        key={mode.id}
-                        type="button"
-                        onClick={() => setSupportMode(mode.id)}
-                        className={cn(
-                          "rounded-[1.4rem] border px-4 py-3 text-left transition",
-                          active
-                            ? "border-blue bg-blue-light text-navy shadow-[0_18px_36px_-28px_rgba(0,102,179,0.3)]"
-                            : "border-gray-200 bg-white text-gray-600 hover:border-blue/35 hover:text-navy",
-                        )}
-                      >
-                        <span className="block text-sm font-bold">{mode.label}</span>
-                        <span className="mt-1 block text-xs leading-5 text-gray-500">
-                          {mode.description}
-                        </span>
-                      </button>
-                    );
-                  })}
-                </div>
+                      return (
+                        <button
+                          key={mode.id}
+                          type="button"
+                          role="radio"
+                          aria-checked={active}
+                          onClick={() => setSupportMode(mode.id)}
+                          className={cn(
+                            "rounded-[1.4rem] border px-4 py-3 text-left transition",
+                            active
+                              ? "border-blue bg-blue-light text-navy shadow-[0_18px_36px_-28px_rgba(0,102,179,0.3)]"
+                              : "border-gray-200 bg-white text-gray-600 hover:border-blue/35 hover:text-navy",
+                          )}
+                        >
+                          <span className="block text-sm font-bold">{mode.label}</span>
+                          <span className="mt-1 block text-xs leading-5 text-gray-500">
+                            {mode.description}
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </fieldset>
               </div>
 
-              <div className="mt-6 grid gap-4 md:grid-cols-3">
+              <ul className="mt-6 grid gap-4 md:grid-cols-3" role="list">
                 {journeyCards.map((card) => {
                   const Icon = card.icon;
                   const href = supportMode === "quote" ? card.quoteHref : card.proofHref;
@@ -220,26 +229,27 @@ export function HeroSection() {
                     supportMode === "quote" ? card.quoteLabel : card.proofLabel;
 
                   return (
-                    <Link
-                      key={card.id}
-                      href={href}
-                      className="group rounded-[1.8rem] border border-gray-100 bg-[linear-gradient(180deg,var(--white)_0%,var(--gray-50)_100%)] p-5 shadow-[0_18px_44px_-36px_rgba(0,32,92,0.38)] transition hover:-translate-y-1 hover:border-blue/30 hover:shadow-[0_24px_50px_-34px_rgba(0,102,179,0.3)]"
-                    >
-                      <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-light text-blue">
-                        <Icon className="h-6 w-6" />
-                      </div>
-                      <h3 className="mt-5 font-display text-2xl font-bold text-gray-900">
-                        {card.title}
-                      </h3>
-                      <p className="mt-3 text-sm leading-7 text-gray-600">{card.description}</p>
-                      <div className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-blue transition group-hover:gap-3">
-                        {ctaLabel}
-                        <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                      </div>
-                    </Link>
+                    <li key={card.id}>
+                      <Link
+                        href={href}
+                        className="group block rounded-[1.8rem] border border-gray-100 bg-[linear-gradient(180deg,var(--white)_0%,var(--gray-50)_100%)] p-5 shadow-[0_18px_44px_-36px_rgba(0,32,92,0.38)] transition hover:-translate-y-1 hover:border-blue/30 hover:shadow-[0_24px_50px_-34px_rgba(0,102,179,0.3)]"
+                      >
+                        <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-light text-blue">
+                          <Icon className="h-6 w-6" />
+                        </div>
+                        <h3 className="mt-5 font-display text-2xl font-bold text-gray-900">
+                          {card.title}
+                        </h3>
+                        <p className="mt-3 text-sm leading-7 text-gray-600">{card.description}</p>
+                        <div className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-blue transition group-hover:gap-3">
+                          {ctaLabel}
+                          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                        </div>
+                      </Link>
+                    </li>
                   );
                 })}
-              </div>
+              </ul>
             </div>
           </div>
 

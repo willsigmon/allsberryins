@@ -5,9 +5,9 @@ import { PageFaqSection } from "@/components/sections/page-faq-section";
 import { StructuredData } from "@/components/seo/structured-data";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { createPageMetadata } from "@/lib/metadata";
-import { agency, getAgentBySlug } from "@/lib/site-data";
-import { normalizeAgentSlug } from "@/lib/tracking";
 import { createBreadcrumbSchema, organizationSchema } from "@/lib/seo";
+import { agency, getAgentBySlug } from "@/lib/site-data";
+import { buildTrackedHref, normalizeAgentSlug } from "@/lib/tracking";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Proof of Insurance",
@@ -128,11 +128,22 @@ export default async function EvidenceOfInsurancePage({
           faqs={pageFaqs}
           ctas={[
             {
-              href: assignedAgentSlug ? `/agents/${assignedAgentSlug}` : "/contact",
+              href: assignedAgentSlug
+                ? buildTrackedHref(`/agents/${assignedAgentSlug}`, {
+                    agent: assignedAgentSlug,
+                    entry: entryPoint ?? "evidence-faq-agent-cta",
+                  })
+                : buildTrackedHref("/contact", {
+                    entry: entryPoint ?? "evidence-faq-contact-cta",
+                  }),
               label: assignedAgent ? `Work with ${assignedAgent.firstName}` : "Talk to the team",
             },
             {
-              href: "/quote?product=business",
+              href: buildTrackedHref("/quote", {
+                agent: assignedAgentSlug,
+                entry: entryPoint ?? "evidence-faq-quote-cta",
+                product: assignedAgentSlug === "brahm" ? "business" : "home",
+              }),
               label: "Start a coverage quote instead",
             },
           ]}

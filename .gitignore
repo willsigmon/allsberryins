@@ -20,6 +20,7 @@
 
 # next.js
 /.next/
+/.next-check-*/
 /.next-build/
 /.next*_stale_*
 /.next-build_prev_*/

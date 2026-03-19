@@ -1,7 +1,7 @@
 "use client";
 
 import { MoonStar, Sun, SunMoon } from "lucide-react";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useId, useMemo, useRef, useState } from "react";
 
 import {
   agencyThemeFallbackCoordinates,
@@ -162,6 +162,7 @@ const themeMeta: Record<
 };
 
 export function ThemeToggle({ className }: ThemeToggleProps) {
+  const helperId = useId();
   const [mode, setMode] = useState<ThemeMode>(defaultThemeMode);
   const shouldPromptOnAutoRef = useRef(false);
 
@@ -320,10 +321,16 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
       )}
       title={`${helper} Click to switch to ${themeModeLabel[nextMode]}.`}
       aria-label={`${themeModeLabel[mode]} theme. Click to switch to ${themeModeLabel[nextMode]}.`}
+      aria-describedby={helperId}
       data-theme-mode={mode}
     >
       <Icon className="h-4 w-4" />
-      <span className="hidden lg:inline">{themeModeLabel[mode]}</span>
+      <span aria-hidden="true" className="hidden lg:inline">
+        {themeModeLabel[mode]}
+      </span>
+      <span id={helperId} className="sr-only" aria-live="polite">
+        {helper}
+      </span>
     </button>
   );
 }

@@ -30,6 +30,7 @@ shopt -s nullglob dotglob
 
 for path in \
   .next \
+  .next-check-* \
   .next-build \
   .next-demo-build \
   .app-build \

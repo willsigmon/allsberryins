@@ -3,6 +3,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { ArrowRight, BadgeCheck, MapPin, ShieldCheck } from "lucide-react";
 
+import { PageFaqSection } from "@/components/sections/page-faq-section";
 import { StructuredData } from "@/components/seo/structured-data";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { createPageMetadata } from "@/lib/metadata";
@@ -20,6 +21,24 @@ export const metadata: Metadata = createPageMetadata({
 const aboutPageDescription =
   "Learn more about Allsberry Insurance Agency, our roots in Corona, CA, and the team helping Southern California families and businesses protect what matters most.";
 
+const aboutPageFaqs: Array<{ question: string; answer: string }> = [
+  {
+    question: "How long has Allsberry Insurance Agency served Southern California?",
+    answer:
+      "The agency has served the area since 1994, with Erin leading the business since 2009 and continuing the same local, personal approach.",
+  },
+  {
+    question: "What kinds of coverage do you help with?",
+    answer:
+      "The team helps with home, auto, renters, life, umbrella, condo, and commercial coverage, plus the proof-of-insurance requests that come with real-world policy management.",
+  },
+  {
+    question: "Who do I talk to if I want to start a quote?",
+    answer:
+      "You can start online or reach out directly. The team will route you to the right licensed agent based on what you need and how quickly you need help.",
+  },
+];
+
 export default function AboutPage() {
   const breadcrumbSchema = createBreadcrumbSchema([
     { name: "Home", path: "/" },
@@ -35,10 +54,22 @@ export default function AboutPage() {
       "@id": organizationSchema["@id"],
     },
   };
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: aboutPageFaqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  };
 
   return (
     <div className="bg-white pt-32">
-      <StructuredData data={[breadcrumbSchema, aboutPageSchema]} />
+      <StructuredData data={[organizationSchema, breadcrumbSchema, aboutPageSchema, faqSchema]} />
       <section className="mx-auto max-w-7xl px-4 pb-18 sm:px-6 lg:px-8">
         <div className="grid gap-10 lg:grid-cols-[1fr_0.96fr] lg:items-center">
           <div>
@@ -215,6 +246,27 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+
+      <PageFaqSection
+        eyebrow="About the agency"
+        title="A few practical questions before you reach out"
+        description="This section helps new visitors understand the agency faster and gives AI systems a cleaner summary of who the team serves."
+        faqs={aboutPageFaqs}
+        ctas={[
+          {
+            href: buildTrackedHref("/contact", {
+              entry: "about-faq-contact-cta",
+            }),
+            label: "Contact the team",
+          },
+          {
+            href: buildTrackedHref("/quote", {
+              entry: "about-faq-quote-cta",
+            }),
+            label: "Start a quote",
+          },
+        ]}
+      />
     </div>
   );
 }

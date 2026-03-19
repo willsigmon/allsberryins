@@ -17,8 +17,8 @@ type PageFaqSectionProps = {
   eyebrow?: string;
   title: string;
   description?: string;
-  faqs: PageFaq[];
-  ctas?: FaqCta[];
+  faqs: readonly PageFaq[];
+  ctas?: readonly FaqCta[];
 };
 
 export function PageFaqSection({

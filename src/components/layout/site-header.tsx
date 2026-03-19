@@ -111,6 +111,7 @@ export function SiteHeader() {
           type="button"
           className={cn("inline-flex h-11 w-11 items-center justify-center rounded-full border md:hidden", menuButtonClassName)}
           aria-expanded={menuOpen}
+          aria-controls="mobile-nav"
           aria-label={menuOpen ? "Close menu" : "Open menu"}
           onClick={() => setMenuOpen((value) => !value)}
         >
@@ -119,7 +120,10 @@ export function SiteHeader() {
       </div>
 
       {menuOpen ? (
-        <div className="border-t border-white/12 bg-navy/98 px-4 pb-6 pt-4 shadow-xl md:hidden">
+        <div
+          id="mobile-nav"
+          className="border-t border-white/12 bg-navy/98 px-4 pb-6 pt-4 shadow-xl md:hidden"
+        >
           <nav className="mx-auto flex max-w-7xl flex-col gap-2">
             {navigation.map((item) => (
               <Link
