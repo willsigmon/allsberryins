@@ -25,7 +25,7 @@ export function TeamSection() {
   }
 
   return (
-    <section className="bg-gray-50 py-20 sm:py-24" id="team">
+    <section className="section-muted-bg py-20 sm:py-24" id="team">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           eyebrow="Meet our team"
@@ -100,7 +100,7 @@ export function TeamSection() {
                       agent: featuredAgent.slug,
                       entry: "featured-team-card",
                     })}
-                    className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-bold text-navy transition hover:bg-blue-light"
+                    className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-bold text-gray-900 transition hover:bg-blue-light"
                   >
                     Meet {featuredAgent.firstName}
                     <Handshake className="h-4 w-4" />
@@ -137,9 +137,9 @@ function SupportingAgentCard({ agent, index }: { agent: Agent; index: number }) 
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.42, ease: "easeOut", delay: index * 0.08 }}
-      className="relative overflow-hidden rounded-[2rem] border border-gray-100 bg-white p-6 shadow-[0_18px_45px_-38px_rgba(0,32,92,0.5)]"
+      className="surface-card relative h-full overflow-hidden rounded-[2rem] border border-gray-100 p-6 shadow-[0_18px_45px_-38px_rgba(0,32,92,0.5)]"
     >
-      <div className="absolute inset-x-0 top-0 h-1 bg-[linear-gradient(90deg,#00205c_0%,#0066b3_70%,#da291c_100%)]" />
+      <div className="brand-stripe absolute inset-x-0 top-0 h-1" />
 
       {agent.photo ? (
         <div className="relative h-20 w-20 overflow-hidden rounded-full border border-white shadow-xl">
@@ -180,7 +180,7 @@ function SupportingAgentCard({ agent, index }: { agent: Agent; index: number }) 
       <div className="mt-6 flex flex-wrap gap-3">
         <Link
           href={`mailto:${agent.email}`}
-          className="inline-flex items-center gap-2 rounded-full border border-gray-200 px-4 py-2 text-sm font-semibold text-gray-700 transition hover:border-blue hover:text-blue"
+          className="inline-flex items-center gap-2 rounded-full border border-gray-200 px-4 py-2 text-sm font-semibold text-gray-600 transition hover:border-blue hover:text-blue"
         >
           <Mail className="h-4 w-4" />
           Email

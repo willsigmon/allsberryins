@@ -95,7 +95,7 @@ export default function AboutPage() {
                   key={stat.label}
                   className="rounded-[1.75rem] border border-gray-100 bg-gray-50 p-5"
                 >
-                  <p className="text-sm font-semibold uppercase tracking-[0.22em] text-gray-500">
+                  <p className="text-sm font-semibold uppercase tracking-[0.22em] text-gray-400">
                     {stat.label}
                   </p>
                   <p className="mt-3 font-display text-2xl font-bold text-gray-900">
@@ -181,7 +181,7 @@ export default function AboutPage() {
                       />
                     </div>
                     <div>
-                      <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gray-500">
+                      <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gray-400">
                         Recognition
                       </p>
                       <p className="mt-1 text-sm font-semibold text-gray-900">{badge.title}</p>
@@ -237,7 +237,7 @@ export default function AboutPage() {
                     agent: agent.slug,
                     entry: "about-team-card",
                   })}
-                  className="mt-6 inline-flex items-center gap-2 font-semibold text-blue transition hover:text-navy"
+                  className="mt-6 inline-flex items-center gap-2 font-semibold text-blue transition hover:text-gray-900"
                 >
                   Meet {agent.firstName}
                   <ArrowRight className="h-4 w-4" />

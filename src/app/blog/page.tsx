@@ -60,7 +60,7 @@ export default function BlogPage() {
               key={post.slug}
               className="rounded-[2rem] border border-gray-100 bg-[linear-gradient(180deg,#ffffff_0%,#f8fafb_100%)] p-6 shadow-[0_20px_50px_-42px_rgba(0,32,92,0.5)]"
             >
-              <div className="flex flex-wrap items-center gap-3 text-sm text-gray-500">
+              <div className="flex flex-wrap items-center gap-3 text-sm text-gray-400">
                 <span>{new Date(post.publishedAt).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</span>
                 <span>•</span>
                 <span>{post.readingTime}</span>
@@ -76,7 +76,7 @@ export default function BlogPage() {
               </div>
               <Link
                 href={`/blog/${post.slug}`}
-                className="mt-8 inline-flex items-center gap-2 font-semibold text-blue transition hover:text-navy"
+                className="mt-8 inline-flex items-center gap-2 font-semibold text-blue transition hover:text-gray-900"
               >
                 Read article
                 <ArrowRight className="h-4 w-4" />
@@ -95,21 +95,21 @@ export default function BlogPage() {
           <div className="mt-8 grid gap-3 md:grid-cols-3">
             <Link
               href="/quote?product=home"
-              className="inline-flex items-center justify-between rounded-2xl border border-gray-200 bg-white px-5 py-4 text-sm font-bold text-navy transition hover:border-blue hover:text-blue"
+              className="inline-flex items-center justify-between rounded-2xl border border-gray-200 bg-white px-5 py-4 text-sm font-bold text-gray-900 transition hover:border-blue hover:text-blue"
             >
               Start a home or auto quote
               <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
               href="/quote?product=business"
-              className="inline-flex items-center justify-between rounded-2xl border border-gray-200 bg-white px-5 py-4 text-sm font-bold text-navy transition hover:border-blue hover:text-blue"
+              className="inline-flex items-center justify-between rounded-2xl border border-gray-200 bg-white px-5 py-4 text-sm font-bold text-gray-900 transition hover:border-blue hover:text-blue"
             >
               Review business coverage
               <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
               href="/evidence-of-insurance"
-              className="inline-flex items-center justify-between rounded-2xl border border-gray-200 bg-white px-5 py-4 text-sm font-bold text-navy transition hover:border-blue hover:text-blue"
+              className="inline-flex items-center justify-between rounded-2xl border border-gray-200 bg-white px-5 py-4 text-sm font-bold text-gray-900 transition hover:border-blue hover:text-blue"
             >
               Request proof of insurance
               <ArrowRight className="h-4 w-4" />

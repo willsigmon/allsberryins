@@ -134,13 +134,13 @@ export default function ContactPage() {
                 href={buildTrackedHref("/evidence-of-insurance", {
                   entry: "contact-page-proof",
                 })}
-                className="inline-flex items-center justify-center rounded-full border border-gray-200 px-6 py-3 text-sm font-bold text-navy transition hover:border-blue hover:text-blue"
+                className="inline-flex items-center justify-center rounded-full border border-gray-200 px-6 py-3 text-sm font-bold text-gray-900 transition hover:border-blue hover:text-blue"
               >
                 Request Proof
               </Link>
               <Link
                 href={agency.phoneHref}
-                className="inline-flex items-center justify-center rounded-full border border-gray-200 px-6 py-3 text-sm font-bold text-navy transition hover:border-blue hover:text-blue"
+                className="inline-flex items-center justify-center rounded-full border border-gray-200 px-6 py-3 text-sm font-bold text-gray-900 transition hover:border-blue hover:text-blue"
               >
                 Call {agency.phone}
               </Link>
@@ -148,7 +148,7 @@ export default function ContactPage() {
           </div>
 
           <div className="rounded-[2rem] border border-gray-100 bg-white p-6">
-            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-gray-500">
+            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-gray-400">
               Connect with us
             </p>
             <div className="mt-4 grid gap-3">
@@ -158,7 +158,7 @@ export default function ContactPage() {
                   href={item.href}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-3 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3 text-sm font-semibold text-gray-700 transition hover:border-blue hover:text-blue"
+                  className="inline-flex items-center gap-3 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3 text-sm font-semibold text-gray-600 transition hover:border-blue hover:text-blue"
                 >
                   <item.icon className="h-5 w-5" />
                   {item.label}

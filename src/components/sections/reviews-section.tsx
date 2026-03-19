@@ -17,12 +17,12 @@ export function ReviewsSection() {
           description="Real feedback from real clients across Southern California."
           align="center"
         />
-        <div className="mt-8 rounded-[2rem] border border-gray-100 bg-[linear-gradient(180deg,#ffffff_0%,#f8fafb_100%)] p-6 shadow-[0_24px_50px_-44px_rgba(0,32,92,0.45)]">
+        <div className="surface-card-strong mt-8 rounded-[2rem] border border-gray-100 p-6 shadow-[0_24px_50px_-44px_rgba(0,32,92,0.45)]">
           <div className="grid gap-6 md:grid-cols-[0.75fr_1.25fr] md:items-center">
             <div className="rounded-[1.5rem] bg-blue-light p-5 text-center md:text-left">
               <p className="text-sm font-semibold uppercase tracking-[0.28em] text-blue">Client confidence</p>
               <div className="mt-3 flex items-center justify-center gap-3 md:justify-start">
-                <span className="font-display text-4xl font-extrabold text-navy">5★</span>
+                <span className="font-display text-4xl font-extrabold text-gray-900">5★</span>
                 <div className="flex items-center gap-1 text-gold">
                   {Array.from({ length: 5 }).map((_, index) => (
                     <Star key={index} className="h-5 w-5 fill-current" />
@@ -53,7 +53,7 @@ export function ReviewsSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.25 }}
                 transition={{ duration: 0.4, ease: "easeOut", delay: index * 0.08 }}
-                className="relative w-[18.5rem] snap-start rounded-[2rem] border border-gray-100 bg-[linear-gradient(180deg,#ffffff_0%,#f8fafb_100%)] p-6 shadow-[0_24px_50px_-42px_rgba(0,32,92,0.55)] sm:w-auto"
+                className="surface-card relative flex h-full w-[18.5rem] snap-start flex-col rounded-[2rem] border border-gray-100 p-6 shadow-[0_24px_50px_-42px_rgba(0,32,92,0.55)] sm:w-auto"
               >
                 <div className="flex items-center gap-1 text-gold">
                   {Array.from({ length: 5 }).map((_, starIndex) => (
@@ -61,10 +61,10 @@ export function ReviewsSection() {
                   ))}
                 </div>
                 <Quote className="absolute right-5 top-5 h-10 w-10 text-blue/12" />
-                <p className="mt-6 text-base leading-7 text-gray-600">“{review.body}”</p>
+                <p className="mt-6 flex-1 text-base leading-7 text-gray-600">“{review.body}”</p>
                 <div className="mt-6 h-px w-full bg-gray-100" />
                 <p className="mt-4 font-display text-lg font-bold text-gray-900">{review.name}</p>
-                <p className="mt-1 text-xs font-semibold uppercase tracking-[0.24em] text-gray-500">Allsberry client</p>
+                <p className="mt-1 text-xs font-semibold uppercase tracking-[0.24em] text-gray-400">Allsberry client</p>
               </motion.article>
             ))}
           </div>
@@ -75,7 +75,7 @@ export function ReviewsSection() {
             href="https://www.google.com/search?q=Allsberry+Insurance+Agency+Corona+CA+reviews"
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2 font-semibold text-blue transition hover:text-navy"
+            className="inline-flex items-center gap-2 font-semibold text-blue transition hover:text-gray-900"
           >
             See More Reviews →
           </Link>

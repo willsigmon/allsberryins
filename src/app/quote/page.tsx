@@ -97,14 +97,14 @@ export default async function QuotePage({ searchParams }: QuotePageProps) {
                 <li>• We help compare coverage options and answer questions clearly.</li>
               </ul>
               {assignedAgent ? (
-                <div className="mt-5 rounded-2xl border border-blue/12 bg-blue-light px-4 py-3 text-sm font-semibold text-navy">
+                <div className="mt-5 rounded-2xl border border-blue/12 bg-blue-light px-4 py-3 text-sm font-semibold text-gray-900">
                   Preferred follow-up: {assignedAgent.name}
                 </div>
               ) : null}
-              <p className="mt-5 text-sm leading-7 text-gray-500">
+              <p className="mt-5 text-sm leading-7 text-gray-400">
                 Need a certificate or proof of insurance instead of a quote? Use the dedicated{" "}
                 <a
-                  className="font-semibold text-blue hover:text-navy"
+                  className="font-semibold text-blue hover:text-gray-900"
                   href={buildTrackedHref("/evidence-of-insurance", {
                     agent: assignedAgentSlug,
                     entry: entryPoint ?? (assignedAgentSlug ? "quote-page-proof-handoff" : undefined),

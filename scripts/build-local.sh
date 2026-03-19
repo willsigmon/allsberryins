@@ -10,4 +10,21 @@ if [ -z "${VERCEL:-}" ] && [ -z "${LOCAL_NEXT_DIST_DIR:-}" ]; then
   echo "Using local Next dist dir: ${LOCAL_NEXT_DIST_DIR}"
 fi
 
-exec npx next build --webpack
+TSCONFIG_PATH="$ROOT_DIR/tsconfig.json"
+TSCONFIG_BACKUP=""
+
+if [ -f "$TSCONFIG_PATH" ]; then
+  TSCONFIG_BACKUP="$(mktemp "${TMPDIR:-/tmp}/allsberry-tsconfig.XXXXXX")"
+  cp "$TSCONFIG_PATH" "$TSCONFIG_BACKUP"
+fi
+
+cleanup() {
+  if [ -n "$TSCONFIG_BACKUP" ] && [ -f "$TSCONFIG_BACKUP" ]; then
+    cp "$TSCONFIG_BACKUP" "$TSCONFIG_PATH"
+    rm -f "$TSCONFIG_BACKUP"
+  fi
+}
+
+trap cleanup EXIT
+
+npx next build --webpack

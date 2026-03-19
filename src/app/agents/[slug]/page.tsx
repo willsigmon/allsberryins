@@ -138,7 +138,7 @@ export default async function AgentPage({ params, searchParams }: AgentPageProps
                   <h1 className="font-display text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">
                     {agent.name}
                   </h1>
-                  <p className="mt-3 text-base font-semibold uppercase tracking-[0.2em] text-gray-500">
+                  <p className="mt-3 text-base font-semibold uppercase tracking-[0.2em] text-gray-400">
                     {agent.title}
                   </p>
                   <div className="mt-4 flex flex-wrap gap-2">
@@ -182,7 +182,7 @@ export default async function AgentPage({ params, searchParams }: AgentPageProps
                     key={highlight.label}
                     className="rounded-[1.5rem] border border-gray-100 bg-white px-4 py-4 shadow-[0_16px_32px_-30px_rgba(0,32,92,0.4)]"
                   >
-                    <p className="text-xs font-semibold uppercase tracking-[0.22em] text-gray-500">
+                    <p className="text-xs font-semibold uppercase tracking-[0.22em] text-gray-400">
                       {highlight.label}
                     </p>
                     <p className="mt-2 text-sm font-semibold leading-6 text-gray-900">
@@ -229,7 +229,7 @@ export default async function AgentPage({ params, searchParams }: AgentPageProps
                     />
                   </div>
                 </div>
-                <p className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-gray-500">
+                <p className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-gray-400">
                   <QrCode className="h-4 w-4 text-blue" />
                   Scan to visit my page
                 </p>

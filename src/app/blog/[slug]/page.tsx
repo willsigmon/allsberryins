@@ -74,7 +74,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         <Link href="/blog" className="text-sm font-semibold uppercase tracking-[0.24em] text-blue">
           Back to Blog
         </Link>
-        <div className="mt-6 flex flex-wrap items-center gap-3 text-sm text-gray-500">
+        <div className="mt-6 flex flex-wrap items-center gap-3 text-sm text-gray-400">
           <span>{new Date(post.publishedAt).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</span>
           <span>•</span>
           <span>{post.readingTime}</span>
@@ -117,21 +117,21 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           <div className="mt-8 grid gap-3 md:grid-cols-3">
             <Link
               href="/quote?product=home"
-              className="inline-flex items-center justify-between rounded-2xl border border-gray-200 bg-white px-5 py-4 text-sm font-bold text-navy transition hover:border-blue hover:text-blue"
+              className="inline-flex items-center justify-between rounded-2xl border border-gray-200 bg-white px-5 py-4 text-sm font-bold text-gray-900 transition hover:border-blue hover:text-blue"
             >
               Start a quote
               <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
               href="/contact"
-              className="inline-flex items-center justify-between rounded-2xl border border-gray-200 bg-white px-5 py-4 text-sm font-bold text-navy transition hover:border-blue hover:text-blue"
+              className="inline-flex items-center justify-between rounded-2xl border border-gray-200 bg-white px-5 py-4 text-sm font-bold text-gray-900 transition hover:border-blue hover:text-blue"
             >
               Talk to the team
               <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
               href="/evidence-of-insurance"
-              className="inline-flex items-center justify-between rounded-2xl border border-gray-200 bg-white px-5 py-4 text-sm font-bold text-navy transition hover:border-blue hover:text-blue"
+              className="inline-flex items-center justify-between rounded-2xl border border-gray-200 bg-white px-5 py-4 text-sm font-bold text-gray-900 transition hover:border-blue hover:text-blue"
             >
               Request proof
               <ArrowRight className="h-4 w-4" />

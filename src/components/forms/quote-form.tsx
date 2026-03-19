@@ -127,7 +127,7 @@ export function QuoteForm({
           aria-describedby={errors.products ? `${formId}-products-error` : undefined}
           className="min-w-0"
         >
-          <legend className="text-sm font-semibold uppercase tracking-[0.22em] text-gray-500">
+          <legend className="text-sm font-semibold uppercase tracking-[0.22em] text-gray-400">
             Products
           </legend>
           <div className="mt-3 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
@@ -146,13 +146,13 @@ export function QuoteForm({
                   role="checkbox"
                   aria-checked={selected}
                   onClick={() => toggleProduct(productSlug)}
-                  className={cn(
-                    "rounded-2xl border px-4 py-3 text-left text-sm font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2",
-                    selected
-                      ? "border-blue bg-blue-light text-navy"
-                      : "border-gray-200 text-gray-600 hover:border-blue/45 hover:text-navy",
-                  )}
-                >
+                    className={cn(
+                      "rounded-2xl border px-4 py-3 text-left text-sm font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2",
+                      selected
+                        ? "border-blue bg-blue-light text-gray-900"
+                        : "border-gray-200 text-gray-600 hover:border-blue/45 hover:text-gray-900",
+                    )}
+                  >
                   {product.shortName}
                 </button>
               );
@@ -315,7 +315,7 @@ export function QuoteForm({
         </Field>
 
         <div className="grid gap-4 sm:grid-cols-[1fr_auto] sm:items-center">
-          <p className="text-sm leading-7 text-gray-500">
+          <p className="text-sm leading-7 text-gray-400">
             We only ask for the basics up front so we can follow up quickly without making the quote process feel heavy.
           </p>
           <button

@@ -84,6 +84,12 @@ export type HomePageFaq = {
   answer: string;
 };
 
+export type CarrierPartner = {
+  name: string;
+  domain: string;
+  logoSrc: string;
+};
+
 export const agency = {
   name: "Allsberry Insurance Agency",
   fullName: "Allsberry Insurance Agency Inc",
@@ -389,28 +395,72 @@ export const reviews = [
   },
 ] as const;
 
-export const carrierPartners = [
-  { name: "Farmers", domain: "farmers.com" },
-  { name: "Travelers", domain: "travelers.com" },
-  { name: "The Hartford", domain: "thehartford.com" },
-  { name: "Progressive", domain: "progressive.com" },
-  { name: "Liberty Mutual", domain: "libertymutual.com" },
-  { name: "Chubb", domain: "chubb.com" },
-  { name: "MetLife", domain: "metlife.com" },
-  { name: "Zurich", domain: "zurichna.com" },
-  { name: "Nationwide", domain: "nationwide.com" },
-  { name: "Safeco", domain: "safeco.com" },
-  { name: "Foremost", domain: "foremostinsurance.com" },
-  { name: "Bristol West", domain: "bristolwest.com" },
-  { name: "National General", domain: "nationalgeneral.com" },
-  { name: "Hagerty", domain: "hagerty.com" },
-  { name: "SageSure", domain: "sagesure.com" },
-  { name: "Prudential", domain: "prudential.com" },
-  { name: "AmTrust", domain: "amtrustfinancial.com" },
-  { name: "Protective", domain: "protective.com" },
-  { name: "Markel", domain: "markel.com" },
-  { name: "Mutual of Omaha", domain: "mutualofomaha.com" },
-] as const;
+export const carrierPartners: CarrierPartner[] = [
+  { name: "Farmers", domain: "farmers.com", logoSrc: "/media/carriers/farmers.png" },
+  { name: "Travelers", domain: "travelers.com", logoSrc: "/media/carriers/travelers.png" },
+  {
+    name: "The Hartford",
+    domain: "thehartford.com",
+    logoSrc: "/media/carriers/the-hartford.png",
+  },
+  {
+    name: "Progressive",
+    domain: "progressive.com",
+    logoSrc: "/media/carriers/progressive.png",
+  },
+  {
+    name: "Liberty Mutual",
+    domain: "libertymutual.com",
+    logoSrc: "/media/carriers/liberty-mutual.png",
+  },
+  { name: "Chubb", domain: "chubb.com", logoSrc: "/media/carriers/chubb.png" },
+  { name: "MetLife", domain: "metlife.com", logoSrc: "/media/carriers/metlife.png" },
+  { name: "Zurich", domain: "zurichna.com", logoSrc: "/media/carriers/zurich.png" },
+  {
+    name: "Nationwide",
+    domain: "nationwide.com",
+    logoSrc: "/media/carriers/nationwide.png",
+  },
+  { name: "Safeco", domain: "safeco.com", logoSrc: "/media/carriers/safeco.png" },
+  {
+    name: "Foremost",
+    domain: "foremostinsurance.com",
+    logoSrc: "/media/carriers/foremost.png",
+  },
+  {
+    name: "Bristol West",
+    domain: "bristolwest.com",
+    logoSrc: "/media/carriers/bristol-west.png",
+  },
+  {
+    name: "National General",
+    domain: "nationalgeneral.com",
+    logoSrc: "/media/carriers/national-general.png",
+  },
+  { name: "Hagerty", domain: "hagerty.com", logoSrc: "/media/carriers/hagerty.png" },
+  { name: "SageSure", domain: "sagesure.com", logoSrc: "/media/carriers/sagesure.png" },
+  {
+    name: "Prudential",
+    domain: "prudential.com",
+    logoSrc: "/media/carriers/prudential.png",
+  },
+  {
+    name: "AmTrust",
+    domain: "amtrustfinancial.com",
+    logoSrc: "/media/carriers/amtrust.png",
+  },
+  {
+    name: "Protective",
+    domain: "protective.com",
+    logoSrc: "/media/carriers/protective.png",
+  },
+  { name: "Markel", domain: "markel.com", logoSrc: "/media/carriers/markel.png" },
+  {
+    name: "Mutual of Omaha",
+    domain: "mutualofomaha.com",
+    logoSrc: "/media/carriers/mutual-of-omaha.png",
+  },
+];
 
 export const carrierAccessStat = 200;
 

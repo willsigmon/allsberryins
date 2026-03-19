@@ -152,13 +152,13 @@ export function AttributionWorkbench({ agents }: AttributionWorkbenchProps) {
               type="button"
               onClick={downloadWorkbook}
               disabled={!workbookExport}
-              className="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white px-4 py-2.5 text-sm font-semibold text-gray-700 transition hover:border-blue hover:text-blue disabled:cursor-not-allowed disabled:opacity-60"
+              className="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white px-4 py-2.5 text-sm font-semibold text-gray-600 transition hover:border-blue hover:text-blue disabled:cursor-not-allowed disabled:opacity-60"
             >
               <Download className="h-4 w-4" />
               Download JSON
             </button>
             {statusMessage ? (
-              <p className="text-sm font-medium text-gray-500" role="status" aria-live="polite">
+              <p className="text-sm font-medium text-gray-400" role="status" aria-live="polite">
                 {statusMessage}
               </p>
             ) : null}
@@ -184,7 +184,7 @@ export function AttributionWorkbench({ agents }: AttributionWorkbenchProps) {
           </div>
 
           <div className="mt-6 rounded-[1.5rem] border border-gray-100 bg-gray-50 px-4 py-4">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gray-500">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gray-400">
               QA checklist
             </p>
             <ul className="mt-3 grid gap-2 text-sm leading-6 text-gray-600 sm:grid-cols-2">
@@ -345,7 +345,7 @@ function DebugTile({
 }) {
   return (
     <div className="rounded-[1.5rem] border border-gray-100 bg-gray-50 px-4 py-4">
-      <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gray-500">{label}</p>
+      <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gray-400">{label}</p>
       <pre
         className={`mt-2 whitespace-pre-wrap break-words text-sm leading-6 text-gray-900 ${mono ? "font-mono" : "font-semibold"}`}
       >
@@ -394,7 +394,7 @@ function LinkRow({
           </a>
         </div>
       </div>
-      <p className="mt-3 break-all text-xs leading-6 text-gray-500">{value}</p>
+      <p className="mt-3 break-all text-xs leading-6 text-gray-400">{value}</p>
     </div>
   );
 }

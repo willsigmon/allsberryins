@@ -1,23 +1,21 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 
 import { SectionHeading } from "@/components/ui/section-heading";
 import { carrierAccessStat, carrierPartners } from "@/lib/site-data";
 
-function carrierBadge(name: string) {
-  return name
-    .split(/\s+/)
-    .filter(Boolean)
-    .slice(0, 2)
-    .map((part) => part[0]?.toUpperCase() ?? "")
-    .join("");
-}
-
 const row1 = carrierPartners.slice(0, 10);
 const row2 = carrierPartners.slice(10);
 
-function MarqueeRow({ carriers, reverse = false }: { carriers: readonly { readonly name: string; readonly domain: string }[]; reverse?: boolean }) {
+function MarqueeRow({
+  carriers,
+  reverse = false,
+}: {
+  carriers: typeof carrierPartners;
+  reverse?: boolean;
+}) {
   const doubled = [...carriers, ...carriers];
   return (
     <div className="flex overflow-hidden">
@@ -30,12 +28,18 @@ function MarqueeRow({ carriers, reverse = false }: { carriers: readonly { readon
         {doubled.map((carrier, index) => (
           <div
             key={`${carrier.name}-${index}`}
-            className="flex shrink-0 items-center gap-3 rounded-2xl border border-gray-100 bg-[linear-gradient(135deg,#f8fafb_0%,#ffffff_100%)] px-5 py-3.5 shadow-[0_4px_20px_-12px_rgba(0,32,92,0.15)] transition hover:border-blue/30 hover:shadow-[0_8px_30px_-10px_rgba(0,102,179,0.25)]"
+            className="surface-card flex h-[5.25rem] shrink-0 items-center gap-3 rounded-2xl border border-gray-100 px-5 py-3.5 shadow-[0_4px_20px_-12px_rgba(0,32,92,0.15)] transition hover:border-blue/30 hover:shadow-[0_8px_30px_-10px_rgba(0,102,179,0.25)]"
           >
-            <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-blue-light text-xs font-bold tracking-[0.18em] text-blue">
-              {carrierBadge(carrier.name)}
+            <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-gray-200 bg-[rgba(255,255,255,0.96)] p-2 shadow-sm">
+              <Image
+                src={carrier.logoSrc}
+                alt={`${carrier.name} logo`}
+                width={44}
+                height={44}
+                className="h-full w-full object-contain"
+              />
             </div>
-            <span className="text-base font-semibold text-gray-700 whitespace-nowrap">
+            <span className="whitespace-nowrap text-base font-semibold text-gray-900">
               {carrier.name}
             </span>
           </div>
@@ -47,7 +51,7 @@ function MarqueeRow({ carriers, reverse = false }: { carriers: readonly { readon
 
 export function CarrierLogosSection() {
   return (
-    <section className="bg-white py-20 sm:py-24 overflow-hidden">
+    <section className="overflow-hidden bg-white py-20 sm:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           eyebrow="Carrier access"

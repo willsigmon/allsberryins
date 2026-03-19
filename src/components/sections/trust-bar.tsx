@@ -58,7 +58,7 @@ export function TrustBar() {
             </div>
             <div className="text-left">
               <p className="text-sm font-bold text-white/90">{stat.unit}</p>
-              <p className="text-xs text-white/55">{stat.label}</p>
+              <p className="text-xs text-white/72">{stat.label}</p>
             </div>
           </motion.div>
         ))}

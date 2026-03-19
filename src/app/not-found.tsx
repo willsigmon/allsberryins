@@ -18,7 +18,7 @@ export default function NotFound() {
           </Link>
           <Link
             href="/quote"
-            className="inline-flex items-center justify-center rounded-full border border-gray-200 px-6 py-3 text-base font-bold text-navy transition hover:border-blue hover:text-blue"
+            className="inline-flex items-center justify-center rounded-full border border-gray-200 px-6 py-3 text-base font-bold text-gray-900 transition hover:border-blue hover:text-blue"
           >
             Start a Quote
           </Link>

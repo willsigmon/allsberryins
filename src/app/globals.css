@@ -20,11 +20,19 @@
     radial-gradient(circle_at_top_left, rgba(0, 32, 92, 0.08), transparent 32%);
   --panel-gradient: linear-gradient(180deg, #ffffff 0%, #eef6fd 100%);
   --surface-gradient: linear-gradient(180deg, #ffffff 0%, #f8fafb 100%);
+  --surface-card: linear-gradient(180deg, #ffffff 0%, #f8fafb 100%);
+  --surface-card-strong: linear-gradient(180deg, #ffffff 0%, #eef6fd 100%);
+  --surface-muted: #f8fafb;
+  --section-glow: radial-gradient(circle_at_top, rgba(0, 102, 179, 0.12), transparent 55%);
+  --brand-stripe: linear-gradient(90deg, #00205c 0%, #0066b3 70%, #da291c 100%);
+  --warm-accent: #c2610c;
+  --warm-accent-soft: #fef3e8;
   --agent-shell-gradient: linear-gradient(145deg, #0b2f72 0%, #0e4b94 48%, #dcecff 100%);
   --elevated-shell-gradient: linear-gradient(160deg, #f8fafb 0%, #e8f0f8 100%);
 }
 
 :root[data-theme="dark"] {
+  --blue: #7fc9ff;
   --blue-light: #122340;
   --white: #091220;
   --gray-50: #0f1728;
@@ -39,6 +47,13 @@
     radial-gradient(circle_at_top_left, rgba(255, 255, 255, 0.05), transparent 32%);
   --panel-gradient: linear-gradient(180deg, #0d1728 0%, #13223b 100%);
   --surface-gradient: linear-gradient(180deg, #0f1728 0%, #112038 100%);
+  --surface-card: linear-gradient(180deg, #101a2b 0%, #17253a 100%);
+  --surface-card-strong: linear-gradient(180deg, #111c2f 0%, #1a2c47 100%);
+  --surface-muted: #0b1320;
+  --section-glow: radial-gradient(circle_at_top, rgba(93, 167, 223, 0.18), transparent 55%);
+  --brand-stripe: linear-gradient(90deg, #5da7df 0%, #7fc9ff 56%, #f38b82 100%);
+  --warm-accent: #f3bf7a;
+  --warm-accent-soft: #342311;
   --agent-shell-gradient: linear-gradient(145deg, #102d63 0%, #0b3c7c 48%, #1d4d91 100%);
   --elevated-shell-gradient: linear-gradient(160deg, #0d1728 0%, #132540 100%);
 }
@@ -213,4 +228,26 @@ textarea {
   );
   background-size: 400% 400%;
   animation: mesh-shift 18s ease infinite;
+}
+
+.surface-card {
+  background-color: var(--white);
+  background-image: var(--surface-card);
+}
+
+.surface-card-strong {
+  background-color: var(--white);
+  background-image: var(--surface-card-strong);
+}
+
+.section-muted-bg {
+  background-color: var(--surface-muted);
+}
+
+.section-glow {
+  background-image: var(--section-glow);
+}
+
+.brand-stripe {
+  background-image: var(--brand-stripe);
 }

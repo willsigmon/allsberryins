@@ -92,7 +92,7 @@ export function EvidenceRequestForm({
     <div className="rounded-[2rem] border border-gray-100 bg-white p-6 shadow-[0_28px_70px_-50px_rgba(0,32,92,0.5)] sm:p-8">
       <form className="grid gap-6" onSubmit={onSubmit} noValidate>
         {initialAudience ? (
-          <div className="rounded-2xl border border-blue/12 bg-blue-light px-4 py-3 text-sm font-semibold text-navy">
+          <div className="rounded-2xl border border-blue/12 bg-blue-light px-4 py-3 text-sm font-semibold text-gray-900">
             Request context: {initialAudience}
           </div>
         ) : null}
@@ -242,7 +242,7 @@ export function EvidenceRequestForm({
         />
 
         <div className="grid gap-4 sm:grid-cols-[1fr_auto] sm:items-center">
-          <p className="text-sm leading-7 text-gray-500">
+          <p className="text-sm leading-7 text-gray-400">
             This request is built for certificates, proof of coverage, and time-sensitive lender or escrow follow-up.
           </p>
           <button

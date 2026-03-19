@@ -10,7 +10,7 @@ import { commercialProducts, personalProducts } from "@/lib/site-data";
 
 export function ProductGridSection() {
   return (
-    <section className="bg-gray-50 py-20 sm:py-24" id="products">
+    <section className="section-muted-bg py-20 sm:py-24" id="products">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           eyebrow="Coverage lines"
@@ -48,9 +48,9 @@ function ProductCategory({
     ? "Commercial coverage built for payroll, property, liability, vehicles, and the realities of running a business."
     : "Protection for homes, vehicles, and the everyday pieces of life that deserve clear coverage.";
 
-  const accentBg = isCommercial ? "bg-[#fef3e8]" : "bg-blue-light";
-  const accentText = isCommercial ? "text-[#c2610c]" : "text-blue";
-  const accentLabel = isCommercial ? "text-[#c2610c]" : "text-blue";
+  const accentBg = isCommercial ? "bg-[var(--warm-accent-soft)]" : "bg-blue-light";
+  const accentText = isCommercial ? "text-[var(--warm-accent)]" : "text-blue";
+  const accentLabel = isCommercial ? "text-[var(--warm-accent)]" : "text-blue";
   const hoverGradient = isCommercial
     ? "group-hover:bg-[linear-gradient(135deg,#d97706,#92400e)]"
     : "group-hover:bg-[linear-gradient(135deg,#0066b3,#00205c)]";
@@ -59,7 +59,7 @@ function ProductCategory({
     : "hover:border-blue hover:shadow-[0_22px_50px_-30px_rgba(0,102,179,0.35)]";
   const topBar = isCommercial
     ? "bg-[linear-gradient(90deg,#92400e_0%,#d97706_50%,#f59e0b_100%)]"
-    : "bg-[linear-gradient(90deg,#00205c_0%,#0066b3_70%,#da291c_100%)]";
+    : "brand-stripe";
 
   return (
     <div id={id} className="mt-16 first:mt-14 scroll-mt-28">
@@ -69,7 +69,7 @@ function ProductCategory({
           <p className="mt-3 text-base leading-7 text-gray-600">{description}</p>
         </div>
       </div>
-      <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+      <div className="grid auto-rows-fr gap-6 sm:grid-cols-2 xl:grid-cols-3">
         {products.map((product, index) => {
           const Icon = getIcon(product.icon);
           return (
@@ -79,10 +79,11 @@ function ProductCategory({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.18 }}
               transition={{ duration: 0.4, ease: "easeOut", delay: index * 0.06 }}
+              className="h-full"
             >
               <Link
                 href={`/quote?product=${product.slug}`}
-                className={`group relative flex h-full flex-col rounded-[2rem] border border-gray-100 bg-white p-6 shadow-[0_18px_40px_-34px_rgba(0,32,92,0.46)] transition duration-300 hover:-translate-y-1 ${hoverBorder} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2`}
+                className={`surface-card group relative flex h-full flex-col rounded-[2rem] border border-gray-100 p-6 shadow-[0_18px_40px_-34px_rgba(0,32,92,0.46)] transition duration-300 hover:-translate-y-1 ${hoverBorder} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2`}
               >
                 <div className={`absolute inset-x-0 top-0 h-1 rounded-t-[2rem] ${topBar}`} />
                 <div className={`flex h-14 w-14 items-center justify-center rounded-2xl ${accentBg} ${accentText} transition-all duration-300 ${hoverGradient} group-hover:text-white group-hover:shadow-lg group-hover:scale-110`}>

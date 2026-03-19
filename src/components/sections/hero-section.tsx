@@ -6,9 +6,6 @@ import { useRouter } from "next/navigation";
 import {
   ArrowRight,
   BadgeCheck,
-  Briefcase,
-  House,
-  KeyRound,
   Mail,
   MapPin,
   Phone,
@@ -19,12 +16,20 @@ import {
 import { useEffect, useState } from "react";
 
 import { getIcon } from "@/components/ui/icon-registry";
-import { agency, heroProductSlugs, officialProfile, products } from "@/lib/site-data";
+import { getHeroHelpContent } from "@/lib/hero-help-content";
+import {
+  agency,
+  heroProductSlugs,
+  officialProfile,
+  products,
+  type ProductSlug,
+} from "@/lib/site-data";
 import { buildTrackedHref } from "@/lib/tracking";
 import { cn } from "@/lib/utils";
 
 const heroProducts = products.filter((p) => heroProductSlugs.includes(p.slug));
 const cyclingWords = ["Home", "Auto", "Life", "Business"] as const;
+const heroProductPreferenceKey = "allsberry-hero-product-usage";
 const supportModes = [
   {
     id: "quote",
@@ -38,47 +43,54 @@ const supportModes = [
   },
 ] as const;
 
-const journeyCards = [
-  {
-    id: "home-auto-owner",
-    title: "Home / Auto Owner",
-    description:
-      "Great for policy reviews, home and auto bundles, or switching your current coverage to something cleaner.",
-    icon: House,
-    quoteHref: "/quote?product=home",
-    quoteLabel: "Start personal quote",
-    proofHref: "/evidence-of-insurance?audience=Home%20%2F%20Auto%20Owner",
-    proofLabel: "Request lender or escrow proof",
-  },
-  {
-    id: "business-owner",
-    title: "Business Owner",
-    description:
-      "Best for commercial packages, general liability, workers comp, commercial auto, or policy cleanup before growth.",
-    icon: Briefcase,
-    quoteHref: "/quote?product=business",
-    quoteLabel: "Start business quote",
-    proofHref: "/evidence-of-insurance?audience=Business%20Owner",
-    proofLabel: "Request a COI or vendor proof",
-  },
-  {
-    id: "real-estate-professional",
-    title: "Real Estate Professional",
-    description:
-      "Helpful for closings, lender coordination, escrow timelines, mortgagee updates, and proof-of-coverage follow-up.",
-    icon: KeyRound,
-    quoteHref: "/quote?product=other",
-    quoteLabel: "Start real-estate referral intake",
-    proofHref: "/evidence-of-insurance?audience=Real%20Estate%20Professional",
-    proofLabel: "Request closing or escrow proof",
-  },
-] as const;
-
 type SupportMode = (typeof supportModes)[number]["id"];
+
+function readHeroProductUsage() {
+  if (typeof window === "undefined") {
+    return {} as Partial<Record<ProductSlug, number>>;
+  }
+
+  try {
+    const raw = window.localStorage.getItem(heroProductPreferenceKey);
+
+    if (!raw) {
+      return {} as Partial<Record<ProductSlug, number>>;
+    }
+
+    const parsed = JSON.parse(raw) as Partial<Record<ProductSlug, number>>;
+
+    return typeof parsed === "object" && parsed ? parsed : {};
+  } catch {
+    return {} as Partial<Record<ProductSlug, number>>;
+  }
+}
+
+function rememberHeroProductSelection(productSlug: ProductSlug) {
+  if (typeof window === "undefined") {
+    return;
+  }
+
+  const usage = readHeroProductUsage();
+  usage[productSlug] = (usage[productSlug] ?? 0) + 1;
+  window.localStorage.setItem(heroProductPreferenceKey, JSON.stringify(usage));
+}
+
+function getPreferredHeroProduct() {
+  const usage = readHeroProductUsage();
+
+  return heroProducts.reduce<ProductSlug>((currentBest, product) => {
+    const currentCount = usage[currentBest] ?? 0;
+    const nextCount = usage[product.slug] ?? 0;
+
+    return nextCount > currentCount ? product.slug : currentBest;
+  }, heroProducts[0]?.slug ?? "home");
+}
 
 export function HeroSection() {
   const router = useRouter();
-  const [selectedProduct, setSelectedProduct] = useState(heroProducts[0]?.slug ?? "home");
+  const [selectedProduct, setSelectedProduct] = useState<ProductSlug>(
+    heroProducts[0]?.slug ?? "home",
+  );
   const [zipCode, setZipCode] = useState("");
   const [wordIndex, setWordIndex] = useState(0);
   const [supportMode, setSupportMode] = useState<SupportMode>("quote");
@@ -91,15 +103,37 @@ export function HeroSection() {
     return () => clearInterval(id);
   }, []);
 
-  const startQuote = () => {
-    const params = new URLSearchParams();
-    params.set("product", selectedProduct);
+  useEffect(() => {
+    const preferredProduct = getPreferredHeroProduct();
 
-    if (zipCode.trim()) {
-      params.set("zip", zipCode.trim());
+    if (preferredProduct === selectedProduct) {
+      return;
     }
 
-    router.push(`/quote?${params.toString()}`);
+    const animationFrame = window.requestAnimationFrame(() => {
+      setSelectedProduct(preferredProduct);
+    });
+
+    return () => window.cancelAnimationFrame(animationFrame);
+  }, [selectedProduct]);
+
+  const selectedProductDetails =
+    heroProducts.find((product) => product.slug === selectedProduct) ?? heroProducts[0];
+  const selectedHelpContent = getHeroHelpContent(selectedProduct);
+
+  const startQuote = () => {
+    router.push(
+      buildTrackedHref("/quote", {
+        entry: `hero-zip-${selectedProduct}`,
+        product: selectedProduct,
+        zip: zipCode.trim() || undefined,
+      }),
+    );
+  };
+
+  const handleProductSelect = (productSlug: ProductSlug) => {
+    setSelectedProduct(productSlug);
+    rememberHeroProductSelection(productSlug);
   };
 
   return (
@@ -110,7 +144,7 @@ export function HeroSection() {
       />
 
       <div className="relative mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8 lg:pb-16">
-        <div className="inline-flex items-center gap-2 rounded-full border border-blue/10 bg-white/90 px-4 py-2 text-sm font-semibold text-navy shadow-sm">
+        <div className="inline-flex items-center gap-2 rounded-full border border-blue/10 bg-white/90 px-4 py-2 text-sm font-semibold text-gray-900 shadow-sm">
           <ShieldCheck className="h-4 w-4 text-blue" />
           Serving families and businesses across Southern California
         </div>
@@ -132,15 +166,15 @@ export function HeroSection() {
             Tell us what you need and we will guide you to the right coverage.
           </p>
           <div className="flex flex-wrap gap-3">
-            <div className="inline-flex items-center gap-2 rounded-full border border-gray-100 bg-white px-4 py-2 text-sm font-semibold text-navy shadow-sm">
+            <div className="inline-flex items-center gap-2 rounded-full border border-gray-100 bg-white px-4 py-2 text-sm font-semibold text-gray-900 shadow-sm">
               <Sparkles className="h-4 w-4 text-blue" />
               SoCal families & businesses
             </div>
-            <div className="inline-flex items-center gap-2 rounded-full border border-gold/20 bg-white px-4 py-2 text-sm font-semibold text-navy shadow-sm">
+            <div className="inline-flex items-center gap-2 rounded-full border border-gold/20 bg-white px-4 py-2 text-sm font-semibold text-gray-900 shadow-sm">
               <Star className="h-4 w-4 fill-gold text-gold" />
               Fast follow-up
             </div>
-            <div className="inline-flex items-center gap-2 rounded-full border border-gray-100 bg-white px-4 py-2 text-sm font-semibold text-navy shadow-sm">
+            <div className="inline-flex items-center gap-2 rounded-full border border-gray-100 bg-white px-4 py-2 text-sm font-semibold text-gray-900 shadow-sm">
               <BadgeCheck className="h-4 w-4 text-blue" />
               Flexible coverage
             </div>
@@ -158,12 +192,12 @@ export function HeroSection() {
                     key={product.slug}
                     type="button"
                     aria-pressed={isActive}
-                    onClick={() => setSelectedProduct(product.slug)}
+                    onClick={() => handleProductSelect(product.slug)}
                     className={cn(
                       "inline-flex items-center gap-2 rounded-full border px-4 py-2.5 text-sm font-semibold transition-all duration-200",
                       isActive
                         ? "border-blue bg-navy text-white shadow-[0_8px_24px_-10px_rgba(0,32,92,0.6)]"
-                        : "border-gray-200 bg-white text-gray-700 hover:border-blue hover:text-blue",
+                        : "border-gray-200 bg-white text-gray-600 hover:border-blue hover:text-blue",
                     )}
                   >
                     <Icon className="h-4 w-4" />
@@ -172,19 +206,23 @@ export function HeroSection() {
                 );
               })}
             </div>
-            <p className="mt-5 max-w-xl text-base leading-7 text-gray-500">
-              These shortcuts prefill the quote form. Use them if you already know the coverage line you want to start with.
+            <p className="mt-5 max-w-2xl text-base leading-7 text-gray-400">
+              These shortcuts now drive the panel below too, and this browser will drift toward the
+              product people click most so the hero lands on the likeliest next step.
             </p>
 
-            <div className="mt-8 rounded-[2rem] border border-gray-100 bg-white/95 p-5 shadow-[0_20px_60px_-42px_rgba(0,32,92,0.22)]">
+            <div className="surface-card-strong mt-8 rounded-[2rem] border border-gray-100 p-5 shadow-[0_20px_60px_-42px_rgba(0,32,92,0.22)]">
               <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
                 <div>
                   <p className="text-sm font-semibold uppercase tracking-[0.22em] text-blue">
                     How can we help?
                   </p>
                   <h2 className="mt-3 font-display text-3xl font-extrabold text-gray-900">
-                    Start with the path that fits your situation.
+                    {selectedHelpContent.headline}
                   </h2>
+                  <p className="mt-3 max-w-2xl text-base leading-7 text-gray-600">
+                    {selectedHelpContent.description}
+                  </p>
                 </div>
                 <fieldset>
                   <legend className="sr-only">Choose the type of help you need</legend>
@@ -206,12 +244,12 @@ export function HeroSection() {
                           className={cn(
                             "rounded-[1.4rem] border px-4 py-3 text-left transition",
                             active
-                              ? "border-blue bg-blue-light text-navy shadow-[0_18px_36px_-28px_rgba(0,102,179,0.3)]"
-                              : "border-gray-200 bg-white text-gray-600 hover:border-blue/35 hover:text-navy",
+                              ? "border-blue bg-blue-light text-gray-900 shadow-[0_18px_36px_-28px_rgba(0,102,179,0.3)]"
+                              : "border-gray-200 bg-white text-gray-600 hover:border-blue/35 hover:text-gray-900",
                           )}
                         >
                           <span className="block text-sm font-bold">{mode.label}</span>
-                          <span className="mt-1 block text-xs leading-5 text-gray-500">
+                          <span className="mt-1 block text-xs leading-5 text-gray-400">
                             {mode.description}
                           </span>
                         </button>
@@ -221,18 +259,38 @@ export function HeroSection() {
                 </fieldset>
               </div>
 
-              <ul className="mt-6 grid gap-4 md:grid-cols-3" role="list">
-                {journeyCards.map((card) => {
-                  const Icon = card.icon;
-                  const href = supportMode === "quote" ? card.quoteHref : card.proofHref;
-                  const ctaLabel =
-                    supportMode === "quote" ? card.quoteLabel : card.proofLabel;
+              <div className="mt-5 rounded-[1.5rem] border border-blue/10 bg-blue-light p-4">
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue">
+                  {selectedProductDetails?.shortName ?? "Coverage"} quick starts
+                </p>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {selectedHelpContent.quickReasons.map((reason) => (
+                    <span
+                      key={reason}
+                      className="rounded-full border border-white/12 bg-white/70 px-3 py-1.5 text-xs font-semibold text-gray-900"
+                    >
+                      {reason}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <ul className="mt-6 grid auto-rows-fr gap-4 md:grid-cols-3" role="list">
+                {selectedHelpContent.cards.map((card) => {
+                  const Icon = getIcon(card.icon);
+                  const action = supportMode === "quote" ? card.quote : card.proof;
+                  const href = buildTrackedHref(action.href, {
+                    audience: action.audience,
+                    entry: action.entry,
+                    product: action.product ?? selectedProduct,
+                  });
+                  const ctaLabel = action.label;
 
                   return (
                     <li key={card.id}>
                       <Link
                         href={href}
-                        className="group block rounded-[1.8rem] border border-gray-100 bg-[linear-gradient(180deg,var(--white)_0%,var(--gray-50)_100%)] p-5 shadow-[0_18px_44px_-36px_rgba(0,32,92,0.38)] transition hover:-translate-y-1 hover:border-blue/30 hover:shadow-[0_24px_50px_-34px_rgba(0,102,179,0.3)]"
+                        className="surface-card group flex h-full flex-col rounded-[1.8rem] border border-gray-100 p-5 shadow-[0_18px_44px_-36px_rgba(0,32,92,0.38)] transition hover:-translate-y-1 hover:border-blue/30 hover:shadow-[0_24px_50px_-34px_rgba(0,102,179,0.3)]"
                       >
                         <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-light text-blue">
                           <Icon className="h-6 w-6" />
@@ -240,8 +298,10 @@ export function HeroSection() {
                         <h3 className="mt-5 font-display text-2xl font-bold text-gray-900">
                           {card.title}
                         </h3>
-                        <p className="mt-3 text-sm leading-7 text-gray-600">{card.description}</p>
-                        <div className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-blue transition group-hover:gap-3">
+                        <p className="mt-3 flex-1 text-sm leading-7 text-gray-600">
+                          {card.description}
+                        </p>
+                        <div className="mt-6 inline-flex items-center gap-2 pt-1 text-sm font-semibold text-blue transition group-hover:gap-3">
                           {ctaLabel}
                           <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                         </div>
@@ -250,6 +310,29 @@ export function HeroSection() {
                   );
                 })}
               </ul>
+
+              <div className="mt-5 grid gap-3 lg:grid-cols-[1.15fr_0.85fr]">
+                <div className="rounded-[1.5rem] border border-gray-100 bg-white/70 p-4">
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue">
+                    Most common next step
+                  </p>
+                  <p className="mt-3 text-sm leading-7 text-gray-600">
+                    {selectedHelpContent.helperText}
+                  </p>
+                </div>
+                <div className="surface-card rounded-[1.5rem] border border-gray-100 p-4">
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue">
+                    Selected line
+                  </p>
+                  <p className="mt-3 text-sm leading-7 text-gray-600">
+                    We&apos;ll keep the quote flow centered on{" "}
+                    <span className="font-semibold text-gray-900">
+                      {selectedProductDetails?.name ?? "the selected coverage"}
+                    </span>{" "}
+                    unless one of the tailored cards above intentionally routes to a better-fit intake.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -346,7 +429,7 @@ export function HeroSection() {
                         agent: "erin",
                         entry: "hero-leadership-card",
                       })}
-                      className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2.5 text-sm font-bold text-navy transition hover:bg-blue-light"
+                      className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2.5 text-sm font-bold text-gray-900 transition hover:bg-blue-light"
                     >
                       Meet Erin
                       <ArrowRight className="h-4 w-4" />
@@ -363,7 +446,7 @@ export function HeroSection() {
               </div>
             </div>
 
-            <div className="mt-5 rounded-[2rem] border border-gray-100 bg-white p-5 shadow-[0_20px_60px_-42px_rgba(0,32,92,0.6)]">
+            <div className="surface-card mt-5 rounded-[2rem] border border-gray-100 p-5 shadow-[0_20px_60px_-42px_rgba(0,32,92,0.6)]">
               <div className="flex flex-col gap-3 sm:flex-row sm:items-end">
                 <label className="grid flex-1 gap-2 text-sm font-semibold text-gray-900">
                   ZIP Code
@@ -387,11 +470,16 @@ export function HeroSection() {
               <div className="mt-3 flex flex-col gap-2 text-sm font-medium text-blue sm:flex-row sm:items-center sm:justify-between">
                 <p className="inline-flex items-center gap-2">
                   <BadgeCheck className="h-4 w-4" />
-                  Savings Tip: Save more when you bundle!
+                  {selectedProductDetails?.shortName ?? "Coverage"} shoppers often save more when they
+                  bundle.
                 </p>
                 <Link
-                  href="/evidence-of-insurance"
-                  className="inline-flex items-center gap-2 font-semibold text-blue transition hover:text-navy"
+                  href={buildTrackedHref("/evidence-of-insurance", {
+                    audience: selectedHelpContent.cards[0]?.proof.audience,
+                    entry: `hero-proof-inline-${selectedProduct}`,
+                    product: selectedProduct,
+                  })}
+                  className="inline-flex items-center gap-2 font-semibold text-blue transition hover:text-gray-900"
                 >
                   <Mail className="h-4 w-4" />
                   Need proof instead?

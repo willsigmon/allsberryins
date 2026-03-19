@@ -108,11 +108,11 @@ export default async function EvidenceOfInsurancePage({
                 <li>• Include any loan, property, or certificate notes you already have.</li>
               </ul>
               {assignedAgent ? (
-                <div className="mt-5 rounded-2xl border border-blue/12 bg-blue-light px-4 py-3 text-sm font-semibold text-navy">
+                <div className="mt-5 rounded-2xl border border-blue/12 bg-blue-light px-4 py-3 text-sm font-semibold text-gray-900">
                   Preferred follow-up: {assignedAgent.name}
                 </div>
               ) : null}
-              <p className="mt-5 text-sm font-semibold text-navy">
+              <p className="mt-5 text-sm font-semibold text-gray-900">
                 Need to call instead? {agency.phone}
               </p>
             </div>

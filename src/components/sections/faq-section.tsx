@@ -48,14 +48,14 @@ export function FaqSection() {
             <div className="mt-8 grid gap-3">
               <Link
                 href="/quote?product=business"
-                className="inline-flex items-center justify-between rounded-2xl border border-gray-200 bg-white px-5 py-4 text-sm font-bold text-navy transition hover:border-blue hover:text-blue"
+                className="inline-flex items-center justify-between rounded-2xl border border-gray-200 bg-white px-5 py-4 text-sm font-bold text-gray-900 transition hover:border-blue hover:text-blue"
               >
                 Start a quote
                 <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
                 href="/evidence-of-insurance"
-                className="inline-flex items-center justify-between rounded-2xl border border-gray-200 bg-white px-5 py-4 text-sm font-bold text-navy transition hover:border-blue hover:text-blue"
+                className="inline-flex items-center justify-between rounded-2xl border border-gray-200 bg-white px-5 py-4 text-sm font-bold text-gray-900 transition hover:border-blue hover:text-blue"
               >
                 Request proof of insurance
                 <ArrowRight className="h-4 w-4" />

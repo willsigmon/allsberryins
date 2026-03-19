@@ -58,7 +58,7 @@ export function PageFaqSection({
                 <Link
                   key={cta.href}
                   href={cta.href}
-                  className="inline-flex items-center justify-between rounded-2xl border border-gray-200 bg-white px-5 py-4 text-sm font-bold text-navy transition hover:border-blue hover:text-blue"
+                  className="inline-flex items-center justify-between rounded-2xl border border-gray-200 bg-white px-5 py-4 text-sm font-bold text-gray-900 transition hover:border-blue hover:text-blue"
                 >
                   {cta.label}
                   <ArrowRight className="h-4 w-4" />
