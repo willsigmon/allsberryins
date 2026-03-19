@@ -8,6 +8,7 @@ import { createPageMetadata } from "@/lib/metadata";
 import { getAgentBySlug } from "@/lib/site-data";
 import { buildTrackedHref, normalizeAgentSlug } from "@/lib/tracking";
 import { createBreadcrumbSchema, organizationSchema } from "@/lib/seo";
+import { absoluteUrl } from "@/lib/utils";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Get a Quote",
@@ -72,7 +73,7 @@ export default async function QuotePage({ searchParams }: QuotePageProps) {
     areaServed: organizationSchema.areaServed,
     availableChannel: {
       "@type": "ServiceChannel",
-      serviceUrl: "https://allsberryagency.com/quote",
+      serviceUrl: absoluteUrl("/quote"),
       servicePhone: "+1-951-739-5959",
     },
   };

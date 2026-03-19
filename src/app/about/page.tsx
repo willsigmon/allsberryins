@@ -10,6 +10,7 @@ import { createPageMetadata } from "@/lib/metadata";
 import { agency, agents, officialProfile } from "@/lib/site-data";
 import { createBreadcrumbSchema, organizationSchema } from "@/lib/seo";
 import { buildTrackedHref } from "@/lib/tracking";
+import { absoluteUrl } from "@/lib/utils";
 
 export const metadata: Metadata = createPageMetadata({
   title: "About",
@@ -48,7 +49,7 @@ export default function AboutPage() {
     "@context": "https://schema.org",
     "@type": "AboutPage",
     name: "About Allsberry Insurance Agency",
-    url: "https://allsberryagency.com/about",
+    url: absoluteUrl("/about"),
     description: aboutPageDescription,
     about: {
       "@id": organizationSchema["@id"],

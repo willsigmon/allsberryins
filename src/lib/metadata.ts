@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { absoluteUrl } from "@/lib/utils";
+import { absoluteUrl, siteUrl } from "@/lib/utils";
 
 const defaultDescription =
   "Allsberry Insurance Agency provides personalized home, auto, business, and life insurance solutions across Southern California. Based in Corona, CA. Get a free quote today.";
@@ -18,7 +18,7 @@ const defaultKeywords = [
 ];
 
 export const sharedMetadata: Metadata = {
-  metadataBase: new URL("https://allsberryagency.com"),
+  metadataBase: new URL(siteUrl),
   title: {
     default: "Allsberry Insurance Agency | Corona, CA",
     template: "%s | Allsberry Insurance Agency | Corona, CA",

@@ -1,3 +1,5 @@
+import { siteUrl } from "@/lib/utils";
+
 export type ProductSlug =
   | "home"
   | "auto"
@@ -103,7 +105,7 @@ export const agency = {
   },
   founded: 1994,
   erinSince: 2009,
-  domain: "https://allsberryagency.com",
+  domain: siteUrl,
   geo: {
     latitude: 33.88454,
     longitude: -117.56837,

@@ -9,6 +9,7 @@ import { createPageMetadata } from "@/lib/metadata";
 import { agency } from "@/lib/site-data";
 import { createBreadcrumbSchema, organizationSchema } from "@/lib/seo";
 import { buildTrackedHref } from "@/lib/tracking";
+import { absoluteUrl } from "@/lib/utils";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Contact",
@@ -62,7 +63,7 @@ export default function ContactPage() {
     "@context": "https://schema.org",
     "@type": "ContactPage",
     name: "Contact Allsberry Insurance Agency",
-    url: "https://allsberryagency.com/contact",
+    url: absoluteUrl("/contact"),
     description:
       "Call, email, or visit Allsberry Insurance Agency in Corona, CA for quote help, policy reviews, and proof-of-insurance requests.",
     mainEntity: {

@@ -8,6 +8,7 @@ import { createPageMetadata } from "@/lib/metadata";
 import { createBreadcrumbSchema, organizationSchema } from "@/lib/seo";
 import { agency, getAgentBySlug } from "@/lib/site-data";
 import { buildTrackedHref, normalizeAgentSlug } from "@/lib/tracking";
+import { absoluteUrl } from "@/lib/utils";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Proof of Insurance",
@@ -81,7 +82,7 @@ export default async function EvidenceOfInsurancePage({
     areaServed: organizationSchema.areaServed,
     availableChannel: {
       "@type": "ServiceChannel",
-      serviceUrl: "https://allsberryagency.com/evidence-of-insurance",
+      serviceUrl: absoluteUrl("/evidence-of-insurance"),
       servicePhone: "+1-951-739-5959",
     },
   };

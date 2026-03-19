@@ -1,5 +1,6 @@
 import type { Agent } from "@/lib/site-data";
 import { agents } from "@/lib/site-data";
+import { siteUrl } from "@/lib/utils";
 
 export type SiteLeadsConfig = {
   labelId: string;
@@ -267,7 +268,7 @@ export function buildTrackedHref(
   pathname: string,
   params: Record<string, string | undefined>,
 ) {
-  const url = new URL(pathname, "https://allsberryagency.com");
+  const url = new URL(pathname, siteUrl);
 
   Object.entries(params).forEach(([key, value]) => {
     if (value) {
