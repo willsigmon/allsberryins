@@ -60,6 +60,9 @@ function ProductCategory({
   const topBar = isCommercial
     ? "bg-[linear-gradient(90deg,#92400e_0%,#d97706_50%,#f59e0b_100%)]"
     : "brand-stripe";
+  const cardPanelClassName = isCommercial
+    ? "bg-[image:var(--commercial-panel-gradient)]"
+    : "bg-[image:var(--personal-panel-gradient)]";
 
   return (
     <div id={id} className="mt-16 first:mt-14 scroll-mt-28">
@@ -83,9 +86,9 @@ function ProductCategory({
             >
               <Link
                 href={`/quote?product=${product.slug}`}
-                className={`surface-card group relative flex h-full flex-col rounded-[2rem] border border-gray-100 p-6 shadow-[0_18px_40px_-34px_rgba(0,32,92,0.46)] transition duration-300 hover:-translate-y-1 ${hoverBorder} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2`}
+                className={`group relative flex h-full flex-col overflow-hidden rounded-[2rem] border border-gray-100 p-6 pt-8 shadow-[0_18px_40px_-34px_rgba(0,32,92,0.46)] transition duration-300 hover:-translate-y-1 ${hoverBorder} ${cardPanelClassName} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2`}
               >
-                <div className={`absolute inset-x-0 top-0 h-1 rounded-t-[2rem] ${topBar}`} />
+                <div className={`absolute inset-x-5 top-4 h-1.5 rounded-full ${topBar}`} />
                 <div className={`flex h-14 w-14 items-center justify-center rounded-2xl ${accentBg} ${accentText} transition-all duration-300 ${hoverGradient} group-hover:text-white group-hover:shadow-lg group-hover:scale-110`}>
                   <Icon className="h-7 w-7 product-icon" />
                 </div>

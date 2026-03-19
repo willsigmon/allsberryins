@@ -13,11 +13,11 @@ import { absoluteUrl } from "@/lib/utils";
 export const metadata: Metadata = createPageMetadata({
   title: "Proof of Insurance",
   description:
-    "Request evidence of insurance, a certificate of insurance, or a mortgagee update from Allsberry Insurance Agency in Corona, CA.",
+    "Request evidence of insurance, a certificate of insurance, or a mortgagee update from Allsberry Insurance Agency across Southern California.",
   path: "/evidence-of-insurance",
   keywords: [
-    "evidence of insurance Corona CA",
-    "certificate of insurance Corona",
+    "evidence of insurance Southern California",
+    "certificate of insurance request",
     "proof of insurance request",
     "mortgagee update insurance",
     "COI request Southern California",

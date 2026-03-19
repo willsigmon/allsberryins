@@ -14,7 +14,7 @@ import { absoluteUrl } from "@/lib/utils";
 export const metadata: Metadata = createPageMetadata({
   title: "Contact",
   description:
-    "Contact Allsberry Insurance Agency in Corona, CA for home, auto, life, and business insurance guidance. Call, email, or start your quote online.",
+    "Contact Allsberry Insurance Agency for home, auto, life, and business insurance guidance across Southern California. Call, email, or start your quote online.",
   path: "/contact",
 });
 
@@ -22,9 +22,9 @@ const contactItems = [
   { title: "Call us", body: agency.phone, href: agency.phoneHref, icon: Phone },
   { title: "Email", body: agency.email, href: agency.emailHref, icon: Mail },
   {
-    title: "Visit",
-    body: `${agency.addressLine1}, ${agency.cityStateZip}`,
-    href: "https://maps.google.com/?q=355+N+Sheridan+St+Ste+100+Corona+CA+92878",
+    title: "Service area",
+    body: `Serving ${agency.serviceArea} by phone, email, and online`,
+    href: "/quote",
     icon: MapPin,
   },
   { title: "Hours", body: agency.hours, href: "/quote", icon: Clock3 },
@@ -65,7 +65,7 @@ export default function ContactPage() {
     name: "Contact Allsberry Insurance Agency",
     url: absoluteUrl("/contact"),
     description:
-      "Call, email, or visit Allsberry Insurance Agency in Corona, CA for quote help, policy reviews, and proof-of-insurance requests.",
+      "Call, email, or start online with Allsberry Insurance Agency for quote help, policy reviews, and proof-of-insurance requests across Southern California.",
     mainEntity: {
       "@id": organizationSchema["@id"],
     },

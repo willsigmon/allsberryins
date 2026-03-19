@@ -97,9 +97,10 @@ export const agency = {
   phoneHref: "tel:+19517395959",
   email: "erin@allsberryagency.com",
   emailHref: "mailto:erin@allsberryagency.com",
-  addressLine1: "355 N Sheridan St Ste 100",
-  cityStateZip: "Corona, CA 92878",
-  fullAddress: "355 N Sheridan St Ste 100, Corona, CA 92878",
+  serviceArea: "Southern California",
+  addressLine1: "By appointment only",
+  cityStateZip: "Southern California",
+  fullAddress: "Serving Southern California by phone, email, and online",
   hours: "Monday–Friday, 8:00 AM – 5:00 PM",
   licenses: "CA #0E91043, Agency #6001414",
   ownerLicense: "CA License #0E91043",
@@ -128,7 +129,7 @@ export const officialProfile = {
     alt: "Erin Allsberry, Agency Owner at Allsberry Insurance Agency",
   },
   highlights: [
-    { label: "Location", value: "Corona, CA" },
+    { label: "Service area", value: "Southern California" },
     { label: "Phone", value: agency.phone },
     { label: "Coverage", value: "Home • Auto • Business • Life" },
   ],
@@ -378,7 +379,7 @@ export const evidenceRequestTypes = [
 
 export const reviews = [
   {
-    name: "Corona, CA homeowner",
+    name: "Southern California homeowner",
     body: "Switching our homeowners coverage felt easy. The team explained everything clearly and helped us land on protection that fit our family better.",
   },
   {

@@ -20,25 +20,11 @@ export const organizationSchema = {
   foundingDate: String(agency.founded),
   areaServed: [
     "Southern California",
-    "Corona",
     "Riverside County",
     "Orange County",
     "Los Angeles County",
     "San Bernardino County",
   ],
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: agency.addressLine1,
-    addressLocality: "Corona",
-    addressRegion: "CA",
-    postalCode: "92878",
-    addressCountry: "US",
-  },
-  geo: {
-    "@type": "GeoCoordinates",
-    latitude: agency.geo.latitude,
-    longitude: agency.geo.longitude,
-  },
   contactPoint: [
     {
       "@type": "ContactPoint",

@@ -72,7 +72,7 @@ export function ReviewsSection() {
 
         <div className="mt-8 text-center">
           <Link
-            href="https://www.google.com/search?q=Allsberry+Insurance+Agency+Corona+CA+reviews"
+            href="https://www.google.com/search?q=Allsberry+Insurance+Agency+reviews"
             target="_blank"
             rel="noreferrer"
             className="inline-flex items-center gap-2 font-semibold text-blue transition hover:text-gray-900"

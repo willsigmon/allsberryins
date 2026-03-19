@@ -32,9 +32,9 @@ export async function generateMetadata({ params }: AgentPageProps): Promise<Meta
 
   return createPageMetadata({
     title: agent.name,
-    description: `${agent.name}, ${agent.title} at Allsberry Insurance Agency. Based in Corona, CA, serving Southern California. Contact ${agent.firstName} for personalized insurance guidance.`,
+    description: `${agent.name}, ${agent.title} at Allsberry Insurance Agency, serving Southern California. Contact ${agent.firstName} for personalized insurance guidance.`,
     path: `/agents/${agent.slug}`,
-    keywords: [agent.name, agent.title, "Southern California insurance agent", "Corona insurance agent"],
+    keywords: [agent.name, agent.title, "Southern California insurance agent", "personalized insurance guidance"],
   });
 }
 
@@ -90,7 +90,7 @@ export default async function AgentPage({ params, searchParams }: AgentPageProps
     },
     {
       label: "Office",
-      value: agency.fullAddress,
+      value: `Serving ${agency.serviceArea}`,
     },
     {
       label: "Mobile-first flow",

@@ -3,25 +3,25 @@ import type { Metadata } from "next";
 import { absoluteUrl, siteUrl } from "@/lib/utils";
 
 const defaultDescription =
-  "Allsberry Insurance Agency provides personalized home, auto, business, and life insurance solutions across Southern California. Based in Corona, CA. Get a free quote today.";
+  "Allsberry Insurance Agency provides personalized home, auto, business, and life insurance solutions across Southern California. Get a free quote today.";
 
 const defaultKeywords = [
-  "insurance agency Corona CA",
-  "home insurance Corona",
-  "auto insurance Corona",
-  "Farmers Insurance agent Corona",
+  "insurance agency Southern California",
+  "home insurance Southern California",
+  "auto insurance Southern California",
+  "personalized insurance agency",
   "business insurance Southern California",
-  "life insurance Corona CA",
-  "certificate of insurance Corona",
+  "life insurance Southern California",
+  "certificate of insurance request",
   "evidence of insurance request",
-  "commercial insurance Corona CA",
+  "commercial insurance Southern California",
 ];
 
 export const sharedMetadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Allsberry Insurance Agency | Corona, CA",
-    template: "%s | Allsberry Insurance Agency | Corona, CA",
+    default: "Allsberry Insurance Agency | Southern California",
+    template: "%s | Allsberry Insurance Agency | Southern California",
   },
   description: defaultDescription,
   keywords: defaultKeywords,
@@ -41,7 +41,7 @@ export const sharedMetadata: Metadata = {
   },
   category: "Insurance",
   openGraph: {
-    title: "Allsberry Insurance Agency | Corona, CA",
+    title: "Allsberry Insurance Agency | Southern California",
     description: defaultDescription,
     url: absoluteUrl(),
     siteName: "Allsberry Insurance Agency",
@@ -52,13 +52,13 @@ export const sharedMetadata: Metadata = {
         url: absoluteUrl("/opengraph-image"),
         width: 1200,
         height: 630,
-        alt: "Allsberry Insurance Agency in Corona, California",
+        alt: "Allsberry Insurance Agency serving Southern California",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Allsberry Insurance Agency | Corona, CA",
+    title: "Allsberry Insurance Agency | Southern California",
     description: defaultDescription,
     images: [absoluteUrl("/twitter-image")],
   },
@@ -80,7 +80,7 @@ export function createPageMetadata(options: {
       canonical: path,
     },
     openGraph: {
-      title: `${title} | Allsberry Insurance Agency | Corona, CA`,
+      title: `${title} | Allsberry Insurance Agency | Southern California`,
       description,
       url: absoluteUrl(path),
       images: [
@@ -88,12 +88,12 @@ export function createPageMetadata(options: {
           url: absoluteUrl("/opengraph-image"),
           width: 1200,
           height: 630,
-          alt: "Allsberry Insurance Agency in Corona, California",
+          alt: "Allsberry Insurance Agency serving Southern California",
         },
       ],
     },
     twitter: {
-      title: `${title} | Allsberry Insurance Agency | Corona, CA`,
+      title: `${title} | Allsberry Insurance Agency | Southern California`,
       description,
       images: [absoluteUrl("/twitter-image")],
     },

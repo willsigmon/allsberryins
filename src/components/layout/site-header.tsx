@@ -14,7 +14,6 @@ export function SiteHeader() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [resolvedTheme, setResolvedTheme] = useState<"light" | "dark">("light");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 80);
@@ -22,46 +21,21 @@ export function SiteHeader() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
-  useEffect(() => {
-    const syncTheme = () => {
-      setResolvedTheme(document.documentElement.dataset.theme === "dark" ? "dark" : "light");
-    };
-
-    syncTheme();
-    window.addEventListener("themechange", syncTheme as EventListener);
-
-    return () => window.removeEventListener("themechange", syncTheme as EventListener);
-  }, []);
-
-  const solidHeader = pathname !== "/" || scrolled || menuOpen;
-  const shouldUseLightChrome = solidHeader || resolvedTheme === "dark";
-  const phoneClassName = shouldUseLightChrome
-    ? "border-white/18 text-white hover:border-white/35 hover:bg-white/8"
-    : "border-navy/10 bg-white/85 text-navy hover:border-blue/35 hover:text-blue";
-  const menuButtonClassName = shouldUseLightChrome
-    ? "border-white/18 text-white"
-    : "border-navy/10 bg-white/85 text-navy shadow-sm";
-  const themeButtonClassName = shouldUseLightChrome
-    ? "border-white/18 text-white hover:border-white/35 hover:bg-white/8 focus-visible:ring-white focus-visible:ring-offset-navy"
-    : "border-navy/10 bg-white/85 text-navy shadow-sm hover:border-blue/35 hover:text-blue focus-visible:ring-blue focus-visible:ring-offset-white";
-  const logoSrc = shouldUseLightChrome
-    ? "/media/brand/logos/allsberry-starlight.png"
-    : "/media/brand/logos/allsberry-deep-blue.png";
+  const elevatedHeader = pathname !== "/" || scrolled || menuOpen;
 
   return (
     <header
       className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-all duration-300",
-        solidHeader
-          ? "bg-navy/95 shadow-[0_20px_45px_-28px_rgba(0,32,92,0.55)] backdrop-blur"
-          : "bg-transparent",
+        "fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-navy/94 backdrop-blur transition-all duration-300",
+        elevatedHeader
+          ? "shadow-[0_20px_45px_-28px_rgba(0,32,92,0.55)]"
+          : "shadow-[0_18px_34px_-32px_rgba(0,32,92,0.35)]",
       )}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center" aria-label="Allsberry Insurance Agency home">
           <Image
-            src={logoSrc}
+            src="/media/brand/logos/allsberry-starlight.png"
             alt="Allsberry Insurance Agency logo"
             width={260}
             height={86}
@@ -77,9 +51,7 @@ export function SiteHeader() {
               href={item.href}
               className={cn(
                 "text-sm font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
-                shouldUseLightChrome
-                  ? "text-white/92 hover:text-white focus-visible:ring-white focus-visible:ring-offset-navy"
-                  : "text-navy/86 hover:text-blue focus-visible:ring-blue focus-visible:ring-offset-white",
+                "text-white/88 hover:text-white focus-visible:ring-white focus-visible:ring-offset-navy",
               )}
             >
               {item.label}
@@ -88,12 +60,12 @@ export function SiteHeader() {
         </nav>
 
         <div className="hidden items-center gap-3 md:flex">
-          <ThemeToggle className={themeButtonClassName} />
+          <ThemeToggle />
           <Link
             href={agency.phoneHref}
             className={cn(
               "inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold transition",
-              phoneClassName,
+              "border-white/18 text-white hover:border-white/35 hover:bg-white/8",
             )}
           >
             <Phone className="h-4 w-4" />
@@ -109,7 +81,7 @@ export function SiteHeader() {
 
         <button
           type="button"
-          className={cn("inline-flex h-11 w-11 items-center justify-center rounded-full border md:hidden", menuButtonClassName)}
+          className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/18 text-white md:hidden"
           aria-expanded={menuOpen}
           aria-controls="mobile-nav"
           aria-label={menuOpen ? "Close menu" : "Open menu"}

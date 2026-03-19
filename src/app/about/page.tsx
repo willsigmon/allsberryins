@@ -15,12 +15,12 @@ import { absoluteUrl } from "@/lib/utils";
 export const metadata: Metadata = createPageMetadata({
   title: "About",
   description:
-    "Learn more about Allsberry Insurance Agency, our roots in Corona, CA, and the team helping Southern California families and businesses protect what matters most.",
+    "Learn more about Allsberry Insurance Agency and the team helping Southern California families and businesses protect what matters most.",
   path: "/about",
 });
 
 const aboutPageDescription =
-  "Learn more about Allsberry Insurance Agency, our roots in Corona, CA, and the team helping Southern California families and businesses protect what matters most.";
+  "Learn more about Allsberry Insurance Agency and the team helping Southern California families and businesses protect what matters most.";
 
 const aboutPageFaqs: Array<{ question: string; answer: string }> = [
   {
@@ -81,8 +81,8 @@ export default function AboutPage() {
               Local guidance, clean communication, and coverage that fits real life.
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-gray-600">
-              Allsberry Insurance Agency has served Southern California since 1994, rooted in Corona, CA. Erin
-              has led the agency since 2009 with a simple belief: insurance should feel tailored,
+              Allsberry Insurance Agency has served Southern California since 1994. Erin has led
+              the agency since 2009 with a simple belief: insurance should feel tailored,
               understandable, and genuinely helpful.
             </p>
             <div className="mt-8 grid gap-4 sm:grid-cols-3">
