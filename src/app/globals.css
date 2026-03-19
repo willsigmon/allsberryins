@@ -137,6 +137,201 @@ textarea {
   background: rgba(93, 167, 223, 0.34);
 }
 
+/*
+  Dark-mode contrast guardrails:
+  We intentionally remap the `white` token to a dark surface so cards can theme
+  automatically, but that means utilities like `text-white`, `border-white/20`,
+  and `bg-white/8` become unreadable on genuinely dark shells. These overrides
+  restore literal white for on-dark text, borders, overlays, and focus rings.
+*/
+:root[data-theme="dark"] .text-white {
+  color: rgb(255 255 255) !important;
+}
+
+:root[data-theme="dark"] .text-white\/90 {
+  color: rgb(255 255 255 / 0.9) !important;
+}
+
+:root[data-theme="dark"] .text-white\/88 {
+  color: rgb(255 255 255 / 0.88) !important;
+}
+
+:root[data-theme="dark"] .text-white\/86 {
+  color: rgb(255 255 255 / 0.86) !important;
+}
+
+:root[data-theme="dark"] .text-white\/82 {
+  color: rgb(255 255 255 / 0.82) !important;
+}
+
+:root[data-theme="dark"] .text-white\/80 {
+  color: rgb(255 255 255 / 0.8) !important;
+}
+
+:root[data-theme="dark"] .text-white\/78 {
+  color: rgb(255 255 255 / 0.78) !important;
+}
+
+:root[data-theme="dark"] .text-white\/75 {
+  color: rgb(255 255 255 / 0.75) !important;
+}
+
+:root[data-theme="dark"] .text-white\/74 {
+  color: rgb(255 255 255 / 0.74) !important;
+}
+
+:root[data-theme="dark"] .text-white\/72 {
+  color: rgb(255 255 255 / 0.72) !important;
+}
+
+:root[data-theme="dark"] .text-white\/70 {
+  color: rgb(255 255 255 / 0.7) !important;
+}
+
+:root[data-theme="dark"] .text-white\/62 {
+  color: rgb(255 255 255 / 0.62) !important;
+}
+
+:root[data-theme="dark"] .text-white\/60 {
+  color: rgb(255 255 255 / 0.6) !important;
+}
+
+:root[data-theme="dark"] .text-white\/55 {
+  color: rgb(255 255 255 / 0.55) !important;
+}
+
+:root[data-theme="dark"] .hover\:text-white:hover {
+  color: rgb(255 255 255) !important;
+}
+
+:root[data-theme="dark"] .border-white {
+  border-color: rgb(255 255 255) !important;
+}
+
+:root[data-theme="dark"] .border-white\/10 {
+  border-color: rgb(255 255 255 / 0.1) !important;
+}
+
+:root[data-theme="dark"] .border-white\/12 {
+  border-color: rgb(255 255 255 / 0.12) !important;
+}
+
+:root[data-theme="dark"] .border-white\/14 {
+  border-color: rgb(255 255 255 / 0.14) !important;
+}
+
+:root[data-theme="dark"] .border-white\/15 {
+  border-color: rgb(255 255 255 / 0.15) !important;
+}
+
+:root[data-theme="dark"] .border-white\/18 {
+  border-color: rgb(255 255 255 / 0.18) !important;
+}
+
+:root[data-theme="dark"] .border-white\/20 {
+  border-color: rgb(255 255 255 / 0.2) !important;
+}
+
+:root[data-theme="dark"] .border-white\/24 {
+  border-color: rgb(255 255 255 / 0.24) !important;
+}
+
+:root[data-theme="dark"] .border-white\/28 {
+  border-color: rgb(255 255 255 / 0.28) !important;
+}
+
+:root[data-theme="dark"] .border-white\/30 {
+  border-color: rgb(255 255 255 / 0.3) !important;
+}
+
+:root[data-theme="dark"] .border-white\/35 {
+  border-color: rgb(255 255 255 / 0.35) !important;
+}
+
+:root[data-theme="dark"] .hover\:border-white\/22:hover {
+  border-color: rgb(255 255 255 / 0.22) !important;
+}
+
+:root[data-theme="dark"] .hover\:border-white\/25:hover {
+  border-color: rgb(255 255 255 / 0.25) !important;
+}
+
+:root[data-theme="dark"] .hover\:border-white\/30:hover {
+  border-color: rgb(255 255 255 / 0.3) !important;
+}
+
+:root[data-theme="dark"] .hover\:border-white\/35:hover {
+  border-color: rgb(255 255 255 / 0.35) !important;
+}
+
+:root[data-theme="dark"] .bg-white\/5 {
+  background-color: rgb(255 255 255 / 0.05) !important;
+}
+
+:root[data-theme="dark"] .bg-white\/6 {
+  background-color: rgb(255 255 255 / 0.06) !important;
+}
+
+:root[data-theme="dark"] .bg-white\/8 {
+  background-color: rgb(255 255 255 / 0.08) !important;
+}
+
+:root[data-theme="dark"] .bg-white\/9 {
+  background-color: rgb(255 255 255 / 0.09) !important;
+}
+
+:root[data-theme="dark"] .bg-white\/10 {
+  background-color: rgb(255 255 255 / 0.1) !important;
+}
+
+:root[data-theme="dark"] .bg-white\/12 {
+  background-color: rgb(255 255 255 / 0.12) !important;
+}
+
+:root[data-theme="dark"] .bg-white\/14 {
+  background-color: rgb(255 255 255 / 0.14) !important;
+}
+
+:root[data-theme="dark"] .bg-white\/70 {
+  background-color: rgb(255 255 255 / 0.7) !important;
+}
+
+:root[data-theme="dark"] .bg-white\/85 {
+  background-color: rgb(255 255 255 / 0.85) !important;
+}
+
+:root[data-theme="dark"] .bg-white\/90 {
+  background-color: rgb(255 255 255 / 0.9) !important;
+}
+
+:root[data-theme="dark"] .bg-white\/95 {
+  background-color: rgb(255 255 255 / 0.95) !important;
+}
+
+:root[data-theme="dark"] .hover\:bg-white\/8:hover {
+  background-color: rgb(255 255 255 / 0.08) !important;
+}
+
+:root[data-theme="dark"] .hover\:bg-white\/9:hover {
+  background-color: rgb(255 255 255 / 0.09) !important;
+}
+
+:root[data-theme="dark"] .hover\:bg-white\/10:hover {
+  background-color: rgb(255 255 255 / 0.1) !important;
+}
+
+:root[data-theme="dark"] .focus-visible\:ring-white:focus-visible {
+  --tw-ring-color: rgb(255 255 255) !important;
+}
+
+:root[data-theme="dark"] .focus-visible\:ring-white\/80:focus-visible {
+  --tw-ring-color: rgb(255 255 255 / 0.8) !important;
+}
+
+:root[data-theme="dark"] .focus-visible\:ring-offset-white:focus-visible {
+  --tw-ring-offset-color: rgb(255 255 255) !important;
+}
+
 /* ── Animated gradient shimmer border ── */
 @keyframes shimmer {
   0% { background-position: 0% 50%; }
