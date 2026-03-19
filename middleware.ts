@@ -1,0 +1,74 @@
+import type { NextRequest } from "next/server";
+import { NextResponse } from "next/server";
+
+const TEAM_ATTRIBUTION_USERNAME = process.env.TEAM_ATTRIBUTION_USERNAME;
+const TEAM_ATTRIBUTION_PASSWORD = process.env.TEAM_ATTRIBUTION_PASSWORD;
+
+function isProtectionEnabled() {
+  return Boolean(TEAM_ATTRIBUTION_USERNAME && TEAM_ATTRIBUTION_PASSWORD);
+}
+
+function unauthorizedResponse() {
+  return new NextResponse("Authentication required.", {
+    status: 401,
+    headers: {
+      "Cache-Control": "private, no-store, max-age=0",
+      "WWW-Authenticate": 'Basic realm="Allsberry Team Attribution", charset="UTF-8"',
+    },
+  });
+}
+
+function readBasicAuthCredentials(request: NextRequest) {
+  const authorizationHeader = request.headers.get("authorization");
+
+  if (!authorizationHeader) {
+    return null;
+  }
+
+  const [scheme, encodedCredentials] = authorizationHeader.split(" ");
+
+  if (scheme !== "Basic" || !encodedCredentials) {
+    return null;
+  }
+
+  try {
+    const decodedCredentials = atob(encodedCredentials);
+    const separatorIndex = decodedCredentials.indexOf(":");
+
+    if (separatorIndex === -1) {
+      return null;
+    }
+
+    return {
+      password: decodedCredentials.slice(separatorIndex + 1),
+      username: decodedCredentials.slice(0, separatorIndex),
+    };
+  } catch {
+    return null;
+  }
+}
+
+export function middleware(request: NextRequest) {
+  if (!isProtectionEnabled()) {
+    return NextResponse.next();
+  }
+
+  const credentials = readBasicAuthCredentials(request);
+
+  if (
+    !credentials ||
+    credentials.username !== TEAM_ATTRIBUTION_USERNAME ||
+    credentials.password !== TEAM_ATTRIBUTION_PASSWORD
+  ) {
+    return unauthorizedResponse();
+  }
+
+  const response = NextResponse.next();
+  response.headers.set("Cache-Control", "private, no-store, max-age=0");
+  response.headers.set("Vary", "Authorization");
+  return response;
+}
+
+export const config = {
+  matcher: ["/team-attribution/:path*"],
+};

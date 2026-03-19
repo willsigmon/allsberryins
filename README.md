@@ -76,3 +76,8 @@ npm run start
   - `SITELEADS_EMBED_CODE`
   - or `NEXT_PUBLIC_SITELEADS_EMBED_CODE`
 - `.env.example` is included for that handoff.
+- `/team-attribution` is an internal noindex workbench for tracked link QA, exports, and agent
+  handoff prep.
+- If you set both `TEAM_ATTRIBUTION_USERNAME` and `TEAM_ATTRIBUTION_PASSWORD`, middleware will
+  protect `/team-attribution` with HTTP Basic Auth. If those vars are blank, the page stays open
+  for local QA.
