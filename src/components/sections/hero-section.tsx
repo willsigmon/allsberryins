@@ -16,6 +16,11 @@ import {
 import { useEffect, useState } from "react";
 
 import { getIcon } from "@/components/ui/icon-registry";
+import {
+  buildHeroProductPreferenceCookie,
+  getMostUsedHeroProduct,
+  heroProductPreferenceStorageKey,
+} from "@/lib/hero-product-preferences";
 import { getHeroHelpContent } from "@/lib/hero-help-content";
 import {
   agency,
@@ -29,7 +34,6 @@ import { cn } from "@/lib/utils";
 
 const heroProducts = products.filter((p) => heroProductSlugs.includes(p.slug));
 const cyclingWords = ["Home", "Auto", "Life", "Business"] as const;
-const heroProductPreferenceKey = "allsberry-hero-product-usage";
 const supportModes = [
   {
     id: "quote",
@@ -51,7 +55,7 @@ function readHeroProductUsage() {
   }
 
   try {
-    const raw = window.localStorage.getItem(heroProductPreferenceKey);
+    const raw = window.localStorage.getItem(heroProductPreferenceStorageKey);
 
     if (!raw) {
       return {} as Partial<Record<ProductSlug, number>>;
@@ -72,24 +76,18 @@ function rememberHeroProductSelection(productSlug: ProductSlug) {
 
   const usage = readHeroProductUsage();
   usage[productSlug] = (usage[productSlug] ?? 0) + 1;
-  window.localStorage.setItem(heroProductPreferenceKey, JSON.stringify(usage));
+  window.localStorage.setItem(heroProductPreferenceStorageKey, JSON.stringify(usage));
+  document.cookie = buildHeroProductPreferenceCookie(getMostUsedHeroProduct(usage));
 }
 
-function getPreferredHeroProduct() {
-  const usage = readHeroProductUsage();
+type HeroSectionProps = {
+  initialProduct?: ProductSlug;
+};
 
-  return heroProducts.reduce<ProductSlug>((currentBest, product) => {
-    const currentCount = usage[currentBest] ?? 0;
-    const nextCount = usage[product.slug] ?? 0;
-
-    return nextCount > currentCount ? product.slug : currentBest;
-  }, heroProducts[0]?.slug ?? "home");
-}
-
-export function HeroSection() {
+export function HeroSection({ initialProduct }: HeroSectionProps) {
   const router = useRouter();
   const [selectedProduct, setSelectedProduct] = useState<ProductSlug>(
-    heroProducts[0]?.slug ?? "home",
+    initialProduct ?? heroProducts[0]?.slug ?? "home",
   );
   const [zipCode, setZipCode] = useState("");
   const [wordIndex, setWordIndex] = useState(0);
@@ -102,20 +100,6 @@ export function HeroSection() {
     );
     return () => clearInterval(id);
   }, []);
-
-  useEffect(() => {
-    const preferredProduct = getPreferredHeroProduct();
-
-    if (preferredProduct === selectedProduct) {
-      return;
-    }
-
-    const animationFrame = window.requestAnimationFrame(() => {
-      setSelectedProduct(preferredProduct);
-    });
-
-    return () => window.cancelAnimationFrame(animationFrame);
-  }, [selectedProduct]);
 
   const selectedProductDetails =
     heroProducts.find((product) => product.slug === selectedProduct) ?? heroProducts[0];
@@ -183,7 +167,7 @@ export function HeroSection() {
 
         <div className="mt-8 grid gap-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-start">
           <div>
-            <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 xl:grid-cols-6">
+            <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-6">
               {heroProducts.map((product) => {
                 const Icon = getIcon(product.icon);
                 const isActive = selectedProduct === product.slug;
@@ -194,14 +178,14 @@ export function HeroSection() {
                     aria-pressed={isActive}
                     onClick={() => handleProductSelect(product.slug)}
                     className={cn(
-                      "inline-flex w-full items-center justify-center gap-2 rounded-full border px-4 py-2.5 text-sm font-semibold whitespace-nowrap transition-all duration-200",
+                      "inline-flex min-w-0 w-full items-center justify-center gap-1.5 rounded-full border px-3 py-2.5 text-[13px] font-semibold whitespace-nowrap transition-[background-color,border-color,color,box-shadow] duration-150 sm:text-sm",
                       isActive
-                        ? "border-blue bg-navy text-white shadow-[0_8px_24px_-10px_rgba(0,32,92,0.6)]"
+                        ? "border-blue bg-navy text-white shadow-[0_10px_24px_-14px_rgba(0,32,92,0.55)]"
                         : "border-gray-200 bg-white text-gray-600 hover:border-blue hover:text-blue",
                     )}
                   >
                     <Icon className="h-4 w-4" />
-                    {product.shortName}
+                    <span className="truncate">{product.shortName}</span>
                   </button>
                 );
               })}
@@ -446,43 +430,65 @@ export function HeroSection() {
               </div>
             </div>
 
-            <div className="surface-card mt-5 rounded-[2rem] border border-gray-100 p-5 shadow-[0_20px_60px_-42px_rgba(0,32,92,0.6)]">
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-end">
-                <label className="grid flex-1 gap-2 text-sm font-semibold text-gray-900">
+            <div className="surface-card mt-5 rounded-[2rem] border border-gray-100 p-5 shadow-[0_20px_60px_-42px_rgba(0,32,92,0.6)] sm:p-6">
+              <div className="grid gap-3 sm:grid-cols-[minmax(0,1.45fr)_minmax(10.75rem,1fr)] sm:items-end">
+                <label className="grid gap-2.5 text-sm font-semibold text-gray-900">
                   ZIP Code
                   <input
                     value={zipCode}
                     onChange={(event) => setZipCode(event.target.value)}
                     inputMode="numeric"
                     placeholder="Enter ZIP code"
-                    className="h-13 rounded-2xl border border-gray-200 px-4 text-base text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-blue focus:ring-4 focus:ring-blue/10"
+                    className="h-14 rounded-2xl border border-gray-200 px-4 text-base text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-blue focus:ring-4 focus:ring-blue/10"
                   />
                 </label>
                 <button
                   type="button"
                   onClick={startQuote}
-                  className="cta-glow inline-flex h-13 items-center justify-center gap-2 rounded-2xl bg-red px-8 text-base font-bold text-white transition hover:bg-red-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red focus-visible:ring-offset-2"
+                  className="cta-glow inline-flex h-14 items-center justify-center gap-2 rounded-2xl bg-red px-8 text-base font-bold text-white transition hover:bg-red-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red focus-visible:ring-offset-2"
                 >
                   Start Quote
                   <ArrowRight className="h-4 w-4" />
                 </button>
               </div>
-              <div className="mt-3 flex flex-col gap-2 text-sm font-medium text-blue sm:flex-row sm:items-center sm:justify-between">
-                <p className="inline-flex items-center gap-2">
-                  <BadgeCheck className="h-4 w-4" />
-                  {selectedProductDetails?.shortName ?? "Coverage"} shoppers often save more when they
-                  bundle.
-                </p>
+              <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                <div className="rounded-[1.35rem] border border-blue/10 bg-blue-light px-4 py-3.5">
+                  <div className="flex items-start gap-3">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white text-blue shadow-sm">
+                      <BadgeCheck className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-bold text-gray-900">Bundle-friendly savings</p>
+                      <p className="mt-1 text-xs leading-5 text-gray-600 sm:text-[13px]">
+                        {selectedProductDetails?.shortName ?? "Coverage"} shoppers often save more
+                        when they bundle.
+                      </p>
+                    </div>
+                  </div>
+                </div>
                 <Link
                   href={buildTrackedHref("/evidence-of-insurance", {
                     audience: selectedHelpContent.cards[0]?.proof.audience,
                     entry: `hero-proof-inline-${selectedProduct}`,
                     product: selectedProduct,
                   })}
-                  className="inline-flex items-center gap-2 font-semibold text-blue transition hover:text-gray-900"
+                  className="group rounded-[1.35rem] border border-blue/12 bg-white/90 px-4 py-3.5 transition hover:border-blue/28 hover:bg-blue-light"
                 >
-                  <Mail className="h-4 w-4" />
-                  Need proof instead?
+                  <div className="flex items-start gap-3">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-navy text-white shadow-sm">
+                      <Mail className="h-5 w-5" />
+                    </div>
+                    <div className="min-w-0">
+                      <p className="text-sm font-bold text-gray-900">Need proof instead?</p>
+                      <p className="mt-1 text-xs leading-5 text-gray-600 sm:text-[13px]">
+                        Skip the quote path and jump straight to the documentation request flow.
+                      </p>
+                      <span className="mt-2 inline-flex items-center gap-2 text-[13px] font-semibold text-blue transition group-hover:gap-3">
+                        Start proof request
+                        <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                      </span>
+                    </div>
+                  </div>
                 </Link>
               </div>
             </div>

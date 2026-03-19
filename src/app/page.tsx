@@ -1,3 +1,5 @@
+import { cookies } from "next/headers";
+
 import { CarrierLogosSection } from "@/components/sections/carrier-logos-section";
 import { CtaBanner } from "@/components/sections/cta-banner";
 import { FaqSection } from "@/components/sections/faq-section";
@@ -8,6 +10,10 @@ import { TeamSection } from "@/components/sections/team-section";
 import { TrustBar } from "@/components/sections/trust-bar";
 import { ValuePropsSection } from "@/components/sections/value-props-section";
 import { StructuredData } from "@/components/seo/structured-data";
+import {
+  heroProductPreferenceCookieKey,
+  resolveHeroProductPreference,
+} from "@/lib/hero-product-preferences";
 import { agency, homePageFaqs, products } from "@/lib/site-data";
 import { organizationSchema } from "@/lib/seo";
 
@@ -66,11 +72,16 @@ const faqSchema = {
   })),
 };
 
-export default function Home() {
+export default async function Home() {
+  const cookieStore = await cookies();
+  const initialProduct = resolveHeroProductPreference(
+    cookieStore.get(heroProductPreferenceCookieKey)?.value,
+  );
+
   return (
     <>
       <StructuredData data={[insuranceAgencySchema, websiteSchema, faqSchema]} />
-      <HeroSection />
+      <HeroSection initialProduct={initialProduct} />
       <TrustBar />
       <ValuePropsSection />
       <ReviewsSection />
