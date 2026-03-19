@@ -1,23 +1,33 @@
-function normalizeEmbedCode(rawEmbedCode: string) {
-  const trimmed = rawEmbedCode.trim();
-  const scriptMatch = trimmed.match(/<script[^>]*>([\s\S]*?)<\/script>/i);
-
-  return scriptMatch ? scriptMatch[1] : trimmed;
-}
+import {
+  defaultSiteLeadsConfig,
+  extractSiteLeadsConfig,
+} from "@/lib/tracking";
 
 export function TrackingScripts() {
-  const embedCode =
+  const rawEmbedCode =
     process.env.SITELEADS_EMBED_CODE ?? process.env.NEXT_PUBLIC_SITELEADS_EMBED_CODE;
-
-  if (!embedCode) {
-    return null;
-  }
+  const config = rawEmbedCode
+    ? extractSiteLeadsConfig(rawEmbedCode)
+    : defaultSiteLeadsConfig;
 
   return (
     <script
-      id="siteleads-embed"
+      id="siteleads-loader"
       dangerouslySetInnerHTML={{
-        __html: normalizeEmbedCode(embedCode),
+        __html: `
+          window.__SITELEADS_CONFIG = ${JSON.stringify(config)};
+          (function (doc, tag, id, src) {
+            if (doc.getElementById(id)) {
+              return;
+            }
+
+            var js = doc.createElement(tag);
+            js.id = id;
+            js.src = src;
+            js.type = "text/javascript";
+            doc.head.appendChild(js);
+          })(document, "script", ${JSON.stringify(config.scriptId)}, ${JSON.stringify(config.scriptSrc)});
+        `,
       }}
     />
   );

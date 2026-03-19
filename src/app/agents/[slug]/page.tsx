@@ -9,6 +9,7 @@ import { AgentContactForm } from "@/components/forms/agent-contact-form";
 import { StructuredData } from "@/components/seo/structured-data";
 import { createPageMetadata } from "@/lib/metadata";
 import { agency, agents, getAgentBySlug } from "@/lib/site-data";
+import { buildTrackedHref } from "@/lib/tracking";
 import { absoluteUrl } from "@/lib/utils";
 
 export function generateStaticParams() {
@@ -17,6 +18,7 @@ export function generateStaticParams() {
 
 type AgentPageProps = {
   params: Promise<{ slug: string }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 };
 
 export async function generateMetadata({ params }: AgentPageProps): Promise<Metadata> {
@@ -35,13 +37,22 @@ export async function generateMetadata({ params }: AgentPageProps): Promise<Meta
   });
 }
 
-export default async function AgentPage({ params }: AgentPageProps) {
+export default async function AgentPage({ params, searchParams }: AgentPageProps) {
   const { slug } = await params;
+  const query = await searchParams;
   const agent = getAgentBySlug(slug);
 
   if (!agent) {
     notFound();
   }
+
+  const entryPoint = typeof query.entry === "string" ? query.entry : undefined;
+  const directPageUrl = absoluteUrl(
+    buildTrackedHref(`/agents/${agent.slug}`, {
+      agent: agent.slug,
+      entry: "qr-profile",
+    }),
+  );
 
   const personSchema = {
     "@context": "https://schema.org",
@@ -184,7 +195,11 @@ export default async function AgentPage({ params }: AgentPageProps) {
                       Scan from your phone to save {agent.firstName}&apos;s contact info instantly.
                     </p>
                     <Link
-                      href={`/quote?product=${agent.slug === "brahm" ? "business" : "home"}`}
+                      href={buildTrackedHref("/quote", {
+                        agent: agent.slug,
+                        entry: "agent-page-quote",
+                        product: agent.slug === "brahm" ? "business" : "home",
+                      })}
                       className="mt-5 inline-flex items-center gap-2 rounded-full bg-navy px-5 py-3 text-sm font-bold text-white transition hover:bg-blue"
                     >
                       Start with {agent.firstName}
@@ -193,7 +208,7 @@ export default async function AgentPage({ params }: AgentPageProps) {
                   </div>
                   <div className="rounded-[2rem] border border-gray-100 bg-gray-50 p-4">
                     <QRCodeSVG
-                      value={absoluteUrl(`/agents/${agent.slug}`)}
+                      value={directPageUrl}
                       size={160}
                       fgColor="#00205C"
                       bgColor="#ffffff"
@@ -246,7 +261,11 @@ export default async function AgentPage({ params }: AgentPageProps) {
             follow up within one business day.
           </p>
           <div className="mt-8">
-            <AgentContactForm agentName={agent.name} agentSlug={agent.slug} />
+            <AgentContactForm
+              agentName={agent.name}
+              agentSlug={agent.slug}
+              entryPoint={entryPoint}
+            />
           </div>
         </div>
       </section>

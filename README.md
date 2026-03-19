@@ -68,7 +68,11 @@ npm run start
   files from prior sessions. Vercel still uses the default build output.
 - `/api/leads` currently logs submissions and includes a TODO for AgencyZoom integration.
 - `/api/chat` currently returns placeholder text and includes a TODO for chatbot integration.
-- To inject the client tracking snippet, add the raw embed code to either:
+- The Stealth ID / SITE I.D. LEADS tracking snippet is now embedded by default.
+- The site now parses that snippet into a route-aware loader so tracking still updates on
+  Next.js client-side navigation and keeps agent/team attribution as visitors move from an
+  agent page into quote or proof-of-insurance flows.
+- To override or replace that client tracking snippet, add the raw embed code to either:
   - `SITELEADS_EMBED_CODE`
   - or `NEXT_PUBLIC_SITELEADS_EMBED_CODE`
 - `.env.example` is included for that handoff.

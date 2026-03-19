@@ -20,6 +20,7 @@ import { useEffect, useState } from "react";
 
 import { getIcon } from "@/components/ui/icon-registry";
 import { agency, heroProductSlugs, officialProfile, products } from "@/lib/site-data";
+import { buildTrackedHref } from "@/lib/tracking";
 import { cn } from "@/lib/utils";
 
 const heroProducts = products.filter((p) => heroProductSlugs.includes(p.slug));
@@ -331,7 +332,10 @@ export function HeroSection() {
 
                   <div className="mt-5 flex flex-wrap gap-3">
                     <Link
-                      href="/agents/erin"
+                      href={buildTrackedHref("/agents/erin", {
+                        agent: "erin",
+                        entry: "hero-leadership-card",
+                      })}
                       className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2.5 text-sm font-bold text-navy transition hover:bg-blue-light"
                     >
                       Meet Erin

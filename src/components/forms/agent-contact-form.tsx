@@ -8,11 +8,16 @@ import { useForm } from "react-hook-form";
 import { agentContactSchema, helpTopics, type AgentContactValues } from "@/lib/lead-schemas";
 
 type AgentContactFormProps = {
+  entryPoint?: string;
   agentName: string;
   agentSlug: string;
 };
 
-export function AgentContactForm({ agentName, agentSlug }: AgentContactFormProps) {
+export function AgentContactForm({
+  agentName,
+  agentSlug,
+  entryPoint,
+}: AgentContactFormProps) {
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const {
@@ -43,6 +48,7 @@ export function AgentContactForm({ agentName, agentSlug }: AgentContactFormProps
         },
         body: JSON.stringify({
           type: "agent-contact",
+          entryPoint,
           agentSlug,
           agentName,
           ...values,

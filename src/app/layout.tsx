@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import { DM_Sans, Plus_Jakarta_Sans } from "next/font/google";
+import { Suspense } from "react";
 import "./globals.css";
 
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
+import { TrackingPageView } from "@/components/seo/tracking-page-view";
 import { SkipLink } from "@/components/layout/skip-link";
 import { TrackingScripts } from "@/components/seo/tracking-scripts";
 import { ThemeScript } from "@/components/theme/theme-script";
@@ -38,6 +40,9 @@ export default function RootLayout({
       </head>
       <body className={`${dmSans.variable} ${plusJakartaSans.variable} bg-white font-sans text-gray-600 antialiased`}>
         <SkipLink />
+        <Suspense fallback={null}>
+          <TrackingPageView />
+        </Suspense>
         <div className="flex min-h-screen flex-col">
           <SiteHeader />
           <main id="main-content" className="flex-1">

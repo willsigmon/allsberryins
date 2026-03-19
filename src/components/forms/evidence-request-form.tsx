@@ -13,10 +13,16 @@ import { evidenceRequestTypes } from "@/lib/site-data";
 import { cn } from "@/lib/utils";
 
 type EvidenceRequestFormProps = {
+  assignedAgentSlug?: string;
+  entryPoint?: string;
   initialAudience?: string;
 };
 
-export function EvidenceRequestForm({ initialAudience }: EvidenceRequestFormProps) {
+export function EvidenceRequestForm({
+  assignedAgentSlug,
+  entryPoint,
+  initialAudience,
+}: EvidenceRequestFormProps) {
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const {
@@ -51,7 +57,9 @@ export function EvidenceRequestForm({ initialAudience }: EvidenceRequestFormProp
         },
         body: JSON.stringify({
           type: "evidence-request",
+          assignedAgentSlug,
           audience: initialAudience,
+          entryPoint,
           ...values,
         }),
       });

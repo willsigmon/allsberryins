@@ -17,11 +17,18 @@ import { cn } from "@/lib/utils";
 type QuoteProductSlug = (typeof productSelectionOptions)[number];
 
 type QuoteFormProps = {
+  assignedAgentSlug?: string;
+  entryPoint?: string;
   initialProduct?: string;
   initialZip?: string;
 };
 
-export function QuoteForm({ initialProduct, initialZip }: QuoteFormProps) {
+export function QuoteForm({
+  assignedAgentSlug,
+  entryPoint,
+  initialProduct,
+  initialZip,
+}: QuoteFormProps) {
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
@@ -73,6 +80,8 @@ export function QuoteForm({ initialProduct, initialZip }: QuoteFormProps) {
         },
         body: JSON.stringify({
           type: "quote-request",
+          assignedAgentSlug,
+          entryPoint,
           ...values,
         }),
       });

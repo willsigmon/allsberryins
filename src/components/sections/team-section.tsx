@@ -7,6 +7,7 @@ import { Handshake, Mail, Phone } from "lucide-react";
 
 import { SectionHeading } from "@/components/ui/section-heading";
 import { agents, type Agent } from "@/lib/site-data";
+import { buildTrackedHref } from "@/lib/tracking";
 import { cn } from "@/lib/utils";
 
 const accentClasses = {
@@ -95,14 +96,21 @@ export function TeamSection() {
                     Email
                   </Link>
                   <Link
-                    href={`/agents/${featuredAgent.slug}`}
+                    href={buildTrackedHref(`/agents/${featuredAgent.slug}`, {
+                      agent: featuredAgent.slug,
+                      entry: "featured-team-card",
+                    })}
                     className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-bold text-navy transition hover:bg-blue-light"
                   >
                     Meet {featuredAgent.firstName}
                     <Handshake className="h-4 w-4" />
                   </Link>
                   <Link
-                    href="/quote?product=business"
+                    href={buildTrackedHref("/quote", {
+                      agent: featuredAgent.slug,
+                      entry: "featured-team-card-quote",
+                      product: "business",
+                    })}
                     className="inline-flex items-center gap-2 rounded-full border border-white/24 px-5 py-3 text-sm font-bold text-white transition hover:bg-white/10"
                   >
                     Start a Commercial Quote
@@ -178,7 +186,10 @@ function SupportingAgentCard({ agent, index }: { agent: Agent; index: number }) 
           Email
         </Link>
         <Link
-          href={`/agents/${agent.slug}`}
+          href={buildTrackedHref(`/agents/${agent.slug}`, {
+            agent: agent.slug,
+            entry: "team-card",
+          })}
           className="inline-flex items-center gap-2 rounded-full bg-navy px-4 py-2 text-sm font-semibold text-white transition hover:bg-blue"
         >
           <Handshake className="h-4 w-4" />

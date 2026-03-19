@@ -6,6 +6,7 @@ import { ArrowRight, BadgeCheck, MapPin, ShieldCheck } from "lucide-react";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { createPageMetadata } from "@/lib/metadata";
 import { agency, agents, officialProfile } from "@/lib/site-data";
+import { buildTrackedHref } from "@/lib/tracking";
 
 export const metadata: Metadata = createPageMetadata({
   title: "About",
@@ -179,7 +180,10 @@ export default function AboutPage() {
                 </div>
                 <p className="mt-4 text-sm leading-7 text-gray-600">{agent.bio}</p>
                 <Link
-                  href={`/agents/${agent.slug}`}
+                  href={buildTrackedHref(`/agents/${agent.slug}`, {
+                    agent: agent.slug,
+                    entry: "about-team-card",
+                  })}
                   className="mt-6 inline-flex items-center gap-2 font-semibold text-blue transition hover:text-navy"
                 >
                   Meet {agent.firstName}

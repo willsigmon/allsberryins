@@ -4,7 +4,8 @@ import { EvidenceRequestForm } from "@/components/forms/evidence-request-form";
 import { StructuredData } from "@/components/seo/structured-data";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { createPageMetadata } from "@/lib/metadata";
-import { agency } from "@/lib/site-data";
+import { agency, getAgentBySlug } from "@/lib/site-data";
+import { normalizeAgentSlug } from "@/lib/tracking";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Proof of Insurance",
@@ -29,6 +30,10 @@ export default async function EvidenceOfInsurancePage({
 }: EvidencePageProps) {
   const params = await searchParams;
   const audience = typeof params.audience === "string" ? params.audience : undefined;
+  const entryPoint = typeof params.entry === "string" ? params.entry : undefined;
+  const assignedAgentSlug =
+    typeof params.agent === "string" ? normalizeAgentSlug(params.agent) : undefined;
+  const assignedAgent = assignedAgentSlug ? getAgentBySlug(assignedAgentSlug) : undefined;
 
   const faqSchema = {
     "@context": "https://schema.org",
@@ -73,12 +78,21 @@ export default async function EvidenceOfInsurancePage({
                 <li>• Add a due date if escrow or underwriting is waiting on it.</li>
                 <li>• Include any loan, property, or certificate notes you already have.</li>
               </ul>
+              {assignedAgent ? (
+                <div className="mt-5 rounded-2xl border border-blue/12 bg-blue-light px-4 py-3 text-sm font-semibold text-navy">
+                  Preferred follow-up: {assignedAgent.name}
+                </div>
+              ) : null}
               <p className="mt-5 text-sm font-semibold text-navy">
                 Need to call instead? {agency.phone}
               </p>
             </div>
           </div>
-          <EvidenceRequestForm initialAudience={audience} />
+          <EvidenceRequestForm
+            initialAudience={audience}
+            assignedAgentSlug={assignedAgentSlug}
+            entryPoint={entryPoint}
+          />
         </div>
       </section>
     </div>

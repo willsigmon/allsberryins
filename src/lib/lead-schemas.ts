@@ -30,6 +30,11 @@ const optionalMessageSchema = z
   .or(z.literal(""));
 
 const honeypotSchema = z.string().max(200).optional().or(z.literal(""));
+const optionalTrackingFieldSchema = z
+  .string()
+  .trim()
+  .max(120, "Tracking context must stay under 120 characters.")
+  .optional();
 
 export const quoteFormSchema = z
   .object({
@@ -107,17 +112,22 @@ export type EvidenceRequestValues = z.infer<typeof evidenceRequestSchema>;
 export const leadsApiSchema = z.discriminatedUnion("type", [
   z.object({
     type: z.literal("quote-request"),
+    assignedAgentSlug: optionalTrackingFieldSchema,
+    entryPoint: optionalTrackingFieldSchema,
     ...quoteFormSchema.shape,
   }),
   z.object({
     type: z.literal("agent-contact"),
+    entryPoint: optionalTrackingFieldSchema,
     agentSlug: z.string().trim().min(1),
     agentName: z.string().trim().min(1),
     ...agentContactSchema.shape,
   }),
   z.object({
     type: z.literal("evidence-request"),
+    assignedAgentSlug: optionalTrackingFieldSchema,
     audience: z.string().trim().optional(),
+    entryPoint: optionalTrackingFieldSchema,
     ...evidenceRequestSchema.shape,
   }),
 ]);
