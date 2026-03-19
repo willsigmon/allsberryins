@@ -212,7 +212,7 @@ export function HeroSection() {
             </p>
 
             <div className="surface-card-strong mt-8 rounded-[2rem] border border-gray-100 p-5 shadow-[0_20px_60px_-42px_rgba(0,32,92,0.22)]">
-              <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+              <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,24rem)] lg:items-end">
                 <div>
                   <p className="text-sm font-semibold uppercase tracking-[0.22em] text-blue">
                     How can we help?
@@ -224,7 +224,7 @@ export function HeroSection() {
                     {selectedHelpContent.description}
                   </p>
                 </div>
-                <fieldset>
+                <fieldset className="w-full">
                   <legend className="sr-only">Choose the type of help you need</legend>
                   <div
                     role="radiogroup"
@@ -242,7 +242,7 @@ export function HeroSection() {
                           aria-checked={active}
                           onClick={() => setSupportMode(mode.id)}
                           className={cn(
-                            "rounded-[1.4rem] border px-4 py-3 text-left transition",
+                            "min-h-[5.5rem] rounded-[1.4rem] border px-4 py-3 text-left transition",
                             active
                               ? "border-blue bg-blue-light text-gray-900 shadow-[0_18px_36px_-28px_rgba(0,102,179,0.3)]"
                               : "border-gray-200 bg-white text-gray-600 hover:border-blue/35 hover:text-gray-900",

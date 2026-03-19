@@ -33,23 +33,23 @@
 
 :root[data-theme="dark"] {
   --blue: #7fc9ff;
-  --blue-light: #122340;
-  --white: #091220;
-  --gray-50: #0f1728;
-  --gray-100: #172134;
-  --gray-200: #243249;
-  --gray-400: #90a2bd;
-  --gray-600: #c4d0df;
+  --blue-light: #17304f;
+  --white: #0d1828;
+  --gray-50: #132031;
+  --gray-100: #1a2a40;
+  --gray-200: #2a3d58;
+  --gray-400: #abc0da;
+  --gray-600: #d7e3f3;
   --gray-900: #f5f8ff;
-  --hero-bg: linear-gradient(180deg, #07101d 0%, #0d1a30 100%);
+  --hero-bg: linear-gradient(180deg, #0a1423 0%, #11223d 100%);
   --hero-glow:
     radial-gradient(circle_at_top_right, rgba(93, 167, 223, 0.22), transparent 34%),
     radial-gradient(circle_at_top_left, rgba(255, 255, 255, 0.05), transparent 32%);
-  --panel-gradient: linear-gradient(180deg, #0d1728 0%, #13223b 100%);
-  --surface-gradient: linear-gradient(180deg, #0f1728 0%, #112038 100%);
-  --surface-card: linear-gradient(180deg, #101a2b 0%, #17253a 100%);
-  --surface-card-strong: linear-gradient(180deg, #111c2f 0%, #1a2c47 100%);
-  --surface-muted: #0b1320;
+  --panel-gradient: linear-gradient(180deg, #132033 0%, #1c2f4a 100%);
+  --surface-gradient: linear-gradient(180deg, #152236 0%, #1a2c45 100%);
+  --surface-card: linear-gradient(180deg, #152236 0%, #1b2d46 100%);
+  --surface-card-strong: linear-gradient(180deg, #18263b 0%, #223652 100%);
+  --surface-muted: #0e1726;
   --section-glow: radial-gradient(circle_at_top, rgba(93, 167, 223, 0.18), transparent 55%);
   --brand-stripe: linear-gradient(90deg, #5da7df 0%, #7fc9ff 56%, #f38b82 100%);
   --warm-accent: #f3bf7a;
