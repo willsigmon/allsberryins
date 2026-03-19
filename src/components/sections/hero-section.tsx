@@ -212,15 +212,15 @@ export function HeroSection() {
             </p>
 
             <div className="surface-card-strong mt-6 rounded-[2rem] border border-gray-100 p-4 shadow-[0_20px_60px_-42px_rgba(0,32,92,0.22)] sm:p-5">
-              <div className="grid gap-3 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,24rem)] lg:items-end">
-                <div>
+              <div className="grid gap-3 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,24rem)] lg:items-start">
+                <div className="lg:min-h-[10.5rem]">
                   <p className="text-sm font-semibold uppercase tracking-[0.22em] text-blue">
                     How can we help?
                   </p>
-                  <h2 className="mt-2 font-display text-2xl font-extrabold text-gray-900 sm:text-[2rem]">
+                  <h2 className="mt-2 min-h-[4.75rem] font-display text-2xl font-extrabold text-gray-900 sm:text-[2rem]">
                     {selectedHelpContent.headline}
                   </h2>
-                  <p className="mt-2 max-w-2xl text-sm leading-6 text-gray-600 sm:text-[15px]">
+                  <p className="mt-2 min-h-[3.75rem] max-w-2xl text-sm leading-6 text-gray-600 sm:text-[15px]">
                     {selectedHelpContent.description}
                   </p>
                 </div>
@@ -259,7 +259,7 @@ export function HeroSection() {
                 </fieldset>
               </div>
 
-              <div className="mt-4 rounded-[1.35rem] border border-blue/10 bg-blue-light px-3.5 py-3">
+              <div className="mt-4 min-h-[5.25rem] rounded-[1.35rem] border border-blue/10 bg-blue-light px-3.5 py-3">
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue">
                   {selectedProductDetails?.shortName ?? "Coverage"} quick starts
                 </p>
@@ -290,15 +290,15 @@ export function HeroSection() {
                     <li key={card.id}>
                       <Link
                         href={href}
-                        className="surface-card group flex h-full flex-col rounded-[1.55rem] border border-gray-100 p-4 shadow-[0_18px_44px_-36px_rgba(0,32,92,0.38)] transition hover:-translate-y-1 hover:border-blue/30 hover:shadow-[0_24px_50px_-34px_rgba(0,102,179,0.3)]"
+                        className="surface-card group flex h-full min-h-[15.5rem] flex-col rounded-[1.55rem] border border-gray-100 p-4 shadow-[0_18px_44px_-36px_rgba(0,32,92,0.38)] transition hover:-translate-y-1 hover:border-blue/30 hover:shadow-[0_24px_50px_-34px_rgba(0,102,179,0.3)]"
                       >
                         <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-light text-blue">
                           <Icon className="h-5 w-5" />
                         </div>
-                        <h3 className="mt-4 font-display text-xl font-bold leading-tight text-gray-900">
+                        <h3 className="mt-4 min-h-[3.5rem] font-display text-xl font-bold leading-tight text-gray-900">
                           {card.title}
                         </h3>
-                        <p className="mt-2.5 flex-1 text-sm leading-6 text-gray-600">
+                        <p className="mt-2.5 min-h-[6.75rem] flex-1 text-sm leading-6 text-gray-600">
                           {card.description}
                         </p>
                         <div className="mt-4 inline-flex items-center gap-2 pt-1 text-[13px] font-semibold text-blue transition group-hover:gap-3">
@@ -312,7 +312,7 @@ export function HeroSection() {
               </ul>
 
               <div className="mt-4 grid gap-3 lg:grid-cols-[1.15fr_0.85fr]">
-                <div className="rounded-[1.35rem] border border-gray-100 bg-white/70 p-3.5">
+                <div className="rounded-[1.35rem] border border-gray-100 bg-white/70 p-3.5 lg:min-h-[8.25rem]">
                   <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue">
                     Most common next step
                   </p>
@@ -320,7 +320,7 @@ export function HeroSection() {
                     {selectedHelpContent.helperText}
                   </p>
                 </div>
-                <div className="surface-card rounded-[1.35rem] border border-gray-100 p-3.5">
+                <div className="surface-card rounded-[1.35rem] border border-gray-100 p-3.5 lg:min-h-[8.25rem]">
                   <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue">
                     Selected line
                   </p>
