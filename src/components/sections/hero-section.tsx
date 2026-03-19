@@ -181,9 +181,9 @@ export function HeroSection() {
           </div>
         </div>
 
-        <div className="mt-8 grid gap-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-stretch">
-          <div className="flex flex-col">
-            <div className="flex flex-wrap gap-2">
+        <div className="mt-8 grid gap-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-start">
+          <div>
+            <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 xl:grid-cols-6">
               {heroProducts.map((product) => {
                 const Icon = getIcon(product.icon);
                 const isActive = selectedProduct === product.slug;
@@ -194,7 +194,7 @@ export function HeroSection() {
                     aria-pressed={isActive}
                     onClick={() => handleProductSelect(product.slug)}
                     className={cn(
-                      "inline-flex items-center gap-2 rounded-full border px-4 py-2.5 text-sm font-semibold transition-all duration-200",
+                      "inline-flex w-full items-center justify-center gap-2 rounded-full border px-4 py-2.5 text-sm font-semibold whitespace-nowrap transition-all duration-200",
                       isActive
                         ? "border-blue bg-navy text-white shadow-[0_8px_24px_-10px_rgba(0,32,92,0.6)]"
                         : "border-gray-200 bg-white text-gray-600 hover:border-blue hover:text-blue",
@@ -211,16 +211,16 @@ export function HeroSection() {
               the coverage people use most.
             </p>
 
-            <div className="surface-card-strong mt-6 flex flex-1 flex-col rounded-[2rem] border border-gray-100 p-4 shadow-[0_20px_60px_-42px_rgba(0,32,92,0.22)] sm:p-5">
-              <div className="grid gap-3 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,24rem)] lg:items-start">
-                <div className="lg:min-h-[10.5rem]">
+            <div className="surface-card-strong mt-6 rounded-[2rem] border border-gray-100 p-4 shadow-[0_20px_60px_-42px_rgba(0,32,92,0.22)] sm:p-5">
+              <div className="grid gap-3 lg:grid-cols-[minmax(0,1fr)_minmax(16rem,17rem)] lg:items-start">
+                <div className="lg:min-h-[8.25rem]">
                   <p className="text-sm font-semibold uppercase tracking-[0.22em] text-blue">
                     How can we help?
                   </p>
-                  <h2 className="mt-2 min-h-[4.75rem] font-display text-2xl font-extrabold text-gray-900 sm:text-[2rem]">
+                  <h2 className="mt-2 min-h-[3.75rem] font-display text-2xl font-extrabold text-gray-900 sm:text-[1.9rem]">
                     {selectedHelpContent.headline}
                   </h2>
-                  <p className="mt-2 min-h-[3.75rem] max-w-2xl text-sm leading-6 text-gray-600 sm:text-[15px]">
+                  <p className="mt-2 min-h-[3.25rem] max-w-2xl text-sm leading-6 text-gray-600 sm:text-[15px]">
                     {selectedHelpContent.description}
                   </p>
                 </div>
@@ -242,7 +242,7 @@ export function HeroSection() {
                           aria-checked={active}
                           onClick={() => setSupportMode(mode.id)}
                           className={cn(
-                            "min-h-[4.75rem] rounded-[1.25rem] border px-3.5 py-2.5 text-left transition",
+                            "min-h-[4.25rem] rounded-[1.25rem] border px-3 py-2 text-left transition",
                             active
                               ? "border-blue bg-blue-light text-gray-900 shadow-[0_18px_36px_-28px_rgba(0,102,179,0.3)]"
                               : "border-gray-200 bg-white text-gray-600 hover:border-blue/35 hover:text-gray-900",
@@ -259,7 +259,7 @@ export function HeroSection() {
                 </fieldset>
               </div>
 
-              <div className="mt-4 min-h-[5.25rem] rounded-[1.35rem] border border-blue/10 bg-blue-light px-3.5 py-3">
+              <div className="mt-4 min-h-[4.5rem] rounded-[1.35rem] border border-blue/10 bg-blue-light px-3.5 py-2.5">
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue">
                   {selectedProductDetails?.shortName ?? "Coverage"} quick starts
                 </p>
@@ -290,15 +290,15 @@ export function HeroSection() {
                     <li key={card.id}>
                       <Link
                         href={href}
-                        className="surface-card group flex h-full min-h-[15.5rem] flex-col rounded-[1.55rem] border border-gray-100 p-4 shadow-[0_18px_44px_-36px_rgba(0,32,92,0.38)] transition hover:-translate-y-1 hover:border-blue/30 hover:shadow-[0_24px_50px_-34px_rgba(0,102,179,0.3)]"
+                        className="surface-card group flex h-full min-h-[14rem] flex-col rounded-[1.55rem] border border-gray-100 p-4 shadow-[0_18px_44px_-36px_rgba(0,32,92,0.38)] transition hover:-translate-y-1 hover:border-blue/30 hover:shadow-[0_24px_50px_-34px_rgba(0,102,179,0.3)]"
                       >
                         <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-light text-blue">
                           <Icon className="h-5 w-5" />
                         </div>
-                        <h3 className="mt-4 min-h-[3.5rem] font-display text-xl font-bold leading-tight text-gray-900">
+                        <h3 className="mt-4 min-h-[3rem] font-display text-xl font-bold leading-tight text-gray-900">
                           {card.title}
                         </h3>
-                        <p className="mt-2.5 min-h-[6.75rem] flex-1 text-sm leading-6 text-gray-600">
+                        <p className="mt-2.5 min-h-[5.5rem] flex-1 text-sm leading-6 text-gray-600">
                           {card.description}
                         </p>
                         <div className="mt-4 inline-flex items-center gap-2 pt-1 text-[13px] font-semibold text-blue transition group-hover:gap-3">
@@ -312,7 +312,7 @@ export function HeroSection() {
               </ul>
 
               <div className="mt-4 grid gap-3 lg:grid-cols-[1.15fr_0.85fr]">
-                <div className="rounded-[1.35rem] border border-gray-100 bg-white/70 p-3.5 lg:min-h-[8.25rem]">
+                <div className="rounded-[1.35rem] border border-gray-100 bg-white/70 p-3.5 lg:min-h-[6.5rem]">
                   <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue">
                     Most common next step
                   </p>
@@ -320,7 +320,7 @@ export function HeroSection() {
                     {selectedHelpContent.helperText}
                   </p>
                 </div>
-                <div className="surface-card rounded-[1.35rem] border border-gray-100 p-3.5 lg:min-h-[8.25rem]">
+                <div className="surface-card rounded-[1.35rem] border border-gray-100 p-3.5 lg:min-h-[6.5rem]">
                   <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue">
                     Selected line
                   </p>
@@ -336,14 +336,14 @@ export function HeroSection() {
             </div>
           </div>
 
-          <div className="relative flex flex-col lg:h-full">
+          <div className="relative">
             <div className="animate-float absolute -left-6 top-10 hidden h-24 w-24 rounded-full bg-blue/10 blur-2xl sm:block" />
             <div className="animate-float-delayed absolute -right-6 bottom-10 hidden h-28 w-28 rounded-full bg-red/12 blur-3xl sm:block" />
 
-            <div className="shimmer-border relative flex-1 overflow-hidden rounded-[2rem] p-[3px] shadow-[0_35px_90px_-48px_rgba(0,32,92,0.8)]">
-              <div className="relative h-full overflow-hidden rounded-[1.85rem] bg-[linear-gradient(145deg,#0d2f73_0%,#0066b3_55%,#dbeafe_100%)] p-5 sm:p-6">
-                <div className="relative flex h-full flex-col rounded-[1.65rem] border border-white/20 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.32),transparent_28%),linear-gradient(180deg,rgba(255,255,255,0.24),rgba(255,255,255,0.08))] p-5 text-white backdrop-blur-sm">
-                  <div className="flex items-center gap-2 rounded-full bg-white/14 px-4 py-2 text-sm font-semibold backdrop-blur-sm w-fit">
+            <div className="shimmer-border relative overflow-hidden rounded-[2rem] p-[3px] shadow-[0_35px_90px_-48px_rgba(0,32,92,0.8)]">
+              <div className="hero-profile-shell relative overflow-hidden rounded-[1.85rem] p-5 sm:p-6">
+                <div className="hero-profile-inner relative rounded-[1.65rem] border p-5 text-white backdrop-blur-sm">
+                  <div className="hero-profile-glass flex w-fit items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold backdrop-blur-sm">
                     <MapPin className="h-4 w-4" />
                     Southern California
                   </div>
@@ -376,7 +376,7 @@ export function HeroSection() {
                     {officialProfile.badges.map((badge) => (
                       <div
                         key={badge.title}
-                        className="flex items-center gap-3 rounded-[1.2rem] border border-white/14 bg-white/10 px-4 py-3 backdrop-blur"
+                        className="hero-profile-glass flex items-center gap-3 rounded-[1.2rem] border px-4 py-3 backdrop-blur"
                       >
                         <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white/95 p-1.5">
                           <Image
@@ -392,7 +392,7 @@ export function HeroSection() {
                     ))}
                   </div>
 
-                  <div className="mt-4 overflow-hidden rounded-[1.2rem] border border-white/14 bg-white/10 backdrop-blur">
+                  <div className="hero-profile-glass mt-4 overflow-hidden rounded-[1.2rem] border backdrop-blur">
                     <div className="flex items-center gap-4 p-4">
                       <div className="h-16 w-24 shrink-0 overflow-hidden rounded-xl">
                         <Image
@@ -416,14 +416,14 @@ export function HeroSection() {
                     {officialProfile.highlights.map((highlight) => (
                       <div
                         key={highlight.label}
-                        className="rounded-full border border-white/14 bg-white/8 px-3 py-1.5 text-xs font-semibold text-white/80"
+                        className="hero-profile-pill rounded-full border px-3 py-1.5 text-xs font-semibold text-white/80"
                       >
                         {highlight.value}
                       </div>
                     ))}
                   </div>
 
-                  <div className="mt-auto flex flex-wrap gap-3 pt-5">
+                  <div className="mt-5 flex flex-wrap gap-3">
                     <Link
                       href={buildTrackedHref("/agents/erin", {
                         agent: "erin",
@@ -436,7 +436,7 @@ export function HeroSection() {
                     </Link>
                     <Link
                       href={agency.phoneHref}
-                      className="inline-flex items-center gap-2 rounded-full border border-white/20 px-4 py-2.5 text-sm font-bold text-white transition hover:bg-white/10"
+                      className="hero-profile-glass inline-flex items-center gap-2 rounded-full border px-4 py-2.5 text-sm font-bold text-white transition hover:brightness-110"
                     >
                       <Phone className="h-4 w-4" />
                       Contact Erin

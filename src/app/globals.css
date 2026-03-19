@@ -30,6 +30,14 @@
   --warm-accent-soft: #fef3e8;
   --personal-panel-gradient: linear-gradient(180deg, rgba(232, 240, 248, 0.92) 0%, rgba(255, 255, 255, 0.98) 58%);
   --commercial-panel-gradient: linear-gradient(180deg, rgba(254, 243, 232, 0.9) 0%, rgba(255, 255, 255, 0.98) 58%);
+  --hero-profile-shell: linear-gradient(145deg, #0d2f73 0%, #0066b3 55%, #dbeafe 100%);
+  --hero-profile-inner:
+    radial-gradient(circle_at_top_left, rgba(255, 255, 255, 0.2), transparent 30%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.06));
+  --hero-profile-glass: rgba(255, 255, 255, 0.12);
+  --hero-profile-glass-border: rgba(255, 255, 255, 0.16);
+  --hero-profile-pill: rgba(255, 255, 255, 0.08);
+  --hero-profile-pill-border: rgba(255, 255, 255, 0.14);
   --agent-shell-gradient: linear-gradient(145deg, #0b2f72 0%, #0e4b94 48%, #dcecff 100%);
   --elevated-shell-gradient: linear-gradient(160deg, #f8fafb 0%, #e8f0f8 100%);
 }
@@ -71,6 +79,14 @@
   --warm-accent-soft: #342311;
   --personal-panel-gradient: linear-gradient(180deg, rgba(18, 49, 88, 0.94) 0%, rgba(21, 34, 54, 0.98) 58%);
   --commercial-panel-gradient: linear-gradient(180deg, rgba(64, 42, 17, 0.94) 0%, rgba(21, 34, 54, 0.98) 58%);
+  --hero-profile-shell: linear-gradient(145deg, #0a1f42 0%, #123666 52%, #17345a 100%);
+  --hero-profile-inner:
+    radial-gradient(circle_at_top_left, rgba(127, 201, 255, 0.1), transparent 34%),
+    linear-gradient(180deg, rgba(12, 28, 48, 0.84), rgba(10, 22, 38, 0.8));
+  --hero-profile-glass: rgba(10, 24, 43, 0.62);
+  --hero-profile-glass-border: rgba(127, 201, 255, 0.18);
+  --hero-profile-pill: rgba(10, 24, 43, 0.5);
+  --hero-profile-pill-border: rgba(127, 201, 255, 0.16);
   --agent-shell-gradient: linear-gradient(145deg, #102d63 0%, #0b3c7c 48%, #1d4d91 100%);
   --elevated-shell-gradient: linear-gradient(160deg, #0d1728 0%, #132540 100%);
 }
@@ -463,4 +479,23 @@ textarea {
 
 .brand-stripe {
   background-image: var(--brand-stripe);
+}
+
+.hero-profile-shell {
+  background-image: var(--hero-profile-shell);
+}
+
+.hero-profile-inner {
+  background-image: var(--hero-profile-inner);
+  border-color: var(--hero-profile-glass-border);
+}
+
+.hero-profile-glass {
+  background-color: var(--hero-profile-glass);
+  border-color: var(--hero-profile-glass-border);
+}
+
+.hero-profile-pill {
+  background-color: var(--hero-profile-pill);
+  border-color: var(--hero-profile-pill-border);
 }
