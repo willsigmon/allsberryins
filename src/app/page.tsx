@@ -1,6 +1,7 @@
 import { cookies } from "next/headers";
 
 import { CarrierLogosSection } from "@/components/sections/carrier-logos-section";
+import { CoverageEvaluationCta } from "@/components/sections/coverage-evaluation-cta";
 import { CtaBanner } from "@/components/sections/cta-banner";
 import { FaqSection } from "@/components/sections/faq-section";
 import { HeroSection } from "@/components/sections/hero-section";
@@ -24,7 +25,7 @@ const insuranceAgencySchema = {
     telephone: agency.phone,
     contactType: "customer service",
     areaServed: "Southern California",
-    availableLanguage: "English",
+    availableLanguage: ["English", "Spanish"],
   },
   slogan: "Simple. Affordable. Tailored for You.",
   knowsAbout: [
@@ -87,6 +88,7 @@ export default async function Home() {
       <ReviewsSection />
       <FaqSection />
       <ProductGridSection />
+      <CoverageEvaluationCta />
       <CarrierLogosSection />
       <TeamSection />
       <CtaBanner />
