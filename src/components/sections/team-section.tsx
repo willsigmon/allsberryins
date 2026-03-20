@@ -83,7 +83,7 @@ export function TeamSection() {
                         alt={fellow.photo.alt}
                         width={80}
                         height={80}
-                        className="h-full w-full object-cover"
+                        className="h-full w-full object-cover object-top"
                       />
                     </div>
                   ) : (
@@ -142,7 +142,7 @@ function LeadershipCard({ agent, index }: { agent: Agent; index: number }) {
               alt={agent.photo.alt}
               width={96}
               height={96}
-              className="h-full w-full object-cover"
+              className="h-full w-full object-cover object-top"
             />
           </div>
         ) : (
@@ -227,7 +227,7 @@ function TeamMemberCard({ agent, index }: { agent: Agent; index: number }) {
               alt={agent.photo.alt}
               width={64}
               height={64}
-              className="h-full w-full object-cover"
+              className="h-full w-full object-cover object-top"
             />
           </div>
         ) : (

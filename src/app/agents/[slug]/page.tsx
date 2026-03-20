@@ -125,7 +125,7 @@ export default async function AgentPage({ params, searchParams }: AgentPageProps
                       alt={agent.photo.alt}
                       width={144}
                       height={144}
-                      className="h-full w-full object-cover"
+                      className="h-full w-full object-cover object-top"
                     />
                   </div>
                 ) : (

@@ -340,7 +340,7 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
                         width={96}
                         height={96}
                         priority
-                        className="h-full w-full object-cover"
+                        className="h-full w-full object-cover object-top"
                       />
                     </div>
                     <div>
