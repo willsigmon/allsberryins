@@ -56,8 +56,8 @@ export function SiteFooter() {
             <div className="flex gap-3">
               <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-white" />
               <div>
-                <p>Serving {agency.serviceArea}</p>
-                <p>Phone, email, and online support</p>
+                <p>{agency.addressLine1}</p>
+                <p>{agency.cityStateZip}</p>
               </div>
             </div>
             <div className="flex gap-3">

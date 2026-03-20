@@ -240,9 +240,9 @@ function TeamMemberCard({ agent, index }: { agent: Agent; index: number }) {
             {agent.initials}
           </div>
         )}
-        <div>
+        <div className="min-w-0">
           <h3 className="font-display text-lg font-bold text-gray-900">{agent.name}</h3>
-          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-blue">
+          <p className="text-[11px] font-semibold text-blue">
             {agent.title}
           </p>
           {agent.languages && agent.languages.length > 1 && (
@@ -253,7 +253,7 @@ function TeamMemberCard({ agent, index }: { agent: Agent; index: number }) {
         </div>
       </div>
 
-      <p className="mt-4 flex-1 text-sm leading-7 text-gray-600">{agent.bio}</p>
+      <p className="mt-4 flex-1 text-sm leading-7 text-gray-600 line-clamp-5">{agent.bio}</p>
 
       <div className="mt-4 flex flex-wrap gap-3">
         <Link
