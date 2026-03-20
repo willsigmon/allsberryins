@@ -202,42 +202,47 @@ export default function AboutPage() {
             description="Insurance works best when you know who you are working with. Here are the people behind your coverage."
             align="center"
           />
-          <div className="mt-12 grid gap-6 lg:grid-cols-3">
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {agents.map((agent) => (
               <div
                 key={agent.slug}
-                className="rounded-[2rem] border border-gray-100 bg-white p-6 shadow-[0_18px_45px_-38px_rgba(0,32,92,0.5)]"
+                className="rounded-[1.75rem] border border-gray-100 bg-white p-5 shadow-[0_18px_45px_-38px_rgba(0,32,92,0.5)]"
               >
                 <div className="flex items-center gap-4">
                   {agent.photo ? (
-                    <div className="relative h-16 w-16 overflow-hidden rounded-full border border-white shadow-md">
+                    <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full border border-white shadow-md">
                       <Image
                         src={agent.photo.src}
                         alt={agent.photo.alt}
-                        width={64}
-                        height={64}
+                        width={56}
+                        height={56}
                         className="h-full w-full object-cover"
                       />
                     </div>
                   ) : (
-                    <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[linear-gradient(145deg,#00205c_0%,#0066b3_100%)] text-xl font-display font-extrabold text-white">
+                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[linear-gradient(145deg,#00205c_0%,#0066b3_100%)] text-lg font-display font-extrabold text-white">
                       {agent.initials}
                     </div>
                   )}
                   <div>
-                    <h2 className="font-display text-2xl font-bold text-gray-900">{agent.name}</h2>
-                    <p className="mt-1 text-sm font-semibold uppercase tracking-[0.24em] text-blue">
+                    <h2 className="font-display text-xl font-bold text-gray-900">{agent.name}</h2>
+                    <p className="text-xs font-semibold uppercase tracking-[0.24em] text-blue">
                       {agent.title}
                     </p>
+                    {agent.languages && agent.languages.length > 1 && (
+                      <p className="mt-1 text-xs font-semibold text-amber-600">
+                        Se habla Español
+                      </p>
+                    )}
                   </div>
                 </div>
-                <p className="mt-4 text-sm leading-7 text-gray-600">{agent.bio}</p>
+                <p className="mt-3 text-sm leading-7 text-gray-600 line-clamp-3">{agent.bio}</p>
                 <Link
                   href={buildTrackedHref(`/agents/${agent.slug}`, {
                     agent: agent.slug,
                     entry: "about-team-card",
                   })}
-                  className="mt-6 inline-flex items-center gap-2 font-semibold text-blue transition hover:text-gray-900"
+                  className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-blue transition hover:text-gray-900"
                 >
                   Meet {agent.firstName}
                   <ArrowRight className="h-4 w-4" />
