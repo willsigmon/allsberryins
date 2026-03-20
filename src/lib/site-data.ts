@@ -830,6 +830,33 @@ export const footerProducts = [
   { label: "Life Insurance", href: "/quote?product=life" },
 ] as const;
 
+export type Fellow = {
+  name: string;
+  firstName: string;
+  recognition: string;
+  career: string;
+  initials: string;
+  photo?: {
+    src: string;
+    alt: string;
+  };
+};
+
+export const fellowDefinition =
+  "An Allsberry Insurance Fellow is a distinguished title awarded to individuals whose contributions have left a lasting impact on our clients, our agency, and our community. This recognition is reserved for those who have demonstrated exceptional dedication to service, deep industry expertise, and a commitment to doing what's right for every client. Fellows represent the values that define Allsberry Insurance — clarity, integrity, and a forward-thinking approach to protecting what matters most. Though retired from day-to-day operations, an Allsberry Fellow remains a respected voice and trusted advisor within our organization.";
+
+export const fellows: Fellow[] = [
+  {
+    name: "Linda",
+    firstName: "Linda",
+    recognition:
+      "Recognized as an Allsberry Insurance Inc. Fellow for a career defined by trust, service, and lasting impact.",
+    career:
+      "26 years as Commercial Account Executive. The original Allsberry team member and a true cornerstone of the agency's legacy. Known as the 'Office Mom,' Linda brought kindness, wisdom, and a steady presence to every interaction.",
+    initials: "L",
+  },
+];
+
 export function getAgentBySlug(slug: string) {
   return agents.find((agent) => agent.slug === slug);
 }

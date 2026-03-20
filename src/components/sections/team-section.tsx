@@ -5,8 +5,10 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Handshake, Mail } from "lucide-react";
 
+import { Award } from "lucide-react";
+
 import { SectionHeading } from "@/components/ui/section-heading";
-import { agents, type Agent, type AgentAccent } from "@/lib/site-data";
+import { agents, fellows, fellowDefinition, type Agent, type AgentAccent } from "@/lib/site-data";
 import { buildTrackedHref } from "@/lib/tracking";
 import { cn } from "@/lib/utils";
 
@@ -51,6 +53,72 @@ export function TeamSection() {
             <TeamMemberCard key={agent.slug} agent={agent} index={index} />
           ))}
         </div>
+
+        {/* Allsberry Fellow */}
+        {fellows.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0, y: 28 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            className="mt-16"
+          >
+            <div className="mb-8 text-center">
+              <div className="mx-auto inline-flex items-center gap-2 rounded-full border border-gold/20 bg-white px-4 py-2 text-sm font-semibold uppercase tracking-[0.22em] text-gold shadow-sm">
+                <Award className="h-4 w-4" />
+                Allsberry Fellow
+              </div>
+            </div>
+
+            {fellows.map((fellow) => (
+              <div
+                key={fellow.name}
+                className="mx-auto max-w-3xl rounded-[2rem] border border-gray-100 bg-white p-8 shadow-[0_18px_45px_-38px_rgba(0,32,92,0.35)]"
+              >
+                <div className="flex flex-col items-center gap-6 text-center sm:flex-row sm:text-left">
+                  {fellow.photo ? (
+                    <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-full border-2 border-gold/30 shadow-lg">
+                      <Image
+                        src={fellow.photo.src}
+                        alt={fellow.photo.alt}
+                        width={80}
+                        height={80}
+                        className="h-full w-full object-cover"
+                      />
+                    </div>
+                  ) : (
+                    <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-full bg-[linear-gradient(145deg,#b8860b_0%,#daa520_100%)] text-2xl font-display font-extrabold text-white shadow-lg">
+                      {fellow.initials}
+                    </div>
+                  )}
+                  <div>
+                    <h3 className="font-display text-2xl font-bold text-gray-900">
+                      {fellow.name}
+                    </h3>
+                    <p className="mt-1 text-sm font-semibold uppercase tracking-[0.2em] text-gold">
+                      Allsberry Fellow
+                    </p>
+                    <p className="mt-3 text-sm leading-7 text-gray-600">
+                      {fellow.recognition}
+                    </p>
+                    <p className="mt-2 text-sm leading-7 text-gray-500">
+                      {fellow.career}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="mt-6 rounded-2xl border border-gray-100 bg-gray-50 p-5">
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gray-400">
+                    What is an Allsberry Fellow?
+                  </p>
+                  <p className="mt-2 text-sm leading-7 text-gray-500">
+                    {fellowDefinition}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </motion.div>
+        )}
       </div>
     </section>
   );
