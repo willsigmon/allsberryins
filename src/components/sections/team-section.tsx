@@ -19,6 +19,8 @@ const accentClasses: Record<AgentAccent, string> = {
   rose: "bg-[linear-gradient(145deg,#e11d48_0%,#fb7185_100%)]",
   slate: "bg-[linear-gradient(145deg,#475569_0%,#94a3b8_100%)]",
   indigo: "bg-[linear-gradient(145deg,#4338ca_0%,#818cf8_100%)]",
+  teal: "bg-[linear-gradient(145deg,#0d9488_0%,#5eead4_100%)]",
+  amber: "bg-[linear-gradient(145deg,#d97706_0%,#fbbf24_100%)]",
 };
 
 const leadershipSlugs = ["erin", "brahm"] as const;

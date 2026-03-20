@@ -53,7 +53,9 @@ export type AgentSlug =
   | "vanessa"
   | "julie"
   | "heidi"
-  | "jenn";
+  | "jenn"
+  | "jason"
+  | "anna";
 
 export type AgentAccent =
   | "blue"
@@ -63,7 +65,9 @@ export type AgentAccent =
   | "emerald"
   | "rose"
   | "slate"
-  | "indigo";
+  | "indigo"
+  | "teal"
+  | "amber";
 
 export type Agent = {
   slug: AgentSlug;
@@ -607,6 +611,40 @@ export const agents: Agent[] = [
     photo: {
       src: "/media/agents/dakota-allsberry-new.png",
       alt: "Dakota Allsberry, Licensed Insurance Agent at Allsberry Insurance Agency",
+    },
+  },
+  {
+    slug: "jason",
+    name: "Jason Allsberry",
+    firstName: "Jason",
+    title: "Licensed Insurance Agent",
+    phone: agency.phone,
+    phoneHref: agency.phoneHref,
+    email: "jason@allsberryagency.com",
+    bio: "Jason is a licensed member of the Allsberry Insurance Agency team, helping clients across Southern California with their insurance needs. Full bio coming soon.",
+    initials: "JA",
+    accent: "teal",
+    specialties: ["Home Insurance", "Auto Insurance"],
+    photo: {
+      src: "/media/agents/jason-allsberry.png",
+      alt: "Jason Allsberry, Licensed Insurance Agent at Allsberry Insurance Agency",
+    },
+  },
+  {
+    slug: "anna",
+    name: "Anna",
+    firstName: "Anna",
+    title: "Licensed Insurance Agent",
+    phone: agency.phone,
+    phoneHref: agency.phoneHref,
+    email: "anna@allsberryagency.com",
+    bio: "Anna is a licensed member of the Allsberry Insurance Agency team, dedicated to providing personalized service to clients across Southern California. Full bio coming soon.",
+    initials: "A",
+    accent: "amber",
+    specialties: ["Home Insurance", "Auto Insurance"],
+    photo: {
+      src: "/media/agents/anna.png",
+      alt: "Anna, Licensed Insurance Agent at Allsberry Insurance Agency",
     },
   },
   {
