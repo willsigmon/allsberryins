@@ -253,7 +253,17 @@ function TeamMemberCard({ agent, index }: { agent: Agent; index: number }) {
         </div>
       </div>
 
-      <p className="mt-4 flex-1 text-sm leading-7 text-gray-600 line-clamp-5">{agent.bio}</p>
+      <p className="mt-4 flex-1 text-sm leading-7 text-gray-600 line-clamp-3">{agent.bio}</p>
+
+      <Link
+        href={buildTrackedHref(`/agents/${agent.slug}`, {
+          agent: agent.slug,
+          entry: "team-card-learn-more",
+        })}
+        className="mt-2 text-sm font-semibold text-blue transition hover:text-gray-900"
+      >
+        Learn more &rarr;
+      </Link>
 
       <div className="mt-4 flex flex-wrap gap-3">
         <Link
