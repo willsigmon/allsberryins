@@ -123,9 +123,9 @@ export const agency = {
   email: "erin@allsberryagency.com",
   emailHref: "mailto:erin@allsberryagency.com",
   serviceArea: "Southern California",
-  addressLine1: "By appointment only",
-  cityStateZip: "Southern California",
-  fullAddress: "Serving Southern California by phone, email, and online",
+  addressLine1: "355 N Sheridan St, Ste 100",
+  cityStateZip: "Corona, CA 92878",
+  fullAddress: "355 N Sheridan St, Ste 100, Corona, CA 92878",
   hours: "Monday–Friday, 8:00 AM – 5:00 PM",
   licenses: "CA #0E91043, Agency #6001414",
   ownerLicense: "CA License #0E91043",
@@ -182,6 +182,13 @@ export const officialProfile = {
       image: {
         src: "/media/farmers/topper-club-award.webp",
         alt: "Topper Club Award logo from the Farmers profile",
+      },
+    },
+    {
+      title: "Agent of the Year — 6 Years Running",
+      image: {
+        src: "/media/farmers/topper-club-award.webp",
+        alt: "Agent of the Year recognition",
       },
     },
   ],
@@ -569,6 +576,7 @@ export const agents: Agent[] = [
       "Commercial Insurance",
       "Client Strategy",
       "Coverage Guidance",
+      "Financial Planning",
     ],
     license: "CA #4434320",
     photo: {
