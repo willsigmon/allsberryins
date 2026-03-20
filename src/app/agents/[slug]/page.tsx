@@ -6,6 +6,7 @@ import { ArrowRight, Mail, Phone, QrCode, ShieldCheck } from "lucide-react";
 import { QRCodeSVG } from "qrcode.react";
 
 import { AgentContactForm } from "@/components/forms/agent-contact-form";
+import { SaveContactButton } from "@/components/ui/save-contact-button";
 import { StructuredData } from "@/components/seo/structured-data";
 import { createPageMetadata } from "@/lib/metadata";
 import { agency, agents, getAgentBySlug } from "@/lib/site-data";
@@ -159,7 +160,7 @@ export default async function AgentPage({ params, searchParams }: AgentPageProps
                 <p className="mt-5 text-sm font-semibold text-blue">{agent.license}</p>
               ) : null}
 
-              <div className="mt-8 grid gap-4 sm:grid-cols-2">
+              <div className="mt-8 grid gap-4 sm:grid-cols-3">
                 <Link
                   href={phoneHref}
                   className="rounded-[1.6rem] border border-gray-200 bg-white px-5 py-4 text-sm font-semibold text-gray-900 transition hover:border-blue hover:text-blue"
@@ -174,6 +175,15 @@ export default async function AgentPage({ params, searchParams }: AgentPageProps
                   <Mail className="mb-3 h-5 w-5 text-blue" />
                   {agent.email}
                 </Link>
+                <SaveContactButton
+                  name={agent.name}
+                  phone={agent.phone}
+                  email={agent.email}
+                  title={agent.title}
+                  address="355 N Sheridan St, Ste 100, Corona, CA 92878"
+                  variant="light"
+                  className="rounded-[1.6rem] border-gray-200 bg-white px-5 py-4 text-sm"
+                />
               </div>
 
               <div className="mt-6 grid gap-3 sm:grid-cols-3">

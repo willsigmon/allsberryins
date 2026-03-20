@@ -64,12 +64,16 @@ function ProductCategory({
     ? "bg-[image:var(--commercial-panel-gradient)]"
     : "bg-[image:var(--personal-panel-gradient)]";
 
+  const wrapperClass = isCommercial
+    ? "mt-16 scroll-mt-28 -mx-4 sm:-mx-6 lg:-mx-8 rounded-[2.5rem] bg-[linear-gradient(160deg,#00205c_0%,#0a3578_55%,#143e7a_100%)] px-4 py-12 sm:px-6 lg:px-8"
+    : "mt-16 first:mt-14 scroll-mt-28";
+
   return (
-    <div id={id} className="mt-16 first:mt-14 scroll-mt-28">
+    <div id={id} className={wrapperClass}>
       <div className="mb-6 flex items-center justify-between gap-4">
         <div className="max-w-2xl">
-          <p className={`text-sm font-semibold uppercase tracking-[0.28em] ${accentLabel}`}>{title}</p>
-          <p className="mt-3 text-base leading-7 text-gray-600">{description}</p>
+          <p className={`text-sm font-semibold uppercase tracking-[0.28em] ${isCommercial ? "text-amber-400" : accentLabel}`}>{title}</p>
+          <p className={`mt-3 text-base leading-7 ${isCommercial ? "text-white/70" : "text-gray-600"}`}>{description}</p>
         </div>
       </div>
       <div className="grid auto-rows-fr gap-6 sm:grid-cols-2 xl:grid-cols-3">
@@ -86,15 +90,19 @@ function ProductCategory({
             >
               <Link
                 href={`/quote?product=${product.slug}`}
-                className={`group relative flex h-full flex-col overflow-hidden rounded-[2rem] border border-gray-100 p-6 pt-8 shadow-[0_18px_40px_-34px_rgba(0,32,92,0.46)] transition duration-300 hover:-translate-y-1 ${hoverBorder} ${cardPanelClassName} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2`}
+                className={`group relative flex h-full flex-col overflow-hidden rounded-[2rem] border p-6 pt-8 transition duration-300 hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2 ${
+                  isCommercial
+                    ? "border-white/12 bg-white/8 backdrop-blur-sm shadow-[0_18px_40px_-34px_rgba(0,0,0,0.5)] hover:border-amber-400/40 hover:shadow-[0_22px_50px_-30px_rgba(217,119,6,0.35)]"
+                    : `border-gray-100 shadow-[0_18px_40px_-34px_rgba(0,32,92,0.46)] ${hoverBorder} ${cardPanelClassName}`
+                }`}
               >
                 <div className={`absolute inset-x-5 top-4 h-1.5 rounded-full ${topBar}`} />
                 <div className={`flex h-14 w-14 items-center justify-center rounded-2xl ${accentBg} ${accentText} transition-all duration-300 ${hoverGradient} group-hover:text-white group-hover:shadow-lg group-hover:scale-110`}>
                   <Icon className="h-7 w-7 product-icon" />
                 </div>
-                <h3 className="mt-5 font-display text-2xl font-bold text-gray-900">{product.name}</h3>
-                <p className="mt-3 flex-1 text-sm leading-7 text-gray-600">{product.description}</p>
-                <div className={`mt-6 inline-flex items-center gap-2 text-sm font-semibold ${accentText} transition group-hover:gap-3`}>
+                <h3 className={`mt-5 font-display text-2xl font-bold ${isCommercial ? "text-white" : "text-gray-900"}`}>{product.name}</h3>
+                <p className={`mt-3 flex-1 text-sm leading-7 ${isCommercial ? "text-white/65" : "text-gray-600"}`}>{product.description}</p>
+                <div className={`mt-6 inline-flex items-center gap-2 text-sm font-semibold ${isCommercial ? "text-amber-400" : accentText} transition group-hover:gap-3`}>
                   Start quote
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </div>

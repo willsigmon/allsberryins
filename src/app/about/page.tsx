@@ -15,7 +15,7 @@ import { absoluteUrl } from "@/lib/utils";
 export const metadata: Metadata = createPageMetadata({
   title: "About",
   description:
-    "Learn more about Allsberry Insurance Agency and the team helping Southern California families and businesses protect what matters most.",
+    "Meet the bilingual team at Allsberry Insurance Agency. 10 licensed agents — including Spanish-speaking staff — helping Southern California families and businesses protect what matters most.",
   path: "/about",
 });
 
@@ -89,7 +89,7 @@ export default function AboutPage() {
               {[
                 { label: "Serving since", value: String(agency.founded) },
                 { label: "Office hours", value: "Mon–Fri · 8–5" },
-                { label: "Primary focus", value: "Home • Auto • Business" },
+                { label: "Se habla Español", value: "Bilingual Team" },
               ].map((stat) => (
                 <div
                   key={stat.label}

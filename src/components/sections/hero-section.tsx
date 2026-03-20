@@ -16,6 +16,7 @@ import {
 import { useEffect, useState } from "react";
 
 import { getIcon } from "@/components/ui/icon-registry";
+import { SaveContactButton } from "@/components/ui/save-contact-button";
 import {
   buildHeroProductPreferenceCookie,
   getMostUsedHeroProduct,
@@ -425,6 +426,13 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
                       <Phone className="h-4 w-4" />
                       Contact Erin
                     </Link>
+                    <SaveContactButton
+                      name="Erin Allsberry"
+                      phone={agency.phone}
+                      email={agency.email}
+                      title="Agency Owner & Principal Agent"
+                      address="355 N Sheridan St, Ste 100, Corona, CA 92878"
+                    />
                   </div>
                 </div>
               </div>
