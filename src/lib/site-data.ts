@@ -49,21 +49,17 @@ export type AgentSlug =
   | "erin"
   | "brahm"
   | "dakota"
-  | "jason"
   | "alex"
-  | "anna"
-  | "jen"
+  | "vanessa"
   | "julie"
   | "heidi"
-  | "vanessa";
+  | "jenn";
 
 export type AgentAccent =
   | "blue"
   | "navy"
   | "red"
-  | "teal"
   | "purple"
-  | "amber"
   | "emerald"
   | "rose"
   | "slate"
@@ -510,10 +506,48 @@ export const agents: Agent[] = [
     initials: "EA",
     accent: "blue",
     specialties: ["Home Insurance", "Auto Insurance", "Agency Leadership"],
-    license: agency.ownerLicense,
+    license: "CA #0E91043",
     photo: {
       src: "/media/agents/erin-allsberry-new.png",
       alt: "Erin Allsberry, Agency Owner at Allsberry Insurance Agency",
+    },
+  },
+  {
+    slug: "alex",
+    name: "Alex",
+    firstName: "Alex",
+    title: "Office Manager | Home, Auto & Umbrella Agent",
+    phone: agency.phone,
+    phoneHref: agency.phoneHref,
+    email: "alex@allsberryagency.com",
+    bio: "Alex keeps everything at Allsberry Insurance Agency running smoothly. As office manager, she's known for her ability to handle just about anything — and often all at once. Highly detail-oriented and incredibly responsive, Alex makes sure every client is taken care of quickly and thoroughly. Clients can count on her for follow-up, organization, and making sure nothing ever falls through the cracks.",
+    initials: "A",
+    accent: "purple",
+    specialties: ["Home Insurance", "Auto Insurance", "Umbrella Insurance"],
+    languages: ["English", "Spanish"],
+    license: "CA #0I53723",
+    photo: {
+      src: "/media/agents/alex.png",
+      alt: "Alex, Office Manager at Allsberry Insurance Agency",
+    },
+  },
+  {
+    slug: "vanessa",
+    name: "Vanessa",
+    firstName: "Vanessa",
+    title: "Home, Auto, Umbrella & Life Insurance Agent",
+    phone: agency.phone,
+    phoneHref: agency.phoneHref,
+    email: "vanessa@allsberryagency.com",
+    bio: "Vanessa has been part of the Allsberry story from the very beginning — one of the original team members long before the agency evolved into what it is today. With 15 years of experience, she's a trusted expert in home, auto, and life insurance. She genuinely enjoys connecting with clients through annual policy reviews, making sure coverage keeps up with life's changes.",
+    initials: "V",
+    accent: "indigo",
+    specialties: ["Home Insurance", "Auto Insurance", "Life Insurance", "Umbrella Insurance"],
+    languages: ["English", "Spanish"],
+    license: "CA #0G84845",
+    photo: {
+      src: "/media/agents/vanessa.png",
+      alt: "Vanessa, Licensed Insurance Agent at Allsberry Insurance Agency",
     },
   },
   {
@@ -524,18 +558,37 @@ export const agents: Agent[] = [
     phone: "(951) 266-2019",
     phoneHref: "tel:+19512662019",
     email: "brahm@allsberryagency.com",
-    bio: "Brahm specializes in helping clients find the right coverage at the right price, with a focus on building lasting relationships. His dedication to client service ensures every policy is tailored to your unique situation.",
+    bio: "Brahm is a trusted advisor who brings a combination of technical fluency and a genuine client-first approach to insurance. Known for translating complex coverage into clear, actionable guidance, he helps clients make confident, informed decisions from the very first conversation. His approach is defined by precision — built on clarity, responsiveness, and trust.",
     initials: "BS",
     accent: "navy",
     specialties: [
       "Commercial Insurance",
-      "Restaurant Coverage",
       "Client Strategy",
-      "Financial Planning",
+      "Coverage Guidance",
     ],
+    license: "CA #4434320",
     photo: {
       src: "/media/agents/brahm-shank-new.png",
       alt: "Brahm Shank, Licensed Insurance Agent at Allsberry Insurance Agency",
+    },
+  },
+  {
+    slug: "julie",
+    name: "Julie",
+    firstName: "Julie",
+    title: "Home, Auto & Umbrella Agent",
+    phone: agency.phone,
+    phoneHref: agency.phoneHref,
+    email: "julie@allsberryagency.com",
+    bio: "Julie brings a wealth of Farmers experience and industry knowledge to the team. Working remotely, she plays an important role in supporting clients and ensuring policies are handled accurately and efficiently. Her reliability, experience, and helpful approach make her a valuable resource for both clients and the team.",
+    initials: "J",
+    accent: "rose",
+    specialties: ["Home Insurance", "Auto Insurance", "Umbrella Insurance"],
+    languages: ["English", "Spanish"],
+    license: "CA #0M05856",
+    photo: {
+      src: "/media/agents/julie.png",
+      alt: "Julie, Licensed Insurance Agent at Allsberry Insurance Agency",
     },
   },
   {
@@ -549,129 +602,56 @@ export const agents: Agent[] = [
     bio: "Dakota brings energy and dedication to every client interaction, ensuring a smooth and personalized insurance experience. Whether you need home, auto, or business coverage, Dakota is here to help.",
     initials: "DA",
     accent: "red",
-    specialties: ["Home Insurance", "Auto Insurance", "Fast Follow-Up"],
+    specialties: ["Home Insurance", "Auto Insurance", "Business Insurance"],
+    license: "CA #4322549",
     photo: {
       src: "/media/agents/dakota-allsberry-new.png",
       alt: "Dakota Allsberry, Licensed Insurance Agent at Allsberry Insurance Agency",
     },
   },
   {
-    slug: "jason",
-    name: "Jason Allsberry",
-    firstName: "Jason",
-    title: "Licensed Insurance Agent",
-    phone: agency.phone,
-    phoneHref: agency.phoneHref,
-    email: "jason@allsberryagency.com",
-    bio: "Jason brings hands-on experience and a straightforward approach to insurance. He works closely with clients to make sure their coverage keeps pace with their lives.",
-    initials: "JA",
-    accent: "teal",
-    specialties: ["Home Insurance", "Auto Insurance"],
-    photo: {
-      src: "/media/agents/jason-allsberry.png",
-      alt: "Jason Allsberry, Licensed Insurance Agent at Allsberry Insurance Agency",
-    },
-  },
-  {
-    slug: "alex",
-    name: "Alex",
-    firstName: "Alex",
-    title: "Licensed Insurance Agent",
-    phone: agency.phone,
-    phoneHref: agency.phoneHref,
-    email: "alex@allsberryagency.com",
-    bio: "Alex is dedicated to helping clients navigate their insurance options with clarity and confidence. She takes time to understand each situation and find coverage that truly fits.",
-    initials: "A",
-    accent: "purple",
-    specialties: ["Home Insurance", "Auto Insurance"],
-    photo: {
-      src: "/media/agents/alex.png",
-      alt: "Alex, Licensed Insurance Agent at Allsberry Insurance Agency",
-    },
-  },
-  {
-    slug: "anna",
-    name: "Anna",
-    firstName: "Anna",
-    title: "Licensed Insurance Agent",
-    phone: agency.phone,
-    phoneHref: agency.phoneHref,
-    email: "anna@allsberryagency.com",
-    bio: "Anna combines genuine care with practical expertise. She makes the insurance process feel simple and works to ensure every client walks away confident in their coverage.",
-    initials: "A",
-    accent: "amber",
-    specialties: ["Home Insurance", "Auto Insurance"],
-    photo: {
-      src: "/media/agents/anna.png",
-      alt: "Anna, Licensed Insurance Agent at Allsberry Insurance Agency",
-    },
-  },
-  {
-    slug: "jen",
-    name: "Jen",
-    firstName: "Jen",
-    title: "Licensed Insurance Agent",
-    phone: agency.phone,
-    phoneHref: agency.phoneHref,
-    email: "jen@allsberryagency.com",
-    bio: "Jen brings a warm, detail-oriented approach to insurance. She takes the time to explain options clearly and helps clients make informed decisions about their protection.",
-    initials: "J",
-    accent: "emerald",
-    specialties: ["Home Insurance", "Auto Insurance"],
-    photo: {
-      src: "/media/agents/jen.png",
-      alt: "Jen, Licensed Insurance Agent at Allsberry Insurance Agency",
-    },
-  },
-  {
-    slug: "julie",
-    name: "Julie",
-    firstName: "Julie",
-    title: "Licensed Insurance Agent",
-    phone: agency.phone,
-    phoneHref: agency.phoneHref,
-    email: "julie@allsberryagency.com",
-    bio: "Julie is passionate about finding the right coverage for every client. Her approachable style and attention to detail make the insurance experience feel personal and thorough.",
-    initials: "J",
-    accent: "rose",
-    specialties: ["Home Insurance", "Auto Insurance"],
-    photo: {
-      src: "/media/agents/julie.png",
-      alt: "Julie, Licensed Insurance Agent at Allsberry Insurance Agency",
-    },
-  },
-  {
     slug: "heidi",
     name: "Heidi",
     firstName: "Heidi",
-    title: "Licensed Insurance Agent",
+    title: "Business Insurance Sales Agent",
     phone: agency.phone,
     phoneHref: agency.phoneHref,
     email: "heidi@allsberryagency.com",
-    bio: "Heidi brings years of industry knowledge and a client-first mindset. She focuses on clear communication and building long-term relationships with every policyholder.",
+    bio: "Specializing in business and commercial insurance, workers compensation, liability, and commercial building coverage, Heidi is a dedicated sales professional who brings energy and consistency to every client interaction. With years of insurance sales experience, she's always ready to take a call, follow up on a quote, and help clients find the right coverage.",
     initials: "H",
     accent: "slate",
-    specialties: ["Home Insurance", "Auto Insurance"],
+    specialties: [
+      "Business Insurance",
+      "Workers Comp",
+      "Liability Insurance",
+      "Commercial Property",
+    ],
+    license: "CA #0E90668",
     photo: {
       src: "/media/agents/heidi.png",
-      alt: "Heidi, Licensed Insurance Agent at Allsberry Insurance Agency",
+      alt: "Heidi, Business Insurance Sales Agent at Allsberry Insurance Agency",
     },
   },
   {
-    slug: "vanessa",
-    name: "Vanessa",
-    firstName: "Vanessa",
-    title: "Licensed Insurance Agent",
+    slug: "jenn",
+    name: "Jenn",
+    firstName: "Jenn",
+    title: "Business Insurance Account Manager",
     phone: agency.phone,
     phoneHref: agency.phoneHref,
-    email: "vanessa@allsberryagency.com",
-    bio: "Vanessa is committed to delivering outstanding service and finding creative solutions to complex insurance needs. She works hard to make every client feel valued and well-protected.",
-    initials: "V",
-    accent: "indigo",
-    specialties: ["Home Insurance", "Auto Insurance"],
+    email: "jenn@allsberryagency.com",
+    bio: "Jenn leads the commercial department with a strong focus on organization, compliance, and client communication. She ensures renewals are handled on time, reports are accurate, and opportunities to connect with business owners are never missed. Her attention to detail and proactive approach make her an essential partner for commercial clients navigating their insurance needs.",
+    initials: "J",
+    accent: "emerald",
+    specialties: [
+      "Commercial Insurance",
+      "Renewals & Compliance",
+      "Business Accounts",
+    ],
+    license: "CA #0K33979",
     photo: {
-      src: "/media/agents/vanessa.png",
-      alt: "Vanessa, Licensed Insurance Agent at Allsberry Insurance Agency",
+      src: "/media/agents/jenn.png",
+      alt: "Jenn, Business Insurance Account Manager at Allsberry Insurance Agency",
     },
   },
 ];
