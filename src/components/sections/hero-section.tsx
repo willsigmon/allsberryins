@@ -312,7 +312,7 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
             <div className="shimmer-border relative overflow-hidden rounded-[2rem] p-[3px] shadow-[0_35px_90px_-48px_rgba(0,32,92,0.8)]">
               <div className="hero-profile-shell relative overflow-hidden rounded-[1.85rem] p-4 sm:p-5">
                 <div className="hero-profile-inner relative rounded-[1.65rem] border p-4 text-white backdrop-blur-sm">
-                  <div className="flex items-center gap-4">
+                  <div className="flex items-start gap-4">
                     <div className="relative h-18 w-18 shrink-0 overflow-hidden rounded-full border-2 border-white/30 shadow-[0_16px_38px_-18px_rgba(0,0,0,0.5)]">
                       <Image
                         src={officialProfile.headshot.src}
@@ -323,22 +323,27 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
                         className="h-full w-full object-cover object-top"
                       />
                     </div>
-                    <div className="min-w-0">
-                      <div className="flex items-center gap-2">
+                    <div className="flex flex-1 items-start justify-between gap-3">
+                      <div className="min-w-0">
                         <p className="font-display text-xl font-extrabold text-white">
                           Erin Allsberry
                         </p>
-                        <span className="pin-drop relative inline-flex items-center gap-1 text-[10px] font-semibold text-white/80">
-                          <span className="relative">
-                            <MapPin className="h-3.5 w-3.5 text-red" />
-                            <span className="pin-pulse-ring absolute inset-0 rounded-full bg-red/30" />
-                          </span>
-                          SoCal
+                        <p className="mt-0.5 text-xs font-medium text-white/70">
+                          Owner & Principal Agent
+                        </p>
+                      </div>
+
+                      {/* SoCal animated map pin */}
+                      <div className="pin-drop flex flex-col items-center gap-1 pt-0.5">
+                        <div className="relative flex h-10 w-10 items-center justify-center">
+                          <span className="pin-pulse-ring absolute h-10 w-10 rounded-full bg-red/20" />
+                          <span className="pin-pulse-ring absolute h-10 w-10 rounded-full bg-red/15" style={{ animationDelay: "1.5s" }} />
+                          <MapPin className="relative h-6 w-6 fill-red text-red drop-shadow-[0_2px_4px_rgba(218,41,28,0.4)]" />
+                        </div>
+                        <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-white/60">
+                          Southern CA
                         </span>
                       </div>
-                      <p className="mt-0.5 text-xs font-medium text-white/70">
-                        Owner & Principal Agent
-                      </p>
                     </div>
                   </div>
 
