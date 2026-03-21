@@ -25,9 +25,10 @@ const accentClasses: Record<AgentAccent, string> = {
   amber: "bg-[linear-gradient(145deg,#d97706_0%,#fbbf24_100%)]",
 };
 
-const leadershipSlugs = ["erin", "brahm"] as const;
+const erinAgent = agents.find((a) => a.slug === "erin");
+const leadershipSlugs = ["brahm", "dakota"] as const;
 const leadershipAgents = agents.filter((a) => (leadershipSlugs as readonly string[]).includes(a.slug));
-const teamAgents = agents.filter((a) => !(leadershipSlugs as readonly string[]).includes(a.slug));
+const teamAgents = agents.filter((a) => a.slug !== "erin" && !(leadershipSlugs as readonly string[]).includes(a.slug));
 
 export function TeamSection() {
   return (
@@ -40,8 +41,15 @@ export function TeamSection() {
           align="center"
         />
 
+        {/* Erin — Agency Owner banner */}
+        {erinAgent && (
+          <div className="mt-12">
+            <LeadershipCard agent={erinAgent} index={0} />
+          </div>
+        )}
+
         {/* Leadership row */}
-        <div className="mt-12 grid gap-6 lg:grid-cols-2">
+        <div className="mt-6 grid gap-6 lg:grid-cols-2">
           {leadershipAgents.map((agent, index) => (
             <LeadershipCard key={agent.slug} agent={agent} index={index} />
           ))}
@@ -187,9 +195,10 @@ function LeadershipCard({ agent, index }: { agent: Agent; index: number }) {
             <Link
               href={`mailto:${agent.email}`}
               className="inline-flex items-center gap-2 rounded-full border border-white/24 px-4 py-2 text-sm font-bold text-white transition hover:bg-white/10"
+              aria-label={`Email ${agent.firstName}`}
             >
               <Mail className="h-4 w-4" />
-              Email
+              Email {agent.firstName}
             </Link>
             <Link
               href={buildTrackedHref(`/agents/${agent.slug}`, {

@@ -106,9 +106,9 @@ const heroHelpContent: Partial<Record<ProductSlug, HeroHelpContent>> = {
     cards: [
       {
         id: "auto-driver",
-        title: "Daily driver or solo vehicle",
+        title: "One car or one driver",
         description:
-          "Great for replacing a current auto policy, adding a vehicle, or checking if the current limits still make sense.",
+          "Great for replacing your current auto plan, adding a vehicle, or checking if your coverage still makes sense.",
         icon: "car",
         quote: {
           href: "/quote",
@@ -126,9 +126,9 @@ const heroHelpContent: Partial<Record<ProductSlug, HeroHelpContent>> = {
       },
       {
         id: "auto-household",
-        title: "Household or bundled drivers",
+        title: "Multiple drivers or family plan",
         description:
-          "Use this when multiple drivers, teen drivers, or a home + auto bundle are part of the decision.",
+          "Use this when you have more than one driver, a teen driver, or want to combine your home and auto together.",
         icon: "users",
         quote: {
           href: "/quote",
@@ -145,22 +145,22 @@ const heroHelpContent: Partial<Record<ProductSlug, HeroHelpContent>> = {
         },
       },
       {
-        id: "auto-lender",
-        title: "Registration, DMV, or lienholder help",
+        id: "auto-proof",
+        title: "Need proof of auto insurance?",
         description:
-          "Best for fast follow-up when a lender, DMV task, dealership, or leasing flow needs evidence of coverage.",
+          "Use this when your bank, dealer, or leasing company needs proof that your vehicle is covered.",
         icon: "shieldCheck",
         quote: {
           href: "/quote",
-          label: "Start guided auto intake",
-          entry: "hero-auto-lender-quote",
+          label: "Start auto quote",
+          entry: "hero-auto-proof-quote",
           audience: "Auto Client",
           product: "auto",
         },
         proof: {
           href: "/evidence-of-insurance",
-          label: "Request lender-ready proof",
-          entry: "hero-auto-lender-proof",
+          label: "Request proof of coverage",
+          entry: "hero-auto-proof-request",
           audience: "Auto Client",
         },
       },

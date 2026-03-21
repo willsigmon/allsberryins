@@ -49,6 +49,7 @@ export function QuoteForm({
       lastName: "",
       phone: "",
       email: "",
+      address: "",
       zipCode: initialZip && /^\d{5}$/.test(initialZip) ? initialZip : "",
       referralSource: undefined,
       employees: undefined,
@@ -223,6 +224,17 @@ export function QuoteForm({
               className={inputClassName}
               placeholder="you@example.com"
               type="email"
+            />
+          </Field>
+          <Field label="Address" error={errors.address?.message} inputId={`${formId}-address`}>
+            <input
+              {...register("address")}
+              id={`${formId}-address`}
+              autoComplete="street-address"
+              aria-describedby={errors.address ? `${formId}-address-error` : undefined}
+              aria-invalid={Boolean(errors.address)}
+              className={inputClassName}
+              placeholder="123 Main St, Corona, CA"
             />
           </Field>
           <Field label="ZIP Code" error={errors.zipCode?.message} inputId={`${formId}-zip`}>

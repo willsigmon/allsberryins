@@ -1,11 +1,52 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ChevronDown } from "lucide-react";
 
 import { SectionHeading } from "@/components/ui/section-heading";
 import { homePageFaqs } from "@/lib/site-data";
+import { cn } from "@/lib/utils";
+
+function FaqItem({ faq, index }: { faq: { question: string; answer: string }; index: number }) {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <motion.article
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.35, ease: "easeOut", delay: index * 0.06 }}
+      className="rounded-[1.8rem] border border-gray-100 bg-[linear-gradient(180deg,var(--white)_0%,var(--gray-50)_100%)] shadow-[0_22px_45px_-38px_rgba(0,32,92,0.4)]"
+    >
+      <button
+        type="button"
+        onClick={() => setOpen((prev) => !prev)}
+        className="flex w-full items-center justify-between gap-4 p-6 text-left"
+        aria-expanded={open}
+      >
+        <h3 className="font-display text-xl font-bold text-gray-900">{faq.question}</h3>
+        <ChevronDown
+          className={cn(
+            "h-5 w-5 shrink-0 text-blue transition-transform duration-200",
+            open && "rotate-180",
+          )}
+        />
+      </button>
+      <div
+        className={cn(
+          "grid transition-[grid-template-rows] duration-200",
+          open ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
+        )}
+      >
+        <div className="overflow-hidden">
+          <p className="px-6 pb-6 text-sm leading-7 text-gray-600">{faq.answer}</p>
+        </div>
+      </div>
+    </motion.article>
+  );
+}
 
 export function FaqSection() {
   return (
@@ -21,17 +62,7 @@ export function FaqSection() {
         <div className="mt-12 grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
           <div className="grid gap-4">
             {homePageFaqs.map((faq, index) => (
-              <motion.article
-                key={faq.question}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.35, ease: "easeOut", delay: index * 0.06 }}
-                className="rounded-[1.8rem] border border-gray-100 bg-[linear-gradient(180deg,var(--white)_0%,var(--gray-50)_100%)] p-6 shadow-[0_22px_45px_-38px_rgba(0,32,92,0.4)]"
-              >
-                <h3 className="font-display text-xl font-bold text-gray-900">{faq.question}</h3>
-                <p className="mt-3 text-sm leading-7 text-gray-600">{faq.answer}</p>
-              </motion.article>
+              <FaqItem key={faq.question} faq={faq} index={index} />
             ))}
           </div>
 

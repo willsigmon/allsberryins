@@ -67,6 +67,7 @@ export const quoteFormSchema = z
       .min(10, "Phone number is required.")
       .regex(/^[0-9()+\-\s]{10,}$/, "Enter a valid phone number."),
     email: z.string().trim().email("Enter a valid email address."),
+    address: z.string().trim().max(200, "Address must be under 200 characters.").optional().or(z.literal("")),
     zipCode: z.string().trim().regex(/^\d{5}$/, "Enter a valid 5-digit ZIP code."),
     referralSource: z.enum(leadReferralSources, {
       error: "Please tell us how you heard about us.",

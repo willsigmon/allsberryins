@@ -90,7 +90,8 @@ function ProductCategory({
             >
               <Link
                 href={`/quote?product=${product.slug}`}
-                className={`group relative flex h-full flex-col overflow-hidden rounded-[2rem] border p-6 pt-8 transition duration-300 hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2 ${
+                onClick={() => { if (typeof navigator !== "undefined" && navigator.vibrate) navigator.vibrate(10); }}
+                className={`parallax-card group relative flex h-full flex-col overflow-hidden rounded-[2rem] border p-6 pt-8 transition duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2 ${
                   isCommercial
                     ? "border-white/12 bg-white/8 backdrop-blur-sm shadow-[0_18px_40px_-34px_rgba(0,0,0,0.5)] hover:border-amber-400/40 hover:shadow-[0_22px_50px_-30px_rgba(217,119,6,0.35)]"
                     : `border-gray-100 shadow-[0_18px_40px_-34px_rgba(0,32,92,0.46)] ${hoverBorder} ${cardPanelClassName}`

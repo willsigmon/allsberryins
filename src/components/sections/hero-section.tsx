@@ -153,7 +153,7 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
           <div className="flex flex-wrap gap-3">
             <div className="inline-flex items-center gap-2 rounded-full border border-gray-100 bg-white px-4 py-2 text-sm font-semibold text-gray-900 shadow-sm">
               <Sparkles className="h-4 w-4 text-blue" />
-              SoCal families & businesses
+              5,000+ protected
             </div>
             <div className="inline-flex items-center gap-2 rounded-full border border-gold/20 bg-white px-4 py-2 text-sm font-semibold text-gray-900 shadow-sm">
               <Star className="h-4 w-4 fill-gold text-gold" />

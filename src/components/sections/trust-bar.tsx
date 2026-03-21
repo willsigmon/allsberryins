@@ -6,9 +6,9 @@ import { useEffect, useRef, useState } from "react";
 import { carrierAccessStat } from "@/lib/site-data";
 
 const stats = [
-  { end: 30, suffix: "+", unit: "Years", label: "Serving Southern California" },
+  { end: 20, suffix: "+", unit: "Years", label: "Serving Southern California" },
   { end: 5, suffix: "★", unit: "Stars", label: "Client rating" },
-  { end: 1000, suffix: "+", unit: "Families", label: "Protected across SoCal" },
+  { end: 5000, suffix: "+", unit: "Households & Businesses", label: "Protected across SoCal" },
   { end: carrierAccessStat, suffix: "+", unit: "Carriers", label: "Markets we can shop" },
 ];
 

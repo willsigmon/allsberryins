@@ -34,7 +34,7 @@ export function EvidenceRequestForm({
       phone: "",
       email: "",
       zipCode: "",
-      requestType: "Evidence of Insurance" as const,
+      requestType: "Proof of Insurance" as const,
       requestedFor: initialAudience ? `${initialAudience} request` : "",
       dueDate: "",
       message: "",

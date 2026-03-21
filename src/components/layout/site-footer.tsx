@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Facebook, Instagram, Linkedin, MapPin, Phone } from "lucide-react";
+import { Facebook, Instagram, Linkedin, Lock, Mail, MapPin, MessageSquare, Phone, ShieldCheck } from "lucide-react";
 
 import { agency, footerProducts, quickLinks } from "@/lib/site-data";
 
@@ -66,12 +66,17 @@ export function SiteFooter() {
                 <Link href={agency.phoneHref} className="transition hover:text-white">
                   {agency.phone}
                 </Link>
-                <p>{agency.hours}</p>
+                <div className="mt-1 flex items-center gap-1.5 text-xs text-white/60">
+                  <MessageSquare className="h-3 w-3" />
+                  Calls & texts accepted
+                </div>
+                <p className="mt-1">{agency.hours}</p>
               </div>
             </div>
-            <div>
+            <div className="flex gap-3">
+              <Mail className="mt-0.5 h-4 w-4 shrink-0 text-white" />
               <Link href={agency.emailHref} className="transition hover:text-white">
-                {agency.email}
+                Email us
               </Link>
             </div>
           </div>
@@ -79,9 +84,38 @@ export function SiteFooter() {
       </div>
 
       <div className="border-t border-white/10">
-        <div className="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-5 text-sm text-white/60 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
-          <p>© 2026 Allsberry Insurance Agency. All rights reserved.</p>
-          <p>{agency.ownerLicense} • {agency.agencyLicense}</p>
+        <div className="mx-auto max-w-7xl px-4 py-5 sm:px-6 lg:px-8">
+          <div className="flex flex-col gap-2 text-sm text-white/60 sm:flex-row sm:items-center sm:justify-between">
+            <p>© 2026 Allsberry Insurance Agency. All rights reserved.</p>
+            <p>{agency.ownerLicense} • {agency.agencyLicense}</p>
+          </div>
+          <div className="mt-3 flex flex-wrap items-center gap-4 text-xs text-white/50">
+            <Link
+              href="https://www.farmers.com/privacy-center/?Agent_Code=993005&Source_Indicator=AP"
+              target="_blank"
+              rel="noreferrer"
+              className="transition hover:text-white"
+            >
+              Privacy Policy
+            </Link>
+            <Link
+              href="https://www.farmers.com/accessibility/"
+              target="_blank"
+              rel="noreferrer"
+              className="transition hover:text-white"
+            >
+              Accessibility
+            </Link>
+            <span className="hidden sm:inline text-white/20">|</span>
+            <span className="inline-flex items-center gap-1.5 text-white/45">
+              <Lock className="h-3 w-3" />
+              SSL Encrypted
+            </span>
+            <span className="inline-flex items-center gap-1.5 text-white/45">
+              <ShieldCheck className="h-3 w-3" />
+              WCAG Accessible
+            </span>
+          </div>
         </div>
       </div>
     </footer>

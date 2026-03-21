@@ -120,8 +120,8 @@ export const agency = {
   fullName: "Allsberry Insurance Agency Inc",
   phone: "(951) 739-5959",
   phoneHref: "tel:+19517395959",
-  email: "erin@allsberryagency.com",
-  emailHref: "mailto:erin@allsberryagency.com",
+  email: "office@allsberryagency.com",
+  emailHref: "mailto:office@allsberryagency.com",
   serviceArea: "Southern California",
   addressLine1: "355 N Sheridan St, Ste 100",
   cityStateZip: "Corona, CA 92878",
@@ -232,7 +232,7 @@ export const valueProps = [
   },
   {
     title: "Personalized Coverage",
-    description: "Protection tailored around your home, vehicles, business, and long-term goals.",
+    description: "Insurance built around what you own and what you're planning for — your home, your car, your business, and your future.",
     icon: "slidersHorizontal",
   },
   {
@@ -242,7 +242,7 @@ export const valueProps = [
   },
   {
     title: "Top-Rated Support",
-    description: "Responsive service before, during, and after claims so you never feel on your own.",
+    description: "We're here when you need us — before, during, and after you file a claim. You won't be left figuring things out alone.",
     icon: "star",
   },
 ] as const;
@@ -268,7 +268,7 @@ export const products: Product[] = [
     slug: "renters",
     name: "Renters Insurance",
     shortName: "Renters",
-    description: "Affordable protection for your stuff, liability, and temporary living costs.",
+    description: "Low-cost protection for your belongings, plus help paying for a place to stay if your rental becomes unlivable.",
     icon: "key",
     category: "personal",
   },
@@ -276,7 +276,7 @@ export const products: Product[] = [
     slug: "life",
     name: "Life Insurance",
     shortName: "Life",
-    description: "Create a safety net for the people who matter most to you.",
+    description: "Create a safety net for the people who matter most to you. Our streamlined process keeps your personal information private and secure.",
     icon: "heartPulse",
     category: "personal",
   },
@@ -284,7 +284,7 @@ export const products: Product[] = [
     slug: "umbrella",
     name: "Umbrella Insurance",
     shortName: "Umbrella",
-    description: "Extra liability protection that kicks in when standard policies run out.",
+    description: "Extra protection that helps pay for big costs your other insurance doesn't fully cover.",
     icon: "umbrella",
     category: "personal",
   },
@@ -292,7 +292,7 @@ export const products: Product[] = [
     slug: "condo",
     name: "Condo Insurance",
     shortName: "Condo",
-    description: "Designed for condo owners who want coverage beyond the HOA master policy.",
+    description: "Made for condo owners who need protection for things inside their unit that the building's shared insurance doesn't cover.",
     icon: "building2",
     category: "personal",
   },
@@ -300,7 +300,7 @@ export const products: Product[] = [
     slug: "general-liability",
     name: "General Liability",
     shortName: "General Liability",
-    description: "Foundational business protection for claims tied to injury, damage, or advertising.",
+    description: "Covers your business if a customer gets hurt, property gets damaged, or you're sued over your advertising.",
     icon: "shield",
     category: "commercial",
   },
@@ -308,7 +308,7 @@ export const products: Product[] = [
     slug: "workers-comp",
     name: "Workers Compensation",
     shortName: "Workers Comp",
-    description: "Help protect your employees and keep your business compliant.",
+    description: "Helps pay for medical bills and lost wages if an employee gets hurt on the job. Required by California law for most businesses.",
     icon: "hardHat",
     category: "commercial",
   },
@@ -324,7 +324,7 @@ export const products: Product[] = [
     slug: "commercial-auto",
     name: "Commercial Auto",
     shortName: "Commercial Auto",
-    description: "Coverage for company vehicles, drivers, cargo, and the miles that keep you moving.",
+    description: "Covers the cars and trucks your business uses, including your drivers and the things you carry.",
     icon: "truck",
     category: "commercial",
   },
@@ -332,7 +332,7 @@ export const products: Product[] = [
     slug: "professional-liability",
     name: "Professional Liability",
     shortName: "Professional Liability",
-    description: "Reduce risk from client claims tied to professional services or advice.",
+    description: "Protects you if a client says your work or advice caused them a loss — even if it was an honest mistake.",
     icon: "briefcase",
     category: "commercial",
   },
@@ -340,7 +340,7 @@ export const products: Product[] = [
     slug: "specialty-coverage",
     name: "Specialty Coverage",
     shortName: "Specialty Coverage",
-    description: "Flexible solutions for unique industries, specialty property, and hard-to-fit risks.",
+    description: "Coverage for unusual situations that don't fit a standard plan — like special equipment, niche businesses, or one-of-a-kind properties.",
     icon: "sparkles",
     category: "commercial",
   },
@@ -348,7 +348,7 @@ export const products: Product[] = [
     slug: "business",
     name: "Business Insurance",
     shortName: "Business",
-    description: "A custom package for growing companies that need layered commercial protection.",
+    description: "A plan built for your business that puts several types of coverage together in one package.",
     icon: "briefcase",
     category: "commercial",
   },
@@ -402,10 +402,10 @@ export const referralSources = [
 export const employeeOptions = ["1-5", "6-15", "16-50", "51-100", "100+"] as const;
 
 export const evidenceRequestTypes = [
-  "Evidence of Insurance",
-  "Certificate of Insurance (COI)",
-  "Mortgagee / Loss Payee Update",
-  "Closing / Escrow Request",
+  "Proof of Insurance",
+  "Business Proof of Insurance (COI)",
+  "Update for My Bank or Lender",
+  "Paperwork for Buying or Selling a Home",
   "Other",
 ] as const;
 
@@ -499,9 +499,9 @@ export const carrierAccessStat = 200;
 
 export const agentMicrositeFeatures = [
   "Direct tap-to-call and email access",
-  "QR code ready for print leave-behinds and text follow-up",
-  "Lead form routed through the agency, not a generic directory",
-  "SEO-ready branded page structure for each producer",
+  "QR code ready for print materials and text follow-up",
+  "Your message goes straight to our office, not some random listing site",
+  "A personal page for each agent that's easy to find on Google",
 ] as const;
 
 export const agents: Agent[] = [
@@ -512,11 +512,11 @@ export const agents: Agent[] = [
     title: "Agency Owner & Principal Agent",
     phone: agency.phone,
     phoneHref: agency.phoneHref,
-    email: "erin@allsberryagency.com",
+    email: "office@allsberryagency.com",
     bio: "With over 24 years of experience, Erin founded Allsberry Insurance Agency to provide personalized insurance solutions to families and businesses across Southern California. She believes in making insurance straightforward and stress-free, so you can focus on what matters most.",
     initials: "EA",
     accent: "blue",
-    specialties: ["Home Insurance", "Auto Insurance", "Agency Leadership"],
+    specialties: ["HSC Leadership"],
     license: "CA #0E91043",
     photo: {
       src: "/media/agents/erin-allsberry-new.png",
@@ -550,7 +550,7 @@ export const agents: Agent[] = [
     phone: agency.phone,
     phoneHref: agency.phoneHref,
     email: "vanessa@allsberryagency.com",
-    bio: "Vanessa has been part of the Allsberry story from the very beginning — one of the original team members long before the agency evolved into what it is today. With 15 years of experience, she's a trusted expert in home, auto, and life insurance. She genuinely enjoys connecting with clients through annual policy reviews, making sure coverage keeps up with life's changes.",
+    bio: "Vanessa has been part of the Allsberry story from the very beginning — one of the original team members long before the agency grew into what it is today. With 15 years of experience, she knows home, auto, and life insurance inside and out. She likes checking in with clients each year to make sure their insurance still fits what's going on in their lives.",
     initials: "V",
     accent: "indigo",
     specialties: ["Home Insurance", "Auto Insurance", "Life Insurance", "Umbrella Insurance"],
@@ -569,10 +569,11 @@ export const agents: Agent[] = [
     phone: "(951) 266-2019",
     phoneHref: "tel:+19512662019",
     email: "brahm@allsberryagency.com",
-    bio: "Brahm is a trusted advisor who brings a combination of technical fluency and a genuine client-first approach to insurance. Known for translating complex coverage into clear, actionable guidance, he helps clients make confident, informed decisions from the very first conversation. His approach is defined by precision — built on clarity, responsiveness, and trust.",
+    bio: "Brahm helps people understand their insurance without the confusing language. He listens to what you need, explains your choices in plain English, and makes sure you feel good about your decision. He's quick to respond and always follows through.",
     initials: "BS",
     accent: "navy",
     specialties: [
+      "Personal Insurance",
       "Commercial Insurance",
       "Client Strategy",
       "Coverage Guidance",
@@ -592,7 +593,7 @@ export const agents: Agent[] = [
     phone: agency.phone,
     phoneHref: agency.phoneHref,
     email: "julie@allsberryagency.com",
-    bio: "Julie brings a wealth of Farmers experience and industry knowledge to the team. Working remotely, she plays an important role in supporting clients and ensuring policies are handled accurately and efficiently. Her reliability, experience, and helpful approach make her a valuable resource for both clients and the team.",
+    bio: "Julie has years of experience with Farmers and knows the business inside and out. She works remotely and makes sure everything with your insurance is done right and on time. Clients and teammates both count on her to be helpful and reliable.",
     initials: "J",
     accent: "rose",
     specialties: ["Home Insurance", "Auto Insurance", "Umbrella Insurance"],
@@ -625,17 +626,17 @@ export const agents: Agent[] = [
     slug: "jason",
     name: "Jason Allsberry",
     firstName: "Jason",
-    title: "Licensed Insurance Agent",
+    title: "Agency Operations & Accounting",
     phone: agency.phone,
     phoneHref: agency.phoneHref,
     email: "jason@allsberryagency.com",
-    bio: "Jason is a licensed member of the Allsberry Insurance Agency team, helping clients across Southern California with their insurance needs. Full bio coming soon.",
+    bio: "Jason keeps the business side of Allsberry Insurance Agency running smoothly, managing day-to-day operations and accounting so the team can focus on serving clients across Southern California.",
     initials: "JA",
     accent: "teal",
-    specialties: ["Home Insurance", "Auto Insurance"],
+    specialties: ["Agency Operations", "Accounting"],
     photo: {
       src: "/media/agents/jason-allsberry.png",
-      alt: "Jason Allsberry, Licensed Insurance Agent at Allsberry Insurance Agency",
+      alt: "Jason Allsberry, Agency Operations & Accounting at Allsberry Insurance Agency",
     },
   },
   {
@@ -663,7 +664,7 @@ export const agents: Agent[] = [
     phone: agency.phone,
     phoneHref: agency.phoneHref,
     email: "heidi@allsberryagency.com",
-    bio: "Specializing in business and commercial insurance, workers compensation, liability, and commercial building coverage, Heidi is a dedicated sales professional who brings energy and consistency to every client interaction. With years of insurance sales experience, she's always ready to take a call, follow up on a quote, and help clients find the right coverage.",
+    bio: "Heidi focuses on insurance for businesses — covering things like employee injuries, lawsuits, and building protection. She's energetic, stays on top of follow-ups, and makes sure every client gets the attention they need.",
     initials: "H",
     accent: "slate",
     specialties: [
@@ -686,7 +687,7 @@ export const agents: Agent[] = [
     phone: agency.phone,
     phoneHref: agency.phoneHref,
     email: "jenn@allsberryagency.com",
-    bio: "Jenn leads the commercial department with a strong focus on organization, compliance, and client communication. She ensures renewals are handled on time, reports are accurate, and opportunities to connect with business owners are never missed. Her attention to detail and proactive approach make her an essential partner for commercial clients navigating their insurance needs.",
+    bio: "Jenn runs the business insurance side of the agency. She keeps track of when your coverage needs to be renewed, makes sure paperwork is right, and stays in touch so nothing gets missed. Business owners count on her to keep things organized and on schedule.",
     initials: "J",
     accent: "emerald",
     specialties: [
@@ -706,7 +707,7 @@ export const homePageFaqs: HomePageFaq[] = [
   {
     question: "What types of insurance can Allsberry Insurance Agency help me quote?",
     answer:
-      "We help Southern California clients compare home, auto, renters, condo, umbrella, life, business, workers compensation, commercial property, professional liability, and specialty coverage options.",
+      "We help people in Southern California compare insurance for their home, car, rental, condo, business, employees, life, and more.",
   },
   {
     question: "How fast will someone follow up after I request a quote?",
@@ -716,12 +717,17 @@ export const homePageFaqs: HomePageFaq[] = [
   {
     question: "Can you help with evidence of insurance or certificates of insurance?",
     answer:
-      "Yes. We can help with proof of insurance, mortgagee updates, COI requests, and escrow or closing-related documentation so the right party gets the right evidence quickly.",
+      "Yes. If your bank, landlord, or another company needs proof that you have insurance, we can send them the right paperwork quickly.",
   },
   {
     question: "Do I need to bundle home and auto insurance to work with the agency?",
     answer:
-      "No. Bundling is often worth reviewing, but the agency can quote a single policy or build a custom mix if that is the better fit for your budget and coverage goals.",
+      "No. Combining your insurance can sometimes save money, but we're happy to help with just one type of insurance if that's all you need.",
+  },
+  {
+    question: "Is my data private and secure?",
+    answer:
+      "Yes. All communications — including phone lines, texts, and email — are encrypted. We follow strict data privacy standards and never share your personal information without your consent. You can review our full privacy practices through the Farmers privacy center.",
   },
 ];
 
@@ -741,14 +747,14 @@ export const blogPosts: BlogPost[] = [
         heading: "Bundle wherever it makes sense",
         body: "Pairing home and auto often opens the door to meaningful discounts. Bundling also makes your coverage easier to manage because one agency can review gaps across multiple policies.",
         bullets: [
-          "Ask for a side-by-side quote with and without bundling.",
-          "Compare deductibles and liability limits together, not just price.",
-          "Review whether umbrella coverage makes sense once policies are bundled.",
+          "Ask for a side-by-side quote with and without combining your policies.",
+          "Compare how much you'd pay out of pocket and how much the insurance covers, not just the monthly price.",
+          "Check if extra protection makes sense once your policies are combined.",
         ],
       },
       {
-        heading: "Revisit replacement cost and endorsements",
-        body: "The cheapest policy is not a win if rebuilding costs outpace your coverage. A strong review should balance affordability with realistic rebuild numbers and the endorsements your property actually needs.",
+        heading: "Make sure your coverage would actually pay to rebuild",
+        body: "The cheapest plan isn't a good deal if it wouldn't actually pay to rebuild your home. When you review your insurance, make sure the amount it would pay matches what it would really cost to rebuild. Also check if you need any add-ons, like earthquake or water backup coverage.",
       },
       {
         heading: "Look for credits you may be missing",
@@ -769,14 +775,14 @@ export const blogPosts: BlogPost[] = [
     sections: [
       {
         heading: "Start with your risk profile",
-        body: "Your industry, contract requirements, payroll size, building setup, and customer traffic all influence the right mix of coverage. A restaurant, contractor, and consultant may all need business insurance, but not the same package.",
+        body: "What kind of business you run, how many people you employ, what your building looks like, and how many customers walk in all affect what insurance you need. A restaurant, contractor, and consultant may all need business insurance, but not the same package.",
       },
       {
         heading: "The coverages business owners ask about most",
         body: "General liability, workers compensation, commercial property, and commercial auto show up in a lot of conversations because they protect the parts of your business that get exposed first.",
         bullets: [
-          "General liability for bodily injury, property damage, and advertising claims.",
-          "Workers compensation for employee injuries and wage replacement obligations.",
+          "General liability — covers you if someone gets hurt, something gets broken, or you get sued over your advertising.",
+          "Workers comp — helps pay medical bills and lost pay when an employee gets hurt at work.",
           "Commercial property for buildings, inventory, furniture, and equipment.",
           "Commercial auto for owned, leased, or hired vehicles used for business.",
         ],
@@ -808,7 +814,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         heading: "Bundle strategically",
-        body: "The right bundle should improve both value and protection. That means checking limits, deductibles, liability, and service expectations instead of chasing the lowest number on the page.",
+        body: "The right bundle should improve both value and protection. That means looking at how much your plan covers, how much you'd pay out of pocket, and what kind of help you'd get — not just picking the cheapest price.",
       },
     ],
   },
@@ -843,7 +849,7 @@ export type Fellow = {
 };
 
 export const fellowDefinition =
-  "An Allsberry Insurance Fellow is a distinguished title awarded to individuals whose contributions have left a lasting impact on our clients, our agency, and our community. This recognition is reserved for those who have demonstrated exceptional dedication to service, deep industry expertise, and a commitment to doing what's right for every client. Fellows represent the values that define Allsberry Insurance — clarity, integrity, and a forward-thinking approach to protecting what matters most. Though retired from day-to-day operations, an Allsberry Fellow remains a respected voice and trusted advisor within our organization.";
+  "An Allsberry Insurance Fellow is a special honor for team members who made a real difference for our clients, our agency, and our community. It's given to people who went above and beyond — who truly knew the business, cared about every client, and always did the right thing. Fellows stand for what Allsberry Insurance is all about — being honest, being clear, and always looking out for our clients. Though retired from day-to-day work, an Allsberry Fellow remains a respected voice within our organization.";
 
 export const fellows: Fellow[] = [
   {

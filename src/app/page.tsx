@@ -7,6 +7,7 @@ import { FaqSection } from "@/components/sections/faq-section";
 import { HeroSection } from "@/components/sections/hero-section";
 import { ProductGridSection } from "@/components/sections/product-grid-section";
 import { ReviewsSection } from "@/components/sections/reviews-section";
+import { ReviewTicker } from "@/components/sections/review-ticker";
 import { TeamSection } from "@/components/sections/team-section";
 import { TrustBar } from "@/components/sections/trust-bar";
 import { ValuePropsSection } from "@/components/sections/value-props-section";
@@ -83,9 +84,10 @@ export default async function Home() {
     <>
       <StructuredData data={[insuranceAgencySchema, websiteSchema, faqSchema]} />
       <HeroSection initialProduct={initialProduct} />
+      <ReviewTicker />
       <TrustBar />
-      <ValuePropsSection />
       <ReviewsSection />
+      <ValuePropsSection />
       <FaqSection />
       <ProductGridSection />
       <CoverageEvaluationCta />

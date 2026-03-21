@@ -171,9 +171,10 @@ export default async function AgentPage({ params, searchParams }: AgentPageProps
                 <Link
                   href={`mailto:${agent.email}`}
                   className="rounded-[1.6rem] border border-gray-200 bg-white px-5 py-4 text-sm font-semibold text-gray-900 transition hover:border-blue hover:text-blue"
+                  aria-label={`Email ${agent.firstName}`}
                 >
                   <Mail className="mb-3 h-5 w-5 text-blue" />
-                  {agent.email}
+                  Email {agent.firstName}
                 </Link>
                 <SaveContactButton
                   name={agent.name}
