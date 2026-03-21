@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { Facebook, Instagram, Linkedin, Lock, Mail, MapPin, MessageSquare, Phone, ShieldCheck } from "lucide-react";
