@@ -69,7 +69,7 @@ export function SaveContactButton({
       type="button"
       onClick={handleDownload}
       className={cn(
-        "inline-flex items-center gap-2 rounded-full px-4 py-2.5 text-sm font-bold transition",
+        "inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-xs font-bold transition",
         variant === "dark"
           ? "border border-white/24 text-white hover:bg-white/10"
           : "border border-gray-200 text-gray-600 hover:border-blue hover:text-blue",
