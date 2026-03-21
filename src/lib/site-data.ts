@@ -505,8 +505,8 @@ export const carrierAccessStat = 200;
 export const agentMicrositeFeatures = [
   "Direct tap-to-call and email access",
   "QR code ready for print materials and text follow-up",
-  "Your message goes straight to our office, not some random listing site",
-  "A personal page for each agent that's easy to find on Google",
+  "Your message goes straight to our office, not some other website",
+  "Each agent has their own page that's easy to find on Google",
 ] as const;
 
 export const agents: Agent[] = [

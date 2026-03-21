@@ -32,7 +32,7 @@ const heroHelpContent: Partial<Record<ProductSlug, HeroHelpContent>> = {
       "Buying a home? Refinancing? Need paperwork for your lender? Pick the path that fits your situation.",
     helperText:
       "Most people start with homeowners insurance. Then they add auto to see if combining saves money.",
-    quickReasons: ["New purchase or refinance", "Bundle home + auto", "Escrow or lender proof"],
+    quickReasons: ["Buying or refinancing a home", "Bundle home + auto", "Proof for your bank or closing"],
     cards: [
       {
         id: "home-homeowner",
@@ -78,7 +78,7 @@ const heroHelpContent: Partial<Record<ProductSlug, HeroHelpContent>> = {
         id: "home-real-estate",
         title: "Real estate or escrow partner",
         description:
-          "Use this when you're closing on a home and need insurance paperwork for the bank or title company.",
+          "Use this when you're buying a home and the bank or closing company needs your insurance paperwork.",
         icon: "key",
         quote: {
           href: "/quote",
@@ -97,18 +97,18 @@ const heroHelpContent: Partial<Record<ProductSlug, HeroHelpContent>> = {
     ],
   },
   auto: {
-    headline: "Pick the auto path that matches the driver mix.",
+    headline: "Pick the auto path that matches your situation.",
     description:
-      "Most auto shoppers want one of three things: a lower price, help adding or removing a driver, or quick proof of insurance.",
+      "Most people shopping for auto insurance want one of three things: a lower price, help adding or removing a driver, or quick proof of coverage.",
     helperText:
       "Not sure where to start? The one-car path is the fastest way to get going.",
-    quickReasons: ["New vehicle or replacement", "Teen or household drivers", "ID cards or lender proof"],
+    quickReasons: ["New or replacement vehicle", "Teen or family drivers", "ID cards or proof for your bank"],
     cards: [
       {
         id: "auto-driver",
         title: "One car or one driver",
         description:
-          "Good for getting a new auto plan, adding a car, or checking if your current coverage still fits.",
+          "Good for getting a new auto plan, adding a car, or checking if what you have now still works for you.",
         icon: "car",
         quote: {
           href: "/quote",
@@ -169,9 +169,9 @@ const heroHelpContent: Partial<Record<ProductSlug, HeroHelpContent>> = {
   renters: {
     headline: "Renters coverage should feel fast, affordable, and clean.",
     description:
-      "Most renters are either moving, bundling with auto, or trying to satisfy a landlord or property manager quickly.",
+      "Most renters are either moving in, combining with auto insurance, or getting proof for their landlord.",
     helperText:
-      "Most renters start with a simple move-in quote. If you already have auto insurance, we can check if combining saves you money.",
+      "Most renters start with a simple move-in quote. If you already have auto insurance, we can check if putting them together saves you money.",
     quickReasons: ["Apartment move-in", "Bundle with auto", "Landlord proof request"],
     cards: [
       {
@@ -242,7 +242,7 @@ const heroHelpContent: Partial<Record<ProductSlug, HeroHelpContent>> = {
       "Your privacy comes first. We only see what we need to help you — never your full personal details. The process is quick and simple.",
     helperText:
       "Not sure where to start? The family protection path is the most popular choice and a great first step.",
-    quickReasons: ["Growing family", "Income replacement", "Existing policy review"],
+    quickReasons: ["Growing family", "Replace lost income", "Review a plan you already have"],
     cards: [
       {
         id: "life-family",
@@ -266,9 +266,9 @@ const heroHelpContent: Partial<Record<ProductSlug, HeroHelpContent>> = {
       },
       {
         id: "life-income",
-        title: "Income or legacy planning",
+        title: "Income or long-term planning",
         description:
-          "Use this if you want to protect a business, a partner, your kids, or plan for the long run.",
+          "Use this if you want to protect a business, a partner, your kids, or plan ahead for the future.",
         icon: "briefcase",
         quote: {
           href: "/quote",
@@ -312,7 +312,7 @@ const heroHelpContent: Partial<Record<ProductSlug, HeroHelpContent>> = {
       "Umbrella insurance adds extra protection on top of your home and auto plans. It helps cover big costs your other insurance might not fully handle.",
     helperText:
       "We usually start by looking at your home and auto plans first. That way, we can see where umbrella coverage would help the most.",
-    quickReasons: ["Extra protection beyond your other plans", "Homes, rentals, or more to protect", "Make sure all your plans work together"],
+    quickReasons: ["Extra protection on top of your other plans", "Homes, rentals, or more to protect", "Make sure all your plans work together"],
     cards: [
       {
         id: "umbrella-household",
@@ -336,9 +336,9 @@ const heroHelpContent: Partial<Record<ProductSlug, HeroHelpContent>> = {
       },
       {
         id: "umbrella-property",
-        title: "Rental or higher-asset protection",
+        title: "Rental or high-value property protection",
         description:
-          "Good for landlords, property owners, or anyone who wants more protection than their regular plans offer.",
+          "Good for landlords, property owners, or anyone who owns a lot and wants more protection than their regular plans offer.",
         icon: "building2",
         quote: {
           href: "/quote",
@@ -382,7 +382,7 @@ const heroHelpContent: Partial<Record<ProductSlug, HeroHelpContent>> = {
       "Business insurance is easier when we start with how your company works, not just a list of policy names.",
     helperText:
       "Most business owners start here. After a quick conversation, we help you figure out which types of coverage you need.",
-    quickReasons: ["New business or renewal", "Proof of insurance for vendors or landlords", "Changes to employees, vehicles, or property"],
+    quickReasons: ["New business or renewal", "Proof of insurance for others you work with", "Changes to staff, vehicles, or property"],
     cards: [
       {
         id: "business-owner",
@@ -408,7 +408,7 @@ const heroHelpContent: Partial<Record<ProductSlug, HeroHelpContent>> = {
         id: "business-operations",
         title: "Contractor, restaurant, or service business",
         description:
-          "Use this when your business has employees, vehicles, tools, or a location that needs coverage.",
+          "Use this when your business has workers, vehicles, tools, or a building that needs insurance.",
         icon: "hardHat",
         quote: {
           href: "/quote",
