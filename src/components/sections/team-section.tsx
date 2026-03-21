@@ -41,11 +41,73 @@ export function TeamSection() {
           align="center"
         />
 
-        {/* Erin — Agency Owner banner */}
+        {/* Erin — Full-width Agency Owner banner */}
         {erinAgent && (
-          <div className="mt-12">
-            <LeadershipCard agent={erinAgent} index={0} />
-          </div>
+          <motion.article
+            initial={{ opacity: 0, y: 28 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            className="relative mt-12 overflow-hidden rounded-[2.5rem] bg-[linear-gradient(160deg,#08214f_0%,#0c2d6b_20%,#0f3a87_50%,#2d7bc6_85%,#5da7df_100%)] p-8 text-white shadow-[0_32px_80px_-32px_rgba(0,32,92,0.7)] sm:p-10 lg:p-12"
+          >
+            <div className="absolute -right-32 -top-32 h-72 w-72 rounded-full bg-white/5 blur-3xl" />
+            <div className="absolute -left-20 bottom-0 h-56 w-56 rounded-full bg-blue/8 blur-3xl" />
+            <div className="absolute inset-x-0 top-0 h-1.5 bg-[linear-gradient(90deg,#ffffff_0%,rgba(255,255,255,0.75)_28%,rgba(245,197,24,0.92)_62%,#da291c_100%)]" />
+
+            <div className="relative grid items-center gap-8 lg:grid-cols-[auto_1fr_auto]">
+              {erinAgent.photo ? (
+                <div className="relative mx-auto h-32 w-32 shrink-0 overflow-hidden rounded-full border-[3px] border-white/30 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.5)] lg:mx-0 lg:h-36 lg:w-36">
+                  <Image
+                    src={erinAgent.photo.src}
+                    alt={erinAgent.photo.alt}
+                    width={144}
+                    height={144}
+                    className="h-full w-full object-cover object-top"
+                  />
+                </div>
+              ) : (
+                <div className={cn("mx-auto flex h-32 w-32 shrink-0 items-center justify-center rounded-full text-4xl font-display font-extrabold text-white shadow-xl lg:mx-0", accentClasses[erinAgent.accent])}>
+                  {erinAgent.initials}
+                </div>
+              )}
+
+              <div className="text-center lg:text-left">
+                <h3 className="font-display text-3xl font-extrabold tracking-tight sm:text-4xl">
+                  {erinAgent.name}
+                </h3>
+                <p className="mt-1.5 text-sm font-semibold uppercase tracking-[0.24em] text-white/70">
+                  {erinAgent.title}
+                </p>
+                <p className="mt-4 max-w-2xl text-base leading-7 text-white/80 lg:text-[15px]">
+                  {erinAgent.bio}
+                </p>
+                <div className="mt-5 flex flex-wrap justify-center gap-2 lg:justify-start">
+                  {erinAgent.specialties.map((specialty) => (
+                    <span key={specialty} className="rounded-full border border-white/14 bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-white/86">
+                      {specialty}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="flex flex-wrap justify-center gap-3 lg:flex-col">
+                <Link
+                  href={`mailto:${erinAgent.email}`}
+                  className="glass-btn-dark inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-bold text-white"
+                >
+                  <Mail className="h-4 w-4" />
+                  Email Erin
+                </Link>
+                <Link
+                  href={buildTrackedHref(`/agents/${erinAgent.slug}`, { agent: erinAgent.slug, entry: "leadership-team-card" })}
+                  className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-gray-900 transition hover:bg-blue-light"
+                >
+                  Meet Erin
+                  <Handshake className="h-4 w-4" />
+                </Link>
+              </div>
+            </div>
+          </motion.article>
         )}
 
         {/* Leadership row */}
@@ -55,78 +117,56 @@ export function TeamSection() {
           ))}
         </div>
 
-        {/* Full team grid */}
+        {/* Full team grid + Linda Fellow tribute in 4th slot */}
         <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {teamAgents.map((agent, index) => (
             <TeamMemberCard key={agent.slug} agent={agent} index={index} />
           ))}
-        </div>
 
-        {/* Allsberry Fellow */}
-        {fellows.length > 0 && (
-          <motion.div
-            initial={{ opacity: 0, y: 28 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-            className="mt-16"
-          >
-            <div className="mb-8 text-center">
-              <div className="mx-auto inline-flex items-center gap-2 rounded-full border border-gold/20 bg-white px-4 py-2 text-sm font-semibold uppercase tracking-[0.22em] text-gold shadow-sm">
-                <Award className="h-4 w-4" />
-                Allsberry Fellow
-              </div>
-            </div>
-
-            {fellows.map((fellow) => (
-              <div
-                key={fellow.name}
-                className="mx-auto max-w-3xl rounded-[2rem] border border-gray-100 bg-white p-8 shadow-[0_18px_45px_-38px_rgba(0,32,92,0.35)]"
-              >
-                <div className="flex flex-col items-center gap-6 text-center sm:flex-row sm:text-left">
-                  {fellow.photo ? (
-                    <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-full border-2 border-gold/30 shadow-lg">
-                      <Image
-                        src={fellow.photo.src}
-                        alt={fellow.photo.alt}
-                        width={80}
-                        height={80}
-                        className="h-full w-full object-cover object-top"
-                      />
-                    </div>
-                  ) : (
-                    <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-full bg-[linear-gradient(145deg,#b8860b_0%,#daa520_100%)] text-2xl font-display font-extrabold text-white shadow-lg">
-                      {fellow.initials}
-                    </div>
-                  )}
-                  <div>
-                    <h3 className="font-display text-2xl font-bold text-gray-900">
-                      {fellow.name}
-                    </h3>
-                    <p className="mt-1 text-sm font-semibold uppercase tracking-[0.2em] text-gold">
-                      Allsberry Fellow
-                    </p>
-                    <p className="mt-3 text-sm leading-7 text-gray-600">
-                      {fellow.recognition}
-                    </p>
-                    <p className="mt-2 text-sm leading-7 text-gray-500">
-                      {fellow.career}
-                    </p>
+          {/* Linda — Fellow tribute card */}
+          {fellows.map((fellow) => (
+            <motion.div
+              key={fellow.name}
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
+              className="relative flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-gold/20 bg-[linear-gradient(160deg,#fffdf5_0%,#fff8e7_50%,#fef3d0_100%)] p-5"
+            >
+              <div className="shimmer-border absolute inset-x-0 top-0 h-1 opacity-50" />
+              <div className="flex items-center gap-4">
+                {fellow.photo ? (
+                  <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-full border-2 border-gold/30 shadow-lg">
+                    <Image
+                      src={fellow.photo.src}
+                      alt={fellow.photo.alt}
+                      width={64}
+                      height={64}
+                      className="h-full w-full object-cover object-top"
+                    />
                   </div>
-                </div>
-
-                <div className="mt-6 rounded-2xl border border-gray-100 bg-gray-50 p-5">
-                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gray-400">
-                    What is an Allsberry Fellow?
-                  </p>
-                  <p className="mt-2 text-sm leading-7 text-gray-500">
-                    {fellowDefinition}
+                ) : (
+                  <div className="ambient-glow flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-[linear-gradient(145deg,#b8860b_0%,#daa520_100%)] text-xl font-display font-extrabold text-white shadow-lg">
+                    {fellow.initials}
+                  </div>
+                )}
+                <div className="min-w-0">
+                  <h3 className="font-display text-lg font-bold text-gray-900">{fellow.name}</h3>
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-gold">
+                    <Award className="mr-1 inline h-3 w-3" />
+                    Allsberry Fellow
                   </p>
                 </div>
               </div>
-            ))}
-          </motion.div>
-        )}
+              <p className="mt-4 flex-1 text-sm leading-7 text-gray-600 line-clamp-3">
+                {fellow.career}
+              </p>
+              <p className="mt-3 text-xs leading-5 text-gold/80 italic">
+                &ldquo;The Office Mom&rdquo; — 26 years of kindness, wisdom, and heart.
+              </p>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );

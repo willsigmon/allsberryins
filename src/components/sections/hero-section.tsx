@@ -35,6 +35,20 @@ import { cn } from "@/lib/utils";
 
 const heroProducts = products.filter((p) => heroProductSlugs.includes(p.slug));
 const cyclingWords = ["Home", "Auto", "Life", "Business"] as const;
+const supportModes = [
+  {
+    id: "quote",
+    label: "I need a quote",
+    description: "Preselect the right form and route.",
+  },
+  {
+    id: "proof",
+    label: "I need evidence of insurance",
+    description: "Use the documentation request flow.",
+  },
+] as const;
+
+type SupportMode = (typeof supportModes)[number]["id"];
 
 function readHeroProductUsage() {
   if (typeof window === "undefined") {
@@ -78,6 +92,8 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
   );
   const [zipCode, setZipCode] = useState("");
   const [wordIndex, setWordIndex] = useState(0);
+  const [supportMode, setSupportMode] = useState<SupportMode>("quote");
+
   useEffect(() => {
     const id = setInterval(
       () => setWordIndex((index) => (index + 1) % cyclingWords.length),
@@ -176,16 +192,96 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
               })}
             </div>
 
-            <div className="surface-card-strong mt-6 rounded-[2rem] border border-gray-100 p-5 shadow-[0_20px_60px_-42px_rgba(0,32,92,0.22)] sm:p-6">
-              <p className="text-sm font-semibold uppercase tracking-[0.22em] text-blue">
-                {selectedProductDetails?.shortName ?? "Coverage"}
-              </p>
-              <h2 className="mt-2 font-display text-2xl font-extrabold text-gray-900 sm:text-[1.9rem]">
-                {selectedHelpContent.headline}
-              </h2>
-              <p className="mt-3 max-w-2xl text-base leading-7 text-gray-600">
-                {selectedHelpContent.description}
-              </p>
+            <p className="mt-4 max-w-2xl text-sm leading-6 text-gray-400">
+              These shortcuts also tune the panel below, and this browser will gradually default to
+              the coverage people use most.
+            </p>
+
+            <div className="surface-card-strong mt-6 rounded-[2rem] border border-gray-100 p-4 shadow-[0_20px_60px_-42px_rgba(0,32,92,0.22)] sm:p-5">
+              <div className="grid gap-3 lg:grid-cols-[minmax(0,1fr)_minmax(16rem,17rem)] lg:items-start">
+                <div className="lg:min-h-[8.25rem]">
+                  <p className="text-sm font-semibold uppercase tracking-[0.22em] text-blue">
+                    How can we help?
+                  </p>
+                  <h2 className="mt-2 min-h-[3.75rem] font-display text-2xl font-extrabold text-gray-900 sm:text-[1.9rem]">
+                    {selectedHelpContent.headline}
+                  </h2>
+                  <p className="mt-2 min-h-[3.25rem] max-w-2xl text-sm leading-6 text-gray-600 sm:text-[15px]">
+                    {selectedHelpContent.description}
+                  </p>
+                </div>
+                <fieldset className="w-full">
+                  <legend className="sr-only">Choose the type of help you need</legend>
+                  <div
+                    role="radiogroup"
+                    aria-label="Choose the type of help you need"
+                    className="grid gap-2 sm:grid-cols-2"
+                  >
+                    {supportModes.map((mode) => {
+                      const active = supportMode === mode.id;
+                      return (
+                        <button
+                          key={mode.id}
+                          type="button"
+                          role="radio"
+                          aria-checked={active}
+                          onClick={() => { if (typeof navigator !== "undefined" && navigator.vibrate) navigator.vibrate(10); setSupportMode(mode.id); }}
+                          className={cn(
+                            "min-h-[4.25rem] rounded-[1.25rem] border px-3 py-2 text-left transition",
+                            active
+                              ? "border-blue bg-blue-light text-gray-900 shadow-[0_18px_36px_-28px_rgba(0,102,179,0.3)]"
+                              : "border-gray-200 bg-white text-gray-600 hover:border-blue/35 hover:text-gray-900",
+                          )}
+                        >
+                          <span className="block text-sm font-bold">{mode.label}</span>
+                          <span className="mt-1 block text-[11px] leading-4 text-gray-400">
+                            {mode.description}
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </fieldset>
+              </div>
+
+              <div className="mt-4 min-h-[4.5rem] rounded-[1.35rem] border border-blue/10 bg-blue-light px-3.5 py-2.5">
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue">
+                  {selectedProductDetails?.shortName ?? "Coverage"} quick starts
+                </p>
+                <div className="mt-2.5 flex flex-wrap gap-2">
+                  {selectedHelpContent.quickReasons.map((reason) => (
+                    <span
+                      key={reason}
+                      className="rounded-full border border-white/12 bg-white/70 px-2.5 py-1 text-[11px] font-semibold text-gray-900"
+                    >
+                      {reason}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="mt-4 grid gap-3 lg:grid-cols-[1.15fr_0.85fr]">
+                <div className="rounded-[1.35rem] border border-gray-100 bg-white/70 p-3.5 lg:min-h-[6.5rem]">
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue">
+                    Most common next step
+                  </p>
+                  <p className="mt-2 text-xs leading-6 text-gray-600 sm:text-sm">
+                    {selectedHelpContent.helperText}
+                  </p>
+                </div>
+                <div className="surface-card rounded-[1.35rem] border border-gray-100 p-3.5 lg:min-h-[6.5rem]">
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue">
+                    Selected line
+                  </p>
+                  <p className="mt-2 text-xs leading-6 text-gray-600 sm:text-sm">
+                    We&apos;ll keep the quote flow centered on{" "}
+                    <span className="font-semibold text-gray-900">
+                      {selectedProductDetails?.name ?? "the selected coverage"}
+                    </span>{" "}
+                    unless you pick a different path from the menu above.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -195,43 +291,41 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
 
             <div className="shimmer-border relative overflow-hidden rounded-[2rem] p-[3px] shadow-[0_35px_90px_-48px_rgba(0,32,92,0.8)]">
               <div className="hero-profile-shell relative overflow-hidden rounded-[1.85rem] p-5 sm:p-6">
-                <div className="hero-profile-inner relative rounded-[1.65rem] border p-5 text-white backdrop-blur-sm">
-                  <div className="hero-profile-glass flex w-fit items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold backdrop-blur-sm">
-                    <MapPin className="h-4 w-4" />
-                    Southern California
-                  </div>
-
-                  <div className="mt-5 flex items-center gap-5">
-                    <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-full border-2 border-white/30 shadow-[0_16px_38px_-18px_rgba(0,0,0,0.5)]">
+                <div className="hero-profile-inner relative rounded-[1.65rem] border p-4 text-white backdrop-blur-sm sm:p-5">
+                  <div className="flex items-center gap-4">
+                    <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-full border-2 border-white/30 shadow-[0_16px_38px_-18px_rgba(0,0,0,0.5)]">
                       <Image
                         src={officialProfile.headshot.src}
                         alt={officialProfile.headshot.alt}
-                        width={96}
-                        height={96}
+                        width={80}
+                        height={80}
                         priority
                         className="h-full w-full object-cover object-top"
                       />
                     </div>
-                    <div>
-                      <p className="text-xs font-semibold uppercase tracking-[0.26em] text-white/70">
-                        Agency leadership
-                      </p>
-                      <p className="mt-1 font-display text-2xl font-extrabold text-white">
-                        Erin Allsberry
-                      </p>
-                      <p className="mt-1 text-sm font-medium text-white/78">
+                    <div className="min-w-0">
+                      <div className="flex items-center gap-2">
+                        <p className="font-display text-xl font-extrabold text-white sm:text-2xl">
+                          Erin Allsberry
+                        </p>
+                        <span className="hero-profile-glass inline-flex items-center gap-1 rounded-lg border px-2 py-0.5 text-[10px] font-semibold text-white/70 backdrop-blur-sm">
+                          <MapPin className="h-2.5 w-2.5" />
+                          SoCal
+                        </span>
+                      </div>
+                      <p className="mt-0.5 text-xs font-medium text-white/70">
                         Owner & Principal Agent
                       </p>
                     </div>
                   </div>
 
-                  <div className="mt-5 grid gap-3 sm:grid-cols-2">
+                  <div className="mt-4 grid gap-2.5 sm:grid-cols-2">
                     {officialProfile.badges.map((badge) => (
                       <div
                         key={badge.title}
-                        className="hero-profile-glass flex items-center gap-3 rounded-[1.2rem] border px-4 py-3 backdrop-blur"
+                        className="hero-profile-glass flex items-center gap-2.5 rounded-[1rem] border px-3 py-2.5 backdrop-blur"
                       >
-                        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white/95 p-1.5">
+                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white/95 p-1">
                           <Image
                             src={badge.image.src}
                             alt={badge.image.alt}
@@ -240,14 +334,14 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
                             className="h-full w-full object-contain"
                           />
                         </div>
-                        <p className="font-display text-sm font-bold text-white">{badge.title}</p>
+                        <p className="font-display text-xs font-bold text-white">{badge.title}</p>
                       </div>
                     ))}
                   </div>
 
-                  <div className="hero-profile-glass mt-4 overflow-hidden rounded-[1.2rem] border backdrop-blur">
-                    <div className="flex items-center gap-4 p-4">
-                      <div className="h-16 w-24 shrink-0 overflow-hidden rounded-xl">
+                  <div className="hero-profile-glass mt-3 overflow-hidden rounded-[1rem] border backdrop-blur">
+                    <div className="flex items-center gap-3 p-3">
+                      <div className="h-12 w-20 shrink-0 overflow-hidden rounded-lg">
                         <Image
                           src={officialProfile.recognition[1].image.src}
                           alt={officialProfile.recognition[1].image.alt}
@@ -257,35 +351,32 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
                         />
                       </div>
                       <div>
-                        <p className="font-display text-sm font-bold text-white">
+                        <p className="font-display text-xs font-bold text-white">
                           {officialProfile.recognition[1].title}
                         </p>
-                        <p className="mt-1 text-xs leading-5 text-white/70">Farmers Insurance</p>
+                        <p className="text-[10px] leading-4 text-white/60">Farmers Insurance</p>
                       </div>
                     </div>
                   </div>
 
-                  <div className="mt-4 flex flex-wrap items-center gap-2">
+                  <div className="mt-3 flex flex-wrap items-center gap-1.5">
                     {officialProfile.highlights
-                      .filter((h) => h.label !== "Service area")
+                      .filter((h) => h.label !== "Service area" && h.label !== "Phone")
                       .map((highlight) => (
                       <div
                         key={highlight.label}
-                        className="hero-profile-pill rounded-full border px-3 py-1.5 text-xs font-semibold text-white/80"
+                        className="hero-profile-pill rounded-full border px-2.5 py-1 text-[10px] font-semibold text-white/75"
                       >
                         {highlight.value}
                       </div>
                     ))}
                   </div>
 
-                  <div className="mt-5 flex flex-wrap items-center gap-2">
+                  <div className="mt-4 flex flex-wrap items-center gap-2">
                     <Link
-                      href={buildTrackedHref("/agents/erin", {
-                        agent: "erin",
-                        entry: "hero-leadership-card",
-                      })}
+                      href={buildTrackedHref("/agents/erin", { agent: "erin", entry: "hero-leadership-card" })}
                       onClick={() => { if (typeof navigator !== "undefined" && navigator.vibrate) navigator.vibrate(10); }}
-                      className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2.5 text-sm font-bold text-gray-900 transition hover:bg-blue-light"
+                      className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-bold text-gray-900 transition hover:bg-blue-light"
                     >
                       Meet Erin
                       <ArrowRight className="h-4 w-4" />
@@ -293,7 +384,7 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
                     <Link
                       href={agency.phoneHref}
                       onClick={() => { if (typeof navigator !== "undefined" && navigator.vibrate) navigator.vibrate(10); }}
-                      className="hero-profile-glass inline-flex items-center gap-2 rounded-full border px-4 py-2.5 text-sm font-bold text-white transition hover:brightness-110"
+                      className="hero-profile-glass inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-bold text-white transition hover:brightness-110"
                     >
                       <Phone className="h-4 w-4" />
                       Contact Erin
