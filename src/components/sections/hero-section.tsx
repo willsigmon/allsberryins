@@ -5,13 +5,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
   ArrowRight,
-  BadgeCheck,
-  Mail,
   MapPin,
   Phone,
-  ShieldCheck,
-  Sparkles,
-  Star,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 
@@ -35,20 +30,6 @@ import { cn } from "@/lib/utils";
 
 const heroProducts = products.filter((p) => heroProductSlugs.includes(p.slug));
 const cyclingWords = ["Home", "Auto", "Life", "Business"] as const;
-const supportModes = [
-  {
-    id: "quote",
-    label: "I need a quote",
-    description: "Preselect the right form and route.",
-  },
-  {
-    id: "proof",
-    label: "I need evidence of insurance",
-    description: "Use the documentation request flow.",
-  },
-] as const;
-
-type SupportMode = (typeof supportModes)[number]["id"];
 
 function readHeroProductUsage() {
   if (typeof window === "undefined") {
@@ -92,8 +73,6 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
   );
   const [zipCode, setZipCode] = useState("");
   const [wordIndex, setWordIndex] = useState(0);
-  const [supportMode, setSupportMode] = useState<SupportMode>("quote");
-
   useEffect(() => {
     const id = setInterval(
       () => setWordIndex((index) => (index + 1) % cyclingWords.length),
@@ -128,13 +107,8 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
         style={{ backgroundImage: "var(--hero-glow)" }}
       />
 
-      <div className="relative mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8 lg:pb-16">
-        <div className="inline-flex items-center gap-2 rounded-full border border-blue/10 bg-white/90 px-4 py-2 text-sm font-semibold text-gray-900 shadow-sm">
-          <ShieldCheck className="h-4 w-4 text-blue" />
-          Serving families and businesses across Southern California
-        </div>
-
-        <h1 className="mt-3 font-display text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl">
+      <div className="relative mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8 lg:pb-14">
+        <h1 className="font-display text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl">
           We Specialize in{" "}
           <span
             key={cyclingWords[wordIndex]}
@@ -146,25 +120,9 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
           Insurance
         </h1>
 
-        <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-3">
-          <p className="max-w-xl text-lg leading-8 text-gray-600">
-            Tell us what you need and we will guide you to the right coverage.
-          </p>
-          <div className="flex flex-wrap gap-3">
-            <div className="hover-lift inline-flex items-center gap-2 rounded-full border border-gray-100 bg-white px-4 py-2 text-sm font-semibold text-gray-900 shadow-sm">
-              <Sparkles className="h-4 w-4 text-blue" />
-              5,000+ protected
-            </div>
-            <div className="hover-lift inline-flex items-center gap-2 rounded-full border border-gold/20 bg-white px-4 py-2 text-sm font-semibold text-gray-900 shadow-sm">
-              <Star className="h-4 w-4 fill-gold text-gold" />
-              Fast follow-up
-            </div>
-            <div className="hover-lift inline-flex items-center gap-2 rounded-full border border-gray-100 bg-white px-4 py-2 text-sm font-semibold text-gray-900 shadow-sm">
-              <BadgeCheck className="h-4 w-4 text-blue" />
-              Flexible coverage
-            </div>
-          </div>
-        </div>
+        <p className="mt-4 max-w-lg text-lg leading-8 text-gray-600">
+          Tell us what you need and we&apos;ll guide you to the right coverage.
+        </p>
 
         <div className="mt-8 grid gap-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
           <div>
@@ -192,98 +150,24 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
               })}
             </div>
 
-            <p className="mt-4 max-w-2xl text-sm leading-6 text-gray-400">
-              These shortcuts also tune the panel below, and this browser will gradually default to
-              the coverage people use most.
-            </p>
-
-            <div className="surface-card-strong mt-6 rounded-[2rem] border border-gray-100 p-4 shadow-[0_20px_60px_-42px_rgba(0,32,92,0.22)] sm:p-5">
-              <div className="grid gap-3 lg:grid-cols-[minmax(0,1fr)_minmax(16rem,17rem)] lg:items-start">
-                <div className="lg:min-h-[8.25rem]">
-                  <p className="text-sm font-semibold uppercase tracking-[0.22em] text-blue">
-                    How can we help?
-                  </p>
-                  <h2 className="mt-2 min-h-[3.75rem] font-display text-2xl font-extrabold text-gray-900 sm:text-[1.9rem]">
-                    {selectedHelpContent.headline}
-                  </h2>
-                  <p className="mt-2 min-h-[3.25rem] max-w-2xl text-sm leading-6 text-gray-600 sm:text-[15px]">
-                    {selectedHelpContent.description}
-                  </p>
-                </div>
-                <fieldset className="w-full">
-                  <legend className="sr-only">Choose the type of help you need</legend>
-                  <div
-                    role="radiogroup"
-                    aria-label="Choose the type of help you need"
-                    className="grid gap-2 sm:grid-cols-2"
+            <div className="surface-card-strong mt-5 rounded-[1.75rem] border border-gray-100 p-5 shadow-[0_16px_48px_-36px_rgba(0,32,92,0.2)]">
+              <h2 className="font-display text-xl font-extrabold text-gray-900 sm:text-2xl">
+                {selectedHelpContent.headline}
+              </h2>
+              <p className="mt-2 max-w-xl text-sm leading-6 text-gray-600">
+                {selectedHelpContent.description}
+              </p>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {selectedHelpContent.quickReasons.map((reason) => (
+                  <span
+                    key={reason}
+                    className="rounded-full border border-blue/10 bg-blue-light px-3 py-1.5 text-[11px] font-semibold text-blue"
                   >
-                    {supportModes.map((mode) => {
-                      const active = supportMode === mode.id;
-                      return (
-                        <button
-                          key={mode.id}
-                          type="button"
-                          role="radio"
-                          aria-checked={active}
-                          onClick={() => { if (typeof navigator !== "undefined" && navigator.vibrate) navigator.vibrate(10); setSupportMode(mode.id); }}
-                          className={cn(
-                            "min-h-[4.25rem] rounded-[1.25rem] border px-3 py-2 text-left transition",
-                            active
-                              ? "border-blue bg-blue-light text-gray-900 shadow-[0_18px_36px_-28px_rgba(0,102,179,0.3)]"
-                              : "border-gray-200 bg-white text-gray-600 hover:border-blue/35 hover:text-gray-900",
-                          )}
-                        >
-                          <span className="block text-sm font-bold">{mode.label}</span>
-                          <span className="mt-1 block text-[11px] leading-4 text-gray-400">
-                            {mode.description}
-                          </span>
-                        </button>
-                      );
-                    })}
-                  </div>
-                </fieldset>
-              </div>
-
-              <div className="mt-4 min-h-[4.5rem] rounded-[1.35rem] border border-blue/10 bg-blue-light px-3.5 py-2.5">
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue">
-                  {selectedProductDetails?.shortName ?? "Coverage"} quick starts
-                </p>
-                <div className="mt-2.5 flex flex-wrap gap-2">
-                  {selectedHelpContent.quickReasons.map((reason) => (
-                    <span
-                      key={reason}
-                      className="rounded-full border border-white/12 bg-white/70 px-2.5 py-1 text-[11px] font-semibold text-gray-900"
-                    >
-                      {reason}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              <div className="mt-4 grid gap-3 lg:grid-cols-[1.15fr_0.85fr]">
-                <div className="rounded-[1.35rem] border border-gray-100 bg-white/70 p-3.5 lg:min-h-[6.5rem]">
-                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue">
-                    Most common next step
-                  </p>
-                  <p className="mt-2 text-xs leading-6 text-gray-600 sm:text-sm">
-                    {selectedHelpContent.helperText}
-                  </p>
-                </div>
-                <div className="surface-card rounded-[1.35rem] border border-gray-100 p-3.5 lg:min-h-[6.5rem]">
-                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue">
-                    Selected line
-                  </p>
-                  <p className="mt-2 text-xs leading-6 text-gray-600 sm:text-sm">
-                    We&apos;ll keep the quote flow centered on{" "}
-                    <span className="font-semibold text-gray-900">
-                      {selectedProductDetails?.name ?? "the selected coverage"}
-                    </span>{" "}
-                    unless you pick a different path from the menu above.
-                  </p>
-                </div>
+                    {reason}
+                  </span>
+                ))}
               </div>
             </div>
-
           </div>
 
           {/* Right column — Erin's profile card only */}
