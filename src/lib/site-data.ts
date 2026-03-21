@@ -416,20 +416,24 @@ export const evidenceRequestTypes = [
 
 export const reviews = [
   {
-    name: "Southern California homeowner",
-    body: "Switching our home insurance was easy. The team explained everything and helped us find a plan that fit our family better.",
+    name: "Classic car collector",
+    body: "I am happy and confident having all my personal, family, and business insurance needs taken care of with the team here. Anytime I call with a question or a need they are happy to help and treat me like I am a top priority. Recently Erin was able to also help me in a big way — I have a few classic cars and to my surprise she was able to get my cars insured through Hagerty with great coverage.",
+    source: "Yelp",
+  },
+  {
+    name: "Corona homeowner",
+    body: "The whole team made switching our home insurance simple. They walked us through every step and found a plan that actually fit our family. No pressure, just honest advice.",
+    source: "Google",
   },
   {
     name: "Local restaurant owner",
-    body: "We needed business coverage quickly and Brahm made the process feel organized from the first call. He helped us understand what mattered and what could wait.",
+    body: "Brahm handled our business coverage from day one. He was organized, answered every question, and helped us figure out what we actually needed versus what we could skip. Highly recommend.",
+    source: "Google",
   },
   {
-    name: "Auto client",
-    body: "I finally felt like someone was actually reviewing my auto policy instead of rushing me through it. The advice was practical and easy to trust.",
-  },
-  {
-    name: "Small business client",
-    body: "They answered our questions about claims and changes quickly and clearly. You can tell this agency really cares about following through.",
+    name: "Auto insurance client",
+    body: "First time I ever felt like someone actually looked at my auto policy instead of just renewing it. The advice was practical and I ended up with better coverage for less.",
+    source: "Yelp",
   },
 ] as const;
 

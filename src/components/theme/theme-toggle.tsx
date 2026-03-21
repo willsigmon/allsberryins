@@ -393,7 +393,7 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
         type="button"
         onClick={() => setOpen((value) => !value)}
         className={cn(
-          "inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-2 focus-visible:ring-offset-navy",
+          "inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1.5 text-xs font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-2 focus-visible:ring-offset-navy",
           className,
         )}
         title="Display settings"
@@ -402,13 +402,9 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
         aria-expanded={open}
         aria-haspopup="dialog"
       >
-        <Accessibility className="h-4 w-4" />
-        <span className="hidden lg:inline">Display</span>
-        <span aria-hidden="true" className="text-[12px] font-bold">
-          aA
-        </span>
-        <ActiveIcon className="h-4 w-4" />
-        <ChevronDown className={cn("h-4 w-4 transition-transform", open && "rotate-180")} />
+        <ActiveIcon className="h-3.5 w-3.5" />
+        <span aria-hidden="true" className="text-[11px] font-bold">aA</span>
+        <ChevronDown className={cn("h-3 w-3 transition-transform", open && "rotate-180")} />
       </button>
 
       <span id={helperId} className="sr-only" aria-live="polite">

@@ -158,7 +158,7 @@ export function TeamSection() {
                   </p>
                 </div>
               </div>
-              <p className="mt-4 flex-1 text-sm leading-7 text-gray-600 line-clamp-3">
+              <p className="mt-4 flex-1 text-sm leading-7 text-gray-600">
                 {fellow.career}
               </p>
               <p className="mt-3 text-xs leading-5 text-gold/80 italic">
@@ -303,7 +303,7 @@ function TeamMemberCard({ agent, index }: { agent: Agent; index: number }) {
         </div>
       </div>
 
-      <p className="mt-4 flex-1 text-sm leading-7 text-gray-600 line-clamp-3">{agent.bio}</p>
+      <p className="mt-4 flex-1 text-sm leading-7 text-gray-600">{agent.bio}</p>
 
       <Link
         href={buildTrackedHref(`/agents/${agent.slug}`, {

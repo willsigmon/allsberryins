@@ -186,7 +186,7 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
                     )}
                   >
                     <Icon className="h-4 w-4" />
-                    <span className="truncate">{product.shortName}</span>
+                    <span>{product.shortName}</span>
                   </button>
                 );
               })}
@@ -328,8 +328,11 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
                         <p className="font-display text-xl font-extrabold text-white">
                           Erin Allsberry
                         </p>
-                        <span className="hero-profile-glass inline-flex items-center gap-1 rounded-lg border px-2 py-0.5 text-[10px] font-semibold text-white/70 backdrop-blur-sm">
-                          <MapPin className="h-2.5 w-2.5" />
+                        <span className="pin-drop relative inline-flex items-center gap-1 text-[10px] font-semibold text-white/80">
+                          <span className="relative">
+                            <MapPin className="h-3.5 w-3.5 text-red" />
+                            <span className="pin-pulse-ring absolute inset-0 rounded-full bg-red/30" />
+                          </span>
                           SoCal
                         </span>
                       </div>
