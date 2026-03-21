@@ -166,7 +166,7 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
           </div>
         </div>
 
-        <div className="mt-8 grid gap-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-start">
+        <div className="mt-8 grid gap-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
           <div>
             <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-6">
               {heroProducts.map((product) => {
@@ -284,24 +284,6 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
               </div>
             </div>
 
-            {/* ZIP Code form — under left panel */}
-            <div className="mt-5 flex items-center gap-3">
-              <input
-                value={zipCode}
-                onChange={(event) => setZipCode(event.target.value)}
-                inputMode="numeric"
-                placeholder="Enter ZIP code"
-                className="h-12 flex-1 rounded-2xl border border-gray-200 px-4 text-base text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-blue focus:ring-4 focus:ring-blue/10"
-              />
-              <button
-                type="button"
-                onClick={() => { if (typeof navigator !== "undefined" && navigator.vibrate) navigator.vibrate(10); startQuote(); }}
-                className="cta-glow inline-flex h-12 shrink-0 items-center justify-center gap-2 rounded-2xl bg-red px-6 text-sm font-bold text-white transition-all hover:bg-red-hover hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red focus-visible:ring-offset-2"
-              >
-                Start Quote
-                <ArrowRight className="h-4 w-4" />
-              </button>
-            </div>
           </div>
 
           {/* Right column — Erin's profile card only */}
@@ -427,6 +409,25 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
                   </div>
                 </div>
               </div>
+            </div>
+
+            {/* ZIP Code form — under Erin's card */}
+            <div className="surface-card mt-4 flex items-center gap-3 rounded-2xl border border-gray-100 p-3 shadow-[0_12px_36px_-24px_rgba(0,32,92,0.4)]">
+              <input
+                value={zipCode}
+                onChange={(event) => setZipCode(event.target.value)}
+                inputMode="numeric"
+                placeholder="Enter ZIP code"
+                className="h-11 flex-1 rounded-xl border border-gray-200 px-4 text-sm text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-blue focus:ring-4 focus:ring-blue/10"
+              />
+              <button
+                type="button"
+                onClick={() => { if (typeof navigator !== "undefined" && navigator.vibrate) navigator.vibrate(10); startQuote(); }}
+                className="cta-glow inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-xl bg-red px-5 text-sm font-bold text-white transition-all hover:bg-red-hover hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red focus-visible:ring-offset-2"
+              >
+                Start Quote
+                <ArrowRight className="h-4 w-4" />
+              </button>
             </div>
           </div>
         </div>
