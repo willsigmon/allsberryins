@@ -124,7 +124,7 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
           Tell us what you need and we&apos;ll guide you to the right coverage.
         </p>
 
-        <div className="mt-8 grid gap-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
+        <div className="mt-6 grid gap-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-start">
           <div>
             <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-6">
               {heroProducts.map((product) => {
