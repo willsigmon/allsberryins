@@ -283,29 +283,49 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
                 </div>
               </div>
             </div>
+
+            {/* ZIP Code form — under left panel */}
+            <div className="mt-5 flex items-center gap-3">
+              <input
+                value={zipCode}
+                onChange={(event) => setZipCode(event.target.value)}
+                inputMode="numeric"
+                placeholder="Enter ZIP code"
+                className="h-12 flex-1 rounded-2xl border border-gray-200 px-4 text-base text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-blue focus:ring-4 focus:ring-blue/10"
+              />
+              <button
+                type="button"
+                onClick={() => { if (typeof navigator !== "undefined" && navigator.vibrate) navigator.vibrate(10); startQuote(); }}
+                className="cta-glow inline-flex h-12 shrink-0 items-center justify-center gap-2 rounded-2xl bg-red px-6 text-sm font-bold text-white transition-all hover:bg-red-hover hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red focus-visible:ring-offset-2"
+              >
+                Start Quote
+                <ArrowRight className="h-4 w-4" />
+              </button>
+            </div>
           </div>
 
+          {/* Right column — Erin's profile card only */}
           <div className="relative">
             <div className="ambient-glow absolute -left-8 top-8 hidden h-32 w-32 rounded-full bg-blue/14 blur-3xl sm:block" />
             <div className="ambient-glow absolute -right-8 bottom-8 hidden h-36 w-36 rounded-full bg-red/16 blur-[40px] sm:block" style={{ animationDelay: "2s" }} />
 
             <div className="shimmer-border relative overflow-hidden rounded-[2rem] p-[3px] shadow-[0_35px_90px_-48px_rgba(0,32,92,0.8)]">
-              <div className="hero-profile-shell relative overflow-hidden rounded-[1.85rem] p-5 sm:p-6">
-                <div className="hero-profile-inner relative rounded-[1.65rem] border p-4 text-white backdrop-blur-sm sm:p-5">
+              <div className="hero-profile-shell relative overflow-hidden rounded-[1.85rem] p-4 sm:p-5">
+                <div className="hero-profile-inner relative rounded-[1.65rem] border p-4 text-white backdrop-blur-sm">
                   <div className="flex items-center gap-4">
-                    <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-full border-2 border-white/30 shadow-[0_16px_38px_-18px_rgba(0,0,0,0.5)]">
+                    <div className="relative h-18 w-18 shrink-0 overflow-hidden rounded-full border-2 border-white/30 shadow-[0_16px_38px_-18px_rgba(0,0,0,0.5)]">
                       <Image
                         src={officialProfile.headshot.src}
                         alt={officialProfile.headshot.alt}
-                        width={80}
-                        height={80}
+                        width={72}
+                        height={72}
                         priority
                         className="h-full w-full object-cover object-top"
                       />
                     </div>
                     <div className="min-w-0">
                       <div className="flex items-center gap-2">
-                        <p className="font-display text-xl font-extrabold text-white sm:text-2xl">
+                        <p className="font-display text-xl font-extrabold text-white">
                           Erin Allsberry
                         </p>
                         <span className="hero-profile-glass inline-flex items-center gap-1 rounded-lg border px-2 py-0.5 text-[10px] font-semibold text-white/70 backdrop-blur-sm">
@@ -319,13 +339,13 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
                     </div>
                   </div>
 
-                  <div className="mt-4 grid gap-2.5 sm:grid-cols-2">
+                  <div className="mt-3 grid gap-2 sm:grid-cols-2">
                     {officialProfile.badges.map((badge) => (
                       <div
                         key={badge.title}
-                        className="hero-profile-glass flex items-center gap-2.5 rounded-[1rem] border px-3 py-2.5 backdrop-blur"
+                        className="hero-profile-glass flex items-center gap-2 rounded-[0.85rem] border px-2.5 py-2 backdrop-blur"
                       >
-                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white/95 p-1">
+                        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white/95 p-1">
                           <Image
                             src={badge.image.src}
                             alt={badge.image.alt}
@@ -334,14 +354,14 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
                             className="h-full w-full object-contain"
                           />
                         </div>
-                        <p className="font-display text-xs font-bold text-white">{badge.title}</p>
+                        <p className="font-display text-[11px] font-bold leading-tight text-white">{badge.title}</p>
                       </div>
                     ))}
                   </div>
 
-                  <div className="hero-profile-glass mt-3 overflow-hidden rounded-[1rem] border backdrop-blur">
-                    <div className="flex items-center gap-3 p-3">
-                      <div className="h-12 w-20 shrink-0 overflow-hidden rounded-lg">
+                  <div className="hero-profile-glass mt-2.5 overflow-hidden rounded-[0.85rem] border backdrop-blur">
+                    <div className="flex items-center gap-3 p-2.5">
+                      <div className="h-10 w-16 shrink-0 overflow-hidden rounded-lg">
                         <Image
                           src={officialProfile.recognition[1].image.src}
                           alt={officialProfile.recognition[1].image.alt}
@@ -351,15 +371,15 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
                         />
                       </div>
                       <div>
-                        <p className="font-display text-xs font-bold text-white">
+                        <p className="font-display text-[11px] font-bold leading-tight text-white">
                           {officialProfile.recognition[1].title}
                         </p>
-                        <p className="text-[10px] leading-4 text-white/60">Farmers Insurance</p>
+                        <p className="text-[10px] text-white/60">Farmers Insurance</p>
                       </div>
                     </div>
                   </div>
 
-                  <div className="mt-3 flex flex-wrap items-center gap-1.5">
+                  <div className="mt-2.5 flex flex-wrap items-center gap-1.5">
                     {officialProfile.highlights
                       .filter((h) => h.label !== "Service area" && h.label !== "Phone")
                       .map((highlight) => (
@@ -372,22 +392,22 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
                     ))}
                   </div>
 
-                  <div className="mt-4 flex flex-wrap items-center gap-2">
+                  <div className="mt-3 flex flex-wrap items-center gap-2">
                     <Link
                       href={buildTrackedHref("/agents/erin", { agent: "erin", entry: "hero-leadership-card" })}
                       onClick={() => { if (typeof navigator !== "undefined" && navigator.vibrate) navigator.vibrate(10); }}
-                      className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-bold text-gray-900 transition hover:bg-blue-light"
+                      className="inline-flex items-center gap-1.5 rounded-full bg-white px-3.5 py-2 text-xs font-bold text-gray-900 transition hover:bg-blue-light"
                     >
                       Meet Erin
-                      <ArrowRight className="h-4 w-4" />
+                      <ArrowRight className="h-3.5 w-3.5" />
                     </Link>
                     <Link
                       href={agency.phoneHref}
                       onClick={() => { if (typeof navigator !== "undefined" && navigator.vibrate) navigator.vibrate(10); }}
-                      className="hero-profile-glass inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-bold text-white transition hover:brightness-110"
+                      className="hero-profile-glass inline-flex items-center gap-1.5 rounded-full border px-3.5 py-2 text-xs font-bold text-white transition hover:brightness-110"
                     >
-                      <Phone className="h-4 w-4" />
-                      Contact Erin
+                      <Phone className="h-3.5 w-3.5" />
+                      Contact
                     </Link>
                     <SaveContactButton
                       name="Erin Allsberry"
@@ -398,69 +418,6 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
                     />
                   </div>
                 </div>
-              </div>
-            </div>
-
-            <div className="surface-card mt-5 rounded-[2rem] border border-gray-100 p-5 shadow-[0_20px_60px_-42px_rgba(0,32,92,0.6)] sm:p-6">
-              <div className="grid gap-3 sm:grid-cols-[minmax(0,1.45fr)_minmax(10.75rem,1fr)] sm:items-end">
-                <label className="grid gap-2.5 text-sm font-semibold text-gray-900">
-                  ZIP Code
-                  <input
-                    value={zipCode}
-                    onChange={(event) => setZipCode(event.target.value)}
-                    inputMode="numeric"
-                    placeholder="Enter ZIP code"
-                    className="h-14 rounded-2xl border border-gray-200 px-4 text-base text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-blue focus:ring-4 focus:ring-blue/10"
-                  />
-                </label>
-                <button
-                  type="button"
-                  onClick={() => { if (typeof navigator !== "undefined" && navigator.vibrate) navigator.vibrate(10); startQuote(); }}
-                  className="cta-glow inline-flex h-14 items-center justify-center gap-2 rounded-2xl bg-red px-8 text-base font-bold text-white transition-all hover:bg-red-hover hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red focus-visible:ring-offset-2"
-                >
-                  Start Quote
-                  <ArrowRight className="h-4 w-4" />
-                </button>
-              </div>
-              <div className="mt-4 grid gap-3 sm:grid-cols-2">
-                <div className="rounded-[1.35rem] border border-blue/10 bg-blue-light px-4 py-3.5">
-                  <div className="flex items-start gap-3">
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white text-blue shadow-sm">
-                      <BadgeCheck className="h-5 w-5" />
-                    </div>
-                    <div>
-                      <p className="text-sm font-bold text-gray-900">Bundle-friendly savings</p>
-                      <p className="mt-1 text-xs leading-5 text-gray-600 sm:text-[13px]">
-                        {selectedProductDetails?.shortName ?? "Coverage"} shoppers often save more
-                        when they bundle.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <Link
-                  href={buildTrackedHref("/evidence-of-insurance", {
-                    audience: selectedHelpContent.cards[0]?.proof.audience,
-                    entry: `hero-proof-inline-${selectedProduct}`,
-                    product: selectedProduct,
-                  })}
-                  className="group rounded-[1.35rem] border border-blue/12 bg-white/90 px-4 py-3.5 transition hover:border-blue/28 hover:bg-blue-light"
-                >
-                  <div className="flex items-start gap-3">
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-navy text-white shadow-sm">
-                      <Mail className="h-5 w-5" />
-                    </div>
-                    <div className="min-w-0">
-                      <p className="text-sm font-bold text-gray-900">Need proof instead?</p>
-                      <p className="mt-1 text-xs leading-5 text-gray-600 sm:text-[13px]">
-                        Skip the quote and go straight to requesting your insurance paperwork.
-                      </p>
-                      <span className="mt-2 inline-flex items-center gap-2 text-[13px] font-semibold text-blue transition group-hover:gap-3">
-                        Start proof request
-                        <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                      </span>
-                    </div>
-                  </div>
-                </Link>
               </div>
             </div>
           </div>
