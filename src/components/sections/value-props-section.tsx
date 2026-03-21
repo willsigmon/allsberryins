@@ -26,21 +26,19 @@ export function ValuePropsSection() {
             return (
               <motion.div
                 key={item.title}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 32, scale: 0.95 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.4, ease: "easeOut", delay: index * 0.08 }}
+                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: index * 0.12 }}
+                whileHover={{ y: -6, scale: 1.02 }}
               >
                 <Link
                   href={buildTrackedHref("/quote", { entry: `value-prop-${item.title.toLowerCase().replace(/\s+/g, "-")}` })}
                   onClick={() => { if (typeof navigator !== "undefined" && navigator.vibrate) navigator.vibrate(10); }}
-                  className="card-accent-strip parallax-card group relative flex h-full flex-col overflow-hidden rounded-[2rem] border border-gray-100 p-6 transition hover:border-blue/30"
+                  className="card-accent-strip group relative flex h-full flex-col overflow-hidden rounded-[2rem] border border-gray-100 p-6 transition hover:border-blue/30"
                 >
-                  <div className="flex items-center gap-3">
-                    <div className="step-badge">{index + 1}</div>
-                    <div className="icon-glow flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-light text-blue">
-                      <Icon className="h-7 w-7" />
-                    </div>
+                  <div className="icon-glow flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-light text-blue">
+                    <Icon className="h-7 w-7" />
                   </div>
                   <h3 className="mt-6 font-display text-xl font-bold text-gray-900">{item.title}</h3>
                   <p className="mt-3 flex-1 text-sm leading-7 text-gray-600">{item.description}</p>
