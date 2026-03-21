@@ -231,10 +231,12 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
                     </p>
                   </div>
                 </div>
-                <span className="mt-3 flex items-center justify-center gap-1.5 text-xs font-semibold text-blue transition group-hover:gap-2.5">
-                  Start proof request
-                  <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
-                </span>
+                <div className="mt-3 text-center">
+                  <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-blue transition group-hover:gap-2.5">
+                    Start proof request
+                    <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                  </span>
+                </div>
               </Link>
             </div>
           </div>
