@@ -268,29 +268,13 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
                         </p>
                       </div>
 
-                      {/* SoCal mini-map */}
-                      <div className="pin-drop flex flex-col items-center gap-0.5">
-                        <div className="relative h-12 w-14">
-                          {/* Simplified SoCal coastline */}
-                          <svg viewBox="0 0 56 48" fill="none" className="h-full w-full" aria-hidden="true">
-                            <path
-                              d="M8 4 L18 6 L24 3 L32 8 L38 7 L44 12 L48 18 L46 26 L42 32 L36 38 L30 42 L22 44 L16 40 L12 34 L10 26 L6 18 L4 12 Z"
-                              fill="rgba(255,255,255,0.08)"
-                              stroke="rgba(255,255,255,0.25)"
-                              strokeWidth="1"
-                            />
-                            {/* Corona area pin location */}
-                            <circle cx="34" cy="28" r="6" className="fill-red/15 pin-pulse-ring" />
-                            <circle cx="34" cy="28" r="3" className="fill-red/20 pin-pulse-ring" style={{ animationDelay: "1s" }} />
-                          </svg>
-                          {/* Pin icon on Corona */}
-                          <div className="absolute" style={{ left: "50%", top: "46%", transform: "translate(-50%, -100%)" }}>
-                            <MapPin className="h-4 w-4 fill-red text-red drop-shadow-[0_1px_3px_rgba(218,41,28,0.5)]" />
-                          </div>
+                      {/* SoCal location badge */}
+                      <div className="pin-drop hero-profile-glass flex items-center gap-1.5 rounded-xl border px-3 py-2 backdrop-blur-sm">
+                        <div className="relative">
+                          <MapPin className="h-4 w-4 fill-red text-red" />
+                          <span className="pin-pulse-ring absolute -inset-1 rounded-full bg-red/20" />
                         </div>
-                        <span className="text-[9px] font-bold uppercase tracking-[0.18em] text-white/50">
-                          SoCal
-                        </span>
+                        <span className="text-[11px] font-bold text-white/80">Corona, CA</span>
                       </div>
                     </div>
                   </div>
