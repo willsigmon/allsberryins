@@ -5,6 +5,7 @@ import { LoaderCircle } from "lucide-react";
 import { useId, useMemo, useState } from "react";
 import { type DefaultValues, useForm, useWatch } from "react-hook-form";
 
+import { AddressAutocomplete } from "@/components/forms/address-autocomplete";
 import {
   employeeOptions,
   productSelectionOptions,
@@ -65,6 +66,7 @@ export function QuoteForm({
     handleSubmit,
     reset,
     setValue,
+    watch,
     formState: { errors, isSubmitting },
   } = useForm<QuoteFormValues>({
     resolver: zodResolver(quoteFormSchema),
@@ -227,14 +229,19 @@ export function QuoteForm({
             />
           </Field>
           <Field label="Address" error={errors.address?.message} inputId={`${formId}-address`}>
-            <input
-              {...register("address")}
+            <AddressAutocomplete
               id={`${formId}-address`}
-              autoComplete="street-address"
+              value={watch("address") ?? ""}
+              onChange={(val) => setValue("address", val, { shouldValidate: true })}
+              onSelect={(suggestion) => {
+                if (suggestion.postalCode) {
+                  setValue("zipCode", suggestion.postalCode, { shouldValidate: true });
+                }
+              }}
+              placeholder="123 Main St, Corona, CA"
+              className={inputClassName}
               aria-describedby={errors.address ? `${formId}-address-error` : undefined}
               aria-invalid={Boolean(errors.address)}
-              className={inputClassName}
-              placeholder="123 Main St, Corona, CA"
             />
           </Field>
           <Field label="ZIP Code" error={errors.zipCode?.message} inputId={`${formId}-zip`}>
