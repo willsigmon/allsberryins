@@ -127,8 +127,9 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
 
         <div className="mt-6 grid gap-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
           <div>
-            <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-6">
-              {heroProducts.map((product) => {
+            {/* Headliner row: Home + Auto */}
+            <div className="grid grid-cols-2 gap-2">
+              {heroProducts.filter((p) => p.slug === "home" || p.slug === "auto").map((product) => {
                 const Icon = getIcon(product.icon);
                 const isActive = selectedProduct === product.slug;
                 return (
@@ -138,13 +139,37 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
                     aria-pressed={isActive}
                     onClick={() => { if (typeof navigator !== "undefined" && navigator.vibrate) navigator.vibrate(10); handleProductSelect(product.slug); }}
                     className={cn(
-                      "inline-flex min-w-0 w-full items-center justify-center gap-1.5 rounded-full border px-3 py-2.5 text-[13px] font-semibold whitespace-nowrap transition-[background-color,border-color,color,box-shadow] duration-150 sm:text-sm",
+                      "inline-flex w-full items-center justify-center gap-2 rounded-2xl border px-4 py-3.5 text-sm font-bold transition-all duration-150",
+                      isActive
+                        ? "border-blue bg-navy text-white shadow-[0_12px_28px_-12px_rgba(0,32,92,0.55)]"
+                        : "border-gray-200 bg-white text-gray-700 hover:border-blue hover:text-blue hover:shadow-[0_8px_20px_-12px_rgba(0,102,179,0.2)]",
+                    )}
+                  >
+                    <Icon className="h-5 w-5" />
+                    {product.shortName}
+                  </button>
+                );
+              })}
+            </div>
+            {/* Secondary row: Renters, Life, Umbrella, Business */}
+            <div className="mt-2 grid grid-cols-4 gap-2">
+              {heroProducts.filter((p) => p.slug !== "home" && p.slug !== "auto").map((product) => {
+                const Icon = getIcon(product.icon);
+                const isActive = selectedProduct === product.slug;
+                return (
+                  <button
+                    key={product.slug}
+                    type="button"
+                    aria-pressed={isActive}
+                    onClick={() => { if (typeof navigator !== "undefined" && navigator.vibrate) navigator.vibrate(10); handleProductSelect(product.slug); }}
+                    className={cn(
+                      "inline-flex w-full items-center justify-center gap-1.5 rounded-full border px-2 py-2 text-[12px] font-semibold whitespace-nowrap transition-all duration-150 sm:text-[13px]",
                       isActive
                         ? "border-blue bg-navy text-white shadow-[0_10px_24px_-14px_rgba(0,32,92,0.55)]"
                         : "border-gray-200 bg-white text-gray-600 hover:border-blue hover:text-blue",
                     )}
                   >
-                    <Icon className="h-4 w-4" />
+                    <Icon className="h-3.5 w-3.5" />
                     <span>{product.shortName}</span>
                   </button>
                 );
