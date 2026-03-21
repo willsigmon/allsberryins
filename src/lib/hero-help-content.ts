@@ -218,7 +218,7 @@ const heroHelpContent: Partial<Record<ProductSlug, HeroHelpContent>> = {
         id: "renters-landlord",
         title: "Leasing office or property manager",
         description:
-          "Best for declarations pages, additional interested parties, or lease-compliance paperwork that needs a fast handoff.",
+          "Best for proof-of-coverage letters, additional interested parties, or lease-compliance paperwork that needs a fast handoff.",
         icon: "shieldCheck",
         quote: {
           href: "/quote",
@@ -239,7 +239,7 @@ const heroHelpContent: Partial<Record<ProductSlug, HeroHelpContent>> = {
   life: {
     headline: "Life coverage starts with who you are protecting.",
     description:
-      "Life shoppers usually want to protect income, cover a growing family, or review a policy they already have but do not fully trust yet.",
+      "Our life process is built with privacy at the center — we only see what we need to know, never your full personal details. Quick, streamlined, and unlike anything else in the industry.",
     helperText:
       "If they are unsure, the growing-family path is the most natural entry point and usually leads to the right follow-up conversation.",
     quickReasons: ["Growing family", "Income replacement", "Existing policy review"],

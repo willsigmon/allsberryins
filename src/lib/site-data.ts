@@ -277,7 +277,7 @@ export const products: Product[] = [
     slug: "life",
     name: "Life Insurance",
     shortName: "Life",
-    description: "Create a safety net for the people who matter most to you. Our streamlined process keeps your personal information private and secure.",
+    description: "Protect the people who matter most with a process built for privacy. We never see your full personal details — only enough to know if you qualify. Quick, secure, and unlike anything else in the industry.",
     icon: "heartPulse",
     category: "personal",
   },
