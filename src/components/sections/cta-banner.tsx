@@ -14,6 +14,8 @@ export function CtaBanner() {
           d="M0,96L60,90.7C120,85,240,75,360,74.7C480,75,600,85,720,90.7C840,96,960,96,1080,85.3C1200,75,1320,53,1380,42.7L1440,32L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z"
         />
       </svg>
+      <div className="absolute -left-32 top-1/2 h-64 w-64 -translate-y-1/2 rounded-full bg-white/5 blur-3xl" />
+      <div className="absolute -right-24 top-1/4 h-48 w-48 rounded-full bg-white/4 blur-3xl" />
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="gradient-border rounded-[2.5rem] bg-white/6 px-6 py-12 backdrop-blur-md sm:px-10 lg:flex lg:items-center lg:justify-between">
           <div className="max-w-2xl">
@@ -37,6 +39,7 @@ export function CtaBanner() {
             <Link
               href="/quote"
               className="cta-glow inline-flex items-center justify-center rounded-full bg-red px-7 py-4 text-base font-bold text-white transition hover:bg-red-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-red"
+              onClick={() => { if (typeof navigator !== "undefined" && navigator.vibrate) navigator.vibrate(10); }}
             >
               Get Your Free Quote
             </Link>

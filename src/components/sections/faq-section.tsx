@@ -18,11 +18,11 @@ function FaqItem({ faq, index }: { faq: { question: string; answer: string }; in
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.35, ease: "easeOut", delay: index * 0.06 }}
-      className="card-elevated hover-lift rounded-[1.8rem] border border-gray-100"
+      className="parallax-card card-elevated hover-lift rounded-[1.8rem] border border-gray-100"
     >
       <button
         type="button"
-        onClick={() => setOpen((prev) => !prev)}
+        onClick={() => { if (typeof navigator !== "undefined" && navigator.vibrate) navigator.vibrate(10); setOpen((prev) => !prev); }}
         className="flex w-full items-center justify-between gap-4 p-6 text-left"
         aria-expanded={open}
       >

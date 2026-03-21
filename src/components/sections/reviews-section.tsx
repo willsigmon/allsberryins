@@ -76,6 +76,7 @@ export function ReviewsSection() {
             target="_blank"
             rel="noreferrer"
             className="inline-flex items-center gap-2 font-semibold text-blue transition hover:text-gray-900"
+            onClick={() => { if (typeof navigator !== "undefined" && navigator.vibrate) navigator.vibrate(10); }}
           >
             See More Reviews →
           </Link>

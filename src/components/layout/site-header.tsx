@@ -49,6 +49,7 @@ export function SiteHeader() {
             <Link
               key={item.label}
               href={item.href}
+              onClick={() => { if (typeof navigator !== "undefined" && navigator.vibrate) navigator.vibrate(10); }}
               className={cn(
                 "text-sm font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
                 "text-white/88 hover:text-white focus-visible:ring-white focus-visible:ring-offset-navy",
@@ -63,6 +64,7 @@ export function SiteHeader() {
           <ThemeToggle />
           <Link
             href={agency.phoneHref}
+            onClick={() => { if (typeof navigator !== "undefined" && navigator.vibrate) navigator.vibrate(10); }}
             className={cn(
               "inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold transition",
               "border-white/18 text-white hover:border-white/35 hover:bg-white/8",
@@ -73,7 +75,8 @@ export function SiteHeader() {
           </Link>
           <Link
             href="/quote"
-            className="inline-flex items-center justify-center rounded-full bg-red px-5 py-2.5 text-sm font-bold text-white transition hover:bg-red-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-red"
+            onClick={() => { if (typeof navigator !== "undefined" && navigator.vibrate) navigator.vibrate(10); }}
+            className="cta-attention inline-flex items-center justify-center rounded-full bg-red px-5 py-2.5 text-sm font-bold text-white transition hover:bg-red-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-red"
           >
             Get a Quote
           </Link>
@@ -85,7 +88,7 @@ export function SiteHeader() {
           aria-expanded={menuOpen}
           aria-controls="mobile-nav"
           aria-label={menuOpen ? "Close menu" : "Open menu"}
-          onClick={() => setMenuOpen((value) => !value)}
+          onClick={() => { if (typeof navigator !== "undefined" && navigator.vibrate) navigator.vibrate(10); setMenuOpen((value) => !value); }}
         >
           {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
@@ -101,7 +104,7 @@ export function SiteHeader() {
               <Link
                 key={item.label}
                 href={item.href}
-                onClick={() => setMenuOpen(false)}
+                onClick={() => { if (typeof navigator !== "undefined" && navigator.vibrate) navigator.vibrate(10); setMenuOpen(false); }}
                 className="rounded-2xl px-4 py-3 text-base font-semibold text-white transition hover:bg-white/10"
               >
                 {item.label}
@@ -110,7 +113,7 @@ export function SiteHeader() {
             <div className="mt-3 grid gap-3 rounded-3xl border border-white/12 bg-white/5 p-4">
               <Link
                 href={agency.phoneHref}
-                onClick={() => setMenuOpen(false)}
+                onClick={() => { if (typeof navigator !== "undefined" && navigator.vibrate) navigator.vibrate(10); setMenuOpen(false); }}
                 className="inline-flex items-center gap-2 text-sm font-semibold text-white/90"
               >
                 <Phone className="h-4 w-4" />
@@ -119,7 +122,7 @@ export function SiteHeader() {
               <ThemeToggle className="inline-flex justify-center border-white/12 bg-white/6 text-white hover:border-white/25 hover:bg-white/10 focus-visible:ring-white focus-visible:ring-offset-navy" />
               <Link
                 href="/quote"
-                onClick={() => setMenuOpen(false)}
+                onClick={() => { if (typeof navigator !== "undefined" && navigator.vibrate) navigator.vibrate(10); setMenuOpen(false); }}
                 className="inline-flex items-center justify-center rounded-full bg-red px-5 py-3 text-sm font-bold text-white transition hover:bg-red-hover"
               >
                 Get a Quote

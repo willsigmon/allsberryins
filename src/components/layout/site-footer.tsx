@@ -159,6 +159,7 @@ function SocialLink({
       target="_blank"
       rel="noreferrer"
       aria-label={label}
+      onClick={() => { if (typeof navigator !== "undefined" && navigator.vibrate) navigator.vibrate(10); }}
       className="social-glow inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white/80 transition hover:text-white"
     >
       {children}

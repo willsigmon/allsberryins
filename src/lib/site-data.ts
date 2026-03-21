@@ -89,6 +89,8 @@ export type Agent = {
   };
 };
 
+export type BlogPostCategory = "tips" | "news" | "guides";
+
 export type BlogPost = {
   slug: string;
   title: string;
@@ -96,6 +98,8 @@ export type BlogPost = {
   publishedAt: string;
   readingTime: string;
   tags: string[];
+  category?: BlogPostCategory;
+  author?: string;
   intro: string;
   sections: Array<{
     heading: string;
@@ -228,22 +232,22 @@ export const navigation = [
 export const valueProps = [
   {
     title: "Seamless Experience",
-    description: "Clear guidance, fast follow-up, and a smooth process from quote to coverage.",
+    description: "We walk you through every step, follow up fast, and make getting covered simple.",
     icon: "shieldCheck",
   },
   {
     title: "Personalized Coverage",
-    description: "Insurance built around what you own and what you're planning for — your home, your car, your business, and your future.",
+    description: "We build a plan around your life — your home, your car, your business, and your future.",
     icon: "slidersHorizontal",
   },
   {
     title: "Expert Advice",
-    description: "Straight answers from a team that helps you compare options with confidence.",
+    description: "Our team gives you straight answers so you can pick the right plan.",
     icon: "users",
   },
   {
     title: "Top-Rated Support",
-    description: "We're here when you need us — before, during, and after you file a claim. You won't be left figuring things out alone.",
+    description: "We're here before, during, and after you file a claim. You won't have to figure things out alone.",
     icon: "star",
   },
 ] as const;
@@ -261,7 +265,7 @@ export const products: Product[] = [
     slug: "auto",
     name: "Auto Insurance",
     shortName: "Auto",
-    description: "Coverage built for your vehicle, your commute, and the unexpected.",
+    description: "Protection for your car, your daily drive, and the surprises on the road.",
     icon: "car",
     category: "personal",
   },
@@ -269,7 +273,7 @@ export const products: Product[] = [
     slug: "renters",
     name: "Renters Insurance",
     shortName: "Renters",
-    description: "Low-cost protection for your belongings, plus help paying for a place to stay if your rental becomes unlivable.",
+    description: "Affordable protection for your stuff. It also helps pay for a place to stay if your rental can't be lived in.",
     icon: "key",
     category: "personal",
   },
@@ -277,7 +281,7 @@ export const products: Product[] = [
     slug: "life",
     name: "Life Insurance",
     shortName: "Life",
-    description: "Protect the people who matter most with a process built for privacy. We never see your full personal details — only enough to know if you qualify. Quick, secure, and unlike anything else in the industry.",
+    description: "Helps take care of the people you love if something happens to you. Getting started is quick, safe, and private.",
     icon: "heartPulse",
     category: "personal",
   },
@@ -293,7 +297,7 @@ export const products: Product[] = [
     slug: "condo",
     name: "Condo Insurance",
     shortName: "Condo",
-    description: "Made for condo owners who need protection for things inside their unit that the building's shared insurance doesn't cover.",
+    description: "Covers what's inside your condo. Your building's insurance protects the outside, but you need your own plan for your stuff and walls.",
     icon: "building2",
     category: "personal",
   },
@@ -301,7 +305,7 @@ export const products: Product[] = [
     slug: "general-liability",
     name: "General Liability",
     shortName: "General Liability",
-    description: "Covers your business if a customer gets hurt, property gets damaged, or you're sued over your advertising.",
+    description: "Pays for costs if a customer gets hurt at your business, something gets broken, or someone sues you.",
     icon: "shield",
     category: "commercial",
   },
@@ -317,7 +321,7 @@ export const products: Product[] = [
     slug: "commercial-property",
     name: "Commercial Property",
     shortName: "Commercial Property",
-    description: "Safeguard your building, equipment, inventory, and daily operations.",
+    description: "Protects your building, equipment, and the things you need to run your business every day.",
     icon: "warehouse",
     category: "commercial",
   },
@@ -333,7 +337,7 @@ export const products: Product[] = [
     slug: "professional-liability",
     name: "Professional Liability",
     shortName: "Professional Liability",
-    description: "Protects you if a client says your work or advice caused them a loss — even if it was an honest mistake.",
+    description: "Helps pay the costs if a client says your work or advice caused them to lose money, even if it was an honest mistake.",
     icon: "briefcase",
     category: "commercial",
   },
@@ -341,7 +345,7 @@ export const products: Product[] = [
     slug: "specialty-coverage",
     name: "Specialty Coverage",
     shortName: "Specialty Coverage",
-    description: "Coverage for unusual situations that don't fit a standard plan — like special equipment, niche businesses, or one-of-a-kind properties.",
+    description: "For things that don't fit a normal plan, like special equipment, unique businesses, or unusual properties.",
     icon: "sparkles",
     category: "commercial",
   },
@@ -349,7 +353,7 @@ export const products: Product[] = [
     slug: "business",
     name: "Business Insurance",
     shortName: "Business",
-    description: "A plan built for your business that puts several types of coverage together in one package.",
+    description: "One package that puts together the different types of insurance your business needs.",
     icon: "briefcase",
     category: "commercial",
   },
@@ -413,7 +417,7 @@ export const evidenceRequestTypes = [
 export const reviews = [
   {
     name: "Southern California homeowner",
-    body: "Switching our homeowners coverage felt easy. The team explained everything clearly and helped us land on protection that fit our family better.",
+    body: "Switching our home insurance was easy. The team explained everything and helped us find a plan that fit our family better.",
   },
   {
     name: "Local restaurant owner",
@@ -425,7 +429,7 @@ export const reviews = [
   },
   {
     name: "Small business client",
-    body: "Responsive, thoughtful, and steady when we had questions about claims and coverage changes. You can tell this agency cares about follow-through.",
+    body: "They answered our questions about claims and changes quickly and clearly. You can tell this agency really cares about following through.",
   },
 ] as const;
 
@@ -514,7 +518,7 @@ export const agents: Agent[] = [
     phone: agency.phone,
     phoneHref: agency.phoneHref,
     email: "office@allsberryagency.com",
-    bio: "With over 24 years of experience, Erin founded Allsberry Insurance Agency to help families and businesses across Southern California find the right insurance. She believes coverage should be easy to understand and simple to manage, so you can spend your time on what matters most.",
+    bio: "Erin started Allsberry Insurance Agency over 24 years ago. She helps families and businesses across Southern California find the right insurance. She keeps things simple so you can focus on what matters most.",
     initials: "EA",
     accent: "blue",
     specialties: ["HSC Leadership"],
@@ -532,7 +536,7 @@ export const agents: Agent[] = [
     phone: agency.phone,
     phoneHref: agency.phoneHref,
     email: "alex@allsberryagency.com",
-    bio: "Alex keeps everything at Allsberry Insurance Agency running smoothly. As office manager, she's known for her ability to handle just about anything — and often all at once. Highly detail-oriented and incredibly responsive, Alex makes sure every client is taken care of quickly and thoroughly. Clients can count on her for follow-up, organization, and making sure nothing ever falls through the cracks.",
+    bio: "Alex runs the office and keeps everything on track. She handles a lot at once and never misses a detail. Clients count on her to follow up fast and make sure nothing slips through the cracks.",
     initials: "A",
     accent: "purple",
     specialties: ["Home Insurance", "Auto Insurance", "Umbrella Insurance"],
@@ -551,7 +555,7 @@ export const agents: Agent[] = [
     phone: agency.phone,
     phoneHref: agency.phoneHref,
     email: "vanessa@allsberryagency.com",
-    bio: "Vanessa has been part of the Allsberry story from the very beginning — one of the original team members long before the agency grew into what it is today. With 15 years of experience, she knows home, auto, and life insurance inside and out. She likes checking in with clients each year to make sure their insurance still fits what's going on in their lives.",
+    bio: "Vanessa has been with Allsberry since the very beginning. With 15 years of experience, she knows home, auto, and life insurance well. She checks in with clients each year to make sure their plan still fits their life.",
     initials: "V",
     accent: "indigo",
     specialties: ["Home Insurance", "Auto Insurance", "Life Insurance", "Umbrella Insurance"],
@@ -613,7 +617,7 @@ export const agents: Agent[] = [
     phone: agency.phone,
     phoneHref: agency.phoneHref,
     email: "dakota@allsberryagency.com",
-    bio: "Dakota brings energy and dedication to every client interaction, ensuring a smooth and personalized insurance experience. Whether you need home, auto, or business coverage, Dakota is here to help.",
+    bio: "Dakota brings energy to every conversation and works hard to make insurance easy. Whether you need home, auto, or business coverage, he's ready to help.",
     initials: "DA",
     accent: "red",
     specialties: ["Home Insurance", "Auto Insurance", "Business Insurance"],
@@ -631,7 +635,7 @@ export const agents: Agent[] = [
     phone: agency.phone,
     phoneHref: agency.phoneHref,
     email: "jason@allsberryagency.com",
-    bio: "Jason keeps the business side of Allsberry Insurance Agency running smoothly, managing day-to-day operations and accounting so the team can focus on serving clients across Southern California.",
+    bio: "Jason handles the day-to-day business side of the agency, including operations and accounting. That lets the rest of the team focus on helping clients.",
     initials: "JA",
     accent: "teal",
     specialties: ["Agency Operations", "Accounting"],
@@ -648,7 +652,7 @@ export const agents: Agent[] = [
     phone: agency.phone,
     phoneHref: agency.phoneHref,
     email: "anna@allsberryagency.com",
-    bio: "Anna is a licensed member of the Allsberry Insurance Agency team, dedicated to providing personalized service to clients across Southern California. Full bio coming soon.",
+    bio: "Anna is a licensed agent on the Allsberry team. She helps clients across Southern California find the right coverage. Full bio coming soon.",
     initials: "A",
     accent: "amber",
     specialties: ["Home Insurance", "Auto Insurance"],
@@ -713,7 +717,7 @@ export const homePageFaqs: HomePageFaq[] = [
   {
     question: "How fast will someone follow up after I request a quote?",
     answer:
-      "A licensed team member follows up within one business day, often sooner when the request is straightforward and we already have the basics we need.",
+      "A licensed team member will get back to you within one business day. If your request is simple and we have the info we need, it's often even faster.",
   },
   {
     question: "Can you help with evidence of insurance or certificates of insurance?",
@@ -728,11 +732,85 @@ export const homePageFaqs: HomePageFaq[] = [
   {
     question: "Is my data private and secure?",
     answer:
-      "Yes. All communications — including phone lines, texts, and email — are encrypted. We follow strict data privacy standards and never share your personal information without your consent. You can review our full privacy practices through the Farmers privacy center.",
+      "Yes. Your phone calls, texts, and emails with us are all protected. We never share your personal information without your permission. You can read more about how we protect your data through the Farmers privacy center.",
   },
 ];
 
 export const blogPosts: BlogPost[] = [
+  {
+    slug: "five-questions-before-renewing-home-insurance",
+    title: "5 Questions to Ask Before Renewing Your Home Insurance",
+    excerpt:
+      "Your renewal is a chance to make sure your coverage still fits. Here are five simple questions that can save you money and stress.",
+    publishedAt: "2026-03-15",
+    readingTime: "3 min read",
+    tags: ["Home Insurance", "Renewal Tips"],
+    category: "tips",
+    author: "Erin Allsberry",
+    intro:
+      "Your renewal is a chance to make sure your coverage still fits. Here are five simple questions that can save you money and stress.",
+    sections: [
+      {
+        heading: "Has anything changed about your home?",
+        body: "If you added a room, got a new roof, or put in a pool, that can change what you need and what you pay. Make sure your plan matches your home today, not when you first signed up.",
+      },
+      {
+        heading: "Are you paying for coverage you do not need?",
+        body: "Over time, some parts of your plan may not matter anymore. Look through each part and ask your agent if it all still makes sense for you.",
+      },
+      {
+        heading: "Is your deductible still right?",
+        body: "A higher deductible means you pay more out of pocket before insurance kicks in, but your monthly cost goes down. Pick an amount you could handle in an emergency.",
+      },
+    ],
+  },
+  {
+    slug: "what-is-an-umbrella-policy",
+    title: "What Is an Umbrella Policy and Do You Need One?",
+    excerpt:
+      "An umbrella policy adds extra protection on top of your home and auto coverage. Here is how it works and who it helps the most.",
+    publishedAt: "2026-03-08",
+    readingTime: "4 min read",
+    tags: ["Umbrella Insurance", "Coverage Guide"],
+    category: "guides",
+    author: "Brahm Shank",
+    intro:
+      "An umbrella policy adds extra protection on top of your home and auto coverage. Here is how it works and who it helps the most.",
+    sections: [
+      {
+        heading: "How umbrella insurance works",
+        body: "An umbrella plan starts paying after your home or auto insurance runs out. It gives you extra protection, often adding a million dollars or more.",
+      },
+      {
+        heading: "Who benefits most from umbrella coverage?",
+        body: "If you have a pool, rent out property, have a teen driver, or own a lot of valuable things, an umbrella plan is a smart idea.",
+        bullets: [
+          "Homeowners who own more than their current insurance would pay out.",
+          "Families with teen drivers or lots of guests at the house.",
+          "Business owners who want extra personal protection on top of their business insurance.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "new-team-members-spring-2026",
+    title: "Welcome to the Team: Spring 2026 Updates",
+    excerpt:
+      "Our agency is growing. Meet the newest members of the Allsberry Insurance family and learn about the coverage areas they specialize in.",
+    publishedAt: "2026-03-01",
+    readingTime: "2 min read",
+    tags: ["Agency News", "Team"],
+    category: "news",
+    author: "Erin Allsberry",
+    intro:
+      "Our agency is growing. Meet the newest members of the Allsberry Insurance family and learn about the coverage areas they specialize in.",
+    sections: [
+      {
+        heading: "A growing team means better service",
+        body: "As we've grown across Southern California, we've added new team members so every client gets personal attention. Each new agent is experienced and truly wants to help people understand their insurance.",
+      },
+    ],
+  },
   {
     slug: "save-on-homeowners-insurance-california",
     title: "How to Save on Homeowners Insurance in California",
@@ -741,25 +819,27 @@ export const blogPosts: BlogPost[] = [
     publishedAt: "2026-02-10",
     readingTime: "4 min read",
     tags: ["Home Insurance", "California", "Savings Tips"],
+    category: "tips",
+    author: "Erin Allsberry",
     intro:
-      "California homeowners are balancing rising costs, wildfire questions, and coverage changes. The good news: there are still practical ways to improve value without sacrificing protection.",
+      "California homeowners are dealing with higher costs, wildfire worries, and changing plans. The good news: there are still real ways to save money without losing the protection you need.",
     sections: [
       {
         heading: "Bundle wherever it makes sense",
-        body: "Pairing home and auto often opens the door to meaningful discounts. Bundling also makes your coverage easier to manage because one agency can review gaps across multiple policies.",
+        body: "Putting your home and auto together often gets you a real discount. It also makes things easier because one agency can check all your plans at once.",
         bullets: [
-          "Ask for a side-by-side quote with and without combining your policies.",
-          "Compare how much you'd pay out of pocket and how much the insurance covers, not just the monthly price.",
-          "Check if extra protection makes sense once your policies are combined.",
+          "Ask to see prices with and without combining your plans.",
+          "Compare what you'd pay out of pocket and what insurance pays, not just the monthly bill.",
+          "Check if adding extra protection makes sense once your plans are together.",
         ],
       },
       {
         heading: "Make sure your coverage would actually pay to rebuild",
-        body: "The cheapest plan isn't a good deal if it wouldn't actually pay to rebuild your home. When you review your insurance, make sure the amount it would pay matches what it would really cost to rebuild. Also check if you need any add-ons, like earthquake or water backup coverage.",
+        body: "The cheapest plan isn't a good deal if it won't pay enough to rebuild your home. Make sure the amount matches what rebuilding would really cost. Also check if you need extras like earthquake or water backup coverage.",
       },
       {
         heading: "Look for credits you may be missing",
-        body: "Alarm systems, newer roofs, gated communities, and recent renovations can all affect your premium. A quick policy review can uncover credits that were never applied when your current policy was written.",
+        body: "Alarm systems, newer roofs, gated neighborhoods, and recent home upgrades can all lower your price. A quick review can find discounts that were missed when your plan was first set up.",
       },
     ],
   },
@@ -767,30 +847,32 @@ export const blogPosts: BlogPost[] = [
     slug: "understanding-commercial-insurance-small-businesses",
     title: "Understanding Commercial Insurance for Small Businesses",
     excerpt:
-      "A practical primer on the core coverages most small businesses should review before they open their doors.",
+      "A simple guide to the main types of insurance most small businesses should look at before opening.",
     publishedAt: "2026-01-22",
     readingTime: "5 min read",
     tags: ["Business Insurance", "Commercial Insurance"],
+    category: "guides",
+    author: "Brahm Shank",
     intro:
-      "Commercial insurance is not one product. It is a set of coverages that work together to protect your operations, team, property, and reputation.",
+      "Business insurance isn't just one thing. It's a group of plans that work together to protect your business, your team, your property, and your name.",
     sections: [
       {
-        heading: "Start with your risk profile",
-        body: "What kind of business you run, how many people you employ, what your building looks like, and how many customers walk in all affect what insurance you need. A restaurant, contractor, and consultant may all need business insurance, but not the same package.",
+        heading: "Start with what your business does",
+        body: "The type of work you do, how many people work for you, what your building looks like, and how many customers come in all matter. A restaurant, a contractor, and a consultant all need insurance, but not the same kind.",
       },
       {
         heading: "The coverages business owners ask about most",
-        body: "General liability, workers compensation, commercial property, and commercial auto show up in a lot of conversations because they protect the parts of your business that get exposed first.",
+        body: "These four types come up the most because they protect the parts of your business that are most likely to need help first.",
         bullets: [
-          "General liability — covers you if someone gets hurt, something gets broken, or you get sued over your advertising.",
-          "Workers comp — helps pay medical bills and lost pay when an employee gets hurt at work.",
-          "Commercial property for buildings, inventory, furniture, and equipment.",
-          "Commercial auto for owned, leased, or hired vehicles used for business.",
+          "General liability -- pays if someone gets hurt, something breaks, or you get sued.",
+          "Workers comp -- helps pay doctor bills and lost pay when an employee gets hurt at work.",
+          "Commercial property -- covers your building, supplies, furniture, and equipment.",
+          "Commercial auto -- covers cars and trucks your business uses.",
         ],
       },
       {
-        heading: "Review coverage before growth outpaces it",
-        body: "Hiring staff, moving locations, adding equipment, or landing bigger contracts can change your insurance needs quickly. An annual review is a minimum; fast-growing businesses should check in more often.",
+        heading: "Check your plan as your business grows",
+        body: "Hiring people, moving to a new place, buying equipment, or taking on bigger jobs can change what insurance you need. Check your plan at least once a year. If your business is growing fast, check in more often.",
       },
     ],
   },
@@ -802,20 +884,22 @@ export const blogPosts: BlogPost[] = [
     publishedAt: "2025-12-18",
     readingTime: "3 min read",
     tags: ["Auto Insurance", "Home Insurance", "Bundle"],
+    category: "tips",
+    author: "Erin Allsberry",
     intro:
-      "When your policies work together, your coverage story usually gets stronger. That matters when life gets messy and you need your insurance to respond cleanly.",
+      "When your insurance plans work together, your protection gets stronger. That matters most when life throws you a curveball.",
     sections: [
       {
         heading: "One agency, clearer coverage",
-        body: "Bundling makes it easier to spot overlaps and gaps. If multiple policies are in play, one coordinated review can save time and reduce confusion.",
+        body: "When one agency handles all your plans, it's easier to find overlaps and gaps. One review covers everything and saves you time.",
       },
       {
         heading: "Discounts are real, but not the only benefit",
-        body: "Lower premiums are great, but the bigger win is usually simplification: fewer billing headaches, easier policy reviews, and less scrambling during claims.",
+        body: "Paying less is great, but the bigger win is keeping things simple. One bill, one review, and less hassle when you need to use your insurance.",
       },
       {
         heading: "Bundle strategically",
-        body: "The right bundle should improve both value and protection. That means looking at how much your plan covers, how much you'd pay out of pocket, and what kind of help you'd get — not just picking the cheapest price.",
+        body: "The right bundle should save you money and give you better protection. Look at what your plan covers, what you'd pay out of pocket, and what help you'd get -- not just the cheapest price.",
       },
     ],
   },
@@ -823,6 +907,7 @@ export const blogPosts: BlogPost[] = [
 
 export const quickLinks = [
   { label: "Get a Quote", href: "/quote" },
+  { label: "Blog", href: "/blog" },
   { label: "Proof of Insurance", href: "/evidence-of-insurance" },
   { label: "Meet Our Team", href: "/#team" },
   { label: "Commercial Coverage", href: "/#commercial-insurance" },

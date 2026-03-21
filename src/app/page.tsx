@@ -6,7 +6,6 @@ import { CtaBanner } from "@/components/sections/cta-banner";
 import { FaqSection } from "@/components/sections/faq-section";
 import { HeroSection } from "@/components/sections/hero-section";
 import { ProductGridSection } from "@/components/sections/product-grid-section";
-import { ReviewsSection } from "@/components/sections/reviews-section";
 import { ReviewTicker } from "@/components/sections/review-ticker";
 import { TeamSection } from "@/components/sections/team-section";
 import { TrustBar } from "@/components/sections/trust-bar";
@@ -86,7 +85,6 @@ export default async function Home() {
       <HeroSection initialProduct={initialProduct} />
       <ReviewTicker />
       <TrustBar />
-      <ReviewsSection />
       <ValuePropsSection />
       <FaqSection />
       <ProductGridSection />
