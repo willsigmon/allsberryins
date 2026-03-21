@@ -18,7 +18,7 @@ function FaqItem({ faq, index }: { faq: { question: string; answer: string }; in
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.35, ease: "easeOut", delay: index * 0.06 }}
-      className="parallax-card card-elevated hover-lift rounded-[1.8rem] border border-gray-100"
+      className="parallax-card hover-lift rounded-[1.8rem] border border-gray-100 bg-white/60 backdrop-blur-xl shadow-[0_8px_32px_-12px_rgba(0,32,92,0.1)] dark:bg-white/5"
     >
       <button
         type="button"
@@ -50,7 +50,7 @@ function FaqItem({ faq, index }: { faq: { question: string; answer: string }; in
 
 export function FaqSection() {
   return (
-    <section className="bg-white py-20 sm:py-24" id="faq">
+    <section className="grain-overlay relative overflow-hidden bg-[linear-gradient(180deg,var(--gray-50)_0%,var(--white)_40%,var(--gray-50)_100%)] py-20 sm:py-24" id="faq">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           eyebrow="Frequently asked"
@@ -66,7 +66,7 @@ export function FaqSection() {
             ))}
           </div>
 
-          <div className="gradient-border card-elevated rounded-[2rem] border border-blue/10 p-8">
+          <div className="gradient-border rounded-[2rem] border border-blue/10 bg-white/50 p-8 backdrop-blur-xl shadow-[0_12px_40px_-16px_rgba(0,32,92,0.12)]">
             <p className="text-sm font-semibold uppercase tracking-[0.22em] text-blue">
               Need the fast path?
             </p>
