@@ -120,7 +120,7 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
           Insurance
         </h1>
 
-        <p className="mt-4 max-w-lg text-lg leading-8 text-gray-600">
+        <p className="mt-4 text-lg leading-8 text-gray-600">
           Tell us what you need and we&apos;ll guide you to the right coverage.
         </p>
 
