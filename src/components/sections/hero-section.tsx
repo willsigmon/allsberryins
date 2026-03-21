@@ -195,7 +195,7 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
               </div>
             </div>
 
-            <div className="mt-4 grid auto-rows-fr gap-3 sm:grid-cols-2">
+            <div className="mt-4 grid gap-3 sm:grid-cols-2">
               <div className="flex flex-col justify-between rounded-[1.25rem] border border-blue/10 bg-blue-light/50 px-4 py-4">
                 <div className="flex items-start gap-3">
                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white text-blue shadow-sm">
