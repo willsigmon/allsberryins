@@ -127,9 +127,9 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
 
         <div className="mt-6 grid gap-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
           <div>
-            {/* Headliner row: Home + Auto */}
-            <div className="grid grid-cols-2 gap-2">
-              {heroProducts.filter((p) => p.slug === "home" || p.slug === "auto").map((product) => {
+            {/* Headliner row: Home + Auto + Life */}
+            <div className="grid grid-cols-3 gap-2">
+              {heroProducts.filter((p) => p.slug === "home" || p.slug === "auto" || p.slug === "life").map((product) => {
                 const Icon = getIcon(product.icon);
                 const isActive = selectedProduct === product.slug;
                 return (
@@ -151,9 +151,9 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
                 );
               })}
             </div>
-            {/* Secondary row: Renters, Life, Umbrella, Business */}
-            <div className="mt-2 grid grid-cols-4 gap-2">
-              {heroProducts.filter((p) => p.slug !== "home" && p.slug !== "auto").map((product) => {
+            {/* Secondary row: Renters, Umbrella, Business */}
+            <div className="mt-2 grid grid-cols-3 gap-2">
+              {heroProducts.filter((p) => p.slug !== "home" && p.slug !== "auto" && p.slug !== "life").map((product) => {
                 const Icon = getIcon(product.icon);
                 const isActive = selectedProduct === product.slug;
                 return (
