@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, ShieldCheck } from "lucide-react";
 
-import { buildTrackedHref } from "@/lib/tracking";
+import { agency } from "@/lib/site-data";
 
 export function CoverageEvaluationCta() {
   return (
@@ -32,9 +32,9 @@ export function CoverageEvaluationCta() {
               <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
-              href={buildTrackedHref("/contact", {
-                entry: "coverage-evaluation-cta",
-              })}
+              href={agency.calendlyUrl}
+              target="_blank"
+              rel="noreferrer"
               className="glass-btn-dark inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-bold text-white"
             >
               Schedule a Review

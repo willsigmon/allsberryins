@@ -1,19 +1,30 @@
 "use client";
 
+import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 
-const RADAR_KEY = process.env.NEXT_PUBLIC_RADAR_PUBLISHABLE_KEY ?? "";
+type PlacePrediction = {
+  placeId: string;
+  text: { text: string };
+  structuredFormat?: {
+    mainText: { text: string };
+    secondaryText: { text: string };
+  };
+};
 
-type Suggestion = {
-  formattedAddress: string;
+export type ParsedAddress = {
+  street: string;
+  city: string;
+  state: string;
   postalCode: string;
+  fullAddress: string;
 };
 
 type AddressAutocompleteProps = {
   id: string;
   value: string;
   onChange: (address: string) => void;
-  onSelect?: (suggestion: Suggestion) => void;
+  onSelect?: (address: ParsedAddress) => void;
   placeholder?: string;
   className?: string;
   "aria-describedby"?: string;
@@ -29,72 +40,132 @@ export function AddressAutocomplete({
   className,
   ...ariaProps
 }: AddressAutocompleteProps) {
-  const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
+  const [predictions, setPredictions] = useState<PlacePrediction[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(-1);
   const debounceRef = useRef<ReturnType<typeof setTimeout>>(undefined);
   const containerRef = useRef<HTMLDivElement>(null);
+  const sessionTokenRef = useRef(crypto.randomUUID());
 
-  const fetchSuggestions = useCallback(async (query: string) => {
-    if (query.length < 3 || !RADAR_KEY) {
-      setSuggestions([]);
+  const fetchPredictions = useCallback(async (input: string) => {
+    if (input.length < 3) {
+      setPredictions([]);
+      setIsOpen(false);
       return;
     }
 
     try {
-      const params = new URLSearchParams({
-        query,
-        country: "US",
-        layers: "address",
-        limit: "5",
+      const res = await fetch("/api/places/autocomplete", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          input,
+          sessionToken: sessionTokenRef.current,
+        }),
       });
-
-      const res = await fetch(
-        `https://api.radar.io/v1/search/autocomplete?${params}`,
-        { headers: { Authorization: RADAR_KEY } },
-      );
 
       if (!res.ok) return;
 
       const data = await res.json();
-      setSuggestions(
-        (data.addresses ?? []).map((a: Record<string, string>) => ({
-          formattedAddress: a.formattedAddress,
-          postalCode: a.postalCode,
-        })),
+      const items: PlacePrediction[] = (data.suggestions ?? []).map(
+        (s: { placePrediction: PlacePrediction }) => s.placePrediction,
       );
-      setIsOpen(true);
+
+      setPredictions(items);
+      setIsOpen(items.length > 0);
+      setActiveIndex(-1);
     } catch {
       /* gracefully degrade to plain text input */
     }
   }, []);
 
+  const fetchDetails = useCallback(
+    async (placeId: string): Promise<ParsedAddress | null> => {
+      try {
+        const params = new URLSearchParams({
+          placeId,
+          sessionToken: sessionTokenRef.current,
+        });
+        const res = await fetch(`/api/places/details?${params}`);
+        if (!res.ok) return null;
+
+        const data = await res.json();
+        const result: ParsedAddress = {
+          street: "",
+          city: "",
+          state: "",
+          postalCode: "",
+          fullAddress: data.formattedAddress ?? "",
+        };
+
+        let streetNumber = "";
+        let streetName = "";
+
+        for (const c of data.addressComponents ?? []) {
+          const types: string[] = c.types;
+          if (types.includes("street_number")) streetNumber = c.longText ?? "";
+          else if (types.includes("route")) streetName = c.longText ?? "";
+          else if (types.includes("locality") || types.includes("sublocality_level_1"))
+            result.city = c.longText ?? "";
+          else if (types.includes("administrative_area_level_1"))
+            result.state = c.shortText ?? "";
+          else if (types.includes("postal_code"))
+            result.postalCode = c.longText ?? "";
+        }
+
+        result.street = [streetNumber, streetName].filter(Boolean).join(" ");
+        return result;
+      } catch {
+        return null;
+      }
+    },
+    [],
+  );
+
+  const handleSelect = useCallback(
+    async (prediction: PlacePrediction) => {
+      const details = await fetchDetails(prediction.placeId);
+
+      if (details) {
+        onChange(details.street || details.fullAddress);
+        onSelect?.(details);
+      } else {
+        onChange(prediction.text.text);
+        onSelect?.({
+          street: prediction.structuredFormat?.mainText.text ?? prediction.text.text,
+          city: "",
+          state: "",
+          postalCode: "",
+          fullAddress: prediction.text.text,
+        });
+      }
+
+      setPredictions([]);
+      setIsOpen(false);
+      setActiveIndex(-1);
+      sessionTokenRef.current = crypto.randomUUID();
+    },
+    [fetchDetails, onChange, onSelect],
+  );
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value;
     onChange(val);
     clearTimeout(debounceRef.current);
-    debounceRef.current = setTimeout(() => fetchSuggestions(val), 300);
-  };
-
-  const handleSelect = (suggestion: Suggestion) => {
-    onChange(suggestion.formattedAddress);
-    onSelect?.(suggestion);
-    setSuggestions([]);
-    setIsOpen(false);
-    setActiveIndex(-1);
+    debounceRef.current = setTimeout(() => fetchPredictions(val), 300);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (!isOpen || suggestions.length === 0) return;
+    if (!isOpen || predictions.length === 0) return;
     if (e.key === "ArrowDown") {
       e.preventDefault();
-      setActiveIndex((i) => Math.min(i + 1, suggestions.length - 1));
+      setActiveIndex((i) => Math.min(i + 1, predictions.length - 1));
     } else if (e.key === "ArrowUp") {
       e.preventDefault();
       setActiveIndex((i) => Math.max(i - 1, 0));
     } else if (e.key === "Enter" && activeIndex >= 0) {
       e.preventDefault();
-      handleSelect(suggestions[activeIndex]);
+      handleSelect(predictions[activeIndex]);
     } else if (e.key === "Escape") {
       setIsOpen(false);
     }
@@ -109,22 +180,6 @@ export function AddressAutocomplete({
     document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);
   }, []);
-
-  // No API key = render plain input with browser autocomplete
-  if (!RADAR_KEY) {
-    return (
-      <input
-        id={id}
-        type="text"
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        placeholder={placeholder}
-        className={className}
-        autoComplete="street-address"
-        {...ariaProps}
-      />
-    );
-  }
 
   return (
     <div ref={containerRef} className="relative">
@@ -144,26 +199,50 @@ export function AddressAutocomplete({
         aria-activedescendant={activeIndex >= 0 ? `${id}-option-${activeIndex}` : undefined}
         {...ariaProps}
       />
-      {isOpen && suggestions.length > 0 && (
+      {isOpen && predictions.length > 0 && (
         <ul
           id={`${id}-listbox`}
           role="listbox"
-          className="absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded-xl border border-gray-200 bg-white py-1 shadow-lg"
+          className="absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded-xl border border-gray-200 bg-white shadow-lg"
         >
-          {suggestions.map((s, i) => (
+          {predictions.map((p, i) => (
             <li
-              key={s.formattedAddress}
+              key={p.placeId}
               id={`${id}-option-${i}`}
               role="option"
               aria-selected={i === activeIndex}
-              onMouseDown={() => handleSelect(s)}
+              onMouseDown={() => handleSelect(p)}
+              onMouseEnter={() => setActiveIndex(i)}
               className={`cursor-pointer px-4 py-2.5 text-sm ${
-                i === activeIndex ? "bg-blue-light font-semibold text-gray-900" : "text-gray-700 hover:bg-gray-50"
+                i === activeIndex
+                  ? "bg-blue-light font-semibold text-gray-900"
+                  : "text-gray-700 hover:bg-gray-50"
               }`}
             >
-              {s.formattedAddress}
+              {p.structuredFormat ? (
+                <>
+                  <span className="font-medium text-gray-900">
+                    {p.structuredFormat.mainText.text}
+                  </span>
+                  <span className="ml-1 text-gray-500">
+                    {p.structuredFormat.secondaryText.text}
+                  </span>
+                </>
+              ) : (
+                p.text.text
+              )}
             </li>
           ))}
+          <li className="border-t border-gray-100 px-4 py-2">
+            <Image
+              src="https://developers.google.com/static/maps/documentation/images/powered_by_google_on_white.png"
+              alt="Powered by Google"
+              width={120}
+              height={14}
+              className="h-3.5 w-auto"
+              unoptimized
+            />
+          </li>
         </ul>
       )}
     </div>

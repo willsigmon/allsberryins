@@ -130,6 +130,7 @@ export const agency = {
   licenses: "CA #0E91043, Agency #6001414",
   ownerLicense: "CA License #0E91043",
   agencyLicense: "Agency #6001414",
+  calendlyUrl: "https://calendly.com/brahm-allsberryagency/30min",
   socials: {
     facebook: "https://facebook.com/AllsberryInsuranceagency",
     instagram: "https://instagram.com/allsberry_insurance",
