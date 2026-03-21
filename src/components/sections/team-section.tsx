@@ -194,7 +194,7 @@ function LeadershipCard({ agent, index }: { agent: Agent; index: number }) {
           <div className="mt-6 flex flex-wrap justify-center gap-3 sm:justify-start">
             <Link
               href={`mailto:${agent.email}`}
-              className="inline-flex items-center gap-2 rounded-full border border-white/24 px-4 py-2 text-sm font-bold text-white transition hover:bg-white/10"
+              className="glass-btn-dark inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-bold text-white"
               aria-label={`Email ${agent.firstName}`}
             >
               <Mail className="h-4 w-4" />

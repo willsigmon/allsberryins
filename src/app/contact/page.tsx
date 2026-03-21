@@ -100,7 +100,7 @@ export default function ContactPage() {
               href={item.href}
               target={item.href.startsWith("http") ? "_blank" : undefined}
               rel={item.href.startsWith("http") ? "noreferrer" : undefined}
-              className="rounded-2xl border border-gray-100 bg-gray-50 p-5 transition hover:-translate-y-1 hover:border-blue/45 hover:bg-white hover:shadow-lg"
+              className="glass-btn rounded-2xl p-5 transition hover:-translate-y-1 hover:shadow-lg"
             >
               <item.icon className="h-5 w-5 text-blue" />
               <h2 className="mt-3 font-display text-lg font-bold text-gray-900">{item.title}</h2>
@@ -134,13 +134,13 @@ export default function ContactPage() {
                 href={buildTrackedHref("/evidence-of-insurance", {
                   entry: "contact-page-proof",
                 })}
-                className="inline-flex items-center justify-center rounded-full border border-gray-200 px-6 py-3 text-sm font-bold text-gray-900 transition hover:border-blue hover:text-blue"
+                className="glass-btn inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-bold text-gray-900"
               >
                 Request Proof
               </Link>
               <Link
                 href={agency.phoneHref}
-                className="inline-flex items-center justify-center rounded-full border border-gray-200 px-6 py-3 text-sm font-bold text-gray-900 transition hover:border-blue hover:text-blue"
+                className="glass-btn inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-bold text-gray-900"
               >
                 Call {agency.phone}
               </Link>
@@ -158,7 +158,7 @@ export default function ContactPage() {
                   href={item.href}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-3 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3 text-sm font-semibold text-gray-600 transition hover:border-blue hover:text-blue"
+                  className="glass-btn inline-flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold text-gray-600"
                 >
                   <item.icon className="h-5 w-5" />
                   {item.label}

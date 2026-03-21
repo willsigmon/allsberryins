@@ -539,6 +539,45 @@ textarea {
   border-color: rgba(127, 201, 255, 0.14);
 }
 
+/* Liquid Glass button — secondary actions */
+.glass-btn {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px) saturate(160%);
+  -webkit-backdrop-filter: blur(12px) saturate(160%);
+  border: 1px solid rgba(0, 102, 179, 0.15);
+  transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+
+.glass-btn:hover {
+  background: rgba(232, 240, 248, 0.85);
+  border-color: rgba(0, 102, 179, 0.3);
+  box-shadow: 0 4px 20px -8px rgba(0, 102, 179, 0.18);
+}
+
+/* Liquid Glass button — on dark backgrounds */
+.glass-btn-dark {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px) saturate(160%);
+  -webkit-backdrop-filter: blur(12px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.glass-btn-dark:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+:root[data-theme="dark"] .glass-btn {
+  background: rgba(13, 24, 40, 0.6);
+  border-color: rgba(127, 201, 255, 0.12);
+}
+
+:root[data-theme="dark"] .glass-btn:hover {
+  background: rgba(18, 49, 88, 0.7);
+  border-color: rgba(127, 201, 255, 0.24);
+}
+
 /* ── Parallax-style depth ── */
 @media (prefers-reduced-motion: no-preference) {
   .parallax-card {

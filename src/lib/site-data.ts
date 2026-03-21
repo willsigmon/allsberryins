@@ -513,7 +513,7 @@ export const agents: Agent[] = [
     phone: agency.phone,
     phoneHref: agency.phoneHref,
     email: "office@allsberryagency.com",
-    bio: "With over 24 years of experience, Erin founded Allsberry Insurance Agency to provide personalized insurance solutions to families and businesses across Southern California. She believes in making insurance straightforward and stress-free, so you can focus on what matters most.",
+    bio: "With over 24 years of experience, Erin founded Allsberry Insurance Agency to help families and businesses across Southern California find the right insurance. She believes coverage should be easy to understand and simple to manage, so you can spend your time on what matters most.",
     initials: "EA",
     accent: "blue",
     specialties: ["HSC Leadership"],

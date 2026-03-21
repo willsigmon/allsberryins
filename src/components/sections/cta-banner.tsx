@@ -25,10 +25,10 @@ export function CtaBanner() {
               Get a free quote today and discover how much you could save.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
-              <span className="rounded-full border border-white/14 bg-white/8 px-4 py-2 text-sm font-semibold text-white/88">
+              <span className="glass-btn-dark rounded-full px-4 py-2 text-sm font-semibold text-white/88">
                 Home • Auto • Life • Business
               </span>
-              <span className="rounded-full border border-white/14 bg-white/8 px-4 py-2 text-sm font-semibold text-white/88">
+              <span className="glass-btn-dark rounded-full px-4 py-2 text-sm font-semibold text-white/88">
                 Southern California
               </span>
             </div>

@@ -74,19 +74,19 @@ export function FaqSection() {
               Start with the right request.
             </h3>
             <p className="mt-4 text-base leading-8 text-gray-600">
-              Use the quote flow if you are shopping coverage. Use the proof request flow if escrow, a lender, or a vendor needs documentation.
+              Use the quote flow if you are looking for coverage. Use the proof request flow if your bank, lender, or a business partner needs paperwork.
             </p>
             <div className="mt-8 grid gap-3">
               <Link
                 href="/quote?product=business"
-                className="inline-flex items-center justify-between rounded-2xl border border-gray-200 bg-white px-5 py-4 text-sm font-bold text-gray-900 transition hover:border-blue hover:text-blue"
+                className="glass-btn inline-flex items-center justify-between rounded-2xl px-5 py-4 text-sm font-bold text-gray-900"
               >
                 Start a quote
                 <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
                 href="/evidence-of-insurance"
-                className="inline-flex items-center justify-between rounded-2xl border border-gray-200 bg-white px-5 py-4 text-sm font-bold text-gray-900 transition hover:border-blue hover:text-blue"
+                className="glass-btn inline-flex items-center justify-between rounded-2xl px-5 py-4 text-sm font-bold text-gray-900"
               >
                 Request proof of insurance
                 <ArrowRight className="h-4 w-4" />

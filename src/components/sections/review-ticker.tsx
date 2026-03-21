@@ -14,7 +14,7 @@ export function ReviewTicker() {
           {tickerReviews.map((review, index) => (
             <div
               key={`${review.name}-${index}`}
-              className="flex shrink-0 items-center gap-4 rounded-full border border-gray-100 bg-gray-50 px-5 py-2.5 shadow-sm"
+              className="glass-btn flex shrink-0 items-center gap-4 rounded-full px-5 py-2.5"
             >
               <div className="flex items-center gap-0.5 text-gold">
                 {Array.from({ length: 5 }).map((_, starIndex) => (

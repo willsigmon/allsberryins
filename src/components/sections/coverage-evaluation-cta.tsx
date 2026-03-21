@@ -35,7 +35,7 @@ export function CoverageEvaluationCta() {
               href={buildTrackedHref("/contact", {
                 entry: "coverage-evaluation-cta",
               })}
-              className="inline-flex items-center gap-2 rounded-full border border-white/24 px-6 py-3 text-sm font-bold text-white transition hover:bg-white/10"
+              className="glass-btn-dark inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-bold text-white"
             >
               Schedule a Review
             </Link>
