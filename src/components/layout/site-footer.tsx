@@ -6,7 +6,7 @@ import { agency, footerProducts, quickLinks } from "@/lib/site-data";
 
 export function SiteFooter() {
   return (
-    <footer className="bg-navy text-white">
+    <footer className="footer-mesh text-white">
       <div className="mx-auto grid max-w-7xl gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[1.2fr_0.8fr_0.8fr_1fr] lg:px-8">
         <div>
           <div className="flex items-center gap-3">
@@ -83,7 +83,7 @@ export function SiteFooter() {
         </FooterColumn>
       </div>
 
-      <div className="border-t border-white/10">
+      <div className="border-t border-white/10" style={{ borderImage: "linear-gradient(90deg, transparent 0%, rgba(0,102,179,0.3) 25%, rgba(218,41,28,0.2) 50%, rgba(245,197,24,0.25) 75%, transparent 100%) 1" }}>
         <div className="mx-auto max-w-7xl px-4 py-5 sm:px-6 lg:px-8">
           <div className="flex flex-col gap-2 text-sm text-white/60 sm:flex-row sm:items-center sm:justify-between">
             <p>© 2026 Allsberry Insurance Agency. All rights reserved.</p>
@@ -159,7 +159,7 @@ function SocialLink({
       target="_blank"
       rel="noreferrer"
       aria-label={label}
-      className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white/80 transition hover:border-white/30 hover:bg-white/8 hover:text-white"
+      className="social-glow inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white/80 transition hover:text-white"
     >
       {children}
     </Link>

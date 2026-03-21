@@ -8,13 +8,13 @@ const tickerReviews = [...reviews, ...reviews];
 
 export function ReviewTicker() {
   return (
-    <section className="glass overflow-hidden border-y border-gray-100 py-4">
+    <section className="glass-tinted overflow-hidden border-y border-blue/8 py-5">
       <div className="relative">
         <div className="animate-ticker flex gap-6">
           {tickerReviews.map((review, index) => (
             <div
               key={`${review.name}-${index}`}
-              className="glass-btn flex shrink-0 items-center gap-4 rounded-full px-5 py-2.5"
+              className="glass-btn flex shrink-0 items-center gap-4 rounded-full px-5 py-3 shadow-sm"
             >
               <div className="flex items-center gap-0.5 text-gold">
                 {Array.from({ length: 5 }).map((_, starIndex) => (

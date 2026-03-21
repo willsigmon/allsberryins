@@ -10,7 +10,7 @@ import { commercialProducts, personalProducts } from "@/lib/site-data";
 
 export function ProductGridSection() {
   return (
-    <section className="section-muted-bg py-20 sm:py-24" id="products">
+    <section className="grain-overlay section-muted-bg py-20 sm:py-24" id="products">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           eyebrow="Coverage lines"
@@ -98,7 +98,7 @@ function ProductCategory({
                 }`}
               >
                 <div className={`absolute inset-x-5 top-4 h-1.5 rounded-full ${topBar}`} />
-                <div className={`flex h-14 w-14 items-center justify-center rounded-2xl ${accentBg} ${accentText} transition-all duration-300 ${hoverGradient} group-hover:text-white group-hover:shadow-lg group-hover:scale-110`}>
+                <div className={`icon-glow flex h-14 w-14 items-center justify-center rounded-2xl ${accentBg} ${accentText} transition-all duration-300 ${hoverGradient} group-hover:text-white group-hover:shadow-lg`}>
                   <Icon className="h-7 w-7 product-icon" />
                 </div>
                 <h3 className={`mt-5 font-display text-2xl font-bold ${isCommercial ? "text-white" : "text-gray-900"}`}>{product.name}</h3>

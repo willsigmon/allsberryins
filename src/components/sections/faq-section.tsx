@@ -18,7 +18,7 @@ function FaqItem({ faq, index }: { faq: { question: string; answer: string }; in
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.35, ease: "easeOut", delay: index * 0.06 }}
-      className="rounded-[1.8rem] border border-gray-100 bg-[linear-gradient(180deg,var(--white)_0%,var(--gray-50)_100%)] shadow-[0_22px_45px_-38px_rgba(0,32,92,0.4)]"
+      className="card-elevated hover-lift rounded-[1.8rem] border border-gray-100"
     >
       <button
         type="button"
@@ -29,14 +29,14 @@ function FaqItem({ faq, index }: { faq: { question: string; answer: string }; in
         <h3 className="font-display text-xl font-bold text-gray-900">{faq.question}</h3>
         <ChevronDown
           className={cn(
-            "h-5 w-5 shrink-0 text-blue transition-transform duration-200",
+            "h-5 w-5 shrink-0 text-blue transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]",
             open && "rotate-180",
           )}
         />
       </button>
       <div
         className={cn(
-          "grid transition-[grid-template-rows] duration-200",
+          "grid transition-[grid-template-rows] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]",
           open ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
         )}
       >
@@ -66,7 +66,7 @@ export function FaqSection() {
             ))}
           </div>
 
-          <div className="rounded-[2rem] border border-blue/10 bg-[linear-gradient(180deg,var(--white)_0%,var(--gray-50)_100%)] p-8 shadow-[0_26px_60px_-44px_rgba(0,32,92,0.45)]">
+          <div className="gradient-border card-elevated rounded-[2rem] border border-blue/10 p-8">
             <p className="text-sm font-semibold uppercase tracking-[0.22em] text-blue">
               Need the fast path?
             </p>

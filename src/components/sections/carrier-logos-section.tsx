@@ -51,7 +51,7 @@ function MarqueeRow({
 
 export function CarrierLogosSection() {
   return (
-    <section className="overflow-hidden bg-white py-20 sm:py-24">
+    <section className="grain-overlay overflow-hidden bg-white py-20 sm:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           eyebrow="Carrier access"
@@ -67,8 +67,8 @@ export function CarrierLogosSection() {
         transition={{ duration: 0.6 }}
         className="relative mt-12 grid gap-4"
       >
-        <div className="absolute inset-y-0 left-0 z-10 w-20 bg-gradient-to-r from-white to-transparent" />
-        <div className="absolute inset-y-0 right-0 z-10 w-20 bg-gradient-to-l from-white to-transparent" />
+        <div className="absolute inset-y-0 left-0 z-10 w-32 bg-gradient-to-r from-white via-white/80 to-transparent" />
+        <div className="absolute inset-y-0 right-0 z-10 w-32 bg-gradient-to-l from-white via-white/80 to-transparent" />
         <MarqueeRow carriers={row1} />
         <MarqueeRow carriers={row2} reverse />
       </motion.div>

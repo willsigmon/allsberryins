@@ -122,7 +122,7 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
   };
 
   return (
-    <section className="relative overflow-hidden pt-28 sm:pt-32" style={{ backgroundImage: "var(--hero-bg)" }}>
+    <section className="grain-overlay relative overflow-hidden pt-28 sm:pt-32" style={{ backgroundImage: "var(--hero-bg)" }}>
       <div
         className="absolute inset-x-0 top-0 h-[38rem]"
         style={{ backgroundImage: "var(--hero-glow)" }}
@@ -138,7 +138,7 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
           We Specialize in{" "}
           <span
             key={cyclingWords[wordIndex]}
-            className="text-gradient transition-opacity duration-300"
+            className="hero-word-enter text-gradient-animated"
             style={{ WebkitTextFillColor: "transparent" }}
           >
             {cyclingWords[wordIndex]}
@@ -151,15 +151,15 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
             Tell us what you need and we will guide you to the right coverage.
           </p>
           <div className="flex flex-wrap gap-3">
-            <div className="inline-flex items-center gap-2 rounded-full border border-gray-100 bg-white px-4 py-2 text-sm font-semibold text-gray-900 shadow-sm">
+            <div className="hover-lift inline-flex items-center gap-2 rounded-full border border-gray-100 bg-white px-4 py-2 text-sm font-semibold text-gray-900 shadow-sm">
               <Sparkles className="h-4 w-4 text-blue" />
               5,000+ protected
             </div>
-            <div className="inline-flex items-center gap-2 rounded-full border border-gold/20 bg-white px-4 py-2 text-sm font-semibold text-gray-900 shadow-sm">
+            <div className="hover-lift inline-flex items-center gap-2 rounded-full border border-gold/20 bg-white px-4 py-2 text-sm font-semibold text-gray-900 shadow-sm">
               <Star className="h-4 w-4 fill-gold text-gold" />
               Fast follow-up
             </div>
-            <div className="inline-flex items-center gap-2 rounded-full border border-gray-100 bg-white px-4 py-2 text-sm font-semibold text-gray-900 shadow-sm">
+            <div className="hover-lift inline-flex items-center gap-2 rounded-full border border-gray-100 bg-white px-4 py-2 text-sm font-semibold text-gray-900 shadow-sm">
               <BadgeCheck className="h-4 w-4 text-blue" />
               Flexible coverage
             </div>
@@ -277,7 +277,7 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
                         href={href}
                         className="surface-card group flex h-full min-h-[14rem] flex-col rounded-[1.55rem] border border-gray-100 p-4 shadow-[0_18px_44px_-36px_rgba(0,32,92,0.38)] transition hover:-translate-y-1 hover:border-blue/30 hover:shadow-[0_24px_50px_-34px_rgba(0,102,179,0.3)]"
                       >
-                        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-light text-blue">
+                        <div className="icon-glow flex h-10 w-10 items-center justify-center rounded-xl bg-blue-light text-blue">
                           <Icon className="h-5 w-5" />
                         </div>
                         <h3 className="mt-4 min-h-[3rem] font-display text-xl font-bold leading-tight text-gray-900">

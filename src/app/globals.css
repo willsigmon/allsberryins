@@ -649,6 +649,174 @@ textarea {
   pointer-events: none;
 }
 
+/* ── Animated gradient text ── */
+@keyframes gradient-flow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.text-gradient-animated {
+  background: linear-gradient(135deg, #0066b3 0%, #00205c 20%, #da291c 40%, #f5c518 60%, #0066b3 80%, #00205c 100%);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradient-flow 5s ease infinite;
+}
+
+/* ── Hero word cycling ── */
+@keyframes word-enter {
+  from { opacity: 0; transform: translateY(100%) rotateX(-30deg); filter: blur(4px); }
+  to { opacity: 1; transform: translateY(0) rotateX(0deg); filter: blur(0); }
+}
+
+.hero-word-enter {
+  display: inline-block;
+  animation: word-enter 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* ── Icon glow on group hover ── */
+.icon-glow {
+  transition: box-shadow 0.4s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.group:hover .icon-glow {
+  box-shadow: 0 0 0 8px rgba(0, 102, 179, 0.06), 0 8px 30px -4px rgba(0, 102, 179, 0.22);
+  transform: scale(1.1) rotate(-3deg);
+}
+
+/* ── Card accent strip (top gradient line) ── */
+.card-accent-strip {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-accent-strip::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #0066b3 0%, #00205c 30%, #da291c 70%, #f5c518 100%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.card-accent-strip:hover::before {
+  opacity: 1;
+}
+
+/* ── Grain texture overlay ── */
+.grain-overlay {
+  position: relative;
+}
+
+.grain-overlay::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+  pointer-events: none;
+  mix-blend-mode: overlay;
+  border-radius: inherit;
+}
+
+/* ── Footer gradient mesh ── */
+.footer-mesh {
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(0, 102, 179, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(218, 41, 28, 0.08) 0%, transparent 40%),
+    radial-gradient(ellipse at 60% 80%, rgba(245, 197, 24, 0.06) 0%, transparent 45%),
+    linear-gradient(180deg, #00205c 0%, #001340 100%);
+}
+
+/* ── Glowing social icons ── */
+.social-glow {
+  transition: all 0.3s ease;
+}
+
+.social-glow:hover {
+  box-shadow: 0 0 20px rgba(0, 102, 179, 0.35), 0 0 40px rgba(0, 102, 179, 0.15);
+  border-color: rgba(127, 201, 255, 0.4) !important;
+  transform: translateY(-2px);
+}
+
+/* ── Section heading gradient underline ── */
+.heading-underline {
+  position: relative;
+  display: inline;
+}
+
+.heading-underline::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #0066b3, #da291c);
+}
+
+/* ── Quote mark decoration ── */
+.quote-mark {
+  position: absolute;
+  top: -0.5rem;
+  left: 1.5rem;
+  font-size: 4rem;
+  line-height: 1;
+  font-family: Georgia, serif;
+  color: rgba(0, 102, 179, 0.08);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ── Hover lift with glow ── */
+.hover-lift {
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 20px 40px -16px rgba(0, 32, 92, 0.2),
+    0 8px 16px -8px rgba(0, 102, 179, 0.12);
+}
+
+/* ── FAQ accordion smooth open ── */
+.faq-body-grid {
+  display: grid;
+  transition: grid-template-rows 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.faq-body-grid[data-open="false"] {
+  grid-template-rows: 0fr;
+}
+
+.faq-body-grid[data-open="true"] {
+  grid-template-rows: 1fr;
+}
+
+/* ── Numbered step badge ── */
+.step-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0066b3, #00205c);
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 800;
+  font-family: var(--font-plus-jakarta), sans-serif;
+  flex-shrink: 0;
+}
+
 /* ── Smooth color transitions on theme change ── */
 section, div, header, footer, nav {
   transition: background-color 240ms ease, border-color 240ms ease;

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Quote, Star } from "lucide-react";
+import { Star } from "lucide-react";
 
 import { SectionHeading } from "@/components/ui/section-heading";
 import { reviews } from "@/lib/site-data";
@@ -17,7 +17,7 @@ export function ReviewsSection() {
           description="Real feedback from real clients across Southern California."
           align="center"
         />
-        <div className="surface-card-strong mt-8 rounded-[2rem] border border-gray-100 p-6 shadow-[0_24px_50px_-44px_rgba(0,32,92,0.45)]">
+        <div className="card-elevated surface-card-strong mt-8 rounded-[2rem] border border-gray-100 p-6">
           <div className="grid gap-6 md:grid-cols-[0.75fr_1.25fr] md:items-center">
             <div className="rounded-[1.5rem] bg-blue-light p-5 text-center md:text-left">
               <p className="text-sm font-semibold uppercase tracking-[0.28em] text-blue">Client confidence</p>
@@ -53,14 +53,14 @@ export function ReviewsSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.25 }}
                 transition={{ duration: 0.4, ease: "easeOut", delay: index * 0.08 }}
-                className="card-elevated relative flex h-full w-[18.5rem] snap-start flex-col rounded-[2rem] border border-gray-100 p-6 sm:w-auto"
+                className="card-accent-strip card-elevated relative flex h-full w-[18.5rem] snap-start flex-col rounded-[2rem] border border-gray-100 p-6 sm:w-auto"
               >
                 <div className="flex items-center gap-1 text-gold">
                   {Array.from({ length: 5 }).map((_, starIndex) => (
                     <Star key={starIndex} className="h-4 w-4 fill-current" />
                   ))}
                 </div>
-                <Quote className="absolute right-5 top-5 h-10 w-10 text-blue/12" />
+                <span className="absolute -top-1 left-5 select-none font-serif text-6xl leading-none text-blue/8" aria-hidden="true">&ldquo;</span>
                 <p className="mt-6 flex-1 text-base leading-7 text-gray-600">“{review.body}”</p>
                 <div className="mt-6 h-px w-full bg-gray-100" />
                 <p className="mt-4 font-display text-lg font-bold text-gray-900">{review.name}</p>
