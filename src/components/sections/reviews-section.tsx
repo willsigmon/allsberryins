@@ -53,7 +53,7 @@ export function ReviewsSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.25 }}
                 transition={{ duration: 0.4, ease: "easeOut", delay: index * 0.08 }}
-                className="surface-card relative flex h-full w-[18.5rem] snap-start flex-col rounded-[2rem] border border-gray-100 p-6 shadow-[0_24px_50px_-42px_rgba(0,32,92,0.55)] sm:w-auto"
+                className="card-elevated relative flex h-full w-[18.5rem] snap-start flex-col rounded-[2rem] border border-gray-100 p-6 sm:w-auto"
               >
                 <div className="flex items-center gap-1 text-gold">
                   {Array.from({ length: 5 }).map((_, starIndex) => (

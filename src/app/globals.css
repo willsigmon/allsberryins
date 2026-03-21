@@ -581,9 +581,75 @@ textarea {
 /* ── Parallax-style depth ── */
 @media (prefers-reduced-motion: no-preference) {
   .parallax-card {
-    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1);
   }
   .parallax-card:hover {
-    transform: translateY(-4px) scale(1.01);
+    transform: translateY(-6px) scale(1.015);
   }
+}
+
+/* ── Smooth section transitions ── */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Ambient glow behind hero profile ── */
+@keyframes ambient-pulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+
+.ambient-glow {
+  animation: ambient-pulse 4s ease-in-out infinite;
+}
+
+/* ── Elevated card with inner glow ── */
+.card-elevated {
+  background: var(--surface-card);
+  box-shadow:
+    0 1px 2px rgba(0, 32, 92, 0.04),
+    0 4px 12px -4px rgba(0, 32, 92, 0.08),
+    0 20px 50px -20px rgba(0, 32, 92, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.card-elevated:hover {
+  box-shadow:
+    0 1px 2px rgba(0, 32, 92, 0.06),
+    0 8px 20px -4px rgba(0, 102, 179, 0.12),
+    0 32px 64px -16px rgba(0, 32, 92, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+:root[data-theme="dark"] .card-elevated {
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.2),
+    0 4px 12px -4px rgba(0, 0, 0, 0.3),
+    0 20px 50px -20px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(127, 201, 255, 0.06);
+}
+
+/* ── Gradient border effect ── */
+.gradient-border {
+  position: relative;
+}
+
+.gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(0, 102, 179, 0.3), rgba(218, 41, 28, 0.2), rgba(245, 197, 24, 0.25));
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  -webkit-mask-composite: xor;
+  pointer-events: none;
+}
+
+/* ── Smooth color transitions on theme change ── */
+section, div, header, footer, nav {
+  transition: background-color 240ms ease, border-color 240ms ease;
 }

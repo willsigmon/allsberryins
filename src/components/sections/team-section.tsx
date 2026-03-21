@@ -139,9 +139,10 @@ function LeadershipCard({ agent, index }: { agent: Agent; index: number }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.45, ease: "easeOut", delay: index * 0.08 }}
-      className="relative overflow-hidden rounded-[2rem] border border-gray-100 bg-[linear-gradient(160deg,#08214f_0%,#0f3a87_55%,#2d7bc6_100%)] p-8 text-white shadow-[0_24px_60px_-38px_rgba(0,32,92,0.62)]"
+      className="relative overflow-hidden rounded-[2rem] bg-[linear-gradient(160deg,#08214f_0%,#0c2d6b_25%,#0f3a87_55%,#2d7bc6_100%)] p-8 text-white shadow-[0_28px_70px_-32px_rgba(0,32,92,0.65),0_8px_20px_-8px_rgba(0,32,92,0.2)]"
     >
-      <div className="absolute inset-x-0 top-0 h-1 bg-[linear-gradient(90deg,#ffffff_0%,rgba(255,255,255,0.75)_28%,rgba(245,197,24,0.92)_62%,#da291c_100%)]" />
+      <div className="absolute -right-24 -top-24 h-48 w-48 rounded-full bg-blue/10 blur-3xl" />
+      <div className="absolute inset-x-0 top-0 h-1.5 bg-[linear-gradient(90deg,#ffffff_0%,rgba(255,255,255,0.75)_28%,rgba(245,197,24,0.92)_62%,#da291c_100%)]" />
       <div className="flex flex-col items-center gap-5 text-center sm:flex-row sm:items-start sm:text-left">
         {agent.photo ? (
           <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-full border-2 border-white/30 shadow-xl">
@@ -224,7 +225,7 @@ function TeamMemberCard({ agent, index }: { agent: Agent; index: number }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.42, ease: "easeOut", delay: index * 0.06 }}
-      className="surface-card relative flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-gray-100 p-5 shadow-[0_18px_45px_-38px_rgba(0,32,92,0.5)]"
+      className="card-elevated parallax-card relative flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-gray-100 p-5"
     >
       <div className="brand-stripe absolute inset-x-0 top-0 h-1" />
 

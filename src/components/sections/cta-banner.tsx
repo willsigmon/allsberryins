@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export function CtaBanner() {
   return (
-    <section className="relative overflow-hidden bg-[linear-gradient(135deg,#00205c_0%,#00448f_54%,#0066b3_100%)] py-20 text-white">
+    <section className="relative overflow-hidden bg-[linear-gradient(135deg,#00205c_0%,#0a3578_30%,#00448f_54%,#0066b3_100%)] py-20 text-white">
       <svg
         aria-hidden="true"
         viewBox="0 0 1440 120"
@@ -15,7 +15,7 @@ export function CtaBanner() {
         />
       </svg>
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="rounded-[2.5rem] border border-white/12 bg-white/6 px-6 py-12 backdrop-blur-sm sm:px-10 lg:flex lg:items-center lg:justify-between">
+        <div className="gradient-border rounded-[2.5rem] bg-white/6 px-6 py-12 backdrop-blur-md sm:px-10 lg:flex lg:items-center lg:justify-between">
           <div className="max-w-2xl">
             <p className="text-sm font-semibold uppercase tracking-[0.28em] text-white/70">Free quote</p>
             <h2 className="mt-4 font-display text-3xl font-extrabold tracking-tight sm:text-4xl">

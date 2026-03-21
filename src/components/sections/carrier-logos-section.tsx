@@ -28,7 +28,7 @@ function MarqueeRow({
         {doubled.map((carrier, index) => (
           <div
             key={`${carrier.name}-${index}`}
-            className="surface-card flex h-[5.25rem] shrink-0 items-center gap-3 rounded-2xl border border-gray-100 px-5 py-3.5 shadow-[0_4px_20px_-12px_rgba(0,32,92,0.15)] transition hover:border-blue/30 hover:shadow-[0_8px_30px_-10px_rgba(0,102,179,0.25)]"
+            className="card-elevated flex h-[5.25rem] shrink-0 items-center gap-3 rounded-2xl border border-gray-100 px-5 py-3.5 transition hover:border-blue/30"
           >
             <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-gray-200 bg-[rgba(255,255,255,0.96)] p-2 shadow-sm">
               <Image

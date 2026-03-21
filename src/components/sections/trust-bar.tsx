@@ -40,25 +40,26 @@ function CountUp({ end, duration = 1.6 }: { end: number; duration?: number }) {
 
 export function TrustBar() {
   return (
-    <section className="relative overflow-hidden border-y border-navy/8 bg-[linear-gradient(90deg,#00205c_0%,#0041a0_50%,#00205c_100%)] py-6">
+    <section className="relative overflow-hidden border-y border-navy/8 bg-[linear-gradient(90deg,#00205c_0%,#0a3578_30%,#0041a0_50%,#0a3578_70%,#00205c_100%)] py-8">
       <div className="absolute inset-0 mesh-bg opacity-40" />
-      <div className="relative mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-12 gap-y-4 px-4 sm:px-6 lg:justify-between lg:px-8">
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,102,179,0.15),transparent_70%)]" />
+      <div className="relative mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-14 gap-y-5 px-4 sm:px-6 lg:justify-between lg:px-8">
         {stats.map((stat, index) => (
           <motion.div
             key={stat.label}
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: index * 0.1 }}
-            className="flex items-center gap-3 text-white"
+            transition={{ duration: 0.5, delay: index * 0.12 }}
+            className="flex items-center gap-4 text-white"
           >
-            <div className="font-display text-3xl font-extrabold tracking-tight sm:text-4xl">
+            <div className="font-display text-3xl font-extrabold tracking-tight drop-shadow-[0_2px_8px_rgba(0,102,179,0.3)] sm:text-4xl">
               <CountUp end={stat.end} />
               {stat.suffix}
             </div>
             <div className="text-left">
-              <p className="text-sm font-bold text-white/90">{stat.unit}</p>
-              <p className="text-xs text-white/72">{stat.label}</p>
+              <p className="text-sm font-bold text-white/92">{stat.unit}</p>
+              <p className="text-xs text-white/65">{stat.label}</p>
             </div>
           </motion.div>
         ))}

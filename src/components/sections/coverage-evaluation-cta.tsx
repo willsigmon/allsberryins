@@ -7,8 +7,10 @@ export function CoverageEvaluationCta() {
   return (
     <section className="py-12 sm:py-16">
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-        <div className="rounded-[2.25rem] border border-red/20 bg-[linear-gradient(160deg,#7a1013_0%,#da291c_55%,#e8534a_100%)] p-8 text-center text-white shadow-[0_24px_60px_-38px_rgba(180,20,20,0.55)] sm:p-10">
-          <div className="mx-auto inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold uppercase tracking-[0.2em]">
+        <div className="relative overflow-hidden rounded-[2.25rem] bg-[linear-gradient(160deg,#6b0f12_0%,#da291c_45%,#e8534a_80%,#f09080_100%)] p-8 text-center text-white shadow-[0_24px_70px_-30px_rgba(180,20,20,0.5),0_8px_20px_-8px_rgba(218,41,28,0.3)] sm:p-10">
+          <div className="absolute -right-20 -top-20 h-60 w-60 rounded-full bg-white/6 blur-3xl" />
+          <div className="absolute -left-16 -bottom-16 h-48 w-48 rounded-full bg-white/4 blur-3xl" />
+          <div className="relative mx-auto inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold uppercase tracking-[0.2em]">
             <ShieldCheck className="h-4 w-4" />
             Free evaluation
           </div>

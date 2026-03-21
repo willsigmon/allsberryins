@@ -322,8 +322,8 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
           </div>
 
           <div className="relative">
-            <div className="animate-float absolute -left-6 top-10 hidden h-24 w-24 rounded-full bg-blue/10 blur-2xl sm:block" />
-            <div className="animate-float-delayed absolute -right-6 bottom-10 hidden h-28 w-28 rounded-full bg-red/12 blur-3xl sm:block" />
+            <div className="ambient-glow absolute -left-8 top-8 hidden h-32 w-32 rounded-full bg-blue/14 blur-3xl sm:block" />
+            <div className="ambient-glow absolute -right-8 bottom-8 hidden h-36 w-36 rounded-full bg-red/16 blur-[40px] sm:block" style={{ animationDelay: "2s" }} />
 
             <div className="shimmer-border relative overflow-hidden rounded-[2rem] p-[3px] shadow-[0_35px_90px_-48px_rgba(0,32,92,0.8)]">
               <div className="hero-profile-shell relative overflow-hidden rounded-[1.85rem] p-5 sm:p-6">

@@ -26,10 +26,10 @@ export function SiteHeader() {
   return (
     <header
       className={cn(
-        "fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-navy/94 backdrop-blur transition-all duration-300",
+        "fixed inset-x-0 top-0 z-50 border-b border-white/8 bg-navy/92 backdrop-blur-xl backdrop-saturate-[1.8] transition-all duration-300",
         elevatedHeader
-          ? "shadow-[0_20px_45px_-28px_rgba(0,32,92,0.55)]"
-          : "shadow-[0_18px_34px_-32px_rgba(0,32,92,0.35)]",
+          ? "shadow-[0_20px_50px_-24px_rgba(0,32,92,0.6)]"
+          : "shadow-[0_18px_34px_-32px_rgba(0,32,92,0.3)]",
       )}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
