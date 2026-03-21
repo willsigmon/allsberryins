@@ -7,6 +7,7 @@ import {
   ArrowRight,
   MapPin,
   Phone,
+  ShieldCheck,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 
@@ -167,6 +168,31 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
                   </span>
                 ))}
               </div>
+            </div>
+
+            <div className="mt-4 grid gap-3 sm:grid-cols-2">
+              <div className="flex items-center gap-3 rounded-[1.25rem] border border-blue/10 bg-blue-light/50 px-4 py-3">
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-white text-blue shadow-sm">
+                  <ShieldCheck className="h-4.5 w-4.5" />
+                </div>
+                <div>
+                  <p className="text-sm font-bold text-gray-900">Bundle and save</p>
+                  <p className="text-xs leading-5 text-gray-500">Combine coverage types for better pricing.</p>
+                </div>
+              </div>
+              <Link
+                href="/evidence-of-insurance"
+                onClick={() => { if (typeof navigator !== "undefined" && navigator.vibrate) navigator.vibrate(10); }}
+                className="group flex items-center gap-3 rounded-[1.25rem] border border-gray-100 bg-white/70 px-4 py-3 transition hover:border-blue/20 hover:bg-blue-light/30"
+              >
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-navy text-white shadow-sm">
+                  <ArrowRight className="h-4 w-4" />
+                </div>
+                <div>
+                  <p className="text-sm font-bold text-gray-900">Need proof instead?</p>
+                  <p className="text-xs leading-5 text-gray-500">Skip the quote — request paperwork directly.</p>
+                </div>
+              </Link>
             </div>
           </div>
 
