@@ -125,7 +125,7 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
           Tell us what you need and we&apos;ll guide you to the right coverage.
         </p>
 
-        <div className="mt-6 grid gap-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-start">
+        <div className="mt-6 grid gap-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
           <div>
             <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-6">
               {heroProducts.map((product) => {
@@ -170,41 +170,47 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
               </div>
             </div>
 
-            <div className="mt-4 grid gap-3 sm:grid-cols-2">
-              <div className="flex items-center gap-3 rounded-[1.25rem] border border-blue/10 bg-blue-light/50 px-4 py-3">
-                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-white text-blue shadow-sm">
-                  <ShieldCheck className="h-4.5 w-4.5" />
+            <div className="mt-4 grid auto-rows-fr gap-3 sm:grid-cols-2">
+              <div className="flex flex-col justify-between rounded-[1.25rem] border border-blue/10 bg-blue-light/50 px-4 py-4">
+                <div className="flex items-start gap-3">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white text-blue shadow-sm">
+                    <ShieldCheck className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-bold text-gray-900">Bundle and save</p>
+                    <p className="mt-1 text-xs leading-5 text-gray-500">
+                      Many clients save by combining home, auto, and other coverage into one plan. We&apos;ll show you the options.
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-sm font-bold text-gray-900">Bundle and save</p>
-                  <p className="text-xs leading-5 text-gray-500">Combine coverage types for better pricing.</p>
+                <div className="mt-3 flex items-center gap-1 text-gold">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <svg key={i} className="h-3.5 w-3.5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
+                  ))}
+                  <span className="ml-1.5 text-[11px] font-semibold text-gray-400">5,000+ protected</span>
                 </div>
               </div>
               <Link
                 href="/evidence-of-insurance"
                 onClick={() => { if (typeof navigator !== "undefined" && navigator.vibrate) navigator.vibrate(10); }}
-                className="group flex items-center gap-3 rounded-[1.25rem] border border-gray-100 bg-white/70 px-4 py-3 transition hover:border-blue/20 hover:bg-blue-light/30"
+                className="group flex flex-col justify-between rounded-[1.25rem] border border-gray-100 bg-white/70 px-4 py-4 transition hover:border-blue/20 hover:bg-blue-light/30"
               >
-                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-navy text-white shadow-sm">
-                  <ArrowRight className="h-4 w-4" />
+                <div className="flex items-start gap-3">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-navy text-white shadow-sm">
+                    <ArrowRight className="h-4 w-4" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-bold text-gray-900">Need proof instead?</p>
+                    <p className="mt-1 text-xs leading-5 text-gray-500">
+                      If your bank, landlord, or business partner needs insurance paperwork, skip the quote and request it here.
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-sm font-bold text-gray-900">Need proof instead?</p>
-                  <p className="text-xs leading-5 text-gray-500">Skip the quote — request paperwork directly.</p>
-                </div>
+                <span className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-blue transition group-hover:gap-2.5">
+                  Start proof request
+                  <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                </span>
               </Link>
-            </div>
-
-            <div className="mt-4 flex items-center gap-4 rounded-[1.25rem] border border-gold/15 bg-white/60 px-5 py-3.5 backdrop-blur-sm">
-              <div className="flex items-center gap-1 text-gold">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <svg key={i} className="h-4 w-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
-                ))}
-              </div>
-              <p className="flex-1 text-sm text-gray-600">
-                <span className="font-semibold text-gray-900">5,000+ families and businesses</span> trust us across Southern California
-              </p>
-              <span className="hidden shrink-0 text-xs font-semibold text-gray-400 sm:inline">20+ years</span>
             </div>
           </div>
 
