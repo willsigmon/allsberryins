@@ -274,7 +274,7 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
                           <MapPin className="h-4 w-4 fill-red text-red" />
                           <span className="pin-pulse-ring absolute -inset-1 rounded-full bg-red/20" />
                         </div>
-                        <span className="text-[11px] font-bold text-white/80">Corona, CA</span>
+                        <span className="text-[11px] font-bold text-white/80">Southern California</span>
                       </div>
                     </div>
                   </div>
