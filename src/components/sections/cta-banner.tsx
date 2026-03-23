@@ -19,7 +19,7 @@ export function CtaBanner() {
       <div className="absolute -left-32 top-1/2 h-64 w-64 -translate-y-1/2 rounded-full bg-white/5 blur-3xl" />
       <div className="absolute -right-24 top-1/4 h-48 w-48 rounded-full bg-white/4 blur-3xl" />
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="gradient-border rounded-[2.5rem] bg-white/6 px-6 py-12 backdrop-blur-md sm:px-10 lg:flex lg:items-center lg:justify-between">
+        <div className="gradient-border parallax-card rounded-[2.5rem] bg-white/6 px-6 py-12 backdrop-blur-md sm:px-10 lg:flex lg:items-center lg:justify-between">
           <div className="max-w-2xl">
             <p className="text-sm font-semibold uppercase tracking-[0.28em] text-white/70">Free quote</p>
             <h2 className="mt-4 font-display text-3xl font-extrabold tracking-tight sm:text-4xl">

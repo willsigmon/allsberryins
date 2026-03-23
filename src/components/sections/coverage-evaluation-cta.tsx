@@ -33,7 +33,7 @@ export function CoverageEvaluationCta() {
               className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-bold text-gray-900 transition hover:bg-blue-light"
               onClick={() => { if (typeof navigator !== "undefined" && navigator.vibrate) navigator.vibrate(10); }}
             >
-              Email Me Your Policy
+              Email Us Your Policy
               <ArrowRight className="h-4 w-4" />
             </Link>
             <Link

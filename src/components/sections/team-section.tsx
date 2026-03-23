@@ -3,14 +3,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Handshake, Mail } from "lucide-react";
-
-import { Award } from "lucide-react";
+import { Award, Globe, Handshake, Mail } from "lucide-react";
 
 import { SectionHeading } from "@/components/ui/section-heading";
 import { agents, fellows, fellowDefinition, type Agent, type AgentAccent } from "@/lib/site-data";
 import { buildTrackedHref } from "@/lib/tracking";
 import { cn } from "@/lib/utils";
+
+const tap = () => { if (typeof navigator !== "undefined" && navigator.vibrate) navigator.vibrate(10); };
 
 const accentClasses: Record<AgentAccent, string> = {
   blue: "bg-[linear-gradient(145deg,#0066b3_0%,#5da7df_100%)]",
@@ -48,7 +48,7 @@ export function TeamSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            className="relative mt-12 overflow-hidden rounded-[2.5rem] bg-[linear-gradient(160deg,#08214f_0%,#0c2d6b_20%,#0f3a87_50%,#2d7bc6_85%,#5da7df_100%)] p-8 text-white shadow-[0_32px_80px_-32px_rgba(0,32,92,0.7)] sm:p-10 lg:p-12"
+            className="parallax-card relative mt-12 overflow-hidden rounded-[2.5rem] bg-[linear-gradient(160deg,#08214f_0%,#0c2d6b_20%,#0f3a87_50%,#2d7bc6_85%,#5da7df_100%)] p-8 text-white shadow-[0_32px_80px_-32px_rgba(0,32,92,0.7)] sm:p-10 lg:p-12"
           >
             <div className="absolute -right-32 -top-32 h-72 w-72 rounded-full bg-white/5 blur-3xl" />
             <div className="absolute -left-20 bottom-0 h-56 w-56 rounded-full bg-blue/8 blur-3xl" />
@@ -94,6 +94,7 @@ export function TeamSection() {
                 <Link
                   href={`mailto:${erinAgent.email}`}
                   className="glass-btn-dark inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-bold text-white"
+                  onClick={tap}
                 >
                   <Mail className="h-4 w-4" />
                   Email Erin
@@ -101,6 +102,7 @@ export function TeamSection() {
                 <Link
                   href={buildTrackedHref(`/agents/${erinAgent.slug}`, { agent: erinAgent.slug, entry: "leadership-team-card" })}
                   className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-gray-900 transition hover:bg-blue-light"
+                  onClick={tap}
                 >
                   Meet Erin
                   <Handshake className="h-4 w-4" />
@@ -131,7 +133,7 @@ export function TeamSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
-              className="relative flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-gold/20 bg-[linear-gradient(160deg,#fffdf5_0%,#fff8e7_50%,#fef3d0_100%)] p-5"
+              className="parallax-card relative flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-gold/20 bg-[linear-gradient(160deg,#fffdf5_0%,#fff8e7_50%,#fef3d0_100%)] p-5"
             >
               <div className="shimmer-border absolute inset-x-0 top-0 h-1 opacity-50" />
               <div className="flex items-center gap-4">
@@ -179,7 +181,7 @@ function LeadershipCard({ agent, index }: { agent: Agent; index: number }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.45, ease: "easeOut", delay: index * 0.08 }}
-      className="relative overflow-hidden rounded-[2rem] bg-[linear-gradient(160deg,#08214f_0%,#0c2d6b_25%,#0f3a87_55%,#2d7bc6_100%)] p-8 text-white shadow-[0_28px_70px_-32px_rgba(0,32,92,0.65),0_8px_20px_-8px_rgba(0,32,92,0.2)]"
+      className="parallax-card relative overflow-hidden rounded-[2rem] bg-[linear-gradient(160deg,#08214f_0%,#0c2d6b_25%,#0f3a87_55%,#2d7bc6_100%)] p-8 text-white shadow-[0_28px_70px_-32px_rgba(0,32,92,0.65),0_8px_20px_-8px_rgba(0,32,92,0.2)]"
     >
       <div className="absolute -right-24 -top-24 h-48 w-48 rounded-full bg-blue/10 blur-3xl" />
       <div className="absolute inset-x-0 top-0 h-1.5 bg-[linear-gradient(90deg,#ffffff_0%,rgba(255,255,255,0.75)_28%,rgba(245,197,24,0.92)_62%,#da291c_100%)]" />
@@ -213,7 +215,8 @@ function LeadershipCard({ agent, index }: { agent: Agent; index: number }) {
             {agent.title}
           </p>
           {agent.languages && agent.languages.length > 1 && (
-            <p className="mt-2 text-sm font-medium text-yellow-300">
+            <p className="mt-2 inline-flex items-center gap-1.5 text-sm font-medium text-yellow-300">
+              <Globe className="h-3.5 w-3.5" />
               Se habla Español
             </p>
           )}
@@ -237,6 +240,7 @@ function LeadershipCard({ agent, index }: { agent: Agent; index: number }) {
               href={`mailto:${agent.email}`}
               className="glass-btn-dark inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-bold text-white"
               aria-label={`Email ${agent.firstName}`}
+              onClick={tap}
             >
               <Mail className="h-4 w-4" />
               Email {agent.firstName}
@@ -247,6 +251,7 @@ function LeadershipCard({ agent, index }: { agent: Agent; index: number }) {
                 entry: "leadership-team-card",
               })}
               className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-bold text-gray-900 transition hover:bg-blue-light"
+              onClick={tap}
             >
               Meet {agent.firstName}
               <Handshake className="h-4 w-4" />
@@ -296,7 +301,8 @@ function TeamMemberCard({ agent, index }: { agent: Agent; index: number }) {
             {agent.title}
           </p>
           {agent.languages && agent.languages.length > 1 && (
-            <p className="mt-1 text-xs font-semibold text-amber-600">
+            <p className="mt-1 inline-flex items-center gap-1 text-xs font-semibold text-amber-600">
+              <Globe className="h-3 w-3" />
               Se habla Español
             </p>
           )}
@@ -311,6 +317,7 @@ function TeamMemberCard({ agent, index }: { agent: Agent; index: number }) {
           entry: "team-card-learn-more",
         })}
         className="mt-2 text-sm font-semibold text-blue transition hover:text-gray-900"
+        onClick={tap}
       >
         Learn more &rarr;
       </Link>
@@ -319,6 +326,7 @@ function TeamMemberCard({ agent, index }: { agent: Agent; index: number }) {
         <Link
           href={`mailto:${agent.email}`}
           className="inline-flex items-center gap-1.5 rounded-full border border-gray-200 px-3 py-1.5 text-xs font-semibold text-gray-600 transition hover:border-blue hover:text-blue"
+          onClick={tap}
         >
           <Mail className="h-3.5 w-3.5" />
           Email
@@ -329,6 +337,7 @@ function TeamMemberCard({ agent, index }: { agent: Agent; index: number }) {
             entry: "team-card",
           })}
           className="inline-flex items-center gap-1.5 rounded-full bg-navy px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-blue"
+          onClick={tap}
         >
           <Handshake className="h-3.5 w-3.5" />
           Meet {agent.firstName}

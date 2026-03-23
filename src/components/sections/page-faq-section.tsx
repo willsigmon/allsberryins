@@ -37,7 +37,7 @@ export function PageFaqSection({
           {faqs.map((faq) => (
             <article
               key={faq.question}
-              className="rounded-[1.8rem] border border-gray-100 bg-[linear-gradient(180deg,var(--white)_0%,var(--gray-50)_100%)] p-6 shadow-[0_22px_45px_-38px_rgba(0,32,92,0.4)]"
+              className="parallax-card rounded-[1.8rem] border border-gray-100 bg-[linear-gradient(180deg,var(--white)_0%,var(--gray-50)_100%)] p-6 shadow-[0_22px_45px_-38px_rgba(0,32,92,0.4)]"
             >
               <h2 className="font-display text-xl font-bold text-gray-900">{faq.question}</h2>
               <p className="mt-3 text-sm leading-7 text-gray-600">{faq.answer}</p>

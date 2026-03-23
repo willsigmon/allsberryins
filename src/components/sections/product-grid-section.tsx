@@ -76,7 +76,7 @@ function ProductCategory({
               <Link
                 href={`/quote?product=${product.slug}`}
                 onClick={() => { if (typeof navigator !== "undefined" && navigator.vibrate) navigator.vibrate(10); }}
-                className={`group relative flex h-full flex-col overflow-hidden rounded-[2rem] border p-7 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2 ${
+                className={`group parallax-card relative flex h-full flex-col overflow-hidden rounded-[2rem] border p-7 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2 ${
                   isCommercial
                     ? "border-white/10 bg-white/6 backdrop-blur-lg shadow-[0_4px_24px_-8px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.06)] hover:border-amber-400/30 hover:bg-white/10 hover:shadow-[0_20px_50px_-20px_rgba(217,119,6,0.3),inset_0_1px_0_rgba(255,255,255,0.1)]"
                     : "border-white/80 bg-white/50 backdrop-blur-xl shadow-[0_4px_24px_-8px_rgba(0,32,92,0.08),0_16px_48px_-24px_rgba(0,32,92,0.12),inset_0_1px_0_rgba(255,255,255,0.9)] hover:border-blue/20 hover:bg-white/70 hover:shadow-[0_8px_32px_-8px_rgba(0,102,179,0.15),0_24px_56px_-20px_rgba(0,32,92,0.18),inset_0_1px_0_rgba(255,255,255,1)]"

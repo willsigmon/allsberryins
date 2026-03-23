@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { ArrowRight, BadgeCheck, MapPin, ShieldCheck } from "lucide-react";
+import { ArrowRight, BadgeCheck, Globe, MapPin, ShieldCheck } from "lucide-react";
 
 import { PageFaqSection } from "@/components/sections/page-faq-section";
 import { StructuredData } from "@/components/seo/structured-data";
@@ -230,7 +230,8 @@ export default function AboutPage() {
                       {agent.title}
                     </p>
                     {agent.languages && agent.languages.length > 1 && (
-                      <p className="mt-1 text-xs font-semibold text-amber-600">
+                      <p className="mt-1 inline-flex items-center gap-1 text-xs font-semibold text-amber-600">
+                        <Globe className="h-3 w-3" />
                         Se habla Español
                       </p>
                     )}

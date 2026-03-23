@@ -17,7 +17,7 @@ export function ReviewsSection() {
           description="Real feedback from real clients across Southern California."
           align="center"
         />
-        <div className="card-elevated surface-card-strong mt-8 rounded-[2rem] border border-gray-100 p-6">
+        <div className="card-elevated surface-card-strong parallax-card mt-8 rounded-[2rem] border border-gray-100 p-6">
           <div className="grid gap-6 md:grid-cols-[0.75fr_1.25fr] md:items-center">
             <div className="rounded-[1.5rem] bg-blue-light p-5 text-center md:text-left">
               <p className="text-sm font-semibold uppercase tracking-[0.28em] text-blue">Client confidence</p>
@@ -53,7 +53,7 @@ export function ReviewsSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.25 }}
                 transition={{ duration: 0.4, ease: "easeOut", delay: index * 0.08 }}
-                className="card-accent-strip card-elevated relative flex h-full w-[18.5rem] snap-start flex-col rounded-[2rem] border border-gray-100 p-6 sm:w-auto"
+                className="card-accent-strip card-elevated parallax-card relative flex h-full w-[18.5rem] snap-start flex-col rounded-[2rem] border border-gray-100 p-6 sm:w-auto"
               >
                 <div className="flex items-center gap-1 text-gold">
                   {Array.from({ length: 5 }).map((_, starIndex) => (

@@ -35,7 +35,7 @@ export function ValuePropsSection() {
                 <Link
                   href={buildTrackedHref("/quote", { entry: `value-prop-${item.title.toLowerCase().replace(/\s+/g, "-")}` })}
                   onClick={() => { if (typeof navigator !== "undefined" && navigator.vibrate) navigator.vibrate(10); }}
-                  className="card-accent-strip group relative flex h-full flex-col overflow-hidden rounded-[2rem] border border-gray-100 p-6 transition hover:border-blue/30"
+                  className="card-accent-strip parallax-card group relative flex h-full flex-col overflow-hidden rounded-[2rem] border border-gray-100 p-6 transition hover:border-blue/30"
                 >
                   <div className="icon-glow flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-light text-blue">
                     <Icon className="h-7 w-7" />
