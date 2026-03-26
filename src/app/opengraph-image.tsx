@@ -1,3 +1,5 @@
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 import { ImageResponse } from "next/og";
 
 export const size = {
@@ -7,7 +9,12 @@ export const size = {
 
 export const contentType = "image/png";
 
-export default function OpenGraphImage() {
+export default async function OpenGraphImage() {
+  const logoData = await readFile(
+    join(process.cwd(), "public", "android-chrome-512x512.png"),
+  );
+  const logoBase64 = `data:image/png;base64,${logoData.toString("base64")}`;
+
   return new ImageResponse(
     (
       <div
@@ -17,12 +24,54 @@ export default function OpenGraphImage() {
           width: "100%",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "linear-gradient(135deg, #00205C 0%, #00448F 48%, #E8F0F8 100%)",
+          background: "linear-gradient(145deg, #001033 0%, #00205c 30%, #0a3578 65%, #1a4f9a 100%)",
           color: "white",
-          padding: "56px",
+          padding: "60px",
           fontFamily: "sans-serif",
+          position: "relative",
+          overflow: "hidden",
         }}
       >
+        {/* Subtle radial glow */}
+        <div
+          style={{
+            position: "absolute",
+            top: "-120px",
+            right: "-80px",
+            width: "600px",
+            height: "600px",
+            borderRadius: "50%",
+            background: "radial-gradient(circle, rgba(0,102,179,0.25) 0%, transparent 70%)",
+            display: "flex",
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            bottom: "-100px",
+            left: "-60px",
+            width: "400px",
+            height: "400px",
+            borderRadius: "50%",
+            background: "radial-gradient(circle, rgba(218,41,28,0.08) 0%, transparent 70%)",
+            display: "flex",
+          }}
+        />
+
+        {/* Top accent line */}
+        <div
+          style={{
+            position: "absolute",
+            top: "0",
+            left: "0",
+            right: "0",
+            height: "4px",
+            background: "linear-gradient(90deg, #ffffff 0%, rgba(255,255,255,0.6) 28%, #f5c518 62%, #da291c 100%)",
+            display: "flex",
+          }}
+        />
+
+        {/* Header row: logo + location badge */}
         <div
           style={{
             display: "flex",
@@ -31,48 +80,66 @@ export default function OpenGraphImage() {
             alignItems: "center",
           }}
         >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={logoBase64}
+            alt=""
+            width={80}
+            height={80}
+            style={{ borderRadius: "20px" }}
+          />
           <div
             style={{
               display: "flex",
-              height: "88px",
-              width: "88px",
               alignItems: "center",
-              justifyContent: "center",
-              borderRadius: "28px",
-              background: "rgba(255,255,255,0.14)",
-              border: "1px solid rgba(255,255,255,0.25)",
-              fontSize: "36px",
-              fontWeight: 800,
-            }}
-          >
-            A
-          </div>
-          <div
-            style={{
-              fontSize: "24px",
-              fontWeight: 700,
-              letterSpacing: "0.35em",
-              textTransform: "uppercase",
-              color: "rgba(255,255,255,0.72)",
+              gap: "8px",
+              padding: "10px 20px",
+              borderRadius: "999px",
+              background: "rgba(255,255,255,0.08)",
+              border: "1px solid rgba(255,255,255,0.15)",
+              fontSize: "18px",
+              fontWeight: 600,
+              letterSpacing: "0.12em",
+              textTransform: "uppercase" as const,
+              color: "rgba(255,255,255,0.7)",
             }}
           >
             Southern California
           </div>
         </div>
-        <div style={{ display: "flex", flexDirection: "column", gap: "20px", maxWidth: "820px" }}>
-          <div style={{ fontSize: "68px", fontWeight: 800, lineHeight: 1.05 }}>Allsberry Insurance Agency</div>
-          <div style={{ fontSize: "28px", lineHeight: 1.45, color: "rgba(255,255,255,0.86)" }}>
-            Personalized home, auto, life, and business insurance guidance for Southern California families and businesses.
+
+        {/* Main content */}
+        <div style={{ display: "flex", flexDirection: "column", gap: "16px", maxWidth: "900px" }}>
+          <div
+            style={{
+              fontSize: "64px",
+              fontWeight: 800,
+              lineHeight: 1.08,
+              letterSpacing: "-0.02em",
+            }}
+          >
+            Allsberry Insurance Agency
+          </div>
+          <div
+            style={{
+              fontSize: "26px",
+              lineHeight: 1.5,
+              color: "rgba(255,255,255,0.75)",
+              maxWidth: "780px",
+            }}
+          >
+            Personalized home, auto, life, and business insurance for families and businesses across Southern California.
           </div>
         </div>
+
+        {/* Bottom row: CTA + tagline */}
         <div
           style={{
             display: "flex",
             alignItems: "center",
-            gap: "14px",
-            fontSize: "24px",
+            gap: "16px",
+            fontSize: "22px",
             fontWeight: 700,
-            color: "#ffffff",
           }}
         >
           <div
@@ -82,12 +149,15 @@ export default function OpenGraphImage() {
               justifyContent: "center",
               borderRadius: "999px",
               background: "#DA291C",
-              padding: "16px 28px",
+              padding: "14px 32px",
+              boxShadow: "0 8px 24px -8px rgba(218,41,28,0.5)",
             }}
           >
-            Get a Quote
+            Get a Free Quote
           </div>
-          <div>Simple. Affordable. Tailored for You.</div>
+          <div style={{ color: "rgba(255,255,255,0.5)", fontSize: "20px", fontWeight: 600 }}>
+            allsberryagency.com
+          </div>
         </div>
       </div>
     ),
