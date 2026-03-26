@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 
-import { tap } from "@/lib/haptics";
+import { haptic } from "@/lib/haptics";
 
 export function CtaBanner() {
   return (
@@ -43,7 +43,7 @@ export function CtaBanner() {
             <Link
               href="/quote"
               className="cta-glow inline-flex items-center justify-center rounded-full bg-red px-7 py-4 text-base font-bold text-white transition hover:bg-red-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-red"
-              onClick={() => { tap(); }}
+              onClick={() => { haptic("nudge"); }}
             >
               Get Your Free Quote
             </Link>

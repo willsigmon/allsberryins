@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { ArrowRight, ShieldCheck } from "lucide-react";
 
-import { tap } from "@/lib/haptics";
+import { haptic, press } from "@/lib/haptics";
 import { agency } from "@/lib/site-data";
 
 export function CoverageEvaluationCta() {
@@ -32,7 +32,7 @@ export function CoverageEvaluationCta() {
             <Link
               href="mailto:brahm@allsberryagency.com?subject=Free%20Coverage%20Evaluation&body=Hi%20Brahm%2C%0A%0AI'd%20like%20a%20free%20evaluation%20of%20my%20current%20policy.%20I've%20attached%20it%20here.%0A%0AThank%20you!"
               className="cta-glow inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-bold text-gray-900 transition hover:bg-blue-light"
-              onClick={() => { tap(); }}
+              onClick={() => { haptic("nudge"); }}
             >
               Email Us Your Policy
               <ArrowRight className="h-4 w-4" />
@@ -42,7 +42,7 @@ export function CoverageEvaluationCta() {
               target="_blank"
               rel="noreferrer"
               className="glass-btn-dark inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-bold text-white"
-              onClick={() => { tap(); }}
+              onClick={() => { press(); }}
             >
               Schedule a Review
             </Link>

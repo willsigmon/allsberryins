@@ -6,7 +6,7 @@ import Link from "next/link";
 import { ArrowRight, ChevronDown } from "lucide-react";
 
 import { SectionHeading } from "@/components/ui/section-heading";
-import { tap } from "@/lib/haptics";
+import { press } from "@/lib/haptics";
 import { homePageFaqs } from "@/lib/site-data";
 import { cn } from "@/lib/utils";
 
@@ -23,7 +23,7 @@ function FaqItem({ faq, index }: { faq: { question: string; answer: string }; in
     >
       <button
         type="button"
-        onClick={() => { tap(); setOpen((prev) => !prev); }}
+        onClick={() => { press(); setOpen((prev) => !prev); }}
         className="flex w-full items-center justify-between gap-4 p-6 text-left"
         aria-expanded={open}
       >

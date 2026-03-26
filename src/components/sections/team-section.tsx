@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { Award, Globe, Handshake, Mail } from "lucide-react";
 
 import { SectionHeading } from "@/components/ui/section-heading";
-import { tap } from "@/lib/haptics";
+import { press, tap } from "@/lib/haptics";
 import { agents, fellows, fellowDefinition, type Agent, type AgentAccent } from "@/lib/site-data";
 import { buildTrackedHref } from "@/lib/tracking";
 import { cn } from "@/lib/utils";
@@ -101,7 +101,7 @@ export function TeamSection() {
                 <Link
                   href={buildTrackedHref(`/agents/${erinAgent.slug}`, { agent: erinAgent.slug, entry: "leadership-team-card" })}
                   className="cta-glow inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-gray-900 transition hover:bg-blue-light"
-                  onClick={tap}
+                  onClick={press}
                 >
                   Meet Erin
                   <Handshake className="h-4 w-4" />
@@ -254,7 +254,7 @@ function LeadershipCard({ agent, index }: { agent: Agent; index: number }) {
                 entry: "leadership-team-card",
               })}
               className="cta-glow inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-bold text-gray-900 transition hover:bg-blue-light"
-              onClick={tap}
+              onClick={press}
             >
               Meet {agent.firstName}
               <Handshake className="h-4 w-4" />
@@ -340,7 +340,7 @@ function TeamMemberCard({ agent, index }: { agent: Agent; index: number }) {
             entry: "team-card",
           })}
           className="inline-flex items-center gap-1.5 rounded-full bg-navy px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-blue"
-          onClick={tap}
+          onClick={press}
         >
           <Handshake className="h-3.5 w-3.5" />
           Meet {agent.firstName}

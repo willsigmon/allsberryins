@@ -6,7 +6,7 @@ import { ArrowRight } from "lucide-react";
 
 import { getIcon } from "@/components/ui/icon-registry";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { tap } from "@/lib/haptics";
+import { press } from "@/lib/haptics";
 import { commercialProducts, personalProducts } from "@/lib/site-data";
 
 export function ProductGridSection() {
@@ -76,7 +76,7 @@ function ProductCategory({
             >
               <Link
                 href={`/quote?product=${product.slug}`}
-                onClick={() => { tap(); }}
+                onClick={() => { press(); }}
                 className={`group parallax-card relative flex h-full flex-col overflow-hidden rounded-[2rem] border p-7 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2 ${
                   isCommercial
                     ? "border-white/10 bg-white/6 backdrop-blur-lg shadow-[0_4px_24px_-8px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.06)] hover:border-amber-400/30 hover:bg-white/10 hover:shadow-[0_20px_50px_-20px_rgba(217,119,6,0.3),inset_0_1px_0_rgba(255,255,255,0.1)]"
