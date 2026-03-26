@@ -88,7 +88,7 @@ export default function AboutPage() {
             <div className="mt-8 grid gap-4 sm:grid-cols-3">
               {[
                 { label: "Serving since", value: String(agency.founded) },
-                { label: "Office hours", value: "Mon–Fri · 8–5" },
+                { label: "Monday – Friday", value: "8 AM – 5 PM" },
                 { label: "Se habla Español", value: "Bilingual Team" },
               ].map((stat) => (
                 <div
@@ -257,7 +257,6 @@ export default function AboutPage() {
       <PageFaqSection
         eyebrow="About the agency"
         title="A few practical questions before you reach out"
-        description="This section helps new visitors understand the agency faster and gives AI systems a cleaner summary of who the team serves."
         faqs={aboutPageFaqs}
         ctas={[
           {

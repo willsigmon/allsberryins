@@ -30,7 +30,7 @@ export function CoverageEvaluationCta() {
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
             <Link
               href="mailto:brahm@allsberryagency.com?subject=Free%20Coverage%20Evaluation&body=Hi%20Brahm%2C%0A%0AI'd%20like%20a%20free%20evaluation%20of%20my%20current%20policy.%20I've%20attached%20it%20here.%0A%0AThank%20you!"
-              className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-bold text-gray-900 transition hover:bg-blue-light"
+              className="cta-glow inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-bold text-gray-900 transition hover:bg-blue-light"
               onClick={() => { if (typeof navigator !== "undefined" && navigator.vibrate) navigator.vibrate(10); }}
             >
               Email Us Your Policy

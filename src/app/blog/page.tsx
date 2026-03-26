@@ -58,7 +58,8 @@ export default function BlogPage() {
           {blogPosts.map((post) => (
             <article
               key={post.slug}
-              className="rounded-[2rem] border border-gray-100 bg-[linear-gradient(180deg,#ffffff_0%,#f8fafb_100%)] p-6 shadow-[0_20px_50px_-42px_rgba(0,32,92,0.5)]"
+              className="rounded-[2rem] border border-gray-100 p-6 shadow-[0_20px_50px_-42px_rgba(0,32,92,0.5)]"
+              style={{ backgroundImage: "var(--surface-card)" }}
             >
               <div className="flex flex-wrap items-center gap-3 text-sm text-gray-400">
                 <span>{new Date(post.publishedAt).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</span>
@@ -85,7 +86,7 @@ export default function BlogPage() {
           ))}
         </div>
 
-        <section className="mt-16 rounded-[2.5rem] border border-blue/10 bg-[linear-gradient(180deg,var(--white)_0%,var(--gray-50)_100%)] p-8 shadow-[0_26px_60px_-44px_rgba(0,32,92,0.45)]">
+        <section className="mt-16 rounded-[2.5rem] border border-gray-100 p-8 shadow-[0_26px_60px_-44px_rgba(0,32,92,0.45)]" style={{ backgroundImage: "var(--surface-card)" }}>
           <p className="text-sm font-semibold uppercase tracking-[0.22em] text-blue">
             Keep moving
           </p>

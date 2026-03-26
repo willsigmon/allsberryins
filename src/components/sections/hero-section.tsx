@@ -30,7 +30,7 @@ import { buildTrackedHref } from "@/lib/tracking";
 import { cn } from "@/lib/utils";
 
 const heroProducts = products.filter((p) => heroProductSlugs.includes(p.slug));
-const cyclingWords = ["Home", "Auto", "Life", "Business"] as const;
+const cyclingWords = ["Home", "Auto", "Life", "Business", "You"] as const;
 
 function readHeroProductUsage() {
   if (typeof window === "undefined") {
@@ -183,6 +183,9 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
               <p className="mt-2 max-w-xl text-sm leading-6 text-gray-600">
                 {selectedHelpContent.description}
               </p>
+              <p className="mt-2 text-sm font-bold text-gray-900">
+                Submit your zip code to get started.
+              </p>
               <div className="mt-4 flex flex-wrap gap-2">
                 {selectedHelpContent.quickReasons.map((reason) => (
                   <span
@@ -218,7 +221,7 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
               <Link
                 href="/evidence-of-insurance"
                 onClick={() => { if (typeof navigator !== "undefined" && navigator.vibrate) navigator.vibrate(10); }}
-                className="group flex flex-col justify-between rounded-[1.25rem] border border-gray-100 bg-white/70 px-4 py-4 transition hover:border-blue/20 hover:bg-blue-light/30"
+                className="group flex flex-col justify-between rounded-[1.25rem] border border-gray-100 bg-white px-4 py-4 shadow-sm transition hover:border-blue/20 hover:bg-blue-light/30"
               >
                 <div className="flex items-start gap-3">
                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-navy text-white shadow-sm">
@@ -226,13 +229,13 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
                   </div>
                   <div>
                     <p className="text-sm font-bold text-gray-900">Need proof instead?</p>
-                    <p className="mt-1 text-xs leading-5 text-gray-500">
+                    <p className="mt-1 text-xs leading-5 text-gray-600">
                       If your bank, landlord, or business partner needs insurance paperwork, skip the quote and request it here.
                     </p>
                   </div>
                 </div>
                 <div className="mt-3 text-center">
-                  <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-blue transition group-hover:gap-2.5">
+                  <span className="cta-glow-blue inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-semibold text-blue transition group-hover:gap-2.5">
                     Start proof request
                     <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
                   </span>

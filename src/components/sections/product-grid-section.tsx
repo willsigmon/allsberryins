@@ -14,8 +14,8 @@ export function ProductGridSection() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           eyebrow="Coverage lines"
-          title="Insurance for Every Need"
-          description="Choose a product tile to jump straight into a quote with that coverage already selected."
+          title="Let's Shop It Out"
+          description="We work with more than 200 carriers, so there's always a solution for your coverage and affordability needs."
           align="center"
         />
 
@@ -45,8 +45,8 @@ function ProductCategory({
 }) {
   const isCommercial = title === "Commercial Insurance";
   const description = isCommercial
-    ? "Commercial coverage built for payroll, property, liability, vehicles, and the realities of running a business."
-    : "Protection for homes, vehicles, and the everyday pieces of life that deserve clear coverage.";
+    ? "Coverage built for the realities of running a business."
+    : "Coverage for your home, your car, and the people who matter most.";
 
   const wrapperClass = isCommercial
     ? "mt-16 scroll-mt-28 -mx-4 sm:-mx-6 lg:-mx-8 rounded-[2.5rem] bg-[linear-gradient(160deg,#00205c_0%,#0a3578_55%,#143e7a_100%)] px-4 py-12 sm:px-6 lg:px-8"

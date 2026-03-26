@@ -378,6 +378,15 @@ textarea {
   animation: pulse-glow 2.8s ease-in-out infinite;
 }
 
+@keyframes pulse-glow-blue {
+  0%, 100% { box-shadow: 0 0 12px rgba(0, 102, 179, 0.35), 0 0 40px rgba(0, 102, 179, 0.12); }
+  50% { box-shadow: 0 0 20px rgba(0, 102, 179, 0.55), 0 0 60px rgba(0, 102, 179, 0.22); }
+}
+
+.cta-glow-blue {
+  animation: pulse-glow-blue 2.8s ease-in-out infinite;
+}
+
 /* ── Infinite marquee scroll ── */
 @keyframes marquee {
   0% { transform: translateX(0); }

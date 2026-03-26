@@ -17,7 +17,6 @@ export function ValuePropsSection() {
         <SectionHeading
           eyebrow="Why clients choose us"
           title="Insurance guidance that feels clear, personal, and low-stress"
-          description="We make insurance simple by listening first, explaining clearly, and following up until you feel confident in your coverage."
           align="center"
         />
         <div className="mt-12 grid auto-rows-fr gap-6 sm:grid-cols-2 xl:grid-cols-4">

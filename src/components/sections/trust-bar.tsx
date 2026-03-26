@@ -11,7 +11,7 @@ const stats = [
   { end: carrierAccessStat, suffix: "+", unit: "Carriers", label: "Markets we can shop" },
 ];
 
-function CountUp({ end, duration = 1.6 }: { end: number; duration?: number }) {
+function CountUp({ end, duration = 3.2 }: { end: number; duration?: number }) {
   const [count, setCount] = useState(0);
   const hasStartedRef = useRef(false);
 

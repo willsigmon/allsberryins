@@ -27,6 +27,7 @@ const accentClasses: Record<AgentAccent, string> = {
 
 const erinAgent = agents.find((a) => a.slug === "erin");
 const leadershipSlugs = ["brahm", "dakota"] as const;
+// Brahm requested to be featured first (above Dakota)
 const leadershipAgents = agents.filter((a) => (leadershipSlugs as readonly string[]).includes(a.slug));
 const teamAgents = agents.filter((a) => a.slug !== "erin" && !(leadershipSlugs as readonly string[]).includes(a.slug));
 
@@ -37,7 +38,6 @@ export function TeamSection() {
         <SectionHeading
           eyebrow="Meet our team"
           title="Local Agents Who Know Your Coverage"
-          description="Every client gets a dedicated agent who listens, explains the tradeoffs clearly, and now has a direct shareable profile page for follow-up."
           align="center"
         />
 
@@ -101,7 +101,7 @@ export function TeamSection() {
                 </Link>
                 <Link
                   href={buildTrackedHref(`/agents/${erinAgent.slug}`, { agent: erinAgent.slug, entry: "leadership-team-card" })}
-                  className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-gray-900 transition hover:bg-blue-light"
+                  className="cta-glow inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-gray-900 transition hover:bg-blue-light"
                   onClick={tap}
                 >
                   Meet Erin
@@ -163,7 +163,11 @@ export function TeamSection() {
               <p className="mt-4 flex-1 text-sm leading-7 text-gray-600">
                 {fellow.career}
               </p>
-              <p className="mt-3 text-xs leading-5 text-gold/80 italic">
+              <p className="mt-3 text-xs leading-5 text-gray-500">
+                <span className="font-semibold text-gold/90">What is an Allsberry Fellow?</span>{" "}
+                A special honor for retired team members who made a real difference for our clients, our agency, and our community. Though retired from day-to-day work, a Fellow remains a respected voice within our organization.
+              </p>
+              <p className="mt-2 text-xs leading-5 text-gold/80 italic">
                 &ldquo;The Office Mom&rdquo; — 26 years of kindness, wisdom, and heart.
               </p>
             </motion.div>
@@ -250,7 +254,7 @@ function LeadershipCard({ agent, index }: { agent: Agent; index: number }) {
                 agent: agent.slug,
                 entry: "leadership-team-card",
               })}
-              className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-bold text-gray-900 transition hover:bg-blue-light"
+              className="cta-glow inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-bold text-gray-900 transition hover:bg-blue-light"
               onClick={tap}
             >
               Meet {agent.firstName}

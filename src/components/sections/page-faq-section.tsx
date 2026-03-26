@@ -29,7 +29,8 @@ export function PageFaqSection({
   ctas = [],
 }: PageFaqSectionProps) {
   return (
-    <section className="mt-14 border-t border-gray-100 pt-14">
+    <section className="mt-14 border-t border-gray-100 px-4 pt-14 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl">
       <SectionHeading eyebrow={eyebrow} title={title} description={description} />
 
       <div className="mt-10 grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
@@ -67,6 +68,7 @@ export function PageFaqSection({
             </div>
           </div>
         ) : null}
+      </div>
       </div>
     </section>
   );

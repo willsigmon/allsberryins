@@ -56,6 +56,23 @@ export default async function AgentPage({ params, searchParams }: AgentPageProps
     }),
   );
 
+  const nameParts = agent.name.split(" ");
+  const vcardFirstName = nameParts[0] ?? agent.name;
+  const vcardLastName = nameParts.slice(1).join(" ");
+  const qrVCard = [
+    "BEGIN:VCARD",
+    "VERSION:3.0",
+    `FN:${agent.name}`,
+    `N:${vcardLastName};${vcardFirstName};;;`,
+    `ORG:Allsberry Insurance Agency`,
+    `TITLE:${agent.title}`,
+    `TEL;TYPE=WORK,VOICE:${agent.phone}`,
+    `EMAIL;TYPE=WORK:${agent.email}`,
+    `ADR;TYPE=WORK:;;355 N Sheridan St, Ste 100;Corona;CA;92878;US`,
+    `URL:${directPageUrl}`,
+    "END:VCARD",
+  ].join("\r\n");
+
   const personSchema = {
     "@context": "https://schema.org",
     "@type": "Person",
@@ -215,8 +232,7 @@ export default async function AgentPage({ params, searchParams }: AgentPageProps
                       Scan to visit {agent.firstName}&apos;s page
                     </h2>
                     <p className="mt-4 text-base leading-8 text-gray-600">
-                      Great for print materials, desk signage, referrals, or follow-up texts.
-                      Scan from your phone to save {agent.firstName}&apos;s contact info instantly.
+                      Scan from your phone to save {agent.firstName}&apos;s contact info.
                     </p>
                     <Link
                       href={buildTrackedHref("/quote", {
@@ -224,7 +240,7 @@ export default async function AgentPage({ params, searchParams }: AgentPageProps
                         entry: "agent-page-quote",
                         product: agent.slug === "brahm" ? "business" : "home",
                       })}
-                      className="mt-5 inline-flex items-center gap-2 rounded-full bg-navy px-5 py-3 text-sm font-bold text-white transition hover:bg-blue"
+                      className="cta-glow-blue mt-5 inline-flex items-center gap-2 rounded-full bg-navy px-5 py-3 text-sm font-bold text-white transition hover:bg-blue"
                     >
                       Start with {agent.firstName}
                       <ArrowRight className="h-4 w-4" />
@@ -232,7 +248,7 @@ export default async function AgentPage({ params, searchParams }: AgentPageProps
                   </div>
                   <div className="rounded-[2rem] border border-gray-100 bg-gray-50 p-4">
                     <QRCodeSVG
-                      value={directPageUrl}
+                      value={qrVCard}
                       size={160}
                       fgColor="#00205C"
                       bgColor="#ffffff"
@@ -242,7 +258,7 @@ export default async function AgentPage({ params, searchParams }: AgentPageProps
                 </div>
                 <p className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-gray-400">
                   <QrCode className="h-4 w-4 text-blue" />
-                  Scan to visit my page
+                  {agent.firstName}&apos;s contact
                 </p>
               </div>
 
