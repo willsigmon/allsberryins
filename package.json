@@ -26,6 +26,7 @@
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "react-hook-form": "^7.65.0",
+    "web-haptics": "^0.0.6",
     "zod": "^4.1.11"
   },
   "devDependencies": {

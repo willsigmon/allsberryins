@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Facebook, Instagram, Lock, Mail, MapPin, MessageSquare, Phone, ShieldCheck } from "lucide-react";
 
+import { tap } from "@/lib/haptics";
 import { agency, footerProducts, quickLinks } from "@/lib/site-data";
 
 export function SiteFooter() {
@@ -166,7 +167,7 @@ function SocialLink({
       target="_blank"
       rel="noreferrer"
       aria-label={label}
-      onClick={() => { if (typeof navigator !== "undefined" && navigator.vibrate) navigator.vibrate(10); }}
+      onClick={() => { tap(); }}
       className="social-glow inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white/80 transition hover:text-white"
     >
       {children}

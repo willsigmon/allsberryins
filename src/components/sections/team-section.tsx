@@ -6,11 +6,10 @@ import { motion } from "framer-motion";
 import { Award, Globe, Handshake, Mail } from "lucide-react";
 
 import { SectionHeading } from "@/components/ui/section-heading";
+import { tap } from "@/lib/haptics";
 import { agents, fellows, fellowDefinition, type Agent, type AgentAccent } from "@/lib/site-data";
 import { buildTrackedHref } from "@/lib/tracking";
 import { cn } from "@/lib/utils";
-
-const tap = () => { if (typeof navigator !== "undefined" && navigator.vibrate) navigator.vibrate(10); };
 
 const accentClasses: Record<AgentAccent, string> = {
   blue: "bg-[linear-gradient(145deg,#0066b3_0%,#5da7df_100%)]",

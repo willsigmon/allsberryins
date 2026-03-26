@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 
+import { tap } from "@/lib/haptics";
+
 export function CtaBanner() {
   return (
     <section className="relative overflow-hidden bg-[linear-gradient(135deg,#00205c_0%,#0a3578_30%,#00448f_54%,#0066b3_100%)] py-20 text-white">
@@ -41,7 +43,7 @@ export function CtaBanner() {
             <Link
               href="/quote"
               className="cta-glow inline-flex items-center justify-center rounded-full bg-red px-7 py-4 text-base font-bold text-white transition hover:bg-red-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-red"
-              onClick={() => { if (typeof navigator !== "undefined" && navigator.vibrate) navigator.vibrate(10); }}
+              onClick={() => { tap(); }}
             >
               Get Your Free Quote
             </Link>

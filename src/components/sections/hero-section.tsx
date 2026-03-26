@@ -28,6 +28,7 @@ import {
 } from "@/lib/site-data";
 import { buildTrackedHref } from "@/lib/tracking";
 import { cn } from "@/lib/utils";
+import { tap } from "@/lib/haptics";
 
 const heroProducts = products.filter((p) => heroProductSlugs.includes(p.slug));
 const cyclingWords = ["Home", "Auto", "Life", "Business", "You"] as const;
@@ -137,7 +138,7 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
                     key={product.slug}
                     type="button"
                     aria-pressed={isActive}
-                    onClick={() => { if (typeof navigator !== "undefined" && navigator.vibrate) navigator.vibrate(10); handleProductSelect(product.slug); }}
+                    onClick={() => { tap(); handleProductSelect(product.slug); }}
                     className={cn(
                       "inline-flex w-full items-center justify-center gap-2 rounded-2xl border px-4 py-3.5 text-sm font-bold transition-all duration-150",
                       isActive
@@ -161,7 +162,7 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
                     key={product.slug}
                     type="button"
                     aria-pressed={isActive}
-                    onClick={() => { if (typeof navigator !== "undefined" && navigator.vibrate) navigator.vibrate(10); handleProductSelect(product.slug); }}
+                    onClick={() => { tap(); handleProductSelect(product.slug); }}
                     className={cn(
                       "inline-flex w-full items-center justify-center gap-1.5 rounded-full border px-2 py-2 text-[12px] font-semibold whitespace-nowrap transition-all duration-150 sm:text-[13px]",
                       isActive
@@ -220,7 +221,7 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
               </div>
               <Link
                 href="/evidence-of-insurance"
-                onClick={() => { if (typeof navigator !== "undefined" && navigator.vibrate) navigator.vibrate(10); }}
+                onClick={() => { tap(); }}
                 className="group flex flex-col justify-between rounded-[1.25rem] border border-gray-100 bg-white px-4 py-4 shadow-sm transition hover:border-blue/20 hover:bg-blue-light/30"
               >
                 <div className="flex items-start gap-3">
@@ -340,7 +341,7 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
                   <div className="mt-3 flex flex-wrap items-center gap-2">
                     <Link
                       href={buildTrackedHref("/agents/erin", { agent: "erin", entry: "hero-leadership-card" })}
-                      onClick={() => { if (typeof navigator !== "undefined" && navigator.vibrate) navigator.vibrate(10); }}
+                      onClick={() => { tap(); }}
                       className="inline-flex items-center gap-1.5 rounded-full bg-white px-3.5 py-2 text-xs font-bold text-gray-900 transition hover:bg-blue-light"
                     >
                       Meet Erin
@@ -348,7 +349,7 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
                     </Link>
                     <Link
                       href={agency.phoneHref}
-                      onClick={() => { if (typeof navigator !== "undefined" && navigator.vibrate) navigator.vibrate(10); }}
+                      onClick={() => { tap(); }}
                       className="hero-profile-glass inline-flex items-center gap-1.5 rounded-full border px-3.5 py-2 text-xs font-bold text-white transition hover:brightness-110"
                     >
                       <Phone className="h-3.5 w-3.5" />
@@ -377,7 +378,7 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
               />
               <button
                 type="button"
-                onClick={() => { if (typeof navigator !== "undefined" && navigator.vibrate) navigator.vibrate(10); startQuote(); }}
+                onClick={() => { tap(); startQuote(); }}
                 className="cta-glow inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-xl bg-red px-5 text-sm font-bold text-white transition-all hover:bg-red-hover hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red focus-visible:ring-offset-2"
               >
                 Start Quote

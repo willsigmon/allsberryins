@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Star } from "lucide-react";
 
 import { SectionHeading } from "@/components/ui/section-heading";
+import { tap } from "@/lib/haptics";
 import { reviews } from "@/lib/site-data";
 
 export function ReviewsSection() {
@@ -76,7 +77,7 @@ export function ReviewsSection() {
             target="_blank"
             rel="noreferrer"
             className="inline-flex items-center gap-2 font-semibold text-blue transition hover:text-gray-900"
-            onClick={() => { if (typeof navigator !== "undefined" && navigator.vibrate) navigator.vibrate(10); }}
+            onClick={() => { tap(); }}
           >
             See More Reviews →
           </Link>
