@@ -10,6 +10,7 @@ import { SkipLink } from "@/components/layout/skip-link";
 import { TrackingScripts } from "@/components/seo/tracking-scripts";
 import { ThemeScript } from "@/components/theme/theme-script";
 import { sharedMetadata } from "@/lib/metadata";
+import { Analytics } from "@vercel/analytics/next";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -50,6 +51,7 @@ export default function RootLayout({
           </main>
           <SiteFooter />
         </div>
+        <Analytics />
       </body>
     </html>
   );
