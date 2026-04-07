@@ -23,8 +23,8 @@ export function CoverageEvaluationCta() {
           </h2>
 
           <p className="mx-auto mt-4 max-w-2xl text-base leading-8 text-white/80">
-            We'll look at your current insurance for free — whether it's
-            personal or business. Send us your policy paperwork and we'll check
+            We&apos;ll look at your current insurance for free — whether it&apos;s
+            personal or business. Send us your policy paperwork and we&apos;ll check
             for gaps, overlaps, and ways to save. No commitment needed.
           </p>
 

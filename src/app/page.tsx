@@ -3,6 +3,7 @@ import { cookies } from "next/headers";
 import { CarrierLogosSection } from "@/components/sections/carrier-logos-section";
 import { CoverageEvaluationCta } from "@/components/sections/coverage-evaluation-cta";
 import { CtaBanner } from "@/components/sections/cta-banner";
+import { ExpertGuidesSection } from "@/components/sections/expert-guides-section";
 import { FaqSection } from "@/components/sections/faq-section";
 import { HeroSection } from "@/components/sections/hero-section";
 import { ProductGridSection } from "@/components/sections/product-grid-section";
@@ -34,6 +35,9 @@ const insuranceAgencySchema = {
     "Business insurance",
     "Commercial insurance",
     "Life insurance",
+    "Wildfire home insurance",
+    "California FAIR Plan",
+    "Difference in Conditions insurance",
     "Evidence of insurance",
     "Certificate of insurance",
   ],
@@ -57,7 +61,7 @@ const websiteSchema = {
   name: agency.fullName,
   url: agency.domain,
   description:
-    "Local insurance guidance, quote requests, agent pages, and proof-of-insurance support for Southern California clients.",
+    "Local insurance guidance, quote requests, agent pages, and proof-of-insurance support from a Corona, California agency serving Southern California clients.",
 };
 
 const faqSchema = {
@@ -88,6 +92,7 @@ export default async function Home() {
       <ValuePropsSection />
       <FaqSection />
       <ProductGridSection />
+      <ExpertGuidesSection />
       <CoverageEvaluationCta />
       <CarrierLogosSection />
       <TeamSection />

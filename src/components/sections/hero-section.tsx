@@ -83,8 +83,6 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
     return () => clearInterval(id);
   }, []);
 
-  const selectedProductDetails =
-    heroProducts.find((product) => product.slug === selectedProduct) ?? heroProducts[0];
   const selectedHelpContent = getHeroHelpContent(selectedProduct);
 
   const startQuote = () => {

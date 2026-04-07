@@ -2,29 +2,43 @@ import type { Metadata } from "next";
 
 import { absoluteUrl, siteUrl } from "@/lib/utils";
 
+const googleSiteVerification =
+  process.env.GOOGLE_SITE_VERIFICATION ?? process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
+const bingSiteVerification =
+  process.env.BING_SITE_VERIFICATION ?? process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION;
+
 const defaultDescription =
-  "Allsberry Insurance Agency provides personalized home, auto, business, and life insurance solutions across Southern California. Get a free quote today.";
+  "Allsberry Insurance Agency is a Corona, California insurance office helping Southern California households and businesses with home, auto, business, life, FAIR Plan, wildfire, and coverage-review questions.";
 
 const defaultKeywords = [
-  "insurance agency Southern California",
-  "home insurance Southern California",
-  "auto insurance Southern California",
-  "personalized insurance agency",
-  "business insurance Southern California",
-  "life insurance Southern California",
-  "certificate of insurance request",
+  "insurance agency corona ca",
+  "insurance agent corona ca",
+  "homeowners insurance california",
+  "home insurance corona ca",
+  "wildfire insurance california",
+  "ca fair plan guide",
+  "difference in conditions insurance california",
+  "insurance inland empire",
+  "business insurance southern california",
   "evidence of insurance request",
-  "commercial insurance Southern California",
 ];
 
 export const sharedMetadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Allsberry Insurance Agency | Southern California",
-    template: "%s | Allsberry Insurance Agency | Southern California",
+    default: "Allsberry Insurance Agency | Corona, CA Insurance Guidance",
+    template: "%s | Allsberry Insurance Agency",
   },
   description: defaultDescription,
   keywords: defaultKeywords,
+  verification: {
+    google: googleSiteVerification || undefined,
+    other: bingSiteVerification
+      ? {
+          "msvalidate.01": bingSiteVerification,
+        }
+      : undefined,
+  },
   icons: {
     icon: [
       { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
@@ -49,7 +63,7 @@ export const sharedMetadata: Metadata = {
   },
   category: "Insurance",
   openGraph: {
-    title: "Allsberry Insurance Agency | Southern California",
+    title: "Allsberry Insurance Agency | Corona, CA Insurance Guidance",
     description: defaultDescription,
     url: absoluteUrl(),
     siteName: "Allsberry Insurance Agency",
@@ -60,13 +74,13 @@ export const sharedMetadata: Metadata = {
         url: absoluteUrl("/opengraph-image"),
         width: 1200,
         height: 630,
-        alt: "Allsberry Insurance Agency serving Southern California",
+        alt: "Allsberry Insurance Agency serving Corona, the Inland Empire, and Southern California",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Allsberry Insurance Agency | Southern California",
+    title: "Allsberry Insurance Agency | Corona, CA Insurance Guidance",
     description: defaultDescription,
     images: [absoluteUrl("/twitter-image")],
   },
@@ -88,7 +102,7 @@ export function createPageMetadata(options: {
       canonical: path,
     },
     openGraph: {
-      title: `${title} | Allsberry Insurance Agency | Southern California`,
+      title: `${title} | Allsberry Insurance Agency`,
       description,
       url: absoluteUrl(path),
       images: [
@@ -96,12 +110,12 @@ export function createPageMetadata(options: {
           url: absoluteUrl("/opengraph-image"),
           width: 1200,
           height: 630,
-          alt: "Allsberry Insurance Agency serving Southern California",
+          alt: "Allsberry Insurance Agency serving Corona, the Inland Empire, and Southern California",
         },
       ],
     },
     twitter: {
-      title: `${title} | Allsberry Insurance Agency | Southern California`,
+      title: `${title} | Allsberry Insurance Agency`,
       description,
       images: [absoluteUrl("/twitter-image")],
     },

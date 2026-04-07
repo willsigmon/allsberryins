@@ -8,7 +8,9 @@ import { QRCodeSVG } from "qrcode.react";
 import { AgentContactForm } from "@/components/forms/agent-contact-form";
 import { SaveContactButton } from "@/components/ui/save-contact-button";
 import { StructuredData } from "@/components/seo/structured-data";
+import { SeoPageCard } from "@/components/ui/seo-page-card";
 import { createPageMetadata } from "@/lib/metadata";
+import { getSeoPagesForAgent } from "@/lib/seo-content";
 import { agency, agents, getAgentBySlug } from "@/lib/site-data";
 import { createBreadcrumbSchema, organizationSchema } from "@/lib/seo";
 import { buildTrackedHref } from "@/lib/tracking";
@@ -116,6 +118,7 @@ export default async function AgentPage({ params, searchParams }: AgentPageProps
     },
   ];
   const phoneHref = agent.phoneHref ?? agency.phoneHref;
+  const relatedSeoPages = getSeoPagesForAgent(agent.slug).slice(0, 3);
 
   return (
     <div className="pt-32 pb-20" style={{ backgroundImage: "var(--hero-bg)" }}>
@@ -308,6 +311,26 @@ export default async function AgentPage({ params, searchParams }: AgentPageProps
             />
           </div>
         </div>
+
+        {relatedSeoPages.length ? (
+          <div className="mt-8 rounded-[2.4rem] border border-gray-100 bg-white p-8 shadow-[0_30px_70px_-52px_rgba(0,32,92,0.45)]">
+            <p className="text-sm font-semibold uppercase tracking-[0.24em] text-blue">
+              Related guides
+            </p>
+            <h2 className="mt-3 font-display text-3xl font-extrabold text-gray-900">
+              Coverage guides {agent.firstName} can help you review
+            </h2>
+            <p className="mt-4 max-w-3xl text-base leading-8 text-gray-600">
+              These pages are part of the first California home insurance search cluster we are
+              building around wildfire pressure, FAIR Plan, and clear next steps.
+            </p>
+            <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+              {relatedSeoPages.map((relatedSeoPage) => (
+                <SeoPageCard key={relatedSeoPage.slug} page={relatedSeoPage} />
+              ))}
+            </div>
+          </div>
+        ) : null}
       </section>
     </div>
   );

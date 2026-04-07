@@ -1,7 +1,6 @@
 "use client";
 
 import {
-  Accessibility,
   Check,
   ChevronDown,
   MoonStar,
