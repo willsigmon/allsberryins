@@ -23,7 +23,7 @@ export function SiteFooter() {
             <h2 className="font-display text-2xl font-extrabold tracking-tight">Allsberry Insurance Agency</h2>
           </div>
           <p className="mt-4 max-w-sm text-sm leading-7 text-white/75">
-            Personalized home, auto, life, and business insurance solutions for families and companies across Southern California.
+            Corona-based home, auto, life, and business insurance guidance for families and companies across Southern California.
           </p>
           <div className="mt-6 flex items-center gap-3">
             <SocialLink href={agency.socials.facebook} label="Facebook">

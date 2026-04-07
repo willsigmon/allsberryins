@@ -100,6 +100,7 @@ export type BlogPost = {
   tags: string[];
   category?: BlogPostCategory;
   author?: string;
+  relatedSeoPageSlugs?: string[];
   intro: string;
   sections: Array<{
     heading: string;
@@ -225,6 +226,7 @@ export const officialProfile = {
 export const navigation = [
   { label: "Personal Insurance", href: "/#personal-insurance" },
   { label: "Commercial Insurance", href: "/#commercial-insurance" },
+  { label: "Resources", href: "/resources" },
   { label: "About", href: "/about" },
   { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/contact" },
@@ -752,6 +754,7 @@ export const blogPosts: BlogPost[] = [
     tags: ["Home Insurance", "Renewal Tips"],
     category: "tips",
     author: "Erin Allsberry",
+    relatedSeoPageSlugs: ["california-home-insurance", "wildfire-home-insurance-california"],
     intro:
       "Your renewal is a chance to make sure your coverage still fits. Here are five simple questions that can save you money and stress.",
     sections: [
@@ -779,6 +782,7 @@ export const blogPosts: BlogPost[] = [
     tags: ["Umbrella Insurance", "Coverage Guide"],
     category: "guides",
     author: "Brahm Shank",
+    relatedSeoPageSlugs: ["california-home-insurance", "insurance-agency-corona-ca"],
     intro:
       "An umbrella policy adds extra protection on top of your home and auto coverage. Here is how it works and who it helps the most.",
     sections: [
@@ -826,6 +830,7 @@ export const blogPosts: BlogPost[] = [
     tags: ["Home Insurance", "California", "Savings Tips"],
     category: "tips",
     author: "Erin Allsberry",
+    relatedSeoPageSlugs: ["california-home-insurance", "wildfire-home-insurance-california", "ca-fair-plan-guide"],
     intro:
       "California homeowners are dealing with higher costs, wildfire worries, and changing plans. The good news: there are still real ways to save money without losing the protection you need.",
     sections: [
@@ -858,6 +863,7 @@ export const blogPosts: BlogPost[] = [
     tags: ["Business Insurance", "Commercial Insurance"],
     category: "guides",
     author: "Brahm Shank",
+    relatedSeoPageSlugs: ["insurance-agency-corona-ca"],
     intro:
       "Business insurance isn't just one thing. It's a group of plans that work together to protect your business, your team, your property, and your name.",
     sections: [
@@ -891,6 +897,7 @@ export const blogPosts: BlogPost[] = [
     tags: ["Auto Insurance", "Home Insurance", "Bundle"],
     category: "tips",
     author: "Erin Allsberry",
+    relatedSeoPageSlugs: ["california-home-insurance", "insurance-agency-corona-ca"],
     intro:
       "When your insurance plans work together, your protection gets stronger. That matters most when life throws you a curveball.",
     sections: [
@@ -912,6 +919,8 @@ export const blogPosts: BlogPost[] = [
 
 export const quickLinks = [
   { label: "Get a Quote", href: "/quote" },
+  { label: "Resources", href: "/resources" },
+  { label: "Insurance Agency in Corona, CA", href: "/insurance-agency-corona-ca" },
   { label: "Blog", href: "/blog" },
   { label: "Proof of Insurance", href: "/evidence-of-insurance" },
   { label: "Meet Our Team", href: "/#team" },

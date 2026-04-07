@@ -4,7 +4,9 @@ import { notFound } from "next/navigation";
 import { ArrowRight } from "lucide-react";
 
 import { StructuredData } from "@/components/seo/structured-data";
+import { SeoPageCard } from "@/components/ui/seo-page-card";
 import { createPageMetadata } from "@/lib/metadata";
+import { getSeoPagesBySlugs } from "@/lib/seo-content";
 import { blogPosts, getBlogPostBySlug } from "@/lib/site-data";
 import { createBreadcrumbSchema, organizationSchema } from "@/lib/seo";
 import { absoluteUrl } from "@/lib/utils";
@@ -66,6 +68,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     .filter((candidate) => candidate.slug !== post.slug)
     .filter((candidate) => candidate.tags.some((tag) => post.tags.includes(tag)))
     .slice(0, 2);
+  const relatedSeoPages = getSeoPagesBySlugs(post.relatedSeoPageSlugs ?? []);
 
   return (
     <div className="bg-white pt-32">
@@ -138,6 +141,19 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             </Link>
           </div>
         </section>
+
+        {relatedSeoPages.length ? (
+          <section className="mt-14">
+            <h2 className="font-display text-2xl font-extrabold text-gray-900">
+              Related California insurance guides
+            </h2>
+            <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+              {relatedSeoPages.map((relatedSeoPage) => (
+                <SeoPageCard key={relatedSeoPage.slug} page={relatedSeoPage} />
+              ))}
+            </div>
+          </section>
+        ) : null}
 
         {relatedPosts.length ? (
           <section className="mt-14">

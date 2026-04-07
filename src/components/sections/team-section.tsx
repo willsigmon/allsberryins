@@ -7,7 +7,7 @@ import { Award, Globe, Handshake, Mail } from "lucide-react";
 
 import { SectionHeading } from "@/components/ui/section-heading";
 import { press, tap } from "@/lib/haptics";
-import { agents, fellows, fellowDefinition, type Agent, type AgentAccent } from "@/lib/site-data";
+import { agents, fellows, type Agent, type AgentAccent } from "@/lib/site-data";
 import { buildTrackedHref } from "@/lib/tracking";
 import { cn } from "@/lib/utils";
 

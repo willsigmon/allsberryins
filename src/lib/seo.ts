@@ -18,7 +18,23 @@ export const organizationSchema = {
   logo: absoluteUrl("/media/brand/logos/allsberry-deep-blue.png"),
   priceRange: "$$",
   foundingDate: String(agency.founded),
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: agency.addressLine1,
+    addressLocality: "Corona",
+    addressRegion: "CA",
+    postalCode: "92878",
+    addressCountry: "US",
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: agency.geo.latitude,
+    longitude: agency.geo.longitude,
+  },
+  hasMap: agency.socials.google,
   areaServed: [
+    "Corona",
+    "Inland Empire",
     "Southern California",
     "Riverside County",
     "Orange County",
@@ -43,7 +59,12 @@ export const organizationSchema = {
       closes: "17:00",
     },
   ],
-  sameAs: [agency.socials.facebook, agency.socials.instagram, agency.socials.linkedin],
+  sameAs: [
+    agency.socials.facebook,
+    agency.socials.instagram,
+    agency.socials.linkedin,
+    agency.socials.google,
+  ],
 };
 
 export function createBreadcrumbSchema(items: BreadcrumbItem[]) {

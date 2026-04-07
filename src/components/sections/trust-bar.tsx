@@ -42,7 +42,7 @@ export function TrustBar() {
     <section className="relative overflow-hidden border-y border-black/20 bg-[linear-gradient(90deg,#001033_0%,#001a4d_20%,#00307a_50%,#001a4d_80%,#001033_100%)] py-10">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_50%,rgba(0,102,179,0.2),transparent_60%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_50%,rgba(218,41,28,0.06),transparent_50%)]" />
-      <div className="relative mx-auto flex max-w-5xl items-center justify-between px-4 sm:px-6 lg:px-8">
+      <div className="relative mx-auto grid max-w-5xl grid-cols-1 gap-6 px-4 sm:grid-cols-3 sm:gap-4 sm:px-6 lg:px-8">
         {stats.map((stat, index) => (
           <motion.div
             key={stat.label}
@@ -50,7 +50,7 @@ export function TrustBar() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: index * 0.12 }}
-            className="flex items-center gap-5 text-white"
+            className="flex items-center justify-center gap-5 text-white sm:justify-start"
           >
             <div className="count-reveal font-display text-4xl font-extrabold tracking-tight sm:text-5xl" style={{ textShadow: "0 2px 0 rgba(0,0,0,0.3), 0 4px 12px rgba(0,102,179,0.25), 0 1px 0 rgba(255,255,255,0.08)" }}>
               <CountUp end={stat.end} />

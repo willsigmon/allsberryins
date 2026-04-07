@@ -1,6 +1,6 @@
 import { clsx, type ClassValue } from "clsx";
 
-export const siteUrl = "https://allsberryagency.vercel.app";
+export const siteUrl = "https://allsberryagency.com";
 
 export function cn(...inputs: ClassValue[]) {
   return clsx(inputs);
