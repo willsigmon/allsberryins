@@ -5,7 +5,7 @@ import { PageFaqSection } from "@/components/sections/page-faq-section";
 import { StructuredData } from "@/components/seo/structured-data";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { createPageMetadata } from "@/lib/metadata";
-import { getAgentBySlug } from "@/lib/site-data";
+import { agency, getAgentBySlug } from "@/lib/site-data";
 import { buildTrackedHref, normalizeAgentSlug } from "@/lib/tracking";
 import { createBreadcrumbSchema, organizationSchema } from "@/lib/seo";
 import { absoluteUrl } from "@/lib/utils";
@@ -74,7 +74,7 @@ export default async function QuotePage({ searchParams }: QuotePageProps) {
     availableChannel: {
       "@type": "ServiceChannel",
       serviceUrl: absoluteUrl("/quote"),
-      servicePhone: "+1-951-739-5959",
+      servicePhone: agency.phoneHref.replace("tel:", ""),
     },
   };
 

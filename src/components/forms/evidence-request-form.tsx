@@ -11,7 +11,7 @@ import {
   evidenceRequestSchema,
   type EvidenceRequestValues,
 } from "@/lib/lead-schemas";
-import { evidenceRequestTypes } from "@/lib/site-data";
+import { agency, evidenceRequestTypes } from "@/lib/site-data";
 import { readStoredMarketingAttribution } from "@/lib/tracking";
 import { cn } from "@/lib/utils";
 
@@ -86,7 +86,7 @@ export function EvidenceRequestForm({
     } catch (error) {
       console.error("Evidence request submission failed", error);
       setErrorMessage(
-        "We couldn't send that request just now. Please call the office at (951) 739-5959.",
+        `We couldn't send that request just now. Please call the office at ${agency.phone}.`,
       );
     }
   });

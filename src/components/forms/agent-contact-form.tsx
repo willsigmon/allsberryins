@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import { ReviewRequest } from "@/components/sections/review-request";
 import { fireLeadConversion } from "@/lib/conversions";
 import { agentContactSchema, helpTopics, type AgentContactValues } from "@/lib/lead-schemas";
+import { agency } from "@/lib/site-data";
 import { readStoredMarketingAttribution } from "@/lib/tracking";
 
 type AgentContactFormProps = {
@@ -70,7 +71,7 @@ export function AgentContactForm({
       fireLeadConversion("agent-contact", { agent: agentSlug });
     } catch (error) {
       console.error("Agent contact form submission failed", error);
-      setErrorMessage("We couldn't send that request just now. Please call the office at (951) 739-5959.");
+      setErrorMessage(`We couldn't send that request just now. Please call the office at ${agency.phone}.`);
     }
   });
 

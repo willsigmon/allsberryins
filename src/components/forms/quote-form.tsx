@@ -7,6 +7,7 @@ import { type DefaultValues, useForm, useWatch } from "react-hook-form";
 
 import { AddressAutocomplete } from "@/components/forms/address-autocomplete";
 import {
+  agency,
   employeeOptions,
   productSelectionOptions,
   products,
@@ -88,18 +89,20 @@ export function QuoteForm({
     setErrorMessage(null);
 
     try {
+      const payload = {
+        type: "quote-request",
+        assignedAgentSlug,
+        entryPoint,
+        ...readStoredMarketingAttribution(),
+        ...values,
+      };
+
       const response = await fetch("/api/leads", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          type: "quote-request",
-          assignedAgentSlug,
-          entryPoint,
-          ...readStoredMarketingAttribution(),
-          ...values,
-        }),
+        body: JSON.stringify(payload),
       });
 
       if (!response.ok) {
@@ -114,7 +117,7 @@ export function QuoteForm({
       });
     } catch (error) {
       console.error("Quote form submission failed", error);
-      setErrorMessage("Something went wrong sending your request. Please call us at (951) 739-5959.");
+      setErrorMessage(`Something went wrong sending your request. Please call us at ${agency.phone}.`);
     }
   });
 

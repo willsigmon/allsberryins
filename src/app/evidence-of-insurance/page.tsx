@@ -83,7 +83,7 @@ export default async function EvidenceOfInsurancePage({
     availableChannel: {
       "@type": "ServiceChannel",
       serviceUrl: absoluteUrl("/evidence-of-insurance"),
-      servicePhone: "+1-951-739-5959",
+      servicePhone: agency.phoneHref.replace("tel:", ""),
     },
   };
 
