@@ -29,5 +29,9 @@ jobs:
       - name: Run lint
         run: npm run lint
 
+      - name: Run typecheck
+        run: npm run typecheck
+        continue-on-error: true
+
       - name: Run build
         run: npm run build
