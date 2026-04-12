@@ -502,6 +502,10 @@ textarea {
   background-color: var(--surface-muted);
 }
 
+.fellow-card-bg {
+  background: linear-gradient(160deg, var(--fellow-bg-from) 0%, var(--fellow-bg-mid) 50%, var(--fellow-bg-to) 100%);
+}
+
 .section-glow {
   background-image: var(--section-glow);
 }

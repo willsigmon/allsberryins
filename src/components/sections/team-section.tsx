@@ -132,7 +132,7 @@ export function TeamSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
-              className="parallax-card relative flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-gold/20 bg-[linear-gradient(160deg,var(--fellow-bg-from)_0%,var(--fellow-bg-mid)_50%,var(--fellow-bg-to)_100%)] p-5"
+              className="fellow-card-bg parallax-card relative flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-gold/20 p-5"
             >
               <div className="shimmer-border absolute inset-x-0 top-0 h-1 opacity-50" />
               <div className="flex items-center gap-4">
@@ -162,7 +162,7 @@ export function TeamSection() {
               <p className="mt-4 flex-1 text-sm leading-7 text-gray-600">
                 {fellow.career}
               </p>
-              <p className="mt-3 text-xs leading-5 text-gray-500">
+              <p className="mt-3 text-xs leading-5 text-gray-400">
                 <span className="font-semibold text-gold/90">What is an Allsberry Fellow?</span>{" "}
                 A special honor for retired team members who made a real difference for our clients, our agency, and our community. Though retired from day-to-day work, a Fellow remains a respected voice within our organization.
               </p>
