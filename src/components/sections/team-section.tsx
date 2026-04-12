@@ -132,7 +132,7 @@ export function TeamSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
-              className="parallax-card relative flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-gold/20 bg-[linear-gradient(160deg,#fffdf5_0%,#fff8e7_50%,#fef3d0_100%)] p-5"
+              className="parallax-card relative flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-gold/20 bg-[linear-gradient(160deg,var(--fellow-bg-from)_0%,var(--fellow-bg-mid)_50%,var(--fellow-bg-to)_100%)] p-5"
             >
               <div className="shimmer-border absolute inset-x-0 top-0 h-1 opacity-50" />
               <div className="flex items-center gap-4">

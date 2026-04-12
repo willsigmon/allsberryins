@@ -18,7 +18,7 @@ function MarqueeRow({
 }) {
   const doubled = [...carriers, ...carriers];
   return (
-    <div className="flex overflow-hidden py-2">
+    <div className="flex overflow-hidden py-3">
       <div
         className="flex shrink-0 items-center gap-5"
         style={{
