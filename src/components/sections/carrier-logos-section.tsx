@@ -18,7 +18,7 @@ function MarqueeRow({
 }) {
   const doubled = [...carriers, ...carriers];
   return (
-    <div className="flex overflow-hidden">
+    <div className="flex overflow-hidden py-2">
       <div
         className="flex shrink-0 items-center gap-5"
         style={{
@@ -67,8 +67,8 @@ export function CarrierLogosSection() {
         transition={{ duration: 0.6 }}
         className="relative mt-12 grid gap-4"
       >
-        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-white to-transparent sm:w-24" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-white to-transparent sm:w-24" />
+        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-white to-transparent sm:w-40" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-white to-transparent sm:w-40" />
         <MarqueeRow carriers={row1} />
         <MarqueeRow carriers={row2} reverse />
       </motion.div>
