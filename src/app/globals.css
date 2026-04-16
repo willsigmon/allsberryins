@@ -412,6 +412,12 @@ textarea {
   animation-play-state: paused;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}
+
 /* ── Review ticker ── */
 @keyframes ticker {
   0% { transform: translateX(0); }
@@ -932,4 +938,16 @@ textarea {
 /* ── Smooth color transitions on theme change ── */
 section, div, header, footer, nav {
   transition: background-color 240ms ease, border-color 240ms ease;
+}
+
+/* ── Global reduced-motion defaults ── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

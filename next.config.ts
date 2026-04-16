@@ -16,10 +16,30 @@ const securityHeaders = [
   { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
   { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
   { key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains; preload" },
+  { key: "X-DNS-Prefetch-Control", value: "on" },
 ];
 
+const longCacheHeader = {
+  key: "Cache-Control",
+  value: "public, max-age=31536000, immutable",
+};
+
+const productionConfig: NextConfig = {
+  async headers() {
+    return [
+      { source: "/(.*)", headers: securityHeaders },
+      { source: "/media/:path*", headers: [longCacheHeader] },
+      { source: "/fonts/:path*", headers: [longCacheHeader] },
+      {
+        source: "/email-signatures/:path*",
+        headers: [{ key: "Cache-Control", value: "public, max-age=3600" }],
+      },
+    ];
+  },
+};
+
 const nextConfig: NextConfig = process.env.VERCEL
-  ? { async headers() { return [{ source: "/(.*)", headers: securityHeaders }]; } }
+  ? productionConfig
   : localDistDir
     ? {
         distDir: localDistDir,

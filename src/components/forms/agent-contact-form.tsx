@@ -5,6 +5,7 @@ import { LoaderCircle } from "lucide-react";
 import { useId, useState } from "react";
 import { useForm } from "react-hook-form";
 
+import { ReviewRequest } from "@/components/sections/review-request";
 import { fireLeadConversion } from "@/lib/conversions";
 import { agentContactSchema, helpTopics, type AgentContactValues } from "@/lib/lead-schemas";
 import { readStoredMarketingAttribution } from "@/lib/tracking";
@@ -165,13 +166,16 @@ export function AgentContactForm({
         Send Request
       </button>
       {successMessage ? (
-        <p
-          aria-live="polite"
-          className="rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-semibold text-emerald-700"
-          role="status"
-        >
-          {successMessage}
-        </p>
+        <div className="grid gap-4">
+          <p
+            aria-live="polite"
+            className="rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-semibold text-emerald-700"
+            role="status"
+          >
+            {successMessage}
+          </p>
+          <ReviewRequest variant="post-submit" />
+        </div>
       ) : null}
       {errorMessage ? (
         <p

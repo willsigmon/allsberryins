@@ -12,6 +12,7 @@ import {
   products,
   referralSources,
 } from "@/lib/site-data";
+import { ReviewRequest } from "@/components/sections/review-request";
 import { fireLeadConversion } from "@/lib/conversions";
 import { quoteFormSchema, type QuoteFormValues } from "@/lib/lead-schemas";
 import { readStoredMarketingAttribution } from "@/lib/tracking";
@@ -353,13 +354,16 @@ export function QuoteForm({
         </div>
 
         {successMessage ? (
-          <p
-            aria-live="polite"
-            className="rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-semibold text-emerald-700"
-            role="status"
-          >
-            {successMessage}
-          </p>
+          <div className="grid gap-4">
+            <p
+              aria-live="polite"
+              className="rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-semibold text-emerald-700"
+              role="status"
+            >
+              {successMessage}
+            </p>
+            <ReviewRequest variant="post-submit" />
+          </div>
         ) : null}
         {errorMessage ? (
           <p

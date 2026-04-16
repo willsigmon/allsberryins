@@ -173,6 +173,40 @@ export default async function CarrierPage({ params }: Params) {
             </li>
           </ul>
         </section>
+
+        <section className="mt-14">
+          <h2 className="text-xl font-bold text-navy">Other carriers we work with</h2>
+          <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {carrierPartners
+              .filter((candidate) => candidate.name !== carrier.name)
+              .slice(0, 6)
+              .map((related) => {
+                const relatedSlug = slugify(related.name);
+                return (
+                  <Link
+                    key={related.name}
+                    href={`/carriers/${relatedSlug}`}
+                    className="flex items-center gap-3 rounded-2xl border border-gray-100 bg-white px-4 py-3 text-sm font-semibold text-navy transition hover:border-blue/40 hover:text-blue"
+                  >
+                    <Image
+                      src={related.logoSrc}
+                      alt=""
+                      width={36}
+                      height={20}
+                      className="h-5 w-auto object-contain"
+                    />
+                    {related.name}
+                  </Link>
+                );
+              })}
+          </div>
+          <Link
+            href="/carriers"
+            className="mt-5 inline-flex text-sm font-semibold text-blue hover:text-red"
+          >
+            See every carrier partner →
+          </Link>
+        </section>
       </div>
       <div className="mt-16">
         <CtaBanner />
