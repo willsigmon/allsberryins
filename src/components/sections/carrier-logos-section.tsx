@@ -1,10 +1,12 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
 
 import { SectionHeading } from "@/components/ui/section-heading";
 import { carrierAccessStat, carrierPartners } from "@/lib/site-data";
+import { slugify } from "@/lib/utils";
 
 const row1 = carrierPartners.slice(0, 10);
 const row2 = carrierPartners.slice(10);
@@ -26,14 +28,16 @@ function MarqueeRow({
         }}
       >
         {doubled.map((carrier, index) => (
-          <div
+          <Link
             key={`${carrier.name}-${index}`}
-            className="card-elevated flex h-[5.25rem] shrink-0 items-center gap-3 rounded-2xl border border-gray-100 px-5 py-3.5 transition-all hover:border-blue/30 hover:scale-[1.03]"
+            href={`/carriers/${slugify(carrier.name)}`}
+            aria-label={`${carrier.name} insurance — learn more`}
+            className="card-elevated flex h-[5.25rem] shrink-0 items-center gap-3 rounded-2xl border border-gray-100 px-5 py-3.5 transition-all hover:border-blue/30 hover:scale-[1.03] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue"
           >
             <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-gray-200 bg-[rgba(255,255,255,0.96)] p-2 shadow-sm">
               <Image
                 src={carrier.logoSrc}
-                alt={`${carrier.name} logo`}
+                alt=""
                 width={44}
                 height={44}
                 className="h-full w-full object-contain"
@@ -42,7 +46,7 @@ function MarqueeRow({
             <span className="whitespace-nowrap text-base font-semibold text-gray-900">
               {carrier.name}
             </span>
-          </div>
+          </Link>
         ))}
       </div>
     </div>
@@ -72,6 +76,14 @@ export function CarrierLogosSection() {
         <MarqueeRow carriers={row1} />
         <MarqueeRow carriers={row2} reverse />
       </motion.div>
+      <div className="mt-8 flex justify-center">
+        <Link
+          href="/carriers"
+          className="inline-flex items-center justify-center rounded-full border border-navy/20 px-5 py-2.5 text-sm font-semibold text-navy transition hover:border-navy/40"
+        >
+          See every carrier partner →
+        </Link>
+      </div>
     </section>
   );
 }

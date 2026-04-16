@@ -6,6 +6,33 @@ type BreadcrumbItem = {
   path?: string;
 };
 
+/**
+ * AggregateRating requires real, verifiable aggregate review data. Populate
+ * these env vars once Google review counts and average rating are confirmed,
+ * then Search Console will recognize review rich snippets.
+ *
+ * AGENCY_REVIEW_COUNT=123
+ * AGENCY_REVIEW_RATING=4.9
+ */
+const aggregateRatingCount = Number(process.env.AGENCY_REVIEW_COUNT);
+const aggregateRatingValue = Number(process.env.AGENCY_REVIEW_RATING);
+const hasVerifiedRating =
+  Number.isFinite(aggregateRatingCount) &&
+  Number.isFinite(aggregateRatingValue) &&
+  aggregateRatingCount > 0 &&
+  aggregateRatingValue > 0 &&
+  aggregateRatingValue <= 5;
+
+const aggregateRating = hasVerifiedRating
+  ? {
+      "@type": "AggregateRating",
+      ratingValue: aggregateRatingValue.toFixed(1),
+      reviewCount: aggregateRatingCount,
+      bestRating: "5",
+      worstRating: "1",
+    }
+  : undefined;
+
 export const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "InsuranceAgency",
@@ -65,6 +92,7 @@ export const organizationSchema = {
     agency.socials.linkedin,
     agency.socials.google,
   ],
+  ...(aggregateRating ? { aggregateRating } : {}),
 };
 
 export function createBreadcrumbSchema(items: BreadcrumbItem[]) {

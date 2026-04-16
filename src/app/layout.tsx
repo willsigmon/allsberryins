@@ -7,6 +7,7 @@ import "./globals.css";
 
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
+import { GoogleAnalytics } from "@/components/seo/google-analytics";
 import { TrackingPageView } from "@/components/seo/tracking-page-view";
 import { SkipLink } from "@/components/layout/skip-link";
 import { TrackingScripts } from "@/components/seo/tracking-scripts";
@@ -39,6 +40,7 @@ export default function RootLayout({
       <head>
         <ThemeScript />
         <TrackingScripts />
+        <GoogleAnalytics />
       </head>
       <body className={`${dmSans.variable} ${plusJakartaSans.variable} bg-white font-sans text-gray-600 antialiased`}>
         <SkipLink />

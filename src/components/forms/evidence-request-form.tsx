@@ -5,6 +5,7 @@ import { LoaderCircle } from "lucide-react";
 import { useId, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 
+import { fireLeadConversion } from "@/lib/conversions";
 import {
   evidenceRequestSchema,
   type EvidenceRequestValues,
@@ -80,6 +81,7 @@ export function EvidenceRequestForm({
       setSuccessMessage(
         "Thanks. We received your request and the team will follow up with the right documentation as quickly as possible.",
       );
+      fireLeadConversion("evidence-request", { requestType: values.requestType });
     } catch (error) {
       console.error("Evidence request submission failed", error);
       setErrorMessage(

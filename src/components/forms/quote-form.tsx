@@ -12,6 +12,7 @@ import {
   products,
   referralSources,
 } from "@/lib/site-data";
+import { fireLeadConversion } from "@/lib/conversions";
 import { quoteFormSchema, type QuoteFormValues } from "@/lib/lead-schemas";
 import { readStoredMarketingAttribution } from "@/lib/tracking";
 import { cn } from "@/lib/utils";
@@ -106,6 +107,10 @@ export function QuoteForm({
 
       reset(defaultValues);
       setSuccessMessage("Thank you! We'll be in touch within one business day.");
+      fireLeadConversion("quote-request", {
+        products: values.products,
+        zip: values.zipCode,
+      });
     } catch (error) {
       console.error("Quote form submission failed", error);
       setErrorMessage("Something went wrong sending your request. Please call us at (951) 739-5959.");
