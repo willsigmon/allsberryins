@@ -1,6 +1,7 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
+const CANONICAL_HOST = "allsberryagency.com";
 const TEAM_ATTRIBUTION_USERNAME = process.env.TEAM_ATTRIBUTION_USERNAME;
 const TEAM_ATTRIBUTION_PASSWORD = process.env.TEAM_ATTRIBUTION_PASSWORD;
 
@@ -49,26 +50,45 @@ function readBasicAuthCredentials(request: NextRequest) {
 }
 
 export function middleware(request: NextRequest) {
-  if (!isProtectionEnabled()) {
-    return NextResponse.next();
+  const host = request.headers.get("host") ?? "";
+
+  // Redirect www → canonical non-www domain (301 permanent).
+  if (host === `www.${CANONICAL_HOST}`) {
+    const url = request.nextUrl.clone();
+    url.host = CANONICAL_HOST;
+    url.port = "";
+    return NextResponse.redirect(url, 301);
   }
 
-  const credentials = readBasicAuthCredentials(request);
+  // Team-attribution basic-auth gate.
+  if (request.nextUrl.pathname.startsWith("/team-attribution")) {
+    if (!isProtectionEnabled()) {
+      return NextResponse.next();
+    }
 
-  if (
-    !credentials ||
-    credentials.username !== TEAM_ATTRIBUTION_USERNAME ||
-    credentials.password !== TEAM_ATTRIBUTION_PASSWORD
-  ) {
-    return unauthorizedResponse();
+    const credentials = readBasicAuthCredentials(request);
+
+    if (
+      !credentials ||
+      credentials.username !== TEAM_ATTRIBUTION_USERNAME ||
+      credentials.password !== TEAM_ATTRIBUTION_PASSWORD
+    ) {
+      return unauthorizedResponse();
+    }
+
+    const response = NextResponse.next();
+    response.headers.set("Cache-Control", "private, no-store, max-age=0");
+    response.headers.set("Vary", "Authorization");
+    return response;
   }
 
-  const response = NextResponse.next();
-  response.headers.set("Cache-Control", "private, no-store, max-age=0");
-  response.headers.set("Vary", "Authorization");
-  return response;
+  return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/team-attribution/:path*"],
+  matcher: [
+    // Match www subdomain redirect (all paths) + team-attribution auth.
+    // Exclude Next.js internals and static assets.
+    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico|woff2?)$).*)",
+  ],
 };
