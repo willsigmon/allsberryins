@@ -1,10 +1,13 @@
+import nodemailer from "nodemailer";
+import type { Transporter } from "nodemailer";
+
 import { agency } from "@/lib/site-data";
 
 type LeadPayload = Record<string, unknown> & { type: string };
 
 type SendResult =
-  | { ok: true; provider: "resend" | "log" }
-  | { ok: false; provider: "resend"; status: number; error: string };
+  | { ok: true; provider: "smtp" | "log" }
+  | { ok: false; provider: "smtp"; error: string };
 
 const LEAD_TYPE_LABELS: Record<string, string> = {
   "quote-request": "Quote Request",
@@ -52,23 +55,46 @@ function escapeHtml(value: string): string {
 
 function leadSubject(lead: LeadPayload): string {
   const label = LEAD_TYPE_LABELS[lead.type] ?? "Website Lead";
-  const name = typeof lead.firstName === "string" && typeof lead.lastName === "string"
-    ? `${lead.firstName} ${lead.lastName}`
-    : typeof lead.name === "string"
-      ? lead.name
-      : "Website Visitor";
+  const name =
+    typeof lead.firstName === "string" && typeof lead.lastName === "string"
+      ? `${lead.firstName} ${lead.lastName}`
+      : typeof lead.name === "string"
+        ? lead.name
+        : "Website Visitor";
   return `[Allsberry Site] ${label} — ${name}`;
 }
 
+let cachedTransporter: Transporter | undefined;
+
+function getTransporter(): Transporter | undefined {
+  if (cachedTransporter) return cachedTransporter;
+
+  const host = process.env.SMTP_HOST;
+  const port = Number(process.env.SMTP_PORT ?? 587);
+  const user = process.env.SMTP_USER;
+  const pass = process.env.SMTP_PASSWORD;
+
+  if (!host || !user || !pass) return undefined;
+
+  cachedTransporter = nodemailer.createTransport({
+    host,
+    port,
+    secure: port === 465,
+    auth: { user, pass },
+  });
+
+  return cachedTransporter;
+}
+
 export async function sendLeadEmail(lead: LeadPayload): Promise<SendResult> {
-  const apiKey = process.env.RESEND_API_KEY;
   const toEmail = process.env.LEADS_TO_EMAIL ?? agency.email;
-  const fromEmail = process.env.LEADS_FROM_EMAIL ?? `leads@${new URL(agency.domain).hostname}`;
-  const replyToHeader =
+  const fromEmail = process.env.LEADS_FROM_EMAIL ?? process.env.SMTP_USER ?? agency.email;
+  const replyTo =
     typeof lead.email === "string" && lead.email.includes("@") ? lead.email : undefined;
 
-  if (!apiKey) {
-    console.info("[lead-email] RESEND_API_KEY not set — logging lead only", {
+  const transporter = getTransporter();
+  if (!transporter) {
+    console.info("[lead-email] SMTP not configured — logging lead only", {
       type: lead.type,
       to: toEmail,
     });
@@ -76,40 +102,20 @@ export async function sendLeadEmail(lead: LeadPayload): Promise<SendResult> {
   }
 
   try {
-    const response = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        from: fromEmail,
-        to: toEmail.split(",").map((value) => value.trim()).filter(Boolean),
-        subject: leadSubject(lead),
-        text: renderTextBody(lead),
-        html: renderHtmlBody(lead),
-        reply_to: replyToHeader,
-      }),
+    await transporter.sendMail({
+      from: `Allsberry Site <${fromEmail}>`,
+      to: toEmail,
+      subject: leadSubject(lead),
+      text: renderTextBody(lead),
+      html: renderHtmlBody(lead),
+      replyTo,
     });
-
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error("[lead-email] Resend rejected send", response.status, errorText);
-      return {
-        ok: false,
-        provider: "resend",
-        status: response.status,
-        error: errorText,
-      };
-    }
-
-    return { ok: true, provider: "resend" };
+    return { ok: true, provider: "smtp" };
   } catch (error) {
-    console.error("[lead-email] send failed", error);
+    console.error("[lead-email] SMTP send failed", error);
     return {
       ok: false,
-      provider: "resend",
-      status: 0,
+      provider: "smtp",
       error: error instanceof Error ? error.message : String(error),
     };
   }
