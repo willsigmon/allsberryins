@@ -37,7 +37,7 @@ function MarqueeRow({
             <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-gray-200 bg-[rgba(255,255,255,0.96)] p-2 shadow-sm">
               <Image
                 src={carrier.logoSrc}
-                alt=""
+                alt={`${carrier.name} logo`}
                 width={44}
                 height={44}
                 className="h-full w-full object-contain"
