@@ -12,7 +12,9 @@
   - AGENT_TITLE       → Title (e.g., Agency Owner & Principal Agent)
   - AGENT_EMAIL       → Email (e.g., office@allsberryagency.com)
   - AGENT_PHONE       → Phone (e.g., (951) 739-5959)
-  - AGENT_PHOTO_URL   → Headshot URL (e.g., https://allsberryagency.com/media/agents/erin-allsberry-new.png)
+  - AGENT_PHOTO_URL   → Square headshot URL (e.g., https://allsberryagency.com/media/agents/signatures/erin-allsberry.png)
+                        MUST be square (200x200 recommended) — Gmail strips object-fit CSS, so a portrait source
+                        will render squashed. Pre-crop to square before using.
   - AGENT_CALENDLY    → Calendly link (optional, delete row if unused)
 -->
 
@@ -33,7 +35,7 @@
         <tr>
           <!-- Photo -->
           <td style="vertical-align:top;padding-right:16px;">
-            <img src="AGENT_PHOTO_URL" alt="AGENT_NAME" width="80" height="80" style="border-radius:50%;display:block;border:2px solid #0066b3;object-fit:cover;object-position:center top;" />
+            <img src="AGENT_PHOTO_URL" alt="AGENT_NAME" width="80" height="80" style="border-radius:50%;display:block;border:2px solid #0066b3;" />
           </td>
           <!-- Info -->
           <td style="vertical-align:top;">
