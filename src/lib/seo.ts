@@ -1,4 +1,4 @@
-import { agency } from "@/lib/site-data";
+import { agency, products } from "@/lib/site-data";
 import { absoluteUrl } from "@/lib/utils";
 
 type BreadcrumbItem = {
@@ -37,7 +37,8 @@ export const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "InsuranceAgency",
   "@id": absoluteUrl("/#organization"),
-  name: agency.fullName,
+  name: agency.name,
+  legalName: agency.fullName,
   url: agency.domain,
   telephone: agency.phone,
   email: agency.email,
@@ -75,9 +76,12 @@ export const organizationSchema = {
       telephone: agency.phone,
       email: agency.email,
       areaServed: "US",
-      availableLanguage: ["English"],
+      availableLanguage: ["English", "Spanish"],
     },
   ],
+  knowsAbout: products
+    .filter((product) => product.slug !== "other")
+    .map((product) => product.name),
   openingHoursSpecification: [
     {
       "@type": "OpeningHoursSpecification",
