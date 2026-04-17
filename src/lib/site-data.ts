@@ -136,6 +136,7 @@ export const agency = {
   ownerLicense: "CA License #0E91043",
   agencyLicense: "Agency #6001414",
   calendlyUrl: "https://calendly.com/brahm-allsberryagency/30min",
+  googleReviewUrl: "https://g.page/r/CbP-IAAlXWkLEAI/review",
   socials: {
     facebook: "https://facebook.com/AllsberryInsuranceagency",
     instagram: "https://instagram.com/allsberry_insurance",

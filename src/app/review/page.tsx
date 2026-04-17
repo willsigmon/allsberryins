@@ -12,7 +12,7 @@ export const metadata: Metadata = createPageMetadata({
   path: "/review",
 });
 
-const googleReviewHref = agency.socials.google;
+const googleReviewHref = agency.googleReviewUrl;
 
 export default function ReviewPage() {
   return (

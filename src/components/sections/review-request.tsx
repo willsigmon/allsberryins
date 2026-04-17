@@ -40,7 +40,7 @@ export function ReviewRequest({ variant = "inline" }: ReviewRequestProps) {
           <h3 className="text-lg font-bold text-navy">{heading}</h3>
           <p className="mt-1.5 text-sm text-gray-600">{body}</p>
           <a
-            href={agency.socials.google}
+            href={agency.googleReviewUrl}
             target="_blank"
             rel="noreferrer noopener"
             className="mt-4 inline-flex items-center gap-2 rounded-full bg-red px-5 py-2.5 text-sm font-bold text-white transition hover:bg-red-hover"
