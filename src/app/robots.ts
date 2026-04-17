@@ -8,6 +8,20 @@ export default function robots(): MetadataRoute.Robots {
     disallow: ["/team-attribution"],
   };
 
+  const allowedAiCrawlers = [
+    "OAI-SearchBot",
+    "GPTBot",
+    "ChatGPT-User",
+    "anthropic-ai",
+    "ClaudeBot",
+    "Claude-Web",
+    "PerplexityBot",
+    "Google-Extended",
+    "GoogleOther",
+    "CCBot",
+    "Applebot-Extended",
+  ];
+
   return {
     rules: [
       {
@@ -15,13 +29,13 @@ export default function robots(): MetadataRoute.Robots {
         ...defaultRule,
       },
       {
-        userAgent: "OAI-SearchBot",
-        ...defaultRule,
-      },
-      {
         userAgent: "bingbot",
         ...defaultRule,
       },
+      ...allowedAiCrawlers.map((userAgent) => ({
+        userAgent,
+        ...defaultRule,
+      })),
     ],
     sitemap: `${siteUrl}/sitemap.xml`,
     host: siteUrl,
