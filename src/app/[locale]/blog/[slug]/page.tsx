@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowRight } from "lucide-react";
+import { setRequestLocale } from "next-intl/server";
 
 import { StructuredData } from "@/components/seo/structured-data";
 import { SeoPageCard } from "@/components/ui/seo-page-card";
+import { Link } from "@/i18n/navigation";
+import { routing } from "@/i18n/routing";
 import { createPageMetadata } from "@/lib/metadata";
 import { getSeoPagesBySlugs } from "@/lib/seo-content";
 import { blogPosts, getBlogPostBySlug } from "@/lib/site-data";
@@ -12,15 +14,17 @@ import { createBreadcrumbSchema, organizationSchema } from "@/lib/seo";
 import { absoluteUrl } from "@/lib/utils";
 
 export function generateStaticParams() {
-  return blogPosts.map((post) => ({ slug: post.slug }));
+  return routing.locales.flatMap((locale) =>
+    blogPosts.map((post) => ({ locale, slug: post.slug })),
+  );
 }
 
 type BlogPostPageProps = {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ locale: string; slug: string }>;
 };
 
 export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
-  const { slug } = await params;
+  const { locale, slug } = await params;
   const post = getBlogPostBySlug(slug);
 
   if (!post) {
@@ -32,11 +36,13 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     description: post.excerpt,
     path: `/blog/${post.slug}`,
     keywords: post.tags,
+    locale,
   });
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
-  const { slug } = await params;
+  const { locale, slug } = await params;
+  setRequestLocale(locale);
   const post = getBlogPostBySlug(slug);
 
   if (!post) {
@@ -164,7 +170,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               {relatedPosts.map((relatedPost) => (
                 <Link
                   key={relatedPost.slug}
-                  href={`/blog/${relatedPost.slug}`}
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  href={`/blog/${relatedPost.slug}` as any}
                   className="rounded-[1.8rem] border border-gray-100 bg-gray-50 p-6 transition hover:border-blue/30 hover:bg-white hover:shadow-[0_18px_45px_-38px_rgba(0,32,92,0.5)]"
                 >
                   <p className="text-xs font-semibold uppercase tracking-[0.22em] text-blue">

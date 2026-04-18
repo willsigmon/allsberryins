@@ -1,34 +1,45 @@
-import Link from "next/link";
 import type { Metadata } from "next";
 import { Star } from "lucide-react";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
+import { Link } from "@/i18n/navigation";
 import { createPageMetadata } from "@/lib/metadata";
 import { agency } from "@/lib/site-data";
 
-export const metadata: Metadata = createPageMetadata({
-  title: "Share Your Experience",
-  description:
-    "Your review on Google helps other Southern California families find a real local agency. It takes under a minute.",
-  path: "/review",
-});
-
 const googleReviewHref = agency.googleReviewUrl;
 
-export default function ReviewPage() {
+type ReviewPageProps = {
+  params: Promise<{ locale: string }>;
+};
+
+export async function generateMetadata({ params }: ReviewPageProps): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "review" });
+  return createPageMetadata({
+    title: t("metaTitle"),
+    description: t("metaDescription"),
+    path: "/review",
+    locale,
+  });
+}
+
+export default async function ReviewPage({ params }: ReviewPageProps) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations("review");
+
   return (
     <main className="mx-auto w-full max-w-3xl px-5 pb-28 pt-16 sm:px-8 sm:pt-24">
       <div className="text-center">
         <span className="inline-flex items-center gap-2 rounded-full bg-amber-50 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-amber-700 ring-1 ring-amber-200">
           <Star className="h-3.5 w-3.5 fill-amber-500 text-amber-500" aria-hidden="true" />
-          Thank you
+          {t("eyebrow")}
         </span>
         <h1 className="mt-6 text-balance text-3xl font-bold leading-[1.1] text-navy sm:text-5xl">
-          Would you share one kind word with your neighbors?
+          {t("heading")}
         </h1>
         <p className="mx-auto mt-5 max-w-xl text-pretty text-base text-gray-600 sm:text-lg">
-          A quick Google review is how other Corona, Norco, Eastvale, and
-          Riverside families find us. It takes about 30 seconds — and it means
-          the world to the team.
+          {t("subheading")}
         </p>
       </div>
 
@@ -53,35 +64,35 @@ export default function ReviewPage() {
             ))}
           </div>
           <h2 className="mt-6 text-2xl font-bold text-navy sm:text-3xl">
-            Leave a Google review
+            {t("ctaPrimary")}
           </h2>
           <p className="mx-auto mt-3 max-w-md text-sm text-gray-600 sm:text-base">
-            Takes about 30 seconds. Opens in a new tab — we&rsquo;ll be right
-            here when you&rsquo;re done.
+            {t("cardBody")}
           </p>
           <div className="mt-8 inline-flex items-center gap-3 rounded-full bg-red px-8 py-4 text-base font-bold text-white shadow-[0_20px_40px_-20px_rgba(218,41,28,0.6)] transition group-hover:gap-4 group-hover:shadow-[0_24px_48px_-16px_rgba(218,41,28,0.7)] sm:text-lg">
-            Write a review on Google
+            {t("buttonLabel")}
             <span aria-hidden="true" className="text-xl">→</span>
           </div>
           <p className="mt-6 text-[11px] font-semibold uppercase tracking-[0.22em] text-gray-400">
-            Thank you — it makes our week
+            {t("thankYou")}
           </p>
         </a>
       </div>
 
       <div className="mt-14 text-center">
         <p className="text-xs text-gray-400">
-          Something didn&rsquo;t land the way it should have?{" "}
+          {t("privateFeedbackIntro")}{" "}
           <Link
-            href="/contact?intent=feedback"
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            href={"/contact?intent=feedback" as any}
             className="text-gray-500 underline underline-offset-4 transition hover:text-gray-700"
           >
-            Tell us privately
+            {t("privateFeedbackLink")}
           </Link>{" "}
-          — a note goes straight to Erin.
+          {t("privateFeedbackOutro")}
         </p>
         <p className="mt-4 text-[11px] text-gray-400">
-          Or call the office directly at{" "}
+          {t("callOfficeIntro")}{" "}
           <a href={agency.phoneHref} className="font-semibold text-gray-500 hover:text-gray-700">
             {agency.phone}
           </a>

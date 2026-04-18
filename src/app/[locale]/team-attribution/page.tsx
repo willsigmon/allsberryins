@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { setRequestLocale } from "next-intl/server";
 
 import { AttributionWorkbench } from "@/components/team/attribution-workbench";
 import { SectionHeading } from "@/components/ui/section-heading";
@@ -7,17 +8,25 @@ import { agents } from "@/lib/site-data";
 import { buildTrackedHref } from "@/lib/tracking";
 import { absoluteUrl } from "@/lib/utils";
 
-export const metadata: Metadata = {
-  ...createPageMetadata({
-    title: "Team Attribution",
-    description: "Internal Allsberry team readout for tracked agent links and attribution QA.",
-    path: "/team-attribution",
-  }),
-  robots: {
-    follow: false,
-    index: false,
-  },
+type TeamAttributionPageProps = {
+  params: Promise<{ locale: string }>;
 };
+
+export async function generateMetadata({ params }: TeamAttributionPageProps): Promise<Metadata> {
+  const { locale } = await params;
+  return {
+    ...createPageMetadata({
+      title: "Team Attribution",
+      description: "Internal Allsberry team readout for tracked agent links and attribution QA.",
+      path: "/team-attribution",
+      locale,
+    }),
+    robots: {
+      follow: false,
+      index: false,
+    },
+  };
+}
 
 const agentLinkSets = agents.map((agent) => ({
   directUrl: absoluteUrl(
@@ -45,7 +54,9 @@ const agentLinkSets = agents.map((agent) => ({
   title: agent.title,
 }));
 
-export default function TeamAttributionPage() {
+export default async function TeamAttributionPage({ params }: TeamAttributionPageProps) {
+  const { locale } = await params;
+  setRequestLocale(locale);
   return (
     <div className="pt-32" style={{ backgroundImage: "var(--hero-bg)" }}>
       <section className="mx-auto max-w-7xl px-4 pb-20 sm:px-6 lg:px-8">

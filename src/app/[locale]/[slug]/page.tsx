@@ -1,20 +1,24 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { setRequestLocale } from "next-intl/server";
 
 import { SeoPageTemplate } from "@/components/pages/seo-page-template";
+import { routing } from "@/i18n/routing";
 import { createPageMetadata } from "@/lib/metadata";
 import { getSeoPageBySlug, seoPages } from "@/lib/seo-content";
 
 export function generateStaticParams() {
-  return seoPages.map((page) => ({ slug: page.slug }));
+  return routing.locales.flatMap((locale) =>
+    seoPages.map((page) => ({ locale, slug: page.slug })),
+  );
 }
 
 type SeoPageRouteProps = {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ locale: string; slug: string }>;
 };
 
 export async function generateMetadata({ params }: SeoPageRouteProps): Promise<Metadata> {
-  const { slug } = await params;
+  const { locale, slug } = await params;
   const page = getSeoPageBySlug(slug);
 
   if (!page) {
@@ -26,11 +30,13 @@ export async function generateMetadata({ params }: SeoPageRouteProps): Promise<M
     description: page.description,
     path: `/${page.slug}`,
     keywords: page.keywords,
+    locale,
   });
 }
 
 export default async function SeoContentPage({ params }: SeoPageRouteProps) {
-  const { slug } = await params;
+  const { locale, slug } = await params;
+  setRequestLocale(locale);
   const page = getSeoPageBySlug(slug);
 
   if (!page) {

@@ -1,60 +1,62 @@
-import Link from "next/link";
 import type { Metadata } from "next";
 import { Clock3, Facebook, Instagram, Linkedin, Mail, MapPin, Phone } from "lucide-react";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { PageFaqSection } from "@/components/sections/page-faq-section";
 import { StructuredData } from "@/components/seo/structured-data";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { Link } from "@/i18n/navigation";
 import { createPageMetadata } from "@/lib/metadata";
 import { agency } from "@/lib/site-data";
 import { createBreadcrumbSchema, organizationSchema } from "@/lib/seo";
 import { buildTrackedHref } from "@/lib/tracking";
 import { absoluteUrl } from "@/lib/utils";
 
-export const metadata: Metadata = createPageMetadata({
-  title: "Contact",
-  description:
-    "Contact Allsberry Insurance Agency for home, auto, life, and business insurance guidance across Southern California. Call, email, or start your quote online.",
-  path: "/contact",
-});
+type ContactPageProps = {
+  params: Promise<{ locale: string }>;
+};
 
-const contactItems = [
-  { title: "Call us", body: agency.phone, href: agency.phoneHref, icon: Phone },
-  { title: "Email", body: agency.email, href: agency.emailHref, icon: Mail },
-  {
-    title: "Service area",
-    body: `Serving ${agency.serviceArea} by phone, email, and online`,
-    href: "/quote",
-    icon: MapPin,
-  },
-  { title: "Hours", body: agency.hours, href: "/quote", icon: Clock3 },
-] as const;
+export async function generateMetadata({ params }: ContactPageProps): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "contact" });
+  return createPageMetadata({
+    title: t("metaTitle"),
+    description: t("metaDescription"),
+    path: "/contact",
+    locale,
+  });
+}
 
-const socialItems = [
-  { label: "Facebook", href: agency.socials.facebook, icon: Facebook },
-  { label: "Instagram", href: agency.socials.instagram, icon: Instagram },
-  { label: "LinkedIn", href: agency.socials.linkedin, icon: Linkedin },
-] as const;
+export default async function ContactPage({ params }: ContactPageProps) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations("contact");
 
-const contactPageFaqs: Array<{ question: string; answer: string }> = [
-  {
-    question: "What is the fastest way to reach the Allsberry team?",
-    answer:
-      "Calling the office is the quickest path when something is time-sensitive. If it is not urgent, the quote or proof-of-insurance form usually gives the team the cleanest context to respond quickly.",
-  },
-  {
-    question: "How quickly will someone follow up after I reach out?",
-    answer:
-      "A licensed team member typically follows up within one business day, and straightforward requests are often reviewed sooner.",
-  },
-  {
-    question: "Can I use this contact page for quotes and proof requests too?",
-    answer:
-      "Yes. The contact page is a good starting point, but the quote flow and proof-of-insurance flow are faster when you already know what you need.",
-  },
-];
+  const contactItems = [
+    { title: t("callUs"), body: agency.phone, href: agency.phoneHref, icon: Phone, external: false },
+    { title: t("email"), body: agency.email, href: agency.emailHref, icon: Mail, external: false },
+    {
+      title: t("serviceArea"),
+      body: t("serviceAreaBody", { area: agency.serviceArea }),
+      href: "/quote",
+      icon: MapPin,
+      external: false,
+    },
+    { title: t("hoursTitle"), body: agency.hours, href: "/quote", icon: Clock3, external: false },
+  ] as const;
 
-export default function ContactPage() {
+  const socialItems = [
+    { label: "Facebook", href: agency.socials.facebook, icon: Facebook },
+    { label: "Instagram", href: agency.socials.instagram, icon: Instagram },
+    { label: "LinkedIn", href: agency.socials.linkedin, icon: Linkedin },
+  ] as const;
+
+  const contactPageFaqs: Array<{ question: string; answer: string }> = [
+    { question: t("faqs.q1.question"), answer: t("faqs.q1.answer") },
+    { question: t("faqs.q2.question"), answer: t("faqs.q2.answer") },
+    { question: t("faqs.q3.question"), answer: t("faqs.q3.answer") },
+  ];
+
   const breadcrumbSchema = createBreadcrumbSchema([
     { name: "Home", path: "/" },
     { name: "Contact", path: "/contact" },
@@ -64,8 +66,7 @@ export default function ContactPage() {
     "@type": "ContactPage",
     name: "Contact Allsberry Insurance Agency",
     url: absoluteUrl("/contact"),
-    description:
-      "Call, email, or start online with Allsberry Insurance Agency for quote help, policy reviews, and proof-of-insurance requests across Southern California.",
+    description: t("metaDescription"),
     mainEntity: {
       "@id": organizationSchema["@id"],
     },
@@ -88,25 +89,39 @@ export default function ContactPage() {
       <StructuredData data={[organizationSchema, breadcrumbSchema, contactPageSchema, faqSchema]} />
       <section className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8">
         <SectionHeading
-          eyebrow="Contact"
-          title="Reach the Allsberry team"
-          description="Call us, email us, or jump straight into a quote."
+          eyebrow={t("eyebrow")}
+          title={t("heading")}
+          description={t("subheading")}
         />
 
         <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {contactItems.map((item) => (
-            <Link
-              key={item.title}
-              href={item.href}
-              target={item.href.startsWith("http") ? "_blank" : undefined}
-              rel={item.href.startsWith("http") ? "noreferrer" : undefined}
-              className="glass-btn rounded-2xl p-5 transition hover:-translate-y-1 hover:shadow-lg"
-            >
-              <item.icon className="h-5 w-5 text-blue" />
-              <h2 className="mt-3 font-display text-lg font-bold text-gray-900">{item.title}</h2>
-              <p className="mt-1 text-sm leading-6 text-gray-600">{item.body}</p>
-            </Link>
-          ))}
+          {contactItems.map((item) => {
+            const isExternal = item.href.startsWith("http") || item.href.startsWith("tel") || item.href.startsWith("mailto");
+            const commonProps = {
+              key: item.title,
+              className: "glass-btn rounded-2xl p-5 transition hover:-translate-y-1 hover:shadow-lg",
+            };
+            const content = (
+              <>
+                <item.icon className="h-5 w-5 text-blue" />
+                <h2 className="mt-3 font-display text-lg font-bold text-gray-900">{item.title}</h2>
+                <p className="mt-1 text-sm leading-6 text-gray-600">{item.body}</p>
+              </>
+            );
+            return isExternal ? (
+              <a key={item.title} href={item.href} className={commonProps.className}>
+                {content}
+              </a>
+            ) : (
+              <Link
+                {...commonProps}
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                href={item.href as any}
+              >
+                {content}
+              </Link>
+            );
+          })}
         </div>
 
         <div className="mt-10 grid gap-6 lg:grid-cols-[1.3fr_0.7fr]">
@@ -115,45 +130,42 @@ export default function ContactPage() {
             style={{ backgroundImage: "var(--panel-gradient)" }}
           >
             <h2 className="font-display text-3xl font-extrabold text-gray-900">
-              Need coverage help fast?
+              {t("fastHelpHeading")}
             </h2>
             <p className="mt-3 max-w-xl text-base leading-7 text-gray-600">
-              The quote flow is the quickest way to tell us what you need. Pick a product and a
-              licensed agent will follow up within one business day.
+              {t("fastHelpBody")}
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <Link
-                href={buildTrackedHref("/quote", {
-                  entry: "contact-page-primary-quote",
-                })}
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                href={buildTrackedHref("/quote", { entry: "contact-page-primary-quote" }) as any}
                 className="cta-glow inline-flex items-center justify-center rounded-full bg-red px-6 py-3 text-sm font-bold text-white transition hover:bg-red-hover"
               >
-                Start Your Quote
+                {t("startYourQuote")}
               </Link>
               <Link
-                href={buildTrackedHref("/evidence-of-insurance", {
-                  entry: "contact-page-proof",
-                })}
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                href={buildTrackedHref("/evidence-of-insurance", { entry: "contact-page-proof" }) as any}
                 className="glass-btn inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-bold text-gray-900"
               >
-                Request Proof
+                {t("requestProof")}
               </Link>
-              <Link
+              <a
                 href={agency.phoneHref}
                 className="glass-btn inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-bold text-gray-900"
               >
-                Call {agency.phone}
-              </Link>
+                {t("callCta", { phone: agency.phone })}
+              </a>
             </div>
           </div>
 
           <div className="rounded-[2rem] border border-gray-100 bg-white p-6">
             <p className="text-sm font-semibold uppercase tracking-[0.22em] text-gray-400">
-              Connect with us
+              {t("connectWithUs")}
             </p>
             <div className="mt-4 grid gap-3">
               {socialItems.map((item) => (
-                <Link
+                <a
                   key={item.label}
                   href={item.href}
                   target="_blank"
@@ -162,28 +174,24 @@ export default function ContactPage() {
                 >
                   <item.icon className="h-5 w-5" />
                   {item.label}
-                </Link>
+                </a>
               ))}
             </div>
           </div>
         </div>
 
         <PageFaqSection
-          title="Contact questions we hear most often"
-          description="These answers make the page more useful for visitors and give search engines and AI systems clearer context about how the agency works."
+          title={t("faqs.heading")}
+          description={t("faqs.description")}
           faqs={contactPageFaqs}
           ctas={[
             {
-              href: buildTrackedHref("/quote", {
-                entry: "contact-faq-quote-cta",
-              }),
-              label: "Start a quote",
+              href: buildTrackedHref("/quote", { entry: "contact-faq-quote-cta" }),
+              label: t("faqs.ctaQuote"),
             },
             {
-              href: buildTrackedHref("/evidence-of-insurance", {
-                entry: "contact-faq-proof-cta",
-              }),
-              label: "Request proof of insurance",
+              href: buildTrackedHref("/evidence-of-insurance", { entry: "contact-faq-proof-cta" }),
+              label: t("faqs.ctaProof"),
             },
           ]}
         />

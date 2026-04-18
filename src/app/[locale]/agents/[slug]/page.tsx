@@ -4,11 +4,13 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowRight, Mail, Phone, QrCode, ShieldCheck } from "lucide-react";
 import { QRCodeSVG } from "qrcode.react";
+import { setRequestLocale } from "next-intl/server";
 
 import { AgentContactForm } from "@/components/forms/agent-contact-form";
 import { SaveContactButton } from "@/components/ui/save-contact-button";
 import { StructuredData } from "@/components/seo/structured-data";
 import { SeoPageCard } from "@/components/ui/seo-page-card";
+import { routing } from "@/i18n/routing";
 import { createPageMetadata } from "@/lib/metadata";
 import { getSeoPagesForAgent } from "@/lib/seo-content";
 import { agency, agents, getAgentBySlug } from "@/lib/site-data";
@@ -17,16 +19,18 @@ import { buildTrackedHref } from "@/lib/tracking";
 import { absoluteUrl } from "@/lib/utils";
 
 export function generateStaticParams() {
-  return agents.map((agent) => ({ slug: agent.slug }));
+  return routing.locales.flatMap((locale) =>
+    agents.map((agent) => ({ locale, slug: agent.slug })),
+  );
 }
 
 type AgentPageProps = {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ locale: string; slug: string }>;
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 };
 
 export async function generateMetadata({ params }: AgentPageProps): Promise<Metadata> {
-  const { slug } = await params;
+  const { locale, slug } = await params;
   const agent = getAgentBySlug(slug);
 
   if (!agent) {
@@ -38,11 +42,13 @@ export async function generateMetadata({ params }: AgentPageProps): Promise<Meta
     description: `${agent.name}, ${agent.title} at Allsberry Insurance Agency, serving Southern California. Contact ${agent.firstName} for personalized insurance guidance.`,
     path: `/agents/${agent.slug}`,
     keywords: [agent.name, agent.title, "Southern California insurance agent", "personalized insurance guidance"],
+    locale,
   });
 }
 
 export default async function AgentPage({ params, searchParams }: AgentPageProps) {
-  const { slug } = await params;
+  const { locale, slug } = await params;
+  setRequestLocale(locale);
   const query = await searchParams;
   const agent = getAgentBySlug(slug);
 

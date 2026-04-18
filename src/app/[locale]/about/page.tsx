@@ -1,46 +1,45 @@
 import Image from "next/image";
-import Link from "next/link";
 import type { Metadata } from "next";
 import { ArrowRight, BadgeCheck, Globe, MapPin, ShieldCheck } from "lucide-react";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { PageFaqSection } from "@/components/sections/page-faq-section";
 import { StructuredData } from "@/components/seo/structured-data";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { Link } from "@/i18n/navigation";
 import { createPageMetadata } from "@/lib/metadata";
 import { agency, agents, officialProfile } from "@/lib/site-data";
 import { createBreadcrumbSchema, organizationSchema } from "@/lib/seo";
 import { buildTrackedHref } from "@/lib/tracking";
 import { absoluteUrl } from "@/lib/utils";
 
-export const metadata: Metadata = createPageMetadata({
-  title: "About",
-  description:
-    "Meet the bilingual team at Allsberry Insurance Agency. 10 licensed agents — including Spanish-speaking staff — helping Southern California families and businesses protect what matters most.",
-  path: "/about",
-});
+type AboutPageProps = {
+  params: Promise<{ locale: string }>;
+};
 
-const aboutPageDescription =
-  "Learn more about Allsberry Insurance Agency and the team helping Southern California families and businesses protect what matters most.";
+export async function generateMetadata({ params }: AboutPageProps): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "about" });
+  return createPageMetadata({
+    title: t("metaTitle"),
+    description: t("metaDescription"),
+    path: "/about",
+    locale,
+  });
+}
 
-const aboutPageFaqs: Array<{ question: string; answer: string }> = [
-  {
-    question: "How long has Allsberry Insurance Agency served Southern California?",
-    answer:
-      "The agency has served the area since 1994, with Erin leading the business since 2009 and continuing the same local, personal approach.",
-  },
-  {
-    question: "What kinds of coverage do you help with?",
-    answer:
-      "The team helps with home, auto, renters, life, umbrella, condo, and commercial coverage, plus the proof-of-insurance requests that come with real-world policy management.",
-  },
-  {
-    question: "Who do I talk to if I want to start a quote?",
-    answer:
-      "You can start online or reach out directly. The team will route you to the right licensed agent based on what you need and how quickly you need help.",
-  },
-];
+export default async function AboutPage({ params }: AboutPageProps) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations("about");
+  const tTeam = await getTranslations("home.team");
 
-export default function AboutPage() {
+  const aboutPageFaqs: Array<{ question: string; answer: string }> = [
+    { question: t("faqs.q1.question"), answer: t("faqs.q1.answer") },
+    { question: t("faqs.q2.question"), answer: t("faqs.q2.answer") },
+    { question: t("faqs.q3.question"), answer: t("faqs.q3.answer") },
+  ];
+
   const breadcrumbSchema = createBreadcrumbSchema([
     { name: "Home", path: "/" },
     { name: "About", path: "/about" },
@@ -50,7 +49,7 @@ export default function AboutPage() {
     "@type": "AboutPage",
     name: "About Allsberry Insurance Agency",
     url: absoluteUrl("/about"),
-    description: aboutPageDescription,
+    description: t("metaDescription"),
     about: {
       "@id": organizationSchema["@id"],
     },
@@ -68,6 +67,9 @@ export default function AboutPage() {
     })),
   };
 
+  const valuesIcons = [BadgeCheck, ShieldCheck, MapPin];
+  const valueKeys = ["clarity", "responsiveness", "localExpertise"] as const;
+
   return (
     <div className="bg-white pt-32">
       <StructuredData data={[organizationSchema, breadcrumbSchema, aboutPageSchema, faqSchema]} />
@@ -75,21 +77,19 @@ export default function AboutPage() {
         <div className="grid gap-10 lg:grid-cols-[1fr_0.96fr] lg:items-center">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.28em] text-blue">
-              About the agency
+              {t("eyebrow")}
             </p>
             <h1 className="mt-5 font-display text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">
-              Local guidance, clean communication, and coverage that fits real life.
+              {t("heading")}
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-gray-600">
-              Allsberry Insurance Agency has served Southern California since 1994. Erin has led
-              the agency since 2009 with a simple belief: insurance should feel tailored,
-              understandable, and genuinely helpful.
+              {t("intro")}
             </p>
             <div className="mt-8 grid gap-4 sm:grid-cols-3">
               {[
-                { label: "Serving since", value: String(agency.founded) },
-                { label: "Monday – Friday", value: "8 AM – 5 PM" },
-                { label: "Se habla Español", value: "Bilingual Team" },
+                { label: t("stats.servingSinceLabel"), value: String(agency.founded) },
+                { label: t("stats.hoursLabel"), value: t("stats.hoursValue") },
+                { label: t("stats.bilingualLabel"), value: t("stats.bilingualValue") },
               ].map((stat) => (
                 <div
                   key={stat.label}
@@ -123,46 +123,30 @@ export default function AboutPage() {
                 </div>
                 <div>
                   <p className="text-sm font-semibold uppercase tracking-[0.24em] text-blue">
-                    Agency leadership
+                    {t("leadership.label")}
                   </p>
                   <h2 className="mt-2 font-display text-2xl font-bold text-gray-900">
                     Erin Allsberry
                   </h2>
                   <p className="mt-1 text-sm font-medium text-gray-600">
-                    Owner & Principal Agent
+                    {t("leadership.title")}
                   </p>
                 </div>
               </div>
 
               <div className="grid gap-4">
-                {[
-                  {
-                    title: "Clear options",
-                    description:
-                      "Coverage choices explained in plain language so the best fit is easy to understand.",
-                    icon: BadgeCheck,
-                  },
-                  {
-                    title: "Tailored advice",
-                    description:
-                      "Recommendations shaped around your household, vehicles, business, and long-term goals.",
-                    icon: ShieldCheck,
-                  },
-                  {
-                    title: "Local context",
-                    description:
-                      "An agency that knows Southern California growth, local markets, and the realities behind California insurance decisions.",
-                    icon: MapPin,
-                  },
-                ].map((item) => (
-                  <div key={item.title} className="rounded-2xl border border-gray-100 p-5">
-                    <item.icon className="h-6 w-6 text-blue" />
-                    <h3 className="mt-4 font-display text-xl font-bold text-gray-900">
-                      {item.title}
-                    </h3>
-                    <p className="mt-2 text-sm leading-7 text-gray-600">{item.description}</p>
-                  </div>
-                ))}
+                {valueKeys.map((key, index) => {
+                  const Icon = valuesIcons[index];
+                  return (
+                    <div key={key} className="rounded-2xl border border-gray-100 p-5">
+                      <Icon className="h-6 w-6 text-blue" />
+                      <h3 className="mt-4 font-display text-xl font-bold text-gray-900">
+                        {t(`values.items.${key}.title`)}
+                      </h3>
+                      <p className="mt-2 text-sm leading-7 text-gray-600">{t(`values.items.${key}.description`)}</p>
+                    </div>
+                  );
+                })}
               </div>
 
               <div className="grid gap-3 sm:grid-cols-2">
@@ -182,7 +166,7 @@ export default function AboutPage() {
                     </div>
                     <div>
                       <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gray-400">
-                        Recognition
+                        {t("recognitionLabel")}
                       </p>
                       <p className="mt-1 text-sm font-semibold text-gray-900">{badge.title}</p>
                     </div>
@@ -197,9 +181,9 @@ export default function AboutPage() {
       <section className="bg-gray-50 py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
-            eyebrow="Our team"
-            title="The people clients actually work with"
-            description="Insurance works best when you know who you are working with. Here are the people behind your coverage."
+            eyebrow={t("teamSection.eyebrow")}
+            title={t("teamSection.title")}
+            description={t("teamSection.description")}
             align="center"
           />
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
@@ -232,20 +216,21 @@ export default function AboutPage() {
                     {agent.languages && agent.languages.length > 1 && (
                       <p className="mt-1 inline-flex items-center gap-1 text-xs font-semibold text-amber-600">
                         <Globe className="h-3 w-3" />
-                        Se habla Español
+                        {tTeam("seHablaEspanol")}
                       </p>
                     )}
                   </div>
                 </div>
                 <p className="mt-3 text-sm leading-7 text-gray-600 line-clamp-3">{agent.bio}</p>
                 <Link
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
                   href={buildTrackedHref(`/agents/${agent.slug}`, {
                     agent: agent.slug,
                     entry: "about-team-card",
-                  })}
+                  }) as any}
                   className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-blue transition hover:text-gray-900"
                 >
-                  Meet {agent.firstName}
+                  {tTeam("meetAgent", { name: agent.firstName })}
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>
@@ -255,24 +240,26 @@ export default function AboutPage() {
       </section>
 
       <PageFaqSection
-        eyebrow="About the agency"
-        title="A few practical questions before you reach out"
+        eyebrow={t("eyebrow")}
+        title={t("faqs.heading")}
         faqs={aboutPageFaqs}
         ctas={[
           {
             href: buildTrackedHref("/contact", {
               entry: "about-faq-contact-cta",
             }),
-            label: "Contact the team",
+            label: t("faqs.ctaContact"),
           },
           {
             href: buildTrackedHref("/quote", {
               entry: "about-faq-quote-cta",
             }),
-            label: "Start a quote",
+            label: t("faqs.ctaQuote"),
           },
         ]}
       />
+      {/* suppress unused import warning — agency used in metadata */}
+      <span className="sr-only" aria-hidden="true">{agency.name}</span>
     </div>
   );
 }

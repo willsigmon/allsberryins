@@ -1,12 +1,20 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { setRequestLocale } from "next-intl/server";
+
+import { Link } from "@/i18n/navigation";
+
+type PrivacyPageProps = {
+  params: Promise<{ locale: string }>;
+};
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description: "How Allsberry Insurance Agency handles your personal information.",
 };
 
-export default function PrivacyPage() {
+export default async function PrivacyPage({ params }: PrivacyPageProps) {
+  const { locale } = await params;
+  setRequestLocale(locale);
   return (
     <main className="mx-auto max-w-3xl px-6 py-16">
       <Link href="/" className="text-sm text-muted-foreground hover:text-foreground">&larr; Back</Link>

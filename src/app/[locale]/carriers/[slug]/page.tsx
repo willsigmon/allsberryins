@@ -1,32 +1,37 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { setRequestLocale } from "next-intl/server";
 
 import { CtaBanner } from "@/components/sections/cta-banner";
 import { StructuredData } from "@/components/seo/structured-data";
+import { routing } from "@/i18n/routing";
 import { createPageMetadata } from "@/lib/metadata";
 import { createBreadcrumbSchema } from "@/lib/seo";
 import { agency, carrierPartners } from "@/lib/site-data";
 import { absoluteUrl, slugify } from "@/lib/utils";
 
-type Params = { params: Promise<{ slug: string }> };
+type Params = { params: Promise<{ locale: string; slug: string }> };
 
 function getCarrierBySlug(slug: string) {
   return carrierPartners.find((carrier) => slugify(carrier.name) === slug);
 }
 
 export function generateStaticParams() {
-  return carrierPartners.map((carrier) => ({ slug: slugify(carrier.name) }));
+  return routing.locales.flatMap((locale) =>
+    carrierPartners.map((carrier) => ({ locale, slug: slugify(carrier.name) })),
+  );
 }
 
 export async function generateMetadata({ params }: Params) {
-  const { slug } = await params;
+  const { locale, slug } = await params;
   const carrier = getCarrierBySlug(slug);
   if (!carrier) {
     return createPageMetadata({
       title: "Carrier not found",
       description: "That carrier page could not be located.",
       path: `/carriers/${slug}`,
+      locale,
     });
   }
   return createPageMetadata({
@@ -41,11 +46,13 @@ export async function generateMetadata({ params }: Params) {
       `${carrier.name} home insurance`,
       `${carrier.name} auto insurance`,
     ],
+    locale,
   });
 }
 
 export default async function CarrierPage({ params }: Params) {
-  const { slug } = await params;
+  const { locale, slug } = await params;
+  setRequestLocale(locale);
   const carrier = getCarrierBySlug(slug);
   if (!carrier) notFound();
 

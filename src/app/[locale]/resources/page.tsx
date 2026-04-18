@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { StructuredData } from "@/components/seo/structured-data";
 import { SectionHeading } from "@/components/ui/section-heading";
@@ -8,20 +9,32 @@ import { createBreadcrumbSchema } from "@/lib/seo";
 import { seoPages } from "@/lib/seo-content";
 import { absoluteUrl } from "@/lib/utils";
 
-export const metadata: Metadata = createPageMetadata({
-  title: "California Insurance Resources",
-  description:
-    "Search-friendly California insurance guides from Allsberry Insurance Agency covering home insurance, wildfire pressure, FAIR Plan, DIC coverage, and local Corona office help.",
-  path: "/resources",
-  keywords: [
-    "california insurance resources",
-    "homeowners insurance california",
-    "ca fair plan guide",
-    "insurance agent corona ca",
-  ],
-});
+type ResourcesPageProps = {
+  params: Promise<{ locale: string }>;
+};
 
-export default function ResourcesPage() {
+export async function generateMetadata({ params }: ResourcesPageProps): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "resources" });
+  return createPageMetadata({
+    title: t("metaTitle"),
+    description: t("metaDescription"),
+    path: "/resources",
+    locale,
+    keywords: [
+      "california insurance resources",
+      "homeowners insurance california",
+      "ca fair plan guide",
+      "insurance agent corona ca",
+    ],
+  });
+}
+
+export default async function ResourcesPage({ params }: ResourcesPageProps) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations("resources");
+
   const breadcrumbSchema = createBreadcrumbSchema([
     { name: "Home", path: "/" },
     { name: "Resources", path: "/resources" },
@@ -45,9 +58,9 @@ export default function ResourcesPage() {
       <StructuredData data={[breadcrumbSchema, collectionSchema]} />
       <section className="mx-auto max-w-7xl px-4 pb-24 sm:px-6 lg:px-8">
         <SectionHeading
-          eyebrow="Resources"
-          title="California insurance answers with local context"
-          description="This hub organizes the pages designed to help both modern search tools and real Southern California shoppers find the clearest next step. Start with the question you need answered today, then move into a quote or local conversation when you are ready."
+          eyebrow={t("eyebrow")}
+          title={t("heading")}
+          description={t("subheading")}
         />
         <div className="mt-12 grid gap-6 lg:grid-cols-2 xl:grid-cols-3">
           {seoPages.map((page) => (

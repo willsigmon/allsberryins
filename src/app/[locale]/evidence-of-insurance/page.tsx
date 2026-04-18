@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { EvidenceRequestForm } from "@/components/forms/evidence-request-form";
 import { PageFaqSection } from "@/components/sections/page-faq-section";
@@ -10,49 +11,45 @@ import { agency, getAgentBySlug } from "@/lib/site-data";
 import { buildTrackedHref, normalizeAgentSlug } from "@/lib/tracking";
 import { absoluteUrl } from "@/lib/utils";
 
-export const metadata: Metadata = createPageMetadata({
-  title: "Proof of Insurance",
-  description:
-    "Request evidence of insurance, a certificate of insurance, or a mortgagee update from Allsberry Insurance Agency across Southern California.",
-  path: "/evidence-of-insurance",
-  keywords: [
-    "evidence of insurance Southern California",
-    "certificate of insurance request",
-    "proof of insurance request",
-    "mortgagee update insurance",
-    "COI request Southern California",
-  ],
-});
-
 type EvidencePageProps = {
+  params: Promise<{ locale: string }>;
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 };
 
-export default async function EvidenceOfInsurancePage({
-  searchParams,
-}: EvidencePageProps) {
-  const params = await searchParams;
-  const audience = typeof params.audience === "string" ? params.audience : undefined;
-  const entryPoint = typeof params.entry === "string" ? params.entry : undefined;
+export async function generateMetadata({ params }: EvidencePageProps): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "evidenceOfInsurance" });
+  return createPageMetadata({
+    title: t("metaTitle"),
+    description: t("metaDescription"),
+    path: "/evidence-of-insurance",
+    locale,
+    keywords: [
+      "evidence of insurance Southern California",
+      "certificate of insurance request",
+      "proof of insurance request",
+      "mortgagee update insurance",
+      "COI request Southern California",
+    ],
+  });
+}
+
+export default async function EvidenceOfInsurancePage({ params, searchParams }: EvidencePageProps) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations("evidenceOfInsurance");
+  const sp = await searchParams;
+
+  const audience = typeof sp.audience === "string" ? sp.audience : undefined;
+  const entryPoint = typeof sp.entry === "string" ? sp.entry : undefined;
   const assignedAgentSlug =
-    typeof params.agent === "string" ? normalizeAgentSlug(params.agent) : undefined;
+    typeof sp.agent === "string" ? normalizeAgentSlug(sp.agent) : undefined;
   const assignedAgent = assignedAgentSlug ? getAgentBySlug(assignedAgentSlug) : undefined;
+
   const pageFaqs = [
-    {
-      question: "Can I request proof of insurance online?",
-      answer:
-        "Yes. Share the basics here and the agency can follow up with the right evidence of insurance, COI details, or mortgagee update.",
-    },
-    {
-      question: "What kinds of documentation can Allsberry Insurance Agency help with?",
-      answer:
-        "The team can help with evidence of insurance, certificates of insurance, escrow or closing requests, and mortgagee or loss payee updates.",
-    },
-    {
-      question: "What helps the team turn around my request faster?",
-      answer:
-        "Include who needs the document, any due date, and any mortgagee, escrow, property, or certificate notes you already have so the request can be routed cleanly.",
-    },
+    { question: t("faqs.q1.question"), answer: t("faqs.q1.answer") },
+    { question: t("faqs.q2.question"), answer: t("faqs.q2.answer") },
+    { question: t("faqs.q3.question"), answer: t("faqs.q3.answer") },
   ];
 
   const faqSchema = {
@@ -94,26 +91,26 @@ export default async function EvidenceOfInsurancePage({
         <div className="grid gap-10 lg:grid-cols-[0.78fr_1.22fr] lg:items-start">
           <div className="lg:sticky lg:top-28">
             <SectionHeading
-              eyebrow="Proof of insurance"
-              title="Need evidence of coverage fast?"
-              description="Use this request flow for certificates of insurance, escrow or mortgage requests, and proof of coverage follow-up."
+              eyebrow={t("eyebrow")}
+              title={t("heading")}
+              description={t("subheading")}
             />
             <div className="mt-8 rounded-[2rem] border border-blue/10 bg-white p-6 shadow-[0_20px_60px_-46px_rgba(0,32,92,0.45)]">
               <p className="text-sm font-semibold uppercase tracking-[0.24em] text-blue">
-                What helps us move faster
+                {t("helpsUsMoveFaster")}
               </p>
               <ul className="mt-5 grid gap-4 text-sm leading-7 text-gray-600">
-                <li>• Tell us who needs the proof.</li>
-                <li>• Add a due date if escrow or underwriting is waiting on it.</li>
-                <li>• Include any loan, property, or certificate notes you already have.</li>
+                <li>• {t("helpBullet1")}</li>
+                <li>• {t("helpBullet2")}</li>
+                <li>• {t("helpBullet3")}</li>
               </ul>
               {assignedAgent ? (
                 <div className="mt-5 rounded-2xl border border-blue/12 bg-blue-light px-4 py-3 text-sm font-semibold text-gray-900">
-                  Preferred follow-up: {assignedAgent.name}
+                  {t("preferredFollowUp", { name: assignedAgent.name })}
                 </div>
               ) : null}
               <p className="mt-5 text-sm font-semibold text-gray-900">
-                Need to call instead? {agency.phone}
+                {t("callInstead", { phone: agency.phone })}
               </p>
             </div>
           </div>
@@ -124,8 +121,8 @@ export default async function EvidenceOfInsurancePage({
           />
         </div>
         <PageFaqSection
-          title="Documentation questions we can answer right here"
-          description="This page now matches the FAQ schema with visible answers, which is cleaner for users and safer for search engines."
+          title={t("faqs.heading")}
+          description={t("faqs.description")}
           faqs={pageFaqs}
           ctas={[
             {
@@ -137,7 +134,7 @@ export default async function EvidenceOfInsurancePage({
                 : buildTrackedHref("/contact", {
                     entry: entryPoint ?? "evidence-faq-contact-cta",
                   }),
-              label: assignedAgent ? `Work with ${assignedAgent.firstName}` : "Talk to the team",
+              label: assignedAgent ? t("faqs.workWithAgent", { name: assignedAgent.firstName }) : t("faqs.talkToTeam"),
             },
             {
               href: buildTrackedHref("/quote", {
@@ -145,7 +142,7 @@ export default async function EvidenceOfInsurancePage({
                 entry: entryPoint ?? "evidence-faq-quote-cta",
                 product: assignedAgentSlug === "brahm" ? "business" : "home",
               }),
-              label: "Start a coverage quote instead",
+              label: t("faqs.ctaQuote"),
             },
           ]}
         />

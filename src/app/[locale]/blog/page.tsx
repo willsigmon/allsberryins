@@ -1,22 +1,35 @@
-import Link from "next/link";
 import type { Metadata } from "next";
 import { ArrowRight } from "lucide-react";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { StructuredData } from "@/components/seo/structured-data";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { Link } from "@/i18n/navigation";
 import { createPageMetadata } from "@/lib/metadata";
 import { blogPosts } from "@/lib/site-data";
 import { createBreadcrumbSchema } from "@/lib/seo";
 import { absoluteUrl } from "@/lib/utils";
 
-export const metadata: Metadata = createPageMetadata({
-  title: "Blog",
-  description:
-    "Helpful insurance articles from Allsberry Insurance Agency covering home, auto, business, and life insurance topics for Southern California clients.",
-  path: "/blog",
-});
+type BlogPageProps = {
+  params: Promise<{ locale: string }>;
+};
 
-export default function BlogPage() {
+export async function generateMetadata({ params }: BlogPageProps): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "blog" });
+  return createPageMetadata({
+    title: t("metaTitle"),
+    description: t("metaDescription"),
+    path: "/blog",
+    locale,
+  });
+}
+
+export default async function BlogPage({ params }: BlogPageProps) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations("blog");
+
   const breadcrumbSchema = createBreadcrumbSchema([
     { name: "Home", path: "/" },
     { name: "Blog", path: "/blog" },
@@ -45,15 +58,22 @@ export default function BlogPage() {
     })),
   };
 
+  const dateLocale = locale === "es" ? "es-US" : "en-US";
+
   return (
     <div className="bg-white pt-32">
       <StructuredData data={[breadcrumbSchema, collectionSchema, itemListSchema]} />
       <section className="mx-auto max-w-7xl px-4 pb-20 sm:px-6 lg:px-8">
         <SectionHeading
-          eyebrow="Insights"
-          title="Insurance articles and practical answers"
-          description="The blog lives in the navigation — not on the homepage — so the main experience stays clean while search-friendly content still has a home."
+          eyebrow={t("eyebrow")}
+          title={t("heading")}
+          description={t("subheading")}
         />
+        {locale === "es" && (
+          <div className="mt-6 rounded-2xl border border-amber-200 bg-amber-50 px-5 py-3 text-sm text-amber-800">
+            {t("articlesInEnglishNotice")}
+          </div>
+        )}
         <div className="mt-12 grid gap-6 lg:grid-cols-3">
           {blogPosts.map((post) => (
             <article
@@ -62,7 +82,7 @@ export default function BlogPage() {
               style={{ backgroundImage: "var(--surface-card)" }}
             >
               <div className="flex flex-wrap items-center gap-3 text-sm text-gray-400">
-                <span>{new Date(post.publishedAt).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</span>
+                <span>{new Date(post.publishedAt).toLocaleDateString(dateLocale, { month: "long", day: "numeric", year: "numeric" })}</span>
                 <span>•</span>
                 <span>{post.readingTime}</span>
               </div>
@@ -76,10 +96,11 @@ export default function BlogPage() {
                 ))}
               </div>
               <Link
-                href={`/blog/${post.slug}`}
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                href={`/blog/${post.slug}` as any}
                 className="mt-8 inline-flex items-center gap-2 font-semibold text-blue transition hover:text-gray-900"
               >
-                Read article
+                {t("readArticle")}
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </article>
@@ -88,31 +109,31 @@ export default function BlogPage() {
 
         <section className="mt-16 rounded-[2.5rem] border border-gray-100 p-8 shadow-[0_26px_60px_-44px_rgba(0,32,92,0.45)]" style={{ backgroundImage: "var(--surface-card)" }}>
           <p className="text-sm font-semibold uppercase tracking-[0.22em] text-blue">
-            Keep moving
+            {t("keepMovingEyebrow")}
           </p>
           <h2 className="mt-4 font-display text-3xl font-extrabold text-gray-900">
-            Turn reading into the next right action.
+            {t("keepMovingHeading")}
           </h2>
           <div className="mt-8 grid gap-3 md:grid-cols-3">
             <Link
               href="/quote?product=home"
               className="inline-flex items-center justify-between rounded-2xl border border-gray-200 bg-white px-5 py-4 text-sm font-bold text-gray-900 transition hover:border-blue hover:text-blue"
             >
-              Start a home or auto quote
+              {t("keepMovingHomeAuto")}
               <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
               href="/quote?product=business"
               className="inline-flex items-center justify-between rounded-2xl border border-gray-200 bg-white px-5 py-4 text-sm font-bold text-gray-900 transition hover:border-blue hover:text-blue"
             >
-              Review business coverage
+              {t("keepMovingBusiness")}
               <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
               href="/evidence-of-insurance"
               className="inline-flex items-center justify-between rounded-2xl border border-gray-200 bg-white px-5 py-4 text-sm font-bold text-gray-900 transition hover:border-blue hover:text-blue"
             >
-              Request proof of insurance
+              {t("keepMovingProof")}
               <ArrowRight className="h-4 w-4" />
             </Link>
           </div>

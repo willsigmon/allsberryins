@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import { routing } from "@/i18n/routing";
 import { absoluteUrl, siteUrl } from "@/lib/utils";
 
 const googleSiteVerification =
@@ -49,6 +50,11 @@ export const sharedMetadata: Metadata = {
   manifest: "/site.webmanifest",
   alternates: {
     canonical: "/",
+    languages: {
+      en: "/",
+      es: "/es",
+      "x-default": "/",
+    },
   },
   robots: {
     index: true,
@@ -86,25 +92,51 @@ export const sharedMetadata: Metadata = {
   },
 };
 
+const ogLocaleByLocale: Record<string, string> = {
+  en: "en_US",
+  es: "es_US",
+};
+
+function localizedPath(locale: string | undefined, path: string): string {
+  const normalized = path.startsWith("/") ? path : `/${path}`;
+  if (!locale || locale === routing.defaultLocale) {
+    return normalized;
+  }
+  if (normalized === "/") {
+    return `/${locale}`;
+  }
+  return `/${locale}${normalized}`;
+}
+
 export function createPageMetadata(options: {
   title: string;
   description: string;
   path: string;
   keywords?: string[];
+  locale?: string;
 }): Metadata {
-  const { title, description, path, keywords } = options;
+  const { title, description, path, keywords, locale } = options;
+  const canonical = localizedPath(locale, path);
+  const englishPath = localizedPath("en", path);
+  const spanishPath = localizedPath("es", path);
 
   return {
     title,
     description,
     keywords: keywords ?? defaultKeywords,
     alternates: {
-      canonical: path,
+      canonical,
+      languages: {
+        en: englishPath,
+        es: spanishPath,
+        "x-default": englishPath,
+      },
     },
     openGraph: {
       title: `${title} | Allsberry Insurance Agency`,
       description,
-      url: absoluteUrl(path),
+      url: absoluteUrl(canonical),
+      locale: locale ? ogLocaleByLocale[locale] ?? "en_US" : "en_US",
       images: [
         {
           url: absoluteUrl("/opengraph-image"),

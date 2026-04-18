@@ -12,7 +12,7 @@ export const contentType = "image/png";
 export default async function CarrierOgImage({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ locale: string; slug: string }>;
 }) {
   const { slug } = await params;
   const carrier = carrierPartners.find(

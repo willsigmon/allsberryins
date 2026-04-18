@@ -182,116 +182,128 @@
     }
   },
   "about": {
-    "metaTitle": "Sobre el equipo de Allsberry Insurance",
+    "metaTitle": "Nosotros",
     "metaDescription": "Conozca al equipo bilingüe de Allsberry Insurance Agency. 10 agentes licenciados — incluyendo personal hispanohablante — ayudando a familias y negocios del Sur de California a proteger lo que más importa.",
-    "eyebrow": "Nosotros",
-    "heading": "Asesoría local de seguros desde 1994",
-    "subheading": "Tres décadas ayudando a familias, propietarios y dueños de negocio del Sur de California.",
+    "eyebrow": "Sobre la agencia",
+    "heading": "Asesoría local, comunicación clara y cobertura que le queda a la vida real.",
+    "intro": "Allsberry Insurance Agency ha servido al Sur de California desde 1994. Erin lidera la agencia desde 2009 con una idea sencilla: el seguro debe sentirse a la medida, entendible y realmente útil.",
+    "recognitionLabel": "Reconocimiento",
     "stats": {
-      "foundedLabel": "Fundada",
-      "foundedValue": "1994",
-      "clientsLabel": "Clientes atendidos",
-      "clientsValue": "5,000+",
-      "agentsLabel": "Agentes licenciados",
-      "agentsValue": "10",
+      "servingSinceLabel": "Sirviendo desde",
+      "hoursLabel": "Lunes – Viernes",
+      "hoursValue": "8 AM – 5 PM",
       "bilingualLabel": "Se habla Español",
       "bilingualValue": "Equipo Bilingüe"
     },
-    "story": {
-      "heading": "Nuestra historia",
-      "paragraph1": "Allsberry Insurance Agency comenzó en 1994 como una pequeña oficina local que atendía a Corona y al Inland Empire. Desde entonces hemos crecido hasta ser un equipo de agentes licenciados en todo el Sur de California — pero nuestra forma de trabajar no ha cambiado. Contestamos el teléfono. Respondemos en lenguaje claro. Y tratamos a cada cliente como a un vecino, porque la mayoría lo son.",
-      "paragraph2": "Erin Allsberry tomó la propiedad en 2009 y ha convertido a la agencia en una de las oficinas más reconocidas de Farmers Insurance en la región. Hoy, nuestros agentes manejan desde pólizas para inquilinos primerizos hasta programas comerciales complejos, siempre con la misma meta: hacer el seguro sencillo."
+    "leadership": {
+      "label": "Liderazgo de la agencia",
+      "title": "Dueña y Agente Principal"
     },
     "values": {
-      "heading": "Lo que defendemos",
       "items": {
         "clarity": {
-          "title": "Claridad sobre complejidad",
+          "title": "Opciones claras",
           "description": "Explicamos las opciones de cobertura en lenguaje sencillo para que elegir la correcta sea fácil."
         },
         "responsiveness": {
-          "title": "Respuesta rápida",
-          "description": "Un miembro licenciado del equipo le contesta dentro de un día hábil — normalmente antes."
+          "title": "Consejo a la medida",
+          "description": "Recomendaciones pensadas en su hogar, vehículos, negocio y metas a largo plazo."
         },
         "localExpertise": {
-          "title": "Experiencia local",
-          "description": "Conocemos las zonas de incendios en California, el riesgo del Inland Empire y las aseguradoras que sí emiten aquí."
-        },
-        "longTermCare": {
-          "title": "Cuidado a largo plazo",
-          "description": "Revisiones anuales, seguimiento tras eventos de vida y ajustes proactivos conforme cambian sus necesidades."
+          "title": "Contexto local",
+          "description": "Una agencia que conoce el crecimiento del Sur de California, los mercados locales y la realidad detrás de las decisiones de seguros en California."
         }
       }
     },
-    "teamHeading": "Conozca al equipo",
-    "teamDescription": "Licenciados, locales y listos para ayudar.",
-    "fellowsHeading": "Allsberry Insurance Fellows",
-    "fellowsDescription": "Honrando a quienes construyeron esta agencia."
+    "teamSection": {
+      "eyebrow": "Nuestro equipo",
+      "title": "Las personas con las que los clientes realmente trabajan",
+      "description": "El seguro funciona mejor cuando sabe con quién está trabajando. Estas son las personas detrás de su cobertura."
+    },
+    "faqs": {
+      "heading": "Algunas preguntas prácticas antes de contactarnos",
+      "ctaContact": "Contactar al equipo",
+      "ctaQuote": "Comenzar cotización",
+      "q1": {
+        "question": "¿Cuánto tiempo lleva Allsberry Insurance Agency sirviendo al Sur de California?",
+        "answer": "La agencia ha servido a la zona desde 1994. Erin lidera el negocio desde 2009 manteniendo el mismo enfoque local y personal."
+      },
+      "q2": {
+        "question": "¿Con qué tipos de cobertura ayudan?",
+        "answer": "El equipo ayuda con seguros de casa, auto, inquilino, vida, sombrilla, condominio y cobertura comercial, además de solicitudes de comprobante de seguro que surgen al manejar pólizas en la vida diaria."
+      },
+      "q3": {
+        "question": "¿Con quién hablo si quiero empezar una cotización?",
+        "answer": "Puede empezar en línea o contactarnos directamente. El equipo le conectará con el agente licenciado adecuado según lo que necesite y qué tan pronto lo necesite."
+      }
+    }
   },
   "contact": {
-    "metaTitle": "Contáctenos",
-    "metaDescription": "Contacte a Allsberry Insurance Agency en Corona, CA. Llámenos, escríbanos o visítenos. Personal bilingüe para ayudarle con cobertura de casa, auto, vida y negocio.",
+    "metaTitle": "Contacto",
+    "metaDescription": "Contacte a Allsberry Insurance Agency para seguros de casa, auto, vida y negocio en todo el Sur de California. Llámenos, escríbanos o empiece su cotización en línea.",
     "eyebrow": "Contacto",
-    "heading": "Nos encantaría saber de usted",
-    "subheading": "Llámenos, envíe un mensaje, correo o pase por la oficina. Un agente licenciado le responde en un día hábil.",
-    "office": "Nuestra oficina",
-    "officeHours": "Horario de oficina",
-    "byPhone": "Por teléfono",
-    "byEmail": "Por correo",
-    "byText": "Por mensaje",
-    "directionsLabel": "Cómo llegar",
-    "callsWelcome": "Aceptamos llamadas y mensajes durante el horario de oficina.",
-    "emailResponse": "Respondemos los correos en un día hábil.",
-    "formHeading": "Envíenos un mensaje",
-    "formSubheading": "Complete el formulario y le contactamos pronto.",
-    "form": {
-      "name": "Nombre completo",
-      "namePlaceholder": "Su nombre completo",
-      "email": "Correo electrónico",
-      "emailPlaceholder": "usted@ejemplo.com",
-      "phone": "Número de teléfono",
-      "phonePlaceholder": "(555) 555-5555",
-      "subject": "Asunto",
-      "subjectPlaceholder": "¿En qué podemos ayudarle?",
-      "message": "Mensaje",
-      "messagePlaceholder": "Cuéntenos qué necesita…",
-      "submit": "Enviar mensaje",
-      "submitting": "Enviando…",
-      "success": "Gracias — le contactamos en un día hábil.",
-      "error": "Algo salió mal. Llámenos al {phone} o intente de nuevo."
+    "heading": "Contacte al equipo de Allsberry",
+    "subheading": "Llámenos, escríbanos o empiece una cotización.",
+    "callUs": "Llámenos",
+    "email": "Correo",
+    "serviceArea": "Área de servicio",
+    "serviceAreaBody": "Sirviendo a {area} por teléfono, correo y en línea",
+    "hoursTitle": "Horario",
+    "fastHelpHeading": "¿Necesita ayuda con cobertura rápido?",
+    "fastHelpBody": "La ruta de cotización es la más rápida para decirnos qué necesita. Elija un producto y un agente licenciado le responderá en un día hábil.",
+    "startYourQuote": "Comenzar Cotización",
+    "requestProof": "Solicitar Comprobante",
+    "callCta": "Llamar al {phone}",
+    "connectWithUs": "Conecte con nosotros",
+    "faqs": {
+      "heading": "Preguntas de contacto que nos hacen más seguido",
+      "description": "Estas respuestas hacen más útil la página para visitantes y les dan a los buscadores y asistentes de IA contexto claro sobre cómo opera la agencia.",
+      "ctaQuote": "Comenzar cotización",
+      "ctaProof": "Solicitar comprobante de seguro",
+      "q1": {
+        "question": "¿Cuál es la forma más rápida de contactar al equipo de Allsberry?",
+        "answer": "Llamar a la oficina es lo más rápido cuando algo es urgente. Si no lo es, los formularios de cotización o comprobante le dan al equipo el contexto más limpio para responder rápido."
+      },
+      "q2": {
+        "question": "¿Qué tan rápido me responderán después de contactarlos?",
+        "answer": "Un miembro licenciado del equipo suele responder en un día hábil, y las solicitudes sencillas muchas veces se revisan antes."
+      },
+      "q3": {
+        "question": "¿Puedo usar esta página de contacto también para cotizaciones y comprobantes?",
+        "answer": "Sí. La página de contacto es un buen punto de partida, pero la ruta de cotización y la de comprobante son más rápidas cuando ya sabe qué necesita."
+      }
     }
   },
   "quote": {
-    "metaTitle": "Solicitar una cotización de seguro",
-    "metaDescription": "Solicite una cotización de seguro de casa, auto, vida o negocio con Allsberry Insurance Agency. Un agente licenciado responde en un día hábil.",
-    "eyebrow": "Solicitar Cotización",
-    "heading": "Díganos qué necesita",
-    "subheading": "Un agente licenciado le contactará en un día hábil con opciones a la medida de su situación.",
-    "form": {
-      "productLabel": "¿Para qué necesita cobertura?",
-      "nameLabel": "Nombre completo",
-      "namePlaceholder": "Su nombre completo",
-      "emailLabel": "Correo",
-      "emailPlaceholder": "usted@ejemplo.com",
-      "phoneLabel": "Teléfono",
-      "phonePlaceholder": "(555) 555-5555",
-      "zipLabel": "Código postal",
-      "zipPlaceholder": "92878",
-      "employeesLabel": "¿Cuántos empleados tiene?",
-      "referralLabel": "¿Cómo supo de nosotros?",
-      "notesLabel": "¿Algo más que debamos saber?",
-      "notesPlaceholder": "Cuéntenos sobre su situación…",
-      "submit": "Solicitar cotización",
-      "submitting": "Enviando…",
-      "successHeading": "Recibimos su solicitud.",
-      "successBody": "Un agente licenciado le contactará en un día hábil. Si necesita ayuda inmediata, llámenos al {phone}.",
-      "errorHeading": "Algo salió mal.",
-      "errorBody": "Llámenos al {phone} o intente de nuevo."
-    },
-    "sidebar": {
-      "whyAllsberry": "¿Por qué Allsberry?",
-      "whyItems": "Agentes licenciados locales;Acceso a más de 200 aseguradoras;Personal bilingüe;Respuesta en un día hábil",
-      "privacy": "Usaremos su información solo para ayudarle con esta cotización."
+    "metaTitle": "Obtener cotización",
+    "metaDescription": "Solicite una cotización con Allsberry Insurance Agency para cobertura de casa, auto, vida, negocio, inquilino, condominio, sombrilla y workers comp en todo el Sur de California.",
+    "eyebrow": "Obtener cotización",
+    "heading": "Empiece sencillo. Nosotros cuidamos los detalles con usted.",
+    "subheading": "Díganos qué necesita y un agente licenciado le contactará con opciones a la medida de su situación.",
+    "whatHappensNext": "Qué sigue",
+    "next1": "Revisamos los productos que seleccionó.",
+    "next2": "Un agente le contacta en un día hábil.",
+    "next3": "Le ayudamos a comparar opciones de cobertura y respondemos sus preguntas con claridad.",
+    "preferredFollowUp": "Seguimiento preferido: {name}",
+    "needProofIntro": "¿Necesita un certificado o comprobante de seguro en vez de una cotización? Use la ruta específica para",
+    "needProofLink": "solicitar comprobante",
+    "faqs": {
+      "heading": "Preguntas de cotización que respondemos antes de que envíe el formulario",
+      "description": "Estas son las preguntas reales que la gente hace antes de comenzar una cotización, lo que también ayuda a que los buscadores y asistentes de IA entiendan mejor la página.",
+      "ctaProof": "Mejor solicitar comprobante",
+      "ctaContact": "Hablar primero con el equipo",
+      "q1": {
+        "question": "¿Qué información debo tener lista antes de solicitar una cotización?",
+        "answer": "Lo básico ayuda mucho: el tipo de seguro que necesita, su código postal y contexto sobre su casa, vehículos, negocio o póliza actual. Si no está seguro, empiece de todas formas y el equipo le guía el siguiente paso."
+      },
+      "q2": {
+        "question": "¿Qué tan rápido me responden después de enviar el formulario?",
+        "answer": "Un miembro licenciado del equipo de Allsberry le responde en un día hábil, y las solicitudes sencillas muchas veces se revisan antes."
+      },
+      "q3": {
+        "question": "¿Debo usar esta página si solo necesito comprobante o certificado de seguro?",
+        "answer": "No. Use la ruta específica de comprobante de seguro para COIs, solicitudes de escrow y actualizaciones al acreedor hipotecario para que el equipo tramite la documentación más rápido."
+      }
     }
   },
   "carriersPage": {
@@ -315,43 +327,65 @@
     "viewAll": "Ver todo"
   },
   "review": {
-    "metaTitle": "Déjenos una reseña",
-    "metaDescription": "¿Le gustó trabajar con Allsberry Insurance Agency? Déjenos una reseña rápida en Google.",
-    "eyebrow": "Gracias por considerar dejar una reseña",
-    "heading": "Su reseña ayuda a nuestros vecinos",
-    "subheading": "Unas palabras en Google ayudan a que otras familias del Sur de California nos encuentren. Toma unos 30 segundos.",
+    "metaTitle": "Comparta su experiencia",
+    "metaDescription": "Su reseña en Google ayuda a que otras familias del Sur de California encuentren una agencia local real. Toma menos de un minuto.",
+    "eyebrow": "Gracias",
+    "heading": "¿Nos regala unas palabras amables para sus vecinos?",
+    "subheading": "Una reseña rápida en Google es como las familias de Corona, Norco, Eastvale y Riverside nos encuentran. Toma unos 30 segundos — y significa mucho para el equipo.",
     "ctaPrimary": "Dejar reseña en Google",
-    "ctaSecondary": "Ahora no",
-    "privateFeedback": "¿Tiene comentarios pero no quiere compartirlos en público? Escríbanos a {email} — leemos cada mensaje."
+    "cardBody": "Toma unos 30 segundos. Se abre en una pestaña nueva — aquí estaremos cuando regrese.",
+    "buttonLabel": "Escribir reseña en Google",
+    "thankYou": "Gracias — nos alegra la semana",
+    "privateFeedbackIntro": "¿Algo no salió como esperaba?",
+    "privateFeedbackLink": "Cuéntenos en privado",
+    "privateFeedbackOutro": "— su nota llega directo a Erin.",
+    "callOfficeIntro": "O llame a la oficina directamente al"
   },
   "evidenceOfInsurance": {
-    "metaTitle": "Solicitar comprobante de seguro",
-    "metaDescription": "Solicite comprobante de seguro, Evidence of Insurance o Certificate of Insurance con Allsberry Insurance Agency.",
-    "eyebrow": "Comprobante de Seguro",
-    "heading": "Obtenga la documentación que su banco, arrendador o socio necesita",
-    "subheading": "Díganos qué necesita y se lo enviamos — normalmente el mismo día.",
-    "requestTypeLabel": "¿Qué documento necesita?",
-    "sendToLabel": "¿A quién se lo enviamos?",
-    "sendToPlaceholder": "Nombre y correo del banco, arrendador o negocio",
-    "policyLabel": "Número de póliza (si lo sabe)",
-    "policyPlaceholder": "Opcional",
-    "notesLabel": "¿Algo más que debamos saber?",
-    "notesPlaceholder": "Fecha límite, dirección en el documento, etc.",
-    "submit": "Solicitar comprobante",
-    "successHeading": "Listo.",
-    "successBody": "Preparamos el documento y se lo enviamos pronto. Si es urgente, llámenos al {phone}."
+    "metaTitle": "Comprobante de Seguro",
+    "metaDescription": "Solicite evidence of insurance, certificado de seguro o actualización al acreedor hipotecario con Allsberry Insurance Agency en todo el Sur de California.",
+    "eyebrow": "Comprobante de seguro",
+    "heading": "¿Necesita comprobante de cobertura rápido?",
+    "subheading": "Use esta ruta para certificados de seguro, solicitudes de escrow o hipoteca y seguimiento de comprobante de cobertura.",
+    "helpsUsMoveFaster": "Lo que nos ayuda a movernos más rápido",
+    "helpBullet1": "Díganos quién necesita el comprobante.",
+    "helpBullet2": "Agregue una fecha límite si escrow o aseguramiento lo esperan.",
+    "helpBullet3": "Incluya cualquier nota de préstamo, propiedad o certificado que ya tenga.",
+    "preferredFollowUp": "Seguimiento preferido: {name}",
+    "callInstead": "¿Prefiere llamar? {phone}",
+    "faqs": {
+      "heading": "Preguntas sobre documentación que respondemos aquí mismo",
+      "description": "Esta página ahora coincide con el esquema FAQ con respuestas visibles, lo que es más claro para los usuarios y más seguro para los buscadores.",
+      "workWithAgent": "Trabajar con {name}",
+      "talkToTeam": "Hablar con el equipo",
+      "ctaQuote": "Mejor comenzar una cotización",
+      "q1": {
+        "question": "¿Puedo solicitar comprobante de seguro en línea?",
+        "answer": "Sí. Comparta los datos básicos aquí y la agencia da seguimiento con evidence of insurance, detalles de COI o la actualización al acreedor hipotecario correspondientes."
+      },
+      "q2": {
+        "question": "¿Con qué tipos de documentación puede ayudar Allsberry Insurance Agency?",
+        "answer": "El equipo puede ayudar con evidence of insurance, certificados de seguro, solicitudes de escrow o cierre y actualizaciones al acreedor hipotecario o loss payee."
+      },
+      "q3": {
+        "question": "¿Qué ayuda a que el equipo atienda mi solicitud más rápido?",
+        "answer": "Incluya quién necesita el documento, cualquier fecha límite y cualquier nota de hipoteca, escrow, propiedad o certificado que ya tenga para que la solicitud se canalice de forma limpia."
+      }
+    }
   },
   "blog": {
-    "metaTitle": "Blog de seguros",
-    "metaDescription": "Consejos, guías y noticias de Allsberry Insurance Agency sobre seguros de casa, auto, negocio y vida en California.",
-    "eyebrow": "Blog",
-    "heading": "Consejos, guías y noticias de la agencia",
-    "subheading": "Información de seguros en lenguaje sencillo para familias y dueños de negocio del Sur de California.",
-    "readingTime": "{minutes} min de lectura",
-    "publishedOn": "Publicado el {date}",
-    "byAuthor": "Por {author}",
-    "relatedGuides": "Guías relacionadas",
-    "allPosts": "Todos los artículos",
+    "metaTitle": "Blog",
+    "metaDescription": "Artículos útiles de Allsberry Insurance Agency sobre temas de seguros de casa, auto, negocio y vida para clientes del Sur de California.",
+    "eyebrow": "Información",
+    "heading": "Artículos de seguros y respuestas prácticas",
+    "subheading": "El blog vive en la navegación — no en la página de inicio — así la experiencia principal se mantiene limpia mientras el contenido optimizado para búsqueda sigue teniendo su lugar.",
+    "readArticle": "Leer artículo",
+    "articlesInEnglishNotice": "Los artículos actualmente se publican en inglés. Si prefiere ayuda en español, llámenos y repasamos los detalles con usted.",
+    "keepMovingEyebrow": "Siga adelante",
+    "keepMovingHeading": "Convierta la lectura en el siguiente paso correcto.",
+    "keepMovingHomeAuto": "Comenzar cotización de casa o auto",
+    "keepMovingBusiness": "Revisar cobertura de negocio",
+    "keepMovingProof": "Solicitar comprobante de seguro",
     "categories": {
       "tips": "Consejos",
       "guides": "Guías",
@@ -371,8 +405,23 @@
   },
   "notFound": {
     "heading": "Página no encontrada",
-    "subheading": "La página que busca se movió o nunca existió.",
-    "cta": "Volver al inicio"
+    "lookslikeThisPageIsntHere": "Parece que esta página no está aquí.",
+    "subheading": "Quizá el enlace quedó viejo o la página se movió. Aquí es a donde llega la mayoría de los visitantes — o llámenos al",
+    "goHome": "Ir al inicio",
+    "popularLinks": {
+      "quoteLabel": "Obtener cotización",
+      "quoteDesc": "Casa, auto, negocio, vida",
+      "teamLabel": "Conozca al equipo",
+      "teamDesc": "Nuestros agentes en Corona, CA",
+      "proofLabel": "Comprobante de seguro",
+      "proofDesc": "Certificados y COIs",
+      "carriersLabel": "Aseguradoras asociadas",
+      "carriersDesc": "Más de 20 aseguradoras comparadas",
+      "blogLabel": "Blog y guías",
+      "blogDesc": "Información sobre cobertura",
+      "contactLabel": "Contáctenos",
+      "contactDesc": "Hable con una persona"
+    }
   },
   "products": {
     "home": {

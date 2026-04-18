@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { QuoteForm } from "@/components/forms/quote-form";
 import { PageFaqSection } from "@/components/sections/page-faq-section";
@@ -10,41 +11,38 @@ import { buildTrackedHref, normalizeAgentSlug } from "@/lib/tracking";
 import { createBreadcrumbSchema, organizationSchema } from "@/lib/seo";
 import { absoluteUrl } from "@/lib/utils";
 
-export const metadata: Metadata = createPageMetadata({
-  title: "Get a Quote",
-  description:
-    "Request a quote from Allsberry Insurance Agency for home, auto, life, business, renters, condo, umbrella, and workers compensation coverage across Southern California.",
-  path: "/quote",
-});
-
 type QuotePageProps = {
+  params: Promise<{ locale: string }>;
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 };
 
-export default async function QuotePage({ searchParams }: QuotePageProps) {
-  const params = await searchParams;
-  const product = typeof params.product === "string" ? params.product : undefined;
-  const zip = typeof params.zip === "string" ? params.zip : undefined;
-  const entryPoint = typeof params.entry === "string" ? params.entry : undefined;
+export async function generateMetadata({ params }: QuotePageProps): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "quote" });
+  return createPageMetadata({
+    title: t("metaTitle"),
+    description: t("metaDescription"),
+    path: "/quote",
+    locale,
+  });
+}
+
+export default async function QuotePage({ params, searchParams }: QuotePageProps) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations("quote");
+  const searchParamsValue = await searchParams;
+  const product = typeof searchParamsValue.product === "string" ? searchParamsValue.product : undefined;
+  const zip = typeof searchParamsValue.zip === "string" ? searchParamsValue.zip : undefined;
+  const entryPoint = typeof searchParamsValue.entry === "string" ? searchParamsValue.entry : undefined;
   const assignedAgentSlug =
-    typeof params.agent === "string" ? normalizeAgentSlug(params.agent) : undefined;
+    typeof searchParamsValue.agent === "string" ? normalizeAgentSlug(searchParamsValue.agent) : undefined;
   const assignedAgent = assignedAgentSlug ? getAgentBySlug(assignedAgentSlug) : undefined;
+
   const pageFaqs = [
-    {
-      question: "What information should I have ready before I request a quote?",
-      answer:
-        "The basics help most: the type of insurance you need, your ZIP code, and any context about your home, vehicles, business, or current policy. If you are not sure, start anyway and the team can guide the next step.",
-    },
-    {
-      question: "How fast will someone follow up after I submit the quote form?",
-      answer:
-        "A licensed Allsberry team member follows up within one business day, and straightforward requests are often reviewed sooner.",
-    },
-    {
-      question: "Should I use this page if I only need proof or a certificate of insurance?",
-      answer:
-        "No. Use the dedicated proof-of-insurance request flow for COIs, escrow requests, and mortgagee updates so the team can route documentation faster.",
-    },
+    { question: t("faqs.q1.question"), answer: t("faqs.q1.answer") },
+    { question: t("faqs.q2.question"), answer: t("faqs.q2.answer") },
+    { question: t("faqs.q3.question"), answer: t("faqs.q3.answer") },
   ];
   const faqSchema = {
     "@context": "https://schema.org",
@@ -85,24 +83,24 @@ export default async function QuotePage({ searchParams }: QuotePageProps) {
         <div className="grid gap-10 lg:grid-cols-[0.78fr_1.22fr] lg:items-start">
           <div className="lg:sticky lg:top-28">
             <SectionHeading
-              eyebrow="Get a quote"
-              title="Start simple. We’ll handle the details with you."
-              description="Tell us what you need and a licensed agent will follow up with options tailored to your situation."
+              eyebrow={t("eyebrow")}
+              title={t("heading")}
+              description={t("subheading")}
             />
             <div className="mt-8 rounded-[2rem] border border-blue/10 bg-white p-6 shadow-[0_20px_60px_-46px_rgba(0,32,92,0.45)]">
-              <p className="text-sm font-semibold uppercase tracking-[0.24em] text-blue">What happens next</p>
+              <p className="text-sm font-semibold uppercase tracking-[0.24em] text-blue">{t("whatHappensNext")}</p>
               <ul className="mt-5 grid gap-4 text-sm leading-7 text-gray-600">
-                <li>• We review the products you selected.</li>
-                <li>• An agent follows up within 24 hours.</li>
-                <li>• We help compare coverage options and answer questions clearly.</li>
+                <li>• {t("next1")}</li>
+                <li>• {t("next2")}</li>
+                <li>• {t("next3")}</li>
               </ul>
               {assignedAgent ? (
                 <div className="mt-5 rounded-2xl border border-blue/12 bg-blue-light px-4 py-3 text-sm font-semibold text-gray-900">
-                  Preferred follow-up: {assignedAgent.name}
+                  {t("preferredFollowUp", { name: assignedAgent.name })}
                 </div>
               ) : null}
               <p className="mt-5 text-sm leading-7 text-gray-400">
-                Need a certificate or proof of insurance instead of a quote? Use the dedicated{" "}
+                {t("needProofIntro")}{" "}
                 <a
                   className="font-semibold text-blue hover:text-gray-900"
                   href={buildTrackedHref("/evidence-of-insurance", {
@@ -110,7 +108,7 @@ export default async function QuotePage({ searchParams }: QuotePageProps) {
                     entry: entryPoint ?? (assignedAgentSlug ? "quote-page-proof-handoff" : undefined),
                   })}
                 >
-                  proof request flow
+                  {t("needProofLink")}
                 </a>
                 .
               </p>
@@ -124,8 +122,8 @@ export default async function QuotePage({ searchParams }: QuotePageProps) {
           />
         </div>
         <PageFaqSection
-          title="Quote questions we can answer before you even submit"
-          description="These are the real questions people ask before they start a quote, which also makes this page easier for search engines and AI answer engines to interpret."
+          title={t("faqs.heading")}
+          description={t("faqs.description")}
           faqs={pageFaqs}
           ctas={[
             {
@@ -133,14 +131,14 @@ export default async function QuotePage({ searchParams }: QuotePageProps) {
                 agent: assignedAgentSlug,
                 entry: entryPoint ?? "quote-faq-proof-cta",
               }),
-              label: "Request proof of insurance instead",
+              label: t("faqs.ctaProof"),
             },
             {
               href: buildTrackedHref("/contact", {
                 agent: assignedAgentSlug,
                 entry: entryPoint ?? "quote-faq-contact-cta",
               }),
-              label: "Talk to the team first",
+              label: t("faqs.ctaContact"),
             },
           ]}
         />

@@ -182,116 +182,128 @@
     }
   },
   "about": {
-    "metaTitle": "About the Allsberry Insurance Team",
+    "metaTitle": "About",
     "metaDescription": "Meet the bilingual team at Allsberry Insurance Agency. 10 licensed agents — including Spanish-speaking staff — helping Southern California families and businesses protect what matters most.",
-    "eyebrow": "About Us",
-    "heading": "Local insurance guidance since 1994",
-    "subheading": "Three decades helping Southern California families, homeowners, and business owners.",
+    "eyebrow": "About the agency",
+    "heading": "Local guidance, clean communication, and coverage that fits real life.",
+    "intro": "Allsberry Insurance Agency has served Southern California since 1994. Erin has led the agency since 2009 with a simple belief: insurance should feel tailored, understandable, and genuinely helpful.",
+    "recognitionLabel": "Recognition",
     "stats": {
-      "foundedLabel": "Founded",
-      "foundedValue": "1994",
-      "clientsLabel": "Clients served",
-      "clientsValue": "5,000+",
-      "agentsLabel": "Licensed agents",
-      "agentsValue": "10",
+      "servingSinceLabel": "Serving since",
+      "hoursLabel": "Monday – Friday",
+      "hoursValue": "8 AM – 5 PM",
       "bilingualLabel": "Se habla Español",
       "bilingualValue": "Bilingual Team"
     },
-    "story": {
-      "heading": "Our story",
-      "paragraph1": "Allsberry Insurance Agency started in 1994 as a small local office serving Corona and the surrounding Inland Empire. Since then we've grown into a Southern California team of licensed agents — but the way we work hasn't changed. We pick up the phone. We answer questions in plain language. And we treat every client like a neighbor, because most of them are.",
-      "paragraph2": "Erin Allsberry took over ownership in 2009 and has built the agency into one of Farmers Insurance's most recognized offices in the region. Today our agents handle everything from first-time renters policies to complex commercial programs, always with the same goal: make insurance straightforward."
+    "leadership": {
+      "label": "Agency leadership",
+      "title": "Owner & Principal Agent"
     },
     "values": {
-      "heading": "What we stand for",
       "items": {
         "clarity": {
-          "title": "Clarity over complexity",
+          "title": "Clear options",
           "description": "Coverage choices explained in plain language so the best fit is easy to understand."
         },
         "responsiveness": {
-          "title": "Responsiveness",
-          "description": "A licensed team member gets back to you within one business day — usually sooner."
+          "title": "Tailored advice",
+          "description": "Recommendations shaped around your household, vehicles, business, and long-term goals."
         },
         "localExpertise": {
-          "title": "Local expertise",
-          "description": "We know California wildfire zones, Inland Empire risk, and the carriers that actually write here."
-        },
-        "longTermCare": {
-          "title": "Long-term care",
-          "description": "Annual reviews, life-event check-ins, and proactive adjustments as your needs change."
+          "title": "Local context",
+          "description": "An agency that knows Southern California growth, local markets, and the realities behind California insurance decisions."
         }
       }
     },
-    "teamHeading": "Meet the team",
-    "teamDescription": "Licensed, local, and ready to help.",
-    "fellowsHeading": "Allsberry Insurance Fellows",
-    "fellowsDescription": "Honoring those who built this agency."
+    "teamSection": {
+      "eyebrow": "Our team",
+      "title": "The people clients actually work with",
+      "description": "Insurance works best when you know who you are working with. Here are the people behind your coverage."
+    },
+    "faqs": {
+      "heading": "A few practical questions before you reach out",
+      "ctaContact": "Contact the team",
+      "ctaQuote": "Start a quote",
+      "q1": {
+        "question": "How long has Allsberry Insurance Agency served Southern California?",
+        "answer": "The agency has served the area since 1994, with Erin leading the business since 2009 and continuing the same local, personal approach."
+      },
+      "q2": {
+        "question": "What kinds of coverage do you help with?",
+        "answer": "The team helps with home, auto, renters, life, umbrella, condo, and commercial coverage, plus the proof-of-insurance requests that come with real-world policy management."
+      },
+      "q3": {
+        "question": "Who do I talk to if I want to start a quote?",
+        "answer": "You can start online or reach out directly. The team will route you to the right licensed agent based on what you need and how quickly you need help."
+      }
+    }
   },
   "contact": {
-    "metaTitle": "Contact Us",
-    "metaDescription": "Contact Allsberry Insurance Agency in Corona, CA. Call, email, or stop by our office. Bilingual staff on hand to help with home, auto, life, and business coverage.",
+    "metaTitle": "Contact",
+    "metaDescription": "Contact Allsberry Insurance Agency for home, auto, life, and business insurance guidance across Southern California. Call, email, or start your quote online.",
     "eyebrow": "Contact",
-    "heading": "We'd love to hear from you",
-    "subheading": "Call, text, email, or stop by. A licensed agent responds within one business day.",
-    "office": "Our office",
-    "officeHours": "Office hours",
-    "byPhone": "By phone",
-    "byEmail": "By email",
-    "byText": "By text",
-    "directionsLabel": "Get directions",
-    "callsWelcome": "Calls and texts are welcome during business hours.",
-    "emailResponse": "Emails are answered within one business day.",
-    "formHeading": "Send us a message",
-    "formSubheading": "Fill out the form below and we'll get back to you shortly.",
-    "form": {
-      "name": "Full name",
-      "namePlaceholder": "Your full name",
-      "email": "Email address",
-      "emailPlaceholder": "you@example.com",
-      "phone": "Phone number",
-      "phonePlaceholder": "(555) 555-5555",
-      "subject": "Subject",
-      "subjectPlaceholder": "How can we help?",
-      "message": "Message",
-      "messagePlaceholder": "Tell us what you need…",
-      "submit": "Send message",
-      "submitting": "Sending…",
-      "success": "Thanks — we'll be in touch within one business day.",
-      "error": "Something went wrong. Please call us at {phone} or try again."
+    "heading": "Reach the Allsberry team",
+    "subheading": "Call us, email us, or jump straight into a quote.",
+    "callUs": "Call us",
+    "email": "Email",
+    "serviceArea": "Service area",
+    "serviceAreaBody": "Serving {area} by phone, email, and online",
+    "hoursTitle": "Hours",
+    "fastHelpHeading": "Need coverage help fast?",
+    "fastHelpBody": "The quote flow is the quickest way to tell us what you need. Pick a product and a licensed agent will follow up within one business day.",
+    "startYourQuote": "Start Your Quote",
+    "requestProof": "Request Proof",
+    "callCta": "Call {phone}",
+    "connectWithUs": "Connect with us",
+    "faqs": {
+      "heading": "Contact questions we hear most often",
+      "description": "These answers make the page more useful for visitors and give search engines and AI systems clearer context about how the agency works.",
+      "ctaQuote": "Start a quote",
+      "ctaProof": "Request proof of insurance",
+      "q1": {
+        "question": "What is the fastest way to reach the Allsberry team?",
+        "answer": "Calling the office is the quickest path when something is time-sensitive. If it is not urgent, the quote or proof-of-insurance form usually gives the team the cleanest context to respond quickly."
+      },
+      "q2": {
+        "question": "How quickly will someone follow up after I reach out?",
+        "answer": "A licensed team member typically follows up within one business day, and straightforward requests are often reviewed sooner."
+      },
+      "q3": {
+        "question": "Can I use this contact page for quotes and proof requests too?",
+        "answer": "Yes. The contact page is a good starting point, but the quote flow and proof-of-insurance flow are faster when you already know what you need."
+      }
     }
   },
   "quote": {
-    "metaTitle": "Request an Insurance Quote",
-    "metaDescription": "Request a home, auto, life, or business insurance quote from Allsberry Insurance Agency. A licensed agent responds within one business day.",
-    "eyebrow": "Request a Quote",
-    "heading": "Tell us what you need",
-    "subheading": "A licensed agent will reach out within one business day with options tailored to your situation.",
-    "form": {
-      "productLabel": "What do you need coverage for?",
-      "nameLabel": "Full name",
-      "namePlaceholder": "Your full name",
-      "emailLabel": "Email",
-      "emailPlaceholder": "you@example.com",
-      "phoneLabel": "Phone",
-      "phonePlaceholder": "(555) 555-5555",
-      "zipLabel": "ZIP code",
-      "zipPlaceholder": "92878",
-      "employeesLabel": "How many employees?",
-      "referralLabel": "How did you hear about us?",
-      "notesLabel": "Anything else we should know?",
-      "notesPlaceholder": "Tell us about your situation…",
-      "submit": "Request quote",
-      "submitting": "Sending…",
-      "successHeading": "We got your request.",
-      "successBody": "A licensed agent will reach out within one business day. If you need help immediately, call us at {phone}.",
-      "errorHeading": "Something went wrong.",
-      "errorBody": "Please call us at {phone} or try again."
-    },
-    "sidebar": {
-      "whyAllsberry": "Why Allsberry?",
-      "whyItems": "Licensed local agents;Access to 200+ carriers;Bilingual staff;One business day response",
-      "privacy": "We'll only use your info to help you with this quote."
+    "metaTitle": "Get a Quote",
+    "metaDescription": "Request a quote from Allsberry Insurance Agency for home, auto, life, business, renters, condo, umbrella, and workers compensation coverage across Southern California.",
+    "eyebrow": "Get a quote",
+    "heading": "Start simple. We'll handle the details with you.",
+    "subheading": "Tell us what you need and a licensed agent will follow up with options tailored to your situation.",
+    "whatHappensNext": "What happens next",
+    "next1": "We review the products you selected.",
+    "next2": "An agent follows up within 24 hours.",
+    "next3": "We help compare coverage options and answer questions clearly.",
+    "preferredFollowUp": "Preferred follow-up: {name}",
+    "needProofIntro": "Need a certificate or proof of insurance instead of a quote? Use the dedicated",
+    "needProofLink": "proof request flow",
+    "faqs": {
+      "heading": "Quote questions we can answer before you even submit",
+      "description": "These are the real questions people ask before they start a quote, which also makes this page easier for search engines and AI answer engines to interpret.",
+      "ctaProof": "Request proof of insurance instead",
+      "ctaContact": "Talk to the team first",
+      "q1": {
+        "question": "What information should I have ready before I request a quote?",
+        "answer": "The basics help most: the type of insurance you need, your ZIP code, and any context about your home, vehicles, business, or current policy. If you are not sure, start anyway and the team can guide the next step."
+      },
+      "q2": {
+        "question": "How fast will someone follow up after I submit the quote form?",
+        "answer": "A licensed Allsberry team member follows up within one business day, and straightforward requests are often reviewed sooner."
+      },
+      "q3": {
+        "question": "Should I use this page if I only need proof or a certificate of insurance?",
+        "answer": "No. Use the dedicated proof-of-insurance request flow for COIs, escrow requests, and mortgagee updates so the team can route documentation faster."
+      }
     }
   },
   "carriersPage": {
@@ -315,43 +327,65 @@
     "viewAll": "View all"
   },
   "review": {
-    "metaTitle": "Leave a Review",
-    "metaDescription": "Loved working with Allsberry Insurance Agency? Leave us a quick Google review.",
-    "eyebrow": "Thanks for considering a review",
-    "heading": "Your review helps our neighbors",
-    "subheading": "A few kind words on Google helps other Southern California families find us. It takes about 30 seconds.",
+    "metaTitle": "Share Your Experience",
+    "metaDescription": "Your review on Google helps other Southern California families find a real local agency. It takes under a minute.",
+    "eyebrow": "Thank you",
+    "heading": "Would you share one kind word with your neighbors?",
+    "subheading": "A quick Google review is how other Corona, Norco, Eastvale, and Riverside families find us. It takes about 30 seconds — and it means the world to the team.",
     "ctaPrimary": "Leave a Google review",
-    "ctaSecondary": "Not right now",
-    "privateFeedback": "Have feedback but not ready to share publicly? Email us at {email} — we read every note."
+    "cardBody": "Takes about 30 seconds. Opens in a new tab — we'll be right here when you're done.",
+    "buttonLabel": "Write a review on Google",
+    "thankYou": "Thank you — it makes our week",
+    "privateFeedbackIntro": "Something didn't land the way it should have?",
+    "privateFeedbackLink": "Tell us privately",
+    "privateFeedbackOutro": "— a note goes straight to Erin.",
+    "callOfficeIntro": "Or call the office directly at"
   },
   "evidenceOfInsurance": {
-    "metaTitle": "Proof of Insurance Request",
-    "metaDescription": "Request proof of insurance, an Evidence of Insurance, or a Certificate of Insurance from Allsberry Insurance Agency.",
-    "eyebrow": "Proof of Insurance",
-    "heading": "Get the paperwork your bank, landlord, or partner needs",
-    "subheading": "Tell us what you need and we'll send it over — usually the same day.",
-    "requestTypeLabel": "What are you requesting?",
-    "sendToLabel": "Who should we send it to?",
-    "sendToPlaceholder": "Name and email of the bank, landlord, or business",
-    "policyLabel": "Policy number (if known)",
-    "policyPlaceholder": "Optional",
-    "notesLabel": "Anything else we should know?",
-    "notesPlaceholder": "Due date, address on the paperwork, etc.",
-    "submit": "Request proof",
-    "successHeading": "Got it.",
-    "successBody": "We'll prepare the paperwork and send it over shortly. If it's urgent, call us at {phone}."
+    "metaTitle": "Proof of Insurance",
+    "metaDescription": "Request evidence of insurance, a certificate of insurance, or a mortgagee update from Allsberry Insurance Agency across Southern California.",
+    "eyebrow": "Proof of insurance",
+    "heading": "Need evidence of coverage fast?",
+    "subheading": "Use this request flow for certificates of insurance, escrow or mortgage requests, and proof of coverage follow-up.",
+    "helpsUsMoveFaster": "What helps us move faster",
+    "helpBullet1": "Tell us who needs the proof.",
+    "helpBullet2": "Add a due date if escrow or underwriting is waiting on it.",
+    "helpBullet3": "Include any loan, property, or certificate notes you already have.",
+    "preferredFollowUp": "Preferred follow-up: {name}",
+    "callInstead": "Need to call instead? {phone}",
+    "faqs": {
+      "heading": "Documentation questions we can answer right here",
+      "description": "This page now matches the FAQ schema with visible answers, which is cleaner for users and safer for search engines.",
+      "workWithAgent": "Work with {name}",
+      "talkToTeam": "Talk to the team",
+      "ctaQuote": "Start a coverage quote instead",
+      "q1": {
+        "question": "Can I request proof of insurance online?",
+        "answer": "Yes. Share the basics here and the agency can follow up with the right evidence of insurance, COI details, or mortgagee update."
+      },
+      "q2": {
+        "question": "What kinds of documentation can Allsberry Insurance Agency help with?",
+        "answer": "The team can help with evidence of insurance, certificates of insurance, escrow or closing requests, and mortgagee or loss payee updates."
+      },
+      "q3": {
+        "question": "What helps the team turn around my request faster?",
+        "answer": "Include who needs the document, any due date, and any mortgagee, escrow, property, or certificate notes you already have so the request can be routed cleanly."
+      }
+    }
   },
   "blog": {
-    "metaTitle": "Insurance Blog",
-    "metaDescription": "Tips, guides, and news from Allsberry Insurance Agency on California home, auto, business, and life insurance.",
-    "eyebrow": "Blog",
-    "heading": "Tips, guides, and agency news",
-    "subheading": "Plain-language insurance reading for Southern California families and business owners.",
-    "readingTime": "{minutes} min read",
-    "publishedOn": "Published {date}",
-    "byAuthor": "By {author}",
-    "relatedGuides": "Related guides",
-    "allPosts": "All posts",
+    "metaTitle": "Blog",
+    "metaDescription": "Helpful insurance articles from Allsberry Insurance Agency covering home, auto, business, and life insurance topics for Southern California clients.",
+    "eyebrow": "Insights",
+    "heading": "Insurance articles and practical answers",
+    "subheading": "The blog lives in the navigation — not on the homepage — so the main experience stays clean while search-friendly content still has a home.",
+    "readArticle": "Read article",
+    "articlesInEnglishNotice": "Articles are currently published in English. If you'd prefer help in Spanish, call us and we'll walk through the details with you.",
+    "keepMovingEyebrow": "Keep moving",
+    "keepMovingHeading": "Turn reading into the next right action.",
+    "keepMovingHomeAuto": "Start a home or auto quote",
+    "keepMovingBusiness": "Review business coverage",
+    "keepMovingProof": "Request proof of insurance",
     "categories": {
       "tips": "Tips",
       "guides": "Guides",
@@ -371,8 +405,23 @@
   },
   "notFound": {
     "heading": "Page not found",
-    "subheading": "The page you're looking for moved or never existed.",
-    "cta": "Return home"
+    "lookslikeThisPageIsntHere": "Looks like this page isn't here.",
+    "subheading": "The link might be outdated, or it may have moved. Here's where most visitors head next — or give us a call at",
+    "goHome": "Go Home",
+    "popularLinks": {
+      "quoteLabel": "Get a quote",
+      "quoteDesc": "Home, auto, business, life",
+      "teamLabel": "Meet the team",
+      "teamDesc": "Our Corona, CA agents",
+      "proofLabel": "Proof of insurance",
+      "proofDesc": "Certificates & COIs",
+      "carriersLabel": "Carrier partners",
+      "carriersDesc": "20+ carriers shopped",
+      "blogLabel": "Blog & guides",
+      "blogDesc": "Coverage insights",
+      "contactLabel": "Contact us",
+      "contactDesc": "Talk to a person"
+    }
   },
   "products": {
     "home": {
