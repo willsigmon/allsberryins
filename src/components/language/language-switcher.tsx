@@ -3,8 +3,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { Check, ChevronDown, Globe } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
-import { useEffect, useId, useRef, useState, useTransition } from "react";
-import { createPortal } from "react-dom";
+import { useEffect, useId, useRef, useState } from "react";
 
 import { usePathname, useRouter } from "@/i18n/navigation";
 import type { AppLocale } from "@/i18n/routing";
@@ -30,12 +29,53 @@ const shortCode: Record<AppLocale, string> = {
   es: "ES",
 };
 
+const OVERLAY_LIFETIME_MS = 1080;
+
+function spawnLocaleOverlay({
+  label,
+  shortCode,
+}: {
+  label: string;
+  shortCode: string;
+}) {
+  if (typeof document === "undefined") return;
+
+  // Purge any existing overlay so back-to-back clicks don't stack.
+  document.querySelectorAll("[data-locale-overlay]").forEach((el) => el.remove());
+
+  const overlay = document.createElement("div");
+  overlay.setAttribute("data-locale-overlay", "");
+  overlay.setAttribute("role", "status");
+  overlay.setAttribute("aria-live", "polite");
+
+  const pill = document.createElement("div");
+  pill.className = "locale-overlay-pill";
+
+  const chip = document.createElement("span");
+  chip.className = "locale-overlay-chip";
+  chip.textContent = shortCode;
+  chip.setAttribute("aria-hidden", "true");
+
+  const text = document.createElement("span");
+  text.textContent = label;
+
+  const bar = document.createElement("span");
+  bar.className = "locale-overlay-bar";
+  bar.setAttribute("aria-hidden", "true");
+
+  pill.append(chip, text, bar);
+  overlay.append(pill);
+  document.body.appendChild(overlay);
+
+  window.setTimeout(() => {
+    overlay.remove();
+  }, OVERLAY_LIFETIME_MS);
+}
+
 export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
   const helperId = useId();
   const panelRef = useRef<HTMLDivElement | null>(null);
   const [open, setOpen] = useState(false);
-  const [isPending, startTransition] = useTransition();
-  const [targetLocale, setTargetLocale] = useState<AppLocale | null>(null);
 
   const t = useTranslations("languageSwitcher");
   const locale = useLocale() as AppLocale;
@@ -70,24 +110,21 @@ export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
       return;
     }
 
-    setTargetLocale(next);
-    startTransition(() => {
-      router.replace(pathname, { locale: next });
+    spawnLocaleOverlay({
+      label: t("switchingTo", { name: t(localeLabelKey[next]) }),
+      shortCode: shortCode[next],
     });
-  };
 
-  const overlayActive = isPending && targetLocale !== null;
-  const targetName = targetLocale ? t(localeLabelKey[targetLocale]) : "";
+    router.replace(pathname, { locale: next });
+  };
 
   return (
     <div ref={panelRef} className="relative">
       <button
         type="button"
         onClick={() => setOpen((value) => !value)}
-        disabled={isPending}
         className={cn(
           "inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1.5 text-xs font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-2 focus-visible:ring-offset-navy",
-          isPending && "opacity-80",
           className,
         )}
         title={t("label")}
@@ -96,7 +133,7 @@ export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
         aria-expanded={open}
         aria-haspopup="dialog"
       >
-        <Globe className={cn("h-3.5 w-3.5", isPending && "animate-spin")} />
+        <Globe className="h-3.5 w-3.5" />
         <span aria-hidden="true" className="text-[11px] font-bold">
           {shortCode[locale]}
         </span>
@@ -155,69 +192,6 @@ export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
           </motion.div>
         ) : null}
       </AnimatePresence>
-
-      {typeof document !== "undefined"
-        ? createPortal(
-            <AnimatePresence>
-              {overlayActive ? (
-                <LocaleSwitchOverlay
-                  key="locale-overlay"
-                  label={t("switchingTo", { name: targetName })}
-                  shortCode={shortCode[targetLocale!]}
-                />
-              ) : null}
-            </AnimatePresence>,
-            document.body,
-          )
-        : null}
     </div>
-  );
-}
-
-type LocaleSwitchOverlayProps = {
-  label: string;
-  shortCode: string;
-};
-
-function LocaleSwitchOverlay({ label, shortCode }: LocaleSwitchOverlayProps) {
-  return (
-    <motion.div
-      aria-live="polite"
-      role="status"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-      className="pointer-events-none fixed inset-0 z-[70] flex items-start justify-center px-4 pt-24 sm:pt-28"
-      style={{
-        background:
-          "radial-gradient(circle at top, rgba(0,32,92,0.28) 0%, rgba(0,32,92,0) 55%)",
-      }}
-    >
-      <motion.div
-        initial={{ y: -24, opacity: 0, scale: 0.92 }}
-        animate={{ y: 0, opacity: 1, scale: 1 }}
-        exit={{ y: -16, opacity: 0, scale: 0.96 }}
-        transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
-        className="flex items-center gap-3 rounded-full border border-white/18 bg-navy/96 px-5 py-3 text-sm font-semibold text-white shadow-[0_24px_60px_-24px_rgba(0,32,92,0.85)] backdrop-blur-xl"
-      >
-        <motion.span
-          initial={{ scale: 0.7, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.28, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
-          className="flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-br from-blue to-red text-[10px] font-extrabold tracking-[0.08em] text-white"
-        >
-          {shortCode}
-        </motion.span>
-        <span>{label}</span>
-        <motion.span
-          aria-hidden="true"
-          initial={{ scaleX: 0 }}
-          animate={{ scaleX: 1 }}
-          transition={{ duration: 0.5, ease: "easeInOut" }}
-          className="h-[2px] w-12 origin-left rounded-full bg-gradient-to-r from-blue via-white to-red"
-        />
-      </motion.div>
-    </motion.div>
   );
 }
