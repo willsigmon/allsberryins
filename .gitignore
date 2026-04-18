@@ -22,6 +22,7 @@
 /.next/
 /.next-check-*/
 /.next-build/
+/.next-verify/
 /.next*_stale_*
 /.next-build_prev_*/
 /.app-build/
