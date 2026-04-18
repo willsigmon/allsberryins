@@ -122,7 +122,7 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
       />
 
       <div className="relative mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8 lg:pb-14">
-        <h1 className="font-display text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl">
+        <h1 className="max-w-5xl text-balance font-display text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl">
           {t("tagline")}{" "}
           <span
             key={currentWord}

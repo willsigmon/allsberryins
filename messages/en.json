@@ -640,6 +640,7 @@
     "englishLabel": "English",
     "englishHelper": "Site in English.",
     "spanishLabel": "Español",
-    "spanishHelper": "Sitio en español."
+    "spanishHelper": "Sitio en español.",
+    "switchingTo": "Switching to {name}"
   }
 }
