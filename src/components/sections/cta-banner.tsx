@@ -1,10 +1,13 @@
 "use client";
 
-import Link from "next/link";
+import { useTranslations } from "next-intl";
 
+import { Link } from "@/i18n/navigation";
 import { haptic } from "@/lib/haptics";
 
 export function CtaBanner() {
+  const t = useTranslations("home.ctaBanner");
+
   return (
     <section className="relative overflow-hidden bg-[linear-gradient(135deg,#00205c_0%,#0a3578_30%,#00448f_54%,#0066b3_100%)] py-20 text-white">
       <svg
@@ -23,19 +26,19 @@ export function CtaBanner() {
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="gradient-border parallax-card rounded-[2.5rem] bg-white/6 px-6 py-12 backdrop-blur-md sm:px-10 lg:flex lg:items-center lg:justify-between">
           <div className="max-w-2xl">
-            <p className="text-sm font-semibold uppercase tracking-[0.28em] text-white/70">Free quote</p>
+            <p className="text-sm font-semibold uppercase tracking-[0.28em] text-white/70">{t("eyebrow")}</p>
             <h2 className="mt-4 font-display text-3xl font-extrabold tracking-tight sm:text-4xl">
-              Ready to Get Started?
+              {t("title")}
             </h2>
             <p className="mt-4 text-lg leading-8 text-white/78">
-              Get a free quote today and see what options are available for you.
+              {t("description")}
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <span className="glass-btn-dark rounded-full px-4 py-2 text-sm font-semibold text-white/88">
-                Home • Auto • Life • Business
+                {t("coverageLines")}
               </span>
               <span className="glass-btn-dark rounded-full px-4 py-2 text-sm font-semibold text-white/88">
-                Southern California
+                {t("region")}
               </span>
             </div>
           </div>
@@ -45,7 +48,7 @@ export function CtaBanner() {
               className="cta-glow inline-flex items-center justify-center rounded-full bg-red px-7 py-4 text-base font-bold text-white transition hover:bg-red-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-red"
               onClick={() => { haptic("nudge"); }}
             >
-              Get Your Free Quote
+              {t("cta")}
             </Link>
           </div>
         </div>

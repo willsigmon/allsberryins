@@ -1,10 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 
 import { SectionHeading } from "@/components/ui/section-heading";
+import { Link } from "@/i18n/navigation";
 import { carrierAccessStat, carrierPartners } from "@/lib/site-data";
 import { slugify } from "@/lib/utils";
 
@@ -18,6 +19,7 @@ function MarqueeRow({
   carriers: typeof carrierPartners;
   reverse?: boolean;
 }) {
+  const t = useTranslations("home.carrierLogos");
   const doubled = [...carriers, ...carriers];
   return (
     <div className="flex overflow-hidden py-3">
@@ -30,14 +32,15 @@ function MarqueeRow({
         {doubled.map((carrier, index) => (
           <Link
             key={`${carrier.name}-${index}`}
-            href={`/carriers/${slugify(carrier.name)}`}
-            aria-label={`${carrier.name} insurance — learn more`}
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            href={`/carriers/${slugify(carrier.name)}` as any}
+            aria-label={t("carrierLearnMore", { carrier: carrier.name })}
             className="card-elevated flex h-[5.25rem] shrink-0 items-center gap-3 rounded-2xl border border-gray-100 px-5 py-3.5 transition-all hover:border-blue/30 hover:scale-[1.03] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue"
           >
             <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-gray-200 bg-[rgba(255,255,255,0.96)] p-2 shadow-sm">
               <Image
                 src={carrier.logoSrc}
-                alt={`${carrier.name} logo`}
+                alt={t("carrierLogoAlt", { carrier: carrier.name })}
                 width={44}
                 height={44}
                 className="h-full w-full object-contain"
@@ -54,13 +57,15 @@ function MarqueeRow({
 }
 
 export function CarrierLogosSection() {
+  const t = useTranslations("home.carrierLogos");
+
   return (
     <section className="grain-overlay overflow-hidden bg-white py-20 sm:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          eyebrow="Carrier access"
-          title="A Sample of the Markets We Can Shop"
-          description={`These logos show a representative sample of the carrier access available through the agency. The full market access goes well beyond the ${carrierAccessStat}+ options shown in the trust bar.`}
+          eyebrow={t("eyebrow")}
+          title={t("title")}
+          description={t("description", { count: carrierAccessStat })}
           align="center"
         />
       </div>
@@ -81,7 +86,7 @@ export function CarrierLogosSection() {
           href="/carriers"
           className="inline-flex items-center justify-center rounded-full border border-navy/20 px-5 py-2.5 text-sm font-semibold text-navy transition hover:border-navy/40"
         >
-          See every carrier partner →
+          {t("seeAllCta")} →
         </Link>
       </div>
     </section>

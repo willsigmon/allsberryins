@@ -93,76 +93,92 @@
       "label": "Reseñas de 5 estrellas"
     },
     "trustBar": {
-      "heading": "La confianza de miles de familias y negocios del Sur de California.",
-      "subheading": "Cuidando a nuestros vecinos desde 1994."
+      "yearsUnit": "Años",
+      "yearsLabel": "Sirviendo al Sur de California",
+      "householdsUnit": "Familias y Negocios",
+      "householdsLabel": "Protegidos en SoCal",
+      "carriersUnit": "Aseguradoras",
+      "carriersLabel": "Mercados que podemos comparar"
     },
     "valueProps": {
-      "eyebrow": "Por qué Allsberry",
-      "heading": "Pensado en las personas, no en el papeleo",
-      "items": {
-        "seamless": {
-          "title": "Experiencia Sin Complicaciones",
-          "description": "Le guiamos paso a paso, damos seguimiento rápido y hacemos que obtener cobertura sea sencillo."
-        },
-        "personalized": {
-          "title": "Cobertura Personalizada",
-          "description": "Construimos un plan a la medida de su vida — su casa, su auto, su negocio y su futuro."
-        },
-        "expert": {
-          "title": "Consejo Experto",
-          "description": "Nuestro equipo le da respuestas claras para que elija el plan correcto."
-        },
-        "topRated": {
-          "title": "Mejor Soporte",
-          "description": "Estamos con usted antes, durante y después de un reclamo. No tendrá que enfrentarlo solo."
-        }
-      }
+      "eyebrow": "Por qué nos eligen",
+      "title": "Asesoría de seguros clara, personal y sin estrés",
+      "cta": "Obtener Cotización"
     },
     "faq": {
-      "eyebrow": "Preguntas Frecuentes",
-      "heading": "Lo que nos preguntan todas las semanas",
-      "description": "Respuestas claras a lo que más nos preguntan las familias y dueños de negocio del Sur de California."
+      "eyebrow": "Preguntas frecuentes",
+      "title": "Respuestas claras sobre cotizaciones, cobertura y comprobantes",
+      "description": "Esta sección está escrita a partir de preguntas reales de clientes, lo que también ayuda a que buscadores y asistentes de IA entiendan mejor el sitio.",
+      "fastPathEyebrow": "¿La ruta rápida?",
+      "fastPathHeading": "Empiece con la solicitud correcta.",
+      "fastPathBody": "Use la ruta de cotización si busca cobertura. Use la ruta de comprobante si su banco, prestamista o socio necesita documentación.",
+      "startQuoteCta": "Comenzar cotización",
+      "requestProofCta": "Solicitar comprobante de seguro"
     },
     "productGrid": {
-      "personalEyebrow": "Seguro Personal",
-      "personalHeading": "Cobertura para su vida",
-      "personalDescription": "Desde su casa y auto hasta el futuro de su familia, armamos un plan que realmente le quede.",
-      "commercialEyebrow": "Seguro Comercial",
-      "commercialHeading": "Cobertura para su negocio",
-      "commercialDescription": "La combinación correcta de protección para que un mal día no derribe lo que tanto ha construido.",
-      "getQuoteLabel": "Cotizar {product}"
+      "eyebrow": "Líneas de cobertura",
+      "title": "Comparemos el Mercado",
+      "description": "Trabajamos con más de 200 aseguradoras, así siempre hay una solución para su cobertura y presupuesto.",
+      "personalTitle": "Seguro Personal",
+      "personalDescription": "Cobertura para su casa, su auto y las personas que más le importan.",
+      "commercialTitle": "Seguro Comercial",
+      "commercialDescription": "Cobertura diseñada para lo que realmente implica manejar un negocio.",
+      "startQuote": "Comenzar cotización"
     },
     "expertGuides": {
-      "eyebrow": "Guías Expertas",
-      "heading": "Información de seguros en lenguaje sencillo"
+      "eyebrow": "Guías expertas",
+      "title": "Respuestas claras a preguntas de seguros en California",
+      "description": "Estamos construyendo el sitio alrededor de información clara y de primera mano, en vez de llenar la página de palabras clave. Empiece por la pregunta que realmente necesita responder.",
+      "browseAll": "Ver todos los recursos"
     },
     "coverageEvaluation": {
-      "eyebrow": "Revisión Gratuita de Cobertura",
-      "heading": "¿Su póliza actual sigue al ritmo de su vida?",
-      "description": "Los precios de casas, los vehículos, la familia y el negocio cambian. Una revisión de 15 minutos puede detectar vacíos antes de que lo haga un reclamo.",
-      "ctaPrimary": "Solicitar revisión gratuita",
-      "ctaSecondary": "Llámenos directamente"
+      "badge": "Evaluación gratuita",
+      "heading": "¿Le preocupan vacíos en su cobertura?",
+      "body": "Revisamos su seguro actual sin costo — personal o de negocio. Envíenos su póliza y buscamos vacíos, duplicados y formas de ahorrar. Sin compromiso.",
+      "emailSubject": "Evaluación Gratuita de Cobertura",
+      "emailBody": "Hola Brahm,\n\nMe gustaría una evaluación gratuita de mi póliza actual. La adjunto aquí.\n\n¡Gracias!",
+      "emailCta": "Envíenos su Póliza",
+      "scheduleCta": "Agendar Revisión"
     },
     "carrierLogos": {
-      "heading": "Acceso a más de {count} aseguradoras de confianza",
-      "description": "Nosotros comparamos el mercado por usted. Una revisión, muchas opciones."
+      "eyebrow": "Acceso a aseguradoras",
+      "title": "Una Muestra de los Mercados Que Podemos Comparar",
+      "description": "Estos logotipos son una muestra del acceso que la agencia tiene a aseguradoras. El acceso total va mucho más allá de las {count}+ opciones que aparecen en la barra de confianza.",
+      "carrierLogoAlt": "Logotipo de {carrier}",
+      "carrierLearnMore": "Seguros {carrier} — más información",
+      "seeAllCta": "Ver todas las aseguradoras"
     },
     "team": {
-      "eyebrow": "Nuestro Equipo",
-      "heading": "Agentes licenciados a los que sí puede llamar",
-      "description": "Conozca a los agentes y al personal que manejan su cobertura de principio a fin.",
+      "eyebrow": "Conozca a nuestro equipo",
+      "title": "Agentes Locales Que Conocen Su Cobertura",
       "seHablaEspanol": "Se habla Español",
-      "bilingualTeam": "Equipo Bilingüe",
-      "viewFullBio": "Ver biografía completa",
+      "emailAgent": "Escribir a {name}",
       "meetAgent": "Conozca a {name}",
-      "phoneLabel": "Teléfono",
-      "emailLabel": "Correo"
+      "emailShort": "Correo",
+      "learnMore": "Ver más",
+      "fellowLabel": "Allsberry Fellow",
+      "fellowDefinitionIntro": "¿Qué es un Allsberry Fellow?",
+      "fellowDefinition": "Un honor especial para miembros retirados del equipo que hicieron una diferencia real para nuestros clientes, nuestra agencia y nuestra comunidad. Aunque ya no trabajen en el día a día, un Fellow sigue siendo una voz respetada dentro de la organización.",
+      "officeMomQuote": "\"The Office Mom\" — 26 años de bondad, sabiduría y corazón."
     },
     "ctaBanner": {
-      "heading": "Encontremos la cobertura que realmente le sirva.",
-      "description": "Díganos qué necesita. Un agente licenciado le responderá en un día hábil.",
-      "ctaPrimary": "Comenzar cotización",
-      "ctaSecondary": "Llamar al {phone}"
+      "eyebrow": "Cotización gratis",
+      "title": "¿Listo para empezar?",
+      "description": "Obtenga una cotización gratuita hoy y vea las opciones disponibles para usted.",
+      "coverageLines": "Casa • Auto • Vida • Negocio",
+      "region": "Sur de California",
+      "cta": "Cotización Gratis"
+    },
+    "reviewsSection": {
+      "eyebrow": "Testimonios",
+      "title": "Lo Que Dicen Nuestros Clientes",
+      "description": "Comentarios reales de clientes reales en todo el Sur de California.",
+      "clientConfidence": "Confianza de los clientes",
+      "trustedLocalGuidance": "Asesoría local confiable",
+      "fastFollowUp": "Seguimiento rápido",
+      "claimsGuidance": "Guía en reclamos",
+      "allsberryClient": "Cliente de Allsberry",
+      "seeMoreCta": "Ver más reseñas"
     }
   },
   "about": {
@@ -487,6 +503,87 @@
       "name": "Cliente de seguro de auto",
       "body": "Fue la primera vez que sentí que alguien realmente revisó mi póliza de auto en lugar de solo renovarla. El consejo fue práctico y terminé con mejor cobertura por menos dinero."
     }
+  },
+  "heroHelp": {
+    "home": {
+      "headline": "Díganos en qué punto está del proceso de su casa.",
+      "description": "¿Comprando casa? ¿Refinanciando? ¿Necesita documentación para su prestamista? Elija la ruta que mejor le sirva.",
+      "reason1": "Comprando o refinanciando una casa",
+      "reason2": "Combinar casa + auto",
+      "reason3": "Comprobante para su banco o cierre"
+    },
+    "auto": {
+      "headline": "Elija la ruta de auto que coincida con su situación.",
+      "description": "La mayoría busca una de tres cosas en su seguro de auto: mejor precio, ayuda para agregar o quitar un conductor, o comprobante rápido de cobertura.",
+      "reason1": "Vehículo nuevo o de reemplazo",
+      "reason2": "Conductores jóvenes o familiares",
+      "reason3": "Tarjetas de seguro o comprobante"
+    },
+    "renters": {
+      "headline": "El seguro de inquilino debe ser rápido, asequible y sencillo.",
+      "description": "La mayoría de inquilinos está mudándose, combinando con seguro de auto o necesitando comprobante para su arrendador.",
+      "reason1": "Mudanza a un apartamento",
+      "reason2": "Combinar con auto",
+      "reason3": "Comprobante para el arrendador"
+    },
+    "life": {
+      "headline": "El seguro de vida empieza por quién quiere proteger.",
+      "description": "Su privacidad es primero. Solo vemos lo necesario para ayudarle — nunca todos sus datos personales. El proceso es rápido y sencillo.",
+      "reason1": "Familia creciendo",
+      "reason2": "Reemplazar ingresos perdidos",
+      "reason3": "Revisar un plan que ya tiene"
+    },
+    "umbrella": {
+      "headline": "El seguro sombrilla protege los vacíos que muchos pasan por alto.",
+      "description": "El seguro sombrilla agrega protección extra sobre su seguro de casa y auto. Ayuda a cubrir costos grandes que sus otros seguros quizá no cubran por completo.",
+      "reason1": "Protección extra sobre sus otros planes",
+      "reason2": "Casas, propiedades rentadas u otros bienes",
+      "reason3": "Asegurar que todos sus planes trabajen juntos"
+    },
+    "business": {
+      "headline": "Empezamos por la situación del negocio, no solo el nombre de la póliza.",
+      "description": "El seguro comercial es más fácil cuando empezamos por cómo trabaja su empresa, no por una lista de nombres de pólizas.",
+      "reason1": "Negocio nuevo o renovación",
+      "reason2": "Comprobante para otras empresas con las que trabaja",
+      "reason3": "Cambios en personal, vehículos o propiedad"
+    }
+  },
+  "heroSection": {
+    "tagline": "Nos especializamos en seguros de",
+    "word1": "Casa",
+    "word2": "Auto",
+    "word3": "Vida",
+    "word4": "Negocio",
+    "word5": "Usted",
+    "insuranceSuffix": "",
+    "guidanceSubtitle": "Díganos lo que necesita y le guiamos a la cobertura correcta.",
+    "submitZipPrompt": "Ingrese su código postal para empezar.",
+    "zipPlaceholder": "Código postal",
+    "bundleTitle": "Combine y ahorre",
+    "bundleBody": "Muchos clientes ahorran al combinar casa, auto y otras coberturas en un solo plan. Le mostramos sus opciones.",
+    "needProofTitle": "¿Necesita comprobante?",
+    "needProofBody": "Si su banco, arrendador o socio comercial necesita documentación del seguro, omita la cotización y solicítela aquí.",
+    "startProofRequest": "Solicitar comprobante",
+    "startQuote": "Comenzar Cotización",
+    "reviewCount": "5,000+",
+    "erinTitle": "Dueña y Agente Principal",
+    "locationBadge": "Sur de California",
+    "farmersLabel": "Farmers Insurance",
+    "meetErin": "Conozca a Erin",
+    "contactLabel": "Contacto"
+  },
+  "reviewRequest": {
+    "inlineHeading": "¿Le gustó nuestro servicio?",
+    "inlineBody": "Una reseña rápida en Google ayuda a que otras familias del Sur de California nos encuentren. Toma menos de un minuto y significa mucho para el equipo.",
+    "postSubmitHeading": "Ayude a un vecino a encontrarnos.",
+    "postSubmitBody": "Mientras le respondemos, ¿le importaría compartir una reseña rápida? Ayuda a que otras familias de Corona encuentren una agencia local real.",
+    "cta": "Dejar reseña en Google",
+    "aria": "Dejar reseña en Google"
+  },
+  "pageFaq": {
+    "defaultEyebrow": "Preguntas frecuentes",
+    "fastPathEyebrow": "¿La ruta rápida?",
+    "fastPathHeading": "Empiece con el siguiente paso correcto."
   },
   "languageSwitcher": {
     "label": "Elegir idioma",

@@ -2,13 +2,15 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import Link from "next/link";
 import { ArrowRight, ChevronDown } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import { SectionHeading } from "@/components/ui/section-heading";
+import { Link } from "@/i18n/navigation";
 import { press } from "@/lib/haptics";
-import { homePageFaqs } from "@/lib/site-data";
 import { cn } from "@/lib/utils";
+
+const faqKeys = ["q1", "q2", "q3", "q4", "q5"] as const;
 
 function FaqItem({ faq, index }: { faq: { question: string; answer: string }; index: number }) {
   const [open, setOpen] = useState(false);
@@ -50,46 +52,53 @@ function FaqItem({ faq, index }: { faq: { question: string; answer: string }; in
 }
 
 export function FaqSection() {
+  const tSection = useTranslations("home.faq");
+  const tFaqs = useTranslations("homeFaqs");
+  const faqs = faqKeys.map((key) => ({
+    question: tFaqs(`${key}.question`),
+    answer: tFaqs(`${key}.answer`),
+  }));
+
   return (
     <section className="grain-overlay relative overflow-hidden bg-[linear-gradient(180deg,var(--gray-50)_0%,var(--white)_40%,var(--gray-50)_100%)] py-20 sm:py-24" id="faq">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          eyebrow="Frequently asked"
-          title="Straight answers for quotes, coverage, and proof requests"
-          description="This section is written for real client questions, which also makes the site easier for search engines and AI answer engines to understand."
+          eyebrow={tSection("eyebrow")}
+          title={tSection("title")}
+          description={tSection("description")}
           align="center"
         />
 
         <div className="mt-12 grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
           <div className="grid gap-4">
-            {homePageFaqs.map((faq, index) => (
+            {faqs.map((faq, index) => (
               <FaqItem key={faq.question} faq={faq} index={index} />
             ))}
           </div>
 
           <div className="gradient-border rounded-[2rem] border border-blue/10 bg-white/50 p-8 backdrop-blur-xl shadow-[0_12px_40px_-16px_rgba(0,32,92,0.12)]">
             <p className="text-sm font-semibold uppercase tracking-[0.22em] text-blue">
-              Need the fast path?
+              {tSection("fastPathEyebrow")}
             </p>
             <h3 className="mt-4 font-display text-3xl font-extrabold text-gray-900">
-              Start with the right request.
+              {tSection("fastPathHeading")}
             </h3>
             <p className="mt-4 text-base leading-8 text-gray-600">
-              Use the quote flow if you are looking for coverage. Use the proof request flow if your bank, lender, or a business partner needs paperwork.
+              {tSection("fastPathBody")}
             </p>
             <div className="mt-8 grid gap-3">
               <Link
                 href="/quote?product=business"
                 className="glass-btn inline-flex items-center justify-between rounded-2xl px-5 py-4 text-sm font-bold text-gray-900"
               >
-                Start a quote
+                {tSection("startQuoteCta")}
                 <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
                 href="/evidence-of-insurance"
                 className="glass-btn inline-flex items-center justify-between rounded-2xl px-5 py-4 text-sm font-bold text-gray-900"
               >
-                Request proof of insurance
+                {tSection("requestProofCta")}
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </div>

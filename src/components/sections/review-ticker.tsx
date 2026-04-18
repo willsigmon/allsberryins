@@ -1,12 +1,18 @@
 "use client";
 
 import { Star } from "lucide-react";
+import { useTranslations } from "next-intl";
 
-import { reviews } from "@/lib/site-data";
-
-const tickerReviews = [...reviews, ...reviews];
+const reviewKeys = ["classicCars", "homeowner", "restaurant", "auto"] as const;
 
 export function ReviewTicker() {
+  const t = useTranslations("reviews");
+  const reviews = reviewKeys.map((key) => ({
+    name: t(`${key}.name`),
+    body: t(`${key}.body`),
+  }));
+  const tickerReviews = [...reviews, ...reviews];
+
   return (
     <section className="glass-tinted overflow-hidden border-y border-blue/8 py-6">
       <div className="relative">

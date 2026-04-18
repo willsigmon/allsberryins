@@ -93,76 +93,92 @@
       "label": "5-star reviews"
     },
     "trustBar": {
-      "heading": "Trusted by thousands of Southern California families and businesses.",
-      "subheading": "Helping our neighbors cover what matters most since 1994."
+      "yearsUnit": "Years",
+      "yearsLabel": "Serving Southern California",
+      "householdsUnit": "Households & Businesses",
+      "householdsLabel": "Protected across SoCal",
+      "carriersUnit": "Carriers",
+      "carriersLabel": "Markets we can shop"
     },
     "valueProps": {
-      "eyebrow": "Why Allsberry",
-      "heading": "Built around people, not paperwork",
-      "items": {
-        "seamless": {
-          "title": "Seamless Experience",
-          "description": "We walk you through every step, follow up fast, and make getting covered simple."
-        },
-        "personalized": {
-          "title": "Personalized Coverage",
-          "description": "We build a plan around your life — your home, your car, your business, and your future."
-        },
-        "expert": {
-          "title": "Expert Advice",
-          "description": "Our team gives you straight answers so you can pick the right plan."
-        },
-        "topRated": {
-          "title": "Top-Rated Support",
-          "description": "We're here before, during, and after you file a claim. You won't have to figure things out alone."
-        }
-      }
+      "eyebrow": "Why clients choose us",
+      "title": "Insurance guidance that feels clear, personal, and low-stress",
+      "cta": "Get a Quote"
     },
     "faq": {
-      "eyebrow": "Frequently Asked",
-      "heading": "Questions we hear every week",
-      "description": "Plain-language answers to what Southern California families and business owners ask us most often."
+      "eyebrow": "Frequently asked",
+      "title": "Straight answers for quotes, coverage, and proof requests",
+      "description": "This section is written for real client questions, which also makes the site easier for search engines and AI answer engines to understand.",
+      "fastPathEyebrow": "Need the fast path?",
+      "fastPathHeading": "Start with the right request.",
+      "fastPathBody": "Use the quote flow if you are looking for coverage. Use the proof request flow if your bank, lender, or a business partner needs paperwork.",
+      "startQuoteCta": "Start a quote",
+      "requestProofCta": "Request proof of insurance"
     },
     "productGrid": {
-      "personalEyebrow": "Personal Insurance",
-      "personalHeading": "Coverage for your life",
-      "personalDescription": "From your home and car to your family's future, we'll build a plan that actually fits.",
-      "commercialEyebrow": "Commercial Insurance",
-      "commercialHeading": "Coverage for your business",
-      "commercialDescription": "The right mix of protection so one bad day doesn't take down everything you've built.",
-      "getQuoteLabel": "Get {product} quote"
+      "eyebrow": "Coverage lines",
+      "title": "Let's Shop It Out",
+      "description": "We work with more than 200 carriers, so there's always a solution for your coverage and affordability needs.",
+      "personalTitle": "Personal Insurance",
+      "personalDescription": "Coverage for your home, your car, and the people who matter most.",
+      "commercialTitle": "Commercial Insurance",
+      "commercialDescription": "Coverage built for the realities of running a business.",
+      "startQuote": "Start quote"
     },
     "expertGuides": {
-      "eyebrow": "Expert Guides",
-      "heading": "Plain-language insurance reading"
+      "eyebrow": "Expert guides",
+      "title": "Search-friendly answers for California insurance questions",
+      "description": "We are building the site around clear, first-party guidance instead of stuffing keywords into the homepage. Start with the question you actually need answered.",
+      "browseAll": "Browse all resources"
     },
     "coverageEvaluation": {
-      "eyebrow": "Free Coverage Review",
-      "heading": "Is your current policy keeping up with your life?",
-      "description": "Home prices, vehicles, family, and business all change. A 15-minute coverage review can catch gaps before a claim does.",
-      "ctaPrimary": "Request a free review",
-      "ctaSecondary": "Call us directly"
+      "badge": "Free evaluation",
+      "heading": "Concerned about gaps in coverage?",
+      "body": "We'll look at your current insurance for free — whether it's personal or business. Send us your policy paperwork and we'll check for gaps, overlaps, and ways to save. No commitment needed.",
+      "emailSubject": "Free Coverage Evaluation",
+      "emailBody": "Hi Brahm,\n\nI'd like a free evaluation of my current policy. I've attached it here.\n\nThank you!",
+      "emailCta": "Email Us Your Policy",
+      "scheduleCta": "Schedule a Review"
     },
     "carrierLogos": {
-      "heading": "Access to {count}+ trusted insurance carriers",
-      "description": "We shop the market so you don't have to. One review, many options."
+      "eyebrow": "Carrier access",
+      "title": "A Sample of the Markets We Can Shop",
+      "description": "These logos show a representative sample of the carrier access available through the agency. The full market access goes well beyond the {count}+ options shown in the trust bar.",
+      "carrierLogoAlt": "{carrier} logo",
+      "carrierLearnMore": "{carrier} insurance — learn more",
+      "seeAllCta": "See every carrier partner"
     },
     "team": {
-      "eyebrow": "Our Team",
-      "heading": "Licensed humans you can actually reach",
-      "description": "Meet the agents and staff who handle your coverage from quote to claim.",
+      "eyebrow": "Meet our team",
+      "title": "Local Agents Who Know Your Coverage",
       "seHablaEspanol": "Se habla Español",
-      "bilingualTeam": "Bilingual Team",
-      "viewFullBio": "View full bio",
+      "emailAgent": "Email {name}",
       "meetAgent": "Meet {name}",
-      "phoneLabel": "Phone",
-      "emailLabel": "Email"
+      "emailShort": "Email",
+      "learnMore": "Learn more",
+      "fellowLabel": "Allsberry Fellow",
+      "fellowDefinitionIntro": "What is an Allsberry Fellow?",
+      "fellowDefinition": "A special honor for retired team members who made a real difference for our clients, our agency, and our community. Though retired from day-to-day work, a Fellow remains a respected voice within our organization.",
+      "officeMomQuote": "\"The Office Mom\" — 26 years of kindness, wisdom, and heart."
     },
     "ctaBanner": {
-      "heading": "Let's find the coverage that actually fits.",
-      "description": "Tell us what you need. A licensed agent will get back to you within one business day.",
-      "ctaPrimary": "Start a quote",
-      "ctaSecondary": "Call {phone}"
+      "eyebrow": "Free quote",
+      "title": "Ready to Get Started?",
+      "description": "Get a free quote today and see what options are available for you.",
+      "coverageLines": "Home • Auto • Life • Business",
+      "region": "Southern California",
+      "cta": "Get Your Free Quote"
+    },
+    "reviewsSection": {
+      "eyebrow": "Social proof",
+      "title": "What Our Clients Say",
+      "description": "Real feedback from real clients across Southern California.",
+      "clientConfidence": "Client confidence",
+      "trustedLocalGuidance": "Trusted local guidance",
+      "fastFollowUp": "Fast follow-up",
+      "claimsGuidance": "Claims guidance",
+      "allsberryClient": "Allsberry client",
+      "seeMoreCta": "See More Reviews"
     }
   },
   "about": {
@@ -487,6 +503,87 @@
       "name": "Auto insurance client",
       "body": "First time I ever felt like someone actually looked at my auto policy instead of just renewing it. The advice was practical and I ended up with better coverage for less."
     }
+  },
+  "heroHelp": {
+    "home": {
+      "headline": "Show us where you are in the home process.",
+      "description": "Buying a home? Refinancing? Need paperwork for your lender? Pick the path that fits your situation.",
+      "reason1": "Buying or refinancing a home",
+      "reason2": "Bundle home + auto",
+      "reason3": "Proof for your bank or closing"
+    },
+    "auto": {
+      "headline": "Pick the auto path that matches your situation.",
+      "description": "Most people shopping for auto insurance want one of three things: a lower price, help adding or removing a driver, or quick proof of coverage.",
+      "reason1": "New or replacement vehicle",
+      "reason2": "Teen or family drivers",
+      "reason3": "ID cards or proof for your bank"
+    },
+    "renters": {
+      "headline": "Renters coverage should feel fast, affordable, and clean.",
+      "description": "Most renters are either moving in, combining with auto insurance, or getting proof for their landlord.",
+      "reason1": "Apartment move-in",
+      "reason2": "Bundle with auto",
+      "reason3": "Landlord proof request"
+    },
+    "life": {
+      "headline": "Life coverage starts with who you are protecting.",
+      "description": "Your privacy comes first. We only see what we need to help you — never your full personal details. The process is quick and simple.",
+      "reason1": "Growing family",
+      "reason2": "Replace lost income",
+      "reason3": "Review a plan you already have"
+    },
+    "umbrella": {
+      "headline": "Umbrella coverage is about protecting the gaps most people miss.",
+      "description": "Umbrella insurance adds extra protection on top of your home and auto plans. It helps cover big costs your other insurance might not fully handle.",
+      "reason1": "Extra protection on top of your other plans",
+      "reason2": "Homes, rentals, or more to protect",
+      "reason3": "Make sure all your plans work together"
+    },
+    "business": {
+      "headline": "Start with the business situation, not just the policy name.",
+      "description": "Business insurance is easier when we start with how your company works, not just a list of policy names.",
+      "reason1": "New business or renewal",
+      "reason2": "Proof of insurance for others you work with",
+      "reason3": "Changes to staff, vehicles, or property"
+    }
+  },
+  "heroSection": {
+    "tagline": "We Specialize in",
+    "word1": "Home",
+    "word2": "Auto",
+    "word3": "Life",
+    "word4": "Business",
+    "word5": "You",
+    "insuranceSuffix": "Insurance",
+    "guidanceSubtitle": "Tell us what you need and we'll guide you to the right coverage.",
+    "submitZipPrompt": "Submit your zip code to get started.",
+    "zipPlaceholder": "Enter ZIP code",
+    "bundleTitle": "Bundle and save",
+    "bundleBody": "Many clients save by combining home, auto, and other coverage into one plan. We'll show you the options.",
+    "needProofTitle": "Need proof instead?",
+    "needProofBody": "If your bank, landlord, or business partner needs insurance paperwork, skip the quote and request it here.",
+    "startProofRequest": "Start proof request",
+    "startQuote": "Start Quote",
+    "reviewCount": "5,000+",
+    "erinTitle": "Owner & Principal Agent",
+    "locationBadge": "Southern California",
+    "farmersLabel": "Farmers Insurance",
+    "meetErin": "Meet Erin",
+    "contactLabel": "Contact"
+  },
+  "reviewRequest": {
+    "inlineHeading": "Happy with our service?",
+    "inlineBody": "A quick Google review helps other Southern California families find us. It takes under a minute and means a lot to the team.",
+    "postSubmitHeading": "Help a neighbor find us.",
+    "postSubmitBody": "While you wait for us to reply, would you mind sharing a quick review? It helps other Corona families find a real local agency.",
+    "cta": "Leave a Google review",
+    "aria": "Leave a Google review"
+  },
+  "pageFaq": {
+    "defaultEyebrow": "Frequently asked",
+    "fastPathEyebrow": "Need the fast path?",
+    "fastPathHeading": "Start with the right next step."
   },
   "languageSwitcher": {
     "label": "Choose language",
