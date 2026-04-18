@@ -83,6 +83,7 @@ export type Agent = {
   specialties: string[];
   languages?: string[];
   license?: string;
+  calendlyUrl?: string;
   photo?: {
     src: string;
     alt: string;
@@ -531,6 +532,7 @@ export const agents: Agent[] = [
     accent: "blue",
     specialties: ["Agency Owner"],
     license: "CA #0E91043",
+    calendlyUrl: "https://calendly.com/erin-j8k/15-minute-quick-call-with-erin",
     photo: {
       src: "/media/agents/erin-allsberry-new.png",
       alt: "Erin Allsberry, Agency Owner at Allsberry Insurance Agency",
@@ -550,6 +552,7 @@ export const agents: Agent[] = [
     specialties: ["Home Insurance", "Auto Insurance", "Umbrella Insurance"],
     languages: ["English", "Spanish"],
     license: "CA #0I53723",
+    calendlyUrl: "https://calendly.com/alex-allsberryagency/quick-call",
     photo: {
       src: "/media/agents/alex.png",
       alt: "Alex Coria, Office Manager at Allsberry Insurance Agency",
@@ -593,6 +596,7 @@ export const agents: Agent[] = [
       "Financial Planning",
     ],
     license: "CA #4434320",
+    calendlyUrl: "https://calendly.com/brahm-allsberryagency/quick-call",
     photo: {
       src: "/media/agents/brahm-shank-new.png",
       alt: "Brahm Shank, Licensed Insurance Agent at Allsberry Insurance Agency",
@@ -612,6 +616,7 @@ export const agents: Agent[] = [
     specialties: ["Home Insurance", "Auto Insurance", "Umbrella Insurance"],
     languages: ["English", "Spanish"],
     license: "CA #0M05856",
+    calendlyUrl: "https://calendly.com/julie-allsberryagency/quick-call",
     photo: {
       src: "/media/agents/julie.png",
       alt: "Julie Ortiz, Licensed Insurance Agent at Allsberry Insurance Agency",
@@ -630,6 +635,7 @@ export const agents: Agent[] = [
     accent: "red",
     specialties: ["Home Insurance", "Auto Insurance", "Business Insurance"],
     license: "CA #4322549",
+    calendlyUrl: "https://calendly.com/dakota-kany/quick-call",
     photo: {
       src: "/media/agents/dakota-allsberry-new.png",
       alt: "Dakota Allsberry, Licensed Insurance Agent at Allsberry Insurance Agency",
@@ -664,6 +670,7 @@ export const agents: Agent[] = [
     initials: "AG",
     accent: "amber",
     specialties: ["Account Processing", "Customer Service"],
+    calendlyUrl: "https://calendly.com/office-allsberryagency/quick-call",
     photo: {
       src: "/media/agents/anna.png",
       alt: "Anna Gonzalez, Service Operations at Allsberry Insurance Agency",
@@ -687,6 +694,7 @@ export const agents: Agent[] = [
       "Commercial Property",
     ],
     license: "CA #0E90668",
+    calendlyUrl: "https://calendly.com/heidi-allsberryagency/quick-call",
     photo: {
       src: "/media/agents/heidi.png",
       alt: "Heidi Melzer, Business Insurance Sales Agent at Allsberry Insurance Agency",
@@ -709,6 +717,7 @@ export const agents: Agent[] = [
       "Business Accounts",
     ],
     license: "CA #0K33979",
+    calendlyUrl: "https://calendly.com/jenn-allsberryagency/quick-call",
     photo: {
       src: "/media/agents/jenn.png",
       alt: "Jennifer Van Buskirk, Business Insurance Account Manager at Allsberry Insurance Agency",

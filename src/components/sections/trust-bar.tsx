@@ -1,15 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 
 import { carrierAccessStat } from "@/lib/site-data";
-
-const stats = [
-  { end: 20, suffix: "+", unit: "Years", label: "Serving Southern California" },
-  { end: 5000, suffix: "+", unit: "Households & Businesses", label: "Protected across SoCal" },
-  { end: carrierAccessStat, suffix: "+", unit: "Carriers", label: "Markets we can shop" },
-];
 
 function CountUp({ end, duration = 3.2 }: { end: number; duration?: number }) {
   const [count, setCount] = useState(0);
@@ -38,6 +33,13 @@ function CountUp({ end, duration = 3.2 }: { end: number; duration?: number }) {
 }
 
 export function TrustBar() {
+  const t = useTranslations("home.trustBar");
+  const stats = [
+    { end: 20, suffix: "+", unit: t("yearsUnit"), label: t("yearsLabel") },
+    { end: 5000, suffix: "+", unit: t("householdsUnit"), label: t("householdsLabel") },
+    { end: carrierAccessStat, suffix: "+", unit: t("carriersUnit"), label: t("carriersLabel") },
+  ];
+
   return (
     <section className="relative overflow-hidden border-y border-black/20 bg-[linear-gradient(90deg,#001033_0%,#001a4d_20%,#00307a_50%,#001a4d_80%,#001033_100%)] py-10">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_50%,rgba(0,102,179,0.2),transparent_60%)]" />

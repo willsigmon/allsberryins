@@ -1,0 +1,645 @@
+{
+  "nav": {
+    "personal": "Personal Insurance",
+    "commercial": "Commercial Insurance",
+    "resources": "Resources",
+    "about": "About",
+    "blog": "Blog",
+    "contact": "Contact",
+    "home": "Home",
+    "agents": "Our Agents",
+    "carriers": "Carriers"
+  },
+  "cta": {
+    "getQuote": "Get a Quote",
+    "startQuote": "Start Quote",
+    "startProofRequest": "Start proof request",
+    "callNow": "Call Now",
+    "contact": "Contact",
+    "contactUs": "Contact Us",
+    "meetErin": "Meet Erin",
+    "learnMore": "Learn More",
+    "submit": "Submit",
+    "send": "Send",
+    "sending": "Sending...",
+    "back": "Back",
+    "continue": "Continue"
+  },
+  "common": {
+    "phone": "Phone",
+    "phoneLabel": "{phone}",
+    "email": "Email",
+    "emailUs": "Email us",
+    "address": "Address",
+    "hours": "Monday–Friday, 8:00 AM – 5:00 PM",
+    "hoursLabel": "Hours",
+    "callsAndTexts": "Calls & texts accepted",
+    "serviceArea": "Southern California",
+    "southernCalifornia": "Southern California",
+    "loading": "Loading…",
+    "requiredField": "Required",
+    "optionalField": "Optional",
+    "yes": "Yes",
+    "no": "No",
+    "selectOption": "Select an option",
+    "returnHome": "Return home"
+  },
+  "language": {
+    "label": "Language",
+    "english": "English",
+    "spanish": "Español",
+    "switchTo": "Switch to {language}",
+    "currentLanguage": "Current language: {language}"
+  },
+  "footer": {
+    "description": "Corona-based home, auto, life, and business insurance guidance for families and companies across Southern California.",
+    "quickLinks": "Quick Links",
+    "products": "Products",
+    "contactInfo": "Contact Info",
+    "privacy": "Privacy Policy",
+    "accessibility": "Accessibility",
+    "sslEncrypted": "SSL Encrypted",
+    "wcagAccessible": "WCAG Accessible",
+    "allRightsReserved": "All rights reserved.",
+    "copyright": "© 2026 Allsberry Insurance Agency. All rights reserved.",
+    "licenseLine": "{ownerLicense} • {agencyLicense}"
+  },
+  "header": {
+    "agencyHome": "Allsberry Insurance Agency home",
+    "logoAlt": "Allsberry Insurance Agency logo",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "displaySettings": "Display settings"
+  },
+  "home": {
+    "hero": {
+      "tagline": "We Specialize in",
+      "insuranceSuffix": "Insurance",
+      "cyclingWords": "Home,Auto,Life,Business,You",
+      "subtitle": "Tell us what you need and we'll guide you to the right coverage.",
+      "submitZipPrompt": "Submit your zip code to get started.",
+      "zipPlaceholder": "Enter ZIP code",
+      "bundleTitle": "Bundle and save",
+      "bundleBody": "Many clients save by combining home, auto, and other coverage into one plan. We'll show you the options.",
+      "needProofTitle": "Need proof instead?",
+      "needProofBody": "If your bank, landlord, or business partner needs insurance paperwork, skip the quote and request it here.",
+      "reviewCount": "5,000+",
+      "erinName": "Erin Allsberry",
+      "erinTitle": "Owner & Principal Agent",
+      "locationBadge": "Southern California",
+      "farmersCarrier": "Farmers Insurance"
+    },
+    "reviewTicker": {
+      "label": "5-star reviews"
+    },
+    "trustBar": {
+      "yearsUnit": "Years",
+      "yearsLabel": "Serving Southern California",
+      "householdsUnit": "Households & Businesses",
+      "householdsLabel": "Protected across SoCal",
+      "carriersUnit": "Carriers",
+      "carriersLabel": "Markets we can shop"
+    },
+    "valueProps": {
+      "eyebrow": "Why clients choose us",
+      "title": "Insurance guidance that feels clear, personal, and low-stress",
+      "cta": "Get a Quote"
+    },
+    "faq": {
+      "eyebrow": "Frequently asked",
+      "title": "Straight answers for quotes, coverage, and proof requests",
+      "description": "This section is written for real client questions, which also makes the site easier for search engines and AI answer engines to understand.",
+      "fastPathEyebrow": "Need the fast path?",
+      "fastPathHeading": "Start with the right request.",
+      "fastPathBody": "Use the quote flow if you are looking for coverage. Use the proof request flow if your bank, lender, or a business partner needs paperwork.",
+      "startQuoteCta": "Start a quote",
+      "requestProofCta": "Request proof of insurance"
+    },
+    "productGrid": {
+      "eyebrow": "Coverage lines",
+      "title": "Let's Shop It Out",
+      "description": "We work with more than 200 carriers, so there's always a solution for your coverage and affordability needs.",
+      "personalTitle": "Personal Insurance",
+      "personalDescription": "Coverage for your home, your car, and the people who matter most.",
+      "commercialTitle": "Commercial Insurance",
+      "commercialDescription": "Coverage built for the realities of running a business.",
+      "startQuote": "Start quote"
+    },
+    "expertGuides": {
+      "eyebrow": "Expert guides",
+      "title": "Search-friendly answers for California insurance questions",
+      "description": "We are building the site around clear, first-party guidance instead of stuffing keywords into the homepage. Start with the question you actually need answered.",
+      "browseAll": "Browse all resources"
+    },
+    "coverageEvaluation": {
+      "badge": "Free evaluation",
+      "heading": "Concerned about gaps in coverage?",
+      "body": "We'll look at your current insurance for free — whether it's personal or business. Send us your policy paperwork and we'll check for gaps, overlaps, and ways to save. No commitment needed.",
+      "emailSubject": "Free Coverage Evaluation",
+      "emailBody": "Hi Brahm,\n\nI'd like a free evaluation of my current policy. I've attached it here.\n\nThank you!",
+      "emailCta": "Email Us Your Policy",
+      "scheduleCta": "Schedule a Review"
+    },
+    "carrierLogos": {
+      "eyebrow": "Carrier access",
+      "title": "A Sample of the Markets We Can Shop",
+      "description": "These logos show a representative sample of the carrier access available through the agency. The full market access goes well beyond the {count}+ options shown in the trust bar.",
+      "carrierLogoAlt": "{carrier} logo",
+      "carrierLearnMore": "{carrier} insurance — learn more",
+      "seeAllCta": "See every carrier partner"
+    },
+    "team": {
+      "eyebrow": "Meet our team",
+      "title": "Local Agents Who Know Your Coverage",
+      "seHablaEspanol": "Se habla Español",
+      "emailAgent": "Email {name}",
+      "meetAgent": "Meet {name}",
+      "emailShort": "Email",
+      "learnMore": "Learn more",
+      "fellowLabel": "Allsberry Fellow",
+      "fellowDefinitionIntro": "What is an Allsberry Fellow?",
+      "fellowDefinition": "A special honor for retired team members who made a real difference for our clients, our agency, and our community. Though retired from day-to-day work, a Fellow remains a respected voice within our organization.",
+      "officeMomQuote": "\"The Office Mom\" — 26 years of kindness, wisdom, and heart."
+    },
+    "ctaBanner": {
+      "eyebrow": "Free quote",
+      "title": "Ready to Get Started?",
+      "description": "Get a free quote today and see what options are available for you.",
+      "coverageLines": "Home • Auto • Life • Business",
+      "region": "Southern California",
+      "cta": "Get Your Free Quote"
+    },
+    "reviewsSection": {
+      "eyebrow": "Social proof",
+      "title": "What Our Clients Say",
+      "description": "Real feedback from real clients across Southern California.",
+      "clientConfidence": "Client confidence",
+      "trustedLocalGuidance": "Trusted local guidance",
+      "fastFollowUp": "Fast follow-up",
+      "claimsGuidance": "Claims guidance",
+      "allsberryClient": "Allsberry client",
+      "seeMoreCta": "See More Reviews"
+    }
+  },
+  "about": {
+    "metaTitle": "About",
+    "metaDescription": "Meet the bilingual team at Allsberry Insurance Agency. 10 licensed agents — including Spanish-speaking staff — helping Southern California families and businesses protect what matters most.",
+    "eyebrow": "About the agency",
+    "heading": "Local guidance, clean communication, and coverage that fits real life.",
+    "intro": "Allsberry Insurance Agency has served Southern California since 1994. Erin has led the agency since 2009 with a simple belief: insurance should feel tailored, understandable, and genuinely helpful.",
+    "recognitionLabel": "Recognition",
+    "stats": {
+      "servingSinceLabel": "Serving since",
+      "hoursLabel": "Monday – Friday",
+      "hoursValue": "8 AM – 5 PM",
+      "bilingualLabel": "Se habla Español",
+      "bilingualValue": "Bilingual Team"
+    },
+    "leadership": {
+      "label": "Agency leadership",
+      "title": "Owner & Principal Agent"
+    },
+    "values": {
+      "items": {
+        "clarity": {
+          "title": "Clear options",
+          "description": "Coverage choices explained in plain language so the best fit is easy to understand."
+        },
+        "responsiveness": {
+          "title": "Tailored advice",
+          "description": "Recommendations shaped around your household, vehicles, business, and long-term goals."
+        },
+        "localExpertise": {
+          "title": "Local context",
+          "description": "An agency that knows Southern California growth, local markets, and the realities behind California insurance decisions."
+        }
+      }
+    },
+    "teamSection": {
+      "eyebrow": "Our team",
+      "title": "The people clients actually work with",
+      "description": "Insurance works best when you know who you are working with. Here are the people behind your coverage."
+    },
+    "faqs": {
+      "heading": "A few practical questions before you reach out",
+      "ctaContact": "Contact the team",
+      "ctaQuote": "Start a quote",
+      "q1": {
+        "question": "How long has Allsberry Insurance Agency served Southern California?",
+        "answer": "The agency has served the area since 1994, with Erin leading the business since 2009 and continuing the same local, personal approach."
+      },
+      "q2": {
+        "question": "What kinds of coverage do you help with?",
+        "answer": "The team helps with home, auto, renters, life, umbrella, condo, and commercial coverage, plus the proof-of-insurance requests that come with real-world policy management."
+      },
+      "q3": {
+        "question": "Who do I talk to if I want to start a quote?",
+        "answer": "You can start online or reach out directly. The team will route you to the right licensed agent based on what you need and how quickly you need help."
+      }
+    }
+  },
+  "contact": {
+    "metaTitle": "Contact",
+    "metaDescription": "Contact Allsberry Insurance Agency for home, auto, life, and business insurance guidance across Southern California. Call, email, or start your quote online.",
+    "eyebrow": "Contact",
+    "heading": "Reach the Allsberry team",
+    "subheading": "Call us, email us, or jump straight into a quote.",
+    "callUs": "Call us",
+    "email": "Email",
+    "serviceArea": "Service area",
+    "serviceAreaBody": "Serving {area} by phone, email, and online",
+    "hoursTitle": "Hours",
+    "fastHelpHeading": "Need coverage help fast?",
+    "fastHelpBody": "The quote flow is the quickest way to tell us what you need. Pick a product and a licensed agent will follow up within one business day.",
+    "startYourQuote": "Start Your Quote",
+    "requestProof": "Request Proof",
+    "callCta": "Call {phone}",
+    "connectWithUs": "Connect with us",
+    "faqs": {
+      "heading": "Contact questions we hear most often",
+      "description": "These answers make the page more useful for visitors and give search engines and AI systems clearer context about how the agency works.",
+      "ctaQuote": "Start a quote",
+      "ctaProof": "Request proof of insurance",
+      "q1": {
+        "question": "What is the fastest way to reach the Allsberry team?",
+        "answer": "Calling the office is the quickest path when something is time-sensitive. If it is not urgent, the quote or proof-of-insurance form usually gives the team the cleanest context to respond quickly."
+      },
+      "q2": {
+        "question": "How quickly will someone follow up after I reach out?",
+        "answer": "A licensed team member typically follows up within one business day, and straightforward requests are often reviewed sooner."
+      },
+      "q3": {
+        "question": "Can I use this contact page for quotes and proof requests too?",
+        "answer": "Yes. The contact page is a good starting point, but the quote flow and proof-of-insurance flow are faster when you already know what you need."
+      }
+    }
+  },
+  "quote": {
+    "metaTitle": "Get a Quote",
+    "metaDescription": "Request a quote from Allsberry Insurance Agency for home, auto, life, business, renters, condo, umbrella, and workers compensation coverage across Southern California.",
+    "eyebrow": "Get a quote",
+    "heading": "Start simple. We'll handle the details with you.",
+    "subheading": "Tell us what you need and a licensed agent will follow up with options tailored to your situation.",
+    "whatHappensNext": "What happens next",
+    "next1": "We review the products you selected.",
+    "next2": "An agent follows up within 24 hours.",
+    "next3": "We help compare coverage options and answer questions clearly.",
+    "preferredFollowUp": "Preferred follow-up: {name}",
+    "needProofIntro": "Need a certificate or proof of insurance instead of a quote? Use the dedicated",
+    "needProofLink": "proof request flow",
+    "faqs": {
+      "heading": "Quote questions we can answer before you even submit",
+      "description": "These are the real questions people ask before they start a quote, which also makes this page easier for search engines and AI answer engines to interpret.",
+      "ctaProof": "Request proof of insurance instead",
+      "ctaContact": "Talk to the team first",
+      "q1": {
+        "question": "What information should I have ready before I request a quote?",
+        "answer": "The basics help most: the type of insurance you need, your ZIP code, and any context about your home, vehicles, business, or current policy. If you are not sure, start anyway and the team can guide the next step."
+      },
+      "q2": {
+        "question": "How fast will someone follow up after I submit the quote form?",
+        "answer": "A licensed Allsberry team member follows up within one business day, and straightforward requests are often reviewed sooner."
+      },
+      "q3": {
+        "question": "Should I use this page if I only need proof or a certificate of insurance?",
+        "answer": "No. Use the dedicated proof-of-insurance request flow for COIs, escrow requests, and mortgagee updates so the team can route documentation faster."
+      }
+    }
+  },
+  "carriersPage": {
+    "metaTitle": "Our Insurance Carriers",
+    "metaDescription": "Allsberry Insurance Agency works with Farmers, Travelers, The Hartford, Progressive, Liberty Mutual, Chubb, and other A-rated carriers across Southern California.",
+    "eyebrow": "Carriers",
+    "heading": "Access to 200+ trusted carriers",
+    "subheading": "We shop the market so you don't have to. Below are some of the carriers we partner with to match you to the right coverage.",
+    "cardHeading": "Work with {carrier}",
+    "visitCarrier": "Visit {carrier}",
+    "quotingWith": "Quote with {carrier}"
+  },
+  "resources": {
+    "metaTitle": "Insurance Resources",
+    "metaDescription": "Helpful guides, FAQs, and resources from Allsberry Insurance Agency on California home, auto, business, and FAIR Plan coverage.",
+    "eyebrow": "Resources",
+    "heading": "Insurance guides and tools",
+    "subheading": "Plain-language resources to help you understand your coverage.",
+    "blogHeading": "From the blog",
+    "guidesHeading": "Coverage guides",
+    "viewAll": "View all"
+  },
+  "review": {
+    "metaTitle": "Share Your Experience",
+    "metaDescription": "Your review on Google helps other Southern California families find a real local agency. It takes under a minute.",
+    "eyebrow": "Thank you",
+    "heading": "Would you share one kind word with your neighbors?",
+    "subheading": "A quick Google review is how other Corona, Norco, Eastvale, and Riverside families find us. It takes about 30 seconds — and it means the world to the team.",
+    "ctaPrimary": "Leave a Google review",
+    "cardBody": "Takes about 30 seconds. Opens in a new tab — we'll be right here when you're done.",
+    "buttonLabel": "Write a review on Google",
+    "thankYou": "Thank you — it makes our week",
+    "privateFeedbackIntro": "Something didn't land the way it should have?",
+    "privateFeedbackLink": "Tell us privately",
+    "privateFeedbackOutro": "— a note goes straight to Erin.",
+    "callOfficeIntro": "Or call the office directly at"
+  },
+  "evidenceOfInsurance": {
+    "metaTitle": "Proof of Insurance",
+    "metaDescription": "Request evidence of insurance, a certificate of insurance, or a mortgagee update from Allsberry Insurance Agency across Southern California.",
+    "eyebrow": "Proof of insurance",
+    "heading": "Need evidence of coverage fast?",
+    "subheading": "Use this request flow for certificates of insurance, escrow or mortgage requests, and proof of coverage follow-up.",
+    "helpsUsMoveFaster": "What helps us move faster",
+    "helpBullet1": "Tell us who needs the proof.",
+    "helpBullet2": "Add a due date if escrow or underwriting is waiting on it.",
+    "helpBullet3": "Include any loan, property, or certificate notes you already have.",
+    "preferredFollowUp": "Preferred follow-up: {name}",
+    "callInstead": "Need to call instead? {phone}",
+    "faqs": {
+      "heading": "Documentation questions we can answer right here",
+      "description": "This page now matches the FAQ schema with visible answers, which is cleaner for users and safer for search engines.",
+      "workWithAgent": "Work with {name}",
+      "talkToTeam": "Talk to the team",
+      "ctaQuote": "Start a coverage quote instead",
+      "q1": {
+        "question": "Can I request proof of insurance online?",
+        "answer": "Yes. Share the basics here and the agency can follow up with the right evidence of insurance, COI details, or mortgagee update."
+      },
+      "q2": {
+        "question": "What kinds of documentation can Allsberry Insurance Agency help with?",
+        "answer": "The team can help with evidence of insurance, certificates of insurance, escrow or closing requests, and mortgagee or loss payee updates."
+      },
+      "q3": {
+        "question": "What helps the team turn around my request faster?",
+        "answer": "Include who needs the document, any due date, and any mortgagee, escrow, property, or certificate notes you already have so the request can be routed cleanly."
+      }
+    }
+  },
+  "blog": {
+    "metaTitle": "Blog",
+    "metaDescription": "Helpful insurance articles from Allsberry Insurance Agency covering home, auto, business, and life insurance topics for Southern California clients.",
+    "eyebrow": "Insights",
+    "heading": "Insurance articles and practical answers",
+    "subheading": "The blog lives in the navigation — not on the homepage — so the main experience stays clean while search-friendly content still has a home.",
+    "readArticle": "Read article",
+    "articlesInEnglishNotice": "Articles are currently published in English. If you'd prefer help in Spanish, call us and we'll walk through the details with you.",
+    "keepMovingEyebrow": "Keep moving",
+    "keepMovingHeading": "Turn reading into the next right action.",
+    "keepMovingHomeAuto": "Start a home or auto quote",
+    "keepMovingBusiness": "Review business coverage",
+    "keepMovingProof": "Request proof of insurance",
+    "categories": {
+      "tips": "Tips",
+      "guides": "Guides",
+      "news": "Agency News"
+    }
+  },
+  "agents": {
+    "listHeading": "Our agents",
+    "listSubheading": "Licensed, local, and easy to reach.",
+    "backToTeam": "Back to the team",
+    "specialtiesLabel": "Specialties",
+    "licenseLabel": "License",
+    "languagesLabel": "Languages",
+    "callAgent": "Call {name}",
+    "emailAgent": "Email {name}",
+    "saveContact": "Save contact"
+  },
+  "notFound": {
+    "heading": "Page not found",
+    "lookslikeThisPageIsntHere": "Looks like this page isn't here.",
+    "subheading": "The link might be outdated, or it may have moved. Here's where most visitors head next — or give us a call at",
+    "goHome": "Go Home",
+    "popularLinks": {
+      "quoteLabel": "Get a quote",
+      "quoteDesc": "Home, auto, business, life",
+      "teamLabel": "Meet the team",
+      "teamDesc": "Our Corona, CA agents",
+      "proofLabel": "Proof of insurance",
+      "proofDesc": "Certificates & COIs",
+      "carriersLabel": "Carrier partners",
+      "carriersDesc": "20+ carriers shopped",
+      "blogLabel": "Blog & guides",
+      "blogDesc": "Coverage insights",
+      "contactLabel": "Contact us",
+      "contactDesc": "Talk to a person"
+    }
+  },
+  "products": {
+    "home": {
+      "name": "Home Insurance",
+      "shortName": "Home",
+      "description": "Protect your home, belongings, and peace of mind with dependable coverage."
+    },
+    "auto": {
+      "name": "Auto Insurance",
+      "shortName": "Auto",
+      "description": "Protection for your car, your daily drive, and the surprises on the road."
+    },
+    "renters": {
+      "name": "Renters Insurance",
+      "shortName": "Renters",
+      "description": "Affordable protection for your stuff. It also helps pay for a place to stay if your rental can't be lived in."
+    },
+    "life": {
+      "name": "Life Insurance",
+      "shortName": "Life",
+      "description": "Helps take care of the people you love if something happens to you. Getting started is quick, safe, and private."
+    },
+    "umbrella": {
+      "name": "Umbrella Insurance",
+      "shortName": "Umbrella",
+      "description": "Extra protection that helps pay for big costs your other insurance doesn't fully cover."
+    },
+    "condo": {
+      "name": "Condo Insurance",
+      "shortName": "Condo",
+      "description": "Covers what's inside your condo. Your building's insurance protects the outside, but you need your own plan for your stuff and walls."
+    },
+    "general-liability": {
+      "name": "General Liability",
+      "shortName": "General Liability",
+      "description": "Pays for costs if a customer gets hurt at your business, something gets broken, or someone sues you."
+    },
+    "workers-comp": {
+      "name": "Workers Compensation",
+      "shortName": "Workers Comp",
+      "description": "Helps pay for medical bills and lost wages if an employee gets hurt on the job. Required by California law for most businesses."
+    },
+    "commercial-property": {
+      "name": "Commercial Property",
+      "shortName": "Commercial Property",
+      "description": "Protects your building, equipment, and the things you need to run your business every day."
+    },
+    "commercial-auto": {
+      "name": "Commercial Auto",
+      "shortName": "Commercial Auto",
+      "description": "Covers the cars and trucks your business uses, including your drivers and the things you carry."
+    },
+    "professional-liability": {
+      "name": "Professional Liability",
+      "shortName": "Professional Liability",
+      "description": "Helps pay the costs if a client says your work or advice caused them to lose money, even if it was an honest mistake."
+    },
+    "specialty-coverage": {
+      "name": "Specialty Coverage",
+      "shortName": "Specialty Coverage",
+      "description": "For things that don't fit a normal plan, like special equipment, unique businesses, or unusual properties."
+    },
+    "business": {
+      "name": "Business Insurance",
+      "shortName": "Business",
+      "description": "One package that puts together the different types of insurance your business needs."
+    },
+    "other": {
+      "name": "Other Coverage",
+      "shortName": "Other",
+      "description": "Tell us what you need and we will point you in the right direction."
+    }
+  },
+  "valueProps": {
+    "seamless": {
+      "title": "Seamless Experience",
+      "description": "We walk you through every step, follow up fast, and make getting covered simple."
+    },
+    "personalized": {
+      "title": "Personalized Coverage",
+      "description": "We build a plan around your life — your home, your car, your business, and your future."
+    },
+    "expert": {
+      "title": "Expert Advice",
+      "description": "Our team gives you straight answers so you can pick the right plan."
+    },
+    "topRated": {
+      "title": "Top-Rated Support",
+      "description": "We're here before, during, and after you file a claim. You won't have to figure things out alone."
+    }
+  },
+  "homeFaqs": {
+    "q1": {
+      "question": "What types of insurance can Allsberry Insurance Agency help me quote?",
+      "answer": "We help people in Southern California compare insurance for their home, car, rental, condo, business, employees, life, and more."
+    },
+    "q2": {
+      "question": "How fast will someone follow up after I request a quote?",
+      "answer": "A licensed team member will get back to you within one business day. If your request is simple and we have the info we need, it's often even faster."
+    },
+    "q3": {
+      "question": "Can you help with evidence of insurance or certificates of insurance?",
+      "answer": "Yes. If your bank, landlord, or another company needs proof that you have insurance, we can send them the right paperwork quickly."
+    },
+    "q4": {
+      "question": "Do I need to bundle home and auto insurance to work with the agency?",
+      "answer": "No. Combining your insurance can sometimes save money, but we're happy to help with just one type of insurance if that's all you need."
+    },
+    "q5": {
+      "question": "Is my data private and secure?",
+      "answer": "Yes. Your phone calls, texts, and emails with us are all protected. We never share your personal information without your permission. You can read more about how we protect your data through the Farmers privacy center."
+    }
+  },
+  "reviews": {
+    "classicCars": {
+      "name": "Classic car collector",
+      "body": "I am happy and confident having all my personal, family, and business insurance needs taken care of with the team here. Anytime I call with a question or a need they are happy to help and treat me like I am a top priority. Recently Erin was able to also help me in a big way — I have a few classic cars and to my surprise she was able to get my cars insured through Hagerty with great coverage."
+    },
+    "homeowner": {
+      "name": "Corona homeowner",
+      "body": "The whole team made switching our home insurance simple. They walked us through every step and found a plan that actually fit our family. No pressure, just honest advice."
+    },
+    "restaurant": {
+      "name": "Local restaurant owner",
+      "body": "Brahm handled our business coverage from day one. He was organized, answered every question, and helped us figure out what we actually needed versus what we could skip. Highly recommend."
+    },
+    "auto": {
+      "name": "Auto insurance client",
+      "body": "First time I ever felt like someone actually looked at my auto policy instead of just renewing it. The advice was practical and I ended up with better coverage for less."
+    }
+  },
+  "heroHelp": {
+    "home": {
+      "headline": "Show us where you are in the home process.",
+      "description": "Buying a home? Refinancing? Need paperwork for your lender? Pick the path that fits your situation.",
+      "reason1": "Buying or refinancing a home",
+      "reason2": "Bundle home + auto",
+      "reason3": "Proof for your bank or closing"
+    },
+    "auto": {
+      "headline": "Pick the auto path that matches your situation.",
+      "description": "Most people shopping for auto insurance want one of three things: a lower price, help adding or removing a driver, or quick proof of coverage.",
+      "reason1": "New or replacement vehicle",
+      "reason2": "Teen or family drivers",
+      "reason3": "ID cards or proof for your bank"
+    },
+    "renters": {
+      "headline": "Renters coverage should feel fast, affordable, and clean.",
+      "description": "Most renters are either moving in, combining with auto insurance, or getting proof for their landlord.",
+      "reason1": "Apartment move-in",
+      "reason2": "Bundle with auto",
+      "reason3": "Landlord proof request"
+    },
+    "life": {
+      "headline": "Life coverage starts with who you are protecting.",
+      "description": "Your privacy comes first. We only see what we need to help you — never your full personal details. The process is quick and simple.",
+      "reason1": "Growing family",
+      "reason2": "Replace lost income",
+      "reason3": "Review a plan you already have"
+    },
+    "umbrella": {
+      "headline": "Umbrella coverage is about protecting the gaps most people miss.",
+      "description": "Umbrella insurance adds extra protection on top of your home and auto plans. It helps cover big costs your other insurance might not fully handle.",
+      "reason1": "Extra protection on top of your other plans",
+      "reason2": "Homes, rentals, or more to protect",
+      "reason3": "Make sure all your plans work together"
+    },
+    "business": {
+      "headline": "Start with the business situation, not just the policy name.",
+      "description": "Business insurance is easier when we start with how your company works, not just a list of policy names.",
+      "reason1": "New business or renewal",
+      "reason2": "Proof of insurance for others you work with",
+      "reason3": "Changes to staff, vehicles, or property"
+    }
+  },
+  "heroSection": {
+    "tagline": "We Specialize in",
+    "word1": "Home",
+    "word2": "Auto",
+    "word3": "Life",
+    "word4": "Business",
+    "word5": "You",
+    "insuranceSuffix": "Insurance",
+    "guidanceSubtitle": "Tell us what you need and we'll guide you to the right coverage.",
+    "submitZipPrompt": "Submit your zip code to get started.",
+    "zipPlaceholder": "Enter ZIP code",
+    "bundleTitle": "Bundle and save",
+    "bundleBody": "Many clients save by combining home, auto, and other coverage into one plan. We'll show you the options.",
+    "needProofTitle": "Need proof instead?",
+    "needProofBody": "If your bank, landlord, or business partner needs insurance paperwork, skip the quote and request it here.",
+    "startProofRequest": "Start proof request",
+    "startQuote": "Start Quote",
+    "reviewCount": "5,000+",
+    "erinTitle": "Owner & Principal Agent",
+    "locationBadge": "Southern California",
+    "farmersLabel": "Farmers Insurance",
+    "meetErin": "Meet Erin",
+    "contactLabel": "Contact"
+  },
+  "reviewRequest": {
+    "inlineHeading": "Happy with our service?",
+    "inlineBody": "A quick Google review helps other Southern California families find us. It takes under a minute and means a lot to the team.",
+    "postSubmitHeading": "Help a neighbor find us.",
+    "postSubmitBody": "While you wait for us to reply, would you mind sharing a quick review? It helps other Corona families find a real local agency.",
+    "cta": "Leave a Google review",
+    "aria": "Leave a Google review"
+  },
+  "pageFaq": {
+    "defaultEyebrow": "Frequently asked",
+    "fastPathEyebrow": "Need the fast path?",
+    "fastPathHeading": "Start with the right next step."
+  },
+  "languageSwitcher": {
+    "label": "Choose language",
+    "sectionTitle": "Language",
+    "englishLabel": "English",
+    "englishHelper": "Site in English.",
+    "spanishLabel": "Español",
+    "spanishHelper": "Sitio en español."
+  }
+}

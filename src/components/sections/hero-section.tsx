@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
   ArrowRight,
@@ -9,16 +8,17 @@ import {
   Phone,
   ShieldCheck,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 
 import { getIcon } from "@/components/ui/icon-registry";
 import { SaveContactButton } from "@/components/ui/save-contact-button";
+import { Link } from "@/i18n/navigation";
 import {
   buildHeroProductPreferenceCookie,
   getMostUsedHeroProduct,
   heroProductPreferenceStorageKey,
 } from "@/lib/hero-product-preferences";
-import { getHeroHelpContent } from "@/lib/hero-help-content";
 import {
   agency,
   heroProductSlugs,
@@ -31,7 +31,8 @@ import { cn } from "@/lib/utils";
 import { haptic, press, tap } from "@/lib/haptics";
 
 const heroProducts = products.filter((p) => heroProductSlugs.includes(p.slug));
-const cyclingWords = ["Home", "Auto", "Life", "Business", "You"] as const;
+const cyclingWordKeys = ["word1", "word2", "word3", "word4", "word5"] as const;
+const heroHelpSlugs: ProductSlug[] = ["home", "auto", "renters", "life", "umbrella", "business"];
 
 function readHeroProductUsage() {
   if (typeof window === "undefined") {
@@ -70,6 +71,10 @@ type HeroSectionProps = {
 
 export function HeroSection({ initialProduct }: HeroSectionProps) {
   const router = useRouter();
+  const t = useTranslations("heroSection");
+  const tProducts = useTranslations("products");
+  const tHeroHelp = useTranslations("heroHelp");
+
   const [selectedProduct, setSelectedProduct] = useState<ProductSlug>(
     initialProduct ?? heroProducts[0]?.slug ?? "home",
   );
@@ -77,13 +82,20 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
   const [wordIndex, setWordIndex] = useState(0);
   useEffect(() => {
     const id = setInterval(
-      () => setWordIndex((index) => (index + 1) % cyclingWords.length),
+      () => setWordIndex((index) => (index + 1) % cyclingWordKeys.length),
       2500,
     );
     return () => clearInterval(id);
   }, []);
 
-  const selectedHelpContent = getHeroHelpContent(selectedProduct);
+  const helpSlug: ProductSlug = heroHelpSlugs.includes(selectedProduct) ? selectedProduct : "home";
+  const helpHeadline = tHeroHelp(`${helpSlug}.headline` as never);
+  const helpDescription = tHeroHelp(`${helpSlug}.description` as never);
+  const helpReasons = [
+    tHeroHelp(`${helpSlug}.reason1` as never),
+    tHeroHelp(`${helpSlug}.reason2` as never),
+    tHeroHelp(`${helpSlug}.reason3` as never),
+  ];
 
   const startQuote = () => {
     router.push(
@@ -100,6 +112,8 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
     rememberHeroProductSelection(productSlug);
   };
 
+  const currentWord = t(cyclingWordKeys[wordIndex]);
+
   return (
     <section className="grain-overlay relative overflow-hidden pt-28 sm:pt-32" style={{ backgroundImage: "var(--hero-bg)" }}>
       <div
@@ -109,24 +123,23 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
 
       <div className="relative mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8 lg:pb-14">
         <h1 className="font-display text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl">
-          We Specialize in{" "}
+          {t("tagline")}{" "}
           <span
-            key={cyclingWords[wordIndex]}
+            key={currentWord}
             className="hero-word-enter text-gradient-animated"
             style={{ WebkitTextFillColor: "transparent" }}
           >
-            {cyclingWords[wordIndex]}
-          </span>{" "}
-          Insurance
+            {currentWord}
+          </span>
+          {t("insuranceSuffix") ? <> {t("insuranceSuffix")}</> : null}
         </h1>
 
         <p className="mt-4 text-lg leading-8 text-gray-600">
-          Tell us what you need and we&apos;ll guide you to the right coverage.
+          {t("guidanceSubtitle")}
         </p>
 
         <div className="mt-6 grid gap-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
           <div>
-            {/* Headliner row: Home + Auto + Life */}
             <div className="grid grid-cols-3 gap-2">
               {heroProducts.filter((p) => p.slug === "home" || p.slug === "auto" || p.slug === "life").map((product) => {
                 const Icon = getIcon(product.icon);
@@ -145,12 +158,11 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
                     )}
                   >
                     <Icon className="h-5 w-5" />
-                    {product.shortName}
+                    {tProducts(`${product.slug}.shortName` as never)}
                   </button>
                 );
               })}
             </div>
-            {/* Secondary row: Renters, Umbrella, Business */}
             <div className="mt-2 grid grid-cols-3 gap-2">
               {heroProducts.filter((p) => p.slug !== "home" && p.slug !== "auto" && p.slug !== "life").map((product) => {
                 const Icon = getIcon(product.icon);
@@ -169,7 +181,7 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
                     )}
                   >
                     <Icon className="h-3.5 w-3.5" />
-                    <span>{product.shortName}</span>
+                    <span>{tProducts(`${product.slug}.shortName` as never)}</span>
                   </button>
                 );
               })}
@@ -177,16 +189,16 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
 
             <div className="surface-card-strong mt-5 rounded-[1.75rem] border border-gray-100 p-5 shadow-[0_16px_48px_-36px_rgba(0,32,92,0.2)]">
               <h2 className="font-display text-xl font-extrabold text-gray-900 sm:text-2xl">
-                {selectedHelpContent.headline}
+                {helpHeadline}
               </h2>
               <p className="mt-2 max-w-xl text-sm leading-6 text-gray-600">
-                {selectedHelpContent.description}
+                {helpDescription}
               </p>
               <p className="mt-2 text-sm font-bold text-gray-900">
-                Submit your zip code to get started.
+                {t("submitZipPrompt")}
               </p>
               <div className="mt-4 flex flex-wrap gap-2">
-                {selectedHelpContent.quickReasons.map((reason) => (
+                {helpReasons.map((reason) => (
                   <span
                     key={reason}
                     className="rounded-full border border-blue/10 bg-blue-light px-3 py-1.5 text-[11px] font-semibold text-blue"
@@ -204,9 +216,9 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
                     <ShieldCheck className="h-5 w-5" />
                   </div>
                   <div>
-                    <p className="text-sm font-bold text-gray-900">Bundle and save</p>
+                    <p className="text-sm font-bold text-gray-900">{t("bundleTitle")}</p>
                     <p className="mt-1 text-xs leading-5 text-gray-500">
-                      Many clients save by combining home, auto, and other coverage into one plan. We&apos;ll show you the options.
+                      {t("bundleBody")}
                     </p>
                   </div>
                 </div>
@@ -214,7 +226,7 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
                   {Array.from({ length: 5 }).map((_, i) => (
                     <svg key={i} className="h-3 w-3 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
                   ))}
-                  <span className="ml-1 whitespace-nowrap text-[10px] font-semibold text-gray-400">5,000+</span>
+                  <span className="ml-1 whitespace-nowrap text-[10px] font-semibold text-gray-400">{t("reviewCount")}</span>
                 </div>
               </div>
               <Link
@@ -227,15 +239,15 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
                     <ArrowRight className="h-4 w-4" />
                   </div>
                   <div>
-                    <p className="text-sm font-bold text-gray-900">Need proof instead?</p>
+                    <p className="text-sm font-bold text-gray-900">{t("needProofTitle")}</p>
                     <p className="mt-1 text-xs leading-5 text-gray-600">
-                      If your bank, landlord, or business partner needs insurance paperwork, skip the quote and request it here.
+                      {t("needProofBody")}
                     </p>
                   </div>
                 </div>
                 <div className="mt-3 text-center">
                   <span className="cta-glow-blue inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-semibold text-blue transition group-hover:gap-2.5">
-                    Start proof request
+                    {t("startProofRequest")}
                     <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
                   </span>
                 </div>
@@ -243,7 +255,6 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
             </div>
           </div>
 
-          {/* Right column — Erin's profile card only */}
           <div className="relative">
             <div className="ambient-glow absolute -left-8 top-8 hidden h-32 w-32 rounded-full bg-blue/14 blur-3xl sm:block" />
             <div className="ambient-glow absolute -right-8 bottom-8 hidden h-36 w-36 rounded-full bg-red/16 blur-[40px] sm:block" style={{ animationDelay: "2s" }} />
@@ -268,17 +279,16 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
                           Erin Allsberry
                         </p>
                         <p className="mt-0.5 text-xs font-medium text-white/70">
-                          Owner & Principal Agent
+                          {t("erinTitle")}
                         </p>
                       </div>
 
-                      {/* SoCal location badge */}
                       <div className="pin-drop hero-profile-glass flex items-center gap-1.5 rounded-xl border px-3 py-2 backdrop-blur-sm">
                         <div className="relative">
                           <MapPin className="h-4 w-4 fill-red text-red" />
                           <span className="pin-pulse-ring absolute -inset-1 rounded-full bg-red/20" />
                         </div>
-                        <span className="text-[11px] font-bold text-white/80">Southern California</span>
+                        <span className="text-[11px] font-bold text-white/80">{t("locationBadge")}</span>
                       </div>
                     </div>
                   </div>
@@ -318,7 +328,7 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
                         <p className="font-display text-[11px] font-bold leading-tight text-white">
                           {officialProfile.recognition[1].title}
                         </p>
-                        <p className="text-[10px] text-white/60">Farmers Insurance</p>
+                        <p className="text-[10px] text-white/60">{t("farmersLabel")}</p>
                       </div>
                     </div>
                   </div>
@@ -338,21 +348,22 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
 
                   <div className="mt-3 flex flex-wrap items-center gap-2">
                     <Link
-                      href={buildTrackedHref("/agents/erin", { agent: "erin", entry: "hero-leadership-card" })}
+                      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                      href={buildTrackedHref("/agents/erin", { agent: "erin", entry: "hero-leadership-card" }) as any}
                       onClick={() => { tap(); }}
                       className="inline-flex items-center gap-1.5 rounded-full bg-white px-3.5 py-2 text-xs font-bold text-gray-900 transition hover:bg-blue-light"
                     >
-                      Meet Erin
+                      {t("meetErin")}
                       <ArrowRight className="h-3.5 w-3.5" />
                     </Link>
-                    <Link
+                    <a
                       href={agency.phoneHref}
                       onClick={() => { tap(); }}
                       className="hero-profile-glass inline-flex items-center gap-1.5 rounded-full border px-3.5 py-2 text-xs font-bold text-white transition hover:brightness-110"
                     >
                       <Phone className="h-3.5 w-3.5" />
-                      Contact
-                    </Link>
+                      {t("contactLabel")}
+                    </a>
                     <SaveContactButton
                       name="Erin Allsberry"
                       phone={agency.phone}
@@ -365,13 +376,12 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
               </div>
             </div>
 
-            {/* ZIP Code form — under Erin's card */}
             <div className="surface-card mt-4 flex items-center gap-3 rounded-2xl border border-gray-100 p-3 shadow-[0_12px_36px_-24px_rgba(0,32,92,0.4)]">
               <input
                 value={zipCode}
                 onChange={(event) => setZipCode(event.target.value)}
                 inputMode="numeric"
-                placeholder="Enter ZIP code"
+                placeholder={t("zipPlaceholder")}
                 className="h-11 flex-1 rounded-xl border border-gray-200 px-4 text-sm text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-blue focus:ring-4 focus:ring-blue/10"
               />
               <button
@@ -379,7 +389,7 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
                 onClick={() => { haptic("nudge"); startQuote(); }}
                 className="cta-glow inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-xl bg-red px-5 text-sm font-bold text-white transition-all hover:bg-red-hover hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red focus-visible:ring-offset-2"
               >
-                Start Quote
+                {t("startQuote")}
                 <ArrowRight className="h-4 w-4" />
               </button>
             </div>

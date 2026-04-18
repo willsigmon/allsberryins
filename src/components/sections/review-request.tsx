@@ -1,30 +1,21 @@
 import { Star } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import { agency } from "@/lib/site-data";
 
 type ReviewRequestProps = {
-  /** When shown after a form submission. Defaults to generic site-wide wording. */
   variant?: "post-submit" | "inline";
 };
 
-/**
- * Prompts happy clients to leave a Google review. Links straight to the
- * Google Maps listing so the reviewer lands on the agency's profile.
- */
 export function ReviewRequest({ variant = "inline" }: ReviewRequestProps) {
-  const heading =
-    variant === "post-submit"
-      ? "Help a neighbor find us."
-      : "Happy with our service?";
-  const body =
-    variant === "post-submit"
-      ? "While you wait for us to reply, would you mind sharing a quick review? It helps other Corona families find a real local agency."
-      : "A quick Google review helps other Southern California families find us. It takes under a minute and means a lot to the team.";
+  const t = useTranslations("reviewRequest");
+  const heading = variant === "post-submit" ? t("postSubmitHeading") : t("inlineHeading");
+  const body = variant === "post-submit" ? t("postSubmitBody") : t("inlineBody");
 
   return (
     <aside
       className="rounded-3xl border border-blue/15 bg-blue-light/40 p-6 text-left shadow-[0_24px_60px_-50px_rgba(0,32,92,0.4)] sm:p-7"
-      aria-label="Leave a Google review"
+      aria-label={t("aria")}
     >
       <div className="flex items-start gap-4">
         <div className="flex shrink-0 items-center gap-0.5 rounded-full bg-white px-3 py-1.5">
@@ -45,7 +36,7 @@ export function ReviewRequest({ variant = "inline" }: ReviewRequestProps) {
             rel="noreferrer noopener"
             className="mt-4 inline-flex items-center gap-2 rounded-full bg-red px-5 py-2.5 text-sm font-bold text-white transition hover:bg-red-hover"
           >
-            Leave a Google review
+            {t("cta")}
             <span aria-hidden="true">→</span>
           </a>
         </div>

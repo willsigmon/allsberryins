@@ -1,11 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { motion } from "framer-motion";
 import { Award, Globe, Handshake, Mail } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import { SectionHeading } from "@/components/ui/section-heading";
+import { Link } from "@/i18n/navigation";
 import { press, tap } from "@/lib/haptics";
 import { agents, fellows, type Agent, type AgentAccent } from "@/lib/site-data";
 import { buildTrackedHref } from "@/lib/tracking";
@@ -26,21 +27,21 @@ const accentClasses: Record<AgentAccent, string> = {
 
 const erinAgent = agents.find((a) => a.slug === "erin");
 const leadershipSlugs = ["brahm", "dakota"] as const;
-// Brahm requested to be featured first (above Dakota)
 const leadershipAgents = agents.filter((a) => (leadershipSlugs as readonly string[]).includes(a.slug));
 const teamAgents = agents.filter((a) => a.slug !== "erin" && !(leadershipSlugs as readonly string[]).includes(a.slug));
 
 export function TeamSection() {
+  const t = useTranslations("home.team");
+
   return (
     <section className="section-muted-bg py-20 sm:py-24" id="team">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          eyebrow="Meet our team"
-          title="Local Agents Who Know Your Coverage"
+          eyebrow={t("eyebrow")}
+          title={t("title")}
           align="center"
         />
 
-        {/* Erin — Full-width Agency Owner banner */}
         {erinAgent && (
           <motion.article
             initial={{ opacity: 0, y: 28 }}
@@ -90,20 +91,21 @@ export function TeamSection() {
               </div>
 
               <div className="flex flex-wrap justify-center gap-3 lg:flex-col">
-                <Link
+                <a
                   href={`mailto:${erinAgent.email}`}
                   className="glass-btn-dark inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-bold text-white"
                   onClick={tap}
                 >
                   <Mail className="h-4 w-4" />
-                  Email Erin
-                </Link>
+                  {t("emailAgent", { name: erinAgent.firstName })}
+                </a>
                 <Link
-                  href={buildTrackedHref(`/agents/${erinAgent.slug}`, { agent: erinAgent.slug, entry: "leadership-team-card" })}
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  href={buildTrackedHref(`/agents/${erinAgent.slug}`, { agent: erinAgent.slug, entry: "leadership-team-card" }) as any}
                   className="cta-glow inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-gray-900 transition hover:bg-blue-light"
                   onClick={press}
                 >
-                  Meet Erin
+                  {t("meetAgent", { name: erinAgent.firstName })}
                   <Handshake className="h-4 w-4" />
                 </Link>
               </div>
@@ -111,20 +113,17 @@ export function TeamSection() {
           </motion.article>
         )}
 
-        {/* Leadership row */}
         <div className="mt-6 grid gap-6 lg:grid-cols-2">
           {leadershipAgents.map((agent, index) => (
             <LeadershipCard key={agent.slug} agent={agent} index={index} />
           ))}
         </div>
 
-        {/* Full team grid + Linda Fellow tribute in 4th slot */}
         <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {teamAgents.map((agent, index) => (
             <TeamMemberCard key={agent.slug} agent={agent} index={index} />
           ))}
 
-          {/* Linda — Fellow tribute card */}
           {fellows.map((fellow) => (
             <motion.div
               key={fellow.name}
@@ -155,7 +154,7 @@ export function TeamSection() {
                   <h3 className="font-display text-lg font-bold text-gray-900">{fellow.name}</h3>
                   <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-gold">
                     <Award className="mr-1 inline h-3 w-3" />
-                    Allsberry Fellow
+                    {t("fellowLabel")}
                   </p>
                 </div>
               </div>
@@ -163,11 +162,11 @@ export function TeamSection() {
                 {fellow.career}
               </p>
               <p className="mt-3 text-xs leading-5 text-gray-400">
-                <span className="font-semibold text-gold/90">What is an Allsberry Fellow?</span>{" "}
-                A special honor for retired team members who made a real difference for our clients, our agency, and our community. Though retired from day-to-day work, a Fellow remains a respected voice within our organization.
+                <span className="font-semibold text-gold/90">{t("fellowDefinitionIntro")}</span>{" "}
+                {t("fellowDefinition")}
               </p>
               <p className="mt-2 text-xs leading-5 text-gold/80 italic">
-                &ldquo;The Office Mom&rdquo; — 26 years of kindness, wisdom, and heart.
+                {t("officeMomQuote")}
               </p>
             </motion.div>
           ))}
@@ -178,6 +177,8 @@ export function TeamSection() {
 }
 
 function LeadershipCard({ agent, index }: { agent: Agent; index: number }) {
+  const t = useTranslations("home.team");
+
   return (
     <motion.article
       initial={{ opacity: 0, y: 28 }}
@@ -220,7 +221,7 @@ function LeadershipCard({ agent, index }: { agent: Agent; index: number }) {
           {agent.languages && agent.languages.length > 1 && (
             <p className="mt-2 inline-flex items-center gap-1.5 text-sm font-medium text-yellow-300">
               <Globe className="h-3.5 w-3.5" />
-              Se habla Español
+              {t("seHablaEspanol")}
             </p>
           )}
           <p className="mt-4 max-w-xl text-sm leading-7 text-white/82">
@@ -239,24 +240,25 @@ function LeadershipCard({ agent, index }: { agent: Agent; index: number }) {
           </div>
 
           <div className="mt-6 flex flex-wrap justify-center gap-3 sm:justify-start">
-            <Link
+            <a
               href={`mailto:${agent.email}`}
               className="glass-btn-dark inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-bold text-white"
-              aria-label={`Email ${agent.firstName}`}
+              aria-label={t("emailAgent", { name: agent.firstName })}
               onClick={tap}
             >
               <Mail className="h-4 w-4" />
-              Email {agent.firstName}
-            </Link>
+              {t("emailAgent", { name: agent.firstName })}
+            </a>
             <Link
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
               href={buildTrackedHref(`/agents/${agent.slug}`, {
                 agent: agent.slug,
                 entry: "leadership-team-card",
-              })}
+              }) as any}
               className="cta-glow inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-bold text-gray-900 transition hover:bg-blue-light"
               onClick={press}
             >
-              Meet {agent.firstName}
+              {t("meetAgent", { name: agent.firstName })}
               <Handshake className="h-4 w-4" />
             </Link>
           </div>
@@ -267,6 +269,8 @@ function LeadershipCard({ agent, index }: { agent: Agent; index: number }) {
 }
 
 function TeamMemberCard({ agent, index }: { agent: Agent; index: number }) {
+  const t = useTranslations("home.team");
+
   return (
     <motion.article
       initial={{ opacity: 0, y: 28 }}
@@ -306,7 +310,7 @@ function TeamMemberCard({ agent, index }: { agent: Agent; index: number }) {
           {agent.languages && agent.languages.length > 1 && (
             <p className="mt-1 inline-flex items-center gap-1 text-xs font-semibold text-amber-600">
               <Globe className="h-3 w-3" />
-              Se habla Español
+              {t("seHablaEspanol")}
             </p>
           )}
         </div>
@@ -315,35 +319,37 @@ function TeamMemberCard({ agent, index }: { agent: Agent; index: number }) {
       <p className="mt-4 flex-1 text-sm leading-7 text-gray-600">{agent.bio}</p>
 
       <Link
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         href={buildTrackedHref(`/agents/${agent.slug}`, {
           agent: agent.slug,
           entry: "team-card-learn-more",
-        })}
+        }) as any}
         className="mt-2 text-sm font-semibold text-blue transition hover:text-gray-900"
         onClick={tap}
       >
-        Learn more &rarr;
+        {t("learnMore")} &rarr;
       </Link>
 
       <div className="mt-4 flex flex-wrap gap-3">
-        <Link
+        <a
           href={`mailto:${agent.email}`}
           className="inline-flex items-center gap-1.5 rounded-full border border-gray-200 px-3 py-1.5 text-xs font-semibold text-gray-600 transition hover:border-blue hover:text-blue"
           onClick={tap}
         >
           <Mail className="h-3.5 w-3.5" />
-          Email
-        </Link>
+          {t("emailShort")}
+        </a>
         <Link
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           href={buildTrackedHref(`/agents/${agent.slug}`, {
             agent: agent.slug,
             entry: "team-card",
-          })}
+          }) as any}
           className="inline-flex items-center gap-1.5 rounded-full bg-navy px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-blue"
           onClick={press}
         >
           <Handshake className="h-3.5 w-3.5" />
-          Meet {agent.firstName}
+          {t("meetAgent", { name: agent.firstName })}
         </Link>
       </div>
     </motion.article>

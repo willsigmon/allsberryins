@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { ArrowRight, ShieldCheck } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import { haptic, press } from "@/lib/haptics";
 import { agency, getAgentBySlug } from "@/lib/site-data";
@@ -9,6 +9,11 @@ import { agency, getAgentBySlug } from "@/lib/site-data";
 const brahm = getAgentBySlug("brahm");
 
 export function CoverageEvaluationCta() {
+  const t = useTranslations("home.coverageEvaluation");
+  const mailto = `mailto:${brahm?.email ?? agency.email}?subject=${encodeURIComponent(
+    t("emailSubject"),
+  )}&body=${encodeURIComponent(t("emailBody"))}`;
+
   return (
     <section className="py-12 sm:py-16">
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
@@ -17,37 +22,35 @@ export function CoverageEvaluationCta() {
           <div className="absolute -left-16 -bottom-16 h-48 w-48 rounded-full bg-white/4 blur-3xl" />
           <div className="relative mx-auto inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold uppercase tracking-[0.2em]">
             <ShieldCheck className="h-4 w-4" />
-            Free evaluation
+            {t("badge")}
           </div>
 
           <h2 className="mt-5 font-display text-2xl font-extrabold tracking-tight sm:text-3xl">
-            Concerned about gaps in coverage?
+            {t("heading")}
           </h2>
 
           <p className="mx-auto mt-4 max-w-2xl text-base leading-8 text-white/80">
-            We&apos;ll look at your current insurance for free — whether it&apos;s
-            personal or business. Send us your policy paperwork and we&apos;ll check
-            for gaps, overlaps, and ways to save. No commitment needed.
+            {t("body")}
           </p>
 
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-            <Link
-              href={`mailto:${brahm?.email ?? agency.email}?subject=Free%20Coverage%20Evaluation&body=Hi%20Brahm%2C%0A%0AI'd%20like%20a%20free%20evaluation%20of%20my%20current%20policy.%20I've%20attached%20it%20here.%0A%0AThank%20you!`}
+            <a
+              href={mailto}
               className="cta-glow inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-bold text-gray-900 transition hover:bg-blue-light"
               onClick={() => { haptic("nudge"); }}
             >
-              Email Us Your Policy
+              {t("emailCta")}
               <ArrowRight className="h-4 w-4" />
-            </Link>
-            <Link
+            </a>
+            <a
               href={agency.calendlyUrl}
               target="_blank"
               rel="noreferrer"
               className="glass-btn-dark inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-bold text-white"
               onClick={() => { press(); }}
             >
-              Schedule a Review
-            </Link>
+              {t("scheduleCta")}
+            </a>
           </div>
         </div>
       </div>

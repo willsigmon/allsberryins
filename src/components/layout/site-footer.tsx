@@ -1,13 +1,36 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { Facebook, Instagram, Lock, Mail, MapPin, MessageSquare, Phone, ShieldCheck } from "lucide-react";
+import { useTranslations } from "next-intl";
 
+import { Link } from "@/i18n/navigation";
 import { tap } from "@/lib/haptics";
-import { agency, footerProducts, quickLinks } from "@/lib/site-data";
+import { agency } from "@/lib/site-data";
 
 export function SiteFooter() {
+  const t = useTranslations("footer");
+  const tCommon = useTranslations("common");
+  const tNav = useTranslations("nav");
+  const tCta = useTranslations("cta");
+
+  const quickLinks = [
+    { label: tCta("getQuote"), href: "/quote" as const },
+    { label: tNav("resources"), href: "/resources" as const },
+    { label: tNav("blog"), href: "/blog" as const },
+    { label: tNav("contact"), href: "/contact" as const },
+  ];
+
+  const products = [
+    { key: "home", href: "/quote?product=home" },
+    { key: "auto", href: "/quote?product=auto" },
+    { key: "business", href: "/quote?product=business" },
+    { key: "workers-comp", href: "/quote?product=workers-comp" },
+    { key: "life", href: "/quote?product=life" },
+  ];
+
+  const tProducts = useTranslations("products");
+
   return (
     <footer className="footer-mesh text-white">
       <div className="mx-auto grid max-w-7xl gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[1.2fr_0.8fr_0.8fr_1fr] lg:px-8">
@@ -23,7 +46,7 @@ export function SiteFooter() {
             <h2 className="font-display text-2xl font-extrabold tracking-tight">Allsberry Insurance Agency</h2>
           </div>
           <p className="mt-4 max-w-sm text-sm leading-7 text-white/75">
-            Corona-based home, auto, life, and business insurance guidance for families and companies across Southern California.
+            {t("description")}
           </p>
           <div className="mt-6 flex items-center gap-3">
             <SocialLink href={agency.socials.facebook} label="Facebook">
@@ -38,7 +61,7 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <FooterColumn title="Quick Links">
+        <FooterColumn title={t("quickLinks")}>
           {quickLinks.map((link) => (
             <FooterTextLink key={link.label} href={link.href}>
               {link.label}
@@ -46,19 +69,19 @@ export function SiteFooter() {
           ))}
         </FooterColumn>
 
-        <FooterColumn title="Products">
-          {footerProducts.map((link) => (
-            <FooterTextLink key={link.label} href={link.href}>
-              {link.label}
+        <FooterColumn title={t("products")}>
+          {products.map((product) => (
+            <FooterTextLink key={product.key} href={product.href}>
+              {tProducts(`${product.key}.shortName` as never)}
             </FooterTextLink>
           ))}
         </FooterColumn>
 
-        <FooterColumn title="Contact Info">
+        <FooterColumn title={t("contactInfo")}>
           <div className="space-y-4 text-sm text-white/75">
             <div className="flex gap-3">
               <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-white" />
-              <Link
+              <a
                 href="https://www.google.com/maps/search/?api=1&query=355+N+Sheridan+St+Ste+100+Corona+CA+92878"
                 target="_blank"
                 rel="noreferrer"
@@ -66,26 +89,26 @@ export function SiteFooter() {
               >
                 <p>{agency.addressLine1}</p>
                 <p>{agency.cityStateZip}</p>
-              </Link>
+              </a>
             </div>
             <div className="flex gap-3">
               <Phone className="mt-0.5 h-4 w-4 shrink-0 text-white" />
               <div>
-                <Link href={agency.phoneHref} className="transition hover:text-white">
+                <a href={agency.phoneHref} className="transition hover:text-white">
                   {agency.phone}
-                </Link>
+                </a>
                 <div className="mt-1 flex items-center gap-1.5 text-xs text-white/60">
                   <MessageSquare className="h-3 w-3" />
-                  Calls & texts accepted
+                  {tCommon("callsAndTexts")}
                 </div>
-                <p className="mt-1">{agency.hours}</p>
+                <p className="mt-1">{tCommon("hours")}</p>
               </div>
             </div>
             <div className="flex gap-3">
               <Mail className="mt-0.5 h-4 w-4 shrink-0 text-white" />
-              <Link href={agency.emailHref} className="transition hover:text-white">
-                Email us
-              </Link>
+              <a href={agency.emailHref} className="transition hover:text-white">
+                {tCommon("emailUs")}
+              </a>
             </div>
           </div>
         </FooterColumn>
@@ -94,34 +117,34 @@ export function SiteFooter() {
       <div className="border-t border-white/10" style={{ borderImage: "linear-gradient(90deg, transparent 0%, rgba(0,102,179,0.3) 25%, rgba(218,41,28,0.2) 50%, rgba(245,197,24,0.25) 75%, transparent 100%) 1" }}>
         <div className="mx-auto max-w-7xl px-4 py-5 sm:px-6 lg:px-8">
           <div className="flex flex-col gap-2 text-sm text-white/60 sm:flex-row sm:items-center sm:justify-between">
-            <p>© 2026 Allsberry Insurance Agency. All rights reserved.</p>
+            <p>{t("copyright")}</p>
             <p>{agency.ownerLicense} • {agency.agencyLicense}</p>
           </div>
           <div className="mt-3 flex flex-wrap items-center gap-4 text-xs text-white/50">
-            <Link
+            <a
               href="https://www.farmers.com/privacy-center/?Agent_Code=993005&Source_Indicator=AP"
               target="_blank"
               rel="noreferrer"
               className="transition hover:text-white"
             >
-              Privacy Policy
-            </Link>
-            <Link
+              {t("privacy")}
+            </a>
+            <a
               href="https://www.farmers.com/accessibility/"
               target="_blank"
               rel="noreferrer"
               className="transition hover:text-white"
             >
-              Accessibility
-            </Link>
+              {t("accessibility")}
+            </a>
             <span className="hidden sm:inline text-white/20">|</span>
             <span className="inline-flex items-center gap-1.5 text-white/45">
               <Lock className="h-3 w-3" />
-              SSL Encrypted
+              {t("sslEncrypted")}
             </span>
             <span className="inline-flex items-center gap-1.5 text-white/45">
               <ShieldCheck className="h-3 w-3" />
-              WCAG Accessible
+              {t("wcagAccessible")}
             </span>
           </div>
         </div>
@@ -145,8 +168,18 @@ function FooterColumn({ title, children }: FooterColumnProps) {
 }
 
 function FooterTextLink({ href, children }: { href: string; children: React.ReactNode }) {
+  // Footer uses string hrefs (internal + external) — external detection handled simply.
+  const isExternal = href.startsWith("http");
+  if (isExternal) {
+    return (
+      <a href={href} className="text-sm text-white/75 transition hover:text-white">
+        {children}
+      </a>
+    );
+  }
   return (
-    <Link href={href} className="text-sm text-white/75 transition hover:text-white">
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    <Link href={href as any} className="text-sm text-white/75 transition hover:text-white">
       {children}
     </Link>
   );
@@ -162,7 +195,7 @@ function SocialLink({
   children: React.ReactNode;
 }) {
   return (
-    <Link
+    <a
       href={href}
       target="_blank"
       rel="noreferrer"
@@ -171,6 +204,6 @@ function SocialLink({
       className="social-glow inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white/80 transition hover:text-white"
     >
       {children}
-    </Link>
+    </a>
   );
 }
