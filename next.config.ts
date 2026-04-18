@@ -1,4 +1,5 @@
 import fs from "node:fs";
+import createNextIntlPlugin from "next-intl/plugin";
 import type { NextConfig } from "next";
 
 // Local builds on the external repo volume have hit intermittent `.next/trace`
@@ -50,4 +51,6 @@ const nextConfig: NextConfig = process.env.VERCEL
           distDir: ".next-build",
         };
 
-export default nextConfig;
+const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
+
+export default withNextIntl(nextConfig);

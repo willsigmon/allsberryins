@@ -1,9 +1,14 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
+import createIntlMiddleware from "next-intl/middleware";
+
+import { routing } from "@/i18n/routing";
 
 const CANONICAL_HOST = "allsberryagency.com";
 const TEAM_ATTRIBUTION_USERNAME = process.env.TEAM_ATTRIBUTION_USERNAME;
 const TEAM_ATTRIBUTION_PASSWORD = process.env.TEAM_ATTRIBUTION_PASSWORD;
+
+const intlMiddleware = createIntlMiddleware(routing);
 
 function isProtectionEnabled() {
   return Boolean(TEAM_ATTRIBUTION_USERNAME && TEAM_ATTRIBUTION_PASSWORD);
@@ -52,7 +57,6 @@ function readBasicAuthCredentials(request: NextRequest) {
 export function middleware(request: NextRequest) {
   const host = request.headers.get("host") ?? "";
 
-  // Redirect www → canonical non-www domain (301 permanent).
   if (host === `www.${CANONICAL_HOST}`) {
     const url = request.nextUrl.clone();
     url.host = CANONICAL_HOST;
@@ -60,10 +64,9 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(url, 301);
   }
 
-  // Team-attribution basic-auth gate.
   if (request.nextUrl.pathname.startsWith("/team-attribution")) {
     if (!isProtectionEnabled()) {
-      return NextResponse.next();
+      return intlMiddleware(request);
     }
 
     const credentials = readBasicAuthCredentials(request);
@@ -76,19 +79,17 @@ export function middleware(request: NextRequest) {
       return unauthorizedResponse();
     }
 
-    const response = NextResponse.next();
+    const response = intlMiddleware(request);
     response.headers.set("Cache-Control", "private, no-store, max-age=0");
     response.headers.set("Vary", "Authorization");
     return response;
   }
 
-  return NextResponse.next();
+  return intlMiddleware(request);
 }
 
 export const config = {
   matcher: [
-    // Match www subdomain redirect (all paths) + team-attribution auth.
-    // Exclude Next.js internals and static assets.
-    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico|woff2?)$).*)",
+    "/((?!api|_next/static|_next/image|favicon.ico|apple-icon|opengraph-image|twitter-image|sitemap.xml|robots.txt|llms.txt|manifest|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico|woff2?|xml|txt|json)$).*)",
   ],
 };

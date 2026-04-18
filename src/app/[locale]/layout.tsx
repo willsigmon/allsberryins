@@ -1,0 +1,80 @@
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { DM_Sans, Plus_Jakarta_Sans } from "next/font/google";
+import { notFound } from "next/navigation";
+import { Suspense } from "react";
+import { NextIntlClientProvider, hasLocale } from "next-intl";
+import { setRequestLocale } from "next-intl/server";
+
+import "../globals.css";
+
+import { SiteFooter } from "@/components/layout/site-footer";
+import { SiteHeader } from "@/components/layout/site-header";
+import { GoogleAnalytics } from "@/components/seo/google-analytics";
+import { TrackingPageView } from "@/components/seo/tracking-page-view";
+import { SkipLink } from "@/components/layout/skip-link";
+import { TrackingScripts } from "@/components/seo/tracking-scripts";
+import { ThemeScript } from "@/components/theme/theme-script";
+import { routing } from "@/i18n/routing";
+
+const dmSans = DM_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-dm-sans",
+  display: "swap",
+});
+
+const plusJakartaSans = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  weight: ["600", "700", "800"],
+  variable: "--font-plus-jakarta",
+  display: "swap",
+});
+
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
+
+type LocaleLayoutProps = {
+  children: React.ReactNode;
+  params: Promise<{ locale: string }>;
+};
+
+export default async function LocaleLayout({ children, params }: LocaleLayoutProps) {
+  const { locale } = await params;
+
+  if (!hasLocale(routing.locales, locale)) {
+    notFound();
+  }
+
+  setRequestLocale(locale);
+
+  return (
+    <html lang={locale} data-theme="light" data-theme-mode="auto" suppressHydrationWarning>
+      <head>
+        <ThemeScript />
+        <TrackingScripts />
+        <GoogleAnalytics />
+      </head>
+      <body
+        className={`${dmSans.variable} ${plusJakartaSans.variable} bg-white font-sans text-gray-600 antialiased`}
+      >
+        <NextIntlClientProvider>
+          <SkipLink />
+          <Suspense fallback={null}>
+            <TrackingPageView />
+          </Suspense>
+          <div className="flex min-h-screen flex-col">
+            <SiteHeader />
+            <main id="main-content" className="flex-1">
+              {children}
+            </main>
+            <SiteFooter />
+          </div>
+        </NextIntlClientProvider>
+        <Analytics />
+        <SpeedInsights />
+      </body>
+    </html>
+  );
+}

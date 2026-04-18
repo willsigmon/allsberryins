@@ -1,0 +1,499 @@
+{
+  "nav": {
+    "personal": "Seguro Personal",
+    "commercial": "Seguro Comercial",
+    "resources": "Recursos",
+    "about": "Nosotros",
+    "blog": "Blog",
+    "contact": "Contacto",
+    "home": "Inicio",
+    "agents": "Nuestros Agentes",
+    "carriers": "Aseguradoras"
+  },
+  "cta": {
+    "getQuote": "Obtener Cotización",
+    "startQuote": "Comenzar Cotización",
+    "startProofRequest": "Solicitar comprobante",
+    "callNow": "Llámenos",
+    "contact": "Contacto",
+    "contactUs": "Contáctenos",
+    "meetErin": "Conozca a Erin",
+    "learnMore": "Ver más",
+    "submit": "Enviar",
+    "send": "Enviar",
+    "sending": "Enviando...",
+    "back": "Volver",
+    "continue": "Continuar"
+  },
+  "common": {
+    "phone": "Teléfono",
+    "phoneLabel": "{phone}",
+    "email": "Correo",
+    "emailUs": "Escríbanos",
+    "address": "Dirección",
+    "hours": "Lunes a viernes, 8:00 AM – 5:00 PM",
+    "hoursLabel": "Horario",
+    "callsAndTexts": "Aceptamos llamadas y mensajes",
+    "serviceArea": "Sur de California",
+    "southernCalifornia": "Sur de California",
+    "loading": "Cargando…",
+    "requiredField": "Requerido",
+    "optionalField": "Opcional",
+    "yes": "Sí",
+    "no": "No",
+    "selectOption": "Seleccione una opción",
+    "returnHome": "Volver al inicio"
+  },
+  "language": {
+    "label": "Idioma",
+    "english": "English",
+    "spanish": "Español",
+    "switchTo": "Cambiar a {language}",
+    "currentLanguage": "Idioma actual: {language}"
+  },
+  "footer": {
+    "description": "Agencia de seguros de Corona que guía a familias y empresas del Sur de California con cobertura de casa, auto, vida y negocio.",
+    "quickLinks": "Enlaces Rápidos",
+    "products": "Productos",
+    "contactInfo": "Información de Contacto",
+    "privacy": "Política de Privacidad",
+    "accessibility": "Accesibilidad",
+    "sslEncrypted": "Cifrado SSL",
+    "wcagAccessible": "Accesible WCAG",
+    "allRightsReserved": "Todos los derechos reservados.",
+    "copyright": "© 2026 Allsberry Insurance Agency. Todos los derechos reservados.",
+    "licenseLine": "{ownerLicense} • {agencyLicense}"
+  },
+  "header": {
+    "agencyHome": "Página principal de Allsberry Insurance Agency",
+    "logoAlt": "Logotipo de Allsberry Insurance Agency",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú",
+    "displaySettings": "Ajustes de pantalla"
+  },
+  "home": {
+    "hero": {
+      "tagline": "Nos especializamos en seguros de",
+      "insuranceSuffix": "",
+      "cyclingWords": "Casa,Auto,Vida,Negocio,Usted",
+      "subtitle": "Díganos lo que necesita y le guiamos a la cobertura correcta.",
+      "submitZipPrompt": "Ingrese su código postal para empezar.",
+      "zipPlaceholder": "Código postal",
+      "bundleTitle": "Combine y ahorre",
+      "bundleBody": "Muchos clientes ahorran al combinar casa, auto y otras coberturas en un solo plan. Le mostramos sus opciones.",
+      "needProofTitle": "¿Necesita un comprobante?",
+      "needProofBody": "Si su banco, arrendador o socio comercial necesita documentación del seguro, omita la cotización y solicítela aquí.",
+      "reviewCount": "5,000+",
+      "erinName": "Erin Allsberry",
+      "erinTitle": "Dueña y Agente Principal",
+      "locationBadge": "Sur de California",
+      "farmersCarrier": "Farmers Insurance"
+    },
+    "reviewTicker": {
+      "label": "Reseñas de 5 estrellas"
+    },
+    "trustBar": {
+      "heading": "La confianza de miles de familias y negocios del Sur de California.",
+      "subheading": "Cuidando a nuestros vecinos desde 1994."
+    },
+    "valueProps": {
+      "eyebrow": "Por qué Allsberry",
+      "heading": "Pensado en las personas, no en el papeleo",
+      "items": {
+        "seamless": {
+          "title": "Experiencia Sin Complicaciones",
+          "description": "Le guiamos paso a paso, damos seguimiento rápido y hacemos que obtener cobertura sea sencillo."
+        },
+        "personalized": {
+          "title": "Cobertura Personalizada",
+          "description": "Construimos un plan a la medida de su vida — su casa, su auto, su negocio y su futuro."
+        },
+        "expert": {
+          "title": "Consejo Experto",
+          "description": "Nuestro equipo le da respuestas claras para que elija el plan correcto."
+        },
+        "topRated": {
+          "title": "Mejor Soporte",
+          "description": "Estamos con usted antes, durante y después de un reclamo. No tendrá que enfrentarlo solo."
+        }
+      }
+    },
+    "faq": {
+      "eyebrow": "Preguntas Frecuentes",
+      "heading": "Lo que nos preguntan todas las semanas",
+      "description": "Respuestas claras a lo que más nos preguntan las familias y dueños de negocio del Sur de California."
+    },
+    "productGrid": {
+      "personalEyebrow": "Seguro Personal",
+      "personalHeading": "Cobertura para su vida",
+      "personalDescription": "Desde su casa y auto hasta el futuro de su familia, armamos un plan que realmente le quede.",
+      "commercialEyebrow": "Seguro Comercial",
+      "commercialHeading": "Cobertura para su negocio",
+      "commercialDescription": "La combinación correcta de protección para que un mal día no derribe lo que tanto ha construido.",
+      "getQuoteLabel": "Cotizar {product}"
+    },
+    "expertGuides": {
+      "eyebrow": "Guías Expertas",
+      "heading": "Información de seguros en lenguaje sencillo"
+    },
+    "coverageEvaluation": {
+      "eyebrow": "Revisión Gratuita de Cobertura",
+      "heading": "¿Su póliza actual sigue al ritmo de su vida?",
+      "description": "Los precios de casas, los vehículos, la familia y el negocio cambian. Una revisión de 15 minutos puede detectar vacíos antes de que lo haga un reclamo.",
+      "ctaPrimary": "Solicitar revisión gratuita",
+      "ctaSecondary": "Llámenos directamente"
+    },
+    "carrierLogos": {
+      "heading": "Acceso a más de {count} aseguradoras de confianza",
+      "description": "Nosotros comparamos el mercado por usted. Una revisión, muchas opciones."
+    },
+    "team": {
+      "eyebrow": "Nuestro Equipo",
+      "heading": "Agentes licenciados a los que sí puede llamar",
+      "description": "Conozca a los agentes y al personal que manejan su cobertura de principio a fin.",
+      "seHablaEspanol": "Se habla Español",
+      "bilingualTeam": "Equipo Bilingüe",
+      "viewFullBio": "Ver biografía completa",
+      "meetAgent": "Conozca a {name}",
+      "phoneLabel": "Teléfono",
+      "emailLabel": "Correo"
+    },
+    "ctaBanner": {
+      "heading": "Encontremos la cobertura que realmente le sirva.",
+      "description": "Díganos qué necesita. Un agente licenciado le responderá en un día hábil.",
+      "ctaPrimary": "Comenzar cotización",
+      "ctaSecondary": "Llamar al {phone}"
+    }
+  },
+  "about": {
+    "metaTitle": "Sobre el equipo de Allsberry Insurance",
+    "metaDescription": "Conozca al equipo bilingüe de Allsberry Insurance Agency. 10 agentes licenciados — incluyendo personal hispanohablante — ayudando a familias y negocios del Sur de California a proteger lo que más importa.",
+    "eyebrow": "Nosotros",
+    "heading": "Asesoría local de seguros desde 1994",
+    "subheading": "Tres décadas ayudando a familias, propietarios y dueños de negocio del Sur de California.",
+    "stats": {
+      "foundedLabel": "Fundada",
+      "foundedValue": "1994",
+      "clientsLabel": "Clientes atendidos",
+      "clientsValue": "5,000+",
+      "agentsLabel": "Agentes licenciados",
+      "agentsValue": "10",
+      "bilingualLabel": "Se habla Español",
+      "bilingualValue": "Equipo Bilingüe"
+    },
+    "story": {
+      "heading": "Nuestra historia",
+      "paragraph1": "Allsberry Insurance Agency comenzó en 1994 como una pequeña oficina local que atendía a Corona y al Inland Empire. Desde entonces hemos crecido hasta ser un equipo de agentes licenciados en todo el Sur de California — pero nuestra forma de trabajar no ha cambiado. Contestamos el teléfono. Respondemos en lenguaje claro. Y tratamos a cada cliente como a un vecino, porque la mayoría lo son.",
+      "paragraph2": "Erin Allsberry tomó la propiedad en 2009 y ha convertido a la agencia en una de las oficinas más reconocidas de Farmers Insurance en la región. Hoy, nuestros agentes manejan desde pólizas para inquilinos primerizos hasta programas comerciales complejos, siempre con la misma meta: hacer el seguro sencillo."
+    },
+    "values": {
+      "heading": "Lo que defendemos",
+      "items": {
+        "clarity": {
+          "title": "Claridad sobre complejidad",
+          "description": "Explicamos las opciones de cobertura en lenguaje sencillo para que elegir la correcta sea fácil."
+        },
+        "responsiveness": {
+          "title": "Respuesta rápida",
+          "description": "Un miembro licenciado del equipo le contesta dentro de un día hábil — normalmente antes."
+        },
+        "localExpertise": {
+          "title": "Experiencia local",
+          "description": "Conocemos las zonas de incendios en California, el riesgo del Inland Empire y las aseguradoras que sí emiten aquí."
+        },
+        "longTermCare": {
+          "title": "Cuidado a largo plazo",
+          "description": "Revisiones anuales, seguimiento tras eventos de vida y ajustes proactivos conforme cambian sus necesidades."
+        }
+      }
+    },
+    "teamHeading": "Conozca al equipo",
+    "teamDescription": "Licenciados, locales y listos para ayudar.",
+    "fellowsHeading": "Allsberry Insurance Fellows",
+    "fellowsDescription": "Honrando a quienes construyeron esta agencia."
+  },
+  "contact": {
+    "metaTitle": "Contáctenos",
+    "metaDescription": "Contacte a Allsberry Insurance Agency en Corona, CA. Llámenos, escríbanos o visítenos. Personal bilingüe para ayudarle con cobertura de casa, auto, vida y negocio.",
+    "eyebrow": "Contacto",
+    "heading": "Nos encantaría saber de usted",
+    "subheading": "Llámenos, envíe un mensaje, correo o pase por la oficina. Un agente licenciado le responde en un día hábil.",
+    "office": "Nuestra oficina",
+    "officeHours": "Horario de oficina",
+    "byPhone": "Por teléfono",
+    "byEmail": "Por correo",
+    "byText": "Por mensaje",
+    "directionsLabel": "Cómo llegar",
+    "callsWelcome": "Aceptamos llamadas y mensajes durante el horario de oficina.",
+    "emailResponse": "Respondemos los correos en un día hábil.",
+    "formHeading": "Envíenos un mensaje",
+    "formSubheading": "Complete el formulario y le contactamos pronto.",
+    "form": {
+      "name": "Nombre completo",
+      "namePlaceholder": "Su nombre completo",
+      "email": "Correo electrónico",
+      "emailPlaceholder": "usted@ejemplo.com",
+      "phone": "Número de teléfono",
+      "phonePlaceholder": "(555) 555-5555",
+      "subject": "Asunto",
+      "subjectPlaceholder": "¿En qué podemos ayudarle?",
+      "message": "Mensaje",
+      "messagePlaceholder": "Cuéntenos qué necesita…",
+      "submit": "Enviar mensaje",
+      "submitting": "Enviando…",
+      "success": "Gracias — le contactamos en un día hábil.",
+      "error": "Algo salió mal. Llámenos al {phone} o intente de nuevo."
+    }
+  },
+  "quote": {
+    "metaTitle": "Solicitar una cotización de seguro",
+    "metaDescription": "Solicite una cotización de seguro de casa, auto, vida o negocio con Allsberry Insurance Agency. Un agente licenciado responde en un día hábil.",
+    "eyebrow": "Solicitar Cotización",
+    "heading": "Díganos qué necesita",
+    "subheading": "Un agente licenciado le contactará en un día hábil con opciones a la medida de su situación.",
+    "form": {
+      "productLabel": "¿Para qué necesita cobertura?",
+      "nameLabel": "Nombre completo",
+      "namePlaceholder": "Su nombre completo",
+      "emailLabel": "Correo",
+      "emailPlaceholder": "usted@ejemplo.com",
+      "phoneLabel": "Teléfono",
+      "phonePlaceholder": "(555) 555-5555",
+      "zipLabel": "Código postal",
+      "zipPlaceholder": "92878",
+      "employeesLabel": "¿Cuántos empleados tiene?",
+      "referralLabel": "¿Cómo supo de nosotros?",
+      "notesLabel": "¿Algo más que debamos saber?",
+      "notesPlaceholder": "Cuéntenos sobre su situación…",
+      "submit": "Solicitar cotización",
+      "submitting": "Enviando…",
+      "successHeading": "Recibimos su solicitud.",
+      "successBody": "Un agente licenciado le contactará en un día hábil. Si necesita ayuda inmediata, llámenos al {phone}.",
+      "errorHeading": "Algo salió mal.",
+      "errorBody": "Llámenos al {phone} o intente de nuevo."
+    },
+    "sidebar": {
+      "whyAllsberry": "¿Por qué Allsberry?",
+      "whyItems": "Agentes licenciados locales;Acceso a más de 200 aseguradoras;Personal bilingüe;Respuesta en un día hábil",
+      "privacy": "Usaremos su información solo para ayudarle con esta cotización."
+    }
+  },
+  "carriersPage": {
+    "metaTitle": "Nuestras aseguradoras",
+    "metaDescription": "Allsberry Insurance Agency trabaja con Farmers, Travelers, The Hartford, Progressive, Liberty Mutual, Chubb y otras aseguradoras con calificación A en todo el Sur de California.",
+    "eyebrow": "Aseguradoras",
+    "heading": "Acceso a más de 200 aseguradoras de confianza",
+    "subheading": "Nosotros comparamos el mercado por usted. Estas son algunas de las aseguradoras con las que trabajamos para encontrarle la cobertura correcta.",
+    "cardHeading": "Trabajar con {carrier}",
+    "visitCarrier": "Visitar {carrier}",
+    "quotingWith": "Cotizar con {carrier}"
+  },
+  "resources": {
+    "metaTitle": "Recursos de seguros",
+    "metaDescription": "Guías útiles, preguntas frecuentes y recursos de Allsberry Insurance Agency sobre cobertura de casa, auto, negocio y FAIR Plan en California.",
+    "eyebrow": "Recursos",
+    "heading": "Guías y herramientas de seguros",
+    "subheading": "Recursos en lenguaje sencillo para entender su cobertura.",
+    "blogHeading": "Del blog",
+    "guidesHeading": "Guías de cobertura",
+    "viewAll": "Ver todo"
+  },
+  "review": {
+    "metaTitle": "Déjenos una reseña",
+    "metaDescription": "¿Le gustó trabajar con Allsberry Insurance Agency? Déjenos una reseña rápida en Google.",
+    "eyebrow": "Gracias por considerar dejar una reseña",
+    "heading": "Su reseña ayuda a nuestros vecinos",
+    "subheading": "Unas palabras en Google ayudan a que otras familias del Sur de California nos encuentren. Toma unos 30 segundos.",
+    "ctaPrimary": "Dejar reseña en Google",
+    "ctaSecondary": "Ahora no",
+    "privateFeedback": "¿Tiene comentarios pero no quiere compartirlos en público? Escríbanos a {email} — leemos cada mensaje."
+  },
+  "evidenceOfInsurance": {
+    "metaTitle": "Solicitar comprobante de seguro",
+    "metaDescription": "Solicite comprobante de seguro, Evidence of Insurance o Certificate of Insurance con Allsberry Insurance Agency.",
+    "eyebrow": "Comprobante de Seguro",
+    "heading": "Obtenga la documentación que su banco, arrendador o socio necesita",
+    "subheading": "Díganos qué necesita y se lo enviamos — normalmente el mismo día.",
+    "requestTypeLabel": "¿Qué documento necesita?",
+    "sendToLabel": "¿A quién se lo enviamos?",
+    "sendToPlaceholder": "Nombre y correo del banco, arrendador o negocio",
+    "policyLabel": "Número de póliza (si lo sabe)",
+    "policyPlaceholder": "Opcional",
+    "notesLabel": "¿Algo más que debamos saber?",
+    "notesPlaceholder": "Fecha límite, dirección en el documento, etc.",
+    "submit": "Solicitar comprobante",
+    "successHeading": "Listo.",
+    "successBody": "Preparamos el documento y se lo enviamos pronto. Si es urgente, llámenos al {phone}."
+  },
+  "blog": {
+    "metaTitle": "Blog de seguros",
+    "metaDescription": "Consejos, guías y noticias de Allsberry Insurance Agency sobre seguros de casa, auto, negocio y vida en California.",
+    "eyebrow": "Blog",
+    "heading": "Consejos, guías y noticias de la agencia",
+    "subheading": "Información de seguros en lenguaje sencillo para familias y dueños de negocio del Sur de California.",
+    "readingTime": "{minutes} min de lectura",
+    "publishedOn": "Publicado el {date}",
+    "byAuthor": "Por {author}",
+    "relatedGuides": "Guías relacionadas",
+    "allPosts": "Todos los artículos",
+    "categories": {
+      "tips": "Consejos",
+      "guides": "Guías",
+      "news": "Noticias de la agencia"
+    }
+  },
+  "agents": {
+    "listHeading": "Nuestros agentes",
+    "listSubheading": "Licenciados, locales y fáciles de contactar.",
+    "backToTeam": "Volver al equipo",
+    "specialtiesLabel": "Especialidades",
+    "licenseLabel": "Licencia",
+    "languagesLabel": "Idiomas",
+    "callAgent": "Llamar a {name}",
+    "emailAgent": "Escribir a {name}",
+    "saveContact": "Guardar contacto"
+  },
+  "notFound": {
+    "heading": "Página no encontrada",
+    "subheading": "La página que busca se movió o nunca existió.",
+    "cta": "Volver al inicio"
+  },
+  "products": {
+    "home": {
+      "name": "Seguro de Casa",
+      "shortName": "Casa",
+      "description": "Proteja su casa, sus pertenencias y su tranquilidad con una cobertura confiable."
+    },
+    "auto": {
+      "name": "Seguro de Auto",
+      "shortName": "Auto",
+      "description": "Protección para su auto, su manejo diario y las sorpresas del camino."
+    },
+    "renters": {
+      "name": "Seguro de Inquilino",
+      "shortName": "Inquilino",
+      "description": "Protección asequible para sus cosas. También ayuda a pagar otro lugar donde quedarse si su casa rentada queda inhabitable."
+    },
+    "life": {
+      "name": "Seguro de Vida",
+      "shortName": "Vida",
+      "description": "Ayuda a cuidar a las personas que usted quiere si algo le pasa. Empezar es rápido, seguro y privado."
+    },
+    "umbrella": {
+      "name": "Seguro Sombrilla (Umbrella)",
+      "shortName": "Sombrilla",
+      "description": "Protección extra que ayuda a cubrir costos grandes que otros seguros no alcanzan a pagar."
+    },
+    "condo": {
+      "name": "Seguro de Condominio",
+      "shortName": "Condominio",
+      "description": "Cubre lo que está dentro de su condominio. El seguro del edificio protege el exterior, pero usted necesita su propio plan para sus cosas y sus paredes."
+    },
+    "general-liability": {
+      "name": "Responsabilidad General",
+      "shortName": "Responsabilidad General",
+      "description": "Paga los costos si un cliente se lastima en su negocio, algo se rompe, o alguien lo demanda."
+    },
+    "workers-comp": {
+      "name": "Compensación al Trabajador",
+      "shortName": "Workers Comp",
+      "description": "Ayuda a pagar facturas médicas y salarios perdidos si un empleado se lastima en el trabajo. Es requerido por ley en California para la mayoría de los negocios."
+    },
+    "commercial-property": {
+      "name": "Propiedad Comercial",
+      "shortName": "Propiedad Comercial",
+      "description": "Protege su edificio, equipo y las cosas que necesita para operar su negocio todos los días."
+    },
+    "commercial-auto": {
+      "name": "Auto Comercial",
+      "shortName": "Auto Comercial",
+      "description": "Cubre los autos y camiones que usa su negocio, incluyendo a sus conductores y lo que transportan."
+    },
+    "professional-liability": {
+      "name": "Responsabilidad Profesional",
+      "shortName": "Responsabilidad Profesional",
+      "description": "Ayuda a pagar los costos si un cliente dice que su trabajo o consejo le hizo perder dinero, aun si fue un error honesto."
+    },
+    "specialty-coverage": {
+      "name": "Cobertura Especializada",
+      "shortName": "Cobertura Especializada",
+      "description": "Para cosas que no caben en un plan típico — equipo especial, negocios únicos o propiedades poco comunes."
+    },
+    "business": {
+      "name": "Seguro Comercial",
+      "shortName": "Negocio",
+      "description": "Un paquete que reúne los distintos tipos de seguro que su negocio necesita."
+    },
+    "other": {
+      "name": "Otra Cobertura",
+      "shortName": "Otro",
+      "description": "Díganos lo que necesita y le orientamos en la dirección correcta."
+    }
+  },
+  "valueProps": {
+    "seamless": {
+      "title": "Experiencia Sin Complicaciones",
+      "description": "Le guiamos paso a paso, damos seguimiento rápido y hacemos que obtener cobertura sea sencillo."
+    },
+    "personalized": {
+      "title": "Cobertura Personalizada",
+      "description": "Construimos un plan a la medida de su vida — su casa, su auto, su negocio y su futuro."
+    },
+    "expert": {
+      "title": "Consejo Experto",
+      "description": "Nuestro equipo le da respuestas claras para que elija el plan correcto."
+    },
+    "topRated": {
+      "title": "Mejor Soporte",
+      "description": "Estamos con usted antes, durante y después de un reclamo. No tendrá que enfrentarlo solo."
+    }
+  },
+  "homeFaqs": {
+    "q1": {
+      "question": "¿Qué tipos de seguro puede cotizarme Allsberry Insurance Agency?",
+      "answer": "Ayudamos a personas en el Sur de California a comparar seguros de casa, auto, rentado, condominio, negocio, empleados, vida y más."
+    },
+    "q2": {
+      "question": "¿Qué tan rápido me responderán después de solicitar una cotización?",
+      "answer": "Un miembro licenciado del equipo le contestará en un día hábil. Si su solicitud es sencilla y tenemos la información que necesitamos, muchas veces es aún más rápido."
+    },
+    "q3": {
+      "question": "¿Pueden ayudarme con un comprobante de seguro o un certificado de seguro?",
+      "answer": "Sí. Si su banco, arrendador u otra empresa necesita la prueba de que tiene seguro, le enviamos el documento correcto rápidamente."
+    },
+    "q4": {
+      "question": "¿Tengo que combinar mi seguro de casa y auto para trabajar con la agencia?",
+      "answer": "No. Combinar su seguro a veces le ahorra dinero, pero con gusto le ayudamos con un solo tipo de seguro si eso es todo lo que necesita."
+    },
+    "q5": {
+      "question": "¿Mis datos son privados y seguros?",
+      "answer": "Sí. Sus llamadas, mensajes y correos con nosotros están protegidos. Nunca compartimos su información personal sin su permiso. Puede leer más sobre cómo protegemos sus datos en el centro de privacidad de Farmers."
+    }
+  },
+  "reviews": {
+    "classicCars": {
+      "name": "Coleccionista de autos clásicos",
+      "body": "Estoy tranquilo y confiado con todas mis necesidades de seguro personales, familiares y de negocio en manos de este equipo. Cada vez que llamo con una pregunta están felices de ayudar y me tratan como prioridad. Recientemente Erin pudo ayudarme con algo grande — tengo varios autos clásicos y para mi sorpresa logró asegurarlos con Hagerty con excelente cobertura."
+    },
+    "homeowner": {
+      "name": "Propietario en Corona",
+      "body": "Todo el equipo hizo que cambiar nuestro seguro de casa fuera fácil. Nos guiaron paso a paso y encontraron un plan que realmente le quedó a nuestra familia. Sin presión, solo consejos honestos."
+    },
+    "restaurant": {
+      "name": "Dueño de restaurante local",
+      "body": "Brahm manejó la cobertura de nuestro negocio desde el primer día. Fue organizado, respondió todas las preguntas y nos ayudó a entender qué necesitábamos de verdad y qué podíamos dejar fuera. Lo recomiendo mucho."
+    },
+    "auto": {
+      "name": "Cliente de seguro de auto",
+      "body": "Fue la primera vez que sentí que alguien realmente revisó mi póliza de auto en lugar de solo renovarla. El consejo fue práctico y terminé con mejor cobertura por menos dinero."
+    }
+  },
+  "languageSwitcher": {
+    "label": "Elegir idioma",
+    "sectionTitle": "Idioma",
+    "englishLabel": "English",
+    "englishHelper": "Site in English.",
+    "spanishLabel": "Español",
+    "spanishHelper": "Sitio en español."
+  }
+}
