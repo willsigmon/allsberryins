@@ -29,7 +29,7 @@ const shortCode: Record<AppLocale, string> = {
   es: "ES",
 };
 
-const OVERLAY_LIFETIME_MS = 1080;
+const OVERLAY_LIFETIME_MS = 1280;
 
 function spawnLocaleOverlay({
   label,
@@ -66,9 +66,11 @@ function spawnLocaleOverlay({
   pill.append(chip, text, bar);
   overlay.append(pill);
   document.body.appendChild(overlay);
+  document.documentElement.classList.add("locale-switching");
 
   window.setTimeout(() => {
     overlay.remove();
+    document.documentElement.classList.remove("locale-switching");
   }, OVERLAY_LIFETIME_MS);
 }
 
@@ -124,7 +126,7 @@ export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
         type="button"
         onClick={() => setOpen((value) => !value)}
         className={cn(
-          "inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1.5 text-xs font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-2 focus-visible:ring-offset-navy",
+          "inline-flex items-center gap-1.5 rounded-full border border-white/28 bg-white/8 px-2.5 py-1.5 text-xs font-semibold text-white transition hover:border-white/45 hover:bg-white/14 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-2 focus-visible:ring-offset-navy",
           className,
         )}
         title={t("label")}

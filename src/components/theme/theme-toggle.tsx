@@ -392,7 +392,7 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
         type="button"
         onClick={() => setOpen((value) => !value)}
         className={cn(
-          "inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1.5 text-xs font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-2 focus-visible:ring-offset-navy",
+          "inline-flex items-center gap-1.5 rounded-full border border-white/28 bg-white/8 px-2.5 py-1.5 text-xs font-semibold text-white transition hover:border-white/45 hover:bg-white/14 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-2 focus-visible:ring-offset-navy",
           className,
         )}
         title="Display settings"
