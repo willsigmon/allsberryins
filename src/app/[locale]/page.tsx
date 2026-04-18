@@ -28,10 +28,15 @@ type HomePageProps = {
 
 export async function generateMetadata({ params }: HomePageProps): Promise<Metadata> {
   const { locale } = await params;
+  const isSpanish = locale === "es";
+
   return createPageMetadata({
-    title: "Allsberry Insurance Agency",
-    description:
-      "Local insurance guidance, quote requests, agent pages, and proof-of-insurance support from a Corona, California agency serving Southern California clients.",
+    title: isSpanish
+      ? "Seguros en Corona, CA — Hogar, Auto y Comercial"
+      : "Home, Auto & Business Insurance in Corona, CA",
+    description: isSpanish
+      ? "Agencia independiente de seguros en Corona, California. Compara carriers y obtén cobertura de hogar, auto, vida y comercial. Atendemos Southern California en inglés y español."
+      : "Independent insurance agency in Corona, CA. We shop carriers to match home, auto, life, and business coverage to your needs. Bilingual service across Southern California.",
     path: "/",
     locale,
   });
