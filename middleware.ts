@@ -89,9 +89,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: [
-    "/",
-    "/(en|es)/:path*",
-    "/((?!api|_next|_vercel|apple-icon|opengraph-image|twitter-image|.*\\..*).*)",
-  ],
+  matcher: "/((?!api|_next|_vercel|apple-icon|opengraph-image|twitter-image|.*\\..*).*)",
 };
