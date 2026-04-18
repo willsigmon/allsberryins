@@ -81,10 +81,14 @@ export default async function AgentPage({ params, searchParams }: AgentPageProps
     "END:VCARD",
   ].join("\r\n");
 
+  const familyName = agent.name.split(" ").slice(1).join(" ") || undefined;
   const personSchema = {
     "@context": "https://schema.org",
     "@type": "Person",
+    "@id": absoluteUrl(`/agents/${agent.slug}#person`),
     name: agent.name,
+    givenName: agent.firstName,
+    familyName,
     jobTitle: agent.title,
     worksFor: {
       "@id": organizationSchema["@id"],
@@ -95,6 +99,18 @@ export default async function AgentPage({ params, searchParams }: AgentPageProps
     description: agent.bio,
     image: agent.photo ? absoluteUrl(agent.photo.src) : undefined,
     knowsAbout: agent.specialties,
+    knowsLanguage: agent.languages?.includes("Spanish") ? ["en", "es"] : ["en"],
+    ...(agent.license
+      ? {
+          hasCredential: [
+            {
+              "@type": "EducationalOccupationalCredential",
+              credentialCategory: "license",
+              name: `California Insurance License ${agent.license}`,
+            },
+          ],
+        }
+      : {}),
   };
   const profilePageSchema = {
     "@context": "https://schema.org",

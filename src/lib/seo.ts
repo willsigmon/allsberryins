@@ -1,4 +1,4 @@
-import { agency, products } from "@/lib/site-data";
+import { agency, agents, products } from "@/lib/site-data";
 import { absoluteUrl } from "@/lib/utils";
 
 type BreadcrumbItem = {
@@ -33,6 +33,39 @@ const aggregateRating = hasVerifiedRating
     }
   : undefined;
 
+const erin = agents.find((a) => a.slug === "erin");
+
+const erinPersonSchema = erin
+  ? {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "@id": absoluteUrl("/about#erin-allsberry"),
+      name: erin.name,
+      givenName: erin.firstName,
+      familyName: erin.name.split(" ").slice(1).join(" ") || undefined,
+      jobTitle: erin.title,
+      email: erin.email,
+      telephone: agency.phone,
+      image: erin.photo ? absoluteUrl(erin.photo.src) : undefined,
+      url: absoluteUrl(`/agents/${erin.slug}`),
+      knowsAbout: products
+        .filter((p) => p.slug !== "other")
+        .map((p) => p.name),
+      worksFor: {
+        "@id": absoluteUrl("/#organization"),
+      },
+      hasCredential: erin.license
+        ? [
+            {
+              "@type": "EducationalOccupationalCredential",
+              credentialCategory: "license",
+              name: `California Insurance License ${erin.license}`,
+            },
+          ]
+        : undefined,
+    }
+  : undefined;
+
 export const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "InsuranceAgency",
@@ -46,6 +79,7 @@ export const organizationSchema = {
   logo: absoluteUrl("/media/brand/logos/allsberry-deep-blue.png"),
   priceRange: "$$",
   foundingDate: String(agency.founded),
+  knowsLanguage: ["en", "es"],
   address: {
     "@type": "PostalAddress",
     streetAddress: agency.addressLine1,
@@ -96,8 +130,46 @@ export const organizationSchema = {
     agency.socials.linkedin,
     agency.socials.google,
   ],
+  ...(erin ? { founder: { "@id": absoluteUrl("/about#erin-allsberry") } } : {}),
   ...(aggregateRating ? { aggregateRating } : {}),
 };
+
+export { erinPersonSchema };
+
+export function createPersonSchema(agentSlug: string) {
+  const agent = agents.find((a) => a.slug === agentSlug);
+  if (!agent) {
+    return undefined;
+  }
+  const familyName = agent.name.split(" ").slice(1).join(" ") || undefined;
+  return {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "@id": absoluteUrl(`/agents/${agent.slug}#person`),
+    name: agent.name,
+    givenName: agent.firstName,
+    familyName,
+    jobTitle: agent.title,
+    email: agent.email,
+    telephone: agent.phone,
+    image: agent.photo ? absoluteUrl(agent.photo.src) : undefined,
+    url: absoluteUrl(`/agents/${agent.slug}`),
+    knowsLanguage: agent.languages?.includes("Spanish") ? ["en", "es"] : ["en"],
+    knowsAbout: agent.specialties,
+    worksFor: {
+      "@id": absoluteUrl("/#organization"),
+    },
+    hasCredential: agent.license
+      ? [
+          {
+            "@type": "EducationalOccupationalCredential",
+            credentialCategory: "license",
+            name: `California Insurance License ${agent.license}`,
+          },
+        ]
+      : undefined,
+  };
+}
 
 export function createBreadcrumbSchema(items: BreadcrumbItem[]) {
   return {

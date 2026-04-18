@@ -98,6 +98,7 @@ export default async function Home({ params }: HomePageProps) {
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
+    inLanguage: locale === "es" ? "es" : "en",
     mainEntity: faqKeys.map((key) => ({
       "@type": "Question",
       name: tFaq(`${key}.question`),

@@ -74,6 +74,7 @@ export const sharedMetadata: Metadata = {
     url: absoluteUrl(),
     siteName: "Allsberry Insurance Agency",
     locale: "en_US",
+    alternateLocale: ["es_US"],
     type: "website",
     images: [
       {
@@ -137,6 +138,9 @@ export function createPageMetadata(options: {
       description,
       url: absoluteUrl(canonical),
       locale: locale ? ogLocaleByLocale[locale] ?? "en_US" : "en_US",
+      alternateLocale: Object.entries(ogLocaleByLocale)
+        .filter(([code]) => code !== (locale ?? "en"))
+        .map(([, ogLocale]) => ogLocale),
       images: [
         {
           url: absoluteUrl("/opengraph-image"),
