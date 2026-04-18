@@ -32,13 +32,14 @@ export async function generateMetadata({ params }: HomePageProps): Promise<Metad
 
   return createPageMetadata({
     title: isSpanish
-      ? "Seguros en Corona, CA — Hogar, Auto y Comercial"
-      : "Home, Auto & Business Insurance in Corona, CA",
+      ? "Allsberry Insurance Agency — Corona, CA Seguros"
+      : "Allsberry Insurance Agency — Corona, CA Insurance",
     description: isSpanish
-      ? "Agencia independiente de seguros en Corona, California. Compara carriers y obtén cobertura de hogar, auto, vida y comercial. Atendemos Southern California en inglés y español."
-      : "Independent insurance agency in Corona, CA. We shop carriers to match home, auto, life, and business coverage to your needs. Bilingual service across Southern California.",
+      ? "Agencia independiente en Corona, CA. Comparamos aseguradoras para hogar, auto, vida y comercial. Servicio bilingüe en Southern California."
+      : "Independent insurance agency in Corona, CA. We shop carriers for home, auto, life & business coverage. Bilingual service across Southern California.",
     path: "/",
     locale,
+    absoluteTitle: true,
   });
 }
 

@@ -115,14 +115,20 @@ export function createPageMetadata(options: {
   path: string;
   keywords?: string[];
   locale?: string;
+  /**
+   * Use the title verbatim (skip the `| Allsberry Insurance Agency`
+   * template append). For pages whose title is already brand-complete
+   * and would otherwise exceed the ~70-char search-result truncation.
+   */
+  absoluteTitle?: boolean;
 }): Metadata {
-  const { title, description, path, keywords, locale } = options;
+  const { title, description, path, keywords, locale, absoluteTitle } = options;
   const canonical = localizedPath(locale, path);
   const englishPath = localizedPath("en", path);
   const spanishPath = localizedPath("es", path);
 
   return {
-    title,
+    title: absoluteTitle ? { absolute: title } : title,
     description,
     keywords: keywords ?? defaultKeywords,
     alternates: {
