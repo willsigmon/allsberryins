@@ -9,7 +9,7 @@ import { SectionHeading } from "@/components/ui/section-heading";
 import { Link } from "@/i18n/navigation";
 import { createPageMetadata } from "@/lib/metadata";
 import { agency, agents, officialProfile } from "@/lib/site-data";
-import { createBreadcrumbSchema, organizationSchema } from "@/lib/seo";
+import { createBreadcrumbSchema, erinPersonSchema, organizationSchema } from "@/lib/seo";
 import { buildTrackedHref } from "@/lib/tracking";
 import { absoluteUrl } from "@/lib/utils";
 
@@ -50,6 +50,7 @@ export default async function AboutPage({ params }: AboutPageProps) {
     name: "About Allsberry Insurance Agency",
     url: absoluteUrl("/about"),
     description: t("metaDescription"),
+    inLanguage: locale === "es" ? "es" : "en",
     about: {
       "@id": organizationSchema["@id"],
     },
@@ -57,6 +58,7 @@ export default async function AboutPage({ params }: AboutPageProps) {
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
+    inLanguage: locale === "es" ? "es" : "en",
     mainEntity: aboutPageFaqs.map((faq) => ({
       "@type": "Question",
       name: faq.question,
@@ -72,7 +74,15 @@ export default async function AboutPage({ params }: AboutPageProps) {
 
   return (
     <div className="bg-white pt-32">
-      <StructuredData data={[organizationSchema, breadcrumbSchema, aboutPageSchema, faqSchema]} />
+      <StructuredData
+        data={[
+          organizationSchema,
+          breadcrumbSchema,
+          aboutPageSchema,
+          faqSchema,
+          ...(erinPersonSchema ? [erinPersonSchema] : []),
+        ]}
+      />
       <section className="mx-auto max-w-7xl px-4 pb-18 sm:px-6 lg:px-8">
         <div className="grid gap-10 lg:grid-cols-[1fr_0.96fr] lg:items-center">
           <div>

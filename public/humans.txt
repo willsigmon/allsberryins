@@ -1,0 +1,15 @@
+/* TEAM */
+Owner & Principal Agent: Erin Allsberry
+Location: Corona, California, USA
+Contact: office [at] allsberryagency.com
+
+/* THANKS */
+Our clients across Corona, the Inland Empire, and Southern California.
+
+/* SITE */
+Last updated: 2026-04-18
+Language: English, Español
+Doctype: HTML5
+IDE: VS Code
+Framework: Next.js
+Deployment: Vercel
