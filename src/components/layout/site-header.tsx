@@ -135,8 +135,8 @@ export function SiteHeader() {
                 {agency.phone}
               </a>
               <div className="grid grid-cols-2 gap-2">
-                <LanguageSwitcher className="inline-flex justify-center border-white/12 bg-white/6 text-white hover:border-white/25 hover:bg-white/10 focus-visible:ring-white focus-visible:ring-offset-navy" />
-                <ThemeToggle className="inline-flex justify-center border-white/12 bg-white/6 text-white hover:border-white/25 hover:bg-white/10 focus-visible:ring-white focus-visible:ring-offset-navy" />
+                <LanguageSwitcher className="w-full justify-center" />
+                <ThemeToggle className="w-full justify-center" />
               </div>
               <Link
                 href="/quote"
