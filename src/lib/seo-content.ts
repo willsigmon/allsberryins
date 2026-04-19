@@ -60,7 +60,7 @@ export const seoPages: SeoPage[] = [
     pageType: "pillar",
     title: "California Home Insurance",
     description:
-      "California home insurance is more complex than a quick quote. Review wildfire exposure, rebuild cost assumptions, carrier appetite, and backup options like FAIR Plan plus DIC before you decide.",
+      "California home insurance is more complex than a quick quote. Review wildfire risk, rebuild cost, carrier appetite, and FAIR Plan + DIC options.",
     eyebrow: "Home insurance guide",
     heroSummary:
       "This is the wedge page for modern search and AI discovery: clear, plain-English guidance on how California home insurance actually gets evaluated in 2026.",
@@ -192,7 +192,7 @@ export const seoPages: SeoPage[] = [
     pageType: "supporting",
     title: "Wildfire Home Insurance in California",
     description:
-      "Wildfire pressure changes how California home insurance is quoted, underwritten, and renewed. Learn how eligibility, inspections, and backup options usually work.",
+      "Wildfire pressure changes how California home insurance is quoted and renewed. Learn how eligibility, inspections, and backup options work.",
     eyebrow: "Wildfire insurance context",
     heroSummary:
       "People often search for a standalone wildfire policy, but the real question is how wildfire exposure affects home insurance eligibility, pricing, and fallback planning in California.",
@@ -622,7 +622,7 @@ export const seoPages: SeoPage[] = [
     pageType: "location",
     title: "Insurance Agency in Corona, CA",
     description:
-      "Allsberry Insurance Agency is based in Corona, California and helps households and businesses across the Inland Empire and Southern California with home, auto, business, and life insurance guidance.",
+      "Allsberry Insurance Agency in Corona, CA helps Inland Empire and Southern California clients with home, auto, business, and life insurance.",
     eyebrow: "Local office page",
     heroSummary:
       "This is the proof-rich local page meant to support map, local, and AI-search visibility without spinning up thin city clones.",
