@@ -94,6 +94,7 @@ export default async function EvidenceOfInsurancePage({ params, searchParams }: 
               eyebrow={t("eyebrow")}
               title={t("heading")}
               description={t("subheading")}
+              as="h1"
             />
             <div className="mt-8 rounded-[2rem] border border-blue/10 bg-white p-6 shadow-[0_20px_60px_-46px_rgba(0,32,92,0.45)]">
               <p className="text-sm font-semibold uppercase tracking-[0.24em] text-blue">

@@ -68,6 +68,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
           eyebrow={t("eyebrow")}
           title={t("heading")}
           description={t("subheading")}
+          as="h1"
         />
         {locale === "es" && (
           <div className="mt-6 rounded-2xl border border-amber-200 bg-amber-50 px-5 py-3 text-sm text-amber-800">

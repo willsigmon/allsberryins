@@ -92,6 +92,7 @@ export default async function ContactPage({ params }: ContactPageProps) {
           eyebrow={t("eyebrow")}
           title={t("heading")}
           description={t("subheading")}
+          as="h1"
         />
 
         <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">

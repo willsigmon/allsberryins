@@ -61,6 +61,7 @@ export default async function ResourcesPage({ params }: ResourcesPageProps) {
           eyebrow={t("eyebrow")}
           title={t("heading")}
           description={t("subheading")}
+          as="h1"
         />
         <div className="mt-12 grid gap-6 lg:grid-cols-2 xl:grid-cols-3">
           {seoPages.map((page) => (
