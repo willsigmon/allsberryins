@@ -12,10 +12,17 @@
   - AGENT_TITLE       → Title (e.g., Agency Owner & Principal Agent)
   - AGENT_EMAIL       → Email (e.g., office@allsberryagency.com)
   - AGENT_PHONE       → Phone (e.g., (951) 739-5959)
+  - AGENT_PHONE_HREF  → tel: digits (e.g., +19517395959)
   - AGENT_PHOTO_URL   → Square headshot URL (e.g., https://allsberryagency.com/media/agents/signatures/erin-allsberry.png)
                         MUST be square (200x200 recommended) — Gmail strips object-fit CSS, so a portrait source
                         will render squashed. Pre-crop to square before using.
-  - AGENT_CALENDLY    → Calendly link (optional, delete row if unused)
+  - AGENT_CALENDLY    → Calendly link (optional; delete the CTA row if the agent does not own a booking link)
+  - AGENT_LINKEDIN    → Personal LinkedIn URL (optional; delete the LinkedIn cell if the agent does not have one)
+
+  Current production-safe defaults:
+  - Keep the "Book an Appointment" CTA only on agents with a confirmed personal Calendly link.
+  - Keep the personal LinkedIn cell only on agents with a confirmed personal profile.
+  - Use the main office phone for everyone except agents with a confirmed direct line.
 -->
 
 <table cellpadding="0" cellspacing="0" border="0" style="font-family:Arial,Helvetica,sans-serif;font-size:14px;color:#1a202c;line-height:1.4;max-width:500px;">
@@ -79,6 +86,7 @@
           <td style="padding-bottom:3px;">
             <span style="color:#0066b3;font-weight:600;">P:</span>&nbsp;
             <a href="tel:AGENT_PHONE_HREF" style="color:#1a202c;text-decoration:none;">AGENT_PHONE</a>
+            <!-- AGENT_PHONE_HREF is the tel: value (digits only, e.g., +19517395959). Use the main office number unless the agent has a confirmed direct line. -->
           </td>
         </tr>
         <tr>
@@ -104,7 +112,9 @@
   </tr>
   <tr>
     <td style="padding-top:12px;">
-      <!-- Book appointment CTA + Share-your-experience review pill -->
+      <!-- Optional book appointment CTA + review pill.
+           Delete the first <a href="AGENT_CALENDLY"> anchor (and its trailing &nbsp;&nbsp;)
+           if this agent does not own a personal booking link. Keep the review pill. -->
       <a href="AGENT_CALENDLY" style="display:inline-block;background:#0066b3;color:#ffffff;font-size:12px;font-weight:600;padding:7px 16px;border-radius:4px;text-decoration:none;letter-spacing:0.3px;">Book an Appointment</a>&nbsp;&nbsp;<a href="https://allsberryagency.com/review" style="display:inline-block;background:#fef3c7;color:#92400e;font-size:11px;font-weight:700;padding:6px 14px;border-radius:999px;text-decoration:none;letter-spacing:0.3px;border:1px solid #fde68a;">&#9733; Share your experience</a>
     </td>
   </tr>
@@ -119,8 +129,10 @@
           <td style="padding-right:12px;">
             <a href="https://instagram.com/allsberry_insurance" style="color:#0066b3;text-decoration:none;font-weight:600;">Instagram</a>
           </td>
+          <!-- Optional personal LinkedIn cell. Delete this <td> entirely
+               if the agent does not have a confirmed personal profile. -->
           <td style="padding-right:12px;">
-            <a href="https://linkedin.com/in/erin-allsberry-2845a819" style="color:#0066b3;text-decoration:none;font-weight:600;">LinkedIn</a>
+            <a href="AGENT_LINKEDIN" style="color:#0066b3;text-decoration:none;font-weight:600;">LinkedIn</a>
           </td>
           <td>
             <a href="https://g.page/r/CbP-IAAlXWkLEAI/review" style="color:#0066b3;text-decoration:none;font-weight:600;">Google</a>
