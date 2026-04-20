@@ -401,7 +401,25 @@
     "languagesLabel": "Idiomas",
     "callAgent": "Llamar a {name}",
     "emailAgent": "Escribir a {name}",
-    "saveContact": "Guardar contacto"
+    "saveContact": "Guardar contacto",
+    "bios": {
+      "erin": "Con más de 24 años de experiencia, Erin fundó Allsberry Insurance Agency para ofrecer soluciones de seguros personalizadas a familias y negocios en todo el Sur de California. Cree en hacer los seguros sencillos y sin estrés, para que usted pueda concentrarse en lo que más importa.",
+      "alex": "Alex mantiene todo en Allsberry Insurance Agency funcionando sin contratiempos. Como gerente de oficina, es conocida por su capacidad de manejar casi cualquier cosa — y muchas veces todo a la vez. Muy detallista y súper receptiva, Alex se asegura de que cada cliente sea atendido de forma rápida y completa. Los clientes pueden contar con ella para dar seguimiento, organizar y garantizar que nada quede sin resolverse.",
+      "vanessa": "Vanessa ha sido parte de la historia de Allsberry desde el principio — una de las integrantes originales del equipo, mucho antes de que la agencia se convirtiera en lo que es hoy. Con 15 años de experiencia, es una experta de confianza en seguros de casa, auto y vida. Disfruta genuinamente conectar con los clientes a través de revisiones anuales de pólizas, asegurándose de que la cobertura se mantenga al día con los cambios de la vida.",
+      "brahm": "Brahm es un asesor de confianza que combina fluidez técnica con un enfoque genuino centrado en el cliente. Conocido por traducir coberturas complejas en orientación clara y accionable, ayuda a los clientes a tomar decisiones seguras e informadas desde la primera conversación. Su enfoque se distingue por la precisión — basado en claridad, capacidad de respuesta y confianza.",
+      "julie": "Julie aporta al equipo una amplia experiencia en Farmers y un profundo conocimiento del sector. Trabajando de forma remota, juega un papel importante apoyando a los clientes y asegurando que las pólizas se manejen con precisión y eficiencia. Su confiabilidad, experiencia y disposición para ayudar la convierten en un recurso valioso tanto para los clientes como para el equipo.",
+      "dakota": "Dakota aporta energía y dedicación a cada interacción con los clientes, garantizando una experiencia de seguro fluida y personalizada. Ya sea que necesite cobertura de casa, auto o negocio, Dakota está aquí para ayudar.",
+      "jason": "Jason se encarga del lado operativo del día a día de la agencia, incluyendo operaciones y contabilidad. Eso permite que el resto del equipo se concentre en ayudar a los clientes.",
+      "anna": "Anna mantiene en marcha el lado de servicio de la agencia. Procesa cuentas, gestiona el papeleo de las pólizas y brinda servicio al cliente diario para que siempre haya alguien disponible para atenderle. Organizada y confiable, se asegura de que cada solicitud se maneje de forma rápida y correcta.",
+      "heidi": "Especializada en seguros de negocio y comerciales, compensación de trabajadores, responsabilidad civil y cobertura de edificios comerciales, Heidi es una profesional de ventas dedicada que aporta energía y consistencia a cada interacción con los clientes. Con años de experiencia en ventas de seguros, siempre está lista para atender una llamada, dar seguimiento a una cotización y ayudar a los clientes a encontrar la cobertura adecuada.",
+      "jenn": "Jenn dirige el departamento comercial con un fuerte enfoque en la organización, el cumplimiento y la comunicación con los clientes. Se asegura de que las renovaciones se manejen a tiempo, los reportes sean precisos y nunca se pierdan oportunidades de conectarse con los dueños de negocios. Su atención al detalle y enfoque proactivo la convierten en una aliada esencial para los clientes comerciales que navegan sus necesidades de seguros."
+    },
+    "fellows": {
+      "linda": {
+        "recognition": "Reconocida como Allsberry Insurance Inc. Fellow por una carrera definida por la confianza, el servicio y el impacto duradero.",
+        "career": "26 años como Ejecutiva de Cuentas Comerciales. Miembro original del equipo Allsberry y verdadero pilar del legado de la agencia. Conocida como la 'Mamá de la Oficina', Linda llevaba amabilidad, sabiduría y una presencia constante a cada interacción."
+      }
+    }
   },
   "notFound": {
     "heading": "Página no encontrada",

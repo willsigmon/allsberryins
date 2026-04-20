@@ -4,7 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowRight, Mail, Phone, QrCode, ShieldCheck } from "lucide-react";
 import { QRCodeSVG } from "qrcode.react";
-import { setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { AgentContactForm } from "@/components/forms/agent-contact-form";
 import { SaveContactButton } from "@/components/ui/save-contact-button";
@@ -37,9 +37,11 @@ export async function generateMetadata({ params }: AgentPageProps): Promise<Meta
     return {};
   }
 
+  const tBio = await getTranslations({ locale, namespace: "agents.bios" });
+
   return createPageMetadata({
     title: agent.name,
-    description: `${agent.name}, ${agent.title} at Allsberry Insurance Agency, serving Southern California. Contact ${agent.firstName} for personalized insurance guidance.`,
+    description: tBio(agent.slug),
     path: `/agents/${agent.slug}`,
     keywords: [agent.name, agent.title, "Southern California insurance agent", "personalized insurance guidance"],
     locale,
@@ -56,6 +58,8 @@ export default async function AgentPage({ params, searchParams }: AgentPageProps
     notFound();
   }
 
+  const tBio = await getTranslations("agents.bios");
+  const agentBio = tBio(agent.slug);
   const entryPoint = typeof query.entry === "string" ? query.entry : undefined;
   const directPageUrl = absoluteUrl(
     buildTrackedHref(`/agents/${agent.slug}`, {
@@ -96,7 +100,7 @@ export default async function AgentPage({ params, searchParams }: AgentPageProps
     telephone: agent.phone,
     email: agent.email,
     url: absoluteUrl(`/agents/${agent.slug}`),
-    description: agent.bio,
+    description: agentBio,
     image: agent.photo ? absoluteUrl(agent.photo.src) : undefined,
     knowsAbout: agent.specialties,
     knowsLanguage: agent.languages?.includes("Spanish") ? ["en", "es"] : ["en"],
@@ -197,7 +201,7 @@ export default async function AgentPage({ params, searchParams }: AgentPageProps
                 </div>
               </div>
 
-              <p className="mt-8 text-lg leading-8 text-gray-600">{agent.bio}</p>
+              <p className="mt-8 text-lg leading-8 text-gray-600">{agentBio}</p>
               {agent.license ? (
                 <p className="mt-5 text-sm font-semibold text-blue">{agent.license}</p>
               ) : null}

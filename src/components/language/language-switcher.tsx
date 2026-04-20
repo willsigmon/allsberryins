@@ -77,7 +77,10 @@ function spawnLocaleOverlay({
 export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
   const helperId = useId();
   const panelRef = useRef<HTMLDivElement | null>(null);
+  const buttonRef = useRef<HTMLButtonElement | null>(null);
+  const panelInnerRef = useRef<HTMLDivElement | null>(null);
   const [open, setOpen] = useState(false);
+  const [mobilePos, setMobilePos] = useState<{ top: number } | null>(null);
 
   const t = useTranslations("languageSwitcher");
   const locale = useLocale() as AppLocale;
@@ -106,6 +109,43 @@ export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
     };
   }, []);
 
+  useEffect(() => {
+    if (!open) {
+      setMobilePos(null);
+      return;
+    }
+    const update = () => {
+      const btn = buttonRef.current;
+      const panel = panelInnerRef.current;
+      const isMobile =
+        typeof window !== "undefined" &&
+        window.matchMedia("(max-width: 767px)").matches;
+      if (!isMobile || !btn) {
+        setMobilePos(null);
+        return;
+      }
+      const btnRect = btn.getBoundingClientRect();
+      const panelHeight = panel?.offsetHeight ?? 202;
+      const margin = 16;
+      const belowTop = btnRect.bottom + 12;
+      const fitsBelow = belowTop + panelHeight + margin <= window.innerHeight;
+      const top = fitsBelow
+        ? belowTop
+        : Math.max(margin, btnRect.top - panelHeight - 12);
+      setMobilePos({ top });
+    };
+    update();
+    // Rerun once after the panel mounts so we know its real height.
+    const raf = requestAnimationFrame(update);
+    window.addEventListener("resize", update);
+    window.addEventListener("scroll", update, true);
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("resize", update);
+      window.removeEventListener("scroll", update, true);
+    };
+  }, [open]);
+
   const changeLocale = (next: AppLocale) => {
     setOpen(false);
     if (next === locale) {
@@ -123,6 +163,7 @@ export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
   return (
     <div ref={panelRef} className="relative">
       <button
+        ref={buttonRef}
         type="button"
         onClick={() => setOpen((value) => !value)}
         className={cn(
@@ -158,7 +199,13 @@ export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -8, scale: 0.96 }}
             transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
-            className="absolute top-[calc(100%+0.75rem)] z-50 left-1/2 -translate-x-1/2 w-[min(17rem,calc(100vw-2rem))] origin-top md:left-auto md:right-0 md:translate-x-0 md:w-[17rem] md:origin-top-right rounded-[1.6rem] border border-white/12 bg-navy p-4 text-white shadow-[0_30px_70px_-34px_rgba(0,0,0,0.55)] backdrop-blur"
+            ref={panelInnerRef}
+            style={mobilePos !== null ? { top: mobilePos.top } : undefined}
+            className={cn(
+              "z-50 origin-top rounded-[1.6rem] border border-white/12 bg-navy p-4 text-white shadow-[0_30px_70px_-34px_rgba(0,0,0,0.55)] backdrop-blur",
+              "max-md:fixed max-md:left-4 max-md:right-4",
+              "md:absolute md:top-[calc(100%+0.75rem)] md:right-0 md:w-[17rem] md:origin-top-right",
+            )}
           >
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/55">
               {t("sectionTitle")}

@@ -32,6 +32,8 @@ const teamAgents = agents.filter((a) => a.slug !== "erin" && !(leadershipSlugs a
 
 export function TeamSection() {
   const t = useTranslations("home.team");
+  const bio = useTranslations("agents.bios");
+  const fellowT = useTranslations("agents.fellows");
 
   return (
     <section className="section-muted-bg py-20 sm:py-24" id="team">
@@ -79,7 +81,7 @@ export function TeamSection() {
                   {erinAgent.title}
                 </p>
                 <p className="mt-4 max-w-2xl text-base leading-7 text-white/80 lg:text-[15px]">
-                  {erinAgent.bio}
+                  {bio(erinAgent.slug)}
                 </p>
                 <div className="mt-5 flex flex-wrap justify-center gap-2 lg:justify-start">
                   {erinAgent.specialties.map((specialty) => (
@@ -159,7 +161,7 @@ export function TeamSection() {
                 </div>
               </div>
               <p className="mt-4 flex-1 text-sm leading-7 text-gray-600">
-                {fellow.career}
+                {fellowT(`${fellow.slug}.career`)}
               </p>
               <p className="mt-3 text-xs leading-5 text-gray-400">
                 <span className="font-semibold text-gold/90">{t("fellowDefinitionIntro")}</span>{" "}
@@ -178,6 +180,7 @@ export function TeamSection() {
 
 function LeadershipCard({ agent, index }: { agent: Agent; index: number }) {
   const t = useTranslations("home.team");
+  const bio = useTranslations("agents.bios");
 
   return (
     <motion.article
@@ -225,7 +228,7 @@ function LeadershipCard({ agent, index }: { agent: Agent; index: number }) {
             </p>
           )}
           <p className="mt-4 max-w-xl text-sm leading-7 text-white/82">
-            {agent.bio}
+            {bio(agent.slug)}
           </p>
 
           <div className="mt-5 flex flex-wrap justify-center gap-2 sm:justify-start">
@@ -270,6 +273,7 @@ function LeadershipCard({ agent, index }: { agent: Agent; index: number }) {
 
 function TeamMemberCard({ agent, index }: { agent: Agent; index: number }) {
   const t = useTranslations("home.team");
+  const bio = useTranslations("agents.bios");
 
   return (
     <motion.article
@@ -316,7 +320,7 @@ function TeamMemberCard({ agent, index }: { agent: Agent; index: number }) {
         </div>
       </div>
 
-      <p className="mt-4 flex-1 text-sm leading-7 text-gray-600">{agent.bio}</p>
+      <p className="mt-4 flex-1 text-sm leading-7 text-gray-600">{bio(agent.slug)}</p>
 
       <Link
         // eslint-disable-next-line @typescript-eslint/no-explicit-any

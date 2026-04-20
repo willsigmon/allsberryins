@@ -947,6 +947,7 @@ export const footerProducts = [
 ] as const;
 
 export type Fellow = {
+  slug: string;
   name: string;
   firstName: string;
   recognition: string;
@@ -963,6 +964,7 @@ export const fellowDefinition =
 
 export const fellows: Fellow[] = [
   {
+    slug: "linda",
     name: "Linda Sullivan",
     firstName: "Linda",
     recognition:
