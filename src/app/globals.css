@@ -965,7 +965,11 @@ section, div, header, footer, nav {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1.5rem;
+  padding:
+    calc(1rem + env(safe-area-inset-top))
+    calc(1rem + env(safe-area-inset-right))
+    calc(1rem + env(safe-area-inset-bottom))
+    calc(1rem + env(safe-area-inset-left));
   pointer-events: none;
   opacity: 0;
   background: radial-gradient(
@@ -981,6 +985,27 @@ section, div, header, footer, nav {
     locale-overlay-morph-out 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.78s forwards;
 }
 
+/* Fallback for mobile browsers where backdrop-filter silently fails —
+   paint a nearly-opaque wash so the overlay never looks see-through. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  [data-locale-overlay] {
+    background: rgba(232, 240, 248, 0.98);
+  }
+  :root[data-theme="dark"] [data-locale-overlay] {
+    background: rgba(5, 12, 28, 0.98);
+  }
+}
+
+@media (min-width: 640px) {
+  [data-locale-overlay] {
+    padding:
+      calc(1.5rem + env(safe-area-inset-top))
+      calc(1.5rem + env(safe-area-inset-right))
+      calc(1.5rem + env(safe-area-inset-bottom))
+      calc(1.5rem + env(safe-area-inset-left));
+  }
+}
+
 :root[data-theme="dark"] [data-locale-overlay] {
   background: radial-gradient(
     ellipse at center,
@@ -994,17 +1019,20 @@ section, div, header, footer, nav {
   position: relative;
   display: flex;
   align-items: center;
-  gap: 0.85rem;
-  padding: 0.95rem 1.45rem;
-  border-radius: 9999px;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  padding: 0.85rem 1.2rem;
+  max-width: min(28rem, 100%);
+  border-radius: 1.6rem;
   border: 1px solid rgba(255, 255, 255, 0.22);
   background: linear-gradient(135deg, rgba(0, 32, 92, 0.98) 0%, rgba(0, 16, 51, 0.98) 100%);
   color: #ffffff;
   font-family: var(--font-sans);
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   font-weight: 600;
   letter-spacing: -0.005em;
-  white-space: nowrap;
+  text-align: center;
   box-shadow:
     0 32px 72px -22px rgba(0, 32, 92, 0.6),
     0 2px 0 rgba(255, 255, 255, 0.1) inset,
@@ -1024,8 +1052,11 @@ section, div, header, footer, nav {
 
 @media (min-width: 640px) {
   [data-locale-overlay] .locale-overlay-pill {
+    flex-wrap: nowrap;
+    gap: 0.85rem;
     font-size: 1.02rem;
     padding: 1.05rem 1.6rem;
+    border-radius: 9999px;
   }
 }
 
@@ -1050,12 +1081,19 @@ section, div, header, footer, nav {
 [data-locale-overlay] .locale-overlay-bar {
   position: relative;
   display: inline-block;
-  width: 3.5rem;
+  flex: 0 0 auto;
+  width: 2.4rem;
   height: 2px;
   background: linear-gradient(90deg, #0066b3 0%, #ffffff 50%, #da291c 100%);
   border-radius: 9999px;
   transform-origin: left;
   animation: locale-overlay-bar 0.72s ease-in-out 0.12s backwards;
+}
+
+@media (min-width: 640px) {
+  [data-locale-overlay] .locale-overlay-bar {
+    width: 3.5rem;
+  }
 }
 
 @keyframes locale-overlay-morph-in {
