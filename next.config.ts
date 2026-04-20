@@ -37,6 +37,15 @@ const productionConfig: NextConfig = {
       },
     ];
   },
+  async redirects() {
+    return [
+      {
+        source: "/email-signatures",
+        destination: "/email-signatures/index.html",
+        permanent: false,
+      },
+    ];
+  },
 };
 
 const nextConfig: NextConfig = process.env.VERCEL
