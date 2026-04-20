@@ -718,6 +718,12 @@ textarea {
 .hero-word-enter {
   display: inline-block;
   animation: word-enter 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  /* WebKit's `background-clip: text` clips the element's content box, not the
+     font's ink bounds, so descenders on letters like g/j/p/y (e.g. "Negocio")
+     get chopped when line-height is tight. Pad the box down and pull layout
+     back up so the gradient has room to paint the descender. */
+  padding-bottom: 0.18em;
+  margin-bottom: -0.18em;
 }
 
 /* ── Icon glow on group hover ── */
