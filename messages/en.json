@@ -401,7 +401,25 @@
     "languagesLabel": "Languages",
     "callAgent": "Call {name}",
     "emailAgent": "Email {name}",
-    "saveContact": "Save contact"
+    "saveContact": "Save contact",
+    "bios": {
+      "erin": "With over 24 years of experience, Erin founded Allsberry Insurance Agency to provide personalized insurance solutions to families and businesses across Southern California. She believes in making insurance straightforward and stress-free, so you can focus on what matters most.",
+      "alex": "Alex keeps everything at Allsberry Insurance Agency running smoothly. As office manager, she's known for her ability to handle just about anything — and often all at once. Highly detail-oriented and incredibly responsive, Alex makes sure every client is taken care of quickly and thoroughly. Clients can count on her for follow-up, organization, and making sure nothing ever falls through the cracks.",
+      "vanessa": "Vanessa has been part of the Allsberry story from the very beginning — one of the original team members long before the agency evolved into what it is today. With 15 years of experience, she's a trusted expert in home, auto, and life insurance. She genuinely enjoys connecting with clients through annual policy reviews, making sure coverage keeps up with life's changes.",
+      "brahm": "Brahm is a trusted advisor who brings a combination of technical fluency and a genuine client-first approach to insurance. Known for translating complex coverage into clear, actionable guidance, he helps clients make confident, informed decisions from the very first conversation. His approach is defined by precision — built on clarity, responsiveness, and trust.",
+      "julie": "Julie brings a wealth of Farmers experience and industry knowledge to the team. Working remotely, she plays an important role in supporting clients and ensuring policies are handled accurately and efficiently. Her reliability, experience, and helpful approach make her a valuable resource for both clients and the team.",
+      "dakota": "Dakota brings energy and dedication to every client interaction, ensuring a smooth and personalized insurance experience. Whether you need home, auto, or business coverage, Dakota is here to help.",
+      "jason": "Jason handles the day-to-day business side of the agency, including operations and accounting. That lets the rest of the team focus on helping clients.",
+      "anna": "Anna keeps the service side of the agency running. She processes accounts, handles policy paperwork, and provides day-to-day customer service so clients always have someone to call. Organized and dependable, she makes sure every request is handled quickly and correctly.",
+      "heidi": "Specializing in business and commercial insurance, workers compensation, liability, and commercial building coverage, Heidi is a dedicated sales professional who brings energy and consistency to every client interaction. With years of insurance sales experience, she's always ready to take a call, follow up on a quote, and help clients find the right coverage.",
+      "jenn": "Jenn leads the commercial department with a strong focus on organization, compliance, and client communication. She ensures renewals are handled on time, reports are accurate, and opportunities to connect with business owners are never missed. Her attention to detail and proactive approach make her an essential partner for commercial clients navigating their insurance needs."
+    },
+    "fellows": {
+      "linda": {
+        "recognition": "Recognized as an Allsberry Insurance Inc. Fellow for a career defined by trust, service, and lasting impact.",
+        "career": "26 years as Commercial Account Executive. The original Allsberry team member and a true cornerstone of the agency's legacy. Known as the 'Office Mom,' Linda brought kindness, wisdom, and a steady presence to every interaction."
+      }
+    }
   },
   "notFound": {
     "heading": "Page not found",

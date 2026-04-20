@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowRight, ExternalLink, MapPin, Phone } from "lucide-react";
+import { getTranslations } from "next-intl/server";
 
 import { StructuredData } from "@/components/seo/structured-data";
 import { PageFaqSection } from "@/components/sections/page-faq-section";
@@ -15,7 +16,8 @@ type SeoPageTemplateProps = {
   page: SeoPage;
 };
 
-export function SeoPageTemplate({ page }: SeoPageTemplateProps) {
+export async function SeoPageTemplate({ page }: SeoPageTemplateProps) {
+  const tBio = await getTranslations("agents.bios");
   const relatedPages = getSeoPagesBySlugs(page.relatedPageSlugs ?? []).filter(
     (relatedPage) => relatedPage.slug !== page.slug,
   );
@@ -314,7 +316,7 @@ export function SeoPageTemplate({ page }: SeoPageTemplateProps) {
                 <h3 className="mt-3 font-display text-2xl font-extrabold tracking-tight text-gray-900">
                   {agent.name}
                 </h3>
-                <p className="mt-4 text-sm leading-7 text-gray-600">{agent.bio}</p>
+                <p className="mt-4 text-sm leading-7 text-gray-600">{tBio(agent.slug)}</p>
                 <div className="mt-5 flex flex-wrap gap-2">
                   {agent.specialties.slice(0, 3).map((specialty) => (
                     <span

@@ -33,6 +33,7 @@ export default async function AboutPage({ params }: AboutPageProps) {
   setRequestLocale(locale);
   const t = await getTranslations("about");
   const tTeam = await getTranslations("home.team");
+  const tBio = await getTranslations("agents.bios");
 
   const aboutPageFaqs: Array<{ question: string; answer: string }> = [
     { question: t("faqs.q1.question"), answer: t("faqs.q1.answer") },
@@ -231,7 +232,7 @@ export default async function AboutPage({ params }: AboutPageProps) {
                     )}
                   </div>
                 </div>
-                <p className="mt-3 text-sm leading-7 text-gray-600 line-clamp-3">{agent.bio}</p>
+                <p className="mt-3 text-sm leading-7 text-gray-600 line-clamp-3">{tBio(agent.slug)}</p>
                 <Link
                   // eslint-disable-next-line @typescript-eslint/no-explicit-any
                   href={buildTrackedHref(`/agents/${agent.slug}`, {
