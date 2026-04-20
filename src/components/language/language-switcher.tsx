@@ -158,7 +158,7 @@ export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -8, scale: 0.96 }}
             transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
-            className="absolute right-0 top-[calc(100%+0.75rem)] z-50 w-[17rem] origin-top-right rounded-[1.6rem] border border-white/12 bg-navy p-4 text-white shadow-[0_30px_70px_-34px_rgba(0,0,0,0.55)] backdrop-blur"
+            className="absolute top-[calc(100%+0.75rem)] z-50 left-1/2 -translate-x-1/2 w-[min(17rem,calc(100vw-2rem))] origin-top md:left-auto md:right-0 md:translate-x-0 md:w-[17rem] md:origin-top-right rounded-[1.6rem] border border-white/12 bg-navy p-4 text-white shadow-[0_30px_70px_-34px_rgba(0,0,0,0.55)] backdrop-blur"
           >
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/55">
               {t("sectionTitle")}
