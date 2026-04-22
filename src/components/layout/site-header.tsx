@@ -46,7 +46,7 @@ export function SiteHeader() {
           : "shadow-[0_18px_34px_-32px_rgba(0,32,92,0.3)]",
       )}
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center" aria-label={tHeader("agencyHome")}>
           <Image
             src="/media/brand/logos/allsberry-starlight.png"
@@ -54,18 +54,18 @@ export function SiteHeader() {
             width={260}
             height={86}
             priority
-            className="h-14 w-auto sm:h-16 lg:h-[4.5rem]"
+            className="h-12 w-auto sm:h-14 xl:h-16"
           />
         </Link>
 
-        <nav className="hidden items-center gap-7 md:flex">
+        <nav className="hidden items-center gap-4 lg:gap-5 xl:gap-7 min-[1180px]:flex">
           {navigation.map((item) => (
             <Link
               key={item.label}
               href={item.href}
               onClick={() => { tap(); }}
               className={cn(
-                "text-sm font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
+                "text-[13px] font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 xl:text-sm",
                 "text-white/88 hover:text-white focus-visible:ring-white focus-visible:ring-offset-navy",
               )}
             >
@@ -74,14 +74,14 @@ export function SiteHeader() {
           ))}
         </nav>
 
-        <div className="hidden items-center gap-3 md:flex">
+        <div className="hidden items-center gap-2 xl:gap-3 min-[1180px]:flex">
           <LanguageSwitcher />
           <ThemeToggle />
           <a
             href={agency.phoneHref}
             onClick={() => { press(); }}
             className={cn(
-              "inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold transition",
+              "inline-flex shrink-0 items-center gap-2 whitespace-nowrap rounded-full border px-3.5 py-2 text-[13px] font-semibold transition xl:px-4 xl:text-sm",
               "border-white/18 text-white hover:border-white/35 hover:bg-white/8",
             )}
           >
@@ -91,7 +91,7 @@ export function SiteHeader() {
           <Link
             href="/quote"
             onClick={() => { haptic("nudge"); }}
-            className="cta-attention inline-flex items-center justify-center rounded-full bg-red px-5 py-2.5 text-sm font-bold text-white transition hover:bg-red-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-red"
+            className="cta-attention inline-flex shrink-0 items-center justify-center whitespace-nowrap rounded-full bg-red px-4 py-2.5 text-[13px] font-bold text-white transition hover:bg-red-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-red xl:px-5 xl:text-sm"
           >
             {tCta("getQuote")}
           </Link>
@@ -99,7 +99,7 @@ export function SiteHeader() {
 
         <button
           type="button"
-          className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/18 text-white md:hidden"
+          className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/18 text-white min-[1180px]:hidden"
           aria-expanded={menuOpen}
           aria-controls="mobile-nav"
           aria-label={menuOpen ? tHeader("closeMenu") : tHeader("openMenu")}
@@ -112,7 +112,7 @@ export function SiteHeader() {
       {menuOpen ? (
         <div
           id="mobile-nav"
-          className="border-t border-white/12 bg-navy/98 px-4 pb-6 pt-4 shadow-xl md:hidden"
+          className="border-t border-white/12 bg-navy/98 px-4 pb-6 pt-4 shadow-xl min-[1180px]:hidden"
         >
           <nav className="mx-auto flex max-w-7xl flex-col gap-2">
             {navigation.map((item) => (
