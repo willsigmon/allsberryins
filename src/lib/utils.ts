@@ -1,6 +1,8 @@
 import { clsx, type ClassValue } from "clsx";
 
-export const siteUrl = "https://allsberryagency.com";
+export const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
+  "https://allsberryagency.com";
 
 export function cn(...inputs: ClassValue[]) {
   return clsx(inputs);

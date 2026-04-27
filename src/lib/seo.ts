@@ -116,6 +116,26 @@ export const organizationSchema = {
   knowsAbout: products
     .filter((product) => product.slug !== "other")
     .map((product) => product.name),
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Insurance Products",
+    itemListElement: products
+      .filter((product) => product.slug !== "other")
+      .map((product) => ({
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: product.name,
+          description: product.description,
+          serviceType:
+            product.category === "commercial"
+              ? "Commercial Insurance"
+              : "Personal Insurance",
+          provider: { "@id": absoluteUrl("/#organization") },
+          areaServed: "Southern California",
+        },
+      })),
+  },
   openingHoursSpecification: [
     {
       "@type": "OpeningHoursSpecification",

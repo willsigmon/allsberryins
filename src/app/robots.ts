@@ -8,6 +8,10 @@ export default function robots(): MetadataRoute.Robots {
     disallow: ["/team-attribution", "/api"],
   };
 
+  // Crawlers we explicitly do not want training on or scraping the site.
+  // ByteDance/TikTok's Bytespider is widely blocked across the web.
+  const disallowedCrawlers = ["Bytespider"];
+
   // AI search + retrieval crawlers we want answering questions about the agency.
   // Each is the documented identifier from the respective provider (separate
   // from their general training crawlers where applicable).
@@ -73,6 +77,10 @@ export default function robots(): MetadataRoute.Robots {
       ...allowedAiCrawlers.map((userAgent) => ({
         userAgent,
         ...defaultRule,
+      })),
+      ...disallowedCrawlers.map((userAgent) => ({
+        userAgent,
+        disallow: "/",
       })),
     ],
     sitemap: `${siteUrl}/sitemap.xml`,
