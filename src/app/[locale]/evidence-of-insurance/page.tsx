@@ -7,7 +7,7 @@ import { StructuredData } from "@/components/seo/structured-data";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { createPageMetadata } from "@/lib/metadata";
 import { createBreadcrumbSchema, organizationSchema } from "@/lib/seo";
-import { agency, getAgentBySlug } from "@/lib/site-data";
+import { agency, getAgentBySlug, primaryProducerSlug } from "@/lib/site-data";
 import { buildTrackedHref, normalizeAgentSlug } from "@/lib/tracking";
 import { absoluteUrl } from "@/lib/utils";
 
@@ -141,7 +141,7 @@ export default async function EvidenceOfInsurancePage({ params, searchParams }: 
               href: buildTrackedHref("/quote", {
                 agent: assignedAgentSlug,
                 entry: entryPoint ?? "evidence-faq-quote-cta",
-                product: assignedAgentSlug === "brahm" ? "business" : "home",
+                product: assignedAgentSlug === primaryProducerSlug ? "business" : "home",
               }),
               label: t("faqs.ctaQuote"),
             },

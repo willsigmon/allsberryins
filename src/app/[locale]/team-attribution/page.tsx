@@ -4,7 +4,7 @@ import { setRequestLocale } from "next-intl/server";
 import { AttributionWorkbench } from "@/components/team/attribution-workbench";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { createPageMetadata } from "@/lib/metadata";
-import { agents } from "@/lib/site-data";
+import { agents, primaryProducerSlug } from "@/lib/site-data";
 import { buildTrackedHref } from "@/lib/tracking";
 import { absoluteUrl } from "@/lib/utils";
 
@@ -39,7 +39,7 @@ const agentLinkSets = agents.map((agent) => ({
   proofUrl: absoluteUrl(
     buildTrackedHref("/evidence-of-insurance", {
       agent: agent.slug,
-      audience: agent.slug === "brahm" ? "Business Owner" : "Home / Auto Owner",
+      audience: agent.slug === primaryProducerSlug ? "Business Owner" : "Home / Auto Owner",
       entry: "team-dashboard-proof",
     }),
   ),
@@ -47,7 +47,7 @@ const agentLinkSets = agents.map((agent) => ({
     buildTrackedHref("/quote", {
       agent: agent.slug,
       entry: "team-dashboard-quote",
-      product: agent.slug === "brahm" ? "business" : "home",
+      product: agent.slug === primaryProducerSlug ? "business" : "home",
     }),
   ),
   slug: agent.slug,

@@ -57,6 +57,8 @@ export type AgentSlug =
   | "jason"
   | "anna";
 
+export const primaryProducerSlug = "brahm" satisfies AgentSlug;
+
 export type AgentAccent =
   | "blue"
   | "navy"
@@ -581,7 +583,7 @@ export const agents: Agent[] = [
     slug: "brahm",
     name: "Brahm Shank",
     firstName: "Brahm",
-    title: "Licensed Insurance Agent",
+    title: "SVP of Sales Development",
     phone: "(951) 266-2019",
     phoneHref: "tel:+19512662019",
     email: "brahm@allsberryagency.com",
@@ -599,7 +601,7 @@ export const agents: Agent[] = [
     calendlyUrl: "https://calendly.com/brahm-allsberryagency/quick-call",
     photo: {
       src: "/media/agents/brahm-shank-new.png",
-      alt: "Brahm Shank, Licensed Insurance Agent at Allsberry Insurance Agency",
+      alt: "Brahm Shank, SVP of Sales Development at Allsberry Insurance Agency",
     },
   },
   {
@@ -723,6 +725,11 @@ export const agents: Agent[] = [
       alt: "Jennifer Van Buskirk, Business Insurance Account Manager at Allsberry Insurance Agency",
     },
   },
+];
+
+export const publicAgentRoster: Agent[] = [
+  ...agents.filter((agent) => agent.slug === "erin" || agent.slug === primaryProducerSlug),
+  ...agents.filter((agent) => agent.slug !== "erin" && agent.slug !== primaryProducerSlug),
 ];
 
 export const homePageFaqs: HomePageFaq[] = [

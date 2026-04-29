@@ -4,13 +4,13 @@ import { ArrowRight, ShieldCheck } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 import { haptic, press } from "@/lib/haptics";
-import { agency, getAgentBySlug } from "@/lib/site-data";
+import { agency, getAgentBySlug, primaryProducerSlug } from "@/lib/site-data";
 
-const brahm = getAgentBySlug("brahm");
+const primaryProducer = getAgentBySlug(primaryProducerSlug);
 
 export function CoverageEvaluationCta() {
   const t = useTranslations("home.coverageEvaluation");
-  const mailto = `mailto:${brahm?.email ?? agency.email}?subject=${encodeURIComponent(
+  const mailto = `mailto:${primaryProducer?.email ?? agency.email}?subject=${encodeURIComponent(
     t("emailSubject"),
   )}&body=${encodeURIComponent(t("emailBody"))}`;
 

@@ -8,7 +8,13 @@ import { useTranslations } from "next-intl";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Link } from "@/i18n/navigation";
 import { press, tap } from "@/lib/haptics";
-import { agents, fellows, type Agent, type AgentAccent } from "@/lib/site-data";
+import {
+  agents,
+  fellows,
+  primaryProducerSlug,
+  type Agent,
+  type AgentAccent,
+} from "@/lib/site-data";
 import { buildTrackedHref } from "@/lib/tracking";
 import { cn } from "@/lib/utils";
 
@@ -25,10 +31,12 @@ const accentClasses: Record<AgentAccent, string> = {
   amber: "bg-[linear-gradient(145deg,#d97706_0%,#fbbf24_100%)]",
 };
 
-const erinAgent = agents.find((a) => a.slug === "erin");
-const leadershipSlugs = ["brahm", "dakota"] as const;
+const primaryProducerAgent = agents.find((a) => a.slug === primaryProducerSlug);
+const leadershipSlugs = ["erin", "dakota"] as const;
 const leadershipAgents = agents.filter((a) => (leadershipSlugs as readonly string[]).includes(a.slug));
-const teamAgents = agents.filter((a) => a.slug !== "erin" && !(leadershipSlugs as readonly string[]).includes(a.slug));
+const teamAgents = agents.filter(
+  (a) => a.slug !== primaryProducerSlug && !(leadershipSlugs as readonly string[]).includes(a.slug),
+);
 
 export function TeamSection() {
   const t = useTranslations("home.team");
@@ -44,7 +52,7 @@ export function TeamSection() {
           align="center"
         />
 
-        {erinAgent && (
+        {primaryProducerAgent && (
           <motion.article
             initial={{ opacity: 0, y: 28 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -57,34 +65,34 @@ export function TeamSection() {
             <div className="absolute inset-x-0 top-0 h-1.5 bg-[linear-gradient(90deg,#ffffff_0%,rgba(255,255,255,0.75)_28%,rgba(245,197,24,0.92)_62%,#da291c_100%)]" />
 
             <div className="relative grid items-center gap-8 lg:grid-cols-[auto_1fr_auto]">
-              {erinAgent.photo ? (
+              {primaryProducerAgent.photo ? (
                 <div className="relative mx-auto h-32 w-32 shrink-0 overflow-hidden rounded-full border-[3px] border-white/30 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.5)] lg:mx-0 lg:h-36 lg:w-36">
                   <Image
-                    src={erinAgent.photo.src}
-                    alt={erinAgent.photo.alt}
+                    src={primaryProducerAgent.photo.src}
+                    alt={primaryProducerAgent.photo.alt}
                     width={144}
                     height={144}
                     className="h-full w-full object-cover object-top"
                   />
                 </div>
               ) : (
-                <div className={cn("mx-auto flex h-32 w-32 shrink-0 items-center justify-center rounded-full text-4xl font-display font-extrabold text-white shadow-xl lg:mx-0", accentClasses[erinAgent.accent])}>
-                  {erinAgent.initials}
+                <div className={cn("mx-auto flex h-32 w-32 shrink-0 items-center justify-center rounded-full text-4xl font-display font-extrabold text-white shadow-xl lg:mx-0", accentClasses[primaryProducerAgent.accent])}>
+                  {primaryProducerAgent.initials}
                 </div>
               )}
 
               <div className="text-center lg:text-left">
                 <h3 className="font-display text-3xl font-extrabold tracking-tight sm:text-4xl">
-                  {erinAgent.name}
+                  {primaryProducerAgent.name}
                 </h3>
                 <p className="mt-1.5 text-sm font-semibold uppercase tracking-[0.24em] text-white/70">
-                  {erinAgent.title}
+                  {primaryProducerAgent.title}
                 </p>
                 <p className="mt-4 max-w-2xl text-base leading-7 text-white/80 lg:text-[15px]">
-                  {bio(erinAgent.slug)}
+                  {bio(primaryProducerAgent.slug)}
                 </p>
                 <div className="mt-5 flex flex-wrap justify-center gap-2 lg:justify-start">
-                  {erinAgent.specialties.map((specialty) => (
+                  {primaryProducerAgent.specialties.map((specialty) => (
                     <span key={specialty} className="rounded-full border border-white/14 bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-white/86">
                       {specialty}
                     </span>
@@ -94,20 +102,19 @@ export function TeamSection() {
 
               <div className="flex flex-wrap justify-center gap-3 lg:flex-col">
                 <a
-                  href={`mailto:${erinAgent.email}`}
+                  href={`mailto:${primaryProducerAgent.email}`}
                   className="glass-btn-dark inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-bold text-white"
                   onClick={tap}
                 >
                   <Mail className="h-4 w-4" />
-                  {t("emailAgent", { name: erinAgent.firstName })}
+                  {t("emailAgent", { name: primaryProducerAgent.firstName })}
                 </a>
                 <Link
-                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                  href={buildTrackedHref(`/agents/${erinAgent.slug}`, { agent: erinAgent.slug, entry: "leadership-team-card" }) as any}
+                  href={buildTrackedHref(`/agents/${primaryProducerAgent.slug}`, { agent: primaryProducerAgent.slug, entry: "primary-producer-team-card" })}
                   className="cta-glow inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-gray-900 transition hover:bg-blue-light"
                   onClick={press}
                 >
-                  {t("meetAgent", { name: erinAgent.firstName })}
+                  {t("meetAgent", { name: primaryProducerAgent.firstName })}
                   <Handshake className="h-4 w-4" />
                 </Link>
               </div>
@@ -253,11 +260,10 @@ function LeadershipCard({ agent, index }: { agent: Agent; index: number }) {
               {t("emailAgent", { name: agent.firstName })}
             </a>
             <Link
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
               href={buildTrackedHref(`/agents/${agent.slug}`, {
                 agent: agent.slug,
                 entry: "leadership-team-card",
-              }) as any}
+              })}
               className="cta-glow inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-bold text-gray-900 transition hover:bg-blue-light"
               onClick={press}
             >
@@ -323,11 +329,10 @@ function TeamMemberCard({ agent, index }: { agent: Agent; index: number }) {
       <p className="mt-4 flex-1 text-sm leading-7 text-gray-600">{bio(agent.slug)}</p>
 
       <Link
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         href={buildTrackedHref(`/agents/${agent.slug}`, {
           agent: agent.slug,
           entry: "team-card-learn-more",
-        }) as any}
+        })}
         className="mt-2 text-sm font-semibold text-blue transition hover:text-gray-900"
         onClick={tap}
       >
@@ -344,11 +349,10 @@ function TeamMemberCard({ agent, index }: { agent: Agent; index: number }) {
           {t("emailShort")}
         </a>
         <Link
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          href={buildTrackedHref(`/agents/${agent.slug}`, {
+            href={buildTrackedHref(`/agents/${agent.slug}`, {
             agent: agent.slug,
             entry: "team-card",
-          }) as any}
+          })}
           className="inline-flex items-center gap-1.5 rounded-full bg-navy px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-blue"
           onClick={press}
         >

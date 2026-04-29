@@ -13,7 +13,7 @@ import { SeoPageCard } from "@/components/ui/seo-page-card";
 import { routing } from "@/i18n/routing";
 import { createPageMetadata } from "@/lib/metadata";
 import { getSeoPagesForAgent } from "@/lib/seo-content";
-import { agency, agents, getAgentBySlug } from "@/lib/site-data";
+import { agency, agents, getAgentBySlug, primaryProducerSlug } from "@/lib/site-data";
 import { createBreadcrumbSchema, organizationSchema } from "@/lib/seo";
 import { buildTrackedHref } from "@/lib/tracking";
 import { absoluteUrl } from "@/lib/utils";
@@ -267,7 +267,7 @@ export default async function AgentPage({ params, searchParams }: AgentPageProps
                       href={buildTrackedHref("/quote", {
                         agent: agent.slug,
                         entry: "agent-page-quote",
-                        product: agent.slug === "brahm" ? "business" : "home",
+                        product: agent.slug === primaryProducerSlug ? "business" : "home",
                       })}
                       className="cta-glow-blue mt-5 inline-flex items-center gap-2 rounded-full bg-navy px-5 py-3 text-sm font-bold text-white transition hover:bg-blue"
                     >

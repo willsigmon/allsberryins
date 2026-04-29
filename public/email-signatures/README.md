@@ -24,7 +24,7 @@
 - `erin-allsberry.html` — Erin Allsberry (Agency Owner)
 - `alex-coria.html` — Alex Coria (Office Manager)
 - `vanessa-rios.html` — Vanessa Rios
-- `brahm-shank.html` — Brahm Shank
+- `brahm-shank.html` — Brahm Shank (SVP of Sales Development)
 - `julie-ortiz.html` — Julie Ortiz
 - `dakota-allsberry.html` — Dakota Allsberry
 - `jason-allsberry.html` — Jason Allsberry
@@ -42,6 +42,7 @@
   - Keep the personal LinkedIn cell only on signatures for agents with a confirmed personal profile (currently Erin).
   - Use the main office phone for everyone except agents with a confirmed direct line (currently Brahm).
 - Review pill links to `/review` → Google Business Profile (shared across all signatures).
+- Brahm's business-card QR asset lives at `/media/agents/qr/brahm-business-card.svg` and points to his tracked profile URL.
 
 ## QA checklist
 

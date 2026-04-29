@@ -8,7 +8,7 @@ import { StructuredData } from "@/components/seo/structured-data";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Link } from "@/i18n/navigation";
 import { createPageMetadata } from "@/lib/metadata";
-import { agency, agents, officialProfile } from "@/lib/site-data";
+import { agency, officialProfile, publicAgentRoster } from "@/lib/site-data";
 import { createBreadcrumbSchema, erinPersonSchema, organizationSchema } from "@/lib/seo";
 import { buildTrackedHref } from "@/lib/tracking";
 import { absoluteUrl } from "@/lib/utils";
@@ -198,7 +198,7 @@ export default async function AboutPage({ params }: AboutPageProps) {
             align="center"
           />
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {agents.map((agent) => (
+            {publicAgentRoster.map((agent) => (
               <div
                 key={agent.slug}
                 className="rounded-[1.75rem] border border-gray-100 bg-white p-5 shadow-[0_18px_45px_-38px_rgba(0,32,92,0.5)]"
@@ -234,11 +234,10 @@ export default async function AboutPage({ params }: AboutPageProps) {
                 </div>
                 <p className="mt-3 text-sm leading-7 text-gray-600 line-clamp-3">{tBio(agent.slug)}</p>
                 <Link
-                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
                   href={buildTrackedHref(`/agents/${agent.slug}`, {
                     agent: agent.slug,
                     entry: "about-team-card",
-                  }) as any}
+                  })}
                   className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-blue transition hover:text-gray-900"
                 >
                   {tTeam("meetAgent", { name: agent.firstName })}

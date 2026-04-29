@@ -91,12 +91,14 @@ export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
     const handlePointerDown = (event: MouseEvent) => {
       if (!panelRef.current?.contains(event.target as Node)) {
         setOpen(false);
+        setMobilePos(null);
       }
     };
 
     const handleEscape = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         setOpen(false);
+        setMobilePos(null);
       }
     };
 
@@ -111,7 +113,6 @@ export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
 
   useEffect(() => {
     if (!open) {
-      setMobilePos(null);
       return;
     }
     const update = () => {
@@ -134,7 +135,6 @@ export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
         : Math.max(margin, btnRect.top - panelHeight - 12);
       setMobilePos({ top });
     };
-    update();
     // Rerun once after the panel mounts so we know its real height.
     const raf = requestAnimationFrame(update);
     window.addEventListener("resize", update);
@@ -148,6 +148,7 @@ export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
 
   const changeLocale = (next: AppLocale) => {
     setOpen(false);
+    setMobilePos(null);
     if (next === locale) {
       return;
     }
@@ -165,7 +166,14 @@ export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
       <button
         ref={buttonRef}
         type="button"
-        onClick={() => setOpen((value) => !value)}
+        onClick={() => {
+          setOpen((value) => {
+            if (value) {
+              setMobilePos(null);
+            }
+            return !value;
+          });
+        }}
         className={cn(
           "inline-flex items-center gap-1.5 rounded-full border border-white/28 bg-white/8 px-2.5 py-1.5 text-xs font-semibold text-white transition hover:border-white/45 hover:bg-white/14 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-2 focus-visible:ring-offset-navy",
           className,
