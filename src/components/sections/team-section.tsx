@@ -14,6 +14,7 @@ import {
   primaryProducerSlug,
   type Agent,
   type AgentAccent,
+  type Fellow,
 } from "@/lib/site-data";
 import { buildTrackedHref } from "@/lib/tracking";
 import { cn } from "@/lib/utils";
@@ -40,7 +41,6 @@ const teamAgents = agents.filter(
 export function TeamSection() {
   const t = useTranslations("home.team");
   const bio = useTranslations("agents.bios");
-  const fellowT = useTranslations("agents.fellows");
 
   return (
     <section className="section-muted-bg py-20 sm:py-24" id="team">
@@ -127,60 +127,85 @@ export function TeamSection() {
           </div>
         ) : null}
 
-        <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-6 grid auto-rows-fr gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {teamAgents.map((agent, index) => (
             <TeamMemberCard key={agent.slug} agent={agent} index={index} />
           ))}
-
-          {fellows.map((fellow) => (
-            <motion.div
-              key={fellow.name}
-              initial={{ opacity: 0, y: 28 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
-              className="fellow-card-bg parallax-card relative flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-gold/20 p-5"
-            >
-              <div className="shimmer-border absolute inset-x-0 top-0 h-1 opacity-50" />
-              <div className="flex items-center gap-4">
-                {fellow.photo ? (
-                  <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-full border-2 border-gold/30 shadow-lg">
-                    <Image
-                      src={fellow.photo.src}
-                      alt={fellow.photo.alt}
-                      width={64}
-                      height={64}
-                      className="h-full w-full object-cover object-top"
-                    />
-                  </div>
-                ) : (
-                  <div className="ambient-glow flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-[linear-gradient(145deg,#b8860b_0%,#daa520_100%)] text-xl font-display font-extrabold text-white shadow-lg">
-                    {fellow.initials}
-                  </div>
-                )}
-                <div className="min-w-0">
-                  <h3 className="font-display text-lg font-bold text-gray-900">{fellow.name}</h3>
-                  <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-gold">
-                    <Award className="mr-1 inline h-3 w-3" />
-                    {t("fellowLabel")}
-                  </p>
-                </div>
-              </div>
-              <p className="mt-4 flex-1 text-sm leading-7 text-gray-600">
-                {fellowT(`${fellow.slug}.career`)}
-              </p>
-              <p className="mt-3 text-xs leading-5 text-gray-400">
-                <span className="font-semibold text-gold/90">{t("fellowDefinitionIntro")}</span>{" "}
-                {t("fellowDefinition")}
-              </p>
-              <p className="mt-2 text-xs leading-5 text-gold/80 italic">
-                {t("officeMomQuote")}
-              </p>
-            </motion.div>
-          ))}
         </div>
+
+        {fellows.length > 0 && (
+          <div className="mt-8 space-y-4">
+            {fellows.map((fellow, index) => (
+              <FellowStrip key={fellow.name} fellow={fellow} index={index} />
+            ))}
+          </div>
+        )}
       </div>
     </section>
+  );
+}
+
+function FellowStrip({ fellow, index }: { fellow: Fellow; index: number }) {
+  const t = useTranslations("home.team");
+  const fellowT = useTranslations("agents.fellows");
+
+  return (
+    <motion.aside
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1], delay: index * 0.06 }}
+      className="fellow-card-bg parallax-card relative overflow-hidden rounded-[1.75rem] border border-gold/25 p-5 shadow-[0_18px_52px_-28px_rgba(184,134,11,0.55)] sm:p-6"
+    >
+      <div className="shimmer-border absolute inset-x-0 top-0 h-1 opacity-55" />
+      <div className="absolute -right-20 -top-20 h-40 w-40 rounded-full bg-gold/20 blur-3xl" />
+
+      <div className="relative grid items-center gap-5 lg:grid-cols-[auto_minmax(0,1.15fr)_minmax(280px,0.85fr)]">
+        <div className="flex items-center gap-4">
+          {fellow.photo ? (
+            <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-full border-2 border-gold/30 shadow-lg">
+              <Image
+                src={fellow.photo.src}
+                alt={fellow.photo.alt}
+                width={64}
+                height={64}
+                className="h-full w-full object-cover object-top"
+              />
+            </div>
+          ) : (
+            <div className="ambient-glow flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-[linear-gradient(145deg,#b8860b_0%,#daa520_100%)] text-xl font-display font-extrabold text-white shadow-lg">
+              {fellow.initials}
+            </div>
+          )}
+
+          <div className="min-w-0">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-gold">
+              <Award className="mr-1 inline h-3 w-3" />
+              {t("fellowLabel")}
+            </p>
+            <h3 className="mt-1 font-display text-xl font-bold text-gray-900">
+              {fellow.name}
+            </h3>
+          </div>
+        </div>
+
+        <p className="text-sm leading-6 text-gray-600 lg:border-l lg:border-gold/20 lg:pl-5">
+          {fellowT(`${fellow.slug}.career`)}
+        </p>
+
+        <div className="rounded-2xl border border-gold/18 bg-white/62 p-4">
+          <p className="text-xs leading-5 text-gray-500">
+            <span className="font-semibold text-gold/90">
+              {t("fellowDefinitionIntro")}
+            </span>{" "}
+            {t("fellowDefinition")}
+          </p>
+          <p className="mt-2 text-xs italic leading-5 text-gold/85">
+            {t("officeMomQuote")}
+          </p>
+        </div>
+      </div>
+    </motion.aside>
   );
 }
 
@@ -326,7 +351,9 @@ function TeamMemberCard({ agent, index }: { agent: Agent; index: number }) {
         </div>
       </div>
 
-      <p className="mt-4 flex-1 text-sm leading-7 text-gray-600">{bio(agent.slug)}</p>
+      <p className="mt-4 line-clamp-7 flex-1 text-sm leading-6 text-gray-600">
+        {bio(agent.slug)}
+      </p>
 
       <Link
         href={buildTrackedHref(`/agents/${agent.slug}`, {
@@ -349,7 +376,7 @@ function TeamMemberCard({ agent, index }: { agent: Agent; index: number }) {
           {t("emailShort")}
         </a>
         <Link
-            href={buildTrackedHref(`/agents/${agent.slug}`, {
+          href={buildTrackedHref(`/agents/${agent.slug}`, {
             agent: agent.slug,
             entry: "team-card",
           })}

@@ -21,9 +21,8 @@ import {
 } from "@/lib/hero-product-preferences";
 import {
   agency,
-  getAgentBySlug,
   heroProductSlugs,
-  primaryProducerSlug,
+  officialProfile,
   products,
   type ProductSlug,
 } from "@/lib/site-data";
@@ -34,7 +33,6 @@ import { haptic, press, tap } from "@/lib/haptics";
 const heroProducts = products.filter((p) => heroProductSlugs.includes(p.slug));
 const cyclingWordKeys = ["word1", "word2", "word3", "word4", "word5"] as const;
 const heroHelpSlugs: ProductSlug[] = ["home", "auto", "renters", "life", "umbrella", "business"];
-const primaryProducer = getAgentBySlug(primaryProducerSlug);
 
 function readHeroProductUsage() {
   if (typeof window === "undefined") {
@@ -261,110 +259,122 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
             <div className="ambient-glow absolute -left-8 top-8 hidden h-32 w-32 rounded-full bg-blue/14 blur-3xl sm:block" />
             <div className="ambient-glow absolute -right-8 bottom-8 hidden h-36 w-36 rounded-full bg-red/16 blur-[40px] sm:block" style={{ animationDelay: "2s" }} />
 
-            {primaryProducer ? (
-              <div className="shimmer-border relative overflow-hidden rounded-[2rem] p-[3px] shadow-[0_35px_90px_-48px_rgba(0,32,92,0.8)]">
-                <div className="hero-profile-shell relative overflow-hidden rounded-[1.85rem] p-4 sm:p-5">
-                  <div className="hero-profile-inner relative rounded-[1.65rem] border p-4 text-white backdrop-blur-sm">
-                    <div className="flex items-start gap-4">
-                      {primaryProducer.photo ? (
-                        <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-full border-2 border-white/30 shadow-[0_16px_38px_-18px_rgba(0,0,0,0.5)]">
-                          <Image
-                            src={primaryProducer.photo.src}
-                            alt={primaryProducer.photo.alt}
-                            width={80}
-                            height={80}
-                            priority
-                            className="h-full w-full object-cover object-top"
-                          />
-                        </div>
-                      ) : (
-                        <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-full border-2 border-white/30 bg-white/10 text-2xl font-display font-extrabold text-white shadow-[0_16px_38px_-18px_rgba(0,0,0,0.5)]">
-                          {primaryProducer.initials}
-                        </div>
-                      )}
-
-                      <div className="flex flex-1 items-start justify-between gap-3">
-                        <div className="min-w-0">
-                          <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-gold">
-                            {t("primaryProducerLabel")}
-                          </p>
-                          <p className="mt-1 font-display text-xl font-extrabold text-white">
-                            {primaryProducer.name}
-                          </p>
-                          <p className="mt-0.5 text-xs font-medium text-white/70">
-                            {primaryProducer.title}
-                          </p>
-                        </div>
-
-                        <div className="pin-drop hero-profile-glass flex items-center gap-1.5 rounded-xl border px-3 py-2 backdrop-blur-sm">
-                          <div className="relative">
-                            <MapPin className="h-4 w-4 fill-red text-red" />
-                            <span className="pin-pulse-ring absolute -inset-1 rounded-full bg-red/20" />
-                          </div>
-                          <span className="text-[11px] font-bold text-white/80">{t("locationBadge")}</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="mt-3 grid gap-2 sm:grid-cols-2">
-                      <div className="hero-profile-glass rounded-[0.85rem] border px-3 py-2 backdrop-blur">
-                        <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/55">
-                          {t("producerProofLabel")}
-                        </p>
-                        <p className="mt-1 font-display text-[12px] font-bold leading-tight text-white">
-                          {t("producerProofOne")}
-                        </p>
-                      </div>
-                      <div className="hero-profile-glass rounded-[0.85rem] border px-3 py-2 backdrop-blur">
-                        <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/55">
-                          {t("producerAccessLabel")}
-                        </p>
-                        <p className="mt-1 font-display text-[12px] font-bold leading-tight text-white">
-                          {t("producerProofTwo")}
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="mt-2.5 flex flex-wrap items-center gap-1.5">
-                      {primaryProducer.specialties.slice(0, 4).map((specialty) => (
-                        <div
-                          key={specialty}
-                          className="hero-profile-pill rounded-full border px-2.5 py-1 text-[10px] font-semibold text-white/75"
-                        >
-                          {specialty}
-                        </div>
-                      ))}
-                    </div>
-
-                    <div className="mt-3 flex flex-wrap items-center gap-2">
-                      <Link
-                              href={buildTrackedHref(`/agents/${primaryProducer.slug}`, { agent: primaryProducer.slug, entry: "hero-primary-producer-card" })}
-                        onClick={() => { tap(); }}
-                        className="inline-flex items-center gap-1.5 rounded-full bg-white px-3.5 py-2 text-xs font-bold text-gray-900 transition hover:bg-blue-light"
-                      >
-                        {t("meetPrimaryProducer", { name: primaryProducer.firstName })}
-                        <ArrowRight className="h-3.5 w-3.5" />
-                      </Link>
-                      <a
-                        href={primaryProducer.phoneHref ?? agency.phoneHref}
-                        onClick={() => { tap(); }}
-                        className="hero-profile-glass inline-flex items-center gap-1.5 rounded-full border px-3.5 py-2 text-xs font-bold text-white transition hover:brightness-110"
-                      >
-                        <Phone className="h-3.5 w-3.5" />
-                        {t("callPrimaryProducer", { name: primaryProducer.firstName })}
-                      </a>
-                      <SaveContactButton
-                        name={primaryProducer.name}
-                        phone={primaryProducer.phone}
-                        email={primaryProducer.email}
-                        title={primaryProducer.title}
-                        address="355 N Sheridan St, Ste 100, Corona, CA 92878"
+            <div className="shimmer-border relative overflow-hidden rounded-[2rem] p-[3px] shadow-[0_35px_90px_-48px_rgba(0,32,92,0.8)]">
+              <div className="hero-profile-shell relative overflow-hidden rounded-[1.85rem] p-4 sm:p-5">
+                <div className="hero-profile-inner relative rounded-[1.65rem] border p-4 text-white backdrop-blur-sm">
+                  <div className="flex items-start gap-4">
+                    <div className="relative h-18 w-18 shrink-0 overflow-hidden rounded-full border-2 border-white/30 shadow-[0_16px_38px_-18px_rgba(0,0,0,0.5)]">
+                      <Image
+                        src={officialProfile.headshot.src}
+                        alt={officialProfile.headshot.alt}
+                        width={72}
+                        height={72}
+                        priority
+                        className="h-full w-full object-cover object-top"
                       />
                     </div>
+                    <div className="flex flex-1 items-start justify-between gap-3">
+                      <div className="min-w-0">
+                        <p className="font-display text-xl font-extrabold text-white">
+                          Erin Allsberry
+                        </p>
+                        <p className="mt-0.5 text-xs font-medium text-white/70">
+                          {t("erinTitle")}
+                        </p>
+                      </div>
+
+                      <div className="pin-drop hero-profile-glass flex items-center gap-1.5 rounded-xl border px-3 py-2 backdrop-blur-sm">
+                        <div className="relative">
+                          <MapPin className="h-4 w-4 fill-red text-red" />
+                          <span className="pin-pulse-ring absolute -inset-1 rounded-full bg-red/20" />
+                        </div>
+                        <span className="text-[11px] font-bold text-white/80">{t("locationBadge")}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="mt-3 grid gap-2 sm:grid-cols-2">
+                    {officialProfile.badges.map((badge) => (
+                      <div
+                        key={badge.title}
+                        className="hero-profile-glass flex items-center gap-2 rounded-[0.85rem] border px-2.5 py-2 backdrop-blur"
+                      >
+                        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white/95 p-1">
+                          <Image
+                            src={badge.image.src}
+                            alt={badge.image.alt}
+                            width={1258}
+                            height={658}
+                            className="h-full w-full object-contain"
+                          />
+                        </div>
+                        <p className="font-display text-[11px] font-bold leading-tight text-white">{badge.title}</p>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="hero-profile-glass mt-2.5 overflow-hidden rounded-[0.85rem] border backdrop-blur">
+                    <div className="flex items-center gap-3 p-2.5">
+                      <div className="h-10 w-16 shrink-0 overflow-hidden rounded-lg">
+                        <Image
+                          src={officialProfile.recognition[1].image.src}
+                          alt={officialProfile.recognition[1].image.alt}
+                          width={2395}
+                          height={2252}
+                          className="h-full w-full object-cover object-top"
+                        />
+                      </div>
+                      <div>
+                        <p className="font-display text-[11px] font-bold leading-tight text-white">
+                          {officialProfile.recognition[1].title}
+                        </p>
+                        <p className="text-[10px] text-white/60">{t("farmersLabel")}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="mt-2.5 flex flex-wrap items-center gap-1.5">
+                    {officialProfile.highlights
+                      .filter((h) => h.label !== "Service area" && h.label !== "Phone")
+                      .map((highlight) => (
+                      <div
+                        key={highlight.label}
+                        className="hero-profile-pill rounded-full border px-2.5 py-1 text-[10px] font-semibold text-white/75"
+                      >
+                        {highlight.value}
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="mt-3 flex flex-wrap items-center gap-2">
+                    <Link
+                      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                      href={buildTrackedHref("/agents/erin", { agent: "erin", entry: "hero-leadership-card" }) as any}
+                      onClick={() => { tap(); }}
+                      className="inline-flex items-center gap-1.5 rounded-full bg-white px-3.5 py-2 text-xs font-bold text-gray-900 transition hover:bg-blue-light"
+                    >
+                      {t("meetErin")}
+                      <ArrowRight className="h-3.5 w-3.5" />
+                    </Link>
+                    <a
+                      href={agency.phoneHref}
+                      onClick={() => { tap(); }}
+                      className="hero-profile-glass inline-flex items-center gap-1.5 rounded-full border px-3.5 py-2 text-xs font-bold text-white transition hover:brightness-110"
+                    >
+                      <Phone className="h-3.5 w-3.5" />
+                      {t("contactLabel")}
+                    </a>
+                    <SaveContactButton
+                      name="Erin Allsberry"
+                      phone={agency.phone}
+                      email={agency.email}
+                      title="Agency Owner & Principal Agent"
+                      address="355 N Sheridan St, Ste 100, Corona, CA 92878"
+                    />
                   </div>
                 </div>
               </div>
-            ) : null}
+            </div>
 
             <div className="surface-card mt-4 flex items-center gap-3 rounded-2xl border border-gray-100 p-3 shadow-[0_12px_36px_-24px_rgba(0,32,92,0.4)]">
               <input
