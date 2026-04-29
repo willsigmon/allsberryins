@@ -32,7 +32,7 @@ const agentLinkSets = agents.map((agent) => ({
   directUrl: absoluteUrl(
     buildTrackedHref(`/agents/${agent.slug}`, {
       agent: agent.slug,
-      entry: "qr-profile",
+      entry: agent.slug === primaryProducerSlug ? "primary-producer-team-card" : "qr-profile",
     }),
   ),
   name: agent.name,

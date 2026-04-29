@@ -31,11 +31,10 @@ const accentClasses: Record<AgentAccent, string> = {
   amber: "bg-[linear-gradient(145deg,#d97706_0%,#fbbf24_100%)]",
 };
 
+const ownerAgent = agents.find((a) => a.slug === "erin");
 const primaryProducerAgent = agents.find((a) => a.slug === primaryProducerSlug);
-const leadershipSlugs = ["erin", "dakota"] as const;
-const leadershipAgents = agents.filter((a) => (leadershipSlugs as readonly string[]).includes(a.slug));
 const teamAgents = agents.filter(
-  (a) => a.slug !== primaryProducerSlug && !(leadershipSlugs as readonly string[]).includes(a.slug),
+  (a) => a.slug !== "erin" && a.slug !== primaryProducerSlug,
 );
 
 export function TeamSection() {
@@ -52,7 +51,7 @@ export function TeamSection() {
           align="center"
         />
 
-        {primaryProducerAgent && (
+        {ownerAgent && (
           <motion.article
             initial={{ opacity: 0, y: 28 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -65,34 +64,34 @@ export function TeamSection() {
             <div className="absolute inset-x-0 top-0 h-1.5 bg-[linear-gradient(90deg,#ffffff_0%,rgba(255,255,255,0.75)_28%,rgba(245,197,24,0.92)_62%,#da291c_100%)]" />
 
             <div className="relative grid items-center gap-8 lg:grid-cols-[auto_1fr_auto]">
-              {primaryProducerAgent.photo ? (
+              {ownerAgent.photo ? (
                 <div className="relative mx-auto h-32 w-32 shrink-0 overflow-hidden rounded-full border-[3px] border-white/30 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.5)] lg:mx-0 lg:h-36 lg:w-36">
                   <Image
-                    src={primaryProducerAgent.photo.src}
-                    alt={primaryProducerAgent.photo.alt}
+                    src={ownerAgent.photo.src}
+                    alt={ownerAgent.photo.alt}
                     width={144}
                     height={144}
                     className="h-full w-full object-cover object-top"
                   />
                 </div>
               ) : (
-                <div className={cn("mx-auto flex h-32 w-32 shrink-0 items-center justify-center rounded-full text-4xl font-display font-extrabold text-white shadow-xl lg:mx-0", accentClasses[primaryProducerAgent.accent])}>
-                  {primaryProducerAgent.initials}
+                <div className={cn("mx-auto flex h-32 w-32 shrink-0 items-center justify-center rounded-full text-4xl font-display font-extrabold text-white shadow-xl lg:mx-0", accentClasses[ownerAgent.accent])}>
+                  {ownerAgent.initials}
                 </div>
               )}
 
               <div className="text-center lg:text-left">
                 <h3 className="font-display text-3xl font-extrabold tracking-tight sm:text-4xl">
-                  {primaryProducerAgent.name}
+                  {ownerAgent.name}
                 </h3>
                 <p className="mt-1.5 text-sm font-semibold uppercase tracking-[0.24em] text-white/70">
-                  {primaryProducerAgent.title}
+                  {ownerAgent.title}
                 </p>
                 <p className="mt-4 max-w-2xl text-base leading-7 text-white/80 lg:text-[15px]">
-                  {bio(primaryProducerAgent.slug)}
+                  {bio(ownerAgent.slug)}
                 </p>
                 <div className="mt-5 flex flex-wrap justify-center gap-2 lg:justify-start">
-                  {primaryProducerAgent.specialties.map((specialty) => (
+                  {ownerAgent.specialties.map((specialty) => (
                     <span key={specialty} className="rounded-full border border-white/14 bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-white/86">
                       {specialty}
                     </span>
@@ -102,19 +101,19 @@ export function TeamSection() {
 
               <div className="flex flex-wrap justify-center gap-3 lg:flex-col">
                 <a
-                  href={`mailto:${primaryProducerAgent.email}`}
+                  href={`mailto:${ownerAgent.email}`}
                   className="glass-btn-dark inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-bold text-white"
                   onClick={tap}
                 >
                   <Mail className="h-4 w-4" />
-                  {t("emailAgent", { name: primaryProducerAgent.firstName })}
+                  {t("emailAgent", { name: ownerAgent.firstName })}
                 </a>
                 <Link
-                  href={buildTrackedHref(`/agents/${primaryProducerAgent.slug}`, { agent: primaryProducerAgent.slug, entry: "primary-producer-team-card" })}
+                  href={buildTrackedHref(`/agents/${ownerAgent.slug}`, { agent: ownerAgent.slug, entry: "owner-team-card" })}
                   className="cta-glow inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-gray-900 transition hover:bg-blue-light"
                   onClick={press}
                 >
-                  {t("meetAgent", { name: primaryProducerAgent.firstName })}
+                  {t("meetAgent", { name: ownerAgent.firstName })}
                   <Handshake className="h-4 w-4" />
                 </Link>
               </div>
@@ -122,11 +121,11 @@ export function TeamSection() {
           </motion.article>
         )}
 
-        <div className="mt-6 grid gap-6 lg:grid-cols-2">
-          {leadershipAgents.map((agent, index) => (
-            <LeadershipCard key={agent.slug} agent={agent} index={index} />
-          ))}
-        </div>
+        {primaryProducerAgent ? (
+          <div className="mt-6">
+            <LeadershipCard agent={primaryProducerAgent} index={0} />
+          </div>
+        ) : null}
 
         <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {teamAgents.map((agent, index) => (
@@ -195,25 +194,25 @@ function LeadershipCard({ agent, index }: { agent: Agent; index: number }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.45, ease: "easeOut", delay: index * 0.08 }}
-      className="parallax-card relative overflow-hidden rounded-[2rem] bg-[linear-gradient(160deg,#08214f_0%,#0c2d6b_25%,#0f3a87_55%,#2d7bc6_100%)] p-8 text-white shadow-[0_28px_70px_-32px_rgba(0,32,92,0.65),0_8px_20px_-8px_rgba(0,32,92,0.2)]"
+      className="parallax-card relative overflow-hidden rounded-[2rem] bg-[linear-gradient(160deg,#08214f_0%,#0c2d6b_25%,#0f3a87_55%,#2d7bc6_100%)] p-8 text-white shadow-[0_28px_70px_-32px_rgba(0,32,92,0.65),0_8px_20px_-8px_rgba(0,32,92,0.2)] lg:p-10"
     >
       <div className="absolute -right-24 -top-24 h-48 w-48 rounded-full bg-blue/10 blur-3xl" />
       <div className="absolute inset-x-0 top-0 h-1.5 bg-[linear-gradient(90deg,#ffffff_0%,rgba(255,255,255,0.75)_28%,rgba(245,197,24,0.92)_62%,#da291c_100%)]" />
-      <div className="flex flex-col items-center gap-5 text-center sm:flex-row sm:items-start sm:text-left">
+      <div className="relative grid items-center gap-6 text-center sm:grid-cols-[auto_minmax(0,1fr)] sm:text-left lg:grid-cols-[auto_minmax(0,1fr)_auto] lg:gap-8">
         {agent.photo ? (
-          <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-full border-2 border-white/30 shadow-xl">
+          <div className="relative mx-auto h-28 w-28 shrink-0 overflow-hidden rounded-full border-2 border-white/30 shadow-xl sm:mx-0">
             <Image
               src={agent.photo.src}
               alt={agent.photo.alt}
-              width={96}
-              height={96}
+              width={112}
+              height={112}
               className="h-full w-full object-cover object-top"
             />
           </div>
         ) : (
           <div
             className={cn(
-              "flex h-24 w-24 shrink-0 items-center justify-center rounded-full text-3xl font-display font-extrabold text-white shadow-xl",
+              "mx-auto flex h-28 w-28 shrink-0 items-center justify-center rounded-full text-3xl font-display font-extrabold text-white shadow-xl sm:mx-0",
               accentClasses[agent.accent],
             )}
           >
@@ -221,7 +220,7 @@ function LeadershipCard({ agent, index }: { agent: Agent; index: number }) {
           </div>
         )}
 
-        <div>
+        <div className="min-w-0">
           <h3 className="font-display text-2xl font-extrabold tracking-tight sm:text-3xl">
             {agent.name}
           </h3>
@@ -234,7 +233,7 @@ function LeadershipCard({ agent, index }: { agent: Agent; index: number }) {
               {t("seHablaEspanol")}
             </p>
           )}
-          <p className="mt-4 max-w-xl text-sm leading-7 text-white/82">
+          <p className="mt-4 max-w-3xl text-sm leading-7 text-white/82">
             {bio(agent.slug)}
           </p>
 
@@ -249,28 +248,29 @@ function LeadershipCard({ agent, index }: { agent: Agent; index: number }) {
             ))}
           </div>
 
-          <div className="mt-6 flex flex-wrap justify-center gap-3 sm:justify-start">
-            <a
-              href={`mailto:${agent.email}`}
-              className="glass-btn-dark inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-bold text-white"
-              aria-label={t("emailAgent", { name: agent.firstName })}
-              onClick={tap}
-            >
-              <Mail className="h-4 w-4" />
-              {t("emailAgent", { name: agent.firstName })}
-            </a>
-            <Link
-              href={buildTrackedHref(`/agents/${agent.slug}`, {
-                agent: agent.slug,
-                entry: "leadership-team-card",
-              })}
-              className="cta-glow inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-bold text-gray-900 transition hover:bg-blue-light"
-              onClick={press}
-            >
-              {t("meetAgent", { name: agent.firstName })}
-              <Handshake className="h-4 w-4" />
-            </Link>
-          </div>
+        </div>
+
+        <div className="flex flex-wrap justify-center gap-3 sm:col-span-2 lg:col-span-1 lg:flex-col lg:items-stretch">
+          <a
+            href={`mailto:${agent.email}`}
+            className="glass-btn-dark inline-flex items-center justify-center gap-2 rounded-full px-4 py-2 text-sm font-bold text-white"
+            aria-label={t("emailAgent", { name: agent.firstName })}
+            onClick={tap}
+          >
+            <Mail className="h-4 w-4" />
+            {t("emailAgent", { name: agent.firstName })}
+          </a>
+          <Link
+            href={buildTrackedHref(`/agents/${agent.slug}`, {
+              agent: agent.slug,
+              entry: "primary-producer-team-card",
+            })}
+            className="cta-glow inline-flex items-center justify-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-bold text-gray-900 transition hover:bg-blue-light"
+            onClick={press}
+          >
+            {t("meetAgent", { name: agent.firstName })}
+            <Handshake className="h-4 w-4" />
+          </Link>
         </div>
       </div>
     </motion.article>

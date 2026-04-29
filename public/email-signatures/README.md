@@ -42,7 +42,7 @@
   - Keep the personal LinkedIn cell only on signatures for agents with a confirmed personal profile (currently Erin).
   - Use the main office phone for everyone except agents with a confirmed direct line (currently Brahm).
 - Review pill links to `/review` → Google Business Profile (shared across all signatures).
-- Brahm's business-card QR asset lives at `/media/agents/qr/brahm-business-card.svg` and points to his tracked profile URL.
+- Brahm's business-card QR assets live at `/media/agents/qr/brahm-business-card.svg` and `/media/agents/qr/brahm-business-card.png`; both point to `https://allsberryagency.com/agents/brahm?agent=brahm&entry=primary-producer-team-card`.
 
 ## QA checklist
 
