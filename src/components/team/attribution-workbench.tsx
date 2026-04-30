@@ -84,7 +84,7 @@ export function AttributionWorkbench({ agents }: AttributionWorkbenchProps) {
       .map((agent) => {
         return [
           `${agent.name} — ${agent.title}`,
-          `Profile: ${agent.directUrl}`,
+          `Landing / QR: ${agent.directUrl}`,
           `Quote: ${agent.quoteUrl}`,
           `Proof: ${agent.proofUrl}`,
         ].join("\n");
@@ -236,9 +236,9 @@ export function AttributionWorkbench({ agents }: AttributionWorkbenchProps) {
           Agent link builder
         </div>
         <p className="mt-3 max-w-3xl text-sm leading-7 text-gray-600">
-          These are the clean tracked URLs the team can use in texts, emails, QR codes, or print
-          materials. Each one carries the agent plus a readable entry point so the follow-up path
-          stays obvious.
+          These are the clean URLs the team can use in texts, emails, QR codes, or print
+          materials. Agent profile QR links carry the agent plus a readable entry point; Brahm&apos;s
+          business-card QR intentionally opens the main landing page.
         </p>
 
         <div className="mt-8 grid gap-6 lg:grid-cols-3">
@@ -268,7 +268,7 @@ export function AttributionWorkbench({ agents }: AttributionWorkbenchProps) {
               <div className="mt-5 grid gap-3">
                 <LinkRow
                   copied={copiedKey === `${agent.slug}-profile`}
-                  label="Direct profile / QR"
+                  label="Landing / QR"
                   value={agent.directUrl}
                   onCopy={() => copyText(agent.directUrl, `${agent.slug}-profile`)}
                 />

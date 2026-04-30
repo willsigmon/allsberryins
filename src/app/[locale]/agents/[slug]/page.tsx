@@ -15,6 +15,7 @@ import { createPageMetadata } from "@/lib/metadata";
 import { getSeoPagesForAgent } from "@/lib/seo-content";
 import { agency, agents, getAgentBySlug, primaryProducerSlug } from "@/lib/site-data";
 import { createBreadcrumbSchema, organizationSchema } from "@/lib/seo";
+import { getAgentQrDestination } from "@/lib/agent-qr";
 import { buildTrackedHref } from "@/lib/tracking";
 import { absoluteUrl } from "@/lib/utils";
 
@@ -61,14 +62,7 @@ export default async function AgentPage({ params, searchParams }: AgentPageProps
   const tBio = await getTranslations("agents.bios");
   const agentBio = tBio(agent.slug);
   const entryPoint = typeof query.entry === "string" ? query.entry : undefined;
-  const directPageEntry =
-    agent.slug === primaryProducerSlug ? "primary-producer-team-card" : "qr-profile";
-  const directPageUrl = absoluteUrl(
-    buildTrackedHref(`/agents/${agent.slug}`, {
-      agent: agent.slug,
-      entry: directPageEntry,
-    }),
-  );
+  const qrDestination = getAgentQrDestination(agent.slug);
 
   const familyName = agent.name.split(" ").slice(1).join(" ") || undefined;
   const personSchema = {
@@ -239,15 +233,19 @@ export default async function AgentPage({ params, searchParams }: AgentPageProps
                       Direct link
                     </p>
                     <h2 className="mt-3 font-display text-3xl font-extrabold leading-tight text-gray-900">
-                      Scan to visit {agent.firstName}&apos;s page
+                      {qrDestination.isMainLandingPage
+                        ? "Scan to visit the main Allsberry site"
+                        : `Scan to visit ${agent.firstName}'s page`}
                     </h2>
                     <p className="mt-3 text-sm leading-7 text-gray-600">
-                      Opens the tracked profile page for print, cards, and follow-up.
+                      {qrDestination.isMainLandingPage
+                        ? "Opens the main landing page for print, cards, and follow-up."
+                        : "Opens the tracked profile page for print, cards, and follow-up."}
                     </p>
                   </div>
                   <div className="mx-auto rounded-[1.35rem] border border-gray-100 bg-gray-50 p-3 sm:mx-0">
                     <QRCodeSVG
-                      value={directPageUrl}
+                      value={qrDestination.absoluteUrl}
                       size={150}
                       fgColor="#00205C"
                       bgColor="#ffffff"
@@ -269,7 +267,7 @@ export default async function AgentPage({ params, searchParams }: AgentPageProps
                   </Link>
                   <p className="inline-flex items-center gap-2 text-sm font-medium text-gray-400">
                     <QrCode className="h-4 w-4 text-blue" />
-                    Tracked profile QR
+                    {qrDestination.entryLabel}
                   </p>
                 </div>
               </article>
@@ -284,16 +282,16 @@ export default async function AgentPage({ params, searchParams }: AgentPageProps
                 <h2 className="mt-3 font-display text-3xl font-extrabold text-gray-900">
                   What to expect
                 </h2>
-                <div className="mt-5 divide-y divide-gray-100 rounded-[1.25rem] border border-gray-100 bg-white/85 px-4">
-                  <p className="py-4 text-sm leading-7 text-gray-600">
+                <div className="mt-5 divide-y divide-[#c8d1dc] rounded-[1.25rem] border border-[#d7dee8] bg-white/85 px-4">
+                  <p className="py-4 text-sm leading-7 text-[#26394f]">
                     Call, email, or fill out the form below and {agent.firstName} will follow up
                     within one business day.
                   </p>
-                  <p className="py-4 text-sm leading-7 text-gray-600">
+                  <p className="py-4 text-sm leading-7 text-[#26394f]">
                     {agent.firstName} will review your situation, explain your options in plain
                     language, and help you compare coverage side by side.
                   </p>
-                  <p className="py-4 text-sm leading-7 text-gray-600">
+                  <p className="py-4 text-sm leading-7 text-[#26394f]">
                     Once you choose a plan, {agent.firstName} stays with you through binding,
                     renewals, and any claims that come up.
                   </p>

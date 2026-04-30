@@ -3,6 +3,7 @@ import { setRequestLocale } from "next-intl/server";
 
 import { AttributionWorkbench } from "@/components/team/attribution-workbench";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { getAgentQrDestination } from "@/lib/agent-qr";
 import { createPageMetadata } from "@/lib/metadata";
 import { agents, primaryProducerSlug } from "@/lib/site-data";
 import { buildTrackedHref } from "@/lib/tracking";
@@ -29,12 +30,7 @@ export async function generateMetadata({ params }: TeamAttributionPageProps): Pr
 }
 
 const agentLinkSets = agents.map((agent) => ({
-  directUrl: absoluteUrl(
-    buildTrackedHref(`/agents/${agent.slug}`, {
-      agent: agent.slug,
-      entry: agent.slug === primaryProducerSlug ? "primary-producer-team-card" : "qr-profile",
-    }),
-  ),
+  directUrl: getAgentQrDestination(agent.slug).absoluteUrl,
   name: agent.name,
   proofUrl: absoluteUrl(
     buildTrackedHref("/evidence-of-insurance", {
