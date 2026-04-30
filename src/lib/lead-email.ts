@@ -7,7 +7,7 @@ type LeadPayload = Record<string, unknown> & { type: string };
 
 type SendResult =
   | { ok: true; provider: "smtp" | "log" }
-  | { ok: false; provider: "smtp"; error: string };
+  | { ok: false; provider: "smtp" | "unconfigured"; error: string };
 
 const LEAD_TYPE_LABELS: Record<string, string> = {
   "quote-request": "Quote Request",
@@ -94,10 +94,17 @@ export async function sendLeadEmail(lead: LeadPayload): Promise<SendResult> {
 
   const transporter = getTransporter();
   if (!transporter) {
-    console.info("[lead-email] SMTP not configured — logging lead only", {
+    const error = "SMTP is not configured, so this lead cannot be emailed.";
+    console.warn("[lead-email] SMTP not configured", {
+      mode: process.env.NODE_ENV,
       type: lead.type,
       to: toEmail,
     });
+
+    if (process.env.NODE_ENV === "production") {
+      return { ok: false, provider: "unconfigured", error };
+    }
+
     return { ok: true, provider: "log" };
   }
 

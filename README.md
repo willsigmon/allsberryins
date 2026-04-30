@@ -27,7 +27,8 @@ Custom Next.js website prototype for **Allsberry Insurance Agency** in Corona, C
 - Quote page with conditional business/workers comp fields
 - Agent profile pages with QR codes and contact forms
 - Blog index + article pages
-- API stubs for `/api/leads` and `/api/chat`
+- Lead capture endpoint at `/api/leads` with SMTP delivery when env vars are configured
+- API stub for `/api/chat`
 - SEO foundation:
   - metadata templates
   - Open Graph / Twitter images
@@ -66,7 +67,9 @@ npm run start
 - Local non-Vercel builds use `.next-build` as the dist dir. The clean script aggressively rotates
   stale local build folders first because Finder/SMB locks on external drives can leave behind busy
   files from prior sessions. Vercel still uses the default build output.
-- `/api/leads` currently logs submissions and includes a TODO for AgencyZoom integration.
+- `/api/leads` emails form submissions through SMTP. Configure `SMTP_HOST`,
+  `SMTP_USER`, `SMTP_PASSWORD`, `LEADS_TO_EMAIL`, and `LEADS_FROM_EMAIL` in
+  Vercel before relying on production lead capture.
 - `/api/chat` currently returns placeholder text and includes a TODO for chatbot integration.
 - The Stealth ID / SITE I.D. LEADS tracking snippet is now embedded by default.
 - The site now parses that snippet into a route-aware loader so tracking still updates on
