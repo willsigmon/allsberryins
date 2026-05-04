@@ -1,33 +1,79 @@
 # SMTP Lead Delivery Handoff
 
-## Status
+## Current production status
 
 The Allsberry site sends quote/contact/evidence leads through `/api/leads`, which calls `src/lib/lead-email.ts` and uses Nodemailer SMTP.
 
-On 2026-05-04, these Vercel **production** environment variables were configured for project `wsmco/allsberryagency`:
+On 2026-05-04, production Vercel project `wsmco/allsberryagency` was switched from Google Workspace SMTP to Brevo SMTP because Erin's Google mailbox should not be used as the website SMTP identity.
+
+Current Vercel **production** email variables:
 
 ```env
-SMTP_HOST=smtp.gmail.com
+SMTP_HOST=smtp-relay.brevo.com
 SMTP_PORT=587
-SMTP_USER=erin@allsberryagency.com
+SMTP_USER=<Brevo SMTP login>
+SMTP_PASSWORD=<encrypted Brevo SMTP key in Vercel>
 LEADS_TO_EMAIL=leads@allsberryagency.com
-LEADS_FROM_EMAIL=erin@allsberryagency.com
+LEADS_FROM_EMAIL=will@willsigmon.media
 ```
 
-`SMTP_PASSWORD` was intentionally **not** set because the value provided was still the placeholder `PASTE_16_CHAR_APP_PASSWORD_HERE`.
+`LEADS_FROM_EMAIL` is temporarily set to `will@willsigmon.media` because that sender is already verified in the Brevo account. This keeps lead delivery unblocked without relying on Erin's mailbox or unauthenticated Allsberry DNS.
 
-## Next action
+Production was redeployed after the switch:
 
-1. Log into Erin's Google Workspace account.
-2. Ensure 2-Step Verification is enabled.
-3. Create a Google App Password for the website SMTP integration.
-4. Add that 16-character app password to Vercel production as `SMTP_PASSWORD`.
-5. Redeploy production.
-6. Submit a test quote/contact form and verify delivery to `leads@allsberryagency.com`.
+- Deployment: `dpl_GvJgVRRswuVhpJvoqeG3j5XFkkbm`
+- Production alias: `https://allsberryagency.com`
 
-## Important checks
+## DNS/domain-auth blocker
+
+The preferred final sender is:
+
+```env
+LEADS_FROM_EMAIL=website@allsberryagency.com
+```
+
+That requires authenticating `allsberryagency.com` in Brevo first.
+
+Brevo generated these DNS records:
+
+| Type | Host | Value |
+| --- | --- | --- |
+| TXT | `@` | `brevo-code:5c72a10a14d5f5d95eeaf277557c9adf` |
+| TXT | `_dmarc` | `v=DMARC1; p=none; rua=mailto:rua@dmarc.brevo.com` |
+| CNAME | `brevo1._domainkey` | `b1.allsberryagency-com.dkim.brevo.com` |
+| CNAME | `brevo2._domainkey` | `b2.allsberryagency-com.dkim.brevo.com` |
+
+Important: do **not** delete the existing Google SPF TXT record at `@` unless replacing it with a correctly merged SPF record. Brevo's generated records above do not require changing the existing SPF record.
+
+## What was tried
+
+- Domain registrar and authoritative DNS are GoDaddy:
+  - `NS55.DOMAINCONTROL.COM`
+  - `NS56.DOMAINCONTROL.COM`
+- Vercel knows the domain, but current DNS is **not** Vercel DNS. Vercel's intended nameservers are `ns1.vercel-dns.com` / `ns2.vercel-dns.com`, but those are not authoritative, so adding DNS records in Vercel will not authenticate Brevo.
+- Brevo's automatic GoDaddy/Domain Connect flow was attempted.
+- Erin's GoDaddy account logged in successfully, but Domain Connect said she does not have access to this domain's DNS.
+- The saved GoDaddy login `info@thehelpcenternc.com` also logged in successfully, but GoDaddy DNS Management said `allsberryagency.com` was not found.
+
+## Next actions
+
+### To finish domain authentication
+
+Get access to the GoDaddy account that actually owns/manages `allsberryagency.com`, or have the owner add delegate DNS access. Then add the four Brevo DNS records above and return to Brevo to verify/authenticate the domain.
+
+After Brevo shows `allsberryagency.com` as authenticated:
+
+```bash
+vercel env add LEADS_FROM_EMAIL production --value website@allsberryagency.com --yes --force
+vercel deploy --prod --archive=tgz
+```
+
+### To test the current working fallback
+
+Submit a synthetic lead through `https://allsberryagency.com/api/leads` or the live quote form and confirm delivery to `leads@allsberryagency.com`. Because this sends a real email to the leads inbox, get action-time approval before running the test.
+
+## Notes
 
 - Do not use Erin's normal Google account password for SMTP.
-- Confirm `leads@allsberryagency.com` exists as a Google Workspace mailbox, group, or alias.
-- Keep `LEADS_FROM_EMAIL` aligned with the authenticated sender unless Google Workspace has the sender configured as a permitted alias.
-- Production lead submissions fail closed if SMTP is missing or broken, so test after redeploy.
+- Do not set `LEADS_FROM_EMAIL=website@allsberryagency.com` until Brevo domain authentication succeeds.
+- The current fallback should keep the website from failing closed on lead submissions while DNS ownership is sorted out.
