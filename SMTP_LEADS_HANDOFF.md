@@ -45,6 +45,36 @@ Brevo generated these DNS records:
 
 Important: do **not** delete the existing Google SPF TXT record at `@` unless replacing it with a correctly merged SPF record. Brevo's generated records above do not require changing the existing SPF record.
 
+
+## Vercel DNS zone prepared
+
+On 2026-05-04, the Vercel DNS zone for `allsberryagency.com` was filled out with the records needed to survive a future nameserver move to Vercel:
+
+- Google Workspace MX records
+- existing Google site verification TXT
+- existing Google SPF TXT
+- Brevo domain verification TXT
+- Brevo DKIM CNAME records
+- Brevo DMARC TXT record
+
+Vercel DNS record IDs created:
+
+| Purpose | ID |
+| --- | --- |
+| Google MX `aspmx.l.google.com` | `rec_19ebf857464baa123ecc33b3` |
+| Google MX `alt1.aspmx.l.google.com` | `rec_cd0bc02f17ccf6f4e6f56efd` |
+| Google MX `alt2.aspmx.l.google.com` | `rec_ba356297a9b05a7eac1bb077` |
+| Google MX `aspmx2.googlemail.com` | `rec_4647309dcf94b5bca49348cb` |
+| Google MX `aspmx3.googlemail.com` | `rec_a875f9b18a1e2b8a4d7e91c3` |
+| Google verification TXT | `rec_09fa8744040aab60eb57a199` |
+| SPF TXT | `rec_3600d713f5d5614621479379` |
+| Brevo verification TXT | `rec_2919cbaab0fcb60aa67d2308` |
+| Brevo DKIM 1 CNAME | `rec_57b152d09b4ebdae1ebe0b21` |
+| Brevo DKIM 2 CNAME | `rec_f6cf692e12bf11a29820ed7b` |
+| Brevo DMARC TXT | `rec_b76be87a7717709bf0df4dc8` |
+
+This does **not** affect live DNS yet because authoritative nameservers are still GoDaddy (`NS55.DOMAINCONTROL.COM` / `NS56.DOMAINCONTROL.COM`). If the real GoDaddy domain owner changes nameservers to `ns1.vercel-dns.com` and `ns2.vercel-dns.com`, the Vercel zone is now ready and should preserve website + Google Workspace mail + Brevo authentication.
+
 ## What was tried
 
 - Domain registrar and authoritative DNS are GoDaddy:
@@ -53,7 +83,7 @@ Important: do **not** delete the existing Google SPF TXT record at `@` unless re
 - Vercel knows the domain, but current DNS is **not** Vercel DNS. Vercel's intended nameservers are `ns1.vercel-dns.com` / `ns2.vercel-dns.com`, but those are not authoritative, so adding DNS records in Vercel will not authenticate Brevo.
 - Brevo's automatic GoDaddy/Domain Connect flow was attempted.
 - Erin's GoDaddy account logged in successfully, but Domain Connect said she does not have access to this domain's DNS.
-- The saved GoDaddy login `info@thehelpcenternc.com` also logged in successfully, but GoDaddy DNS Management said `allsberryagency.com` was not found.
+- The saved GoDaddy login `info@thehelpcenternc.com` also logged in successfully, but GoDaddy DNS Management said `allsberryagency.com` was not found. This account is for Twanna Jones / The Help Center NC, a different client, and should not be used for Allsberry DNS work.
 
 ## Next actions
 
