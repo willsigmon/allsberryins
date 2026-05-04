@@ -84,12 +84,29 @@ This does **not** affect live DNS yet because authoritative nameservers are stil
 - Brevo's automatic GoDaddy/Domain Connect flow was attempted.
 - Erin's GoDaddy account logged in successfully, but Domain Connect said she does not have access to this domain's DNS.
 - The saved GoDaddy login `info@thehelpcenternc.com` also logged in successfully, but GoDaddy DNS Management said `allsberryagency.com` was not found. This account is for Twanna Jones / The Help Center NC, a different client, and should not be used for Allsberry DNS work.
+- Google Admin → Domains → Manage domains → Advanced DNS Settings showed a GoDaddy DNS console sign-in for `allsberryagency.com`. The displayed credentials were tried in both the Google Workspace-branded GoDaddy login and the generic GoDaddy/secure-server login in a clean Safari session on 2026-05-04. Both flows rejected them as an incorrect username/password, so the Google Admin DNS-console credentials appear stale, locked, or no longer valid.
 
 ## Next actions
 
 ### To finish domain authentication
 
 Get access to the GoDaddy account that actually owns/manages `allsberryagency.com`, or have the owner add delegate DNS access. Then add the four Brevo DNS records above and return to Brevo to verify/authenticate the domain.
+
+Alternative if the owner wants Vercel to be the DNS source of truth: use a working GoDaddy/registrar login to change the domain nameservers from:
+
+```text
+NS55.DOMAINCONTROL.COM
+NS56.DOMAINCONTROL.COM
+```
+
+to:
+
+```text
+ns1.vercel-dns.com
+ns2.vercel-dns.com
+```
+
+The Vercel DNS zone is already staged with website, Google Workspace mail, and Brevo authentication records, so this nameserver move should be the fastest finish once registrar access is working.
 
 After Brevo shows `allsberryagency.com` as authenticated:
 
