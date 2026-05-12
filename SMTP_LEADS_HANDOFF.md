@@ -24,6 +24,28 @@ Production was redeployed after the switch:
 - Deployment: `dpl_GvJgVRRswuVhpJvoqeG3j5XFkkbm`
 - Production alias: `https://allsberryagency.com`
 
+## 2026-05-12 GoDaddy migration update
+
+Erin received Google's post-migration notice confirming that `allsberryagency.com`
+has moved from Google-managed domain registration to a newly created GoDaddy
+account. This does not change the Google Workspace mailbox subscription, but it
+does make GoDaddy the required place to manage renewal billing, domain contact
+details, nameservers, and DNS records.
+
+Immediate owner-side action:
+
+1. Find the GoDaddy welcome email sent to the domain account contact.
+2. Sign in to the newly created GoDaddy account from that email.
+3. Accept GoDaddy's terms.
+4. Add/update billing and domain-contact information before the next renewal.
+5. Either:
+   - add the Brevo records in GoDaddy DNS, or
+   - delegate DNS/domain access so we can add them, or
+   - change nameservers to Vercel using the prepared Vercel zone below.
+
+If Erin cannot find the GoDaddy welcome email, contact GoDaddy Support and ask
+them to recover the newly created account for `allsberryagency.com`.
+
 ## DNS/domain-auth blocker
 
 The preferred final sender is:
@@ -75,6 +97,16 @@ Vercel DNS record IDs created:
 
 This does **not** affect live DNS yet because authoritative nameservers are still GoDaddy (`NS55.DOMAINCONTROL.COM` / `NS56.DOMAINCONTROL.COM`). If the real GoDaddy domain owner changes nameservers to `ns1.vercel-dns.com` and `ns2.vercel-dns.com`, the Vercel zone is now ready and should preserve website + Google Workspace mail + Brevo authentication.
 
+Live check on 2026-05-12:
+
+- Authoritative nameservers are still GoDaddy:
+  - `ns55.domaincontrol.com`
+  - `ns56.domaincontrol.com`
+- Google Workspace MX records are still present.
+- Brevo verification, DKIM, and DMARC records are **not** present in live DNS.
+- `www.allsberryagency.com` now resolves through Vercel and redirects to
+  `https://allsberryagency.com/`.
+
 ## What was tried
 
 - Domain registrar and authoritative DNS are GoDaddy:
@@ -85,6 +117,9 @@ This does **not** affect live DNS yet because authoritative nameservers are stil
 - Erin's GoDaddy account logged in successfully, but Domain Connect said she does not have access to this domain's DNS.
 - The saved GoDaddy login `info@thehelpcenternc.com` also logged in successfully, but GoDaddy DNS Management said `allsberryagency.com` was not found. This account is for Twanna Jones / The Help Center NC, a different client, and should not be used for Allsberry DNS work.
 - Google Admin → Domains → Manage domains → Advanced DNS Settings showed a GoDaddy DNS console sign-in for `allsberryagency.com`. The displayed credentials were tried in both the Google Workspace-branded GoDaddy login and the generic GoDaddy/secure-server login in a clean Safari session on 2026-05-04. Both flows rejected them as an incorrect username/password, so the Google Admin DNS-console credentials appear stale, locked, or no longer valid.
+- On 2026-05-12, Google's migration notice made the likely path clearer: the
+  working registrar login is the newly created GoDaddy account referenced in the
+  GoDaddy welcome email, not the older Google Admin DNS-console credential.
 
 ## Next actions
 
