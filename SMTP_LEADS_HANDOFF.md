@@ -46,7 +46,36 @@ Immediate owner-side action:
 If Erin cannot find the GoDaddy welcome email, contact GoDaddy Support and ask
 them to recover the newly created account for `allsberryagency.com`.
 
-## DNS/domain-auth blocker
+## 2026-05-12 DNS/domain-auth update
+
+The GoDaddy account that manages `allsberryagency.com` was recovered by customer
+number and used to add the four Brevo authentication records directly in live
+GoDaddy DNS.
+
+Confirmed live against both authoritative GoDaddy nameservers
+(`ns55.domaincontrol.com` and `ns56.domaincontrol.com`):
+
+| Type | Host | Live value |
+| --- | --- | --- |
+| TXT | `@` | `brevo-code:5c72a10a14d5f5d95eeaf277557c9adf` |
+| TXT | `_dmarc` | `v=DMARC1; p=none; rua=mailto:rua@dmarc.brevo.com` |
+| CNAME | `brevo1._domainkey` | `b1.allsberryagency-com.dkim.brevo.com` |
+| CNAME | `brevo2._domainkey` | `b2.allsberryagency-com.dkim.brevo.com` |
+
+Public recursive DNS also returned `_dmarc`, `brevo1._domainkey`, and
+`brevo2._domainkey`, so the DNS side is no longer the blocker.
+
+Remaining dashboard-side step: authenticate/verify `allsberryagency.com` inside
+Brevo. Brevo's API supports domain authentication through
+`PUT /v3/senders/domains/{domainName}/authenticate`, but this repo currently
+does not have a usable Brevo API key available. Browser login also requires the
+actual Brevo account; Google OAuth with `wjsigmon@gmail.com` is not associated
+with the Brevo account.
+
+Do **not** switch `LEADS_FROM_EMAIL` to `website@allsberryagency.com` until
+Brevo reports the domain as authenticated.
+
+## DNS/domain-auth background
 
 The preferred final sender is:
 
@@ -97,13 +126,13 @@ Vercel DNS record IDs created:
 
 This does **not** affect live DNS yet because authoritative nameservers are still GoDaddy (`NS55.DOMAINCONTROL.COM` / `NS56.DOMAINCONTROL.COM`). If the real GoDaddy domain owner changes nameservers to `ns1.vercel-dns.com` and `ns2.vercel-dns.com`, the Vercel zone is now ready and should preserve website + Google Workspace mail + Brevo authentication.
 
-Live check on 2026-05-12:
+Live check before the GoDaddy fix on 2026-05-12:
 
 - Authoritative nameservers are still GoDaddy:
   - `ns55.domaincontrol.com`
   - `ns56.domaincontrol.com`
 - Google Workspace MX records are still present.
-- Brevo verification, DKIM, and DMARC records are **not** present in live DNS.
+- Brevo verification, DKIM, and DMARC records were **not** present in live DNS.
 - `www.allsberryagency.com` now resolves through Vercel and redirects to
   `https://allsberryagency.com/`.
 
@@ -125,9 +154,11 @@ Live check on 2026-05-12:
 
 ### To finish domain authentication
 
-Get access to the GoDaddy account that actually owns/manages `allsberryagency.com`, or have the owner add delegate DNS access. Then add the four Brevo DNS records above and return to Brevo to verify/authenticate the domain.
+The live GoDaddy DNS records are now in place. Return to Brevo with the actual
+Brevo account/API key and verify/authenticate `allsberryagency.com`.
 
-Alternative if the owner wants Vercel to be the DNS source of truth: use a working GoDaddy/registrar login to change the domain nameservers from:
+Alternative if the owner later wants Vercel to be the DNS source of truth: use a
+working GoDaddy/registrar login to change the domain nameservers from:
 
 ```text
 NS55.DOMAINCONTROL.COM
@@ -141,7 +172,10 @@ ns1.vercel-dns.com
 ns2.vercel-dns.com
 ```
 
-The Vercel DNS zone is already staged with website, Google Workspace mail, and Brevo authentication records, so this nameserver move should be the fastest finish once registrar access is working.
+The Vercel DNS zone is already staged with website, Google Workspace mail, and
+Brevo authentication records, so this nameserver move should be safe if the
+owner deliberately wants Vercel to manage DNS. It is no longer required just to
+finish Brevo authentication.
 
 After Brevo shows `allsberryagency.com` as authenticated:
 
