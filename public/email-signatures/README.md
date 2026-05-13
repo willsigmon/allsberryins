@@ -38,7 +38,7 @@
 - All signatures use inline CSS for maximum email client compatibility
 - The gradient brand stripe may render as solid navy in older Outlook versions
 - Production-safe defaults:
-  - Keep the "Book an Appointment" CTA only on signatures for agents with a confirmed personal booking link (currently Brahm).
+  - Keep booking CTAs only on signatures for agents with a confirmed personal booking link (currently Erin and Brahm).
   - Keep the personal LinkedIn cell only on signatures for agents with a confirmed personal profile (currently Erin).
   - Use the main office phone for everyone except agents with a confirmed direct line (currently Brahm).
 - Review pill links to `/review` → Google Business Profile (shared across all signatures).
