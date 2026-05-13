@@ -75,6 +75,36 @@ with the Brevo account.
 Do **not** switch `LEADS_FROM_EMAIL` to `website@allsberryagency.com` until
 Brevo reports the domain as authenticated.
 
+## 2026-05-12 Brevo authentication + production sender flip
+
+Brevo API access was recovered for the `will@willsigmon.media` Brevo account.
+Using Brevo's `/v3/senders/domains/allsberryagency.com` endpoints:
+
+- Before authentication, Brevo already saw all four DNS records as `status: true`.
+- `PUT /v3/senders/domains/allsberryagency.com/authenticate` returned
+  `Domain has been authenticated successfully.`
+- A follow-up domain fetch returned `verified: true` and `authenticated: true`.
+
+After Brevo confirmed authentication, production Vercel env values were updated
+for the live website:
+
+```env
+SMTP_HOST=smtp-relay.brevo.com
+SMTP_PORT=587
+SMTP_USER=<Brevo SMTP login>
+SMTP_PASSWORD=<Brevo SMTP key>
+LEADS_TO_EMAIL=leads@allsberryagency.com
+LEADS_FROM_EMAIL=website@allsberryagency.com
+```
+
+Production was redeployed after the env update:
+
+- Deployment: `dpl_CnpGniezh8nMprScMeXXk5SqYDLk`
+- Production alias: `https://allsberryagency.com`
+- Vercel ready state: `READY`
+
+The live homepage returned `HTTP/2 200` from Vercel after the deploy.
+
 ## DNS/domain-auth background
 
 The preferred final sender is:
@@ -154,8 +184,9 @@ Live check before the GoDaddy fix on 2026-05-12:
 
 ### To finish domain authentication
 
-The live GoDaddy DNS records are now in place. Return to Brevo with the actual
-Brevo account/API key and verify/authenticate `allsberryagency.com`.
+Complete as of 2026-05-12: live GoDaddy DNS records are in place, Brevo reports
+`allsberryagency.com` as verified/authenticated, Vercel env was flipped to
+`website@allsberryagency.com`, and production was redeployed.
 
 Alternative if the owner later wants Vercel to be the DNS source of truth: use a
 working GoDaddy/registrar login to change the domain nameservers from:
@@ -177,10 +208,10 @@ Brevo authentication records, so this nameserver move should be safe if the
 owner deliberately wants Vercel to manage DNS. It is no longer required just to
 finish Brevo authentication.
 
-After Brevo shows `allsberryagency.com` as authenticated:
+Historical command pattern used after Brevo authentication:
 
 ```bash
-vercel env add LEADS_FROM_EMAIL production --value website@allsberryagency.com --yes --force
+vercel env update LEADS_FROM_EMAIL production --value website@allsberryagency.com --yes
 vercel deploy --prod --archive=tgz
 ```
 
