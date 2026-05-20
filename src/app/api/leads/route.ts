@@ -4,7 +4,16 @@ import { sendLeadEmail } from "@/lib/lead-email";
 import { leadsApiSchema } from "@/lib/lead-schemas";
 
 export async function POST(request: Request) {
-  const body = await request.json();
+  let body;
+  try {
+    body = await request.json();
+  } catch {
+    return NextResponse.json(
+      { success: false, message: "Invalid JSON format." },
+      { status: 400 },
+    );
+  }
+
   const parsed = leadsApiSchema.safeParse(body);
 
   if (!parsed.success) {

@@ -3,6 +3,8 @@
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 
+import { safeUUID } from "@/lib/uuid";
+
 type PlacePrediction = {
   placeId: string;
   text: { text: string };
@@ -45,7 +47,7 @@ export function AddressAutocomplete({
   const [activeIndex, setActiveIndex] = useState(-1);
   const debounceRef = useRef<ReturnType<typeof setTimeout>>(undefined);
   const containerRef = useRef<HTMLDivElement>(null);
-  const sessionTokenRef = useRef(crypto.randomUUID());
+  const sessionTokenRef = useRef(safeUUID());
 
   const fetchPredictions = useCallback(async (input: string) => {
     if (input.length < 3) {
@@ -143,7 +145,7 @@ export function AddressAutocomplete({
       setPredictions([]);
       setIsOpen(false);
       setActiveIndex(-1);
-      sessionTokenRef.current = crypto.randomUUID();
+      sessionTokenRef.current = safeUUID();
     },
     [fetchDetails, onChange, onSelect],
   );
