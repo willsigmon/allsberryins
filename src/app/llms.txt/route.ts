@@ -57,6 +57,9 @@ The site is published in English (default, ${absoluteUrl("/")}) and Spanish
 (${absoluteUrl("/es")}). Bilingual agents on staff: ${bilingualAgentList}.
 Se habla Español.
 
+## Full context
+- [Full Context Corpus](${absoluteUrl("/llms-full.txt")}): Comprehensive dataset containing the complete products details, licensed agent profiles, all guide articles, and deep California insurance landing page wedge contents.
+
 ## Contact
 - Phone: ${agency.phone}
 - Email: ${agency.email}
