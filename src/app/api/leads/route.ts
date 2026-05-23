@@ -44,5 +44,27 @@ export async function POST(request: Request) {
     provider: emailResult.provider,
   });
 
+  // Optional: Send lead data to Zapier webhook if configured
+  const zapierUrl = process.env.ZAPIER_WEBHOOK_URL;
+  if (zapierUrl) {
+    try {
+      const zapierResponse = await fetch(zapierUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...parsed.data,
+          timestamp: new Date().toISOString(),
+        }),
+      });
+      if (!zapierResponse.ok) {
+        console.error("[api/leads] Zapier webhook failed", zapierResponse.status, zapierResponse.statusText);
+      } else {
+        console.info("[api/leads] Zapier webhook delivered successfully");
+      }
+    } catch (err) {
+      console.error("[api/leads] Zapier webhook request error", err);
+    }
+  }
+
   return NextResponse.json({ success: true });
 }
