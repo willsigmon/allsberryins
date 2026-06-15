@@ -1,6 +1,7 @@
 import nodemailer from "nodemailer";
 import type { Transporter } from "nodemailer";
 
+import { leadTypeLabels } from "@/lib/lead-schemas";
 import { agency } from "@/lib/site-data";
 
 type LeadPayload = Record<string, unknown> & { type: string };
@@ -8,12 +9,6 @@ type LeadPayload = Record<string, unknown> & { type: string };
 type SendResult =
   | { ok: true; provider: "smtp" | "log" }
   | { ok: false; provider: "smtp" | "unconfigured"; error: string };
-
-const LEAD_TYPE_LABELS: Record<string, string> = {
-  "quote-request": "Quote Request",
-  "agent-contact": "Agent Contact",
-  "evidence-request": "Evidence of Insurance Request",
-};
 
 function formatValue(value: unknown): string {
   if (value === null || value === undefined || value === "") return "—";
@@ -37,7 +32,7 @@ function renderHtmlBody(lead: LeadPayload): string {
         `<tr><td style="padding:6px 12px;border:1px solid #e5e7eb;font-weight:600;background:#f8fafc;">${escapeHtml(key)}</td><td style="padding:6px 12px;border:1px solid #e5e7eb;">${escapeHtml(formatValue(value))}</td></tr>`,
     )
     .join("");
-  const label = LEAD_TYPE_LABELS[lead.type] ?? "Lead";
+  const label = leadTypeLabels[lead.type] ?? "Lead";
   return `<!doctype html><html><body style="font-family:Arial,sans-serif;color:#0f172a;">
 <h2 style="margin:0 0 12px;">New ${escapeHtml(label)}</h2>
 <p style="margin:0 0 16px;color:#475569;">Submitted via ${escapeHtml(agency.domain)}</p>
@@ -54,7 +49,7 @@ function escapeHtml(value: string): string {
 }
 
 function leadSubject(lead: LeadPayload): string {
-  const label = LEAD_TYPE_LABELS[lead.type] ?? "Website Lead";
+  const label = leadTypeLabels[lead.type] ?? "Website Lead";
   const name =
     typeof lead.firstName === "string" && typeof lead.lastName === "string"
       ? `${lead.firstName} ${lead.lastName}`

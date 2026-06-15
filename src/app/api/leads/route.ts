@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
 import { sendLeadEmail } from "@/lib/lead-email";
-import { leadsApiSchema } from "@/lib/lead-schemas";
+import { leadsApiSchema, leadTypeLabels } from "@/lib/lead-schemas";
 
 export async function POST(request: Request) {
   let body;
@@ -44,7 +44,10 @@ export async function POST(request: Request) {
     provider: emailResult.provider,
   });
 
-  // Optional: Send lead data to Zapier webhook if configured
+  // Optional: forward the lead to Zapier (the website "spoke" of the lead pipeline).
+  // Zapier normalizes this payload and routes it to Ricochet + Farmers Apex + SMS.
+  // `source` and `leadTypeLabel` are stamped here so the downstream Zap can segment
+  // website leads from provider-email leads and populate Ricochet's required Vendor Name.
   const zapierUrl = process.env.ZAPIER_WEBHOOK_URL;
   if (zapierUrl) {
     try {
@@ -53,6 +56,8 @@ export async function POST(request: Request) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...parsed.data,
+          source: "website",
+          leadTypeLabel: leadTypeLabels[parsed.data.type],
           timestamp: new Date().toISOString(),
         }),
       });

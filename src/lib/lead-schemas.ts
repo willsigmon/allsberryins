@@ -128,6 +128,12 @@ export const evidenceRequestSchema = z.object({
 
 export type EvidenceRequestValues = z.infer<typeof evidenceRequestSchema>;
 
+export const leadTypeLabels: Record<string, string> = {
+  "quote-request": "Quote Request",
+  "agent-contact": "Agent Contact",
+  "evidence-request": "Evidence of Insurance Request",
+};
+
 export const leadsApiSchema = z.discriminatedUnion("type", [
   z.object({
     type: z.literal("quote-request"),
