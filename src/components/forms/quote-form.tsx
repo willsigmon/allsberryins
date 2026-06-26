@@ -6,6 +6,7 @@ import { useId, useMemo, useState } from "react";
 import { type DefaultValues, useForm, useWatch } from "react-hook-form";
 
 import { AddressAutocomplete } from "@/components/forms/address-autocomplete";
+import { SmsConsentFields } from "@/components/forms/sms-consent-fields";
 import {
   agency,
   employeeOptions,
@@ -59,6 +60,8 @@ export function QuoteForm({
       employees: undefined,
       message: "",
       honeypot: "",
+      marketingTextOptIn: false,
+      nonMarketingTextOptIn: false,
     }),
     [initialZip, normalizedInitialProduct],
   );
@@ -341,6 +344,8 @@ export function QuoteForm({
             placeholder="Tell us anything helpful about your coverage needs."
           />
         </Field>
+
+        <SmsConsentFields formId={formId} register={register} errors={errors} />
 
         <div className="grid gap-4 sm:grid-cols-[1fr_auto] sm:items-center">
           <p className="text-sm leading-7 text-gray-400">

@@ -6,6 +6,7 @@ import { useId, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 
 import { ReviewRequest } from "@/components/sections/review-request";
+import { SmsConsentFields } from "@/components/forms/sms-consent-fields";
 import { fireLeadConversion } from "@/lib/conversions";
 import {
   evidenceRequestSchema,
@@ -41,6 +42,8 @@ export function EvidenceRequestForm({
       dueDate: "",
       message: "",
       honeypot: "",
+      marketingTextOptIn: false,
+      nonMarketingTextOptIn: false,
     }),
     [initialAudience],
   );
@@ -243,6 +246,8 @@ export function EvidenceRequestForm({
           className="hidden"
           aria-hidden="true"
         />
+
+        <SmsConsentFields formId={formId} register={register} errors={errors} />
 
         <div className="grid gap-4 sm:grid-cols-[1fr_auto] sm:items-center">
           <p className="text-sm leading-7 text-gray-400">

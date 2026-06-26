@@ -6,6 +6,7 @@ import { useId, useState } from "react";
 import { useForm } from "react-hook-form";
 
 import { ReviewRequest } from "@/components/sections/review-request";
+import { SmsConsentFields } from "@/components/forms/sms-consent-fields";
 import { fireLeadConversion } from "@/lib/conversions";
 import { agentContactSchema, helpTopics, type AgentContactValues } from "@/lib/lead-schemas";
 import { agency } from "@/lib/site-data";
@@ -39,6 +40,8 @@ export function AgentContactForm({
       helpTopic: undefined,
       message: "",
       honeypot: "",
+      marketingTextOptIn: false,
+      nonMarketingTextOptIn: false,
     },
   });
 
@@ -158,6 +161,7 @@ export function AgentContactForm({
         className="hidden"
         aria-hidden="true"
       />
+      <SmsConsentFields formId={formId} register={register} errors={errors} />
       <button
         type="submit"
         disabled={isSubmitting}

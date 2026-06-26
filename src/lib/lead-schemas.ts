@@ -30,6 +30,11 @@ const optionalMessageSchema = z
   .or(z.literal(""));
 
 const honeypotSchema = z.string().max(200).optional().or(z.literal(""));
+
+export const smsConsentSchema = z.object({
+  marketingTextOptIn: z.boolean().optional(),
+  nonMarketingTextOptIn: z.boolean().optional(),
+});
 const optionalTrackingFieldSchema = z
   .string()
   .trim()
@@ -75,6 +80,7 @@ export const quoteFormSchema = z
     employees: z.enum(leadEmployeeOptions).optional(),
     message: optionalMessageSchema,
     honeypot: honeypotSchema,
+    ...smsConsentSchema.shape,
   })
   .superRefine((values, ctx) => {
     const needsEmployees = values.products.some(
@@ -103,6 +109,7 @@ export const agentContactSchema = z.object({
   helpTopic: z.enum(helpTopics, { error: "Select how the agent can help." }),
   message: optionalMessageSchema,
   honeypot: honeypotSchema,
+  ...smsConsentSchema.shape,
 });
 
 export type AgentContactValues = z.infer<typeof agentContactSchema>;
@@ -124,6 +131,7 @@ export const evidenceRequestSchema = z.object({
   dueDate: z.string().trim().max(40).optional().or(z.literal("")),
   message: optionalMessageSchema,
   honeypot: honeypotSchema,
+  ...smsConsentSchema.shape,
 });
 
 export type EvidenceRequestValues = z.infer<typeof evidenceRequestSchema>;
