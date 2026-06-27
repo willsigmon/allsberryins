@@ -14,6 +14,14 @@ function CountUp({ end, duration = 3.2 }: { end: number; duration?: number }) {
     if (hasStartedRef.current) return;
     hasStartedRef.current = true;
 
+    if (
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      const reducedId = requestAnimationFrame(() => setCount(end));
+      return () => cancelAnimationFrame(reducedId);
+    }
+
     const startTime = performance.now();
     const animate = (now: number) => {
       const elapsed = now - startTime;
@@ -54,7 +62,7 @@ export function TrustBar() {
             transition={{ duration: 0.5, delay: index * 0.12 }}
             className="flex items-center justify-center gap-5 text-white sm:justify-start"
           >
-            <div className="count-reveal font-display text-4xl font-extrabold tracking-tight sm:text-5xl" style={{ textShadow: "0 2px 0 rgba(0,0,0,0.3), 0 4px 12px rgba(0,102,179,0.25), 0 1px 0 rgba(255,255,255,0.08)" }}>
+            <div className="count-reveal font-display text-4xl font-extrabold tabular-nums tracking-tight sm:text-5xl" style={{ textShadow: "0 2px 0 rgba(0,0,0,0.3), 0 4px 12px rgba(0,102,179,0.25), 0 1px 0 rgba(255,255,255,0.08)" }}>
               <CountUp end={stat.end} />
               {stat.suffix}
             </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useId, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { useTranslations } from "next-intl";
@@ -14,6 +14,7 @@ const faqKeys = ["q1", "q2", "q3", "q4", "q5"] as const;
 
 function FaqItem({ faq, index }: { faq: { question: string; answer: string }; index: number }) {
   const [open, setOpen] = useState(false);
+  const panelId = useId();
 
   return (
     <motion.article
@@ -28,8 +29,9 @@ function FaqItem({ faq, index }: { faq: { question: string; answer: string }; in
         onClick={() => { press(); setOpen((prev) => !prev); }}
         className="flex w-full items-center justify-between gap-4 p-6 text-left"
         aria-expanded={open}
+        aria-controls={panelId}
       >
-        <h3 className="font-display text-xl font-bold text-gray-900">{faq.question}</h3>
+        <h3 className="min-w-0 font-display text-xl font-bold text-gray-900">{faq.question}</h3>
         <ChevronDown
           className={cn(
             "h-5 w-5 shrink-0 text-blue transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]",
@@ -38,6 +40,8 @@ function FaqItem({ faq, index }: { faq: { question: string; answer: string }; in
         />
       </button>
       <div
+        id={panelId}
+        inert={!open}
         className={cn(
           "grid transition-[grid-template-rows] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]",
           open ? "grid-rows-[1fr]" : "grid-rows-[0fr]",

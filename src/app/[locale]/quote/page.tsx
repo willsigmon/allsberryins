@@ -88,7 +88,7 @@ export default async function QuotePage({ params, searchParams }: QuotePageProps
               description={t("subheading")}
               as="h1"
             />
-            <div className="mt-8 rounded-[2rem] border border-blue/10 bg-white p-6 shadow-[0_20px_60px_-46px_rgba(0,32,92,0.45)]">
+            <div className="mt-8 rounded-card-lg border border-blue/10 bg-white p-6 shadow-[0_20px_60px_-46px_rgba(0,32,92,0.45)]">
               <p className="text-sm font-semibold uppercase tracking-[0.24em] text-blue">{t("whatHappensNext")}</p>
               <ul className="mt-5 grid gap-4 text-sm leading-7 text-gray-600">
                 <li>• {t("next1")}</li>
@@ -100,7 +100,7 @@ export default async function QuotePage({ params, searchParams }: QuotePageProps
                   {t("preferredFollowUp", { name: assignedAgent.name })}
                 </div>
               ) : null}
-              <p className="mt-5 text-sm leading-7 text-gray-400">
+              <p className="mt-5 text-sm leading-7 text-gray-600">
                 {t("needProofIntro")}{" "}
                 <a
                   className="font-semibold text-blue hover:text-gray-900"

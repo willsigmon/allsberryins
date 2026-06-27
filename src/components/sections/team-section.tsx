@@ -20,9 +20,9 @@ import { buildTrackedHref } from "@/lib/tracking";
 import { cn } from "@/lib/utils";
 
 const accentClasses: Record<AgentAccent, string> = {
-  blue: "bg-[linear-gradient(145deg,#0066b3_0%,#5da7df_100%)]",
-  navy: "bg-[linear-gradient(145deg,#00205c_0%,#33599d_100%)]",
-  red: "bg-[linear-gradient(145deg,#da291c_0%,#f6685d_100%)]",
+  blue: "bg-[linear-gradient(145deg,var(--blue)_0%,#5da7df_100%)]",
+  navy: "bg-[linear-gradient(145deg,var(--navy)_0%,#33599d_100%)]",
+  red: "bg-[linear-gradient(145deg,var(--red)_0%,#f6685d_100%)]",
   purple: "bg-[linear-gradient(145deg,#7c3aed_0%,#a78bfa_100%)]",
   emerald: "bg-[linear-gradient(145deg,#059669_0%,#6ee7b7_100%)]",
   rose: "bg-[linear-gradient(145deg,#e11d48_0%,#fb7185_100%)]",
@@ -57,11 +57,11 @@ export function TeamSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            className="parallax-card relative mt-12 overflow-hidden rounded-[2.5rem] bg-[linear-gradient(160deg,#08214f_0%,#0c2d6b_20%,#0f3a87_50%,#2d7bc6_85%,#5da7df_100%)] p-8 text-white shadow-[0_32px_80px_-32px_rgba(0,32,92,0.7)] sm:p-10 lg:p-12"
+            className="parallax-card relative mt-12 overflow-hidden rounded-[2.5rem] bg-[linear-gradient(160deg,var(--navy)_0%,#0c2d6b_20%,#0f3a87_50%,var(--blue)_85%,#5da7df_100%)] p-8 text-white shadow-[0_32px_80px_-32px_rgba(0,32,92,0.7)] sm:p-10 lg:p-12"
           >
             <div className="absolute -right-32 -top-32 h-72 w-72 rounded-full bg-white/5 blur-3xl" />
             <div className="absolute -left-20 bottom-0 h-56 w-56 rounded-full bg-blue/8 blur-3xl" />
-            <div className="absolute inset-x-0 top-0 h-1.5 bg-[linear-gradient(90deg,#ffffff_0%,rgba(255,255,255,0.75)_28%,rgba(245,197,24,0.92)_62%,#da291c_100%)]" />
+            <div className="brand-stripe absolute inset-x-0 top-0 h-1.5" />
 
             <div className="relative grid items-center gap-8 lg:grid-cols-[auto_1fr_auto]">
               {ownerAgent.photo ? (
@@ -219,10 +219,10 @@ function LeadershipCard({ agent, index }: { agent: Agent; index: number }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.45, ease: "easeOut", delay: index * 0.08 }}
-      className="parallax-card relative overflow-hidden rounded-[2rem] bg-[linear-gradient(160deg,#08214f_0%,#0c2d6b_25%,#0f3a87_55%,#2d7bc6_100%)] p-8 text-white shadow-[0_28px_70px_-32px_rgba(0,32,92,0.65),0_8px_20px_-8px_rgba(0,32,92,0.2)] lg:p-10"
+      className="parallax-card relative overflow-hidden rounded-[2rem] bg-[linear-gradient(160deg,var(--navy)_0%,#0c2d6b_25%,#0f3a87_55%,var(--blue)_100%)] p-8 text-white shadow-[0_28px_70px_-32px_rgba(0,32,92,0.65),0_8px_20px_-8px_rgba(0,32,92,0.2)] lg:p-10"
     >
       <div className="absolute -right-24 -top-24 h-48 w-48 rounded-full bg-blue/10 blur-3xl" />
-      <div className="absolute inset-x-0 top-0 h-1.5 bg-[linear-gradient(90deg,#ffffff_0%,rgba(255,255,255,0.75)_28%,rgba(245,197,24,0.92)_62%,#da291c_100%)]" />
+      <div className="brand-stripe absolute inset-x-0 top-0 h-1.5" />
       <div className="relative grid items-center gap-6 text-center sm:grid-cols-[auto_minmax(0,1fr)] sm:text-left lg:grid-cols-[auto_minmax(0,1fr)_auto] lg:gap-8">
         {agent.photo ? (
           <div className="relative mx-auto h-28 w-28 shrink-0 overflow-hidden rounded-full border-2 border-white/30 shadow-xl sm:mx-0">
@@ -253,7 +253,7 @@ function LeadershipCard({ agent, index }: { agent: Agent; index: number }) {
             {agent.title}
           </p>
           {agent.languages && agent.languages.length > 1 && (
-            <p className="mt-2 inline-flex items-center gap-1.5 text-sm font-medium text-yellow-300">
+            <p className="mt-2 inline-flex items-center gap-1.5 text-sm font-medium text-gold">
               <Globe className="h-3.5 w-3.5" />
               {t("seHablaEspanol")}
             </p>
@@ -343,7 +343,7 @@ function TeamMemberCard({ agent, index }: { agent: Agent; index: number }) {
             {agent.title}
           </p>
           {agent.languages && agent.languages.length > 1 && (
-            <p className="mt-1 inline-flex items-center gap-1 text-xs font-semibold text-amber-600">
+            <p className="mt-1 inline-flex items-center gap-1 text-xs font-semibold text-warm-accent">
               <Globe className="h-3 w-3" />
               {t("seHablaEspanol")}
             </p>
@@ -351,7 +351,7 @@ function TeamMemberCard({ agent, index }: { agent: Agent; index: number }) {
         </div>
       </div>
 
-      <p className="mt-4 line-clamp-7 flex-1 text-sm leading-6 text-gray-600">
+      <p className="mt-4 line-clamp-6 flex-1 text-sm leading-6 text-gray-600">
         {bio(agent.slug)}
       </p>
 

@@ -1,7 +1,7 @@
 {
   "nav": {
-    "personal": "Seguro Personal",
-    "commercial": "Seguro Comercial",
+    "personal": "Personal",
+    "commercial": "Comercial",
     "resources": "Recursos",
     "about": "Nosotros",
     "blog": "Blog",
@@ -108,7 +108,7 @@
     "faq": {
       "eyebrow": "Preguntas frecuentes",
       "title": "Respuestas claras sobre cotizaciones, cobertura y comprobantes",
-      "description": "Esta sección está escrita a partir de preguntas reales de clientes, lo que también ayuda a que buscadores y asistentes de IA entiendan mejor el sitio.",
+      "description": "Preguntas reales que escuchamos de nuestros clientes cada semana — respondidas con claridad, para que sepa qué esperar antes de contactarnos.",
       "fastPathEyebrow": "¿La ruta rápida?",
       "fastPathHeading": "Empiece con la solicitud correcta.",
       "fastPathBody": "Use la ruta de cotización si busca cobertura. Use la ruta de comprobante si su banco, prestamista o socio necesita documentación.",
@@ -128,7 +128,7 @@
     "expertGuides": {
       "eyebrow": "Guías expertas",
       "title": "Respuestas claras a preguntas de seguros en California",
-      "description": "Estamos construyendo el sitio alrededor de información clara y de primera mano, en vez de llenar la página de palabras clave. Empiece por la pregunta que realmente necesita responder.",
+      "description": "Orientación clara y de primera mano de nuestro equipo. Empiece por la pregunta que realmente necesita responder.",
       "browseAll": "Ver todos los recursos"
     },
     "coverageEvaluation": {
@@ -257,7 +257,7 @@
     "connectWithUs": "Conecte con nosotros",
     "faqs": {
       "heading": "Preguntas de contacto que nos hacen más seguido",
-      "description": "Estas respuestas hacen más útil la página para visitantes y les dan a los buscadores y asistentes de IA contexto claro sobre cómo opera la agencia.",
+      "description": "Respuestas rápidas a las preguntas que más escuchamos — para que nos contacte de la forma que mejor le funcione.",
       "ctaQuote": "Comenzar cotización",
       "ctaProof": "Solicitar comprobante de seguro",
       "q1": {
@@ -289,7 +289,7 @@
     "needProofLink": "solicitar comprobante",
     "faqs": {
       "heading": "Preguntas de cotización que respondemos antes de que envíe el formulario",
-      "description": "Estas son las preguntas reales que la gente hace antes de comenzar una cotización, lo que también ayuda a que los buscadores y asistentes de IA entiendan mejor la página.",
+      "description": "Las preguntas que la gente hace antes de comenzar una cotización — respondidas desde el inicio, para que empiece con confianza.",
       "ctaProof": "Mejor solicitar comprobante",
       "ctaContact": "Hablar primero con el equipo",
       "q1": {
@@ -355,7 +355,7 @@
     "callInstead": "¿Prefiere llamar? {phone}",
     "faqs": {
       "heading": "Preguntas sobre documentación que respondemos aquí mismo",
-      "description": "Esta página ahora coincide con el esquema FAQ con respuestas visibles, lo que es más claro para los usuarios y más seguro para los buscadores.",
+      "description": "Respuestas a las preguntas de documentación que más escuchamos — para que obtenga lo que necesita sin tanto ir y venir.",
       "workWithAgent": "Trabajar con {name}",
       "talkToTeam": "Hablar con el equipo",
       "ctaQuote": "Mejor comenzar una cotización",
@@ -378,7 +378,7 @@
     "metaDescription": "Artículos útiles de Allsberry Insurance Agency sobre temas de seguros de casa, auto, negocio y vida para clientes del Sur de California.",
     "eyebrow": "Información",
     "heading": "Artículos de seguros y respuestas prácticas",
-    "subheading": "El blog vive en la navegación — no en la página de inicio — así la experiencia principal se mantiene limpia mientras el contenido optimizado para búsqueda sigue teniendo su lugar.",
+    "subheading": "Consejos prácticos de seguros y explicaciones en lenguaje sencillo del equipo Allsberry — para ayudarle a tomar decisiones de cobertura con confianza.",
     "readArticle": "Leer artículo",
     "articlesInEnglishNotice": "Los artículos actualmente se publican en inglés. Si prefiere ayuda en español, llámenos y repasamos los detalles con usted.",
     "keepMovingEyebrow": "Siga adelante",
@@ -633,6 +633,8 @@
     "startProofRequest": "Solicitar comprobante",
     "startQuote": "Comenzar Cotización",
     "reviewCount": "5,000+",
+    "ratingAria": "Calificación de 5 de 5 estrellas",
+    "zipLabel": "Código postal",
     "erinTitle": "Dueña y Agente Principal",
     "primaryProducerLabel": "Productor principal",
     "producerProofLabel": "Enfoque al cliente",
@@ -667,5 +669,94 @@
     "spanishLabel": "Español",
     "spanishHelper": "Sitio en español.",
     "switchingTo": "Cambiando a {name}"
+  },
+  "a11y": {
+    "skipToContent": "Saltar al contenido"
+  },
+  "seoCard": {
+    "readGuide": "Leer guía",
+    "pageType": {
+      "pillar": "Guía principal",
+      "supporting": "Explicación",
+      "location": "Página local"
+    }
+  },
+  "carrierDetail": {
+    "breadcrumbLabel": "Ruta de navegación",
+    "logoAlt": "Logotipo de {carrier}",
+    "eyebrow": "Aseguradora asociada",
+    "heading": "Seguros de {carrier} en Corona y el Sur de California",
+    "intro": "Como agencia independiente, Allsberry coloca su cobertura con {carrier} cuando es la opción correcta — y la compara con más de 20 aseguradoras para que no quede atado a una sola cotización.",
+    "howWeUse": "Cómo trabajamos con {carrier}",
+    "howWeUseBody": "Algunas aseguradoras son fuertes en seguros de vivienda. Otras en pequeños negocios, autos comerciales, pólizas paraguas o vida. Adaptamos su situación a la aseguradora cuyo proceso de suscripción y precio tengan sentido para usted — y la revisamos en la renovación cuando el mercado cambia.",
+    "talkToPerson": "Hable con una persona real",
+    "talkToPersonBody": "Llame a la oficina al <phone></phone> o solicite una cotización comparativa en línea. En cualquier caso, le atenderá un agente con licencia — no un guión de centro de llamadas.",
+    "compareQuote": "Comparar cotización de {carrier}",
+    "whyIndependent": "¿Por qué acudir a un agente independiente para {carrier}?",
+    "benefitCompare": "Una sola comparación entre {carrier} y más de 20 aseguradoras — no una única cotización directa.",
+    "benefitAdvocacy": "Apoyo local al momento de un reclamo; le ayudamos a gestionar directamente con el ajustador de {carrier}.",
+    "benefitReview": "Revisión anual de cobertura sin costo para que su póliza se mantenga al día con los cambios de su vida.",
+    "benefitNoPressure": "Sin presión para combinar pólizas — si {carrier} solo conviene para un ramo, se lo decimos.",
+    "otherCarriers": "Otras aseguradoras con las que trabajamos",
+    "seeAllCarriers": "Ver todas las aseguradoras asociadas →"
+  },
+  "blogPost": {
+    "backToBlog": "Volver al blog",
+    "nextStep": "Siguiente paso",
+    "nextStepHeading": "¿Desea ayuda para aplicar esto a su póliza?",
+    "startQuote": "Comenzar cotización",
+    "talkToTeam": "Hablar con el equipo",
+    "requestProof": "Solicitar comprobante",
+    "relatedGuides": "Guías de seguros de California relacionadas",
+    "relatedReading": "Lecturas relacionadas",
+    "relatedArticle": "Artículo relacionado"
+  },
+  "agentProfile": {
+    "directAgentPage": "Página directa del agente",
+    "coverageFocus": "Enfoque de cobertura",
+    "office": "Oficina",
+    "officeValue": "Atendemos {area}",
+    "mobileFirst": "Diseñado para el móvil",
+    "mobileFirstValue": "Toque para llamar, escanear o iniciar una cotización en línea",
+    "emailFirstName": "Escribir a {firstName}",
+    "directLink": "Enlace directo",
+    "scanToVisitMain": "Escanee para visitar el sitio principal de Allsberry",
+    "scanToVisitAgent": "Escanee para visitar la página de {firstName}",
+    "scanBodyMain": "Abre la página principal para impresos, tarjetas y seguimiento.",
+    "scanBodyAgent": "Abre la página de perfil con seguimiento para impresos, tarjetas y seguimiento.",
+    "startWith": "Comience con {firstName}",
+    "workingWith": "Trabajar con {firstName}",
+    "whatToExpect": "Qué esperar",
+    "expectStep1": "Llame, escriba o complete el formulario a continuación y {firstName} le responderá en un día hábil.",
+    "expectStep2": "{firstName} revisará su situación, le explicará sus opciones en lenguaje sencillo y le ayudará a comparar coberturas lado a lado.",
+    "expectStep3": "Una vez que elija un plan, {firstName} le acompaña durante la contratación, las renovaciones y cualquier reclamo que surja.",
+    "leadForm": "Formulario de contacto",
+    "getStartedWith": "Comience con {firstName}",
+    "leadFormBody": "Comparta lo básico y {firstName} u otro miembro con licencia del equipo le responderá en un día hábil.",
+    "relatedGuides": "Guías relacionadas",
+    "relatedGuidesHeading": "Guías de cobertura que {firstName} puede ayudarle a revisar",
+    "relatedGuidesBody": "Estas páginas forman parte del primer grupo de búsqueda de seguros de vivienda en California que estamos construyendo en torno a la presión de los incendios forestales, el Plan FAIR y los siguientes pasos claros."
+  },
+  "themeToggle": {
+    "displaySettings": "Ajustes de visualización",
+    "themeLabel": "Tema",
+    "textSizeLabel": "Tamaño del texto",
+    "liveRegion": "Tema {theme}. Tamaño del texto {textSize}.",
+    "scaleAriaLabel": "Tamaño del texto {size}",
+    "modeLabel": {
+      "auto": "Automático",
+      "light": "Claro",
+      "dark": "Oscuro"
+    },
+    "modeHelper": {
+      "auto": "Sigue la hora local del atardecer cuando la ubicación está disponible.",
+      "light": "Mantiene activa la paleta más clara.",
+      "dark": "Mantiene activa la paleta más oscura."
+    },
+    "scaleLabel": {
+      "sm": "Compacto",
+      "md": "Estándar",
+      "lg": "Grande"
+    }
   }
 }

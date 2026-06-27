@@ -250,7 +250,7 @@ export function EvidenceRequestForm({
         <SmsConsentFields formId={formId} register={register} errors={errors} />
 
         <div className="grid gap-4 sm:grid-cols-[1fr_auto] sm:items-center">
-          <p className="text-sm leading-7 text-gray-400">
+          <p className="text-sm leading-7 text-gray-600">
             This request is built for certificates, proof of coverage, and time-sensitive lender or escrow follow-up.
           </p>
           <button
@@ -278,7 +278,7 @@ export function EvidenceRequestForm({
         {errorMessage ? (
           <p
             aria-live="assertive"
-            className="rounded-2xl border border-red/15 bg-red/6 px-4 py-3 text-sm font-semibold text-red"
+            className="rounded-2xl border border-red/15 bg-red/6 px-4 py-3 text-sm font-semibold text-red-hover"
             role="alert"
           >
             {errorMessage}
@@ -305,7 +305,7 @@ function Field({
       <label htmlFor={inputId}>{label}</label>
       {children}
       {error ? (
-        <span id={`${inputId}-error`} role="alert" className="text-sm font-medium text-red">
+        <span id={`${inputId}-error`} role="alert" className="text-sm font-medium text-red-hover">
           {error}
         </span>
       ) : null}

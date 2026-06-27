@@ -114,7 +114,7 @@ export function SiteFooter() {
         </FooterColumn>
       </div>
 
-      <div className="border-t border-white/10" style={{ borderImage: "linear-gradient(90deg, transparent 0%, rgba(0,102,179,0.3) 25%, rgba(218,41,28,0.2) 50%, rgba(245,197,24,0.25) 75%, transparent 100%) 1" }}>
+      <div className="footer-divider">
         <div className="mx-auto max-w-7xl px-4 py-5 sm:px-6 lg:px-8">
           <div className="flex flex-col gap-2 text-sm text-white/60 sm:flex-row sm:items-center sm:justify-between">
             <p>{t("copyright")}</p>
@@ -138,11 +138,11 @@ export function SiteFooter() {
               {t("accessibility")}
             </a>
             <span className="hidden sm:inline text-white/20">|</span>
-            <span className="inline-flex items-center gap-1.5 text-white/45">
+            <span className="inline-flex items-center gap-1.5 text-white/60">
               <Lock className="h-3 w-3" />
               {t("sslEncrypted")}
             </span>
-            <span className="inline-flex items-center gap-1.5 text-white/45">
+            <span className="inline-flex items-center gap-1.5 text-white/60">
               <ShieldCheck className="h-3 w-3" />
               {t("wcagAccessible")}
             </span>

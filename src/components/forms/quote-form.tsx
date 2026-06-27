@@ -142,7 +142,7 @@ export function QuoteForm({
           aria-describedby={errors.products ? `${formId}-products-error` : undefined}
           className="min-w-0"
         >
-          <legend className="text-sm font-semibold uppercase tracking-[0.22em] text-gray-400">
+          <legend className="text-sm font-semibold uppercase tracking-[0.22em] text-gray-600">
             Products
           </legend>
           <div className="mt-3 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
@@ -177,7 +177,7 @@ export function QuoteForm({
             <p
               id={`${formId}-products-error`}
               role="alert"
-              className="mt-2 text-sm text-red"
+              className="mt-2 text-sm text-red-hover"
             >
               {errors.products.message}
             </p>
@@ -348,7 +348,7 @@ export function QuoteForm({
         <SmsConsentFields formId={formId} register={register} errors={errors} />
 
         <div className="grid gap-4 sm:grid-cols-[1fr_auto] sm:items-center">
-          <p className="text-sm leading-7 text-gray-400">
+          <p className="text-sm leading-7 text-gray-600">
             We only ask for the basics up front so we can follow up quickly without making the quote process feel heavy.
           </p>
           <button
@@ -376,7 +376,7 @@ export function QuoteForm({
         {errorMessage ? (
           <p
             aria-live="assertive"
-            className="rounded-2xl border border-red/15 bg-red/6 px-4 py-3 text-sm font-semibold text-red"
+            className="rounded-2xl border border-red/15 bg-red/6 px-4 py-3 text-sm font-semibold text-red-hover"
             role="alert"
           >
             {errorMessage}
@@ -403,7 +403,7 @@ function Field({
       <label htmlFor={inputId}>{label}</label>
       {children}
       {error ? (
-        <span id={`${inputId}-error`} role="alert" className="text-sm font-medium text-red">
+        <span id={`${inputId}-error`} role="alert" className="text-sm font-medium text-red-hover">
           {error}
         </span>
       ) : null}
@@ -412,4 +412,4 @@ function Field({
 }
 
 const inputClassName =
-  "h-13 rounded-2xl border border-gray-200 px-4 text-base font-medium text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-blue focus:ring-4 focus:ring-blue/10";
+  "h-13 rounded-2xl border border-gray-200 bg-white px-4 text-base font-medium text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-blue focus:ring-4 focus:ring-blue/10";

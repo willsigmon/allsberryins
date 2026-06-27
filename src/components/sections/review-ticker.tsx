@@ -20,6 +20,7 @@ export function ReviewTicker() {
           {tickerReviews.map((review, index) => (
             <div
               key={`${review.name}-${index}`}
+              aria-hidden={index >= reviews.length ? "true" : undefined}
               className="glass-btn flex shrink-0 items-center gap-4 rounded-2xl px-6 py-4 shadow-sm"
             >
               <div className="flex items-center gap-0.5 text-gold">

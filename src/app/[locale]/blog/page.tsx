@@ -82,7 +82,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
               className="rounded-[2rem] border border-gray-100 p-6 shadow-[0_20px_50px_-42px_rgba(0,32,92,0.5)]"
               style={{ backgroundImage: "var(--surface-card)" }}
             >
-              <div className="flex flex-wrap items-center gap-3 text-sm text-gray-400">
+              <div className="flex flex-wrap items-center gap-3 text-sm text-gray-600">
                 <span>{new Date(post.publishedAt).toLocaleDateString(dateLocale, { month: "long", day: "numeric", year: "numeric" })}</span>
                 <span>•</span>
                 <span>{post.readingTime}</span>

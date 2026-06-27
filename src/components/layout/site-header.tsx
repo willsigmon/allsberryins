@@ -29,13 +29,16 @@ export function SiteHeader() {
   const elevatedHeader = pathname !== "/" || scrolled || menuOpen;
 
   const navigation = [
-    { label: tNav("personal"), href: "/#personal-insurance" as const },
-    { label: tNav("commercial"), href: "/#commercial-insurance" as const },
-    { label: tNav("resources"), href: "/resources" as const },
-    { label: tNav("about"), href: "/about" as const },
-    { label: tNav("blog"), href: "/blog" as const },
-    { label: tNav("contact"), href: "/contact" as const },
+    { label: tNav("personal"), href: "/#personal-insurance" as const, match: null },
+    { label: tNav("commercial"), href: "/#commercial-insurance" as const, match: null },
+    { label: tNav("resources"), href: "/resources" as const, match: "/resources" },
+    { label: tNav("about"), href: "/about" as const, match: "/about" },
+    { label: tNav("blog"), href: "/blog" as const, match: "/blog" },
+    { label: tNav("contact"), href: "/contact" as const, match: "/contact" },
   ];
+
+  const isActive = (match: string | null) =>
+    match ? pathname === match || pathname.startsWith(`${match}/`) : false;
 
   return (
     <header
@@ -58,20 +61,27 @@ export function SiteHeader() {
           />
         </Link>
 
-        <nav className="hidden items-center gap-4 lg:gap-5 xl:gap-7 min-[1180px]:flex">
-          {navigation.map((item) => (
-            <Link
-              key={item.label}
-              href={item.href}
-              onClick={() => { tap(); }}
-              className={cn(
-                "text-[13px] font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 xl:text-sm",
-                "text-white/88 hover:text-white focus-visible:ring-white focus-visible:ring-offset-navy",
-              )}
-            >
-              {item.label}
-            </Link>
-          ))}
+        <nav className="hidden items-center gap-5 lg:gap-6 xl:gap-7 min-[1180px]:flex">
+          {navigation.map((item) => {
+            const active = isActive(item.match);
+            return (
+              <Link
+                key={item.label}
+                href={item.href}
+                aria-current={active ? "page" : undefined}
+                onClick={() => { tap(); }}
+                className={cn(
+                  "relative whitespace-nowrap rounded-sm text-sm font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-navy",
+                  "after:absolute after:-bottom-1.5 after:left-0 after:h-0.5 after:rounded-full after:transition-all after:duration-300 after:content-['']",
+                  active
+                    ? "text-white after:w-full after:bg-gold"
+                    : "text-white/85 hover:text-white after:w-0 after:bg-white/70 hover:after:w-full",
+                )}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
         </nav>
 
         <div className="hidden items-center gap-2 xl:gap-3 min-[1180px]:flex">

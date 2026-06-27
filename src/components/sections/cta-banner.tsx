@@ -34,10 +34,10 @@ export function CtaBanner() {
               {t("description")}
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
-              <span className="glass-btn-dark rounded-full px-4 py-2 text-sm font-semibold text-white/88">
+              <span className="glass-btn-dark whitespace-nowrap rounded-full px-4 py-2 text-sm font-semibold text-white/88">
                 {t("coverageLines")}
               </span>
-              <span className="glass-btn-dark rounded-full px-4 py-2 text-sm font-semibold text-white/88">
+              <span className="glass-btn-dark whitespace-nowrap rounded-full px-4 py-2 text-sm font-semibold text-white/88">
                 {t("region")}
               </span>
             </div>

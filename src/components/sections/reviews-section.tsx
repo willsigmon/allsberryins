@@ -73,7 +73,7 @@ export function ReviewsSection() {
                 <p className="mt-6 flex-1 text-base leading-7 text-gray-600">&ldquo;{review.body}&rdquo;</p>
                 <div className="mt-6 h-px w-full bg-gray-100" />
                 <p className="mt-4 font-display text-lg font-bold text-gray-900">{review.name}</p>
-                <p className="mt-1 text-xs font-semibold uppercase tracking-[0.24em] text-gray-400">{t("allsberryClient")}</p>
+                <p className="mt-1 text-xs font-semibold uppercase tracking-[0.24em] text-gray-600">{t("allsberryClient")}</p>
               </motion.article>
             ))}
           </div>

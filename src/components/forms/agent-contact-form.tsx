@@ -185,7 +185,7 @@ export function AgentContactForm({
       {errorMessage ? (
         <p
           aria-live="assertive"
-          className="rounded-2xl border border-red/15 bg-red/6 px-4 py-3 text-sm font-semibold text-red"
+          className="rounded-2xl border border-red/15 bg-red/6 px-4 py-3 text-sm font-semibold text-red-hover"
           role="alert"
         >
           {errorMessage}
@@ -211,7 +211,7 @@ function Field({
       <label htmlFor={inputId}>{label}</label>
       {children}
       {error ? (
-        <span id={`${inputId}-error`} role="alert" className="text-sm font-medium text-red">
+        <span id={`${inputId}-error`} role="alert" className="text-sm font-medium text-red-hover">
           {error}
         </span>
       ) : null}
@@ -220,4 +220,4 @@ function Field({
 }
 
 const inputClassName =
-  "h-13 rounded-2xl border border-gray-200 px-4 text-base font-medium text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-blue focus:ring-4 focus:ring-blue/10";
+  "h-13 rounded-2xl border border-gray-200 bg-white px-4 text-base font-medium text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-blue focus:ring-4 focus:ring-blue/10";

@@ -33,7 +33,7 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
       <main className="mx-auto w-full max-w-3xl px-5 pb-28 pt-28 sm:px-8 sm:pt-32">
         <div className="text-center">
           <span className="inline-flex items-center gap-2 rounded-full bg-amber-50 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-amber-700 ring-1 ring-amber-200">
-            <Star className="h-3.5 w-3.5 fill-amber-500 text-amber-500" aria-hidden="true" />
+            <Star className="h-3.5 w-3.5 fill-gold text-gold" aria-hidden="true" />
             {t("eyebrow")}
           </span>
           <h1 className="mt-6 text-balance text-3xl font-bold leading-[1.1] text-gray-900 sm:text-5xl">
@@ -63,7 +63,7 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
               {Array.from({ length: 5 }).map((_, index) => (
                 <Star
                   key={index}
-                  className="h-8 w-8 fill-[#f59e0b] text-[#f59e0b] drop-shadow-[0_4px_12px_rgba(245,158,11,0.4)] sm:h-10 sm:w-10"
+                  className="h-8 w-8 fill-gold text-gold drop-shadow-[0_4px_12px_rgba(245,197,24,0.4)] sm:h-10 sm:w-10"
                   aria-hidden="true"
                 />
               ))}

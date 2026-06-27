@@ -60,6 +60,8 @@ export default async function AgentPage({ params, searchParams }: AgentPageProps
   }
 
   const tBio = await getTranslations("agents.bios");
+  const t = await getTranslations("agentProfile");
+  const tAgents = await getTranslations("agents");
   const agentBio = tBio(agent.slug);
   const entryPoint = typeof query.entry === "string" ? query.entry : undefined;
   const qrDestination = getAgentQrDestination(agent.slug);
@@ -110,16 +112,16 @@ export default async function AgentPage({ params, searchParams }: AgentPageProps
 
   const agentHighlights = [
     {
-      label: "Coverage focus",
+      label: t("coverageFocus"),
       value: agent.specialties.join(" • "),
     },
     {
-      label: "Office",
-      value: `Serving ${agency.serviceArea}`,
+      label: t("office"),
+      value: t("officeValue", { area: agency.serviceArea }),
     },
     {
-      label: "Mobile-first flow",
-      value: "Tap to call, scan, or start a quote online",
+      label: t("mobileFirst"),
+      value: t("mobileFirstValue"),
     },
   ];
   const phoneHref = agent.phoneHref ?? agency.phoneHref;
@@ -137,7 +139,7 @@ export default async function AgentPage({ params, searchParams }: AgentPageProps
             >
               <div className="inline-flex items-center gap-2 rounded-full border border-blue/10 bg-white px-3.5 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-blue shadow-sm">
                 <ShieldCheck className="h-3.5 w-3.5" />
-                Direct agent page
+                {t("directAgentPage")}
               </div>
 
               <div className="mt-6 grid gap-6 sm:grid-cols-[7rem_minmax(0,1fr)] sm:items-start">
@@ -161,7 +163,7 @@ export default async function AgentPage({ params, searchParams }: AgentPageProps
                   <h1 className="font-display text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">
                     {agent.name}
                   </h1>
-                  <p className="mt-2 text-sm font-semibold uppercase tracking-[0.2em] text-gray-400">
+                  <p className="mt-2 text-sm font-semibold uppercase tracking-[0.2em] text-gray-600">
                     {agent.title}
                   </p>
                   <div className="mt-4 flex flex-wrap gap-2">
@@ -186,6 +188,7 @@ export default async function AgentPage({ params, searchParams }: AgentPageProps
                 <Link
                   href={phoneHref}
                   className="inline-flex items-center gap-3 rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm font-semibold text-gray-900 transition hover:border-blue hover:text-blue"
+                  aria-label={tAgents("callAgent", { name: agent.firstName })}
                 >
                   <Phone className="h-5 w-5 shrink-0 text-blue" />
                   {agent.phone}
@@ -193,10 +196,10 @@ export default async function AgentPage({ params, searchParams }: AgentPageProps
                 <Link
                   href={`mailto:${agent.email}`}
                   className="inline-flex items-center gap-3 rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm font-semibold text-gray-900 transition hover:border-blue hover:text-blue"
-                  aria-label={`Email ${agent.firstName}`}
+                  aria-label={tAgents("emailAgent", { name: agent.firstName })}
                 >
                   <Mail className="h-5 w-5 shrink-0 text-blue" />
-                  Email {agent.firstName}
+                  {t("emailFirstName", { firstName: agent.firstName })}
                 </Link>
                 <SaveContactButton
                   name={agent.name}
@@ -213,7 +216,7 @@ export default async function AgentPage({ params, searchParams }: AgentPageProps
                 <div className="grid gap-4 sm:grid-cols-3">
                   {agentHighlights.map((highlight) => (
                     <div key={highlight.label} className="min-w-0">
-                      <dt className="text-[11px] font-semibold uppercase tracking-[0.2em] text-gray-400">
+                      <dt className="text-[11px] font-semibold uppercase tracking-[0.2em] text-gray-600">
                         {highlight.label}
                       </dt>
                       <dd className="mt-1 text-sm font-semibold leading-6 text-gray-900">
@@ -230,17 +233,17 @@ export default async function AgentPage({ params, searchParams }: AgentPageProps
                 <div className="grid gap-6 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center">
                   <div>
                     <p className="text-xs font-semibold uppercase tracking-[0.24em] text-blue">
-                      Direct link
+                      {t("directLink")}
                     </p>
                     <h2 className="mt-3 font-display text-3xl font-extrabold leading-tight text-gray-900">
                       {qrDestination.isMainLandingPage
-                        ? "Scan to visit the main Allsberry site"
-                        : `Scan to visit ${agent.firstName}'s page`}
+                        ? t("scanToVisitMain")
+                        : t("scanToVisitAgent", { firstName: agent.firstName })}
                     </h2>
                     <p className="mt-3 text-sm leading-7 text-gray-600">
                       {qrDestination.isMainLandingPage
-                        ? "Opens the main landing page for print, cards, and follow-up."
-                        : "Opens the tracked profile page for print, cards, and follow-up."}
+                        ? t("scanBodyMain")
+                        : t("scanBodyAgent")}
                     </p>
                   </div>
                   <div className="mx-auto rounded-[1.35rem] border border-gray-100 bg-gray-50 p-3 sm:mx-0">
@@ -262,10 +265,10 @@ export default async function AgentPage({ params, searchParams }: AgentPageProps
                     })}
                     className="cta-glow-blue inline-flex items-center gap-2 rounded-full bg-navy px-5 py-3 text-sm font-bold text-white transition hover:bg-blue"
                   >
-                    Start with {agent.firstName}
+                    {t("startWith", { firstName: agent.firstName })}
                     <ArrowRight className="h-4 w-4" />
                   </Link>
-                  <p className="inline-flex items-center gap-2 text-sm font-medium text-gray-400">
+                  <p className="inline-flex items-center gap-2 text-sm font-medium text-gray-600">
                     <QrCode className="h-4 w-4 text-blue" />
                     {qrDestination.entryLabel}
                   </p>
@@ -277,23 +280,20 @@ export default async function AgentPage({ params, searchParams }: AgentPageProps
                 style={{ backgroundImage: "var(--surface-gradient)" }}
               >
                 <p className="text-xs font-semibold uppercase tracking-[0.24em] text-blue">
-                  Working with {agent.firstName}
+                  {t("workingWith", { firstName: agent.firstName })}
                 </p>
                 <h2 className="mt-3 font-display text-3xl font-extrabold text-gray-900">
-                  What to expect
+                  {t("whatToExpect")}
                 </h2>
                 <div className="mt-5 divide-y divide-[#c8d1dc] rounded-[1.25rem] border border-[#d7dee8] bg-white/85 px-4">
                   <p className="py-4 text-sm leading-7 text-[#26394f]">
-                    Call, email, or fill out the form below and {agent.firstName} will follow up
-                    within one business day.
+                    {t("expectStep1", { firstName: agent.firstName })}
                   </p>
                   <p className="py-4 text-sm leading-7 text-[#26394f]">
-                    {agent.firstName} will review your situation, explain your options in plain
-                    language, and help you compare coverage side by side.
+                    {t("expectStep2", { firstName: agent.firstName })}
                   </p>
                   <p className="py-4 text-sm leading-7 text-[#26394f]">
-                    Once you choose a plan, {agent.firstName} stays with you through binding,
-                    renewals, and any claims that come up.
+                    {t("expectStep3", { firstName: agent.firstName })}
                   </p>
                 </div>
               </article>
@@ -302,13 +302,12 @@ export default async function AgentPage({ params, searchParams }: AgentPageProps
         </div>
 
         <div className="mt-8 rounded-[2.4rem] border border-gray-100 bg-white p-8 shadow-[0_30px_70px_-52px_rgba(0,32,92,0.45)]">
-          <p className="text-sm font-semibold uppercase tracking-[0.24em] text-blue">Lead form</p>
+          <p className="text-sm font-semibold uppercase tracking-[0.24em] text-blue">{t("leadForm")}</p>
           <h2 className="mt-3 font-display text-3xl font-extrabold text-gray-900">
-            Get Started with {agent.firstName}
+            {t("getStartedWith", { firstName: agent.firstName })}
           </h2>
           <p className="mt-4 max-w-3xl text-base leading-8 text-gray-600">
-            Share the basics and {agent.firstName} or another licensed member of the team will
-            follow up within one business day.
+            {t("leadFormBody", { firstName: agent.firstName })}
           </p>
           <div className="mt-8">
             <AgentContactForm
@@ -322,14 +321,13 @@ export default async function AgentPage({ params, searchParams }: AgentPageProps
         {relatedSeoPages.length ? (
           <div className="mt-8 rounded-[2.4rem] border border-gray-100 bg-white p-8 shadow-[0_30px_70px_-52px_rgba(0,32,92,0.45)]">
             <p className="text-sm font-semibold uppercase tracking-[0.24em] text-blue">
-              Related guides
+              {t("relatedGuides")}
             </p>
             <h2 className="mt-3 font-display text-3xl font-extrabold text-gray-900">
-              Coverage guides {agent.firstName} can help you review
+              {t("relatedGuidesHeading", { firstName: agent.firstName })}
             </h2>
             <p className="mt-4 max-w-3xl text-base leading-8 text-gray-600">
-              These pages are part of the first California home insurance search cluster we are
-              building around wildfire pressure, FAIR Plan, and clear next steps.
+              {t("relatedGuidesBody")}
             </p>
             <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
               {relatedSeoPages.map((relatedSeoPage) => (

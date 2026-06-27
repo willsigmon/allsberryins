@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ArrowRight } from "lucide-react";
-import { setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { StructuredData } from "@/components/seo/structured-data";
 import { SeoPageCard } from "@/components/ui/seo-page-card";
@@ -49,6 +49,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     notFound();
   }
 
+  const t = await getTranslations("blogPost");
+
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -81,10 +83,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       <StructuredData data={[breadcrumbSchema, articleSchema]} />
       <article className="mx-auto max-w-4xl px-4 pb-24 sm:px-6 lg:px-8">
         <Link href="/blog" className="text-sm font-semibold uppercase tracking-[0.24em] text-blue">
-          Back to Blog
+          {t("backToBlog")}
         </Link>
-        <div className="mt-6 flex flex-wrap items-center gap-3 text-sm text-gray-400">
-          <span>{new Date(post.publishedAt).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</span>
+        <div className="mt-6 flex flex-wrap items-center gap-3 text-sm text-gray-600">
+          <span>{new Date(post.publishedAt).toLocaleDateString(locale === "es" ? "es-US" : "en-US", { month: "long", day: "numeric", year: "numeric" })}</span>
           <span>•</span>
           <span>{post.readingTime}</span>
         </div>
@@ -118,31 +120,31 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
         <section className="mt-14 rounded-[2.2rem] border border-blue/10 bg-[linear-gradient(180deg,var(--white)_0%,var(--gray-50)_100%)] p-8 shadow-[0_26px_60px_-44px_rgba(0,32,92,0.45)]">
           <p className="text-sm font-semibold uppercase tracking-[0.22em] text-blue">
-            Next step
+            {t("nextStep")}
           </p>
           <h2 className="mt-4 font-display text-3xl font-extrabold text-gray-900">
-            Want help applying this to your policy?
+            {t("nextStepHeading")}
           </h2>
           <div className="mt-8 grid gap-3 md:grid-cols-3">
             <Link
               href="/quote?product=home"
               className="inline-flex items-center justify-between rounded-2xl border border-gray-200 bg-white px-5 py-4 text-sm font-bold text-gray-900 transition hover:border-blue hover:text-blue"
             >
-              Start a quote
+              {t("startQuote")}
               <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
               href="/contact"
               className="inline-flex items-center justify-between rounded-2xl border border-gray-200 bg-white px-5 py-4 text-sm font-bold text-gray-900 transition hover:border-blue hover:text-blue"
             >
-              Talk to the team
+              {t("talkToTeam")}
               <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
               href="/evidence-of-insurance"
               className="inline-flex items-center justify-between rounded-2xl border border-gray-200 bg-white px-5 py-4 text-sm font-bold text-gray-900 transition hover:border-blue hover:text-blue"
             >
-              Request proof
+              {t("requestProof")}
               <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
@@ -151,7 +153,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         {relatedSeoPages.length ? (
           <section className="mt-14">
             <h2 className="font-display text-2xl font-extrabold text-gray-900">
-              Related California insurance guides
+              {t("relatedGuides")}
             </h2>
             <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
               {relatedSeoPages.map((relatedSeoPage) => (
@@ -164,7 +166,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         {relatedPosts.length ? (
           <section className="mt-14">
             <h2 className="font-display text-2xl font-extrabold text-gray-900">
-              Related reading
+              {t("relatedReading")}
             </h2>
             <div className="mt-6 grid gap-4 md:grid-cols-2">
               {relatedPosts.map((relatedPost) => (
@@ -175,7 +177,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   className="rounded-[1.8rem] border border-gray-100 bg-gray-50 p-6 transition hover:border-blue/30 hover:bg-white hover:shadow-[0_18px_45px_-38px_rgba(0,32,92,0.5)]"
                 >
                   <p className="text-xs font-semibold uppercase tracking-[0.22em] text-blue">
-                    Related article
+                    {t("relatedArticle")}
                   </p>
                   <h3 className="mt-3 font-display text-xl font-bold text-gray-900">
                     {relatedPost.title}

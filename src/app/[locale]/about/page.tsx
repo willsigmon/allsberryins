@@ -104,7 +104,7 @@ export default async function AboutPage({ params }: AboutPageProps) {
               ].map((stat) => (
                 <div
                   key={stat.label}
-                  className="rounded-[1.75rem] border border-gray-100 bg-gray-50 p-5"
+                  className="rounded-card border border-gray-100 bg-gray-50 p-5"
                 >
                   <p className="text-sm font-semibold uppercase tracking-[0.22em] text-gray-400">
                     {stat.label}
@@ -118,10 +118,10 @@ export default async function AboutPage({ params }: AboutPageProps) {
           </div>
 
           <div
-            className="rounded-[2rem] border border-gray-100 p-8 shadow-[0_25px_70px_-52px_rgba(0,32,92,0.5)]"
+            className="rounded-card-lg border border-gray-100 p-8 shadow-[0_25px_70px_-52px_rgba(0,32,92,0.5)]"
             style={{ backgroundImage: "var(--elevated-shell-gradient)" }}
           >
-            <div className="grid gap-6 rounded-[1.8rem] bg-white p-6">
+            <div className="grid gap-6 rounded-card bg-white p-6">
               <div className="flex items-center gap-5">
                 <div className="relative h-24 w-24 overflow-hidden rounded-full border-4 border-white shadow-lg">
                   <Image
@@ -201,7 +201,7 @@ export default async function AboutPage({ params }: AboutPageProps) {
             {publicAgentRoster.map((agent) => (
               <div
                 key={agent.slug}
-                className="rounded-[1.75rem] border border-gray-100 bg-white p-5 shadow-[0_18px_45px_-38px_rgba(0,32,92,0.5)]"
+                className="rounded-card border border-gray-100 bg-white p-5 shadow-[0_18px_45px_-38px_rgba(0,32,92,0.5)]"
               >
                 <div className="flex items-center gap-4">
                   {agent.photo ? (
@@ -215,7 +215,7 @@ export default async function AboutPage({ params }: AboutPageProps) {
                       />
                     </div>
                   ) : (
-                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[linear-gradient(145deg,#00205c_0%,#0066b3_100%)] text-lg font-display font-extrabold text-white">
+                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[linear-gradient(145deg,var(--navy)_0%,var(--blue)_100%)] text-lg font-display font-extrabold text-white">
                       {agent.initials}
                     </div>
                   )}
@@ -225,7 +225,7 @@ export default async function AboutPage({ params }: AboutPageProps) {
                       {agent.title}
                     </p>
                     {agent.languages && agent.languages.length > 1 && (
-                      <p className="mt-1 inline-flex items-center gap-1 text-xs font-semibold text-amber-600">
+                      <p className="mt-1 inline-flex items-center gap-1 text-xs font-semibold text-warm-accent">
                         <Globe className="h-3 w-3" />
                         {tTeam("seHablaEspanol")}
                       </p>

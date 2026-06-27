@@ -1,7 +1,7 @@
 {
   "nav": {
-    "personal": "Personal Insurance",
-    "commercial": "Commercial Insurance",
+    "personal": "Personal",
+    "commercial": "Commercial",
     "resources": "Resources",
     "about": "About",
     "blog": "Blog",
@@ -108,7 +108,7 @@
     "faq": {
       "eyebrow": "Frequently asked",
       "title": "Straight answers for quotes, coverage, and proof requests",
-      "description": "This section is written for real client questions, which also makes the site easier for search engines and AI answer engines to understand.",
+      "description": "Real questions we hear from clients every week — answered plainly, so you know what to expect before you reach out.",
       "fastPathEyebrow": "Need the fast path?",
       "fastPathHeading": "Start with the right request.",
       "fastPathBody": "Use the quote flow if you are looking for coverage. Use the proof request flow if your bank, lender, or a business partner needs paperwork.",
@@ -127,8 +127,8 @@
     },
     "expertGuides": {
       "eyebrow": "Expert guides",
-      "title": "Search-friendly answers for California insurance questions",
-      "description": "We are building the site around clear, first-party guidance instead of stuffing keywords into the homepage. Start with the question you actually need answered.",
+      "title": "Clear answers to common California insurance questions",
+      "description": "Straightforward, first-hand guidance from our team. Start with the question you actually need answered.",
       "browseAll": "Browse all resources"
     },
     "coverageEvaluation": {
@@ -257,7 +257,7 @@
     "connectWithUs": "Connect with us",
     "faqs": {
       "heading": "Contact questions we hear most often",
-      "description": "These answers make the page more useful for visitors and give search engines and AI systems clearer context about how the agency works.",
+      "description": "Quick answers to the questions we hear most — so you can reach us the way that works best for you.",
       "ctaQuote": "Start a quote",
       "ctaProof": "Request proof of insurance",
       "q1": {
@@ -289,7 +289,7 @@
     "needProofLink": "proof request flow",
     "faqs": {
       "heading": "Quote questions we can answer before you even submit",
-      "description": "These are the real questions people ask before they start a quote, which also makes this page easier for search engines and AI answer engines to interpret.",
+      "description": "The questions people ask most before starting a quote — answered up front, so you can begin with confidence.",
       "ctaProof": "Request proof of insurance instead",
       "ctaContact": "Talk to the team first",
       "q1": {
@@ -355,7 +355,7 @@
     "callInstead": "Need to call instead? {phone}",
     "faqs": {
       "heading": "Documentation questions we can answer right here",
-      "description": "This page now matches the FAQ schema with visible answers, which is cleaner for users and safer for search engines.",
+      "description": "Answers to the documentation questions we hear most — so you can get what you need without the back-and-forth.",
       "workWithAgent": "Work with {name}",
       "talkToTeam": "Talk to the team",
       "ctaQuote": "Start a coverage quote instead",
@@ -378,7 +378,7 @@
     "metaDescription": "Helpful insurance articles from Allsberry Insurance Agency covering home, auto, business, and life insurance topics for Southern California clients.",
     "eyebrow": "Insights",
     "heading": "Insurance articles and practical answers",
-    "subheading": "The blog lives in the navigation — not on the homepage — so the main experience stays clean while search-friendly content still has a home.",
+    "subheading": "Practical insurance tips and plain-English explainers from the Allsberry team — written to help you make confident coverage decisions.",
     "readArticle": "Read article",
     "articlesInEnglishNotice": "Articles are currently published in English. If you'd prefer help in Spanish, call us and we'll walk through the details with you.",
     "keepMovingEyebrow": "Keep moving",
@@ -633,6 +633,8 @@
     "startProofRequest": "Start proof request",
     "startQuote": "Start Quote",
     "reviewCount": "5,000+",
+    "ratingAria": "Rated 5 out of 5 stars",
+    "zipLabel": "ZIP code",
     "erinTitle": "Owner & Principal Agent",
     "primaryProducerLabel": "Main producer",
     "producerProofLabel": "Client focus",
@@ -667,5 +669,94 @@
     "spanishLabel": "Español",
     "spanishHelper": "Sitio en español.",
     "switchingTo": "Switching to {name}"
+  },
+  "a11y": {
+    "skipToContent": "Skip to content"
+  },
+  "seoCard": {
+    "readGuide": "Read guide",
+    "pageType": {
+      "pillar": "Pillar guide",
+      "supporting": "Explainer",
+      "location": "Local page"
+    }
+  },
+  "carrierDetail": {
+    "breadcrumbLabel": "Breadcrumb",
+    "logoAlt": "{carrier} logo",
+    "eyebrow": "Carrier partner",
+    "heading": "{carrier} insurance in Corona & Southern California",
+    "intro": "As an independent agency, Allsberry places coverage with {carrier} when it’s the right fit — and compares it against 20+ other carriers so you’re not locked into one quote.",
+    "howWeUse": "How we use {carrier}",
+    "howWeUseBody": "Some carriers are strong on homeowners. Others on small business, commercial autos, umbrellas, or life. We match your situation to the carrier whose underwriting and price make sense for you — and revisit at renewal when markets shift.",
+    "talkToPerson": "Talk to a real person",
+    "talkToPersonBody": "Call the office at <phone></phone> or request a comparison quote online. Either way, you’ll get a licensed agent — not a call-center script.",
+    "compareQuote": "Compare {carrier} quote",
+    "whyIndependent": "Why go through an independent agent for {carrier}?",
+    "benefitCompare": "One comparison across {carrier} and 20+ other carriers — not a single direct quote.",
+    "benefitAdvocacy": "Local advocacy at claim time; we help you work with the {carrier} adjuster directly.",
+    "benefitReview": "Free annual coverage review so your policy keeps up with life changes.",
+    "benefitNoPressure": "No pressure to bundle — if {carrier} only makes sense for one line, we say so.",
+    "otherCarriers": "Other carriers we work with",
+    "seeAllCarriers": "See every carrier partner →"
+  },
+  "blogPost": {
+    "backToBlog": "Back to Blog",
+    "nextStep": "Next step",
+    "nextStepHeading": "Want help applying this to your policy?",
+    "startQuote": "Start a quote",
+    "talkToTeam": "Talk to the team",
+    "requestProof": "Request proof",
+    "relatedGuides": "Related California insurance guides",
+    "relatedReading": "Related reading",
+    "relatedArticle": "Related article"
+  },
+  "agentProfile": {
+    "directAgentPage": "Direct agent page",
+    "coverageFocus": "Coverage focus",
+    "office": "Office",
+    "officeValue": "Serving {area}",
+    "mobileFirst": "Mobile-first flow",
+    "mobileFirstValue": "Tap to call, scan, or start a quote online",
+    "emailFirstName": "Email {firstName}",
+    "directLink": "Direct link",
+    "scanToVisitMain": "Scan to visit the main Allsberry site",
+    "scanToVisitAgent": "Scan to visit {firstName}’s page",
+    "scanBodyMain": "Opens the main landing page for print, cards, and follow-up.",
+    "scanBodyAgent": "Opens the tracked profile page for print, cards, and follow-up.",
+    "startWith": "Start with {firstName}",
+    "workingWith": "Working with {firstName}",
+    "whatToExpect": "What to expect",
+    "expectStep1": "Call, email, or fill out the form below and {firstName} will follow up within one business day.",
+    "expectStep2": "{firstName} will review your situation, explain your options in plain language, and help you compare coverage side by side.",
+    "expectStep3": "Once you choose a plan, {firstName} stays with you through binding, renewals, and any claims that come up.",
+    "leadForm": "Lead form",
+    "getStartedWith": "Get Started with {firstName}",
+    "leadFormBody": "Share the basics and {firstName} or another licensed member of the team will follow up within one business day.",
+    "relatedGuides": "Related guides",
+    "relatedGuidesHeading": "Coverage guides {firstName} can help you review",
+    "relatedGuidesBody": "These pages are part of the first California home insurance search cluster we are building around wildfire pressure, FAIR Plan, and clear next steps."
+  },
+  "themeToggle": {
+    "displaySettings": "Display settings",
+    "themeLabel": "Theme",
+    "textSizeLabel": "Text size",
+    "liveRegion": "Theme {theme}. Text size {textSize}.",
+    "scaleAriaLabel": "{size} text size",
+    "modeLabel": {
+      "auto": "Auto",
+      "light": "Light",
+      "dark": "Dark"
+    },
+    "modeHelper": {
+      "auto": "Follows local sunset time when location is available.",
+      "light": "Keeps the brighter palette active.",
+      "dark": "Keeps the darker palette active."
+    },
+    "scaleLabel": {
+      "sm": "Compact",
+      "md": "Standard",
+      "lg": "Large"
+    }
   }
 }

@@ -7,6 +7,7 @@ import {
   Sun,
   SunMoon,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useEffect, useId, useMemo, useRef, useState } from "react";
 
 import {
@@ -18,9 +19,7 @@ import {
   sanitizeTextScale,
   sanitizeThemeMode,
   solarCacheStorageKey,
-  textScaleLabel,
   textScaleStorageKey,
-  themeModeLabel,
   themeStorageKey,
   type SolarCache,
   type TextScale,
@@ -38,22 +37,18 @@ type GeolocationPermissionState = "granted" | "prompt" | "denied" | "unsupported
 const themeOptions: Array<{
   id: ThemeMode;
   icon: typeof SunMoon;
-  helper: string;
 }> = [
   {
     id: "auto",
     icon: SunMoon,
-    helper: "Follows local sunset time when location is available.",
   },
   {
     id: "light",
     icon: Sun,
-    helper: "Keeps the brighter palette active.",
   },
   {
     id: "dark",
     icon: MoonStar,
-    helper: "Keeps the darker palette active.",
   },
 ];
 
@@ -204,6 +199,7 @@ async function fetchSolarTimes(latitude: number, longitude: number) {
 }
 
 export function ThemeToggle({ className }: ThemeToggleProps) {
+  const t = useTranslations("themeToggle");
   const helperId = useId();
   const panelRef = useRef<HTMLDivElement | null>(null);
   const shouldPromptOnAutoRef = useRef(false);
@@ -395,8 +391,8 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
           "inline-flex items-center gap-1.5 rounded-full border border-white/28 bg-white/8 px-2.5 py-1.5 text-xs font-semibold text-white transition hover:border-white/45 hover:bg-white/14 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-2 focus-visible:ring-offset-navy",
           className,
         )}
-        title="Display settings"
-        aria-label="Display settings"
+        title={t("displaySettings")}
+        aria-label={t("displaySettings")}
         aria-describedby={helperId}
         aria-expanded={open}
         aria-haspopup="dialog"
@@ -407,18 +403,21 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
       </button>
 
       <span id={helperId} className="sr-only" aria-live="polite">
-        Theme {themeModeLabel[mode]}. Text size {textScaleLabel[textScale]}.
+        {t("liveRegion", {
+          theme: t(`modeLabel.${mode}`),
+          textSize: t(`scaleLabel.${textScale}`),
+        })}
       </span>
 
       {open ? (
         <div
           role="dialog"
-          aria-label="Display settings"
+          aria-label={t("displaySettings")}
           className="absolute right-0 top-[calc(100%+0.75rem)] z-50 w-[19rem] rounded-[1.6rem] border border-white/12 bg-navy p-4 text-white shadow-[0_30px_70px_-34px_rgba(0,0,0,0.55)] backdrop-blur"
         >
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/55">
-              Theme
+              {t("themeLabel")}
             </p>
             <div className="mt-3 grid gap-2">
               {themeOptions.map((option) => {
@@ -440,9 +439,9 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
                     <span className="flex items-start gap-3">
                       <Icon className="mt-0.5 h-4 w-4 shrink-0" />
                       <span>
-                        <span className="block text-sm font-semibold">{themeModeLabel[option.id]}</span>
+                        <span className="block text-sm font-semibold">{t(`modeLabel.${option.id}`)}</span>
                         <span className="mt-1 block text-[11px] leading-4 text-white/62">
-                          {option.helper}
+                          {t(`modeHelper.${option.id}`)}
                         </span>
                       </span>
                     </span>
@@ -455,7 +454,7 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
 
           <div className="mt-4">
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/55">
-              Text size
+              {t("textSizeLabel")}
             </p>
             <div className="mt-3 grid grid-cols-3 gap-2">
               {textScaleOptions.map((option) => {
@@ -479,11 +478,11 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
                         : "border-white/10 bg-white/5 text-white/82 hover:border-white/22 hover:bg-white/9",
                     )}
                     aria-pressed={active}
-                    aria-label={`${textScaleLabel[option.id]} text size`}
+                    aria-label={t("scaleAriaLabel", { size: t(`scaleLabel.${option.id}`) })}
                   >
                     <span className={cn("block font-bold", previewClassName)}>{option.preview}</span>
                     <span className="mt-1 block text-[11px] font-semibold text-white/62">
-                      {textScaleLabel[option.id]}
+                      {t(`scaleLabel.${option.id}`)}
                     </span>
                   </button>
                 );
