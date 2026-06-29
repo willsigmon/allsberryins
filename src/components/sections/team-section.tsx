@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Award, Globe, Handshake, Mail } from "lucide-react";
+import { Globe, Handshake, Mail } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 import { SectionHeading } from "@/components/ui/section-heading";
@@ -10,11 +10,9 @@ import { Link } from "@/i18n/navigation";
 import { press, tap } from "@/lib/haptics";
 import {
   agents,
-  fellows,
   primaryProducerSlug,
   type Agent,
   type AgentAccent,
-  type Fellow,
 } from "@/lib/site-data";
 import { buildTrackedHref } from "@/lib/tracking";
 import { cn } from "@/lib/utils";
@@ -132,80 +130,8 @@ export function TeamSection() {
             <TeamMemberCard key={agent.slug} agent={agent} index={index} />
           ))}
         </div>
-
-        {fellows.length > 0 && (
-          <div className="mt-8 space-y-4">
-            {fellows.map((fellow, index) => (
-              <FellowStrip key={fellow.name} fellow={fellow} index={index} />
-            ))}
-          </div>
-        )}
       </div>
     </section>
-  );
-}
-
-function FellowStrip({ fellow, index }: { fellow: Fellow; index: number }) {
-  const t = useTranslations("home.team");
-  const fellowT = useTranslations("agents.fellows");
-
-  return (
-    <motion.aside
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1], delay: index * 0.06 }}
-      className="fellow-card-bg parallax-card relative overflow-hidden rounded-[1.75rem] border border-gold/25 p-5 shadow-[0_18px_52px_-28px_rgba(184,134,11,0.55)] sm:p-6"
-    >
-      <div className="shimmer-border absolute inset-x-0 top-0 h-1 opacity-55" />
-      <div className="absolute -right-20 -top-20 h-40 w-40 rounded-full bg-gold/20 blur-3xl" />
-
-      <div className="relative grid items-center gap-5 lg:grid-cols-[auto_minmax(0,1.15fr)_minmax(280px,0.85fr)]">
-        <div className="flex items-center gap-4">
-          {fellow.photo ? (
-            <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-full border-2 border-gold/30 shadow-lg">
-              <Image
-                src={fellow.photo.src}
-                alt={fellow.photo.alt}
-                width={64}
-                height={64}
-                className="h-full w-full object-cover object-top"
-              />
-            </div>
-          ) : (
-            <div className="ambient-glow flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-[linear-gradient(145deg,#b8860b_0%,#daa520_100%)] text-xl font-display font-extrabold text-white shadow-lg">
-              {fellow.initials}
-            </div>
-          )}
-
-          <div className="min-w-0">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-gold">
-              <Award className="mr-1 inline h-3 w-3" />
-              {t("fellowLabel")}
-            </p>
-            <h3 className="mt-1 font-display text-xl font-bold text-gray-900">
-              {fellow.name}
-            </h3>
-          </div>
-        </div>
-
-        <p className="text-sm leading-6 text-gray-600 lg:border-l lg:border-gold/20 lg:pl-5">
-          {fellowT(`${fellow.slug}.career`)}
-        </p>
-
-        <div className="rounded-2xl border border-gold/18 bg-white/62 p-4">
-          <p className="text-xs leading-5 text-gray-500">
-            <span className="font-semibold text-gold/90">
-              {t("fellowDefinitionIntro")}
-            </span>{" "}
-            {t("fellowDefinition")}
-          </p>
-          <p className="mt-2 text-xs italic leading-5 text-gold/85">
-            {t("officeMomQuote")}
-          </p>
-        </div>
-      </div>
-    </motion.aside>
   );
 }
 

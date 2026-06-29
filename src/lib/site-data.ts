@@ -51,7 +51,6 @@ export type AgentSlug =
   | "dakota"
   | "alex"
   | "vanessa"
-  | "julie"
   | "heidi"
   | "jenn"
   | "jason"
@@ -605,26 +604,6 @@ export const agents: Agent[] = [
     },
   },
   {
-    slug: "julie",
-    name: "Julie Ortiz",
-    firstName: "Julie",
-    title: "Home, Auto & Umbrella Agent",
-    phone: agency.phone,
-    phoneHref: agency.phoneHref,
-    email: "julie@allsberryagency.com",
-    bio: "Julie brings a wealth of Farmers experience and industry knowledge to the team. Working remotely, she plays an important role in supporting clients and ensuring policies are handled accurately and efficiently. Her reliability, experience, and helpful approach make her a valuable resource for both clients and the team.",
-    initials: "J",
-    accent: "rose",
-    specialties: ["Home Insurance", "Auto Insurance", "Umbrella Insurance"],
-    languages: ["English", "Spanish"],
-    license: "CA #0M05856",
-    calendlyUrl: "https://calendly.com/julie-allsberryagency/quick-call",
-    photo: {
-      src: "/media/agents/julie.png",
-      alt: "Julie Ortiz, Licensed Insurance Agent at Allsberry Insurance Agency",
-    },
-  },
-  {
     slug: "dakota",
     name: "Dakota Allsberry",
     firstName: "Dakota",
@@ -952,35 +931,6 @@ export const footerProducts = [
   { label: "Workers Comp", href: "/quote?product=workers-comp" },
   { label: "Life Insurance", href: "/quote?product=life" },
 ] as const;
-
-export type Fellow = {
-  slug: string;
-  name: string;
-  firstName: string;
-  recognition: string;
-  career: string;
-  initials: string;
-  photo?: {
-    src: string;
-    alt: string;
-  };
-};
-
-export const fellowDefinition =
-  "An Allsberry Insurance Fellow is a special honor for team members who made a real difference for our clients, our agency, and our community. It's given to people who went above and beyond — who truly knew the business, cared about every client, and always did the right thing. Fellows stand for what Allsberry Insurance is all about — being honest, being clear, and always looking out for our clients. Though retired from day-to-day work, an Allsberry Fellow remains a respected voice within our organization.";
-
-export const fellows: Fellow[] = [
-  {
-    slug: "linda",
-    name: "Linda Sullivan",
-    firstName: "Linda",
-    recognition:
-      "Recognized as an Allsberry Insurance Inc. Fellow for a career defined by trust, service, and lasting impact.",
-    career:
-      "26 years as Commercial Account Executive. The original Allsberry team member and a true cornerstone of the agency's legacy. Known as the 'Office Mom,' Linda brought kindness, wisdom, and a steady presence to every interaction.",
-    initials: "L",
-  },
-];
 
 export function getAgentBySlug(slug: string) {
   return agents.find((agent) => agent.slug === slug);

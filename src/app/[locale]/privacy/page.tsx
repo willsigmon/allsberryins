@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
 
 import { Link } from "@/i18n/navigation";
+import { agency } from "@/lib/site-data";
 
 type PrivacyPageProps = {
   params: Promise<{ locale: string }>;
@@ -48,12 +49,12 @@ export default async function PrivacyPage({ params }: PrivacyPageProps) {
 
         <section>
           <h2 className="text-lg font-semibold text-foreground">Your Rights</h2>
-          <p>You may request access to, correction of, or deletion of your data by contacting us at <a href="mailto:carter.helms@highstreetins.com" className="text-primary underline">carter.helms@highstreetins.com</a>.</p>
+          <p>You may request access to, correction of, or deletion of your data by contacting us at <a href={agency.emailHref} className="text-primary underline">{agency.email}</a>.</p>
         </section>
 
         <section>
           <h2 className="text-lg font-semibold text-foreground">Contact</h2>
-          <p>Allsberry Insurance Agency<br />Powered by High Street Insurance Partners<br /><a href="mailto:carter.helms@highstreetins.com" className="text-primary underline">carter.helms@highstreetins.com</a></p>
+          <p>Allsberry Insurance Agency<br />Powered by High Street Insurance Partners<br /><a href={agency.emailHref} className="text-primary underline">{agency.email}</a></p>
         </section>
       </div>
     </main>

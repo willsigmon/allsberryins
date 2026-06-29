@@ -46,9 +46,6 @@
   --hero-profile-pill-border: rgba(255, 255, 255, 0.14);
   --agent-shell-gradient: linear-gradient(145deg, #0b2f72 0%, #0e4b94 48%, #dcecff 100%);
   --elevated-shell-gradient: linear-gradient(160deg, #f8fafb 0%, #e8f0f8 100%);
-  --fellow-bg-from: #fffdf5;
-  --fellow-bg-mid: #fff8e7;
-  --fellow-bg-to: #fef3d0;
 }
 
 :root[data-text-scale="sm"] {
@@ -101,9 +98,6 @@
   --hero-profile-pill-border: rgba(127, 201, 255, 0.16);
   --agent-shell-gradient: linear-gradient(145deg, #102d63 0%, #0b3c7c 48%, #1d4d91 100%);
   --elevated-shell-gradient: linear-gradient(160deg, #0d1728 0%, #132540 100%);
-  --fellow-bg-from: #1a1708;
-  --fellow-bg-mid: #1e1a0c;
-  --fellow-bg-to: #231e10;
 }
 
 @theme inline {
@@ -534,10 +528,6 @@ textarea {
 
 .section-muted-bg {
   background-color: var(--surface-muted);
-}
-
-.fellow-card-bg {
-  background: linear-gradient(160deg, var(--fellow-bg-from) 0%, var(--fellow-bg-mid) 50%, var(--fellow-bg-to) 100%);
 }
 
 .section-glow {
