@@ -25,7 +25,6 @@
 - `alex-coria.html` — Alex Coria (Office Manager)
 - `vanessa-rios.html` — Vanessa Rios
 - `brahm-shank.html` — Brahm Shank (SVP of Sales Development)
-- `julie-ortiz.html` — Julie Ortiz
 - `dakota-allsberry.html` — Dakota Allsberry
 - `jason-allsberry.html` — Jason Allsberry
 - `anna-gonzalez.html` — Anna Gonzalez
