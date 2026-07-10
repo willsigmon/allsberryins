@@ -34,7 +34,7 @@ export function SmsConsentFields<T extends SmsConsentFormValues>({
 
   return (
     <div className={cn("grid gap-4", className)}>
-      <p className="text-xs leading-relaxed text-gray-500">
+      <p className="text-sm leading-6 text-gray-600">
         {smsConsentDisclosureIntro}{" "}
         <Link href={legalPagePaths.privacy} className="font-medium text-blue underline">
           Privacy Policy
@@ -48,7 +48,7 @@ export function SmsConsentFields<T extends SmsConsentFormValues>({
 
       <label
         htmlFor={marketingId}
-        className="flex items-start gap-3 text-sm font-medium text-gray-700"
+        className="flex min-h-11 items-start gap-3 py-2 text-sm font-medium text-gray-700"
       >
         <input
           {...register(smsConsentFieldNames.marketingTextOptIn as Parameters<typeof register>[0])}
@@ -69,7 +69,7 @@ export function SmsConsentFields<T extends SmsConsentFormValues>({
 
       <label
         htmlFor={nonMarketingId}
-        className="flex items-start gap-3 text-sm font-medium text-gray-700"
+        className="flex min-h-11 items-start gap-3 py-2 text-sm font-medium text-gray-700"
       >
         <input
           {...register(smsConsentFieldNames.nonMarketingTextOptIn as Parameters<typeof register>[0])}

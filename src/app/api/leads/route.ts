@@ -2,6 +2,9 @@ import { NextResponse } from "next/server";
 
 import { sendLeadEmail } from "@/lib/lead-email";
 import { leadsApiSchema, leadTypeLabels } from "@/lib/lead-schemas";
+import { normalizeSmsConsent, smsConsentDisclosureVersion } from "@/lib/sms-consent";
+
+const zapierWebhookTimeoutMs = 8_000;
 
 export async function POST(request: Request) {
   let body;
@@ -30,7 +33,21 @@ export async function POST(request: Request) {
     return NextResponse.json({ success: true });
   }
 
-  const emailResult = await sendLeadEmail(parsed.data);
+  const submittedAt = new Date().toISOString();
+  const marketingTextOptIn = normalizeSmsConsent(parsed.data.marketingTextOptIn);
+  const nonMarketingTextOptIn = normalizeSmsConsent(parsed.data.nonMarketingTextOptIn);
+  const lead = {
+    ...parsed.data,
+    marketingTextOptIn,
+    nonMarketingTextOptIn,
+    consentCapturedAt:
+      marketingTextOptIn || nonMarketingTextOptIn ? submittedAt : undefined,
+    consentDisclosureVersion: smsConsentDisclosureVersion,
+    consentSource: "website-form",
+    submittedAt,
+  };
+
+  const emailResult = await sendLeadEmail(lead);
   if (!emailResult.ok) {
     console.error("[api/leads] email delivery failed", emailResult);
     return NextResponse.json(
@@ -40,26 +57,30 @@ export async function POST(request: Request) {
   }
 
   console.info("[api/leads] lead delivered", {
-    type: parsed.data.type,
+    type: lead.type,
     provider: emailResult.provider,
   });
 
   // Optional: forward the lead to Zapier (the website "spoke" of the lead pipeline).
-  // Zapier normalizes this payload and routes it to Ricochet + Farmers Apex + SMS.
+  // Zapier normalizes this payload and routes it to AgencyZoom plus future CRM branches.
   // `source` and `leadTypeLabel` are stamped here so the downstream Zap can segment
-  // website leads from provider-email leads and populate Ricochet's required Vendor Name.
+  // website leads from provider-email leads.
   const zapierUrl = process.env.ZAPIER_WEBHOOK_URL;
   if (zapierUrl) {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), zapierWebhookTimeoutMs);
+
     try {
       const zapierResponse = await fetch(zapierUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          ...parsed.data,
+          ...lead,
           source: "website",
-          leadTypeLabel: leadTypeLabels[parsed.data.type],
-          timestamp: new Date().toISOString(),
+          leadTypeLabel: leadTypeLabels[lead.type],
+          timestamp: submittedAt,
         }),
+        signal: controller.signal,
       });
       if (!zapierResponse.ok) {
         console.error("[api/leads] Zapier webhook failed", zapierResponse.status, zapierResponse.statusText);
@@ -67,7 +88,10 @@ export async function POST(request: Request) {
         console.info("[api/leads] Zapier webhook delivered successfully");
       }
     } catch (err) {
-      console.error("[api/leads] Zapier webhook request error", err);
+      const reason = err instanceof DOMException && err.name === "AbortError" ? "timeout" : "request-error";
+      console.error("[api/leads] Zapier webhook request error", { reason });
+    } finally {
+      clearTimeout(timeout);
     }
   }
 

@@ -1,14 +1,142 @@
 # Zapier Lead Automation — Design & Handoff
 
-**Date:** 2026-06-15 (rev. 2 — research-backed, two-channel)
-**Status:** Design finalized. Build blocked on a few inputs from Brahm (see "Build inputs still needed").
+**Date:** 2026-07-10 (rev. 5 — website-side routing complete; Zap activation still external)
+**Status:** The website now emits an explicit `insuranceType` (`personal`, `commercial`, or `life`) with every quote request and rejects invalid type/product combinations server-side. The production webhook remains deliberately unset until the Zap is renamed, published, and updated to route all three quote types correctly. No live webhook URL belongs in this repository.
 **Requirements from:** Brahm Shank (Allsberry). Owner contacts: Erin / Brahm.
 
-## ▶ Resume here (EOD 2026-06-15)
+## ▶ Rev. 5 — website-side routing and webhook hygiene (2026-07-10)
 
-**Done today:** email live (`quotes@` + `brahm@` + `leads@`); site emits source-tagged lead payload (committed); Zapier MCP connected + inventoried; Brahm's answers locked; editor build recipe written.
+### Website changes completed
 
-**Tomorrow, in order:**
+- The quote form now asks for the insurance lane first: `personal`, `commercial`, or `life`.
+- The API payload carries `insuranceType`; it is available to Zapier as a top-level field.
+- Both browser and API validation reject a product that does not match its selected lane, and commercial requests require an employee count.
+- The API normalizes both SMS-consent fields to literal booleans and includes the disclosure version, consent source, and capture time when a visitor opts in.
+- The webhook endpoint was scrubbed from this document. Store it only as Vercel's encrypted `ZAPIER_WEBHOOK_URL` environment variable after the Zap is ready to receive real customer data.
+
+### Required Zap changes before the Vercel webhook is enabled
+
+The current quick version creates a Personal Lead for every `quote-request`. Update it to branch on the new `insuranceType` field:
+
+1. `personal` → Personal Lead in `1. New Personal Leads`.
+2. `commercial` → Business Lead in `4. New Comm. Leads`.
+3. `life` → lead in `7. Life Pipeline`.
+
+After those paths are published, set `ZAPIER_WEBHOOK_URL` in Vercel production from a secure source, deploy, and run one controlled commercial test with a unique test email. Do not use a real customer submission as the first test.
+
+## ▶ Rev. 4 — AgencyZoom Zap built and tested live in Zapier editor (2026-07-08)
+
+Built directly in Zapier's editor (Zap name: "Untitled Zap" in Erin Allsberry's account, draft — rename before publish). Structure: **Catch Hook → Paths (3)**, no separate Formatter step needed (site payload is already clean per-type).
+
+**Catch Hook URL:** intentionally omitted. Store it only in Vercel's encrypted `ZAPIER_WEBHOOK_URL` environment variable; never commit or paste it into a handoff document.
+
+**Path A — `quote-request` → Create Personal Lead.** Tested live: **Lead ID 84333294** created successfully in AgencyZoom.
+- Name = First + Last (concatenated with a literal space — the chip editor silently drops the space if you insert two data chips back-to-back without care; verify in Zapier's own preview before trusting it)
+- Pipeline = `1. New Personal Leads` (98781), Stage = `New` (431879)
+- Email, Phone, Postal Code (Zip) mapped directly; State hardcoded `CA`
+- Comments = `Message: {{message}}` (kept simple — full raw payload is preserved in Zapier's task history regardless, so this doesn't need to be exhaustive)
+- Tags = `Website` (static)
+- **Left blank on purpose:** Lead Owner (defaults to agency owner) and Lead Source (doesn't exist yet — see "Still needed" below). Business-vs-personal routing (Create Business Lead for commercial products) was **not built** — out of scope for tonight's speed-to-ship version; every quote-request lands as a Personal Lead regardless of product mix. Flag this as a fast-follow if commercial lead volume matters.
+
+**Path B — `agent-contact` → Create Personal Lead.** Tested live: **Lead ID 84333955** created successfully.
+- Same field pattern as Path A, but Name maps directly from the site's single `name` field (no concatenation needed)
+- Comments = `Message: {{helpTopic + message}}` pattern, same Pipeline/Stage as Path A
+
+**Path C — `evidence-request` → Create Service Request** (not a Lead — matches the "Existing Customer" treatment from the original design). Tested live: **service request created successfully** (Result: true).
+- Customer Name, Customer Email mapped from site fields
+- Summery (subject) = `requestType` (e.g. "Business Proof of Insurance (COI)")
+- Category = `Service: COI` (126391) — exact match, confirmed live
+- Priority = `Medium` (51583)
+- Pipeline = `Missing Documents` (98821) — best fit from the 6 available service pipelines (Pers. Policy Changes, Missing Documents, Late Payments, Commercial Renewals, Comm. Policy Change, Claims); confirm with Brahm if a better fit exists
+- Stage = `Received` (432063)
+- Due after days = `3` (placeholder — confirm real SLA with Brahm)
+- Description = `Requested for: ` (minimal — the chip-insertion UI kept failing to append the Message field here; the static text alone satisfies the required-field check, full payload is still in Zapier's task history)
+
+**Not built:** SMS alert, Ricochet branch, Farmers Apex branch — all still per the rev. 3 architecture above (parallel branches to add later off the same Catch Hook, not blocking this).
+
+### Still needed before publish
+1. **Add a "Website" Lead Source** in AgencyZoom → Settings → Lead Sources. Confirmed still missing (checked twice tonight against the live account — 60+ sources exist, none named Website). Not required for the Zap to function, but leaves `leadSourceId` blank on every lead until it's added.
+2. **Set `ZAPIER_WEBHOOK_URL`** in Vercel production from the secure Zapier source, then redeploy. Do this only after the three quote-routing paths below are correct and the Zap is published.
+3. **Publish the Zap** in Zapier (top-right button, currently enabled) — hasn't been clicked. Rename the Zap first (still "Untitled Zap").
+4. **One real end-to-end test**: submit a real form on the live site after step 2, confirm it lands correctly in AgencyZoom, *then* consider this done.
+
+## ▶ Rev. 3 — AgencyZoom added, runs alongside Ricochet (2026-07-08, hard deadline 10:00 AM PT 2026-07-09)
+
+Erin forwarded a "Done-For-You" package explainer describing a Zapier integration that connects website forms → AgencyZoom (dedupe check, comments logging, tags, service tickets), with a 10am PT deadline and a Zoom walkthrough tomorrow. This **amends the rev. 2 decision** below ("AgencyZoom out of scope, CRM = Ricochet + Farmers Apex") — that decision is exactly what line 81 (original) flagged as something "Brahm to confirm strategy if revisited." **Confirmed 2026-07-08: every lead now needs to land in both AgencyZoom and Ricochet, not one or the other.**
+
+**Why AgencyZoom ships first:** it's been fully connected in the Zapier account this whole time (14 native actions, no OAuth needed) — unlike Ricochet, which has been stalled 3+ weeks waiting on Brahm's Posting URL. The site emits a clean, source-tagged payload when `ZAPIER_WEBHOOK_URL` is configured. **Both CRM paths live in the same Zap** (see architecture note below) — AgencyZoom's path can go live once the published Zap has all three quote-routing branches; Ricochet's path slots into this same Zap when Brahm delivers the Posting URL.
+
+**The Gravity Forms / JotForm language in Erin's email is generic vendor boilerplate** — Allsberry's site is custom Next.js, not WordPress, so AgencyZoom's out-of-the-box form connectors don't apply. The build below uses the same Catch Hook → normalize → Paths pattern already designed for Ricochet, with AgencyZoom's native actions added as a parallel branch off the same trigger.
+
+**Farmers Apex is unaffected** — still parked, still needs a Farmers-supplied endpoint. Once it lands it becomes a third parallel CRM branch off the same Catch Hook.
+
+### Architecture — one Zap, three CRM branches
+
+The Catch Hook stays singular (one `ZAPIER_WEBHOOK_URL`, configured in Vercel only after activation). After the Formatter/normalize step, the lead-type Paths (A/B/C below) each fan out into **parallel, independent branches** — AgencyZoom write, Ricochet write (once connected), Farmers Apex write (once the endpoint exists) — not a branching either/or. **SMS by Zapier fires once per lead, at the top level, not once per CRM branch** — it's a notification, not a CRM write, so it should not be duplicated inside the AgencyZoom path and the Ricochet path (that would text Brahm twice per lead). Wire it as its own parallel step off the Formatter, gated by the same `type != evidence-request` filter from the rev. 2 design.
+
+One intentional divergence between the two CRM branches, worth a 10-second sanity check with Brahm: **Ricochet force-assigns every lead to Brahm**; the AgencyZoom branch below assigns to the **visitor's chosen agent** instead, since AgencyZoom already has clean per-agent producer IDs. That's fine as two independent systems, but flag it so it's a decision, not an inconsistency nobody noticed.
+
+### Same-day update — build AgencyZoom-only for tomorrow; Ricochet vendor is Accelerated Automation, not AgencyZoom's own onboarding
+
+Two things came in after the section above was written:
+
+1. **The vendor is a third party ("Accelerated Automation," rep Janaya), already paid, running tomorrow's 10am PT call.** Their onboarding portal (`acceleratedautomation.launchportal.com`) is templated for a WordPress + Gravity Forms/JotForm site and asks for three sets of raw plaintext credentials: website login, Zapier login, and form-system login. **None of the first apply here** — this site has no CMS/login system to give them, and it isn't Gravity Forms or JotForm. **Do not submit the Zapier account password into that form** — that hands a third party full account access (every connected app, not just this one integration), not a scoped grant. Correct alternative: Zapier's own team-member invite (Settings → Team) for scoped, revocable access under Janaya's own login, **or** Will builds it live on the call using the recipe already documented here, so no credentials change hands at all. **Recommend Erin rotate the Zapier password regardless** — it was visible on-screen in a screen recording that's since been forwarded by email, so treat it as exposed.
+2. **Erin authorized dropping Ricochet if that's what it takes to hit the deadline.** Given Ricochet has been stalled 3+ weeks on Brahm's missing Posting URL with no forward motion, and AgencyZoom is fully connected and ready now: **build AgencyZoom-only for tomorrow.** Ricochet stays documented above as a future add-on (same Zap, new parallel branch) if/when Brahm ever delivers the Posting URL — not deleted, just no longer blocking.
+
+**Clean division of labor for tomorrow's call, with zero credential sharing either direction:**
+- Hand Janaya the field-mapping spec above (Paths A/B/C, pipeline/stage/producer IDs, dedupe logic) instead of a login — she has everything needed to build the AgencyZoom action steps in Erin's Zapier account via a proper scoped invite, or by screen-sharing with Erin driving.
+- The **one thing this build still needs from that call**: once Janaya (or whoever) creates the "Webhooks by Zapier → Catch Hook" trigger step, it generates a unique Catch Hook URL. That URL is the only artifact that needs to come back to Will/Claude — everything downstream (setting it as `ZAPIER_WEBHOOK_URL` in Vercel production + redeploy) can be done immediately once it's in hand.
+
+### Live AgencyZoom account data (pulled via Zapier MCP, 2026-07-08)
+
+- **Pipelines** (shared list for Personal + Business leads): `1. New Personal Leads` (98781), `2. Quotes Not Closed` (98784), `3. Leads Not Quoted` (98785), `4. New Comm. Leads` (98786), `5. Comm. Quotes Not Closed` (98787), `6. Comm. Leads Not Quoted` (98788), `7. Life Pipeline` (98789), `8. Referral Partnership` (98791).
+- **Personal lead stages** (pipeline 98781): New (431879), Contacted (431880), Quoted (431881), Folio This Month (431882), Folio Next Month (431883). → use **New (431879)** for fresh web leads.
+- **Producers (`assignTo`)** — maps cleanly to the site's existing `agentSlug` values in `src/lib/site-data.ts`:
+
+  | Site `agentSlug` | AgencyZoom `assignTo` |
+  |---|---|
+  | erin | 171855 |
+  | brahm | 171865 |
+  | dakota | 171862 |
+  | alex | 173933 |
+  | vanessa | 173972 |
+  | heidi | 173966 |
+  | jenn | 173977 |
+  | anna | 171955 |
+  | jason | *(not a producer — no mapping; default to Round Robin)* |
+  | *(none / round robin)* | 0 |
+
+- **Service Request categories** — `Service: COI` (126391) is an exact match for evidence-of-insurance/certificate requests.
+- **Service Request pipelines**: `Pers. Policy Changes` (98823), `Missing Documents` (98821), `Late Payments` (98818), `Commercial Renewals` (98827), `Comm. Policy Change` (98824), `Claims` (98819). No pipeline is named "COI" — best fit is **Missing Documents (98821)**; confirm live.
+- **Service Request priorities**: High (51582), Medium (51583), Low (51584), Urgent Agency Mistake (52161), Urgent (52162), Today (52163), Low-Automation Only (52164). Default **Medium**.
+- **Gap found — blocks clean segmentation:** no "Website" Lead Source exists yet among the 60+ configured sources (Google, Facebook, EverQuote, SMART FINANCIAL, agent names, etc.). Needs Brahm/Erin to add one in **AgencyZoom → Settings → Lead Sources** — a 30-second task, but it's the one blocking input, same category as Ricochet's Posting URL just much smaller.
+
+### Zap build recipe: "Allsberry Website Leads → AgencyZoom"
+
+1. **Trigger** — Webhooks by Zapier → Catch Hook (same pattern as the parked Ricochet recipe below; must be built in Zapier's web editor — the connected Zapier MCP can test/execute AgencyZoom actions but can't publish a live webhook-triggered Zap). Point `ZAPIER_WEBHOOK_URL` at it.
+2. **Formatter** — normalize `full_name`; site is CA-only so `state` can be hardcoded `CA`.
+3. **Paths** (mirrors the 3 site lead types):
+   - **Path A — `quote-request`:** if `products` includes `business` or `workers-comp` → **Create Business Lead** (pipeline 98786 `4. New Comm. Leads`); else → **Create Personal Lead** (pipeline 98781, stage 431879 `New`).
+     - `name` = firstName + lastName · `notes` = products list + message + referralSource + employees
+     - `leadSourceId` = new "Website" source (pending creation) · `tagNames` = `Website` + `Opt-In` when `marketingTextOptIn` is true
+     - `assignTo` = map `assignedAgentSlug` to the producer table above when present, else Round Robin (0). **This intentionally diverges from the Ricochet plan's "force everything to Brahm" rule** — AgencyZoom already has clean per-agent producer IDs, so honoring the visitor's chosen agent is the better default. Flag for a 10-second confirm with Erin/Brahm.
+   - **Path B — `agent-contact`:** Create Personal Lead (or Business if `helpTopic` is "Business Insurance" or "Workers Comp"); `notes` = helpTopic + message; `assignTo` = the specific `agentSlug` the visitor contacted (always known here).
+   - **Path C — `evidence-request`:** **Create Service Request**, not a lead — matches both the rev. 2 "Existing Customer" treatment and the vendor pitch's "creates Service Tickets for certificate requests." `categoryId` = 126391 `Service: COI`, `pipelineId` = 98821 `Missing Documents` (confirm), `priorityId` = Medium default, `subject`/`serviceDesc` = requestType + requestedFor + companyOrAgency + dueDate + message.
+4. **Duplicate check** (matches the vendor pitch's "checks for duplicates: updates instead of creating a duplicate") — insert **Find a Lead** (search by phone, `createIfMissing=No`) ahead of Paths A/B; if found, branch to **Update Lead** + **Create a Note** (append, don't overwrite `notes`) instead of Create.
+5. Comments/logging live directly in the `notes` field on the Create action — no separate step needed except in the dedupe-found branch.
+
+### Needed from Brahm/Erin before or during the call
+
+1. Add a **"Website"** Lead Source in AgencyZoom (Settings → Lead Sources).
+2. Confirm: assign website leads to the **visitor's chosen agent** (recommended above) or force everything to **Brahm** (matches the parked Ricochet decision, for consistency across CRMs)?
+3. Confirm the Service Request **pipeline** for COI/evidence requests — `Missing Documents` (98821) is the best guess from the existing pipeline list; pick a different one if it doesn't fit.
+4. ~~Confirm replace-vs-alongside~~ — resolved 2026-07-08: **runs alongside Ricochet**, both CRMs get every lead. Still bring the Ricochet Posting URL if Brahm has it — the moment it's connected, its branch slots into this same Zap.
+
+## ▶ Resume here (EOD 2026-06-15) — parked, Ricochet plan below
+
+**Done that day:** email live (`quotes@` + `brahm@` + `leads@`); site emits source-tagged lead payload (committed); Zapier MCP connected + inventoried; Brahm's answers locked; editor build recipe written.
+
+**Was next, in order (superseded by the AgencyZoom pivot above unless Brahm says otherwise):**
 1. **Brahm** — bring the **Ricochet Posting URL** from his Ricochet meeting + connect Ricochet in their Zapier. ← the gate.
 2. **Will** — connect **SMS by Zapier** and verify **(951) 266-2019** (path A) via the app-auth URL, so the alert + a test text can fire.
 3. **Claude** — build the editor Zap per "Editor build recipe": Catch Hook → normalize → Paths (new-business → Ricochet + SMS; COI → Ricochet "Existing Customer", no SMS). Set `ZAPIER_WEBHOOK_URL` in Vercel prod + redeploy.
@@ -34,7 +162,7 @@ Rev. 1 covered one channel (website forms). Research confirmed Allsberry has **t
 
 ## Goal
 
-Every lead, from either channel: (1) email `quotes@` + `brahm@`, (2) land in **Ricochet** + **Farmers Apex**, (3) fire an SMS alert to **(951) 266-2019**.
+Every lead, from either channel: (1) email `quotes@` + `brahm@`, (2) land in **Ricochet** + **AgencyZoom** (rev. 3) + **Farmers Apex**, (3) fire an SMS alert to **(951) 266-2019** (once per lead, not once per CRM).
 
 ## Decisions (locked — Brahm confirmed 2026-06-15)
 
@@ -45,7 +173,7 @@ Every lead, from either channel: (1) email `quotes@` + `brahm@`, (2) land in **R
 - **Provider leads** = bring them in; pursue SmartFinancial direct-to-Ricochet first. Email-only providers parsed via **AI by Zapier** (native — no personal API keys; keeps client billing self-contained). [Q3=A]
 - **Extra automations (Phase 2)** = none for now; core lead pipeline only. [Q8=D]
 - **SMS** = SMS by Zapier → +1 951 266 2019 (stays on Zapier — no personal Twilio; keep client separate). Fires on every **new** lead; **skips COI/evidence** requests (a Filter on `type != evidence-request` before the SMS step). [Q5: Brahm 2026-06-15]
-- **CRMs** = Ricochet + Farmers Apex. AgencyZoom out of scope.
+- **CRMs** = Ricochet + Farmers Apex. ~~AgencyZoom out of scope.~~ **Superseded by rev. 3 (2026-07-08): AgencyZoom is back in scope, runs alongside Ricochet — every lead goes to both.**
 - **Zapier plan** = Pro (750 tasks/mo).
 
 ## Architecture (hub-and-spoke)

@@ -6,6 +6,10 @@ import {
   productSelectionOptions,
   referralSources,
 } from "@/lib/site-data";
+import {
+  isQuoteProductForInsuranceType,
+  quoteInsuranceTypes,
+} from "@/lib/quote-routing";
 
 export const honeypotFieldName = "website";
 
@@ -59,8 +63,10 @@ const leadAttributionSchema = {
   utmTerm: optionalTrackingFieldSchema,
 } satisfies Record<string, z.ZodTypeAny>;
 
-export const quoteFormSchema = z
-  .object({
+const quoteFormFieldsSchema = z.object({
+    insuranceType: z.enum(quoteInsuranceTypes, {
+      error: "Choose personal, commercial, or life insurance.",
+    }),
     products: z
       .array(z.enum(quoteProductSelectionOptions))
       .min(1, "Select at least one coverage type."),
@@ -81,20 +87,37 @@ export const quoteFormSchema = z
     message: optionalMessageSchema,
     honeypot: honeypotSchema,
     ...smsConsentSchema.shape,
-  })
-  .superRefine((values, ctx) => {
-    const needsEmployees = values.products.some(
-      (product) => product === "business" || product === "workers-comp",
-    );
-
-    if (needsEmployees && !values.employees) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        path: ["employees"],
-        message: "Please choose the number of employees.",
-      });
-    }
   });
+
+type QuoteFormFieldValues = z.infer<typeof quoteFormFieldsSchema>;
+
+function validateQuoteFormFields(values: QuoteFormFieldValues, ctx: z.RefinementCtx) {
+  const hasMismatchedProduct = values.products.some(
+    (product) => !isQuoteProductForInsuranceType(product, values.insuranceType),
+  );
+
+  if (hasMismatchedProduct) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      path: ["products"],
+      message: "Choose coverage options that match the selected insurance type.",
+    });
+  }
+
+  const needsEmployees = values.products.some(
+    (product) => product === "business" || product === "workers-comp",
+  );
+
+  if (needsEmployees && !values.employees) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      path: ["employees"],
+      message: "Please choose the number of employees.",
+    });
+  }
+}
+
+export const quoteFormSchema = quoteFormFieldsSchema.superRefine(validateQuoteFormFields);
 
 export type QuoteFormValues = z.infer<typeof quoteFormSchema>;
 
@@ -142,31 +165,37 @@ export const leadTypeLabels: Record<string, string> = {
   "evidence-request": "Evidence of Insurance Request",
 };
 
-export const leadsApiSchema = z.discriminatedUnion("type", [
-  z.object({
-    type: z.literal("quote-request"),
-    assignedAgentSlug: optionalTrackingFieldSchema,
-    entryPoint: optionalTrackingFieldSchema,
-    ...leadAttributionSchema,
-    ...quoteFormSchema.shape,
-  }),
-  z.object({
-    type: z.literal("agent-contact"),
-    entryPoint: optionalTrackingFieldSchema,
-    agentSlug: z.string().trim().min(1),
-    agentName: z.string().trim().min(1),
-    ...leadAttributionSchema,
-    ...agentContactSchema.shape,
-  }),
-  z.object({
-    type: z.literal("evidence-request"),
-    assignedAgentSlug: optionalTrackingFieldSchema,
-    audience: z.string().trim().optional(),
-    entryPoint: optionalTrackingFieldSchema,
-    ...leadAttributionSchema,
-    ...evidenceRequestSchema.shape,
-  }),
-]);
+export const leadsApiSchema = z
+  .discriminatedUnion("type", [
+    z.object({
+      type: z.literal("quote-request"),
+      assignedAgentSlug: optionalTrackingFieldSchema,
+      entryPoint: optionalTrackingFieldSchema,
+      ...leadAttributionSchema,
+      ...quoteFormFieldsSchema.shape,
+    }),
+    z.object({
+      type: z.literal("agent-contact"),
+      entryPoint: optionalTrackingFieldSchema,
+      agentSlug: z.string().trim().min(1),
+      agentName: z.string().trim().min(1),
+      ...leadAttributionSchema,
+      ...agentContactSchema.shape,
+    }),
+    z.object({
+      type: z.literal("evidence-request"),
+      assignedAgentSlug: optionalTrackingFieldSchema,
+      audience: z.string().trim().optional(),
+      entryPoint: optionalTrackingFieldSchema,
+      ...leadAttributionSchema,
+      ...evidenceRequestSchema.shape,
+    }),
+  ])
+  .superRefine((values, ctx) => {
+    if (values.type === "quote-request") {
+      validateQuoteFormFields(values, ctx);
+    }
+  });
 
 export const chatRequestSchema = z.object({
   message: z.string().trim().min(1, "Message is required.").max(1000),

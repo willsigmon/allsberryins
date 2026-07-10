@@ -17,10 +17,17 @@ import {
 import { ReviewRequest } from "@/components/sections/review-request";
 import { fireLeadConversion } from "@/lib/conversions";
 import { quoteFormSchema, type QuoteFormValues } from "@/lib/lead-schemas";
+import {
+  defaultQuoteProductByInsuranceType,
+  getQuoteInsuranceTypeForProduct,
+  isQuoteProductForInsuranceType,
+  quoteInsuranceTypeOptions,
+  quoteProductOptionsByInsuranceType,
+  type QuoteInsuranceType,
+  type QuoteProductSlug,
+} from "@/lib/quote-routing";
 import { readStoredMarketingAttribution } from "@/lib/tracking";
 import { cn } from "@/lib/utils";
-
-type QuoteProductSlug = (typeof productSelectionOptions)[number];
 
 type QuoteFormProps = {
   assignedAgentSlug?: string;
@@ -45,11 +52,18 @@ export function QuoteForm({
       : undefined;
   }, [initialProduct]);
 
+  const initialInsuranceType = useMemo<QuoteInsuranceType>(() => {
+    return normalizedInitialProduct
+      ? getQuoteInsuranceTypeForProduct(normalizedInitialProduct)
+      : "personal";
+  }, [normalizedInitialProduct]);
+
   const defaultValues = useMemo<DefaultValues<QuoteFormValues>>(
     () => ({
+      insuranceType: initialInsuranceType,
       products: normalizedInitialProduct
         ? [normalizedInitialProduct]
-        : (["home"] as QuoteProductSlug[]),
+        : ([defaultQuoteProductByInsuranceType[initialInsuranceType]] as QuoteProductSlug[]),
       firstName: "",
       lastName: "",
       phone: "",
@@ -63,7 +77,7 @@ export function QuoteForm({
       marketingTextOptIn: false,
       nonMarketingTextOptIn: false,
     }),
-    [initialZip, normalizedInitialProduct],
+    [initialInsuranceType, initialZip, normalizedInitialProduct],
   );
 
   const {
@@ -83,6 +97,12 @@ export function QuoteForm({
     control,
     name: "products",
   });
+  const selectedInsuranceType =
+    useWatch({
+      control,
+      name: "insuranceType",
+    }) ?? initialInsuranceType;
+  const availableProductOptions = quoteProductOptionsByInsuranceType[selectedInsuranceType];
   const needsEmployees = selectedProducts?.some(
     (product) => product === "business" || product === "workers-comp",
   );
@@ -115,6 +135,7 @@ export function QuoteForm({
       reset(defaultValues);
       setSuccessMessage("Thank you! We'll be in touch within one business day.");
       fireLeadConversion("quote-request", {
+        insuranceType: values.insuranceType,
         products: values.products,
         zip: values.zipCode,
       });
@@ -125,6 +146,8 @@ export function QuoteForm({
   });
 
   const toggleProduct = (product: QuoteProductSlug) => {
+    if (!isQuoteProductForInsuranceType(product, selectedInsuranceType)) return;
+
     const nextSelection = selectedProducts?.includes(product)
       ? selectedProducts.filter((item) => item !== product)
       : [...(selectedProducts ?? []), product];
@@ -135,18 +158,96 @@ export function QuoteForm({
     });
   };
 
+  const selectInsuranceType = (insuranceType: QuoteInsuranceType) => {
+    const compatibleProducts = (selectedProducts ?? []).filter((product) =>
+      isQuoteProductForInsuranceType(product, insuranceType),
+    );
+    const nextProducts = compatibleProducts.length
+      ? compatibleProducts
+      : [defaultQuoteProductByInsuranceType[insuranceType]];
+
+    setValue("insuranceType", insuranceType, {
+      shouldValidate: true,
+      shouldDirty: true,
+    });
+    setValue("products", nextProducts as QuoteProductSlug[], {
+      shouldValidate: true,
+      shouldDirty: true,
+    });
+
+    if (insuranceType !== "commercial") {
+      setValue("employees", undefined, {
+        shouldValidate: true,
+        shouldDirty: true,
+      });
+    }
+  };
+
   return (
     <div className="rounded-[2rem] border border-gray-100 bg-white p-6 shadow-[0_28px_70px_-50px_rgba(0,32,92,0.5)] sm:p-8">
       <form className="grid gap-6" onSubmit={onSubmit} noValidate>
         <fieldset
-          aria-describedby={errors.products ? `${formId}-products-error` : undefined}
+          aria-describedby={
+            errors.insuranceType ? `${formId}-insurance-type-error` : undefined
+          }
+          aria-required="true"
           className="min-w-0"
         >
           <legend className="text-sm font-semibold uppercase tracking-[0.22em] text-gray-600">
-            Products
+            What kind of insurance are you looking for? <span aria-hidden="true">*</span>
+          </legend>
+          <div className="mt-3 grid gap-3 sm:grid-cols-3">
+            {quoteInsuranceTypeOptions.map((option) => {
+              const selected = selectedInsuranceType === option.value;
+
+              return (
+                <label
+                  key={option.value}
+                  className={cn(
+                    "flex min-h-24 cursor-pointer flex-col justify-center rounded-2xl border px-4 py-3 transition focus-within:outline-none focus-within:ring-2 focus-within:ring-blue focus-within:ring-offset-2",
+                    selected
+                      ? "border-blue bg-blue-light text-gray-900"
+                      : "border-gray-200 text-gray-600 hover:border-blue/45 hover:text-gray-900",
+                  )}
+                >
+                  <input
+                    {...register("insuranceType")}
+                    type="radio"
+                    value={option.value}
+                    checked={selected}
+                    onChange={() => selectInsuranceType(option.value)}
+                    required
+                    className="sr-only"
+                  />
+                  <span className="text-base font-bold">{option.label}</span>
+                  <span className="mt-1 text-xs font-medium leading-5 text-gray-500">
+                    {option.description}
+                  </span>
+                </label>
+              );
+            })}
+          </div>
+          {errors.insuranceType ? (
+            <p
+              id={`${formId}-insurance-type-error`}
+              role="alert"
+              className="mt-2 text-sm text-red-hover"
+            >
+              {errors.insuranceType.message}
+            </p>
+          ) : null}
+        </fieldset>
+
+        <fieldset
+          aria-describedby={errors.products ? `${formId}-products-error` : undefined}
+          aria-required="true"
+          className="min-w-0"
+        >
+          <legend className="text-sm font-semibold uppercase tracking-[0.22em] text-gray-600">
+            Coverage needs <span aria-hidden="true">*</span>
           </legend>
           <div className="mt-3 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
-            {productSelectionOptions.map((productSlug) => {
+            {availableProductOptions.map((productSlug) => {
               const product = products.find((item) => item.slug === productSlug);
               const selected = selectedProducts?.includes(productSlug);
 
@@ -159,7 +260,7 @@ export function QuoteForm({
                   key={product.slug}
                   type="button"
                   role="checkbox"
-                  aria-checked={selected}
+                  aria-checked={Boolean(selected)}
                   onClick={() => toggleProduct(productSlug)}
                     className={cn(
                       "rounded-2xl border px-4 py-3 text-left text-sm font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2",
@@ -189,11 +290,13 @@ export function QuoteForm({
             label="First Name"
             error={errors.firstName?.message}
             inputId={`${formId}-first-name`}
+            required
           >
             <input
               {...register("firstName")}
               id={`${formId}-first-name`}
               autoComplete="given-name"
+              required
               aria-describedby={errors.firstName ? `${formId}-first-name-error` : undefined}
               aria-invalid={Boolean(errors.firstName)}
               className={inputClassName}
@@ -204,22 +307,25 @@ export function QuoteForm({
             label="Last Name"
             error={errors.lastName?.message}
             inputId={`${formId}-last-name`}
+            required
           >
             <input
               {...register("lastName")}
               id={`${formId}-last-name`}
               autoComplete="family-name"
+              required
               aria-describedby={errors.lastName ? `${formId}-last-name-error` : undefined}
               aria-invalid={Boolean(errors.lastName)}
               className={inputClassName}
               placeholder="Last name"
             />
           </Field>
-          <Field label="Phone" error={errors.phone?.message} inputId={`${formId}-phone`}>
+          <Field label="Phone" error={errors.phone?.message} inputId={`${formId}-phone`} required>
             <input
               {...register("phone")}
               id={`${formId}-phone`}
               autoComplete="tel"
+              required
               aria-describedby={errors.phone ? `${formId}-phone-error` : undefined}
               aria-invalid={Boolean(errors.phone)}
               className={inputClassName}
@@ -228,11 +334,12 @@ export function QuoteForm({
               type="tel"
             />
           </Field>
-          <Field label="Email" error={errors.email?.message} inputId={`${formId}-email`}>
+          <Field label="Email" error={errors.email?.message} inputId={`${formId}-email`} required>
             <input
               {...register("email")}
               id={`${formId}-email`}
               autoComplete="email"
+              required
               aria-describedby={errors.email ? `${formId}-email-error` : undefined}
               aria-invalid={Boolean(errors.email)}
               className={inputClassName}
@@ -256,11 +363,12 @@ export function QuoteForm({
               aria-invalid={Boolean(errors.address)}
             />
           </Field>
-          <Field label="ZIP Code" error={errors.zipCode?.message} inputId={`${formId}-zip`}>
+          <Field label="ZIP Code" error={errors.zipCode?.message} inputId={`${formId}-zip`} required>
             <input
               {...register("zipCode")}
               id={`${formId}-zip`}
               autoComplete="postal-code"
+              required
               aria-describedby={errors.zipCode ? `${formId}-zip-error` : undefined}
               aria-invalid={Boolean(errors.zipCode)}
               inputMode="numeric"
@@ -272,6 +380,7 @@ export function QuoteForm({
             label="How did you hear about us?"
             error={errors.referralSource?.message}
             inputId={`${formId}-referral-source`}
+            required
           >
             <select
               {...register("referralSource")}
@@ -280,6 +389,7 @@ export function QuoteForm({
                 errors.referralSource ? `${formId}-referral-source-error` : undefined
               }
               aria-invalid={Boolean(errors.referralSource)}
+              required
               className={inputClassName}
               defaultValue=""
             >
@@ -300,12 +410,14 @@ export function QuoteForm({
             label="Number of Employees"
             error={errors.employees?.message}
             inputId={`${formId}-employees`}
+            required
           >
             <select
               {...register("employees")}
               id={`${formId}-employees`}
               aria-describedby={errors.employees ? `${formId}-employees-error` : undefined}
               aria-invalid={Boolean(errors.employees)}
+              required
               className={inputClassName}
               defaultValue=""
             >
@@ -349,7 +461,9 @@ export function QuoteForm({
 
         <div className="grid gap-4 sm:grid-cols-[1fr_auto] sm:items-center">
           <p className="text-sm leading-7 text-gray-600">
-            We only ask for the basics up front so we can follow up quickly without making the quote process feel heavy.
+            By submitting, you ask and authorize our team to follow up by live phone call or
+            email about this specific request. This does not authorize text messages; texts are
+            optional and only sent when you select an option above.
           </p>
           <button
             type="submit"
@@ -391,16 +505,21 @@ function Field({
   label,
   error,
   inputId,
+  required = false,
   children,
 }: {
   label: string;
   error?: string;
   inputId: string;
+  required?: boolean;
   children: React.ReactNode;
 }) {
   return (
     <div className="grid gap-2 text-sm font-semibold text-gray-900">
-      <label htmlFor={inputId}>{label}</label>
+      <label htmlFor={inputId}>
+        {label}
+        {required ? <span aria-hidden="true"> *</span> : null}
+      </label>
       {children}
       {error ? (
         <span id={`${inputId}-error`} role="alert" className="text-sm font-medium text-red-hover">
