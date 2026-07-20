@@ -97,6 +97,18 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           <span>{new Date(post.publishedAt).toLocaleDateString(locale === "es" ? "es-US" : "en-US", { month: "long", day: "numeric", year: "numeric" })}</span>
           <span>•</span>
           <span>{post.readingTime}</span>
+          {post.author ? (
+            <>
+              <span>•</span>
+              {authorAgent ? (
+                <Link href={`/agents/${authorAgent.slug}`} className="font-semibold text-blue hover:underline">
+                  {t("byAuthor", { name: post.author })}
+                </Link>
+              ) : (
+                <span>{t("byAuthor", { name: post.author })}</span>
+              )}
+            </>
+          ) : null}
         </div>
         <h1 className="mt-5 font-display text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">
           {post.title}

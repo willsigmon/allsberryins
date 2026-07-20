@@ -691,6 +691,7 @@
   },
   "blogPost": {
     "backToBlog": "Back to Blog",
+    "byAuthor": "By {name}",
     "nextStep": "Next step",
     "nextStepHeading": "Want help applying this to your policy?",
     "startQuote": "Start a quote",

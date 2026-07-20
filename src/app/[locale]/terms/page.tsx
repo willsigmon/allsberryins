@@ -16,6 +16,7 @@ export async function generateMetadata({ params }: TermsPageProps): Promise<Meta
     description: "Terms and conditions for using Allsberry Insurance Agency services.",
     path: "/terms",
     locale,
+    localizeAlternates: false,
   });
 }
 

@@ -16,6 +16,7 @@ export async function generateMetadata({ params }: PrivacyPageProps): Promise<Me
     description: "How Allsberry Insurance Agency handles your personal information.",
     path: "/privacy",
     locale,
+    localizeAlternates: false,
   });
 }
 
