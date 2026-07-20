@@ -2,16 +2,22 @@ import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
 
 import { Link } from "@/i18n/navigation";
+import { createPageMetadata } from "@/lib/metadata";
 import { agency } from "@/lib/site-data";
 
 type TermsPageProps = {
   params: Promise<{ locale: string }>;
 };
 
-export const metadata: Metadata = {
-  title: "Terms & Conditions",
-  description: "Terms and conditions for using Allsberry Insurance Agency services.",
-};
+export async function generateMetadata({ params }: TermsPageProps): Promise<Metadata> {
+  const { locale } = await params;
+  return createPageMetadata({
+    title: "Terms & Conditions",
+    description: "Terms and conditions for using Allsberry Insurance Agency services.",
+    path: "/terms",
+    locale,
+  });
+}
 
 export default async function TermsPage({ params }: TermsPageProps) {
   const { locale } = await params;
