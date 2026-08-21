@@ -27,4 +27,4 @@ cleanup() {
 
 trap cleanup EXIT
 
-npx next build
+npx next build --webpack

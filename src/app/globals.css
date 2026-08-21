@@ -177,6 +177,14 @@ textarea {
   background: rgba(0, 102, 179, 0.16);
 }
 
+.campaign-grid {
+  background-image:
+    linear-gradient(rgba(0, 32, 92, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 32, 92, 0.045) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: linear-gradient(to bottom, black, transparent 82%);
+}
+
 :root[data-theme="dark"] ::selection {
   background: rgba(93, 167, 223, 0.34);
 }
