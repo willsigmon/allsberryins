@@ -8,12 +8,6 @@ import { Link } from "@/i18n/navigation";
 import { allsberryCampaign } from "@/lib/allsberry-campaign";
 import { agency } from "@/lib/site-data";
 
-declare global {
-  interface Window {
-    fbq?: (action: string, event: string, parameters?: Record<string, string>) => void;
-  }
-}
-
 type AllsberryAgencyCampaignProps = {
   googleAdsSendTo?: string;
 };
@@ -35,10 +29,6 @@ function reportCallIntent(location: string, googleAdsSendTo?: string) {
     window.gtag?.("event", "conversion", { send_to: googleAdsSendTo });
   }
 
-  window.fbq?.("track", "Lead", {
-    content_name: "phone_call",
-    content_category: location,
-  });
 }
 
 function CallLink({

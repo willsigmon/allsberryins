@@ -77,7 +77,7 @@
 - **Asset paths / design files:** `public/media/brand/`; `public/media/agents/`; `public/media/farmers/`; `public/media/carriers/`; no Figma or formal design-source file was found during this review.
 - **Decisions confirmed by:** Project owner confirmed the recommended campaign direction on 2026-08-21. The implementation uses the Allsberry system, keeps the ad route `noindex`, links to the existing agency legal pages, and avoids new or altered Farmers marks.
 - **Open partner-controlled inputs:**
-  1. Frank should provide or explicitly waive the Google Ads conversion ID/label and Meta Pixel ID. The route supports environment-configured values without hardcoding them.
+  1. Frank supplied Google Ads tag `AW-695248855` and a Meta Pixel ID on 2026-08-21; both are configured in Vercel Production. Frank's updated package specifies Meta `PageView` only, so the page does not emit a Meta `Lead` event for call clicks. A Google Ads conversion label was not supplied, so the Google tag loads but no direct Google Ads conversion event is emitted.
   2. Erin or the appropriate Farmers reviewer must approve any future expansion of Farmers marks, co-branding, or campaign-specific compliance language.
   3. The deployed production origin must be checked after release before campaign traffic is switched over.
 - **Confidence / evidence gaps:** Brand direction is strongly grounded in the current application, but co-branding authority, campaign legal ownership, final domain, tracking configuration, and campaign-layout intent are not confirmed.
