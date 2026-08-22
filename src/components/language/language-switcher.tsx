@@ -161,6 +161,10 @@ export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
     router.replace(pathname, { locale: next });
   };
 
+  // This paid-campaign route intentionally has one owner-approved English variant.
+  // Do not offer a locale destination that does not contain translated content.
+  if (pathname === "/allsberry-agency") return null;
+
   return (
     <div ref={panelRef} className="relative">
       <button

@@ -79,8 +79,7 @@
 - **Open partner-controlled inputs:**
   1. Frank supplied Google Ads tag `AW-695248855` and a Meta Pixel ID on 2026-08-21; both are configured in Vercel Production. Frank's updated package specifies Meta `PageView` only, so the page does not emit a Meta `Lead` event for call clicks. A Google Ads conversion label was not supplied, so the Google tag loads but no direct Google Ads conversion event is emitted.
   2. Erin or the appropriate Farmers reviewer must approve any future expansion of Farmers marks, co-branding, or campaign-specific compliance language.
-  3. The deployed production origin must be checked after release before campaign traffic is switched over.
-- **Confidence / evidence gaps:** Brand direction is strongly grounded in the current application, but co-branding authority, campaign legal ownership, final domain, tracking configuration, and campaign-layout intent are not confirmed.
+- **Confidence / evidence gaps:** The production domain, campaign layout, noindex strategy, and supplied tracking identifiers are confirmed and deployed. Future Farmers co-branding remains subject to the appropriate Farmers reviewer.
 - **Change rule:** Proposed brand changes must update this file, state the reason, and receive Erin's or the designated owner's confirmation before implementation. Tracking or compliance changes also require the responsible campaign owner to confirm them.
 
 ## Approval checklist

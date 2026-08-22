@@ -10,6 +10,29 @@ const TEAM_ATTRIBUTION_PASSWORD = process.env.TEAM_ATTRIBUTION_PASSWORD;
 
 const intlMiddleware = createIntlMiddleware(routing);
 
+function campaignRoutingResponse(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+  const canonicalPath = "/allsberry-agency";
+
+  if (pathname === "/es/allsberry-agency" || pathname === "/en/allsberry-agency") {
+    const redirectUrl = request.nextUrl.clone();
+    redirectUrl.pathname = canonicalPath;
+    return NextResponse.redirect(redirectUrl);
+  }
+
+  if (pathname !== canonicalPath) return null;
+
+  const rewriteUrl = request.nextUrl.clone();
+  rewriteUrl.pathname = `/en${canonicalPath}`;
+  const response = NextResponse.rewrite(rewriteUrl);
+  const canonicalUrl = new URL(canonicalPath, request.url).toString();
+  response.headers.set(
+    "link",
+    `<${canonicalUrl}>; rel="alternate"; hreflang="en", <${canonicalUrl}>; rel="alternate"; hreflang="x-default"`,
+  );
+  return response;
+}
+
 function isProtectionEnabled() {
   return Boolean(TEAM_ATTRIBUTION_USERNAME && TEAM_ATTRIBUTION_PASSWORD);
 }
@@ -63,6 +86,9 @@ export function proxy(request: NextRequest) {
     url.port = "";
     return NextResponse.redirect(url, 301);
   }
+
+  const campaignResponse = campaignRoutingResponse(request);
+  if (campaignResponse) return campaignResponse;
 
   if (request.nextUrl.pathname.startsWith("/team-attribution")) {
     if (!isProtectionEnabled()) {

@@ -20,7 +20,7 @@ export default async function PrivacyPage({ params }: PrivacyPageProps) {
     <main className="mx-auto max-w-3xl px-6 py-16">
       <Link href="/" className="text-sm text-muted-foreground hover:text-foreground">&larr; Back</Link>
       <h1 className="mt-4 text-3xl font-bold text-foreground">Privacy Policy</h1>
-      <p className="mt-2 text-sm text-muted-foreground">Last updated: June 30, 2026</p>
+      <p className="mt-2 text-sm text-muted-foreground">Last updated: August 22, 2026</p>
 
       <div className="mt-8 space-y-6 text-muted-foreground leading-relaxed">
         <section>
@@ -48,6 +48,10 @@ export default async function PrivacyPage({ params }: PrivacyPageProps) {
             <li>Name, email, phone number, and mailing address</li>
             <li>Insurance coverage details and policy preferences</li>
             <li>Vehicle, property, or business information for quoting</li>
+            <li>
+              Technical and usage information such as IP address, browser and device details,
+              referring URL, pages viewed, and campaign interactions
+            </li>
           </ul>
         </section>
 
@@ -58,6 +62,46 @@ export default async function PrivacyPage({ params }: PrivacyPageProps) {
             <li>Service your existing policies</li>
             <li>Send renewal reminders and coverage updates</li>
           </ul>
+        </section>
+
+        <section>
+          <h2 className="text-lg font-semibold text-foreground">Website Analytics and Advertising</h2>
+          <p>
+            We use limited website measurement tools to understand whether our advertising is
+            effective and how visitors reach and use our site. On campaign pages, CallRail may
+            replace the displayed phone number and associate calls with the advertising source that
+            led to the page. Google Ads may measure page visits and advertising performance. The
+            Meta Pixel may send a PageView event to Meta for advertising measurement and audience
+            services. These providers may receive technical information such as your IP address,
+            browser or device details, referring URL, and page activity under their own privacy
+            terms.
+          </p>
+          <p className="mt-3">
+            We do not sell personal information for money. Some advertising-related disclosures may
+            be considered a &ldquo;sale&rdquo; or &ldquo;sharing&rdquo; for cross-context behavioral
+            advertising under California law. When your browser sends an enabled Global Privacy
+            Control signal or a Do Not Track signal, this site does not load Google Ads, Meta Pixel,
+            or CallRail campaign tracking for that browser visit. You can also manage advertising
+            preferences through{" "}
+            <a
+              href="https://myadcenter.google.com/"
+              className="text-primary underline"
+              rel="noreferrer"
+              target="_blank"
+            >
+              Google My Ad Center
+            </a>{" "}
+            and the{" "}
+            <a
+              href="https://www.facebook.com/adpreferences/ad_settings"
+              className="text-primary underline"
+              rel="noreferrer"
+              target="_blank"
+            >
+              Meta Ad Preferences
+            </a>
+            .
+          </p>
         </section>
 
         <section>
@@ -109,12 +153,24 @@ export default async function PrivacyPage({ params }: PrivacyPageProps) {
 
         <section>
           <h2 className="text-lg font-semibold text-foreground">Data Sharing</h2>
-          <p>We share information with insurance carriers solely to obtain quotes and bind coverage on your behalf. We do not sell your personal information.</p>
+          <p>
+            We share quote and policy information with insurance carriers as needed to obtain quotes,
+            bind coverage, and service policies on your behalf. We also use service providers that
+            support website hosting, communications, analytics, call attribution, and advertising as
+            described above. We do not sell personal information for money.
+          </p>
         </section>
 
         <section>
           <h2 className="text-lg font-semibold text-foreground">Your Rights</h2>
-          <p>You may request access to, correction of, or deletion of your data by contacting us at <a href={agency.emailHref} className="text-primary underline">{agency.email}</a>.</p>
+          <p>
+            Depending on where you live, you may have rights to request access to, correction of, or
+            deletion of your personal information, and to opt out of its sale or sharing. Submit a
+            request by contacting us at{" "}
+            <a href={agency.emailHref} className="text-primary underline">{agency.email}</a>. We will
+            verify and respond to requests as required by applicable law and will not discriminate
+            against you for exercising a privacy right.
+          </p>
         </section>
 
         <section>

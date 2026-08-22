@@ -36,14 +36,14 @@ gtag('js', new Date());
 ${configLines}`;
 
   return (
-    <>
-      <Script id="gtag-loader" src={loaderSrc} strategy="afterInteractive" />
-      <Script
-        id="gtag-init"
-        strategy="afterInteractive"
-      >
-        {initScript}
-      </Script>
-    </>
+    <Script id="gtag-consent-aware-loader" strategy="afterInteractive">
+      {`if (navigator.globalPrivacyControl !== true && navigator.doNotTrack !== '1') {
+  var googleTagScript = document.createElement('script');
+  googleTagScript.async = true;
+  googleTagScript.src = ${JSON.stringify(loaderSrc)};
+  document.head.appendChild(googleTagScript);
+  ${initScript}
+}`}
+    </Script>
   );
 }

@@ -8,8 +8,16 @@ import { Link } from "@/i18n/navigation";
 import { allsberryCampaign } from "@/lib/allsberry-campaign";
 import { agency } from "@/lib/site-data";
 
+declare global {
+  interface Navigator {
+    readonly globalPrivacyControl?: boolean;
+  }
+}
+
 type AllsberryAgencyCampaignProps = {
+  callRailScriptUrl?: string;
   googleAdsSendTo?: string;
+  metaPixelId?: string;
 };
 
 const carrierLogos = [
@@ -58,7 +66,15 @@ function CallLink({
   );
 }
 
-export function AllsberryAgencyCampaign({ googleAdsSendTo }: AllsberryAgencyCampaignProps) {
+function allowsCampaignTracking() {
+  return navigator.globalPrivacyControl !== true && navigator.doNotTrack !== "1";
+}
+
+export function AllsberryAgencyCampaign({
+  callRailScriptUrl,
+  googleAdsSendTo,
+  metaPixelId,
+}: AllsberryAgencyCampaignProps) {
   const heroCallRef = useRef<HTMLDivElement>(null);
   const [showStickyCall, setShowStickyCall] = useState(false);
 
@@ -73,6 +89,49 @@ export function AllsberryAgencyCampaign({ googleAdsSendTo }: AllsberryAgencyCamp
     observer.observe(target);
     return () => observer.disconnect();
   }, []);
+
+  useEffect(() => {
+    if (!callRailScriptUrl || !allowsCampaignTracking()) {
+      return;
+    }
+
+    const existingScript = document.getElementById("allsberry-callrail");
+    if (existingScript) return;
+
+    const script = document.createElement("script");
+    script.id = "allsberry-callrail";
+    script.async = true;
+    script.src = callRailScriptUrl;
+    document.head.appendChild(script);
+
+    return () => script.remove();
+  }, [callRailScriptUrl]);
+
+  useEffect(() => {
+    if (!metaPixelId || !allowsCampaignTracking()) {
+      return;
+    }
+
+    const existingPixel = document.getElementById("allsberry-meta-pixel");
+    if (existingPixel) return;
+
+    const script = document.createElement("script");
+    script.id = "allsberry-meta-pixel";
+    script.async = true;
+    script.src = "https://connect.facebook.net/en_US/fbevents.js";
+    document.head.appendChild(script);
+
+    const pixelQueue = function (...args: unknown[]) {
+      pixelQueue.queue.push(args);
+    };
+    pixelQueue.queue = [] as unknown[][];
+    Object.assign(pixelQueue, { loaded: true, version: "2.0" });
+    (window as typeof window & { fbq?: typeof pixelQueue }).fbq = pixelQueue;
+    pixelQueue("init", metaPixelId);
+    pixelQueue("track", "PageView");
+
+    return () => script.remove();
+  }, [metaPixelId]);
 
   return (
     <div className="campaign-shell relative overflow-hidden bg-[#f7f9fc] text-gray-900">
@@ -240,18 +299,17 @@ export function AllsberryAgencyCampaign({ googleAdsSendTo }: AllsberryAgencyCamp
         </p>
       </section>
 
-      <div
-        className={`fixed inset-x-0 bottom-0 z-50 border-t border-gray-200 bg-white/95 px-4 py-3 shadow-[0_-18px_55px_-35px_rgba(0,32,92,0.7)] backdrop-blur-xl transition duration-300 motion-reduce:transition-none ${showStickyCall ? "translate-y-0" : "translate-y-full"}`}
-        aria-hidden={!showStickyCall}
-      >
-        <div className="mx-auto flex max-w-md items-center justify-between gap-3">
-          <div className="min-w-0">
-            <p className="truncate text-sm font-extrabold text-gray-900">Talk with an Allsberry agent</p>
-            <p className="text-xs text-gray-500">{allsberryCampaign.phone}</p>
+      {showStickyCall ? (
+        <div className="fixed inset-x-0 bottom-0 z-50 border-t border-gray-200 bg-white/95 px-4 py-3 shadow-[0_-18px_55px_-35px_rgba(0,32,92,0.7)] backdrop-blur-xl">
+          <div className="mx-auto flex max-w-md items-center justify-between gap-3">
+            <div className="min-w-0">
+              <p className="truncate text-sm font-extrabold text-gray-900">Talk with an Allsberry agent</p>
+              <p className="text-xs text-gray-500">{allsberryCampaign.phone}</p>
+            </div>
+            <CallLink location="sticky" googleAdsSendTo={googleAdsSendTo} compact />
           </div>
-          <CallLink location="sticky" googleAdsSendTo={googleAdsSendTo} compact />
         </div>
-      </div>
+      ) : null}
     </div>
   );
 }
