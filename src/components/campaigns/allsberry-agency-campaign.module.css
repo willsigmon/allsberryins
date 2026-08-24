@@ -282,6 +282,8 @@
 }
 
 .heroShell {
+  position: relative;
+  overflow: hidden;
   padding: 38px 16px 34px;
   border-bottom: 1px solid rgb(75 21 40 / 10%);
   background: var(--campaign-pink);
@@ -289,6 +291,7 @@
 
 .heroCard {
   position: relative;
+  z-index: 1;
   display: flex;
   width: 100%;
   flex-direction: column;
@@ -527,6 +530,7 @@
 
 .callRow {
   display: flex;
+  width: 100%;
   min-height: 84px;
   align-items: center;
   gap: 13px;

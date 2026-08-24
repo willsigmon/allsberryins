@@ -10,6 +10,7 @@ import { Link } from "@/i18n/navigation";
 import { agency, reviews } from "@/lib/site-data";
 import { allsberryCampaign } from "@/lib/allsberry-campaign";
 
+import motionStyles from "./allsberry-agency-motion.module.css";
 import styles from "./allsberry-agency-campaign.module.css";
 
 declare global {
@@ -30,6 +31,7 @@ type QuoteOption = (typeof allsberryCampaign.quoteOptions)[number] & {
 };
 
 const campaignReviews = reviews.filter((review) => review.name !== "Local restaurant owner");
+const heroDustMotes = Array.from({ length: 12 }, (_, index) => index);
 
 function allowsCampaignTracking() {
   return navigator.globalPrivacyControl !== true && navigator.doNotTrack !== "1";
@@ -55,13 +57,30 @@ function CallAction({
   googleAdsSendTo?: string;
   sticky?: boolean;
 }) {
+  const [isPopping, setIsPopping] = useState(false);
+  const className = [
+    styles.heroCta,
+    motionStyles.ctaInteractive,
+    sticky ? styles.stickyCta + " " + motionStyles.stickyInteractive : "",
+    isPopping ? motionStyles.ctaPopping : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
   return (
     <a
       href={allsberryCampaign.phoneHref}
       data-campaign-call
       data-cta={location}
+      onPointerDown={() => setIsPopping(true)}
+      onKeyDown={(event) => {
+        if (event.key === "Enter") setIsPopping(true);
+      }}
       onClick={() => reportCallIntent(location, googleAdsSendTo)}
-      className={sticky ? styles.heroCta + " " + styles.stickyCta : styles.heroCta}
+      onAnimationEnd={(event) => {
+        if (event.target === event.currentTarget) setIsPopping(false);
+      }}
+      className={className}
       aria-label={"Call Allsberry Insurance Agency at " + allsberryCampaign.phone}
     >
       <Phone className={styles.ctaIcon} aria-hidden="true" />
@@ -277,6 +296,11 @@ export function AllsberryAgencyCampaign({
 
       <div id="campaign-main">
         <div className={styles.heroShell}>
+          <div className={motionStyles.heroDust} aria-hidden="true">
+            {heroDustMotes.map((mote) => (
+              <span key={mote} className={motionStyles.heroDustMote} />
+            ))}
+          </div>
           <section className={styles.heroCard} aria-labelledby="campaign-hero-heading">
             <div className={styles.heroCenter}>
               <h1 ref={heroHeadingRef} id="campaign-hero-heading" className={styles.heroTitle}>
@@ -308,21 +332,55 @@ export function AllsberryAgencyCampaign({
         <section className={styles.section} aria-labelledby="carrier-heading">
           <div className={styles.wrap}>
             <h2 id="carrier-heading" className="sr-only">Carrier options</h2>
-            <p className={styles.carriersText}>
+            <motion.p
+              initial={prefersReducedMotion ? false : { opacity: 0, y: 14 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.7 }}
+              transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.42, ease: "easeOut" }}
+              className={styles.carriersText}
+            >
               We shop your home rate with <strong>Top Rated Home Insurance Carriers</strong>.
-            </p>
+            </motion.p>
             <div className={styles.carrierStrip}>
-              {allsberryCampaign.carrierLogos.map((carrier) => (
-                <Image
-                  key={carrier.name}
-                  src={carrier.src}
-                  alt={carrier.name}
-                  width={carrier.width}
-                  height={carrier.height}
-                  loading="lazy"
-                  className={styles.carrierLogo}
-                />
-              ))}
+              {allsberryCampaign.carrierLogos.map((carrier, index) => {
+                const centerOffset = index - (allsberryCampaign.carrierLogos.length - 1) / 2;
+
+                return (
+                  <motion.div
+                    key={carrier.name}
+                    initial={prefersReducedMotion
+                      ? false
+                      : {
+                          opacity: 0,
+                          x: centerOffset * 54,
+                          y: 16,
+                          scale: 0.86,
+                          rotate: centerOffset * 2.2,
+                        }}
+                    whileInView={{ opacity: 1, x: 0, y: 0, scale: 1, rotate: 0 }}
+                    viewport={{ once: true, amount: 0.75 }}
+                    transition={prefersReducedMotion
+                      ? { duration: 0 }
+                      : {
+                          type: "spring",
+                          stiffness: 190,
+                          damping: 17,
+                          mass: 0.78,
+                          delay: index * 0.07,
+                        }}
+                    className={motionStyles.carrierLogoMotion}
+                  >
+                    <Image
+                      src={carrier.src}
+                      alt={carrier.name}
+                      width={carrier.width}
+                      height={carrier.height}
+                      loading="lazy"
+                      className={styles.carrierLogo}
+                    />
+                  </motion.div>
+                );
+              })}
             </div>
             <p className={styles.carrierNote}>
               Carrier availability and eligibility vary by applicant, property, underwriting, and location.
@@ -332,15 +390,37 @@ export function AllsberryAgencyCampaign({
 
         <section className={styles.section} aria-labelledby="quote-heading">
           <div className={styles.wrap}>
-            <h2 id="quote-heading" className={styles.sectionHeading}>What do you need a quote for?</h2>
-            <p className={styles.sectionDescription}>Pick one and we&apos;ll pick up.</p>
+            <motion.div
+              initial={prefersReducedMotion ? false : { opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.7 }}
+              transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.42, ease: "easeOut" }}
+            >
+              <h2 id="quote-heading" className={styles.sectionHeading}>What do you need a quote for?</h2>
+              <p className={styles.sectionDescription}>Pick one and we&apos;ll pick up.</p>
+            </motion.div>
             <div className={styles.callRows}>
-              {allsberryCampaign.quoteOptions.map((option) => (
-                <QuoteRow
+              {allsberryCampaign.quoteOptions.map((option, index) => (
+                <motion.div
                   key={option.title}
-                  option={option}
-                  googleAdsSendTo={googleAdsSendTo}
-                />
+                  initial={prefersReducedMotion ? false : { opacity: 0, y: 28, scale: 0.97 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  viewport={{ once: true, amount: 0.45 }}
+                  transition={prefersReducedMotion
+                    ? { duration: 0 }
+                    : {
+                        type: "spring",
+                        stiffness: 220,
+                        damping: 21,
+                        delay: index * 0.09,
+                      }}
+                  className={motionStyles.callRowMotion}
+                >
+                  <QuoteRow
+                    option={option}
+                    googleAdsSendTo={googleAdsSendTo}
+                  />
+                </motion.div>
               ))}
             </div>
           </div>
@@ -366,7 +446,15 @@ export function AllsberryAgencyCampaign({
         <section className={styles.section} aria-labelledby="agent-heading">
           <div className={styles.wrap}>
             <h2 id="agent-heading" className="sr-only">Your local Allsberry agent</h2>
-            <article className={styles.agentCard}>
+            <motion.article
+              initial={prefersReducedMotion ? false : { opacity: 0, y: 26, scale: 0.97 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true, amount: 0.4 }}
+              transition={prefersReducedMotion
+                ? { duration: 0 }
+                : { type: "spring", stiffness: 190, damping: 20 }}
+              className={styles.agentCard}
+            >
               <Image
                 src={allsberryCampaign.agent.image}
                 alt="Erin Allsberry, licensed insurance agent in Corona, California"
@@ -380,7 +468,7 @@ export function AllsberryAgencyCampaign({
                 <div className={styles.agentRole}>{allsberryCampaign.agent.role}</div>
                 <p className={styles.agentCopy}>{allsberryCampaign.agent.description}</p>
               </div>
-            </article>
+            </motion.article>
           </div>
         </section>
 

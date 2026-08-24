@@ -1,0 +1,241 @@
+@keyframes dustDrift {
+  from {
+    opacity: var(--dust-opacity-start);
+    transform: translate3d(0, 0, 0) scale(0.88);
+  }
+
+  46% {
+    opacity: var(--dust-opacity-peak);
+  }
+
+  to {
+    opacity: var(--dust-opacity-end);
+    transform: translate3d(var(--dust-x), var(--dust-y), 0) scale(1.12);
+  }
+}
+
+@keyframes ctaPoke {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+    box-shadow: var(--cta-shadow-rest);
+  }
+
+  38% {
+    transform: translateY(3px) scale(0.965);
+    box-shadow: var(--cta-shadow-pressed);
+  }
+
+  72% {
+    transform: translateY(-1px) scale(1.028);
+    box-shadow: var(--cta-shadow-pop);
+  }
+}
+
+.heroDust {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.heroDustMote {
+  --dust-x: 18px;
+  --dust-y: -38px;
+  --dust-opacity-start: 0.08;
+  --dust-opacity-peak: 0.24;
+  --dust-opacity-end: 0.04;
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 72%);
+  filter: blur(0.35px);
+  animation: dustDrift 18s ease-in-out both;
+}
+
+.heroDustMote:nth-child(1) {
+  top: 12%;
+  left: 8%;
+  width: 3px;
+  height: 3px;
+  animation-duration: 16s;
+}
+
+.heroDustMote:nth-child(2) {
+  --dust-x: -22px;
+  --dust-y: -46px;
+  top: 28%;
+  left: 18%;
+  animation-delay: 1.2s;
+  animation-duration: 19s;
+}
+
+.heroDustMote:nth-child(3) {
+  --dust-x: 28px;
+  --dust-y: -32px;
+  top: 52%;
+  left: 12%;
+  width: 2px;
+  height: 2px;
+  animation-delay: 0.4s;
+  animation-duration: 17s;
+}
+
+.heroDustMote:nth-child(4) {
+  --dust-x: -15px;
+  --dust-y: -54px;
+  top: 78%;
+  left: 23%;
+  width: 5px;
+  height: 5px;
+  animation-delay: 2.6s;
+  animation-duration: 21s;
+}
+
+.heroDustMote:nth-child(5) {
+  --dust-x: 24px;
+  --dust-y: -42px;
+  top: 18%;
+  left: 38%;
+  animation-delay: 0.8s;
+  animation-duration: 20s;
+}
+
+.heroDustMote:nth-child(6) {
+  --dust-x: -28px;
+  --dust-y: -36px;
+  top: 66%;
+  left: 43%;
+  width: 3px;
+  height: 3px;
+  animation-delay: 3.1s;
+  animation-duration: 18s;
+}
+
+.heroDustMote:nth-child(7) {
+  --dust-x: 16px;
+  --dust-y: -58px;
+  top: 35%;
+  left: 57%;
+  width: 2px;
+  height: 2px;
+  animation-delay: 1.9s;
+  animation-duration: 22s;
+}
+
+.heroDustMote:nth-child(8) {
+  --dust-x: -18px;
+  --dust-y: -34px;
+  top: 84%;
+  left: 64%;
+  animation-delay: 0.2s;
+  animation-duration: 17s;
+}
+
+.heroDustMote:nth-child(9) {
+  --dust-x: 26px;
+  --dust-y: -48px;
+  top: 15%;
+  left: 72%;
+  width: 5px;
+  height: 5px;
+  animation-delay: 2.2s;
+  animation-duration: 20s;
+}
+
+.heroDustMote:nth-child(10) {
+  --dust-x: -30px;
+  --dust-y: -40px;
+  top: 48%;
+  left: 81%;
+  width: 3px;
+  height: 3px;
+  animation-delay: 1s;
+  animation-duration: 18s;
+}
+
+.heroDustMote:nth-child(11) {
+  --dust-x: 14px;
+  --dust-y: -52px;
+  top: 72%;
+  left: 88%;
+  width: 2px;
+  height: 2px;
+  animation-delay: 2.8s;
+  animation-duration: 21s;
+}
+
+.heroDustMote:nth-child(12) {
+  --dust-x: -20px;
+  --dust-y: -30px;
+  top: 90%;
+  left: 52%;
+  animation-delay: 1.5s;
+  animation-duration: 16s;
+}
+
+.ctaInteractive {
+  --cta-shadow-rest: 0 10px 30px rgb(10 44 99 / 34%);
+  --cta-shadow-pressed: 0 3px 9px rgb(10 44 99 / 24%);
+  --cta-shadow-pop: 0 14px 34px rgb(10 44 99 / 38%);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.ctaInteractive::before {
+  position: absolute;
+  z-index: 0;
+  top: -30%;
+  bottom: -30%;
+  left: -48%;
+  width: 34%;
+  transform: translateX(-170%) skewX(-18deg);
+  background: linear-gradient(90deg, transparent, rgb(255 255 255 / 22%), transparent);
+  content: "";
+  pointer-events: none;
+  transition: transform 520ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.ctaInteractive > * {
+  position: relative;
+  z-index: 1;
+}
+
+.ctaInteractive:hover::before {
+  transform: translateX(610%) skewX(-18deg);
+}
+
+.stickyInteractive {
+  --cta-shadow-rest: 0 6px 20px rgb(10 44 99 / 30%);
+  --cta-shadow-pressed: 0 2px 8px rgb(10 44 99 / 22%);
+  --cta-shadow-pop: 0 10px 24px rgb(10 44 99 / 34%);
+}
+
+.ctaInteractive.ctaPopping {
+  animation: ctaPoke 0.38s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.carrierLogoMotion {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-origin: center;
+}
+
+.callRowMotion {
+  width: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heroDustMote {
+    opacity: 0.08;
+    animation: none !important;
+  }
+
+  .ctaInteractive::before {
+    transition: none;
+  }
+}
