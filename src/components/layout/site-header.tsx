@@ -9,6 +9,7 @@ import { LanguageSwitcher } from "@/components/language/language-switcher";
 import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { Link, usePathname } from "@/i18n/navigation";
 import { haptic, press, tap } from "@/lib/haptics";
+import { allsberryCampaign } from "@/lib/allsberry-campaign";
 import { agency } from "@/lib/site-data";
 import { cn } from "@/lib/utils";
 
@@ -26,6 +27,11 @@ export function SiteHeader() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  if (pathname === allsberryCampaign.path) {
+    return null;
+  }
+
   const elevatedHeader = pathname !== "/" || scrolled || menuOpen;
 
   const navigation = [

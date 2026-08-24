@@ -4,15 +4,22 @@ import Image from "next/image";
 import { Facebook, Instagram, Lock, Mail, MapPin, MessageSquare, Phone, ShieldCheck } from "lucide-react";
 import { useTranslations } from "next-intl";
 
-import { Link } from "@/i18n/navigation";
+import { Link, usePathname } from "@/i18n/navigation";
+import { allsberryCampaign } from "@/lib/allsberry-campaign";
 import { tap } from "@/lib/haptics";
 import { agency } from "@/lib/site-data";
 
 export function SiteFooter() {
+  const pathname = usePathname();
   const t = useTranslations("footer");
   const tCommon = useTranslations("common");
   const tNav = useTranslations("nav");
   const tCta = useTranslations("cta");
+  const tProducts = useTranslations("products");
+
+  if (pathname === allsberryCampaign.path) {
+    return null;
+  }
 
   const quickLinks = [
     { label: tCta("getQuote"), href: "/quote" as const },
@@ -28,8 +35,6 @@ export function SiteFooter() {
     { key: "workers-comp", href: "/quote?product=workers-comp" },
     { key: "life", href: "/quote?product=life" },
   ];
-
-  const tProducts = useTranslations("products");
 
   return (
     <footer className="footer-mesh text-white">

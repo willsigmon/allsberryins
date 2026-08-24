@@ -43,6 +43,7 @@
 - **Reference 2:** Official Erin Allsberry Farmers profile (`https://agents.farmers.com/ca/corona/erin-allsberry/`) — use real local leadership, verifiable recognition, and Farmers relationship cues as trust evidence rather than decorative co-branding.
 - **Reference 3:** Supplied Ricochet campaign page (`allsberry-agency (1).zip`, received 2026-08-20) — retain its narrow call-first conversion intent and campaign-number tracking, but not its source-domain canonicals, generic comparison-site framing, placeholder ad pixels, or unapproved legal language.
 - **Anti-reference:** `homeinsurancecompare.net/allsberry-agency/` — do not reproduce an anonymous comparison-funnel aesthetic or ownership ambiguity on the Allsberry domain.
+- **Campaign-specific approved exception (2026-08-24):** Erin explicitly approved matching Frank's supplied pink Farmers campaign template exactly for `/allsberry-agency`. This is a route-specific paid-campaign art direction, not a replacement for the broader Allsberry site system: retain Allsberry ownership, the Allsberry-domain canonical, the route-level `noindex`, the maintained legal pages, and the approved CallRail/Google/Meta behavior. Do not copy the source domain, its legal pages, or unresolved partner-controlled tracking values.
 - **Design-tool note:** No Mobbin, Magic/21st.dev, Figma, or other external design reference was supplied or available in this review; the references above are the verified project and partner sources.
 - **Art direction in one sentence:** A bright, locally grounded insurance experience where real people, clear choices, and Farmers-compatible trust cues feel more prominent than advertising technology.
 - **Logo rules:** Use repository-owned Allsberry marks from `public/media/brand/`; preserve aspect ratio and clear space; favor full agency marks when ownership must be explicit; do not redraw, recolor, or combine the Allsberry and Farmers marks into a new lockup; any Farmers mark usage must follow confirmed Farmers compliance requirements.
@@ -81,6 +82,7 @@
   2. Erin or the appropriate Farmers reviewer must approve any future expansion of Farmers marks, co-branding, or campaign-specific compliance language.
 - **Confidence / evidence gaps:** The production domain, campaign layout, noindex strategy, and supplied tracking identifiers are confirmed and deployed. Future Farmers co-branding remains subject to the appropriate Farmers reviewer.
 - **Change rule:** Proposed brand changes must update this file, state the reason, and receive Erin's or the designated owner's confirmation before implementation. Tracking or compliance changes also require the responsible campaign owner to confirm them.
+- **Latest campaign approval:** Erin's 2026-08-24 reply approved making the campaign page look exactly like Frank's supplied template; Brahm confirmed the supplied campaign information should be plugged in. Implementation may proceed within the route-specific exception above, followed by production campaign QA.
 
 ## Approval checklist
 

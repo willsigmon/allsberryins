@@ -1,6 +1,6 @@
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { DM_Sans, Plus_Jakarta_Sans } from "next/font/google";
+import { Caveat, DM_Sans, Inter, Plus_Jakarta_Sans } from "next/font/google";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
@@ -31,6 +31,20 @@ const plusJakartaSans = Plus_Jakarta_Sans({
   display: "swap",
 });
 
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
+const caveat = Caveat({
+  subsets: ["latin"],
+  weight: ["500", "600"],
+  variable: "--font-caveat",
+  display: "swap",
+});
+
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
@@ -57,7 +71,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
         <GoogleAnalytics />
       </head>
       <body
-        className={`${dmSans.variable} ${plusJakartaSans.variable} bg-white font-sans text-gray-600 antialiased`}
+        className={`${dmSans.variable} ${plusJakartaSans.variable} ${inter.variable} ${caveat.variable} bg-white font-sans text-gray-600 antialiased`}
       >
         <NextIntlClientProvider>
           <SkipLink />
