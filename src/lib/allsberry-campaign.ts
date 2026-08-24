@@ -17,10 +17,30 @@ export const allsberryCampaign = {
     reviewCount: "147",
   },
   carrierLogos: [
-    { name: "Farmers Insurance", src: "/media/carriers/farmers.png" },
-    { name: "Bristol West", src: "/media/carriers/bristol-west.png" },
-    { name: "Foremost Insurance", src: "/media/carriers/foremost.png" },
-    { name: "Progressive", src: "/media/carriers/progressive.png" },
+    {
+      name: "Farmers Insurance",
+      src: "/media/campaign/carriers/farmers.png",
+      width: 1476,
+      height: 802,
+    },
+    {
+      name: "Bristol West",
+      src: "/media/campaign/carriers/bristol-west.png",
+      width: 400,
+      height: 400,
+    },
+    {
+      name: "Foremost Insurance",
+      src: "/media/campaign/carriers/foremost.png",
+      width: 465,
+      height: 465,
+    },
+    {
+      name: "Progressive",
+      src: "/media/campaign/carriers/progressive.png",
+      width: 540,
+      height: 508,
+    },
   ],
   quoteOptions: [
     {

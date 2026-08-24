@@ -317,8 +317,8 @@ export function AllsberryAgencyCampaign({
                   key={carrier.name}
                   src={carrier.src}
                   alt={carrier.name}
-                  width={160}
-                  height={44}
+                  width={carrier.width}
+                  height={carrier.height}
                   loading="lazy"
                   className={styles.carrierLogo}
                 />
