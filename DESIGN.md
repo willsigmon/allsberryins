@@ -44,7 +44,7 @@ Mobbin is used here as a visual reference only. No Magic UI, Figma, or external 
   },
   "spacing": "8pt base grid; 16px mobile gutters; 40px section rhythm",
   "radius": "soft controlled: 12px actions, 16-18px cards, no universal rounding",
-  "motion": "rise-in hierarchy reveal; 680ms CTA entrance; 150-280ms interaction/review-slide transitions; reduced-motion disables animation",
+  "motion": "one-time springy note and CTA reveals; brief phone-ring and quote-icon feedback; spring sticky CTA; 150-480ms review transitions; no loops; reduced-motion disables animation",
   "texture": "subtle dotted pink trust band; otherwise clean flat surfaces"
 }
 ```
@@ -56,7 +56,7 @@ Mobbin is used here as a visual reference only. No Magic UI, Figma, or external 
 - Keep the phone CTA as the primary conversion action. The online quote link remains a secondary fallback only where it is already required by the campaign contract.
 - Preserve `data-campaign-call`, CallRail number swapping, consent-aware Google/Meta loading, PageView-only Meta behavior, route-level `noindex`, Allsberry canonical/OG URLs, `/privacy`, `/terms`, and no-binding language.
 - Avoid source-domain canonicals, external source legal pages, unapproved logo-host dependencies, new Farmers lockups, or invented claims.
-- Keep carrier logos static. Motion is reserved for the hierarchy reveal, CTA entrance/press feedback, sticky-call appearance, and the user-controlled one-card review slide.
+- Keep carrier logos static. Motion is reserved for the hierarchy reveal, one-time sticky-note settle and pin pop, brief phone/quote-icon feedback, spring sticky-call appearance, and the user-controlled one-card review slide. Do not add looping motion.
 - Keep all interactive targets keyboard accessible and at least 44px tall. Respect `prefers-reduced-motion`.
 
 ## Verification checklist

@@ -502,11 +502,22 @@ export function AllsberryAgencyCampaign({
         </div>
       </footer>
 
-      {showStickyCall ? (
-        <div className={styles.stickyCall}>
-          <CallAction location="sticky" googleAdsSendTo={googleAdsSendTo} sticky />
-        </div>
-      ) : null}
+      <AnimatePresence initial={false}>
+        {showStickyCall ? (
+          <motion.div
+            key="sticky-call"
+            initial={prefersReducedMotion ? false : { opacity: 0, y: 72, scale: 0.96 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: 72, scale: 0.96 }}
+            transition={prefersReducedMotion
+              ? { duration: 0 }
+              : { type: "spring", stiffness: 420, damping: 30, mass: 0.8 }}
+            className={styles.stickyCall}
+          >
+            <CallAction location="sticky" googleAdsSendTo={googleAdsSendTo} sticky />
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
     </div>
   );
 }
