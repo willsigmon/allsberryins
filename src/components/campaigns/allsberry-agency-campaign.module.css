@@ -97,10 +97,10 @@
   justify-content: center;
   gap: 7px;
   padding: 10px 16px;
-  border: 1px solid var(--campaign-line-strong);
+  border: 1px solid var(--campaign-blue);
   border-radius: 12px;
-  background: var(--campaign-card);
-  color: var(--campaign-ink);
+  background: var(--campaign-blue);
+  color: #ffffff;
   font-size: 14px;
   font-weight: 600;
   white-space: nowrap;
@@ -109,7 +109,8 @@
 }
 
 .headerCall:hover {
-  border-color: var(--campaign-blue);
+  border-color: var(--campaign-blue-dark);
+  background: var(--campaign-blue-dark);
   transform: scale(1.03);
 }
 
@@ -120,7 +121,7 @@
 }
 
 .headerCallIcon {
-  color: var(--campaign-blue);
+  color: #ffffff;
 }
 
 .headerCallShort {
@@ -320,17 +321,11 @@
 
 .carrierLogo {
   width: auto;
-  max-width: 120px;
-  height: 26px;
+  max-width: 160px;
+  height: 44px;
   object-fit: contain;
-  opacity: 0.78;
-  filter: grayscale(35%);
-  transition: opacity 200ms ease, filter 200ms ease;
-}
-
-.carrierLogo:hover {
-  opacity: 1;
-  filter: grayscale(0);
+  opacity: 0.88;
+  filter: grayscale(20%);
 }
 
 .carrierNote {
@@ -548,8 +543,22 @@
   line-height: 1.6;
 }
 
-.testimonialCard {
+.testimonialViewport {
+  min-height: 278px;
   margin-top: 20px;
+  overflow: hidden;
+  border-radius: 18px;
+  outline: none;
+  touch-action: pan-y;
+}
+
+.testimonialViewport:focus-visible {
+  outline: 2px solid var(--campaign-blue);
+  outline-offset: 3px;
+}
+
+.testimonialCard {
+  min-height: 278px;
   padding: 24px 22px;
 }
 
@@ -600,6 +609,75 @@
   margin-top: 1px;
   color: var(--campaign-muted);
   font-size: 12px;
+}
+
+.reviewControls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.reviewArrow {
+  display: inline-flex;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--campaign-line-strong);
+  border-radius: 50%;
+  background: var(--campaign-card);
+  color: var(--campaign-blue);
+  box-shadow: var(--campaign-shadow);
+  transition: transform 150ms ease, border-color 200ms ease, background-color 200ms ease;
+}
+
+.reviewArrow:hover {
+  border-color: var(--campaign-blue);
+  background: #f2f6fb;
+  transform: translateY(-1px);
+}
+
+.reviewArrow:active {
+  transform: scale(0.96);
+}
+
+.reviewDots {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.reviewDot {
+  display: inline-flex;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+}
+
+.reviewDot::before {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--campaign-line-strong);
+  content: "";
+  transition: width 200ms ease, border-radius 200ms ease, background-color 200ms ease;
+}
+
+.reviewDot[aria-current="true"]::before {
+  width: 22px;
+  border-radius: 999px;
+  background: var(--campaign-blue);
+}
+
+.reviewHint {
+  margin: 10px 0 0;
+  color: var(--campaign-subtle);
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: center;
 }
 
 .footer {

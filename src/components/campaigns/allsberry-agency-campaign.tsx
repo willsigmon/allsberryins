@@ -1,11 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import { Clock3, MapPin, Phone, Users } from "lucide-react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { ChevronLeft, ChevronRight, Clock3, MapPin, Phone, Users } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import type { KeyboardEvent, PointerEvent } from "react";
 
 import { Link } from "@/i18n/navigation";
-import { agency } from "@/lib/site-data";
+import { agency, reviews } from "@/lib/site-data";
 import { allsberryCampaign } from "@/lib/allsberry-campaign";
 
 import styles from "./allsberry-agency-campaign.module.css";
@@ -26,6 +28,8 @@ type AllsberryAgencyCampaignProps = {
 type QuoteOption = (typeof allsberryCampaign.quoteOptions)[number] & {
   readonly badge?: string;
 };
+
+const campaignReviews = reviews.filter((review) => review.name !== "Local restaurant owner");
 
 function allowsCampaignTracking() {
   return navigator.globalPrivacyControl !== true && navigator.doNotTrack !== "1";
@@ -132,7 +136,61 @@ export function AllsberryAgencyCampaign({
 }: AllsberryAgencyCampaignProps) {
   const currentYear = new Date().getFullYear();
   const heroHeadingRef = useRef<HTMLHeadingElement>(null);
+  const reviewPointerStartX = useRef<number | null>(null);
   const [showStickyCall, setShowStickyCall] = useState(false);
+  const [reviewIndex, setReviewIndex] = useState(0);
+  const [reviewDirection, setReviewDirection] = useState<1 | -1>(1);
+  const prefersReducedMotion = useReducedMotion();
+  const activeReview = campaignReviews[reviewIndex];
+
+  const moveReview = (direction: 1 | -1) => {
+    if (campaignReviews.length < 2) return;
+    setReviewDirection(direction);
+    setReviewIndex((current) => (current + direction + campaignReviews.length) % campaignReviews.length);
+  };
+
+  const selectReview = (nextIndex: number) => {
+    if (nextIndex === reviewIndex || !campaignReviews[nextIndex]) return;
+    setReviewDirection(nextIndex > reviewIndex ? 1 : -1);
+    setReviewIndex(nextIndex);
+  };
+
+  const handleReviewKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === "ArrowLeft") {
+      event.preventDefault();
+      moveReview(-1);
+    }
+    if (event.key === "ArrowRight") {
+      event.preventDefault();
+      moveReview(1);
+    }
+  };
+
+  const handleReviewPointerDown = (event: PointerEvent<HTMLDivElement>) => {
+    reviewPointerStartX.current = event.clientX;
+  };
+
+  const handleReviewPointerUp = (event: PointerEvent<HTMLDivElement>) => {
+    const startX = reviewPointerStartX.current;
+    reviewPointerStartX.current = null;
+    if (startX === null) return;
+
+    const deltaX = event.clientX - startX;
+    if (Math.abs(deltaX) < 48) return;
+    moveReview(deltaX < 0 ? 1 : -1);
+  };
+
+  const reviewSlideVariants = {
+    enter: (direction: 1 | -1) => ({
+      opacity: 0,
+      x: prefersReducedMotion ? 0 : direction * 48,
+    }),
+    center: { opacity: 1, x: 0 },
+    exit: (direction: 1 | -1) => ({
+      opacity: 0,
+      x: prefersReducedMotion ? 0 : direction * -48,
+    }),
+  };
 
   useEffect(() => {
     const target = heroHeadingRef.current;
@@ -259,8 +317,8 @@ export function AllsberryAgencyCampaign({
                   key={carrier.name}
                   src={carrier.src}
                   alt={carrier.name}
-                  width={120}
-                  height={26}
+                  width={160}
+                  height={44}
                   loading="lazy"
                   className={styles.carrierLogo}
                 />
@@ -326,20 +384,82 @@ export function AllsberryAgencyCampaign({
           </div>
         </section>
 
-        <section className={styles.section} aria-labelledby="review-heading">
+        <section
+          className={styles.section}
+          aria-labelledby="review-heading"
+          aria-roledescription="carousel"
+          aria-label="Client reviews"
+        >
           <div className={styles.wrap}>
             <h2 id="review-heading" className={styles.sectionHeading}>What clients say</h2>
-            <article className={styles.testimonialCard}>
-              <div className={styles.stars} aria-label="5 out of 5 stars">★★★★★</div>
-              <p className={styles.testimonialQuote}>&quot;{allsberryCampaign.testimonial.quote}&quot;</p>
-              <div className={styles.whoRow}>
-                <span className={styles.avatar} aria-hidden="true">B</span>
-                <span>
-                  <strong className={styles.whoName}>{allsberryCampaign.testimonial.author}</strong>
-                  <span className={styles.whoRole}>{allsberryCampaign.testimonial.attribution}</span>
-                </span>
+            <div
+              className={styles.testimonialViewport}
+              tabIndex={0}
+              role="group"
+              aria-roledescription="slide"
+              aria-label={`${reviewIndex + 1} of ${campaignReviews.length}`}
+              aria-live="polite"
+              onKeyDown={handleReviewKeyDown}
+              onPointerDown={handleReviewPointerDown}
+              onPointerUp={handleReviewPointerUp}
+              onPointerCancel={() => { reviewPointerStartX.current = null; }}
+            >
+              <AnimatePresence initial={false} custom={reviewDirection} mode="wait">
+                {activeReview ? (
+                  <motion.article
+                    key={activeReview.name}
+                    custom={reviewDirection}
+                    variants={reviewSlideVariants}
+                    initial="enter"
+                    animate="center"
+                    exit="exit"
+                    transition={{ duration: prefersReducedMotion ? 0 : 0.28, ease: "easeOut" }}
+                    className={styles.testimonialCard}
+                  >
+                    <div className={styles.stars} aria-label="5 out of 5 stars">★★★★★</div>
+                    <p className={styles.testimonialQuote}>&quot;{activeReview.body}&quot;</p>
+                    <div className={styles.whoRow}>
+                      <span className={styles.avatar} aria-hidden="true">{activeReview.name.charAt(0)}</span>
+                      <span>
+                        <strong className={styles.whoName}>{activeReview.name}</strong>
+                        <span className={styles.whoRole}>{activeReview.source} review</span>
+                      </span>
+                    </div>
+                  </motion.article>
+                ) : null}
+              </AnimatePresence>
+            </div>
+            <div className={styles.reviewControls}>
+              <button
+                type="button"
+                className={styles.reviewArrow}
+                aria-label="Previous review"
+                onClick={() => moveReview(-1)}
+              >
+                <ChevronLeft size={20} aria-hidden="true" />
+              </button>
+              <div className={styles.reviewDots} aria-label="Choose a review">
+                {campaignReviews.map((review, index) => (
+                  <button
+                    key={review.name}
+                    type="button"
+                    className={styles.reviewDot}
+                    aria-label={`Show review from ${review.name}`}
+                    aria-current={index === reviewIndex ? "true" : undefined}
+                    onClick={() => selectReview(index)}
+                  />
+                ))}
               </div>
-            </article>
+              <button
+                type="button"
+                className={styles.reviewArrow}
+                aria-label="Next review"
+                onClick={() => moveReview(1)}
+              >
+                <ChevronRight size={20} aria-hidden="true" />
+              </button>
+            </div>
+            <p className={styles.reviewHint}>Swipe or use the arrows to see more reviews.</p>
           </div>
         </section>
       </div>

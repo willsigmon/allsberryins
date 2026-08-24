@@ -47,10 +47,4 @@ export const allsberryCampaign = {
     description:
       "One call is usually all it takes. Erin looks at the coverage you have now, walks through what California underwriting will and won't accept on your property, and tells you straight what your options are — including the FAIR Plan if your home sits in a high fire-risk area.",
   },
-  testimonial: {
-    quote:
-      "Erin Allsberry is hands down one of the best insurance agents in California. With how difficult it's become to find homeowners insurance in California (especially in high fire risk areas) she knows exactly how to get things done. She helped me navigate the CA Fair Plan, secure affordable home insurance, and make sure I had the right coverage without overpaying.",
-    author: "Brahm Shank",
-    attribution: "Verified Google review",
-  },
 } as const;
