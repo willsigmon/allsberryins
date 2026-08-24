@@ -66,7 +66,7 @@ Mobbin is used here as a visual reference only. No Magic UI, Figma, or external 
 
 - [ ] Compare mobile and desktop layout against the supplied pink template.
 - [ ] Confirm the Allsberry URL is the only canonical/OG URL and remains `noindex, nofollow`.
-- [ ] Confirm every phone CTA retains `tel:+18666886145`, campaign tracking, and CallRail attributes.
+- [ ] Confirm every phone CTA retains the Google Ads fallback `tel:+19514337683`, campaign tracking, and CallRail attributes; verify Meta traffic swaps to Quotely's `(951) 494-2765` line and Google traffic uses `(951) 433-7683`.
 - [ ] Confirm the Meta implementation emits PageView only and Google call conversion remains label-gated.
 - [ ] Confirm privacy, terms, address, license, no-binding, and savings disclosures remain Allsberry-owned and readable.
 - [ ] Run `npm run check` and `npm run build:clean`.

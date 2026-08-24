@@ -1,7 +1,9 @@
 export const allsberryCampaign = {
   path: "/allsberry-agency",
-  phone: "(866) 688-6145",
-  phoneHref: "tel:+18666886145",
+  // Quotely Google Ads live-call-transfer line. CallRail's existing dynamic
+  // number insertion swaps this fallback for the configured source number.
+  phone: "(951) 433-7683",
+  phoneHref: "tel:+19514337683",
   callRailScriptUrl:
     "https://cdn.callrail.com/companies/952649365/646c44144ffb383f042d/12/swap.js",
   headline: "California home insurance starts with one clear conversation.",
