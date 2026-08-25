@@ -77,7 +77,6 @@ export default async function AllsberryAgencyPage({ params }: CampaignPageProps)
     <>
       <StructuredData data={campaignSchema} />
       <AllsberryAgencyCampaign
-        callRailScriptUrl={allsberryCampaign.callRailScriptUrl}
         googleAdsSendTo={googleAdsSendTo}
         metaPixelId={metaPixelId}
       />

@@ -56,7 +56,7 @@ Mobbin is used here as a visual reference only. No Magic UI, Figma, or external 
 - Keep the campaign shell light-themed even when the main site is in dark mode.
 - Do not render the global site header or footer on this route; the campaign has its own minimal header/footer.
 - Keep the phone CTA as the primary conversion action. The online quote link remains a secondary fallback only where it is already required by the campaign contract.
-- Preserve `data-campaign-call`, CallRail number swapping, consent-aware Google/Meta loading, PageView-only Meta behavior, route-level `noindex`, Allsberry canonical/OG URLs, `/privacy`, `/terms`, and no-binding language.
+- Preserve `data-campaign-call`, the single approved website tracking number `(866) 688-6145`, consent-aware Google/Meta loading, PageView-only Meta behavior, route-level `noindex`, Allsberry canonical/OG URLs, `/privacy`, `/terms`, and no-binding language. Meta click-to-call is handled in the ads, not by this website.
 - Avoid source-domain canonicals, external source legal pages, unapproved logo-host dependencies, new Farmers lockups, or invented claims.
 - Carrier logos may converge toward their final positions once when the strip first enters the viewport; preserve clear space and keep them static afterward. Motion is otherwise reserved for one-time hierarchy/scroll reveals, sticky-note settle and pin pop, brief phone/quote-icon feedback, CTA poke feedback, spring sticky-call appearance, and the user-controlled one-card review slide.
 - The hero may contain twelve extremely low-opacity dust motes behind all content. They drift once over 16-22 seconds and settle; they never capture input, overlap above content, or loop. Do not add other ambient particles or decorative loops.
@@ -66,7 +66,7 @@ Mobbin is used here as a visual reference only. No Magic UI, Figma, or external 
 
 - [ ] Compare mobile and desktop layout against the supplied pink template.
 - [ ] Confirm the Allsberry URL is the only canonical/OG URL and remains `noindex, nofollow`.
-- [ ] Confirm every phone CTA retains the Google Ads fallback `tel:+19514337683`, campaign tracking, and CallRail attributes; verify Meta traffic swaps to Quotely's `(951) 494-2765` line and Google traffic uses `(951) 433-7683`.
+- [ ] Confirm every phone CTA uses the single approved website tracking number `(866) 688-6145` / `tel:+18666886145`, with no client-side number swap. Meta click-to-call remains configured in the ads and is not expected to appear on the website.
 - [ ] Confirm the Meta implementation emits PageView only and Google call conversion remains label-gated.
 - [ ] Confirm privacy, terms, address, license, no-binding, and savings disclosures remain Allsberry-owned and readable.
 - [ ] Run `npm run check` and `npm run build:clean`.

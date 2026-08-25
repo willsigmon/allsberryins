@@ -1,12 +1,9 @@
 export const allsberryCampaign = {
   path: "/allsberry-agency",
-  // Google Ads fallback number. CallRail's existing dynamic number insertion
-  // keeps Google on this line and swaps Meta traffic to its configured
-  // tracking line, (951) 494-2765, when applicable.
-  phone: "(951) 433-7683",
-  phoneHref: "tel:+19514337683",
-  callRailScriptUrl:
-    "https://cdn.callrail.com/companies/952649365/646c44144ffb383f042d/12/swap.js",
+  // Frank's latest direction: the Google landing page uses this single
+  // tracking number. Meta uses click-to-call directly in the ads, not here.
+  phone: "(866) 688-6145",
+  phoneHref: "tel:+18666886145",
   headline: "California home insurance starts with one clear conversation.",
   description:
     "Get a free California home insurance quote from Erin Allsberry, a licensed agent in Corona. One call covers coverage review, high fire-risk options, and bundling.",

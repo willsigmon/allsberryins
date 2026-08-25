@@ -21,7 +21,6 @@ declare global {
 }
 
 type AllsberryAgencyCampaignProps = {
-  callRailScriptUrl?: string;
   googleAdsSendTo?: string;
   metaPixelId?: string;
 };
@@ -149,7 +148,6 @@ function QuoteRow({
 }
 
 export function AllsberryAgencyCampaign({
-  callRailScriptUrl,
   googleAdsSendTo,
   metaPixelId,
 }: AllsberryAgencyCampaignProps) {
@@ -223,23 +221,6 @@ export function AllsberryAgencyCampaign({
     observer.observe(target);
     return () => observer.disconnect();
   }, []);
-
-  useEffect(() => {
-    if (!callRailScriptUrl || !allowsCampaignTracking()) {
-      return;
-    }
-
-    const existingScript = document.getElementById("allsberry-callrail");
-    if (existingScript) return;
-
-    const script = document.createElement("script");
-    script.id = "allsberry-callrail";
-    script.async = true;
-    script.src = callRailScriptUrl;
-    document.head.appendChild(script);
-
-    return () => script.remove();
-  }, [callRailScriptUrl]);
 
   useEffect(() => {
     if (!metaPixelId || !allowsCampaignTracking()) {
