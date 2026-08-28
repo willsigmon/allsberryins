@@ -71,6 +71,7 @@ export function QuoteForm({
       address: "",
       zipCode: initialZip && /^\d{5}$/.test(initialZip) ? initialZip : "",
       referralSource: undefined,
+      businessName: "",
       employees: undefined,
       message: "",
       honeypot: "",
@@ -106,18 +107,23 @@ export function QuoteForm({
   const needsEmployees = selectedProducts?.some(
     (product) => product === "business" || product === "workers-comp",
   );
+  const needsBusinessName = selectedInsuranceType === "commercial";
 
   const onSubmit = handleSubmit(async (values) => {
     setSuccessMessage(null);
     setErrorMessage(null);
 
     try {
+      const { businessName, ...quoteFields } = values;
       const payload = {
         type: "quote-request",
         assignedAgentSlug,
         entryPoint,
         ...readStoredMarketingAttribution(),
-        ...values,
+        ...quoteFields,
+        ...(values.insuranceType === "commercial"
+          ? { businessName: businessName?.trim() }
+          : {}),
       };
 
       const response = await fetch("/api/leads", {
@@ -177,6 +183,10 @@ export function QuoteForm({
 
     if (insuranceType !== "commercial") {
       setValue("employees", undefined, {
+        shouldValidate: true,
+        shouldDirty: true,
+      });
+      setValue("businessName", "", {
         shouldValidate: true,
         shouldDirty: true,
       });
@@ -284,6 +294,28 @@ export function QuoteForm({
             </p>
           ) : null}
         </fieldset>
+
+        {needsBusinessName ? (
+          <Field
+            label="Business Name"
+            error={errors.businessName?.message}
+            inputId={`${formId}-business-name`}
+            required
+          >
+            <input
+              {...register("businessName")}
+              id={`${formId}-business-name`}
+              autoComplete="organization"
+              required
+              aria-describedby={
+                errors.businessName ? `${formId}-business-name-error` : undefined
+              }
+              aria-invalid={Boolean(errors.businessName)}
+              className={inputClassName}
+              placeholder="Acme Plumbing LLC"
+            />
+          </Field>
+        ) : null}
 
         <div className="grid gap-6 sm:grid-cols-2">
           <Field
