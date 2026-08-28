@@ -1,8 +1,26 @@
 # Zapier Lead Automation — Design & Handoff
 
-**Date:** 2026-07-10 (rev. 5 — website-side routing complete; Zap activation still external)
-**Status:** The website now emits an explicit `insuranceType` (`personal`, `commercial`, or `life`) with every quote request and rejects invalid type/product combinations server-side. The production webhook remains deliberately unset until the Zap is renamed, published, and updated to route all three quote types correctly. No live webhook URL belongs in this repository.
-**Requirements from:** Brahm Shank (Allsberry). Owner contacts: Erin / Brahm.
+**Date:** 2026-08-28 (rev. 6 — commercial `businessName` for AgencyZoom)
+**Status:** The website now emits an explicit `insuranceType` (`personal`, `commercial`, or `life`) with every quote request and rejects invalid type/product combinations server-side. Commercial quote requests also require `businessName` so AgencyZoom can create a Business Lead. No live webhook URL belongs in this repository.
+**Requirements from:** Brahm Shank (Allsberry). Owner contacts: Erin / Brahm. Janaya Lund (Accelerated Automation) asked for this field on 2026-08-25.
+
+## ▶ Rev. 6 — commercial Business Name for AgencyZoom (2026-08-28)
+
+Janaya needs a business name to create an AgencyZoom **Business Lead**. The live quote form now shows a required **Business Name** field when the visitor selects Commercial.
+
+### Website payload
+
+| Site field | When present | AgencyZoom Create Business Lead |
+| --- | --- | --- |
+| `businessName` | Required when `insuranceType` is `commercial`. Omitted on personal and life quotes. | Map to AgencyZoom `name` (labeled **Business name**). |
+
+There was no existing company/business key on quote-request payloads. Do **not** reuse evidence-of-insurance `companyOrAgency`, and do **not** overwrite the contact `name` / `firstName` + `lastName` mapping used for personal leads.
+
+Personal and life quote submit still work without `businessName`. Client and `/api/leads` both reject commercial quotes when it is missing or under 2 characters.
+
+### Zap change
+
+On the commercial / Create Business Lead path, map webhook `businessName` → AgencyZoom Business name. Contact first/last stay on `firstName` / `lastName`.
 
 ## ▶ Rev. 5 — website-side routing and webhook hygiene (2026-07-10)
 

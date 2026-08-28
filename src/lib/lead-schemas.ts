@@ -83,6 +83,12 @@ const quoteFormFieldsSchema = z.object({
     referralSource: z.enum(leadReferralSources, {
       error: "Please tell us how you heard about us.",
     }),
+    businessName: z
+      .string()
+      .trim()
+      .max(200, "Business name must be under 200 characters.")
+      .optional()
+      .or(z.literal("")),
     employees: z.enum(leadEmployeeOptions).optional(),
     message: optionalMessageSchema,
     honeypot: honeypotSchema,
@@ -113,6 +119,15 @@ function validateQuoteFormFields(values: QuoteFormFieldValues, ctx: z.Refinement
       code: z.ZodIssueCode.custom,
       path: ["employees"],
       message: "Please choose the number of employees.",
+    });
+  }
+
+  const businessName = values.businessName?.trim() ?? "";
+  if (values.insuranceType === "commercial" && businessName.length < 2) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      path: ["businessName"],
+      message: "Business name is required for commercial quotes.",
     });
   }
 }
