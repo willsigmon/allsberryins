@@ -5,7 +5,6 @@ import {
   legalPagePaths,
   normalizeSmsConsent,
   smsConsentCheckboxLabels,
-  smsConsentDisclosureIntro,
   smsConsentDisclosureVersion,
 } from "@/lib/sms-consent";
 
@@ -18,13 +17,13 @@ describe("normalizeSmsConsent", () => {
 });
 
 describe("SMS consent leftovers", () => {
-  it("keeps the August 31 disclosure version and TCR opt-out language", () => {
-    expect(smsConsentDisclosureVersion).toBe("2026-08-31");
-    expect(smsConsentDisclosureIntro).toContain(agency.name);
-    expect(smsConsentDisclosureIntro).toContain("STOP");
-    expect(smsConsentDisclosureIntro).toContain("HELP");
+  it("keeps the final August 31 disclosure version and TCR opt-out language", () => {
+    expect(smsConsentDisclosureVersion).toBe("2026-08-31-v2");
     expect(smsConsentCheckboxLabels.marketing).toContain(agency.name);
     expect(smsConsentCheckboxLabels.marketing).toContain("STOP");
+    expect(smsConsentCheckboxLabels.marketing).toContain("HELP");
+    expect(smsConsentCheckboxLabels.marketing).toContain("Messages and data rates may apply");
+    expect(smsConsentCheckboxLabels.marketing).toContain("Message frequency will vary");
     expect(legalPagePaths.privacy).toBe("/privacy");
     expect(legalPagePaths.terms).toBe("/terms");
   });

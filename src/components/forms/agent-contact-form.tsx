@@ -20,7 +20,6 @@ import {
   readLeadSubmitError,
 } from "@/lib/lead-submit-error";
 import { agency } from "@/lib/site-data";
-import { formPhoneEmailFollowUpDisclosure } from "@/lib/sms-consent";
 import { readStoredMarketingAttribution } from "@/lib/tracking";
 
 type AgentContactFormProps = {
@@ -56,7 +55,6 @@ export function AgentContactForm({
       message: "",
       honeypot: "",
       marketingTextOptIn: false,
-      nonMarketingTextOptIn: false,
     },
   });
 
@@ -199,7 +197,6 @@ export function AgentContactForm({
         aria-hidden="true"
       />
       <SmsConsentFields formId={formId} register={register} errors={errors} />
-      <p className="text-sm leading-7 text-gray-600">{formPhoneEmailFollowUpDisclosure}</p>
       <button
         type="submit"
         disabled={isSubmitting}
