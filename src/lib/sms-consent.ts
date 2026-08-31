@@ -5,15 +5,14 @@ export const smsConsentFieldNames = {
   nonMarketingTextOptIn: "nonMarketingTextOptIn",
 } as const;
 
-export const smsConsentDisclosureVersion = "2026-07-10";
+export const smsConsentDisclosureVersion = "2026-08-31";
 
 export function normalizeSmsConsent(value: boolean | undefined): boolean {
   return value === true;
 }
 
 export const smsConsentCheckboxLabels = {
-  marketing:
-    "Yes, I would like to receive marketing text messages",
+  marketing: `By checking this box, you agree to receive insurance quotes, policy review reminders, renewal follow-ups, appointment reminders, customer care, billing or account-related inquiries, documentation requests, and marketing messages related to insurance products and services, including home and auto insurance bundle quote opportunities messages from ${agency.name}. You can reply STOP to opt out at any time. Reply HELP to ${agency.phone}. Messages and data rates may apply. Message frequency will vary.`,
   nonMarketing:
     "Yes, I would like to receive non-marketing text messages",
 } as const;

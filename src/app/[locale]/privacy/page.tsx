@@ -20,7 +20,7 @@ export default async function PrivacyPage({ params }: PrivacyPageProps) {
     <main className="mx-auto max-w-3xl px-6 py-16">
       <Link href="/" className="text-sm text-muted-foreground hover:text-foreground">&larr; Back</Link>
       <h1 className="mt-4 text-3xl font-bold text-foreground">Privacy Policy</h1>
-      <p className="mt-2 text-sm text-muted-foreground">Last updated: August 22, 2026</p>
+      <p className="mt-2 text-sm text-muted-foreground">Last updated: August 31, 2026</p>
 
       <div className="mt-8 space-y-6 text-muted-foreground leading-relaxed">
         <section>
@@ -129,6 +129,15 @@ export default async function PrivacyPage({ params }: PrivacyPageProps) {
             Consent to receive SMS/text messages is not a condition of purchase.
           </p>
           <p className="mt-3">
+            SMS opt-in or phone numbers for the purpose of SMS are not shared with any third parties
+            or affiliate companies for marketing purposes.
+          </p>
+          <p className="mt-3">
+            <strong className="text-foreground">Opt-In Method</strong>
+            <br />
+            You may opt in to receive SMS messages from {agency.name} by submitting an online form.
+          </p>
+          <p className="mt-3">
             When collecting personal information, particularly for activities that involve telephony
             services such as SMS/MMS messaging, we adhere to stringent consent requirements.
             Explicit, informed, and unambiguous consent is obtained from all individuals prior to
@@ -146,8 +155,8 @@ export default async function PrivacyPage({ params }: PrivacyPageProps) {
             this policy.
           </p>
           <p className="mt-3">
-            Phone numbers provided for SMS opt-in will remain confidential and will not be shared
-            with any third parties.
+            Phone numbers provided for SMS opt-in remain confidential and are not shared with third
+            parties or affiliate companies for marketing purposes.
           </p>
         </section>
 

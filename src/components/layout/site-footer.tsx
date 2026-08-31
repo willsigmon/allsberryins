@@ -126,14 +126,9 @@ export function SiteFooter() {
             <p>{agency.ownerLicense} • {agency.agencyLicense}</p>
           </div>
           <div className="mt-3 flex flex-wrap items-center gap-4 text-xs text-white/50">
-            <a
-              href="https://www.farmers.com/privacy-center/?Agent_Code=993005&Source_Indicator=AP"
-              target="_blank"
-              rel="noreferrer"
-              className="transition hover:text-white"
-            >
+            <Link href="/privacy" className="transition hover:text-white">
               {t("privacy")}
-            </a>
+            </Link>
             <a
               href="https://www.farmers.com/accessibility/"
               target="_blank"
