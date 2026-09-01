@@ -165,6 +165,17 @@
       "region": "Southern California",
       "cta": "Get Your Free Quote"
     },
+    "leftover": {
+      "unknownAgent": "That old agent link is not a person on this homepage. We do not invent a teammate.",
+      "knownAgent": "This is the agency homepage, not {name}'s private inbox.",
+      "knownAgentCta": "Open {name}'s page",
+      "unknownProduct": "We do not invent a coverage line for that old product link.",
+      "knownProduct": "This homepage is not a quote form, and that line is not among the products above. {name} is listed — request it from the quote page.",
+      "knownProductCta": "Request a {name} quote",
+      "knownHeroProduct": "This homepage is not a quote form. {name} is selected below so you can start from there.",
+      "knownHeroProductCta": "Request a {name} quote",
+      "reset": "Show the regular homepage"
+    },
     "reviewsSection": {
       "eyebrow": "Social proof",
       "title": "What Our Clients Say",

@@ -14,16 +14,19 @@ import { TeamSection } from "@/components/sections/team-section";
 import { TrustBar } from "@/components/sections/trust-bar";
 import { ValuePropsSection } from "@/components/sections/value-props-section";
 import { StructuredData } from "@/components/seo/structured-data";
+import { Link } from "@/i18n/navigation";
 import { createPageMetadata } from "@/lib/metadata";
 import {
   heroProductPreferenceCookieKey,
   resolveHeroProductPreference,
 } from "@/lib/hero-product-preferences";
-import { agency, products } from "@/lib/site-data";
+import { homeLeftoverHeroProduct, readHomeLeftovers, type HomeLeftover } from "@/lib/home-leftover";
+import { agency, agents, heroProductSlugs, products, type ProductSlug } from "@/lib/site-data";
 import { organizationSchema } from "@/lib/seo";
 
 type HomePageProps = {
   params: Promise<{ locale: string }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 };
 
 export async function generateMetadata({ params }: HomePageProps): Promise<Metadata> {
@@ -43,16 +46,61 @@ export async function generateMetadata({ params }: HomePageProps): Promise<Metad
   });
 }
 
-export default async function Home({ params }: HomePageProps) {
+function leftoverNoticeCopy(
+  leftover: HomeLeftover,
+  tLeftover: Awaited<ReturnType<typeof getTranslations>>,
+) {
+  switch (leftover.kind) {
+    case "unknown-agent":
+      return { body: tLeftover("unknownAgent"), href: undefined, cta: undefined };
+    case "known-agent":
+      return {
+        body: tLeftover("knownAgent", { name: leftover.agentName }),
+        href: `/agents/${leftover.agentSlug}`,
+        cta: tLeftover("knownAgentCta", { name: leftover.agentName }),
+      };
+    case "unknown-product":
+      return { body: tLeftover("unknownProduct"), href: undefined, cta: undefined };
+    case "known-product":
+      return {
+        body: tLeftover("knownProduct", { name: leftover.productName }),
+        href: `/quote?product=${leftover.productSlug}`,
+        cta: tLeftover("knownProductCta", { name: leftover.productName }),
+      };
+    case "known-hero-product":
+      return {
+        body: tLeftover("knownHeroProduct", { name: leftover.productName }),
+        href: `/quote?product=${leftover.productSlug}`,
+        cta: tLeftover("knownHeroProductCta", { name: leftover.productName }),
+      };
+    default: {
+      const exhaustive: never = leftover;
+      return exhaustive;
+    }
+  }
+}
+
+export default async function Home({ params, searchParams }: HomePageProps) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("products");
   const tFaq = await getTranslations("homeFaqs");
+  const tLeftover = await getTranslations("home.leftover");
 
   const cookieStore = await cookies();
-  const initialProduct = resolveHeroProductPreference(
-    cookieStore.get(heroProductPreferenceCookieKey)?.value,
-  );
+  const search = await searchParams;
+  const leftovers = readHomeLeftovers(search, {
+    agents,
+    heroProductSlugs,
+    products,
+  });
+  const leftoverHeroProduct = homeLeftoverHeroProduct(leftovers);
+  const initialProduct =
+    leftoverHeroProduct && heroProductSlugs.includes(leftoverHeroProduct as ProductSlug)
+      ? (leftoverHeroProduct as ProductSlug)
+      : resolveHeroProductPreference(
+          cookieStore.get(heroProductPreferenceCookieKey)?.value,
+        );
 
   const insuranceAgencySchema = {
     ...organizationSchema,
@@ -119,6 +167,47 @@ export default async function Home({ params }: HomePageProps) {
     <>
       <StructuredData data={[insuranceAgencySchema, websiteSchema, faqSchema]} />
       <HeroSection initialProduct={initialProduct} />
+      {leftovers.length > 0 ? (
+        <div className="bg-white px-4 pb-2 sm:px-6 lg:px-8">
+          <div className="mx-auto flex max-w-7xl flex-col gap-3">
+            {leftovers.map((leftover) => {
+              const copy = leftoverNoticeCopy(leftover, tLeftover);
+              const key =
+                leftover.kind === "known-agent"
+                  ? `${leftover.kind}-${leftover.agentSlug}`
+                  : leftover.kind === "known-product" || leftover.kind === "known-hero-product"
+                    ? `${leftover.kind}-${leftover.productSlug}`
+                    : leftover.kind;
+
+              return (
+                <aside
+                  key={key}
+                  className="rounded-2xl border border-amber-200 bg-amber-50 px-5 py-3 text-sm text-amber-800"
+                >
+                  <p>{copy.body}</p>
+                  <p className="mt-2 flex flex-wrap gap-x-4 gap-y-2">
+                    {copy.href && copy.cta ? (
+                      <Link
+                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                        href={copy.href as any}
+                        className="font-semibold underline underline-offset-4 hover:text-amber-950"
+                      >
+                        {copy.cta}
+                      </Link>
+                    ) : null}
+                    <Link
+                      href="/"
+                      className="font-semibold underline underline-offset-4 hover:text-amber-950"
+                    >
+                      {tLeftover("reset")}
+                    </Link>
+                  </p>
+                </aside>
+              );
+            })}
+          </div>
+        </div>
+      ) : null}
       <ReviewTicker />
       <TrustBar />
       <ValuePropsSection />
