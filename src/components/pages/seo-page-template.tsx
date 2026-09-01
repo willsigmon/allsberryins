@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { ArrowRight, ExternalLink, MapPin, Phone } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 
@@ -6,6 +5,7 @@ import { StructuredData } from "@/components/seo/structured-data";
 import { PageFaqSection } from "@/components/sections/page-faq-section";
 import { SeoPageCard } from "@/components/ui/seo-page-card";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { Link } from "@/i18n/navigation";
 import type { SeoPage } from "@/lib/seo-content";
 import { getSeoPagesBySlugs } from "@/lib/seo-content";
 import { agency, agents, blogPosts } from "@/lib/site-data";

@@ -155,7 +155,8 @@
       "emailAgent": "Email {name}",
       "meetAgent": "Meet {name}",
       "emailShort": "Email",
-      "learnMore": "Learn more"
+      "learnMore": "Learn more",
+      "viewDirectory": "See the full team directory"
     },
     "ctaBanner": {
       "eyebrow": "Free quote",
@@ -251,6 +252,10 @@
     "requestProof": "Request Proof",
     "callCta": "Call {phone}",
     "connectWithUs": "Connect with us",
+    "officeAddress": "Office",
+    "openMap": "Open in Google Maps",
+    "feedbackHeading": "Private feedback",
+    "feedbackBody": "Email the office or call. This page does not publish a review.",
     "faqs": {
       "heading": "Contact questions we hear most often",
       "description": "Quick answers to the questions we hear most — so you can reach us the way that works best for you.",
@@ -389,6 +394,9 @@
     }
   },
   "agents": {
+    "metaTitle": "Our Agents",
+    "metaDescription": "Meet the licensed Allsberry Insurance Agency team in Corona, California. Call, email, or start a quote with a local agent.",
+    "eyebrow": "Our team",
     "listHeading": "Our agents",
     "listSubheading": "Licensed, local, and easy to reach.",
     "backToTeam": "Back to the team",

@@ -8,7 +8,7 @@ export default function NotFound() {
   const tCta = useTranslations("cta");
   const popularLinks = [
     { labelKey: "quoteLabel", descKey: "quoteDesc", href: "/quote" as const },
-    { labelKey: "teamLabel", descKey: "teamDesc", href: "/about" as const },
+    { labelKey: "teamLabel", descKey: "teamDesc", href: "/agents" as const },
     { labelKey: "proofLabel", descKey: "proofDesc", href: "/evidence-of-insurance" as const },
     { labelKey: "carriersLabel", descKey: "carriersDesc", href: "/carriers" as const },
     { labelKey: "blogLabel", descKey: "blogDesc", href: "/blog" as const },

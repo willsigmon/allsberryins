@@ -130,6 +130,15 @@ export function TeamSection() {
             <TeamMemberCard key={agent.slug} agent={agent} index={index} />
           ))}
         </div>
+        <div className="mt-8 text-center">
+          <Link
+            href="/agents"
+            className="inline-flex min-h-11 items-center justify-center text-sm font-semibold text-blue transition hover:text-gray-900"
+            onClick={tap}
+          >
+            {t("viewDirectory")}
+          </Link>
+        </div>
       </div>
     </section>
   );

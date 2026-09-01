@@ -14,6 +14,7 @@ import { absoluteUrl } from "@/lib/utils";
 
 type ContactPageProps = {
   params: Promise<{ locale: string }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 };
 
 export async function generateMetadata({ params }: ContactPageProps): Promise<Metadata> {
@@ -27,22 +28,25 @@ export async function generateMetadata({ params }: ContactPageProps): Promise<Me
   });
 }
 
-export default async function ContactPage({ params }: ContactPageProps) {
+export default async function ContactPage({ params, searchParams }: ContactPageProps) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("contact");
+  const tNav = await getTranslations("nav");
+  const query = await searchParams;
+  const intent = typeof query.intent === "string" ? query.intent : undefined;
+  const isPrivateFeedback = intent === "feedback";
 
   const contactItems = [
-    { title: t("callUs"), body: agency.phone, href: agency.phoneHref, icon: Phone, external: false },
-    { title: t("email"), body: agency.email, href: agency.emailHref, icon: Mail, external: false },
+    { title: t("callUs"), body: agency.phone, href: agency.phoneHref, icon: Phone },
+    { title: t("email"), body: agency.email, href: agency.emailHref, icon: Mail },
     {
-      title: t("serviceArea"),
-      body: t("serviceAreaBody", { area: agency.serviceArea }),
-      href: "/quote",
+      title: t("officeAddress"),
+      body: `${agency.addressLine1}\n${agency.cityStateZip}`,
+      href: agency.socials.google,
       icon: MapPin,
-      external: false,
     },
-    { title: t("hoursTitle"), body: agency.hours, href: "/quote", icon: Clock3, external: false },
+    { title: t("hoursTitle"), body: agency.hours, href: undefined, icon: Clock3 },
   ] as const;
 
   const socialItems = [
@@ -58,13 +62,13 @@ export default async function ContactPage({ params }: ContactPageProps) {
   ];
 
   const breadcrumbSchema = createBreadcrumbSchema([
-    { name: "Home", path: "/" },
-    { name: "Contact", path: "/contact" },
+    { name: tNav("home"), path: "/" },
+    { name: tNav("contact"), path: "/contact" },
   ]);
   const contactPageSchema = {
     "@context": "https://schema.org",
     "@type": "ContactPage",
-    name: "Contact Allsberry Insurance Agency",
+    name: t("heading"),
     url: absoluteUrl("/contact"),
     description: t("metaDescription"),
     mainEntity: {
@@ -94,36 +98,70 @@ export default async function ContactPage({ params }: ContactPageProps) {
           description={t("subheading")}
           as="h1"
         />
+        {isPrivateFeedback ? (
+          <div className="mt-8 rounded-[1.5rem] border border-blue/15 bg-blue/5 px-5 py-4">
+            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-blue">
+              {t("feedbackHeading")}
+            </p>
+            <p className="mt-2 text-sm leading-7 text-gray-600">{t("feedbackBody")}</p>
+          </div>
+        ) : null}
 
         <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {contactItems.map((item) => {
-            const isExternal = item.href.startsWith("http") || item.href.startsWith("tel") || item.href.startsWith("mailto");
-            const commonProps = {
-              key: item.title,
-              className: "glass-btn rounded-2xl p-5 transition hover:-translate-y-1 hover:shadow-lg",
-            };
+            const href = item.href;
+            const isExternal =
+              typeof href === "string" &&
+              (href.startsWith("http") || href.startsWith("tel") || href.startsWith("mailto"));
+            const cardClassName = href
+              ? "glass-btn rounded-2xl p-5 transition hover:-translate-y-1 hover:shadow-lg"
+              : "rounded-2xl border border-gray-100 bg-white p-5";
             const content = (
               <>
                 <item.icon className="h-5 w-5 text-blue" />
                 <h2 className="mt-3 font-display text-lg font-bold text-gray-900">{item.title}</h2>
-                <p className="mt-1 text-sm leading-6 text-gray-600">{item.body}</p>
+                <p className="mt-1 whitespace-pre-line text-sm leading-6 text-gray-600">{item.body}</p>
+                {href === agency.socials.google ? (
+                  <p className="mt-2 text-xs font-semibold text-blue">{t("openMap")}</p>
+                ) : null}
               </>
             );
-            return isExternal ? (
-              <a key={item.title} href={item.href} className={commonProps.className}>
-                {content}
-              </a>
-            ) : (
+            if (!href) {
+              return (
+                <div key={item.title} className={cardClassName}>
+                  {content}
+                </div>
+              );
+            }
+            if (isExternal) {
+              return (
+                <a
+                  key={item.title}
+                  href={href}
+                  className={cardClassName}
+                  {...(href.startsWith("http")
+                    ? { target: "_blank", rel: "noreferrer" }
+                    : {})}
+                >
+                  {content}
+                </a>
+              );
+            }
+            return (
               <Link
-                {...commonProps}
+                key={item.title}
+                className={cardClassName}
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                href={item.href as any}
+                href={href as any}
               >
                 {content}
               </Link>
             );
           })}
         </div>
+        <p className="mt-4 text-sm text-gray-600">
+          {t("serviceAreaBody", { area: agency.serviceArea })}
+        </p>
 
         <div className="mt-10 grid gap-6 lg:grid-cols-[1.3fr_0.7fr]">
           <div

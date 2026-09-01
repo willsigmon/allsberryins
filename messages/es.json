@@ -155,7 +155,8 @@
       "emailAgent": "Escribir a {name}",
       "meetAgent": "Conozca a {name}",
       "emailShort": "Correo",
-      "learnMore": "Ver más"
+      "learnMore": "Ver más",
+      "viewDirectory": "Ver el directorio del equipo"
     },
     "ctaBanner": {
       "eyebrow": "Cotización gratis",
@@ -251,6 +252,10 @@
     "requestProof": "Solicitar Comprobante",
     "callCta": "Llamar al {phone}",
     "connectWithUs": "Conecte con nosotros",
+    "officeAddress": "Oficina",
+    "openMap": "Abrir en Google Maps",
+    "feedbackHeading": "Comentario privado",
+    "feedbackBody": "Escriba a la oficina o llame. Esta página no publica reseñas.",
     "faqs": {
       "heading": "Preguntas de contacto que nos hacen más seguido",
       "description": "Respuestas rápidas a las preguntas que más escuchamos — para que nos contacte de la forma que mejor le funcione.",
@@ -389,6 +394,9 @@
     }
   },
   "agents": {
+    "metaTitle": "Nuestros Agentes",
+    "metaDescription": "Conozca al equipo licenciado de Allsberry Insurance Agency en Corona, California. Llame, escriba o empiece una cotización con un agente local.",
+    "eyebrow": "Nuestro equipo",
     "listHeading": "Nuestros agentes",
     "listSubheading": "Licenciados, locales y fáciles de contactar.",
     "backToTeam": "Volver al equipo",

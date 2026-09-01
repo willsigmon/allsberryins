@@ -111,6 +111,8 @@ ${seoWedgeLines}
 - Contact (Spanish): ${absoluteUrl("/es/contact")}
 - About: ${absoluteUrl("/about")}
 - About (Spanish): ${absoluteUrl("/es/about")}
+- Agents: ${absoluteUrl("/agents")}
+- Agents (Spanish): ${absoluteUrl("/es/agents")}
 - Review: ${absoluteUrl("/review")}
 - Carriers: ${absoluteUrl("/carriers")}
 - Resources: ${absoluteUrl("/resources")}
