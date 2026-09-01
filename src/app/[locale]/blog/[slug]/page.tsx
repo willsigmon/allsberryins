@@ -9,7 +9,7 @@ import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { createPageMetadata } from "@/lib/metadata";
 import { getSeoPagesBySlugs } from "@/lib/seo-content";
-import { blogPosts, getBlogPostBySlug } from "@/lib/site-data";
+import { blogPosts, getAgentByName, getBlogPostBySlug } from "@/lib/site-data";
 import { createBreadcrumbSchema, organizationSchema } from "@/lib/seo";
 import { absoluteUrl } from "@/lib/utils";
 
@@ -50,6 +50,19 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   }
 
   const t = await getTranslations("blogPost");
+  const authorAgent = post.author ? getAgentByName(post.author) : undefined;
+  const articleAuthor = post.author
+    ? {
+        "@type": "Person",
+        name: post.author,
+        url: authorAgent ? absoluteUrl(`/agents/${authorAgent.slug}`) : undefined,
+        worksFor: {
+          "@id": organizationSchema["@id"],
+        },
+      }
+    : {
+        "@id": organizationSchema["@id"],
+      };
 
   const articleSchema = {
     "@context": "https://schema.org",
@@ -57,9 +70,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     headline: post.title,
     description: post.excerpt,
     datePublished: post.publishedAt,
-    author: {
-      "@id": organizationSchema["@id"],
-    },
+    author: articleAuthor,
     publisher: {
       "@id": organizationSchema["@id"],
     },
@@ -89,6 +100,21 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           <span>{new Date(post.publishedAt).toLocaleDateString(locale === "es" ? "es-US" : "en-US", { month: "long", day: "numeric", year: "numeric" })}</span>
           <span>•</span>
           <span>{post.readingTime}</span>
+          {post.author ? (
+            <>
+              <span>•</span>
+              {authorAgent ? (
+                <Link
+                  href={`/agents/${authorAgent.slug}`}
+                  className="font-semibold text-blue hover:text-navy"
+                >
+                  {t("byAuthor", { author: post.author })}
+                </Link>
+              ) : (
+                <span>{t("byAuthor", { author: post.author })}</span>
+              )}
+            </>
+          ) : null}
         </div>
         <h1 className="mt-5 font-display text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">
           {post.title}

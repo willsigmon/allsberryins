@@ -23,7 +23,7 @@ Custom Next.js marketing + lead-capture site for Allsberry Insurance Agency (Cor
 
 ## Deploy
 - Vercel (auto from main)
-- Domain: TBD — currently lives on Vercel preview/handoff URL
+- Domain: `allsberryagency.com` (`www` redirects to apex)
 - Node `22.17.1` (`.nvmrc`)
 - Local builds use `.next-build` dir; Vercel uses default `.next`
 
@@ -42,10 +42,10 @@ Custom Next.js marketing + lead-capture site for Allsberry Insurance Agency (Cor
 - `.next-build/` — local build output, ignored
 
 ## Open questions / known gaps
-- `/api/leads` still has TODO for AgencyZoom integration — currently logs only
-- `/api/chat` returns placeholder text — chatbot vendor not selected
-- Production domain not yet pointed at Vercel
+- `/api/leads` emails the office and optionally forwards to Zapier; AgencyZoom remains Zapier-side, not a first-party API
+- `/api/chat` remains a stub with no site UI
 - Team-attribution Basic Auth creds live in Vercel env, not in repo
+- `allsberryagency.vercel.app` is a stale alias (404); live Vercel alias is `allsberry.vercel.app`
 
 <!-- NOT_ANOTHER_AI_WEBSITE_DESIGN_BIBLE_START -->
 ## Global Design Bible: Not-Another-AI-Website

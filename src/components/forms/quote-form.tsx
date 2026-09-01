@@ -26,6 +26,7 @@ import {
   type QuoteInsuranceType,
   type QuoteProductSlug,
 } from "@/lib/quote-routing";
+import { formPhoneEmailFollowUpDisclosure } from "@/lib/sms-consent";
 import { readStoredMarketingAttribution } from "@/lib/tracking";
 import { cn } from "@/lib/utils";
 
@@ -493,9 +494,7 @@ export function QuoteForm({
 
         <div className="grid gap-4 sm:grid-cols-[1fr_auto] sm:items-center">
           <p className="text-sm leading-7 text-gray-600">
-            By submitting, you ask and authorize our team to follow up by live phone call or
-            email about this specific request. This does not authorize text messages; texts are
-            optional and only sent when you select an option above.
+            {formPhoneEmailFollowUpDisclosure}
           </p>
           <button
             type="submit"
@@ -503,7 +502,7 @@ export function QuoteForm({
             className="inline-flex h-13 items-center justify-center gap-2 rounded-full bg-red px-7 text-base font-bold text-white transition hover:bg-red-hover disabled:cursor-not-allowed disabled:opacity-70"
           >
             {isSubmitting ? <LoaderCircle className="h-5 w-5 animate-spin" /> : null}
-            Get My Quote
+            Request a Quote
           </button>
         </div>
 

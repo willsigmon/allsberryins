@@ -121,8 +121,8 @@ export default async function CarrierOgImage({
               maxWidth: "820px",
             }}
           >
-            Independent access to {carrierName} — compared against 20+ carriers for
-            Corona, Riverside, and Southern California clients.
+            Independent access to {carrierName} — compared with the other carriers
+            listed on this site for Corona, Riverside, and Southern California clients.
           </div>
         </div>
 

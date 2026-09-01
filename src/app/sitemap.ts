@@ -25,7 +25,19 @@ function buildAlternates(path: string) {
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const siteUpdatedAt = "2026-04-18T00:00:00.000Z";
-  const staticRoutes = ["", "/about", "/contact", "/quote", "/evidence-of-insurance", "/blog", "/resources", "/carriers", "/review"];
+  const staticRoutes = [
+    "",
+    "/about",
+    "/contact",
+    "/quote",
+    "/evidence-of-insurance",
+    "/blog",
+    "/resources",
+    "/carriers",
+    "/review",
+    "/privacy",
+    "/terms",
+  ];
 
   const staticEntries = routing.locales.flatMap((locale) =>
     staticRoutes.map((path) => ({

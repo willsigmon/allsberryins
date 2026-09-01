@@ -13,6 +13,7 @@ import {
   type EvidenceRequestValues,
 } from "@/lib/lead-schemas";
 import { agency, evidenceRequestTypes } from "@/lib/site-data";
+import { formPhoneEmailFollowUpDisclosure } from "@/lib/sms-consent";
 import { readStoredMarketingAttribution } from "@/lib/tracking";
 import { cn } from "@/lib/utils";
 
@@ -251,7 +252,8 @@ export function EvidenceRequestForm({
 
         <div className="grid gap-4 sm:grid-cols-[1fr_auto] sm:items-center">
           <p className="text-sm leading-7 text-gray-600">
-            This request is built for certificates, proof of coverage, and time-sensitive lender or escrow follow-up.
+            This request is built for certificates, proof of coverage, and time-sensitive lender
+            or escrow follow-up. {formPhoneEmailFollowUpDisclosure}
           </p>
           <button
             type="submit"

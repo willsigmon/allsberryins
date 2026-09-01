@@ -10,6 +10,7 @@ import { SmsConsentFields } from "@/components/forms/sms-consent-fields";
 import { fireLeadConversion } from "@/lib/conversions";
 import { agentContactSchema, helpTopics, type AgentContactValues } from "@/lib/lead-schemas";
 import { agency } from "@/lib/site-data";
+import { formPhoneEmailFollowUpDisclosure } from "@/lib/sms-consent";
 import { readStoredMarketingAttribution } from "@/lib/tracking";
 
 type AgentContactFormProps = {
@@ -162,6 +163,7 @@ export function AgentContactForm({
         aria-hidden="true"
       />
       <SmsConsentFields formId={formId} register={register} errors={errors} />
+      <p className="text-sm leading-7 text-gray-600">{formPhoneEmailFollowUpDisclosure}</p>
       <button
         type="submit"
         disabled={isSubmitting}

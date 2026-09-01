@@ -57,6 +57,7 @@
     "products": "Products",
     "contactInfo": "Contact Info",
     "privacy": "Privacy Policy",
+    "terms": "Terms & Conditions",
     "accessibility": "Accessibility",
     "sslEncrypted": "SSL Encrypted",
     "wcagAccessible": "WCAG Accessible",
@@ -83,7 +84,7 @@
       "bundleBody": "Many clients save by combining home, auto, and other coverage into one plan. We'll show you the options.",
       "needProofTitle": "Need proof instead?",
       "needProofBody": "If your bank, landlord, or business partner needs insurance paperwork, skip the quote and request it here.",
-      "reviewCount": "5,000+",
+      "reviewCount": "Since 1994",
       "erinName": "Erin Allsberry",
       "erinTitle": "Owner & Principal Agent",
       "locationBadge": "Southern California",
@@ -95,10 +96,10 @@
     "trustBar": {
       "yearsUnit": "Years",
       "yearsLabel": "Serving Southern California",
-      "householdsUnit": "Households & Businesses",
-      "householdsLabel": "Protected across SoCal",
+      "teamUnit": "Named agents",
+      "teamLabel": "On this site",
       "carriersUnit": "Carriers",
-      "carriersLabel": "Markets we can shop"
+      "carriersLabel": "Listed partners"
     },
     "valueProps": {
       "eyebrow": "Why clients choose us",
@@ -118,7 +119,7 @@
     "productGrid": {
       "eyebrow": "Coverage lines",
       "title": "Let's Shop It Out",
-      "description": "We work with more than 200 carriers, so there's always a solution for your coverage and affordability needs.",
+      "description": "We shop Farmers and the other carriers listed on this site so you can compare coverage options that fit your situation.",
       "personalTitle": "Personal Insurance",
       "personalDescription": "Coverage for your home, your car, and the people who matter most.",
       "commercialTitle": "Commercial Insurance",
@@ -143,7 +144,7 @@
     "carrierLogos": {
       "eyebrow": "Carrier access",
       "title": "A Sample of the Markets We Can Shop",
-      "description": "These logos show a representative sample of the carrier access available through the agency. The full market access goes well beyond the {count}+ options shown in the trust bar.",
+      "description": "These logos are the {count} carrier partners listed on this site — the same roster you can open on the carriers page.",
       "carrierLogoAlt": "{carrier} logo",
       "carrierLearnMore": "{carrier} insurance — learn more",
       "seeAllCta": "See every carrier partner"
@@ -278,7 +279,7 @@
     "subheading": "Tell us what you need and a licensed agent will follow up with options tailored to your situation.",
     "whatHappensNext": "What happens next",
     "next1": "We review the products you selected.",
-    "next2": "An agent follows up within 24 hours.",
+    "next2": "An agent follows up within one business day.",
     "next3": "We help compare coverage options and answer questions clearly.",
     "preferredFollowUp": "Preferred follow-up: {name}",
     "needProofIntro": "Need a certificate or proof of insurance instead of a quote? Use the dedicated",
@@ -304,9 +305,9 @@
   },
   "carriersPage": {
     "metaTitle": "Our Insurance Carriers",
-    "metaDescription": "Allsberry Insurance Agency shops Farmers, Travelers, The Hartford, Progressive, Liberty Mutual, Chubb, and other A-rated carriers for clients.",
+    "metaDescription": "Allsberry Insurance Agency shops Farmers, Travelers, The Hartford, Progressive, Liberty Mutual, Chubb, and the other carriers listed on this site.",
     "eyebrow": "Carriers",
-    "heading": "Access to 200+ trusted carriers",
+    "heading": "Carriers we work with",
     "subheading": "We shop the market so you don't have to. Below are some of the carriers we partner with to match you to the right coverage.",
     "cardHeading": "Work with {carrier}",
     "visitCarrier": "Visit {carrier}",
@@ -539,7 +540,7 @@
     },
     "q5": {
       "question": "Is my data private and secure?",
-      "answer": "Yes. Your phone calls, texts, and emails with us are all protected. We never share your personal information without your permission. You can read more about how we protect your data through the Farmers privacy center."
+      "answer": "We use the information you send to respond to your request and, when needed, to shop coverage with carriers. SMS opt-in numbers are not shared with third parties for marketing. Read our Privacy Policy for details."
     }
   },
   "reviews": {
@@ -621,8 +622,9 @@
     "needProofBody": "If your bank, landlord, or business partner needs insurance paperwork, skip the quote and request it here.",
     "startProofRequest": "Start proof request",
     "startQuote": "Start Quote",
-    "reviewCount": "5,000+",
-    "ratingAria": "Rated 5 out of 5 stars",
+    "reviewCount": "Since 1994",
+    "ratingAria": "Serving Southern California since 1994",
+    "sinceFounded": "Serving Southern California since {year}",
     "zipLabel": "ZIP code",
     "erinTitle": "Owner & Principal Agent",
     "primaryProducerLabel": "Main producer",
@@ -675,14 +677,14 @@
     "logoAlt": "{carrier} logo",
     "eyebrow": "Carrier partner",
     "heading": "{carrier} insurance in Corona & Southern California",
-    "intro": "As an independent agency, Allsberry places coverage with {carrier} when it’s the right fit — and compares it against 20+ other carriers so you’re not locked into one quote.",
+    "intro": "As an independent agency, Allsberry places coverage with {carrier} when it’s the right fit — and compares it against the other carriers listed on this site so you’re not locked into one quote.",
     "howWeUse": "How we use {carrier}",
     "howWeUseBody": "Some carriers are strong on homeowners. Others on small business, commercial autos, umbrellas, or life. We match your situation to the carrier whose underwriting and price make sense for you — and revisit at renewal when markets shift.",
     "talkToPerson": "Talk to a real person",
     "talkToPersonBody": "Call the office at <phone></phone> or request a comparison quote online. Either way, you’ll get a licensed agent — not a call-center script.",
     "compareQuote": "Compare {carrier} quote",
     "whyIndependent": "Why go through an independent agent for {carrier}?",
-    "benefitCompare": "One comparison across {carrier} and 20+ other carriers — not a single direct quote.",
+    "benefitCompare": "One comparison across {carrier} and the other carriers listed on this site — not a single direct quote.",
     "benefitAdvocacy": "Local advocacy at claim time; we help you work with the {carrier} adjuster directly.",
     "benefitReview": "Free annual coverage review so your policy keeps up with life changes.",
     "benefitNoPressure": "No pressure to bundle — if {carrier} only makes sense for one line, we say so.",
@@ -698,7 +700,8 @@
     "requestProof": "Request proof",
     "relatedGuides": "Related California insurance guides",
     "relatedReading": "Related reading",
-    "relatedArticle": "Related article"
+    "relatedArticle": "Related article",
+    "byAuthor": "By {author}"
   },
   "agentProfile": {
     "directAgentPage": "Direct agent page",

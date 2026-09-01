@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: Params) {
   }
   return createPageMetadata({
     title: `${carrier.name} Insurance in Corona & Southern California`,
-    description: `Get ${carrier.name} home, auto, business, or life insurance through Allsberry Insurance Agency — an independent Corona, CA agency comparing ${carrier.name} with 20+ other carriers for the right fit.`,
+    description: `Get ${carrier.name} home, auto, business, or life insurance through Allsberry Insurance Agency — an independent Corona, CA agency comparing ${carrier.name} with the other carriers listed on this site.`,
     path: `/carriers/${slug}`,
     keywords: [
       `${carrier.name} insurance agent near me`,

@@ -129,6 +129,9 @@ export function SiteFooter() {
             <Link href="/privacy" className="transition hover:text-white">
               {t("privacy")}
             </Link>
+            <Link href="/terms" className="transition hover:text-white">
+              {t("terms")}
+            </Link>
             <a
               href="https://www.farmers.com/accessibility/"
               target="_blank"
