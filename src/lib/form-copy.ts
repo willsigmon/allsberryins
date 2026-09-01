@@ -39,12 +39,12 @@ export const evidenceRequestTypeLabelKeys = {
 } as const;
 
 export const helpTopicLabelKeys = {
-  "Home Insurance": "helpTopic.home",
-  "Auto Insurance": "helpTopic.auto",
-  "Business Insurance": "helpTopic.business",
-  "Workers Comp": "helpTopic.workersComp",
-  "Life Insurance": "helpTopic.life",
-  Other: "helpTopic.other",
+  "Home Insurance": "helpTopics.home",
+  "Auto Insurance": "helpTopics.auto",
+  "Business Insurance": "helpTopics.business",
+  "Workers Comp": "helpTopics.workersComp",
+  "Life Insurance": "helpTopics.life",
+  Other: "helpTopics.other",
 } as const;
 
 export const formValidationMessageKeys = {

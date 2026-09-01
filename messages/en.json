@@ -821,7 +821,7 @@
       "buyingSelling": "Paperwork for Buying or Selling a Home",
       "other": "Other"
     },
-    "helpTopic": {
+    "helpTopics": {
       "home": "Home Insurance",
       "auto": "Auto Insurance",
       "business": "Business Insurance",

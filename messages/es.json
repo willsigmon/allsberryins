@@ -821,7 +821,7 @@
       "buyingSelling": "Papelería para comprar o vender una casa",
       "other": "Otro"
     },
-    "helpTopic": {
+    "helpTopics": {
       "home": "Seguro de casa",
       "auto": "Seguro de auto",
       "business": "Seguro comercial",
