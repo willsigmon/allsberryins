@@ -418,15 +418,15 @@
     "leftover": {
       "agent": {
         "heading": "That agent page is not on this site",
-        "body": "We only list people from the current team. This leftover link is not a licensed agent page — or give us a call at"
+        "body": "We only list people from the current team. This old link is not a licensed agent page — or give us a call at"
       },
       "carrier": {
         "heading": "That carrier page is not on this site",
-        "body": "We only list partners from the carriers page. This leftover link is not an appointment — or give us a call at"
+        "body": "We only list partners from the carriers page. This old link is not an appointment — or give us a call at"
       },
       "article": {
         "heading": "That article is not published here",
-        "body": "We do not invent posts for leftover links. Here's where most visitors head next — or give us a call at"
+        "body": "We do not invent posts for old links. Here's where most visitors head next — or give us a call at"
       }
     },
     "popularLinks": {

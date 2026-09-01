@@ -66,7 +66,7 @@ const missingCatalogCopy = {
   article: {
     title: "This article is not published",
     description:
-      "That address is not a published article. We do not invent posts for leftover links.",
+      "That address is not a published article. We do not invent posts for old links.",
   },
 } as const satisfies Record<MissingCatalogKind, { title: string; description: string }>;
 
@@ -106,7 +106,7 @@ export function missingCatalogOgCopy(kind: Extract<MissingCatalogKind, "carrier"
       return {
         eyebrow: "Not listed",
         heading: "This carrier page is not listed",
-        body: "We only show partners from the carriers page. This leftover link is not an appointment.",
+        body: "We only show partners from the carriers page. This old link is not an appointment.",
         cta: "See listed carriers",
       };
     default: {
