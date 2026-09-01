@@ -1,5 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 
+import { placesMethodHonesty } from "@/lib/places-honesty";
+import { agency } from "@/lib/site-data";
+
+export function POST() {
+  return NextResponse.json(placesMethodHonesty("POST", ["GET"], agency), {
+    status: 405,
+  });
+}
+
 export async function GET(req: NextRequest) {
   const placeId = req.nextUrl.searchParams.get("placeId");
   const sessionToken = req.nextUrl.searchParams.get("sessionToken");

@@ -2,15 +2,43 @@ import type { Metadata } from "next";
 import { Star } from "lucide-react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
+import { LeftoverQueryNotice } from "@/components/ui/leftover-query-notice";
 import { Link } from "@/i18n/navigation";
 import { createPageMetadata } from "@/lib/metadata";
-import { agency } from "@/lib/site-data";
+import { resolveReviewQueryLeftovers, type ReviewQueryLeftover } from "@/lib/review-query";
+import { agency, getAgentBySlug } from "@/lib/site-data";
+import { normalizeAgentSlug } from "@/lib/tracking";
 
 const googleReviewHref = agency.googleReviewUrl;
 
 type ReviewPageProps = {
   params: Promise<{ locale: string }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 };
+
+function leftoverCopy(
+  leftover: ReviewQueryLeftover,
+  t: Awaited<ReturnType<typeof getTranslations>>,
+) {
+  switch (leftover.kind) {
+    case "unknown-agent":
+      return t("leftoverUnknownAgent", { raw: leftover.raw });
+    case "known-agent":
+      return t("leftoverKnownAgent", { name: leftover.name });
+    case "unknown-source":
+      return t("leftoverUnknownSource", { raw: leftover.raw });
+    case "yelp-source":
+      return t("leftoverYelpSource");
+    case "unknown-intent":
+      return t("leftoverUnknownIntent", { raw: leftover.raw });
+    case "feedback-intent":
+      return t("leftoverFeedbackIntent");
+    default: {
+      const _never: never = leftover;
+      return _never;
+    }
+  }
+}
 
 export async function generateMetadata({ params }: ReviewPageProps): Promise<Metadata> {
   const { locale } = await params;
@@ -23,10 +51,22 @@ export async function generateMetadata({ params }: ReviewPageProps): Promise<Met
   });
 }
 
-export default async function ReviewPage({ params }: ReviewPageProps) {
+export default async function ReviewPage({ params, searchParams }: ReviewPageProps) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("review");
+  const query = await searchParams;
+  const rawAgent = typeof query.agent === "string" ? query.agent : undefined;
+  const rawSource = typeof query.source === "string" ? query.source : undefined;
+  const rawIntent = typeof query.intent === "string" ? query.intent : undefined;
+  const assignedAgentSlug = rawAgent ? normalizeAgentSlug(rawAgent) : undefined;
+  const knownAgent = assignedAgentSlug ? getAgentBySlug(assignedAgentSlug) : undefined;
+  const leftovers = resolveReviewQueryLeftovers({
+    rawAgent,
+    knownAgentName: knownAgent?.name,
+    rawSource,
+    rawIntent,
+  });
 
   return (
     <div style={{ backgroundImage: "var(--hero-bg)" }}>
@@ -43,6 +83,16 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
             {t("subheading")}
           </p>
         </div>
+
+        {leftovers.length ? (
+          <div className="mx-auto mt-8 grid max-w-2xl gap-3 text-left">
+            {leftovers.map((leftover) => (
+              <LeftoverQueryNotice key={`${leftover.kind}-${"raw" in leftover ? leftover.raw : leftover.kind}`}>
+                {leftoverCopy(leftover, t)}
+              </LeftoverQueryNotice>
+            ))}
+          </div>
+        ) : null}
 
         <div className="relative mx-auto mt-12 max-w-2xl">
           <div

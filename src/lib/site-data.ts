@@ -1,3 +1,4 @@
+import { formatOfficeHours } from "@/lib/office-hours";
 import { siteUrl } from "@/lib/utils";
 
 export type ProductSlug =
@@ -133,7 +134,7 @@ export const agency = {
   addressLine1: "355 N Sheridan St, Ste 100",
   cityStateZip: "Corona, CA 92878",
   fullAddress: "355 N Sheridan St, Ste 100, Corona, CA 92878",
-  hours: "Monday–Friday, 8:00 AM – 5:00 PM",
+  hours: formatOfficeHours(),
   licenses: "CA #0E91043, Agency #6001414",
   ownerLicense: "CA License #0E91043",
   agencyLicense: "Agency #6001414",

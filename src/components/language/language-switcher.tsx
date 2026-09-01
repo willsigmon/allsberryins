@@ -8,6 +8,7 @@ import { useEffect, useId, useRef, useState } from "react";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import type { AppLocale } from "@/i18n/routing";
 import { routing } from "@/i18n/routing";
+import { localeSwitchHref } from "@/lib/locale-query";
 import { cn } from "@/lib/utils";
 
 type LanguageSwitcherProps = {
@@ -158,7 +159,8 @@ export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
       shortCode: shortCode[next],
     });
 
-    router.replace(pathname, { locale: next });
+    const search = typeof window !== "undefined" ? window.location.search : "";
+    router.replace(localeSwitchHref(pathname, search), { locale: next });
   };
 
   // This paid-campaign route intentionally has one owner-approved English variant.
