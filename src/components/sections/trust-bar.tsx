@@ -4,7 +4,11 @@ import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 
-import { carrierAccessStat } from "@/lib/site-data";
+import {
+  listedCarrierCount,
+  publicAgentRoster,
+  yearsServingSouthernCalifornia,
+} from "@/lib/site-data";
 
 function CountUp({ end, duration = 3.2 }: { end: number; duration?: number }) {
   const [count, setCount] = useState(0);
@@ -43,9 +47,24 @@ function CountUp({ end, duration = 3.2 }: { end: number; duration?: number }) {
 export function TrustBar() {
   const t = useTranslations("home.trustBar");
   const stats = [
-    { end: 20, suffix: "+", unit: t("yearsUnit"), label: t("yearsLabel") },
-    { end: 5000, suffix: "+", unit: t("householdsUnit"), label: t("householdsLabel") },
-    { end: carrierAccessStat, suffix: "+", unit: t("carriersUnit"), label: t("carriersLabel") },
+    {
+      end: yearsServingSouthernCalifornia(),
+      suffix: "",
+      unit: t("yearsUnit"),
+      label: t("yearsLabel"),
+    },
+    {
+      end: publicAgentRoster.length,
+      suffix: "",
+      unit: t("teamUnit"),
+      label: t("teamLabel"),
+    },
+    {
+      end: listedCarrierCount,
+      suffix: "",
+      unit: t("carriersUnit"),
+      label: t("carriersLabel"),
+    },
   ];
 
   return (

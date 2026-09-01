@@ -14,7 +14,13 @@ import {
   resolveFormValidationCopy,
 } from "@/lib/form-copy";
 import { agentContactSchema, helpTopics, type AgentContactValues } from "@/lib/lead-schemas";
+import {
+  LeadSubmitError,
+  leadFormErrorMessage,
+  readLeadSubmitError,
+} from "@/lib/lead-submit-error";
 import { agency } from "@/lib/site-data";
+import { formPhoneEmailFollowUpDisclosure } from "@/lib/sms-consent";
 import { readStoredMarketingAttribution } from "@/lib/tracking";
 
 type AgentContactFormProps = {
@@ -75,7 +81,12 @@ export function AgentContactForm({
       });
 
       if (!response.ok) {
-        throw new Error("Unable to send your request.");
+        throw new LeadSubmitError(
+          await readLeadSubmitError(
+            response,
+            `We couldn't send that request just now. Please call the office at ${agency.phone}.`,
+          ),
+        );
       }
 
       reset();
@@ -83,7 +94,12 @@ export function AgentContactForm({
       fireLeadConversion("agent-contact", { agent: agentSlug });
     } catch (error) {
       console.error("Agent contact form submission failed", error);
-      setErrorMessage(t("submitError", { phone: agency.phone }));
+      setErrorMessage(
+        leadFormErrorMessage(
+          error,
+          t("submitError", { phone: agency.phone }),
+        ),
+      );
     }
   });
 
@@ -183,6 +199,7 @@ export function AgentContactForm({
         aria-hidden="true"
       />
       <SmsConsentFields formId={formId} register={register} errors={errors} />
+      <p className="text-sm leading-7 text-gray-600">{formPhoneEmailFollowUpDisclosure}</p>
       <button
         type="submit"
         disabled={isSubmitting}

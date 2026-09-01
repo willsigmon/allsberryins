@@ -11,8 +11,6 @@ import {
   quoteInsuranceTypes,
 } from "@/lib/quote-routing";
 
-export const honeypotFieldName = "website";
-
 export const quoteProductSelectionOptions = productSelectionOptions;
 export const leadReferralSources = referralSources;
 export const leadEmployeeOptions = employeeOptions;
@@ -34,6 +32,18 @@ const optionalMessageSchema = z
   .or(z.literal(""));
 
 const honeypotSchema = z.string().max(200).optional().or(z.literal(""));
+
+export function countPhoneDigits(value: string): number {
+  return (value.match(/\d/g) ?? []).length;
+}
+
+export const leadPhoneSchema = z
+  .string()
+  .trim()
+  .min(10, "Phone number is required.")
+  .refine((value) => /^[0-9()+\-\s]+$/.test(value) && countPhoneDigits(value) >= 10, {
+    message: "Enter a valid phone number.",
+  });
 
 export const smsConsentSchema = z.object({
   marketingTextOptIn: z.boolean().optional(),
@@ -64,36 +74,32 @@ const leadAttributionSchema = {
 } satisfies Record<string, z.ZodTypeAny>;
 
 const quoteFormFieldsSchema = z.object({
-    insuranceType: z.enum(quoteInsuranceTypes, {
-      error: "Choose personal, commercial, or life insurance.",
-    }),
-    products: z
-      .array(z.enum(quoteProductSelectionOptions))
-      .min(1, "Select at least one coverage type."),
-    firstName: z.string().trim().min(2, "First name is required."),
-    lastName: z.string().trim().min(2, "Last name is required."),
-    phone: z
-      .string()
-      .trim()
-      .min(10, "Phone number is required.")
-      .regex(/^[0-9()+\-\s]{10,}$/, "Enter a valid phone number."),
-    email: z.string().trim().email("Enter a valid email address."),
-    address: z.string().trim().max(200, "Address must be under 200 characters.").optional().or(z.literal("")),
-    zipCode: z.string().trim().regex(/^\d{5}$/, "Enter a valid 5-digit ZIP code."),
-    referralSource: z.enum(leadReferralSources, {
-      error: "Please tell us how you heard about us.",
-    }),
-    businessName: z
-      .string()
-      .trim()
-      .max(200, "Business name must be under 200 characters.")
-      .optional()
-      .or(z.literal("")),
-    employees: z.enum(leadEmployeeOptions).optional(),
-    message: optionalMessageSchema,
-    honeypot: honeypotSchema,
-    ...smsConsentSchema.shape,
-  });
+  insuranceType: z.enum(quoteInsuranceTypes, {
+    error: "Choose personal, commercial, or life insurance.",
+  }),
+  products: z
+    .array(z.enum(quoteProductSelectionOptions))
+    .min(1, "Select at least one coverage type."),
+  firstName: z.string().trim().min(2, "First name is required."),
+  lastName: z.string().trim().min(2, "Last name is required."),
+  phone: leadPhoneSchema,
+  email: z.string().trim().email("Enter a valid email address."),
+  address: z.string().trim().max(200, "Address must be under 200 characters.").optional().or(z.literal("")),
+  zipCode: z.string().trim().regex(/^\d{5}$/, "Enter a valid 5-digit ZIP code."),
+  referralSource: z.enum(leadReferralSources, {
+    error: "Please tell us how you heard about us.",
+  }),
+  businessName: z
+    .string()
+    .trim()
+    .max(200, "Business name must be under 200 characters.")
+    .optional()
+    .or(z.literal("")),
+  employees: z.enum(leadEmployeeOptions).optional(),
+  message: optionalMessageSchema,
+  honeypot: honeypotSchema,
+  ...smsConsentSchema.shape,
+});
 
 type QuoteFormFieldValues = z.infer<typeof quoteFormFieldsSchema>;
 
@@ -138,11 +144,7 @@ export type QuoteFormValues = z.infer<typeof quoteFormSchema>;
 
 export const agentContactSchema = z.object({
   name: z.string().trim().min(2, "Your name is required."),
-  phone: z
-    .string()
-    .trim()
-    .min(10, "Phone number is required.")
-    .regex(/^[0-9()+\-\s]{10,}$/, "Enter a valid phone number."),
+  phone: leadPhoneSchema,
   email: z.string().trim().email("Enter a valid email address."),
   helpTopic: z.enum(helpTopics, { error: "Select how the agent can help." }),
   message: optionalMessageSchema,
@@ -155,11 +157,7 @@ export type AgentContactValues = z.infer<typeof agentContactSchema>;
 export const evidenceRequestSchema = z.object({
   name: z.string().trim().min(2, "Your name is required."),
   companyOrAgency: z.string().trim().min(2, "Company, lender, or agency name is required."),
-  phone: z
-    .string()
-    .trim()
-    .min(10, "Phone number is required.")
-    .regex(/^[0-9()+\-\s]{10,}$/, "Enter a valid phone number."),
+  phone: leadPhoneSchema,
   email: z.string().trim().email("Enter a valid email address."),
   zipCode: z.string().trim().regex(/^\d{5}$/, "Enter a valid 5-digit ZIP code."),
   requestType: z.enum(evidenceRequestTypes, {

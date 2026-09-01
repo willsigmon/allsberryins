@@ -4,11 +4,13 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { EvidenceRequestForm } from "@/components/forms/evidence-request-form";
 import { PageFaqSection } from "@/components/sections/page-faq-section";
 import { StructuredData } from "@/components/seo/structured-data";
+import { LeftoverNotice } from "@/components/ui/leftover-notice";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { resolveEvidenceAgent } from "@/lib/evidence-entry";
 import { createPageMetadata } from "@/lib/metadata";
 import { createBreadcrumbSchema, organizationSchema } from "@/lib/seo";
-import { agency, getAgentBySlug, primaryProducerSlug } from "@/lib/site-data";
-import { buildTrackedHref, normalizeAgentSlug } from "@/lib/tracking";
+import { agency, agents, primaryProducerSlug } from "@/lib/site-data";
+import { buildTrackedHref } from "@/lib/tracking";
 import { absoluteUrl } from "@/lib/utils";
 
 type EvidencePageProps = {
@@ -42,9 +44,13 @@ export default async function EvidenceOfInsurancePage({ params, searchParams }: 
 
   const audience = typeof sp.audience === "string" ? sp.audience : undefined;
   const entryPoint = typeof sp.entry === "string" ? sp.entry : undefined;
-  const assignedAgentSlug =
-    typeof sp.agent === "string" ? normalizeAgentSlug(sp.agent) : undefined;
-  const assignedAgent = assignedAgentSlug ? getAgentBySlug(assignedAgentSlug) : undefined;
+  const evidenceAgent = resolveEvidenceAgent(
+    typeof sp.agent === "string" ? sp.agent : undefined,
+    agents,
+  );
+  const assignedAgentSlug = evidenceAgent.kind === "known" ? evidenceAgent.slug : undefined;
+  const assignedAgentName = evidenceAgent.kind === "known" ? evidenceAgent.name : undefined;
+  const assignedAgentFirstName = evidenceAgent.kind === "known" ? evidenceAgent.firstName : undefined;
 
   const pageFaqs = [
     { question: t("faqs.q1.question"), answer: t("faqs.q1.answer") },
@@ -105,10 +111,15 @@ export default async function EvidenceOfInsurancePage({ params, searchParams }: 
                 <li>• {t("helpBullet2")}</li>
                 <li>• {t("helpBullet3")}</li>
               </ul>
-              {assignedAgent ? (
+              {assignedAgentName ? (
                 <div className="mt-5 rounded-2xl border border-blue/12 bg-blue-light px-4 py-3 text-sm font-semibold text-gray-900">
-                  {t("preferredFollowUp", { name: assignedAgent.name })}
+                  {t("preferredFollowUp", { name: assignedAgentName })}
                 </div>
+              ) : null}
+              {evidenceAgent.kind === "unknown" ? (
+                <LeftoverNotice className="mt-5">
+                  {t("unknownAgentNotice")}
+                </LeftoverNotice>
               ) : null}
               <p className="mt-5 text-sm font-semibold text-gray-900">
                 {t("callInstead", { phone: agency.phone })}
@@ -135,7 +146,9 @@ export default async function EvidenceOfInsurancePage({ params, searchParams }: 
                 : buildTrackedHref("/contact", {
                     entry: entryPoint ?? "evidence-faq-contact-cta",
                   }),
-              label: assignedAgent ? t("faqs.workWithAgent", { name: assignedAgent.firstName }) : t("faqs.talkToTeam"),
+              label: assignedAgentFirstName
+                ? t("faqs.workWithAgent", { name: assignedAgentFirstName })
+                : t("faqs.talkToTeam"),
             },
             {
               href: buildTrackedHref("/quote", {

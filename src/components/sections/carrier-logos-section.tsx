@@ -6,7 +6,7 @@ import { useTranslations } from "next-intl";
 
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Link } from "@/i18n/navigation";
-import { carrierAccessStat, carrierPartners } from "@/lib/site-data";
+import { listedCarrierCount, carrierPartners } from "@/lib/site-data";
 import { slugify } from "@/lib/utils";
 
 const row1 = carrierPartners.slice(0, 10);
@@ -65,7 +65,7 @@ export function CarrierLogosSection() {
         <SectionHeading
           eyebrow={t("eyebrow")}
           title={t("title")}
-          description={t("description", { count: carrierAccessStat })}
+          description={t("description", { count: listedCarrierCount })}
           align="center"
         />
       </div>

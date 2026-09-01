@@ -14,11 +14,15 @@
     "start": "next start",
     "lint": "eslint src --ext .ts,.tsx",
     "typecheck": "tsc --noEmit --pretty false",
-    "check": "npm run lint && npm run typecheck",
-    "test:node": "node --experimental-strip-types --test src/lib/quote-entry.test.ts src/lib/chat-response.test.ts src/lib/review-sources.test.ts src/lib/address-lookup.test.ts",
+    "test:node": "node --experimental-strip-types --test src/lib/quote-entry.test.ts src/lib/chat-response.test.ts src/lib/review-sources.test.ts src/lib/address-lookup.test.ts src/lib/hero-zip.test.ts src/lib/evidence-entry.test.ts src/lib/lead-submit-error.test.ts src/lib/bilingual-agents.test.ts src/lib/leads-get-honesty.test.ts",
     "test:forms": "node --experimental-strip-types --test src/lib/form-copy.test.ts src/lib/form-i18n.test.ts",
     "test:query": "node --experimental-strip-types --test src/lib/office-hours.test.ts src/lib/locale-query.test.ts src/lib/review-query.test.ts src/lib/blog-filter.test.ts src/lib/places-honesty.test.ts",
     "test:catalog": "node --experimental-strip-types --test src/lib/catalog-leftover.test.ts",
+    "test:missing": "node --experimental-strip-types --test src/lib/missing-catalog-slug.test.ts",
+    "test:home-query": "node --experimental-strip-types --test src/lib/home-leftover.test.ts",
+    "test": "vitest run && npm run test:node && npm run test:forms && npm run test:query && npm run test:catalog && npm run test:missing && npm run test:home-query",
+    "test:watch": "vitest",
+    "check": "npm run lint && npm run typecheck && npm run test",
     "seo:indexnow": "node ./scripts/submit-indexnow.mjs"
   },
   "dependencies": {
@@ -47,6 +51,7 @@
     "eslint": "^9.39.1",
     "eslint-config-next": "16.1.6",
     "tailwindcss": "^4.1.16",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.11"
   }
 }

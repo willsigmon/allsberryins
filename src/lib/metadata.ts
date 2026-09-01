@@ -121,11 +121,35 @@ export function createPageMetadata(options: {
    * and would otherwise exceed the ~70-char search-result truncation.
    */
   absoluteTitle?: boolean;
+  /**
+   * Legal and other English-only pages should canonicalize every locale
+   * variant to the default-locale URL and skip Spanish hreflang / OG
+   * alternates so they do not advertise an untranslated version.
+   */
+  localizeAlternates?: boolean;
 }): Metadata {
-  const { title, description, path, keywords, locale, absoluteTitle } = options;
-  const canonical = localizedPath(locale, path);
+  const {
+    title,
+    description,
+    path,
+    keywords,
+    locale,
+    absoluteTitle,
+    localizeAlternates = true,
+  } = options;
   const englishPath = localizedPath("en", path);
   const spanishPath = localizedPath("es", path);
+  const canonical = localizeAlternates ? localizedPath(locale, path) : englishPath;
+  const languages = localizeAlternates
+    ? {
+        en: englishPath,
+        es: spanishPath,
+        "x-default": englishPath,
+      }
+    : {
+        en: englishPath,
+        "x-default": englishPath,
+      };
 
   return {
     title: absoluteTitle ? { absolute: title } : title,
@@ -133,20 +157,18 @@ export function createPageMetadata(options: {
     keywords: keywords ?? defaultKeywords,
     alternates: {
       canonical,
-      languages: {
-        en: englishPath,
-        es: spanishPath,
-        "x-default": englishPath,
-      },
+      languages,
     },
     openGraph: {
       title: `${title} | Allsberry Insurance Agency`,
       description,
       url: absoluteUrl(canonical),
       locale: locale ? ogLocaleByLocale[locale] ?? "en_US" : "en_US",
-      alternateLocale: Object.entries(ogLocaleByLocale)
-        .filter(([code]) => code !== (locale ?? "en"))
-        .map(([, ogLocale]) => ogLocale),
+      alternateLocale: localizeAlternates
+        ? Object.entries(ogLocaleByLocale)
+            .filter(([code]) => code !== (locale ?? "en"))
+            .map(([, ogLocale]) => ogLocale)
+        : undefined,
       images: [
         {
           url: absoluteUrl("/opengraph-image"),

@@ -57,6 +57,7 @@
     "products": "Productos",
     "contactInfo": "Información de Contacto",
     "privacy": "Política de Privacidad",
+    "terms": "Términos y Condiciones",
     "accessibility": "Accesibilidad",
     "sslEncrypted": "Cifrado SSL",
     "wcagAccessible": "Accesible WCAG",
@@ -83,7 +84,7 @@
       "bundleBody": "Muchos clientes ahorran al combinar casa, auto y otras coberturas en un solo plan. Le mostramos sus opciones.",
       "needProofTitle": "¿Necesita un comprobante?",
       "needProofBody": "Si su banco, arrendador o socio comercial necesita documentación del seguro, omita la cotización y solicítela aquí.",
-      "reviewCount": "5,000+",
+      "reviewCount": "Desde 1994",
       "erinName": "Erin Allsberry",
       "erinTitle": "Dueña y Agente Principal",
       "locationBadge": "Sur de California",
@@ -95,10 +96,10 @@
     "trustBar": {
       "yearsUnit": "Años",
       "yearsLabel": "Sirviendo al Sur de California",
-      "householdsUnit": "Familias y Negocios",
-      "householdsLabel": "Protegidos en SoCal",
+      "teamUnit": "Agentes nombrados",
+      "teamLabel": "En este sitio",
       "carriersUnit": "Aseguradoras",
-      "carriersLabel": "Mercados que podemos comparar"
+      "carriersLabel": "Socios listados"
     },
     "valueProps": {
       "eyebrow": "Por qué nos eligen",
@@ -118,7 +119,7 @@
     "productGrid": {
       "eyebrow": "Líneas de cobertura",
       "title": "Comparemos el Mercado",
-      "description": "Trabajamos con más de 200 aseguradoras, así siempre hay una solución para su cobertura y presupuesto.",
+      "description": "Comparamos Farmers y las demás aseguradoras listadas en este sitio para que pueda revisar opciones de cobertura que encajen con su situación.",
       "personalTitle": "Seguro Personal",
       "personalDescription": "Cobertura para su casa, su auto y las personas que más le importan.",
       "commercialTitle": "Seguro Comercial",
@@ -143,7 +144,7 @@
     "carrierLogos": {
       "eyebrow": "Acceso a aseguradoras",
       "title": "Una Muestra de los Mercados Que Podemos Comparar",
-      "description": "Estos logotipos son una muestra del acceso que la agencia tiene a aseguradoras. El acceso total va mucho más allá de las {count}+ opciones que aparecen en la barra de confianza.",
+      "description": "Estos logotipos son las {count} aseguradoras asociadas que aparecen en este sitio — el mismo listado de la página de aseguradoras.",
       "carrierLogoAlt": "Logotipo de {carrier}",
       "carrierLearnMore": "Seguros {carrier} — más información",
       "seeAllCta": "Ver todas las aseguradoras"
@@ -155,7 +156,8 @@
       "emailAgent": "Escribir a {name}",
       "meetAgent": "Conozca a {name}",
       "emailShort": "Correo",
-      "learnMore": "Ver más"
+      "learnMore": "Ver más",
+      "viewDirectory": "Ver el directorio del equipo"
     },
     "ctaBanner": {
       "eyebrow": "Cotización gratis",
@@ -164,6 +166,17 @@
       "coverageLines": "Casa • Auto • Vida • Negocio",
       "region": "Sur de California",
       "cta": "Cotización Gratis"
+    },
+    "leftover": {
+      "unknownAgent": "Ese enlace de agente no es una persona en esta página de inicio. No inventamos a un compañero.",
+      "knownAgent": "Esta es la página de inicio de la agencia, no la bandeja privada de {name}.",
+      "knownAgentCta": "Abrir la página de {name}",
+      "unknownProduct": "No inventamos una línea de cobertura para ese enlace de producto.",
+      "knownProduct": "Esta página de inicio no es un formulario de cotización, y esa línea no está arriba. {name} sí está listada: solicítela desde la página de cotización.",
+      "knownProductCta": "Solicitar una cotización de {name}",
+      "knownHeroProduct": "Esta página de inicio no es un formulario de cotización. {name} queda seleccionada arriba para que pueda empezar desde ahí.",
+      "knownHeroProductCta": "Solicitar una cotización de {name}",
+      "reset": "Ver la página de inicio habitual"
     },
     "reviewsSection": {
       "eyebrow": "Testimonios",
@@ -256,6 +269,10 @@
     "requestProof": "Solicitar Comprobante",
     "callCta": "Llamar al {phone}",
     "connectWithUs": "Conecte con nosotros",
+    "officeAddress": "Oficina",
+    "openMap": "Abrir en Google Maps",
+    "feedbackHeading": "Comentario privado",
+    "feedbackBody": "Escriba a la oficina o llame. Esta página no publica reseñas.",
     "faqs": {
       "heading": "Preguntas de contacto que nos hacen más seguido",
       "description": "Respuestas rápidas a las preguntas que más escuchamos — para que nos contacte de la forma que mejor le funcione.",
@@ -313,9 +330,9 @@
   },
   "carriersPage": {
     "metaTitle": "Nuestras aseguradoras",
-    "metaDescription": "Allsberry Insurance Agency compara Farmers, Travelers, The Hartford, Progressive, Liberty Mutual, Chubb y otras aseguradoras calificación A.",
+    "metaDescription": "Allsberry Insurance Agency compara Farmers, Travelers, The Hartford, Progressive, Liberty Mutual, Chubb y las demás aseguradoras listadas en este sitio.",
     "eyebrow": "Aseguradoras",
-    "heading": "Acceso a más de 200 aseguradoras de confianza",
+    "heading": "Aseguradoras con las que trabajamos",
     "subheading": "Nosotros comparamos el mercado por usted. Estas son algunas de las aseguradoras con las que trabajamos para encontrarle la cobertura correcta.",
     "cardHeading": "Trabajar con {carrier}",
     "visitCarrier": "Visitar {carrier}",
@@ -327,6 +344,7 @@
     "eyebrow": "Recursos",
     "heading": "Guías y herramientas de seguros",
     "subheading": "Recursos en lenguaje sencillo para entender su cobertura.",
+    "englishOnlyNotice": "Estas guías actualmente se publican en inglés. Si prefiere ayuda en español, llámenos y repasamos los detalles con usted.",
     "blogHeading": "Del blog",
     "guidesHeading": "Guías de cobertura",
     "viewAll": "Ver todo",
@@ -345,7 +363,7 @@
     "thankYou": "Gracias — nos alegra la semana",
     "privateFeedbackIntro": "¿Algo no salió como esperaba?",
     "privateFeedbackLink": "Cuéntenos en privado",
-    "privateFeedbackOutro": "— su nota llega directo a Erin.",
+    "privateFeedbackOutro": "— escriba o llame a la oficina. Este sitio no tiene un formulario de comentarios privados.",
     "callOfficeIntro": "O llame a la oficina directamente al",
     "leftoverUnknownAgent": "No inventamos una bandeja para “{raw}”. Las reseñas van al listado de Google de la agencia.",
     "leftoverKnownAgent": "Las reseñas para {name} van al listado de Google de la agencia. No inventamos una bandeja privada.",
@@ -365,6 +383,7 @@
     "helpBullet2": "Agregue una fecha límite si escrow o aseguramiento lo esperan.",
     "helpBullet3": "Incluya cualquier nota de préstamo, propiedad o certificado que ya tenga.",
     "preferredFollowUp": "Seguimiento preferido: {name}",
+    "unknownAgentNotice": "Ese enlace de agente no está en este sitio. La solicitud sigue llegando a la oficina — no inventamos un nombre ni un tipo de cobertura.",
     "callInstead": "¿Prefiere llamar? {phone}",
     "faqs": {
       "heading": "Preguntas sobre documentación que respondemos aquí mismo",
@@ -413,6 +432,9 @@
     "showingCategory": "Mostrando artículos de {category}."
   },
   "agents": {
+    "metaTitle": "Nuestros Agentes",
+    "metaDescription": "Conozca al equipo licenciado de Allsberry Insurance Agency en Corona, California. Llame, escriba o empiece una cotización con un agente local.",
+    "eyebrow": "Nuestro equipo",
     "listHeading": "Nuestros agentes",
     "listSubheading": "Licenciados, locales y fáciles de contactar.",
     "backToTeam": "Volver al equipo",
@@ -439,6 +461,20 @@
     "lookslikeThisPageIsntHere": "Parece que esta página no está aquí.",
     "subheading": "Quizá el enlace quedó viejo o la página se movió. Aquí es a donde llega la mayoría de los visitantes — o llámenos al",
     "goHome": "Ir al inicio",
+    "leftover": {
+      "agent": {
+        "heading": "Esa página de agente no está en este sitio",
+        "body": "Solo listamos a las personas del equipo actual. Este enlace no es la página de un agente licenciado — o llámenos al"
+      },
+      "carrier": {
+        "heading": "Esa página de aseguradora no está en este sitio",
+        "body": "Solo listamos las aseguradoras de la página de socios. Este enlace no es una cita — o llámenos al"
+      },
+      "article": {
+        "heading": "Ese artículo no está publicado aquí",
+        "body": "No inventamos publicaciones para enlaces viejos. Aquí es a donde llega la mayoría de los visitantes — o llámenos al"
+      }
+    },
     "popularLinks": {
       "quoteLabel": "Obtener cotización",
       "quoteDesc": "Casa, auto, negocio, vida",
@@ -447,7 +483,7 @@
       "proofLabel": "Comprobante de seguro",
       "proofDesc": "Certificados y COIs",
       "carriersLabel": "Aseguradoras asociadas",
-      "carriersDesc": "Más de 20 aseguradoras comparadas",
+      "carriersDesc": "Socios listados en este sitio",
       "blogLabel": "Blog y guías",
       "blogDesc": "Información sobre cobertura",
       "contactLabel": "Contáctenos",
@@ -540,7 +576,7 @@
       "description": "Nuestro equipo le da respuestas claras para que elija el plan correcto."
     },
     "topRated": {
-      "title": "Mejor Soporte",
+      "title": "Apoyo en reclamos",
       "description": "Estamos con usted antes, durante y después de un reclamo. No tendrá que enfrentarlo solo."
     }
   },
@@ -563,7 +599,7 @@
     },
     "q5": {
       "question": "¿Mis datos son privados y seguros?",
-      "answer": "Sí. Sus llamadas, mensajes y correos con nosotros están protegidos. Nunca compartimos su información personal sin su permiso. Puede leer más sobre cómo protegemos sus datos en el centro de privacidad de Farmers."
+      "answer": "Usamos la información que nos envía para responder a su solicitud y, cuando hace falta, para cotizar cobertura con aseguradoras. Los números de opt-in de SMS no se comparten con terceros para marketing. Lea nuestra Política de Privacidad para más detalles."
     }
   },
   "reviews": {
@@ -641,13 +677,16 @@
     "zipPlaceholder": "Código postal",
     "bundleTitle": "Combine y ahorre",
     "bundleBody": "Muchos clientes ahorran al combinar casa, auto y otras coberturas en un solo plan. Le mostramos sus opciones.",
+    "bundleSince": "Sirviendo al Sur de California desde {year}",
     "needProofTitle": "¿Necesita comprobante?",
     "needProofBody": "Si su banco, arrendador o socio comercial necesita documentación del seguro, omita la cotización y solicítela aquí.",
     "startProofRequest": "Solicitar comprobante",
     "startQuote": "Comenzar Cotización",
-    "reviewCount": "5,000+",
-    "ratingAria": "Calificación de 5 de 5 estrellas",
+    "reviewCount": "Desde 1994",
+    "ratingAria": "Sirviendo al Sur de California desde 1994",
+    "sinceFounded": "Sirviendo al Sur de California desde {year}",
     "zipLabel": "Código postal",
+    "zipLeftover": "Ingrese un código postal de 5 dígitos de EE. UU., o déjelo en blanco. No inventamos un ZIP.",
     "erinTitle": "Dueña y Agente Principal",
     "primaryProducerLabel": "Productor principal",
     "producerProofLabel": "Enfoque al cliente",
@@ -704,19 +743,26 @@
     "logoAlt": "Logotipo de {carrier}",
     "eyebrow": "Aseguradora asociada",
     "heading": "Seguros de {carrier} en Corona y el Sur de California",
-    "intro": "Como agencia independiente, Allsberry coloca su cobertura con {carrier} cuando es la opción correcta — y la compara con más de 20 aseguradoras para que no quede atado a una sola cotización.",
+    "intro": "Como agencia independiente, Allsberry coloca su cobertura con {carrier} cuando es la opción correcta — y la compara con las demás aseguradoras listadas en este sitio para que no quede atado a una sola cotización.",
     "howWeUse": "Cómo trabajamos con {carrier}",
     "howWeUseBody": "Algunas aseguradoras son fuertes en seguros de vivienda. Otras en pequeños negocios, autos comerciales, pólizas paraguas o vida. Adaptamos su situación a la aseguradora cuyo proceso de suscripción y precio tengan sentido para usted — y la revisamos en la renovación cuando el mercado cambia.",
     "talkToPerson": "Hable con una persona real",
     "talkToPersonBody": "Llame a la oficina al <phone></phone> o solicite una cotización comparativa en línea. En cualquier caso, le atenderá un agente con licencia — no un guión de centro de llamadas.",
     "compareQuote": "Comparar cotización de {carrier}",
     "whyIndependent": "¿Por qué acudir a un agente independiente para {carrier}?",
-    "benefitCompare": "Una sola comparación entre {carrier} y más de 20 aseguradoras — no una única cotización directa.",
+    "benefitCompare": "Una sola comparación entre {carrier} y las demás aseguradoras listadas en este sitio — no una única cotización directa.",
     "benefitAdvocacy": "Apoyo local al momento de un reclamo; le ayudamos a gestionar directamente con el ajustador de {carrier}.",
     "benefitReview": "Revisión anual de cobertura sin costo para que su póliza se mantenga al día con los cambios de su vida.",
     "benefitNoPressure": "Sin presión para combinar pólizas — si {carrier} solo conviene para un ramo, se lo decimos.",
     "otherCarriers": "Otras aseguradoras con las que trabajamos",
     "seeAllCarriers": "Ver todas las aseguradoras asociadas →"
+  },
+  "errorPage": {
+    "eyebrow": "Algo falló",
+    "heading": "Esta página no cargó.",
+    "body": "No inventamos un estado ni un número de ticket. Intente de nuevo, o comuníquese con la oficina al",
+    "tryAgain": "Intentar de nuevo",
+    "goHome": "Ir al inicio"
   },
   "blogPost": {
     "backToBlog": "Volver al blog",
@@ -727,7 +773,8 @@
     "requestProof": "Solicitar comprobante",
     "relatedGuides": "Guías de seguros de California relacionadas",
     "relatedReading": "Lecturas relacionadas",
-    "relatedArticle": "Artículo relacionado"
+    "relatedArticle": "Artículo relacionado",
+    "byAuthor": "Por {author}"
   },
   "agentProfile": {
     "directAgentPage": "Página directa del agente",
@@ -814,7 +861,7 @@
     "quoteSubmit": "Obtener mi cotización",
     "sendRequest": "Enviar solicitud",
     "quoteSubmitNote": "Al enviar, pide y autoriza a nuestro equipo a darle seguimiento por llamada o correo sobre esta solicitud. Esto no autoriza mensajes de texto; los textos son opcionales y solo se envían si selecciona una opción arriba.",
-    "evidenceSubmitNote": "Esta solicitud es para certificados, comprobantes de cobertura y trámites urgentes con prestamistas o escrow.",
+    "evidenceSubmitNote": "Esta solicitud es para certificados, comprobantes de cobertura y trámites urgentes con prestamistas o escrow. Al enviar, pide y autoriza a nuestro equipo a darle seguimiento por llamada o correo sobre esta solicitud. Esto no autoriza mensajes de texto; los textos son opcionales y solo se envían si selecciona una opción arriba.",
     "quoteSuccess": "Gracias. Le contactaremos en un día hábil.",
     "evidenceSuccess": "Gracias. Recibimos su solicitud y el equipo le dará seguimiento con la documentación correcta lo antes posible.",
     "agentSuccess": "Gracias por escribirnos. {name} o alguien del equipo le contactará pronto.",

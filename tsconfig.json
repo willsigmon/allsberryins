@@ -50,6 +50,8 @@
     "src/**/*.test.ts",
     ".next-build",
     ".next-demo-build",
-    ".app-build"
+    ".app-build",
+    "src/lib/schema-honesty.test.ts",
+    "src/lib/home-leftover.test.ts"
   ]
 }

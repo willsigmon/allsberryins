@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 import { placesMethodHonesty } from "@/lib/places-honesty";
+import { allowPlacesRequest } from "@/lib/places-rate-limit";
 import { agency } from "@/lib/site-data";
 
 export function GET() {
@@ -9,33 +10,33 @@ export function GET() {
   });
 }
 
-const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
-
-function checkRateLimit(ip: string): boolean {
-  const now = Date.now();
-  const record = rateLimitMap.get(ip);
-
-  if (!record || now > record.resetAt) {
-    rateLimitMap.set(ip, { count: 1, resetAt: now + 60_000 });
-    return true;
-  }
-  if (record.count >= 60) return false;
-  record.count++;
-  return true;
-}
 
 export async function POST(req: NextRequest) {
-  const ip = req.headers.get("x-forwarded-for")?.split(",")[0] ?? "unknown";
-
-  if (!checkRateLimit(ip)) {
+  if (!allowPlacesRequest(req)) {
     return NextResponse.json(
       { error: "Too many requests. Please slow down." },
       { status: 429 },
     );
   }
 
-  const body = await req.json();
-  const { input, sessionToken } = body;
+  let body: unknown;
+  try {
+    body = await req.json();
+  } catch {
+    return NextResponse.json(
+      { error: "Invalid JSON format." },
+      { status: 400 },
+    );
+  }
+
+  const input =
+    typeof body === "object" && body !== null && "input" in body
+      ? (body as { input?: unknown }).input
+      : undefined;
+  const sessionToken =
+    typeof body === "object" && body !== null && "sessionToken" in body
+      ? (body as { sessionToken?: unknown }).sessionToken
+      : undefined;
 
   if (!input || typeof input !== "string" || input.length < 3) {
     return NextResponse.json(
@@ -61,7 +62,7 @@ export async function POST(req: NextRequest) {
     url.searchParams.set("types", "address");
     url.searchParams.set("components", "country:us");
     url.searchParams.set("key", apiKey);
-    if (sessionToken) {
+    if (typeof sessionToken === "string" && sessionToken) {
       url.searchParams.set("sessiontoken", sessionToken);
     }
 
