@@ -129,7 +129,7 @@ export default async function BlogPage({ params, searchParams }: BlogPageProps) 
             <LeftoverQueryNotice>{t("leftoverEmptyFilter")}</LeftoverQueryNotice>
           </div>
         ) : null}
-        {filter.appliedTag || filter.appliedCategory ? (
+        {!filter.emptyFilter && (filter.appliedTag || filter.appliedCategory) ? (
           <p className="mt-6 text-sm text-gray-600">
             {filter.appliedTag ? t("showingTag", { tag: filter.appliedTag }) : null}
             {filter.appliedTag && filter.appliedCategory ? " " : null}
