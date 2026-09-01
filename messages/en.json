@@ -31,7 +31,7 @@
     "email": "Email",
     "emailUs": "Email us",
     "address": "Address",
-    "hours": "Monday–Friday, 8:00 AM – 5:00 PM",
+    "hours": "Monday–Friday, 8:00 AM – 5:00 PM Pacific Time",
     "hoursLabel": "Hours",
     "callsAndTexts": "Calls & texts accepted",
     "serviceArea": "Southern California",
@@ -187,7 +187,7 @@
     "stats": {
       "servingSinceLabel": "Serving since",
       "hoursLabel": "Monday – Friday",
-      "hoursValue": "8 AM – 5 PM",
+      "hoursValue": "8 AM – 5 PM PT",
       "bilingualLabel": "Se habla Español",
       "bilingualValue": "Bilingual Team"
     },
@@ -335,7 +335,13 @@
     "privateFeedbackIntro": "Something didn't land the way it should have?",
     "privateFeedbackLink": "Tell us privately",
     "privateFeedbackOutro": "— a note goes straight to Erin.",
-    "callOfficeIntro": "Or call the office directly at"
+    "callOfficeIntro": "Or call the office directly at",
+    "leftoverUnknownAgent": "We do not invent an agent inbox for “{raw}”. Reviews go to the sourced Google listing.",
+    "leftoverKnownAgent": "Reviews for {name} go to the agency Google listing. We do not invent a private review inbox.",
+    "leftoverUnknownSource": "We do not invent a “{raw}” review form. This page opens the sourced Google listing.",
+    "leftoverYelpSource": "This page opens the sourced Google review link. We do not invent a Yelp review form.",
+    "leftoverUnknownIntent": "We do not invent a “{raw}” flow. This page is a public Google review.",
+    "leftoverFeedbackIntent": "This page opens a public Google review. Private feedback is email or a phone call — we do not invent a feedback form here."
   },
   "evidenceOfInsurance": {
     "metaTitle": "Proof of Insurance",
@@ -386,7 +392,12 @@
       "tips": "Tips",
       "guides": "Guides",
       "news": "Agency News"
-    }
+    },
+    "leftoverUnknownTag": "No articles are tagged “{raw}”. We do not invent posts.",
+    "leftoverUnknownCategory": "“{raw}” is not a published category. We do not invent one.",
+    "leftoverEmptyFilter": "No articles match that leftover filter. We do not invent posts.",
+    "showingTag": "Showing articles tagged {tag}.",
+    "showingCategory": "Showing {category} articles."
   },
   "agents": {
     "listHeading": "Our agents",

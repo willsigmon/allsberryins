@@ -15,6 +15,7 @@
     "lint": "eslint src --ext .ts,.tsx",
     "typecheck": "tsc --noEmit --pretty false",
     "check": "npm run lint && npm run typecheck",
+    "test:query": "node --experimental-strip-types --test src/lib/office-hours.test.ts src/lib/locale-query.test.ts src/lib/review-query.test.ts src/lib/blog-filter.test.ts src/lib/places-honesty.test.ts",
     "seo:indexnow": "node ./scripts/submit-indexnow.mjs"
   },
   "dependencies": {

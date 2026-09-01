@@ -3,8 +3,10 @@ import { ArrowRight } from "lucide-react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { StructuredData } from "@/components/seo/structured-data";
+import { LeftoverQueryNotice } from "@/components/ui/leftover-query-notice";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Link } from "@/i18n/navigation";
+import { resolveBlogFilter, type BlogFilterLeftover } from "@/lib/blog-filter";
 import { createPageMetadata } from "@/lib/metadata";
 import { blogPosts } from "@/lib/site-data";
 import { createBreadcrumbSchema } from "@/lib/seo";
@@ -12,7 +14,40 @@ import { absoluteUrl } from "@/lib/utils";
 
 type BlogPageProps = {
   params: Promise<{ locale: string }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 };
+
+function blogCategoryLabel(
+  category: string,
+  t: Awaited<ReturnType<typeof getTranslations>>,
+) {
+  switch (category) {
+    case "tips":
+      return t("categories.tips");
+    case "guides":
+      return t("categories.guides");
+    case "news":
+      return t("categories.news");
+    default:
+      return category;
+  }
+}
+
+function leftoverCopy(
+  leftover: BlogFilterLeftover,
+  t: Awaited<ReturnType<typeof getTranslations>>,
+) {
+  switch (leftover.kind) {
+    case "unknown-tag":
+      return t("leftoverUnknownTag", { raw: leftover.raw });
+    case "unknown-category":
+      return t("leftoverUnknownCategory", { raw: leftover.raw });
+    default: {
+      const _never: never = leftover;
+      return _never;
+    }
+  }
+}
 
 export async function generateMetadata({ params }: BlogPageProps): Promise<Metadata> {
   const { locale } = await params;
@@ -25,10 +60,15 @@ export async function generateMetadata({ params }: BlogPageProps): Promise<Metad
   });
 }
 
-export default async function BlogPage({ params }: BlogPageProps) {
+export default async function BlogPage({ params, searchParams }: BlogPageProps) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("blog");
+  const query = await searchParams;
+  const tag = typeof query.tag === "string" ? query.tag : undefined;
+  const category = typeof query.category === "string" ? query.category : undefined;
+  const filter = resolveBlogFilter({ tag, category }, blogPosts);
+  const visiblePosts = filter.emptyFilter ? [] : filter.posts;
 
   const breadcrumbSchema = createBreadcrumbSchema([
     { name: "Home", path: "/" },
@@ -39,7 +79,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
     "@type": "CollectionPage",
     name: "Insurance articles and practical answers",
     url: absoluteUrl("/blog"),
-    hasPart: blogPosts.map((post) => ({
+    hasPart: visiblePosts.map((post) => ({
       "@type": "BlogPosting",
       headline: post.title,
       url: absoluteUrl(`/blog/${post.slug}`),
@@ -50,7 +90,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
   const itemListSchema = {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    itemListElement: blogPosts.map((post, index) => ({
+    itemListElement: visiblePosts.map((post, index) => ({
       "@type": "ListItem",
       position: index + 1,
       url: absoluteUrl(`/blog/${post.slug}`),
@@ -75,8 +115,33 @@ export default async function BlogPage({ params }: BlogPageProps) {
             {t("articlesInEnglishNotice")}
           </div>
         )}
+        {filter.leftovers.length ? (
+          <div className="mt-6 grid gap-3">
+            {filter.leftovers.map((leftover) => (
+              <LeftoverQueryNotice key={`${leftover.kind}-${leftover.raw}`}>
+                {leftoverCopy(leftover, t)}
+              </LeftoverQueryNotice>
+            ))}
+          </div>
+        ) : null}
+        {filter.emptyFilter ? (
+          <div className="mt-6">
+            <LeftoverQueryNotice>{t("leftoverEmptyFilter")}</LeftoverQueryNotice>
+          </div>
+        ) : null}
+        {filter.appliedTag || filter.appliedCategory ? (
+          <p className="mt-6 text-sm text-gray-600">
+            {filter.appliedTag ? t("showingTag", { tag: filter.appliedTag }) : null}
+            {filter.appliedTag && filter.appliedCategory ? " " : null}
+            {filter.appliedCategory
+              ? t("showingCategory", {
+                  category: blogCategoryLabel(filter.appliedCategory, t),
+                })
+              : null}
+          </p>
+        ) : null}
         <div className="mt-12 grid gap-6 lg:grid-cols-3">
-          {blogPosts.map((post) => (
+          {visiblePosts.map((post) => (
             <article
               key={post.slug}
               className="rounded-[2rem] border border-gray-100 p-6 shadow-[0_20px_50px_-42px_rgba(0,32,92,0.5)]"

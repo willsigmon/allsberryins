@@ -1,5 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 
+import { placesMethodHonesty } from "@/lib/places-honesty";
+import { agency } from "@/lib/site-data";
+
+export function GET() {
+  return NextResponse.json(placesMethodHonesty("GET", ["POST"], agency), {
+    status: 405,
+  });
+}
+
 const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
 
 function checkRateLimit(ip: string): boolean {

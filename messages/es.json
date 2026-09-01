@@ -31,7 +31,7 @@
     "email": "Correo",
     "emailUs": "Escríbanos",
     "address": "Dirección",
-    "hours": "Lunes a viernes, 8:00 AM – 5:00 PM",
+    "hours": "Lunes a viernes, 8:00 AM – 5:00 PM hora del Pacífico",
     "hoursLabel": "Horario",
     "callsAndTexts": "Aceptamos llamadas y mensajes",
     "serviceArea": "Sur de California",
@@ -187,7 +187,7 @@
     "stats": {
       "servingSinceLabel": "Sirviendo desde",
       "hoursLabel": "Lunes – Viernes",
-      "hoursValue": "8 AM – 5 PM",
+      "hoursValue": "8 AM – 5 PM PT",
       "bilingualLabel": "Se habla Español",
       "bilingualValue": "Equipo Bilingüe"
     },
@@ -335,7 +335,13 @@
     "privateFeedbackIntro": "¿Algo no salió como esperaba?",
     "privateFeedbackLink": "Cuéntenos en privado",
     "privateFeedbackOutro": "— su nota llega directo a Erin.",
-    "callOfficeIntro": "O llame a la oficina directamente al"
+    "callOfficeIntro": "O llame a la oficina directamente al",
+    "leftoverUnknownAgent": "No inventamos una bandeja para “{raw}”. Las reseñas van al listado de Google de la agencia.",
+    "leftoverKnownAgent": "Las reseñas para {name} van al listado de Google de la agencia. No inventamos una bandeja privada.",
+    "leftoverUnknownSource": "No inventamos un formulario de reseñas “{raw}”. Esta página abre el listado de Google.",
+    "leftoverYelpSource": "Esta página abre el enlace de reseñas de Google. No inventamos un formulario de Yelp.",
+    "leftoverUnknownIntent": "No inventamos un flujo “{raw}”. Esta página es una reseña pública de Google.",
+    "leftoverFeedbackIntent": "Esta página abre una reseña pública de Google. Los comentarios privados son correo o una llamada — no inventamos un formulario aquí."
   },
   "evidenceOfInsurance": {
     "metaTitle": "Comprobante de Seguro",
@@ -386,7 +392,12 @@
       "tips": "Consejos",
       "guides": "Guías",
       "news": "Noticias de la agencia"
-    }
+    },
+    "leftoverUnknownTag": "No hay artículos con la etiqueta “{raw}”. No inventamos publicaciones.",
+    "leftoverUnknownCategory": "“{raw}” no es una categoría publicada. No inventamos una.",
+    "leftoverEmptyFilter": "Ningún artículo coincide con ese filtro residual. No inventamos publicaciones.",
+    "showingTag": "Mostrando artículos con la etiqueta {tag}.",
+    "showingCategory": "Mostrando artículos de {category}."
   },
   "agents": {
     "listHeading": "Nuestros agentes",
