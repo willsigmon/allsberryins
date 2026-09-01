@@ -747,5 +747,109 @@
       "md": "Standard",
       "lg": "Large"
     }
+  },
+  "forms": {
+    "insuranceKindLegend": "What kind of insurance are you looking for?",
+    "coverageNeedsLegend": "Coverage needs",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "fullName": "Name",
+    "phone": "Phone",
+    "email": "Email",
+    "address": "Address",
+    "zipCode": "ZIP Code",
+    "businessName": "Business Name",
+    "referralSource": "How did you hear about us?",
+    "employees": "Number of Employees",
+    "messageOptional": "Message (optional)",
+    "notesOptional": "Notes (optional)",
+    "companyLender": "Company / lender / agency",
+    "requestType": "Request type",
+    "requestedFor": "Requested for",
+    "dueDateOptional": "Need-by date (optional)",
+    "helpTopic": "How can I help?",
+    "selectOne": "Select one",
+    "firstNamePlaceholder": "First name",
+    "lastNamePlaceholder": "Last name",
+    "fullNamePlaceholder": "Your full name",
+    "phonePlaceholder": "(555) 555-5555",
+    "emailPlaceholder": "you@example.com",
+    "addressPlaceholder": "123 Main St, Corona, CA",
+    "zipPlaceholder": "92878",
+    "businessNamePlaceholder": "Acme Plumbing LLC",
+    "companyPlaceholder": "Who needs the proof?",
+    "requestedForPlaceholder": "Escrow, lender, landlord, vendor, HOA, or client",
+    "quoteMessagePlaceholder": "Tell us anything helpful about your coverage needs.",
+    "evidenceMessagePlaceholder": "Share any loan number, escrow context, property details, or instructions that will help us move faster.",
+    "agentMessagePlaceholder": "Tell {firstName} a little bit about what you need.",
+    "quoteSubmit": "Get My Quote",
+    "sendRequest": "Send Request",
+    "quoteSubmitNote": "By submitting, you ask and authorize our team to follow up by live phone call or email about this specific request. This does not authorize text messages; texts are optional and only sent when you select an option above.",
+    "evidenceSubmitNote": "This request is built for certificates, proof of coverage, and time-sensitive lender or escrow follow-up.",
+    "quoteSuccess": "Thank you! We'll be in touch within one business day.",
+    "evidenceSuccess": "Thanks. We received your request and the team will follow up with the right documentation as quickly as possible.",
+    "agentSuccess": "Thanks for reaching out. {name} or someone from the team will be in touch shortly.",
+    "submitError": "Something went wrong sending your request. Please call us at {phone}.",
+    "leftoverZip": "That ZIP is not a 5-digit U.S. ZIP. Type it in the form — we do not invent a ZIP.",
+    "leftoverAudience": "That link mentioned “{raw}”, which is not a request type we use. Tell us who needs the proof. We do not invent a recipient.",
+    "audienceContext": "Request context: {audience}",
+    "insuranceType": {
+      "personal": {
+        "label": "Personal",
+        "description": "Home, auto, renters, condo, and umbrella coverage"
+      },
+      "commercial": {
+        "label": "Commercial",
+        "description": "Business and workers compensation coverage"
+      },
+      "life": {
+        "label": "Life",
+        "description": "Life insurance for the people who depend on you"
+      }
+    },
+    "referral": {
+      "realEstateAgent": "Real Estate Agent",
+      "onlineSearch": "Online Search",
+      "referral": "Referral",
+      "socialMedia": "Social Media",
+      "other": "Other"
+    },
+    "evidenceType": {
+      "proof": "Proof of Insurance",
+      "businessCoi": "Business Proof of Insurance (COI)",
+      "bankLender": "Update for My Bank or Lender",
+      "buyingSelling": "Paperwork for Buying or Selling a Home",
+      "other": "Other"
+    },
+    "helpTopic": {
+      "home": "Home Insurance",
+      "auto": "Auto Insurance",
+      "business": "Business Insurance",
+      "workersComp": "Workers Comp",
+      "life": "Life Insurance",
+      "other": "Other"
+    },
+    "errors": {
+      "insuranceType": "Choose personal, commercial, or life insurance.",
+      "products": "Select at least one coverage type.",
+      "firstName": "First name is required.",
+      "lastName": "Last name is required.",
+      "fullName": "Your name is required.",
+      "phoneRequired": "Phone number is required.",
+      "phoneInvalid": "Enter a valid phone number.",
+      "email": "Enter a valid email address.",
+      "addressLength": "Address must be under 200 characters.",
+      "zip": "Enter a valid 5-digit ZIP code.",
+      "referral": "Please tell us how you heard about us.",
+      "businessNameLength": "Business name must be under 200 characters.",
+      "productsMismatch": "Choose coverage options that match the selected insurance type.",
+      "employees": "Please choose the number of employees.",
+      "businessNameRequired": "Business name is required for commercial quotes.",
+      "messageLength": "Keep the message under 1000 characters.",
+      "company": "Company, lender, or agency name is required.",
+      "requestType": "Select the type of request.",
+      "requestedFor": "Tell us who the proof is for.",
+      "helpTopic": "Select how the agent can help."
+    }
   }
 }

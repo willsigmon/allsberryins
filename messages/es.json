@@ -747,5 +747,109 @@
       "md": "Estándar",
       "lg": "Grande"
     }
+  },
+  "forms": {
+    "insuranceKindLegend": "¿Qué tipo de seguro busca?",
+    "coverageNeedsLegend": "Cobertura que necesita",
+    "firstName": "Nombre",
+    "lastName": "Apellido",
+    "fullName": "Nombre",
+    "phone": "Teléfono",
+    "email": "Correo",
+    "address": "Dirección",
+    "zipCode": "Código postal",
+    "businessName": "Nombre del negocio",
+    "referralSource": "¿Cómo se enteró de nosotros?",
+    "employees": "Número de empleados",
+    "messageOptional": "Mensaje (opcional)",
+    "notesOptional": "Notas (opcional)",
+    "companyLender": "Empresa / prestamista / agencia",
+    "requestType": "Tipo de solicitud",
+    "requestedFor": "Solicitado para",
+    "dueDateOptional": "Fecha límite (opcional)",
+    "helpTopic": "¿En qué le puedo ayudar?",
+    "selectOne": "Seleccione una opción",
+    "firstNamePlaceholder": "Nombre",
+    "lastNamePlaceholder": "Apellido",
+    "fullNamePlaceholder": "Su nombre completo",
+    "phonePlaceholder": "(555) 555-5555",
+    "emailPlaceholder": "usted@ejemplo.com",
+    "addressPlaceholder": "123 Main St, Corona, CA",
+    "zipPlaceholder": "92878",
+    "businessNamePlaceholder": "Acme Plumbing LLC",
+    "companyPlaceholder": "¿Quién necesita el comprobante?",
+    "requestedForPlaceholder": "Escrow, prestamista, arrendador, proveedor, HOA o cliente",
+    "quoteMessagePlaceholder": "Cuéntenos cualquier detalle útil sobre la cobertura que necesita.",
+    "evidenceMessagePlaceholder": "Comparta número de préstamo, contexto de escrow, datos de la propiedad o instrucciones que nos ayuden a avanzar más rápido.",
+    "agentMessagePlaceholder": "Cuéntele a {firstName} un poco sobre lo que necesita.",
+    "quoteSubmit": "Obtener mi cotización",
+    "sendRequest": "Enviar solicitud",
+    "quoteSubmitNote": "Al enviar, pide y autoriza a nuestro equipo a darle seguimiento por llamada o correo sobre esta solicitud. Esto no autoriza mensajes de texto; los textos son opcionales y solo se envían si selecciona una opción arriba.",
+    "evidenceSubmitNote": "Esta solicitud es para certificados, comprobantes de cobertura y trámites urgentes con prestamistas o escrow.",
+    "quoteSuccess": "Gracias. Le contactaremos en un día hábil.",
+    "evidenceSuccess": "Gracias. Recibimos su solicitud y el equipo le dará seguimiento con la documentación correcta lo antes posible.",
+    "agentSuccess": "Gracias por escribirnos. {name} o alguien del equipo le contactará pronto.",
+    "submitError": "No pudimos enviar su solicitud. Llámenos al {phone}.",
+    "leftoverZip": "Ese código no es un ZIP de 5 dígitos de EE. UU. Escríbalo en el formulario. No inventamos un código postal.",
+    "leftoverAudience": "Ese enlace mencionó “{raw}”, que no es un tipo de solicitud que usamos. Díganos quién necesita el comprobante. No inventamos el destinatario.",
+    "audienceContext": "Contexto de la solicitud: {audience}",
+    "insuranceType": {
+      "personal": {
+        "label": "Personal",
+        "description": "Casa, auto, inquilinos, condo y cobertura paraguas"
+      },
+      "commercial": {
+        "label": "Comercial",
+        "description": "Cobertura de negocio y compensación laboral"
+      },
+      "life": {
+        "label": "Vida",
+        "description": "Seguro de vida para las personas que dependen de usted"
+      }
+    },
+    "referral": {
+      "realEstateAgent": "Agente de bienes raíces",
+      "onlineSearch": "Búsqueda en internet",
+      "referral": "Recomendación",
+      "socialMedia": "Redes sociales",
+      "other": "Otro"
+    },
+    "evidenceType": {
+      "proof": "Comprobante de seguro",
+      "businessCoi": "Comprobante de seguro comercial (COI)",
+      "bankLender": "Actualización para mi banco o prestamista",
+      "buyingSelling": "Papelería para comprar o vender una casa",
+      "other": "Otro"
+    },
+    "helpTopic": {
+      "home": "Seguro de casa",
+      "auto": "Seguro de auto",
+      "business": "Seguro comercial",
+      "workersComp": "Compensación laboral",
+      "life": "Seguro de vida",
+      "other": "Otro"
+    },
+    "errors": {
+      "insuranceType": "Elija seguro personal, comercial o de vida.",
+      "products": "Seleccione al menos un tipo de cobertura.",
+      "firstName": "El nombre es obligatorio.",
+      "lastName": "El apellido es obligatorio.",
+      "fullName": "Su nombre es obligatorio.",
+      "phoneRequired": "El teléfono es obligatorio.",
+      "phoneInvalid": "Ingrese un teléfono válido.",
+      "email": "Ingrese un correo válido.",
+      "addressLength": "La dirección debe tener menos de 200 caracteres.",
+      "zip": "Ingrese un código postal de 5 dígitos.",
+      "referral": "Díganos cómo se enteró de nosotros.",
+      "businessNameLength": "El nombre del negocio debe tener menos de 200 caracteres.",
+      "productsMismatch": "Elija coberturas que coincidan con el tipo de seguro seleccionado.",
+      "employees": "Elija el número de empleados.",
+      "businessNameRequired": "El nombre del negocio es obligatorio para cotizaciones comerciales.",
+      "messageLength": "El mensaje debe tener menos de 1000 caracteres.",
+      "company": "El nombre de la empresa, prestamista o agencia es obligatorio.",
+      "requestType": "Seleccione el tipo de solicitud.",
+      "requestedFor": "Díganos para quién es el comprobante.",
+      "helpTopic": "Seleccione cómo puede ayudar el agente."
+    }
   }
 }
