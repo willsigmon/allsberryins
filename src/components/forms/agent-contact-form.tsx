@@ -2,12 +2,17 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoaderCircle } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useId, useState } from "react";
 import { useForm } from "react-hook-form";
 
 import { ReviewRequest } from "@/components/sections/review-request";
 import { SmsConsentFields } from "@/components/forms/sms-consent-fields";
 import { fireLeadConversion } from "@/lib/conversions";
+import {
+  helpTopicLabelKey,
+  resolveFormValidationCopy,
+} from "@/lib/form-copy";
 import { agentContactSchema, helpTopics, type AgentContactValues } from "@/lib/lead-schemas";
 import { agency } from "@/lib/site-data";
 import { readStoredMarketingAttribution } from "@/lib/tracking";
@@ -24,8 +29,12 @@ export function AgentContactForm({
   entryPoint,
 }: AgentContactFormProps) {
   const formId = useId();
+  const t = useTranslations("forms");
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const fieldError = (message?: string) =>
+    resolveFormValidationCopy(message, (key) => t(key as never));
+  const agentFirstName = agentName.split(" ")[0] ?? agentName;
   const {
     register,
     handleSubmit,
@@ -70,17 +79,21 @@ export function AgentContactForm({
       }
 
       reset();
-      setSuccessMessage(`Thanks for reaching out. ${agentName} or someone from the team will be in touch shortly.`);
+      setSuccessMessage(t("agentSuccess", { name: agentName }));
       fireLeadConversion("agent-contact", { agent: agentSlug });
     } catch (error) {
       console.error("Agent contact form submission failed", error);
-      setErrorMessage(`We couldn't send that request just now. Please call the office at ${agency.phone}.`);
+      setErrorMessage(t("submitError", { phone: agency.phone }));
     }
   });
 
   return (
     <form className="grid gap-5" onSubmit={onSubmit} noValidate>
-      <Field label="Name" error={errors.name?.message} inputId={`${formId}-name`}>
+      <Field
+        label={t("fullName")}
+        error={fieldError(errors.name?.message)}
+        inputId={`${formId}-name`}
+      >
         <input
           {...register("name")}
           id={`${formId}-name`}
@@ -88,10 +101,14 @@ export function AgentContactForm({
           aria-describedby={errors.name ? `${formId}-name-error` : undefined}
           aria-invalid={Boolean(errors.name)}
           className={inputClassName}
-          placeholder="Your full name"
+          placeholder={t("fullNamePlaceholder")}
         />
       </Field>
-      <Field label="Phone" error={errors.phone?.message} inputId={`${formId}-phone`}>
+      <Field
+        label={t("phone")}
+        error={fieldError(errors.phone?.message)}
+        inputId={`${formId}-phone`}
+      >
         <input
           {...register("phone")}
           id={`${formId}-phone`}
@@ -100,11 +117,15 @@ export function AgentContactForm({
           aria-invalid={Boolean(errors.phone)}
           className={inputClassName}
           inputMode="tel"
-          placeholder="(555) 555-5555"
+          placeholder={t("phonePlaceholder")}
           type="tel"
         />
       </Field>
-      <Field label="Email" error={errors.email?.message} inputId={`${formId}-email`}>
+      <Field
+        label={t("email")}
+        error={fieldError(errors.email?.message)}
+        inputId={`${formId}-email`}
+      >
         <input
           {...register("email")}
           id={`${formId}-email`}
@@ -112,13 +133,13 @@ export function AgentContactForm({
           aria-describedby={errors.email ? `${formId}-email-error` : undefined}
           aria-invalid={Boolean(errors.email)}
           className={inputClassName}
-          placeholder="you@example.com"
+          placeholder={t("emailPlaceholder")}
           type="email"
         />
       </Field>
       <Field
-        label="How can I help?"
-        error={errors.helpTopic?.message}
+        label={t("helpTopic")}
+        error={fieldError(errors.helpTopic?.message)}
         inputId={`${formId}-help-topic`}
       >
         <select
@@ -130,18 +151,18 @@ export function AgentContactForm({
           defaultValue=""
         >
           <option value="" disabled>
-            Select one
+            {t("selectOne")}
           </option>
           {helpTopics.map((topic) => (
             <option key={topic} value={topic}>
-              {topic}
+              {t(helpTopicLabelKey(topic) as never)}
             </option>
           ))}
         </select>
       </Field>
       <Field
-        label="Message (optional)"
-        error={errors.message?.message}
+        label={t("messageOptional")}
+        error={fieldError(errors.message?.message)}
         inputId={`${formId}-message`}
       >
         <textarea
@@ -151,7 +172,7 @@ export function AgentContactForm({
           aria-describedby={errors.message ? `${formId}-message-error` : undefined}
           aria-invalid={Boolean(errors.message)}
           className={`${inputClassName} min-h-28 py-3`}
-          placeholder={`Tell ${agentName.split(" ")[0]} a little bit about what you need.`}
+          placeholder={t("agentMessagePlaceholder", { firstName: agentFirstName })}
         />
       </Field>
       <input
@@ -168,7 +189,7 @@ export function AgentContactForm({
         className="inline-flex h-13 items-center justify-center gap-2 rounded-full bg-red px-6 text-base font-bold text-white transition hover:bg-red-hover disabled:cursor-not-allowed disabled:opacity-70"
       >
         {isSubmitting ? <LoaderCircle className="h-5 w-5 animate-spin" /> : null}
-        Send Request
+        {t("sendRequest")}
       </button>
       {successMessage ? (
         <div className="grid gap-4">
