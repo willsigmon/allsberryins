@@ -99,6 +99,20 @@ describe("resolveAboutRosterLeftover", () => {
     const result = resolveAboutRosterLeftover({ roster: [] });
     assert.equal(result.emptyRoster, true);
   });
+
+  it("does not highlight the first teammate for a shared leftover surname", () => {
+    const familyRoster = [
+      { slug: "erin", firstName: "Erin", name: "Erin Allsberry" },
+      { slug: "dakota", firstName: "Dakota", name: "Dakota Allsberry" },
+      { slug: "jason", firstName: "Jason", name: "Jason Allsberry" },
+    ] as const;
+    const result = resolveAboutRosterLeftover({
+      rawAgent: "allsberry",
+      roster: familyRoster,
+    });
+    assert.equal(result.highlightedSlug, undefined);
+    assert.deepEqual(result.leftovers, [{ kind: "unknown-agent", raw: "allsberry" }]);
+  });
 });
 
 describe("resolveCarrierCatalogLeftover", () => {
@@ -147,6 +161,19 @@ describe("resolveCarrierCatalogLeftover", () => {
     const result = resolveCarrierCatalogLeftover({ carriers: [] });
     assert.equal(result.emptyCatalog, true);
     assert.deepEqual(result.visibleSlugs, []);
+  });
+
+  it("does not treat a shared leftover token as the first sourced carrier", () => {
+    const overlappingCarriers = [
+      { name: "Liberty Mutual", slug: "liberty-mutual" },
+      { name: "Mutual of Omaha", slug: "mutual-of-omaha" },
+    ] as const;
+    const result = resolveCarrierCatalogLeftover({
+      carriers: overlappingCarriers,
+      rawName: "mutual",
+    });
+    assert.deepEqual(result.leftovers, [{ kind: "unknown-carrier", raw: "mutual" }]);
+    assert.deepEqual(result.visibleSlugs, ["liberty-mutual", "mutual-of-omaha"]);
   });
 });
 

@@ -59,6 +59,14 @@ function tokensCoverQuery(haystack: readonly string[], query: string): boolean {
   return queryParts.length > 0 && queryParts.every((part) => haystackParts.has(part));
 }
 
+function findUniqueMatch<T>(
+  items: readonly T[],
+  matches: (item: T) => boolean,
+): T | undefined {
+  const hits = items.filter(matches);
+  return hits.length === 1 ? hits[0] : undefined;
+}
+
 export type CatalogPerson = {
   firstName: string;
   name: string;
@@ -79,7 +87,7 @@ function findRosterPerson(roster: readonly CatalogPerson[], raw: string) {
     return undefined;
   }
 
-  return roster.find((person) => {
+  return findUniqueMatch(roster, (person) => {
     const haystack = [person.slug, person.firstName, person.name];
     return tokensCoverQuery(haystack, raw);
   });
@@ -123,7 +131,7 @@ function findCarrier(carriers: readonly CarrierRecord[], raw: string) {
     return undefined;
   }
 
-  return carriers.find((carrier) => {
+  return findUniqueMatch(carriers, (carrier) => {
     if (carrier.slug === querySlug || leftoverToken(carrier.name) === querySlug) {
       return true;
     }
