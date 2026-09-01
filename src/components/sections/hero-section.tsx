@@ -12,8 +12,10 @@ import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 
 import { getIcon } from "@/components/ui/icon-registry";
+import { LeftoverNotice } from "@/components/ui/leftover-notice";
 import { SaveContactButton } from "@/components/ui/save-contact-button";
 import { Link } from "@/i18n/navigation";
+import { heroZipForQuote, parseHeroZip } from "@/lib/hero-zip";
 import {
   buildHeroProductPreferenceCookie,
   getMostUsedHeroProduct,
@@ -79,6 +81,7 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
     initialProduct ?? heroProducts[0]?.slug ?? "home",
   );
   const [zipCode, setZipCode] = useState("");
+  const [zipLeftover, setZipLeftover] = useState(false);
   const [wordIndex, setWordIndex] = useState(0);
   useEffect(() => {
     const id = setInterval(
@@ -98,11 +101,17 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
   ];
 
   const startQuote = () => {
+    const parsedZip = parseHeroZip(zipCode);
+    setZipLeftover(parsedZip.kind === "invalid");
+    if (parsedZip.kind === "invalid") {
+      return;
+    }
+
     router.push(
       buildTrackedHref("/quote", {
         entry: `hero-zip-${selectedProduct}`,
         product: selectedProduct,
-        zip: zipCode.trim() || undefined,
+        zip: heroZipForQuote(parsedZip),
       }),
     );
   };
@@ -378,23 +387,34 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
               </div>
             </div>
 
-            <div className="surface-card mt-4 flex items-center gap-3 rounded-2xl border border-gray-100 p-3 shadow-[0_12px_36px_-24px_rgba(0,32,92,0.4)]">
-              <input
-                value={zipCode}
-                onChange={(event) => setZipCode(event.target.value)}
-                inputMode="numeric"
-                aria-label={t("zipLabel")}
-                placeholder={t("zipPlaceholder")}
-                className="h-11 flex-1 rounded-xl border border-gray-200 px-4 text-sm text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-blue focus:ring-4 focus:ring-blue/10"
-              />
-              <button
-                type="button"
-                onClick={() => { haptic("nudge"); startQuote(); }}
-                className="cta-glow inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-xl bg-red px-5 text-sm font-bold text-white transition-all hover:bg-red-hover hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red focus-visible:ring-offset-2"
-              >
-                {t("startQuote")}
-                <ArrowRight className="h-4 w-4" />
-              </button>
+            <div className="surface-card mt-4 rounded-2xl border border-gray-100 p-3 shadow-[0_12px_36px_-24px_rgba(0,32,92,0.4)]">
+              <div className="flex items-center gap-3">
+                <input
+                  aria-invalid={zipLeftover}
+                  aria-label={t("zipLabel")}
+                  className="h-11 flex-1 rounded-xl border border-gray-200 px-4 text-sm text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-blue focus:ring-4 focus:ring-blue/10"
+                  inputMode="numeric"
+                  onChange={(event) => {
+                    setZipCode(event.target.value);
+                    if (zipLeftover) {
+                      setZipLeftover(false);
+                    }
+                  }}
+                  placeholder={t("zipPlaceholder")}
+                  value={zipCode}
+                />
+                <button
+                  className="cta-glow inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-xl bg-red px-5 text-sm font-bold text-white transition-all hover:bg-red-hover hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red focus-visible:ring-offset-2"
+                  onClick={() => { haptic("nudge"); startQuote(); }}
+                  type="button"
+                >
+                  {t("startQuote")}
+                  <ArrowRight className="h-4 w-4" />
+                </button>
+              </div>
+              {zipLeftover ? (
+                <LeftoverNotice className="mt-3">{t("zipLeftover")}</LeftoverNotice>
+              ) : null}
             </div>
           </div>
         </div>

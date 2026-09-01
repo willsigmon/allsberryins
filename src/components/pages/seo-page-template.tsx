@@ -1,9 +1,10 @@
 import Link from "next/link";
 import { ArrowRight, ExternalLink, MapPin, Phone } from "lucide-react";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 
 import { StructuredData } from "@/components/seo/structured-data";
 import { PageFaqSection } from "@/components/sections/page-faq-section";
+import { LeftoverNotice } from "@/components/ui/leftover-notice";
 import { SeoPageCard } from "@/components/ui/seo-page-card";
 import { SectionHeading } from "@/components/ui/section-heading";
 import type { SeoPage } from "@/lib/seo-content";
@@ -17,6 +18,8 @@ type SeoPageTemplateProps = {
 };
 
 export async function SeoPageTemplate({ page }: SeoPageTemplateProps) {
+  const locale = await getLocale();
+  const tResources = await getTranslations("resources");
   const tBio = await getTranslations("agents.bios");
   const relatedPages = getSeoPagesBySlugs(page.relatedPageSlugs ?? []).filter(
     (relatedPage) => relatedPage.slug !== page.slug,
@@ -87,6 +90,9 @@ export async function SeoPageTemplate({ page }: SeoPageTemplateProps) {
             <h1 className="mt-4 font-display text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">
               {page.title}
             </h1>
+            {locale === "es" ? (
+              <LeftoverNotice className="mt-6">{tResources("englishOnlyNotice")}</LeftoverNotice>
+            ) : null}
             <p className="mt-6 text-lg leading-8 text-gray-600">{page.answer}</p>
             <div className="mt-8 grid gap-4 sm:grid-cols-3">
               {page.keyPoints.map((point) => (

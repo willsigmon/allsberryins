@@ -41,6 +41,7 @@
     ".next-verify/dev/types/**/*.ts"
   ],
   "exclude": [
+    "src/**/*.test.ts",
     "node_modules",
     "node_modules_old",
     "node_modules_broken_20260316_1523",

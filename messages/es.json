@@ -318,6 +318,7 @@
     "eyebrow": "Recursos",
     "heading": "Guías y herramientas de seguros",
     "subheading": "Recursos en lenguaje sencillo para entender su cobertura.",
+    "englishOnlyNotice": "Estas guías actualmente se publican en inglés. Si prefiere ayuda en español, llámenos y repasamos los detalles con usted.",
     "blogHeading": "Del blog",
     "guidesHeading": "Guías de cobertura",
     "viewAll": "Ver todo"
@@ -334,7 +335,7 @@
     "thankYou": "Gracias — nos alegra la semana",
     "privateFeedbackIntro": "¿Algo no salió como esperaba?",
     "privateFeedbackLink": "Cuéntenos en privado",
-    "privateFeedbackOutro": "— su nota llega directo a Erin.",
+    "privateFeedbackOutro": "— escriba o llame a la oficina. Este sitio no tiene un formulario de comentarios privados.",
     "callOfficeIntro": "O llame a la oficina directamente al"
   },
   "evidenceOfInsurance": {
@@ -348,6 +349,7 @@
     "helpBullet2": "Agregue una fecha límite si escrow o aseguramiento lo esperan.",
     "helpBullet3": "Incluya cualquier nota de préstamo, propiedad o certificado que ya tenga.",
     "preferredFollowUp": "Seguimiento preferido: {name}",
+    "unknownAgentNotice": "Ese enlace de agente no está en este sitio. La solicitud sigue llegando a la oficina — no inventamos un nombre ni un tipo de cobertura.",
     "callInstead": "¿Prefiere llamar? {phone}",
     "faqs": {
       "heading": "Preguntas sobre documentación que respondemos aquí mismo",
@@ -516,7 +518,7 @@
       "description": "Nuestro equipo le da respuestas claras para que elija el plan correcto."
     },
     "topRated": {
-      "title": "Mejor Soporte",
+      "title": "Apoyo en reclamos",
       "description": "Estamos con usted antes, durante y después de un reclamo. No tendrá que enfrentarlo solo."
     }
   },
@@ -624,6 +626,7 @@
     "reviewCount": "5,000+",
     "ratingAria": "Calificación de 5 de 5 estrellas",
     "zipLabel": "Código postal",
+    "zipLeftover": "Ingrese un código postal de 5 dígitos de EE. UU., o déjelo en blanco. No inventamos un ZIP.",
     "erinTitle": "Dueña y Agente Principal",
     "primaryProducerLabel": "Productor principal",
     "producerProofLabel": "Enfoque al cliente",
@@ -688,6 +691,13 @@
     "benefitNoPressure": "Sin presión para combinar pólizas — si {carrier} solo conviene para un ramo, se lo decimos.",
     "otherCarriers": "Otras aseguradoras con las que trabajamos",
     "seeAllCarriers": "Ver todas las aseguradoras asociadas →"
+  },
+  "errorPage": {
+    "eyebrow": "Algo falló",
+    "heading": "Esta página no cargó.",
+    "body": "No inventamos un estado ni un número de ticket. Intente de nuevo, o comuníquese con la oficina al",
+    "tryAgain": "Intentar de nuevo",
+    "goHome": "Ir al inicio"
   },
   "blogPost": {
     "backToBlog": "Volver al blog",

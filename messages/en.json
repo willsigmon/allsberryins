@@ -318,6 +318,7 @@
     "eyebrow": "Resources",
     "heading": "Insurance guides and tools",
     "subheading": "Plain-language resources to help you understand your coverage.",
+    "englishOnlyNotice": "These guides are currently published in English. If you'd prefer help in Spanish, call us and we'll walk through the details with you.",
     "blogHeading": "From the blog",
     "guidesHeading": "Coverage guides",
     "viewAll": "View all"
@@ -334,7 +335,7 @@
     "thankYou": "Thank you — it makes our week",
     "privateFeedbackIntro": "Something didn't land the way it should have?",
     "privateFeedbackLink": "Tell us privately",
-    "privateFeedbackOutro": "— a note goes straight to Erin.",
+    "privateFeedbackOutro": "— email or call the office. This site does not have a private-feedback form.",
     "callOfficeIntro": "Or call the office directly at"
   },
   "evidenceOfInsurance": {
@@ -348,6 +349,7 @@
     "helpBullet2": "Add a due date if escrow or underwriting is waiting on it.",
     "helpBullet3": "Include any loan, property, or certificate notes you already have.",
     "preferredFollowUp": "Preferred follow-up: {name}",
+    "unknownAgentNotice": "That agent link is not on this site. The request still goes to the office — we will not invent a name or coverage type.",
     "callInstead": "Need to call instead? {phone}",
     "faqs": {
       "heading": "Documentation questions we can answer right here",
@@ -516,7 +518,7 @@
       "description": "Our team gives you straight answers so you can pick the right plan."
     },
     "topRated": {
-      "title": "Top-Rated Support",
+      "title": "Claims support",
       "description": "We're here before, during, and after you file a claim. You won't have to figure things out alone."
     }
   },
@@ -624,6 +626,7 @@
     "reviewCount": "5,000+",
     "ratingAria": "Rated 5 out of 5 stars",
     "zipLabel": "ZIP code",
+    "zipLeftover": "Enter a 5-digit U.S. ZIP, or leave it blank. We will not invent a ZIP code.",
     "erinTitle": "Owner & Principal Agent",
     "primaryProducerLabel": "Main producer",
     "producerProofLabel": "Client focus",
@@ -688,6 +691,13 @@
     "benefitNoPressure": "No pressure to bundle — if {carrier} only makes sense for one line, we say so.",
     "otherCarriers": "Other carriers we work with",
     "seeAllCarriers": "See every carrier partner →"
+  },
+  "errorPage": {
+    "eyebrow": "Something broke",
+    "heading": "This page did not load.",
+    "body": "We did not invent a status or a ticket number. Try again, or reach the office at",
+    "tryAgain": "Try again",
+    "goHome": "Go home"
   },
   "blogPost": {
     "backToBlog": "Back to Blog",

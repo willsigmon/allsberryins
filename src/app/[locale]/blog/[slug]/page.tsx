@@ -4,6 +4,7 @@ import { ArrowRight } from "lucide-react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { StructuredData } from "@/components/seo/structured-data";
+import { LeftoverNotice } from "@/components/ui/leftover-notice";
 import { SeoPageCard } from "@/components/ui/seo-page-card";
 import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
@@ -50,6 +51,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   }
 
   const t = await getTranslations("blogPost");
+  const tBlog = await getTranslations("blog");
 
   const articleSchema = {
     "@context": "https://schema.org",
@@ -93,6 +95,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         <h1 className="mt-5 font-display text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">
           {post.title}
         </h1>
+        {locale === "es" ? (
+          <LeftoverNotice className="mt-6">{tBlog("articlesInEnglishNotice")}</LeftoverNotice>
+        ) : null}
         <p className="mt-6 text-xl leading-9 text-gray-600">{post.intro}</p>
         <div className="mt-8 flex flex-wrap gap-2">
           {post.tags.map((tag) => (

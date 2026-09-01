@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 
+import { bilingualAgentFirstNames } from "@/lib/bilingual-agents";
 import { seoPages } from "@/lib/seo-content";
 import { agency, agents, blogPosts, carrierPartners, products } from "@/lib/site-data";
 import { absoluteUrl } from "@/lib/utils";
@@ -151,8 +152,8 @@ We serve Corona, Riverside County, Inland Empire, Orange County, Los Angeles Cou
 ---
 
 ## Bilingual Service (Se Habla Español)
-The site is published natively in English (${absoluteUrl("/")}) and Spanish (${absoluteUrl("/es")}). 
-We have multiple bilingual English/Spanish licensed agents on staff who can guide clients through reviews, quotes, and renewals in their preferred language.
+The site is published natively in English (${absoluteUrl("/")}) and Spanish (${absoluteUrl("/es")}).
+Bilingual English/Spanish agents on the published roster: ${bilingualAgentFirstNames(agents) || "none listed on this site"}. They can guide clients through reviews, quotes, and renewals in their preferred language.
 
 ---
 
