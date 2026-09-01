@@ -747,5 +747,21 @@
       "md": "Standard",
       "lg": "Large"
     }
+  },
+  "leftoverCatalog": {
+    "unknownAgent": "We do not invent a teammate named “{requested}.” The people on this page come from the agency roster.",
+    "knownAgent": "This is the agency About page — not {name}’s inbox. Meet {firstName} on their profile.",
+    "unknownCarrier": "We do not invent a carrier named “{requested}.” This page lists named partners from the agency roster.",
+    "knownCarrier": "Showing the sourced {name} partner card. See every named partner on this page.",
+    "seeAllCarriers": "See all named carriers",
+    "carrierLine": "This catalog is a named-partner list. We do not invent a “{requested}” line or a personal/commercial split here.",
+    "unknownTopic": "We do not invent a “{requested}” section on this guide. The headings below are the ones we actually published.",
+    "unknownCity": "We do not invent a “{requested}” city page. The Corona office is on the agency location guide and the contact page.",
+    "guideZip": "This guide is not a quote form, so “{requested}” is not a ZIP we can prefill. Start a quote if you want a local review.",
+    "emptyRosterTitle": "No teammates are listed here",
+    "emptyRosterBody": "We do not invent a roster. Call or email the office for a licensed agent.",
+    "emptyCarriersTitle": "No named carriers are listed here",
+    "emptyCarriersBody": "We do not invent a market. Call or email the office and we will shop the partners we actually appoint.",
+    "meetProfile": "Open {firstName}’s profile"
   }
 }
