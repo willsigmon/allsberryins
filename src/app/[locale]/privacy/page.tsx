@@ -2,16 +2,23 @@ import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
 
 import { Link } from "@/i18n/navigation";
+import { createPageMetadata } from "@/lib/metadata";
 import { agency } from "@/lib/site-data";
 
 type PrivacyPageProps = {
   params: Promise<{ locale: string }>;
 };
 
-export const metadata: Metadata = {
-  title: "Privacy Policy",
-  description: "How Allsberry Insurance Agency handles your personal information.",
-};
+export async function generateMetadata({ params }: PrivacyPageProps): Promise<Metadata> {
+  const { locale } = await params;
+  return createPageMetadata({
+    title: "Privacy Policy",
+    description: "How Allsberry Insurance Agency handles your personal information.",
+    path: "/privacy",
+    locale,
+    localizeAlternates: false,
+  });
+}
 
 export default async function PrivacyPage({ params }: PrivacyPageProps) {
   const { locale } = await params;

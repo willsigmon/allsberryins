@@ -691,6 +691,7 @@
   },
   "blogPost": {
     "backToBlog": "Volver al blog",
+    "byAuthor": "Por {name}",
     "nextStep": "Siguiente paso",
     "nextStepHeading": "¿Desea ayuda para aplicar esto a su póliza?",
     "startQuote": "Comenzar cotización",

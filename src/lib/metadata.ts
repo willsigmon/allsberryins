@@ -121,11 +121,20 @@ export function createPageMetadata(options: {
    * and would otherwise exceed the ~70-char search-result truncation.
    */
   absoluteTitle?: boolean;
+  /**
+   * Set false for pages whose content is not translated (e.g. legal
+   * pages served in English at every locale path). Canonicalizes every
+   * locale variant to the default-locale URL and skips hreflang
+   * alternates and OG alternate locales, so crawlers aren't told a
+   * Spanish version exists.
+   */
+  localizeAlternates?: boolean;
 }): Metadata {
   const { title, description, path, keywords, locale, absoluteTitle } = options;
-  const canonical = localizedPath(locale, path);
+  const localizeAlternates = options.localizeAlternates ?? true;
   const englishPath = localizedPath("en", path);
   const spanishPath = localizedPath("es", path);
+  const canonical = localizeAlternates ? localizedPath(locale, path) : englishPath;
 
   return {
     title: absoluteTitle ? { absolute: title } : title,
@@ -133,20 +142,30 @@ export function createPageMetadata(options: {
     keywords: keywords ?? defaultKeywords,
     alternates: {
       canonical,
-      languages: {
-        en: englishPath,
-        es: spanishPath,
-        "x-default": englishPath,
-      },
+      ...(localizeAlternates
+        ? {
+            languages: {
+              en: englishPath,
+              es: spanishPath,
+              "x-default": englishPath,
+            },
+          }
+        : {}),
     },
     openGraph: {
       title: `${title} | Allsberry Insurance Agency`,
       description,
       url: absoluteUrl(canonical),
-      locale: locale ? ogLocaleByLocale[locale] ?? "en_US" : "en_US",
-      alternateLocale: Object.entries(ogLocaleByLocale)
-        .filter(([code]) => code !== (locale ?? "en"))
-        .map(([, ogLocale]) => ogLocale),
+      locale: localizeAlternates
+        ? locale
+          ? ogLocaleByLocale[locale] ?? "en_US"
+          : "en_US"
+        : "en_US",
+      alternateLocale: localizeAlternates
+        ? Object.entries(ogLocaleByLocale)
+            .filter(([code]) => code !== (locale ?? "en"))
+            .map(([, ogLocale]) => ogLocale)
+        : [],
       images: [
         {
           url: absoluteUrl("/opengraph-image"),

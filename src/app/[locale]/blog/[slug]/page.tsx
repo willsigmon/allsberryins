@@ -9,7 +9,7 @@ import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { createPageMetadata } from "@/lib/metadata";
 import { getSeoPagesBySlugs } from "@/lib/seo-content";
-import { blogPosts, getBlogPostBySlug } from "@/lib/site-data";
+import { agents, blogPosts, getBlogPostBySlug } from "@/lib/site-data";
 import { createBreadcrumbSchema, organizationSchema } from "@/lib/seo";
 import { absoluteUrl } from "@/lib/utils";
 
@@ -51,15 +51,23 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   const t = await getTranslations("blogPost");
 
+  const authorAgent = agents.find((agent) => agent.name === post.author);
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: post.title,
     description: post.excerpt,
     datePublished: post.publishedAt,
-    author: {
-      "@id": organizationSchema["@id"],
-    },
+    author: post.author
+      ? {
+          "@type": "Person",
+          name: post.author,
+          ...(authorAgent
+            ? { url: absoluteUrl(`/agents/${authorAgent.slug}`) }
+            : {}),
+          worksFor: { "@id": organizationSchema["@id"] },
+        }
+      : { "@id": organizationSchema["@id"] },
     publisher: {
       "@id": organizationSchema["@id"],
     },
@@ -89,6 +97,18 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           <span>{new Date(post.publishedAt).toLocaleDateString(locale === "es" ? "es-US" : "en-US", { month: "long", day: "numeric", year: "numeric" })}</span>
           <span>•</span>
           <span>{post.readingTime}</span>
+          {post.author ? (
+            <>
+              <span>•</span>
+              {authorAgent ? (
+                <Link href={`/agents/${authorAgent.slug}`} className="font-semibold text-blue hover:underline">
+                  {t("byAuthor", { name: post.author })}
+                </Link>
+              ) : (
+                <span>{t("byAuthor", { name: post.author })}</span>
+              )}
+            </>
+          ) : null}
         </div>
         <h1 className="mt-5 font-display text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">
           {post.title}
