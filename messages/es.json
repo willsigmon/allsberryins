@@ -619,6 +619,7 @@
     "zipPlaceholder": "Código postal",
     "bundleTitle": "Combine y ahorre",
     "bundleBody": "Muchos clientes ahorran al combinar casa, auto y otras coberturas en un solo plan. Le mostramos sus opciones.",
+    "bundleSince": "Sirviendo al Sur de California desde {year}",
     "needProofTitle": "¿Necesita comprobante?",
     "needProofBody": "Si su banco, arrendador o socio comercial necesita documentación del seguro, omita la cotización y solicítela aquí.",
     "startProofRequest": "Solicitar comprobante",

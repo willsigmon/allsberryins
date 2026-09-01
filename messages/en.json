@@ -619,6 +619,7 @@
     "zipPlaceholder": "Enter ZIP code",
     "bundleTitle": "Bundle and save",
     "bundleBody": "Many clients save by combining home, auto, and other coverage into one plan. We'll show you the options.",
+    "bundleSince": "Serving Southern California since {year}",
     "needProofTitle": "Need proof instead?",
     "needProofBody": "If your bank, landlord, or business partner needs insurance paperwork, skip the quote and request it here.",
     "startProofRequest": "Start proof request",
