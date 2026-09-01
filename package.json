@@ -14,7 +14,9 @@
     "start": "next start",
     "lint": "eslint src --ext .ts,.tsx",
     "typecheck": "tsc --noEmit --pretty false",
-    "check": "npm run lint && npm run typecheck",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "check": "npm run lint && npm run typecheck && npm run test",
     "seo:indexnow": "node ./scripts/submit-indexnow.mjs"
   },
   "dependencies": {
@@ -43,6 +45,7 @@
     "eslint": "^9.39.1",
     "eslint-config-next": "16.1.6",
     "tailwindcss": "^4.1.16",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.11"
   }
 }

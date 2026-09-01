@@ -1,16 +1,14 @@
 /**
  * Robust UUID generator helper.
- * Uses window.crypto.randomUUID() where supported.
+ * Uses globalThis.crypto.randomUUID() where supported (browsers and Node).
  * Falls back to a resilient mathematical pseudo-random number generator
  * if running in legacy, HTTP (non-secure), or older mobile environments.
  */
 export function safeUUID(): string {
-  if (
-    typeof window !== "undefined" &&
-    typeof crypto !== "undefined" &&
-    crypto.randomUUID
-  ) {
-    return crypto.randomUUID();
+  const randomUUID = globalThis.crypto?.randomUUID?.bind(globalThis.crypto);
+
+  if (randomUUID) {
+    return randomUUID();
   }
 
   // Resilient RFC4122 version 4 compliant fallback

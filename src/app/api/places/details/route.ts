@@ -1,6 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 
+import { allowPlacesRequest } from "@/lib/places-rate-limit";
+
 export async function GET(req: NextRequest) {
+  if (!allowPlacesRequest(req)) {
+    return NextResponse.json(
+      { error: "Too many requests. Please slow down." },
+      { status: 429 },
+    );
+  }
+
   const placeId = req.nextUrl.searchParams.get("placeId");
   const sessionToken = req.nextUrl.searchParams.get("sessionToken");
 

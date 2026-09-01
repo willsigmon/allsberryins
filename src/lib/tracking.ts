@@ -1,3 +1,4 @@
+import { stripLocalePrefix } from "@/lib/locale-path";
 import type { Agent } from "@/lib/site-data";
 import { agents } from "@/lib/site-data";
 import { siteUrl } from "@/lib/utils";
@@ -86,31 +87,33 @@ export function normalizeAgentSlug(value?: string | null) {
 }
 
 export function inferPageType(pathname: string) {
-  if (pathname === "/") {
+  const routePath = stripLocalePrefix(pathname);
+
+  if (routePath === "/") {
     return "home";
   }
 
-  if (pathname.startsWith("/agents/")) {
+  if (routePath.startsWith("/agents/")) {
     return "agent";
   }
 
-  if (pathname.startsWith("/quote")) {
+  if (routePath.startsWith("/quote")) {
     return "quote";
   }
 
-  if (pathname.startsWith("/evidence-of-insurance")) {
+  if (routePath.startsWith("/evidence-of-insurance")) {
     return "evidence";
   }
 
-  if (pathname.startsWith("/about")) {
+  if (routePath.startsWith("/about")) {
     return "about";
   }
 
-  if (pathname.startsWith("/contact")) {
+  if (routePath.startsWith("/contact")) {
     return "contact";
   }
 
-  if (pathname.startsWith("/blog")) {
+  if (routePath.startsWith("/blog")) {
     return "blog";
   }
 
@@ -118,11 +121,13 @@ export function inferPageType(pathname: string) {
 }
 
 export function inferPageSlug(pathname: string) {
-  if (pathname === "/") {
+  const routePath = stripLocalePrefix(pathname);
+
+  if (routePath === "/") {
     return "home";
   }
 
-  return sanitizeToken(pathname.replace(/^\/+/, "").replace(/\//g, "-"));
+  return sanitizeToken(routePath.replace(/^\/+/, "").replace(/\//g, "-"));
 }
 
 export function createTeamTrackingContext(
@@ -131,7 +136,8 @@ export function createTeamTrackingContext(
   href?: string,
 ): TeamTrackingContext {
   const searchParams = new URLSearchParams(searchString);
-  const pathSegments = pathname.split("/").filter(Boolean);
+  const routePath = stripLocalePrefix(pathname);
+  const pathSegments = routePath.split("/").filter(Boolean);
   const pathAgentSlug = pathSegments[0] === "agents" ? normalizeAgentSlug(pathSegments[1]) : undefined;
 
   return {

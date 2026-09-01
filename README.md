@@ -53,6 +53,7 @@ npm run setup
 npm run dev
 npm run lint
 npm run typecheck
+npm run test
 npm run check
 npm run build
 npm run start

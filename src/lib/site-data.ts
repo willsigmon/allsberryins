@@ -375,20 +375,22 @@ export const products: Product[] = [
 
 export const heroProductSlugs: ProductSlug[] = ["home", "auto", "life", "business", "renters", "umbrella"];
 
-export const personalProducts = products.filter((product) =>
-  ["home", "auto", "renters", "life", "umbrella", "condo"].includes(product.slug),
-);
+export function isHomepagePersonalProduct(product: Product): boolean {
+  return product.category === "personal" && product.slug !== "other";
+}
 
-export const commercialProducts = products.filter((product) =>
-  [
-    "general-liability",
-    "workers-comp",
-    "commercial-property",
-    "commercial-auto",
-    "professional-liability",
-    "specialty-coverage",
-  ].includes(product.slug),
-);
+export function isHomepageCommercialProduct(product: Product): boolean {
+  return product.category === "commercial";
+}
+
+export const personalProducts = products.filter(isHomepagePersonalProduct);
+
+export const commercialProducts = [
+  ...products.filter((product) => product.slug === "business"),
+  ...products.filter(
+    (product) => product.category === "commercial" && product.slug !== "business",
+  ),
+];
 
 export const productSelectionOptions = [
   "home",

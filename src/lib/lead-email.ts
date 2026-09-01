@@ -48,7 +48,7 @@ function escapeHtml(value: string): string {
     .replace(/"/g, "&quot;");
 }
 
-function leadSubject(lead: LeadPayload): string {
+export function leadSubject(lead: LeadPayload): string {
   const label = leadTypeLabels[lead.type] ?? "Website Lead";
   const name =
     typeof lead.firstName === "string" && typeof lead.lastName === "string"
