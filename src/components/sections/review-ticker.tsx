@@ -1,17 +1,22 @@
 "use client";
 
-import { Star } from "lucide-react";
 import { useTranslations } from "next-intl";
 
-const reviewKeys = ["classicCars", "homeowner", "restaurant", "auto"] as const;
+import { reviewQuoteKeys, reviewQuoteSources } from "@/lib/review-sources";
 
 export function ReviewTicker() {
   const t = useTranslations("reviews");
-  const reviews = reviewKeys.map((key) => ({
+  const tSection = useTranslations("home.reviewsSection");
+  const reviews = reviewQuoteKeys.map((key) => ({
     name: t(`${key}.name`),
     body: t(`${key}.body`),
+    source: reviewQuoteSources[key],
   }));
   const tickerReviews = [...reviews, ...reviews];
+
+  if (!reviews.length) {
+    return null;
+  }
 
   return (
     <section className="glass-tinted overflow-hidden border-y border-blue/8 py-6">
@@ -23,16 +28,14 @@ export function ReviewTicker() {
               aria-hidden={index >= reviews.length ? "true" : undefined}
               className="glass-btn flex shrink-0 items-center gap-4 rounded-2xl px-6 py-4 shadow-sm"
             >
-              <div className="flex items-center gap-0.5 text-gold">
-                {Array.from({ length: 5 }).map((_, starIndex) => (
-                  <Star key={starIndex} className="h-3.5 w-3.5 fill-current" />
-                ))}
-              </div>
               <p className="max-w-lg text-sm leading-6 text-gray-600">
                 &ldquo;{review.body}&rdquo;
               </p>
               <span className="whitespace-nowrap text-xs font-semibold text-gray-900">
                 — {review.name}
+              </span>
+              <span className="whitespace-nowrap text-[11px] font-semibold uppercase tracking-[0.18em] text-gray-500">
+                {tSection("quotedFrom", { source: review.source })}
               </span>
             </div>
           ))}

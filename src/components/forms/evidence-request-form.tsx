@@ -2,12 +2,19 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoaderCircle } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useId, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 
 import { ReviewRequest } from "@/components/sections/review-request";
 import { SmsConsentFields } from "@/components/forms/sms-consent-fields";
 import { fireLeadConversion } from "@/lib/conversions";
+import {
+  evidenceLeftoverAudience,
+  evidenceRequestTypeLabelKey,
+  leftoverAudiencePrefill,
+  resolveFormValidationCopy,
+} from "@/lib/form-copy";
 import {
   evidenceRequestSchema,
   type EvidenceRequestValues,
@@ -28,8 +35,15 @@ export function EvidenceRequestForm({
   initialAudience,
 }: EvidenceRequestFormProps) {
   const formId = useId();
+  const t = useTranslations("forms");
+  const leftoverAudience = useMemo(
+    () => evidenceLeftoverAudience(initialAudience),
+    [initialAudience],
+  );
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const fieldError = (message?: string) =>
+    resolveFormValidationCopy(message, (key) => t(key as never));
   const defaultValues = useMemo(
     () => ({
       name: "",
@@ -38,14 +52,14 @@ export function EvidenceRequestForm({
       email: "",
       zipCode: "",
       requestType: "Proof of Insurance" as const,
-      requestedFor: initialAudience ? `${initialAudience} request` : "",
+      requestedFor: leftoverAudiencePrefill(leftoverAudience),
       dueDate: "",
       message: "",
       honeypot: "",
       marketingTextOptIn: false,
       nonMarketingTextOptIn: false,
     }),
-    [initialAudience],
+    [leftoverAudience],
   );
   const {
     register,
@@ -82,29 +96,34 @@ export function EvidenceRequestForm({
       }
 
       reset(defaultValues);
-      setSuccessMessage(
-        "Thanks. We received your request and the team will follow up with the right documentation as quickly as possible.",
-      );
+      setSuccessMessage(t("evidenceSuccess"));
       fireLeadConversion("evidence-request", { requestType: values.requestType });
     } catch (error) {
       console.error("Evidence request submission failed", error);
-      setErrorMessage(
-        `We couldn't send that request just now. Please call the office at ${agency.phone}.`,
-      );
+      setErrorMessage(t("submitError", { phone: agency.phone }));
     }
   });
 
   return (
     <div className="rounded-[2rem] border border-gray-100 bg-white p-6 shadow-[0_28px_70px_-50px_rgba(0,32,92,0.5)] sm:p-8">
       <form className="grid gap-6" onSubmit={onSubmit} noValidate>
-        {initialAudience ? (
+        {leftoverAudience.kind === "known" ? (
           <div className="rounded-2xl border border-blue/12 bg-blue-light px-4 py-3 text-sm font-semibold text-gray-900">
-            Request context: {initialAudience}
+            {t("audienceContext", { audience: leftoverAudience.audience })}
           </div>
+        ) : null}
+        {leftoverAudience.kind === "unknown" ? (
+          <p className="rounded-2xl border border-amber-200 bg-amber-50 px-5 py-3 text-sm text-amber-800">
+            {t("leftoverAudience", { raw: leftoverAudience.raw })}
+          </p>
         ) : null}
 
         <div className="grid gap-6 sm:grid-cols-2">
-          <Field label="Name" error={errors.name?.message} inputId={`${formId}-name`}>
+          <Field
+            label={t("fullName")}
+            error={fieldError(errors.name?.message)}
+            inputId={`${formId}-name`}
+          >
             <input
               {...register("name")}
               id={`${formId}-name`}
@@ -112,12 +131,12 @@ export function EvidenceRequestForm({
               aria-describedby={errors.name ? `${formId}-name-error` : undefined}
               aria-invalid={Boolean(errors.name)}
               className={inputClassName}
-              placeholder="Your full name"
+              placeholder={t("fullNamePlaceholder")}
             />
           </Field>
           <Field
-            label="Company / lender / agency"
-            error={errors.companyOrAgency?.message}
+            label={t("companyLender")}
+            error={fieldError(errors.companyOrAgency?.message)}
             inputId={`${formId}-company`}
           >
             <input
@@ -127,10 +146,14 @@ export function EvidenceRequestForm({
               aria-describedby={errors.companyOrAgency ? `${formId}-company-error` : undefined}
               aria-invalid={Boolean(errors.companyOrAgency)}
               className={inputClassName}
-              placeholder="Who needs the proof?"
+              placeholder={t("companyPlaceholder")}
             />
           </Field>
-          <Field label="Phone" error={errors.phone?.message} inputId={`${formId}-phone`}>
+          <Field
+            label={t("phone")}
+            error={fieldError(errors.phone?.message)}
+            inputId={`${formId}-phone`}
+          >
             <input
               {...register("phone")}
               id={`${formId}-phone`}
@@ -139,11 +162,15 @@ export function EvidenceRequestForm({
               aria-invalid={Boolean(errors.phone)}
               className={inputClassName}
               inputMode="tel"
-              placeholder="(555) 555-5555"
+              placeholder={t("phonePlaceholder")}
               type="tel"
             />
           </Field>
-          <Field label="Email" error={errors.email?.message} inputId={`${formId}-email`}>
+          <Field
+            label={t("email")}
+            error={fieldError(errors.email?.message)}
+            inputId={`${formId}-email`}
+          >
             <input
               {...register("email")}
               id={`${formId}-email`}
@@ -151,11 +178,15 @@ export function EvidenceRequestForm({
               aria-describedby={errors.email ? `${formId}-email-error` : undefined}
               aria-invalid={Boolean(errors.email)}
               className={inputClassName}
-              placeholder="you@example.com"
+              placeholder={t("emailPlaceholder")}
               type="email"
             />
           </Field>
-          <Field label="ZIP Code" error={errors.zipCode?.message} inputId={`${formId}-zip`}>
+          <Field
+            label={t("zipCode")}
+            error={fieldError(errors.zipCode?.message)}
+            inputId={`${formId}-zip`}
+          >
             <input
               {...register("zipCode")}
               id={`${formId}-zip`}
@@ -164,12 +195,12 @@ export function EvidenceRequestForm({
               aria-invalid={Boolean(errors.zipCode)}
               inputMode="numeric"
               className={inputClassName}
-              placeholder="92878"
+              placeholder={t("zipPlaceholder")}
             />
           </Field>
           <Field
-            label="Request type"
-            error={errors.requestType?.message}
+            label={t("requestType")}
+            error={fieldError(errors.requestType?.message)}
             inputId={`${formId}-request-type`}
           >
             <select
@@ -183,7 +214,7 @@ export function EvidenceRequestForm({
             >
               {evidenceRequestTypes.map((option) => (
                 <option key={option} value={option}>
-                  {option}
+                  {t(evidenceRequestTypeLabelKey(option) as never)}
                 </option>
               ))}
             </select>
@@ -192,8 +223,8 @@ export function EvidenceRequestForm({
 
         <div className="grid gap-6 sm:grid-cols-[1.4fr_0.6fr]">
           <Field
-            label="Requested for"
-            error={errors.requestedFor?.message}
+            label={t("requestedFor")}
+            error={fieldError(errors.requestedFor?.message)}
             inputId={`${formId}-requested-for`}
           >
             <input
@@ -204,12 +235,12 @@ export function EvidenceRequestForm({
               }
               aria-invalid={Boolean(errors.requestedFor)}
               className={inputClassName}
-              placeholder="Escrow, lender, landlord, vendor, HOA, or client"
+              placeholder={t("requestedForPlaceholder")}
             />
           </Field>
           <Field
-            label="Need-by date (optional)"
-            error={errors.dueDate?.message}
+            label={t("dueDateOptional")}
+            error={fieldError(errors.dueDate?.message)}
             inputId={`${formId}-due-date`}
           >
             <input
@@ -224,8 +255,8 @@ export function EvidenceRequestForm({
         </div>
 
         <Field
-          label="Notes (optional)"
-          error={errors.message?.message}
+          label={t("notesOptional")}
+          error={fieldError(errors.message?.message)}
           inputId={`${formId}-message`}
         >
           <textarea
@@ -235,7 +266,7 @@ export function EvidenceRequestForm({
             aria-describedby={errors.message ? `${formId}-message-error` : undefined}
             aria-invalid={Boolean(errors.message)}
             className={cn(inputClassName, "min-h-32 py-3")}
-            placeholder="Share any loan number, escrow context, property details, or instructions that will help us move faster."
+            placeholder={t("evidenceMessagePlaceholder")}
           />
         </Field>
 
@@ -251,7 +282,7 @@ export function EvidenceRequestForm({
 
         <div className="grid gap-4 sm:grid-cols-[1fr_auto] sm:items-center">
           <p className="text-sm leading-7 text-gray-600">
-            This request is built for certificates, proof of coverage, and time-sensitive lender or escrow follow-up.
+            {t("evidenceSubmitNote")}
           </p>
           <button
             type="submit"
@@ -259,7 +290,7 @@ export function EvidenceRequestForm({
             className="inline-flex h-13 items-center justify-center gap-2 rounded-full bg-red px-7 text-base font-bold text-white transition hover:bg-red-hover disabled:cursor-not-allowed disabled:opacity-70"
           >
             {isSubmitting ? <LoaderCircle className="h-5 w-5 animate-spin" /> : null}
-            Send Request
+            {t("sendRequest")}
           </button>
         </div>
 

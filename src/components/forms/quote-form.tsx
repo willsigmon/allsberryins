@@ -2,6 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoaderCircle } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useId, useMemo, useState } from "react";
 import { type DefaultValues, useForm, useWatch } from "react-hook-form";
 
@@ -16,6 +17,11 @@ import {
 } from "@/lib/site-data";
 import { ReviewRequest } from "@/components/sections/review-request";
 import { fireLeadConversion } from "@/lib/conversions";
+import {
+  quoteLeftoverZip,
+  referralSourceLabelKey,
+  resolveFormValidationCopy,
+} from "@/lib/form-copy";
 import { quoteFormSchema, type QuoteFormValues } from "@/lib/lead-schemas";
 import {
   defaultQuoteProductByInsuranceType,
@@ -43,8 +49,13 @@ export function QuoteForm({
   initialZip,
 }: QuoteFormProps) {
   const formId = useId();
+  const t = useTranslations("forms");
+  const tProducts = useTranslations("products");
+  const leftoverZip = useMemo(() => quoteLeftoverZip(initialZip), [initialZip]);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const fieldError = (message?: string) =>
+    resolveFormValidationCopy(message, (key) => t(key as never));
 
   const normalizedInitialProduct = useMemo(() => {
     return productSelectionOptions.includes(initialProduct as QuoteProductSlug)
@@ -69,7 +80,7 @@ export function QuoteForm({
       phone: "",
       email: "",
       address: "",
-      zipCode: initialZip && /^\d{5}$/.test(initialZip) ? initialZip : "",
+      zipCode: leftoverZip.kind === "valid" ? leftoverZip.zip : "",
       referralSource: undefined,
       businessName: "",
       employees: undefined,
@@ -78,7 +89,7 @@ export function QuoteForm({
       marketingTextOptIn: false,
       nonMarketingTextOptIn: false,
     }),
-    [initialInsuranceType, initialZip, normalizedInitialProduct],
+    [initialInsuranceType, leftoverZip, normalizedInitialProduct],
   );
 
   const {
@@ -139,7 +150,7 @@ export function QuoteForm({
       }
 
       reset(defaultValues);
-      setSuccessMessage("Thank you! We'll be in touch within one business day.");
+      setSuccessMessage(t("quoteSuccess"));
       fireLeadConversion("quote-request", {
         insuranceType: values.insuranceType,
         products: values.products,
@@ -147,7 +158,7 @@ export function QuoteForm({
       });
     } catch (error) {
       console.error("Quote form submission failed", error);
-      setErrorMessage(`Something went wrong sending your request. Please call us at ${agency.phone}.`);
+      setErrorMessage(t("submitError", { phone: agency.phone }));
     }
   });
 
@@ -196,6 +207,11 @@ export function QuoteForm({
   return (
     <div className="rounded-[2rem] border border-gray-100 bg-white p-6 shadow-[0_28px_70px_-50px_rgba(0,32,92,0.5)] sm:p-8">
       <form className="grid gap-6" onSubmit={onSubmit} noValidate>
+        {leftoverZip.kind === "invalid" ? (
+          <p className="rounded-2xl border border-amber-200 bg-amber-50 px-5 py-3 text-sm text-amber-800">
+            {t("leftoverZip")}
+          </p>
+        ) : null}
         <fieldset
           aria-describedby={
             errors.insuranceType ? `${formId}-insurance-type-error` : undefined
@@ -204,7 +220,7 @@ export function QuoteForm({
           className="min-w-0"
         >
           <legend className="text-sm font-semibold uppercase tracking-[0.22em] text-gray-600">
-            What kind of insurance are you looking for? <span aria-hidden="true">*</span>
+            {t("insuranceKindLegend")} <span aria-hidden="true">*</span>
           </legend>
           <div className="mt-3 grid gap-3 sm:grid-cols-3">
             {quoteInsuranceTypeOptions.map((option) => {
@@ -229,9 +245,11 @@ export function QuoteForm({
                     required
                     className="sr-only"
                   />
-                  <span className="text-base font-bold">{option.label}</span>
+                  <span className="text-base font-bold">
+                    {t(`insuranceType.${option.value}.label` as never)}
+                  </span>
                   <span className="mt-1 text-xs font-medium leading-5 text-gray-500">
-                    {option.description}
+                    {t(`insuranceType.${option.value}.description` as never)}
                   </span>
                 </label>
               );
@@ -243,7 +261,7 @@ export function QuoteForm({
               role="alert"
               className="mt-2 text-sm text-red-hover"
             >
-              {errors.insuranceType.message}
+              {fieldError(errors.insuranceType.message)}
             </p>
           ) : null}
         </fieldset>
@@ -254,7 +272,7 @@ export function QuoteForm({
           className="min-w-0"
         >
           <legend className="text-sm font-semibold uppercase tracking-[0.22em] text-gray-600">
-            Coverage needs <span aria-hidden="true">*</span>
+            {t("coverageNeedsLegend")} <span aria-hidden="true">*</span>
           </legend>
           <div className="mt-3 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
             {availableProductOptions.map((productSlug) => {
@@ -279,7 +297,7 @@ export function QuoteForm({
                         : "border-gray-200 text-gray-600 hover:border-blue/45 hover:text-gray-900",
                     )}
                   >
-                  {product.shortName}
+                  {tProducts(`${product.slug}.shortName` as never)}
                 </button>
               );
             })}
@@ -290,15 +308,15 @@ export function QuoteForm({
               role="alert"
               className="mt-2 text-sm text-red-hover"
             >
-              {errors.products.message}
+              {fieldError(errors.products.message)}
             </p>
           ) : null}
         </fieldset>
 
         {needsBusinessName ? (
           <Field
-            label="Business Name"
-            error={errors.businessName?.message}
+            label={t("businessName")}
+            error={fieldError(errors.businessName?.message)}
             inputId={`${formId}-business-name`}
             required
           >
@@ -312,15 +330,15 @@ export function QuoteForm({
               }
               aria-invalid={Boolean(errors.businessName)}
               className={inputClassName}
-              placeholder="Acme Plumbing LLC"
+              placeholder={t("businessNamePlaceholder")}
             />
           </Field>
         ) : null}
 
         <div className="grid gap-6 sm:grid-cols-2">
           <Field
-            label="First Name"
-            error={errors.firstName?.message}
+            label={t("firstName")}
+            error={fieldError(errors.firstName?.message)}
             inputId={`${formId}-first-name`}
             required
           >
@@ -332,12 +350,12 @@ export function QuoteForm({
               aria-describedby={errors.firstName ? `${formId}-first-name-error` : undefined}
               aria-invalid={Boolean(errors.firstName)}
               className={inputClassName}
-              placeholder="First name"
+              placeholder={t("firstNamePlaceholder")}
             />
           </Field>
           <Field
-            label="Last Name"
-            error={errors.lastName?.message}
+            label={t("lastName")}
+            error={fieldError(errors.lastName?.message)}
             inputId={`${formId}-last-name`}
             required
           >
@@ -349,10 +367,15 @@ export function QuoteForm({
               aria-describedby={errors.lastName ? `${formId}-last-name-error` : undefined}
               aria-invalid={Boolean(errors.lastName)}
               className={inputClassName}
-              placeholder="Last name"
+              placeholder={t("lastNamePlaceholder")}
             />
           </Field>
-          <Field label="Phone" error={errors.phone?.message} inputId={`${formId}-phone`} required>
+          <Field
+            label={t("phone")}
+            error={fieldError(errors.phone?.message)}
+            inputId={`${formId}-phone`}
+            required
+          >
             <input
               {...register("phone")}
               id={`${formId}-phone`}
@@ -362,11 +385,16 @@ export function QuoteForm({
               aria-invalid={Boolean(errors.phone)}
               className={inputClassName}
               inputMode="tel"
-              placeholder="(555) 555-5555"
+              placeholder={t("phonePlaceholder")}
               type="tel"
             />
           </Field>
-          <Field label="Email" error={errors.email?.message} inputId={`${formId}-email`} required>
+          <Field
+            label={t("email")}
+            error={fieldError(errors.email?.message)}
+            inputId={`${formId}-email`}
+            required
+          >
             <input
               {...register("email")}
               id={`${formId}-email`}
@@ -375,11 +403,15 @@ export function QuoteForm({
               aria-describedby={errors.email ? `${formId}-email-error` : undefined}
               aria-invalid={Boolean(errors.email)}
               className={inputClassName}
-              placeholder="you@example.com"
+              placeholder={t("emailPlaceholder")}
               type="email"
             />
           </Field>
-          <Field label="Address" error={errors.address?.message} inputId={`${formId}-address`}>
+          <Field
+            label={t("address")}
+            error={fieldError(errors.address?.message)}
+            inputId={`${formId}-address`}
+          >
             <AddressAutocomplete
               id={`${formId}-address`}
               value={watch("address") ?? ""}
@@ -389,13 +421,18 @@ export function QuoteForm({
                   setValue("zipCode", suggestion.postalCode, { shouldValidate: true });
                 }
               }}
-              placeholder="123 Main St, Corona, CA"
+              placeholder={t("addressPlaceholder")}
               className={inputClassName}
               aria-describedby={errors.address ? `${formId}-address-error` : undefined}
               aria-invalid={Boolean(errors.address)}
             />
           </Field>
-          <Field label="ZIP Code" error={errors.zipCode?.message} inputId={`${formId}-zip`} required>
+          <Field
+            label={t("zipCode")}
+            error={fieldError(errors.zipCode?.message)}
+            inputId={`${formId}-zip`}
+            required
+          >
             <input
               {...register("zipCode")}
               id={`${formId}-zip`}
@@ -405,12 +442,12 @@ export function QuoteForm({
               aria-invalid={Boolean(errors.zipCode)}
               inputMode="numeric"
               className={inputClassName}
-              placeholder="92878"
+              placeholder={t("zipPlaceholder")}
             />
           </Field>
           <Field
-            label="How did you hear about us?"
-            error={errors.referralSource?.message}
+            label={t("referralSource")}
+            error={fieldError(errors.referralSource?.message)}
             inputId={`${formId}-referral-source`}
             required
           >
@@ -426,11 +463,11 @@ export function QuoteForm({
               defaultValue=""
             >
               <option value="" disabled>
-                Select one
+                {t("selectOne")}
               </option>
               {referralSources.map((source) => (
                 <option key={source} value={source}>
-                  {source}
+                  {t(referralSourceLabelKey(source) as never)}
                 </option>
               ))}
             </select>
@@ -439,8 +476,8 @@ export function QuoteForm({
 
         {needsEmployees ? (
           <Field
-            label="Number of Employees"
-            error={errors.employees?.message}
+            label={t("employees")}
+            error={fieldError(errors.employees?.message)}
             inputId={`${formId}-employees`}
             required
           >
@@ -454,7 +491,7 @@ export function QuoteForm({
               defaultValue=""
             >
               <option value="" disabled>
-                Select one
+                {t("selectOne")}
               </option>
               {employeeOptions.map((option) => (
                 <option key={option} value={option}>
@@ -474,8 +511,8 @@ export function QuoteForm({
         />
 
         <Field
-          label="Message (optional)"
-          error={errors.message?.message}
+          label={t("messageOptional")}
+          error={fieldError(errors.message?.message)}
           inputId={`${formId}-message`}
         >
           <textarea
@@ -485,7 +522,7 @@ export function QuoteForm({
             aria-describedby={errors.message ? `${formId}-message-error` : undefined}
             aria-invalid={Boolean(errors.message)}
             className={cn(inputClassName, "min-h-32 py-3")}
-            placeholder="Tell us anything helpful about your coverage needs."
+            placeholder={t("quoteMessagePlaceholder")}
           />
         </Field>
 
@@ -493,9 +530,7 @@ export function QuoteForm({
 
         <div className="grid gap-4 sm:grid-cols-[1fr_auto] sm:items-center">
           <p className="text-sm leading-7 text-gray-600">
-            By submitting, you ask and authorize our team to follow up by live phone call or
-            email about this specific request. This does not authorize text messages; texts are
-            optional and only sent when you select an option above.
+            {t("quoteSubmitNote")}
           </p>
           <button
             type="submit"
@@ -503,7 +538,7 @@ export function QuoteForm({
             className="inline-flex h-13 items-center justify-center gap-2 rounded-full bg-red px-7 text-base font-bold text-white transition hover:bg-red-hover disabled:cursor-not-allowed disabled:opacity-70"
           >
             {isSubmitting ? <LoaderCircle className="h-5 w-5 animate-spin" /> : null}
-            Get My Quote
+            {t("quoteSubmit")}
           </button>
         </div>
 

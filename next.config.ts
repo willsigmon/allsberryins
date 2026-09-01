@@ -25,6 +25,14 @@ const longCacheHeader = {
   value: "public, max-age=31536000, immutable",
 };
 
+const emailSignatureRedirects = [
+  {
+    source: "/email-signatures",
+    destination: "/email-signatures/index.html",
+    permanent: false,
+  },
+] as const;
+
 const productionConfig: NextConfig = {
   async headers() {
     return [
@@ -38,27 +46,28 @@ const productionConfig: NextConfig = {
     ];
   },
   async redirects() {
-    return [
-      {
-        source: "/email-signatures",
-        destination: "/email-signatures/index.html",
-        permanent: false,
-      },
-    ];
+    return [...emailSignatureRedirects];
   },
 };
 
+const localConfig: NextConfig = localDistDir
+  ? {
+      distDir: localDistDir,
+    }
+  : hasMiddleware
+    ? {}
+    : {
+        distDir: ".next-build",
+      };
+
 const nextConfig: NextConfig = process.env.VERCEL
   ? productionConfig
-  : localDistDir
-    ? {
-        distDir: localDistDir,
-      }
-    : hasMiddleware
-      ? {}
-      : {
-          distDir: ".next-build",
-        };
+  : {
+      ...localConfig,
+      async redirects() {
+        return [...emailSignatureRedirects];
+      },
+    };
 
 const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 

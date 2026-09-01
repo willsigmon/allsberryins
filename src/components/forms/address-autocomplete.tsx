@@ -1,8 +1,10 @@
 "use client";
 
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import { useCallback, useEffect, useRef, useState } from "react";
 
+import { nextAddressLookupStatus, type AddressLookupStatus } from "@/lib/address-lookup";
 import { safeUUID } from "@/lib/uuid";
 
 type PlacePrediction = {
@@ -42,7 +44,9 @@ export function AddressAutocomplete({
   className,
   ...ariaProps
 }: AddressAutocompleteProps) {
+  const t = useTranslations("addressLookup");
   const [predictions, setPredictions] = useState<PlacePrediction[]>([]);
+  const [lookupStatus, setLookupStatus] = useState<AddressLookupStatus>("idle");
   const [isOpen, setIsOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(-1);
   const debounceRef = useRef<ReturnType<typeof setTimeout>>(undefined);
@@ -52,6 +56,7 @@ export function AddressAutocomplete({
   const fetchPredictions = useCallback(async (input: string) => {
     if (input.length < 3) {
       setPredictions([]);
+      setLookupStatus("idle");
       setIsOpen(false);
       return;
     }
@@ -66,18 +71,32 @@ export function AddressAutocomplete({
         }),
       });
 
-      if (!res.ok) return;
+      if (!res.ok) {
+        setPredictions([]);
+        setLookupStatus(nextAddressLookupStatus({ ok: false, predictionCount: 0 }));
+        setIsOpen(true);
+        setActiveIndex(-1);
+        return;
+      }
 
       const data = await res.json();
       const items: PlacePrediction[] = (data.suggestions ?? []).map(
         (s: { placePrediction: PlacePrediction }) => s.placePrediction,
       );
+      const status = nextAddressLookupStatus({
+        ok: true,
+        predictionCount: items.length,
+      });
 
       setPredictions(items);
-      setIsOpen(items.length > 0);
+      setLookupStatus(status);
+      setIsOpen(status === "results" || status === "empty");
       setActiveIndex(-1);
     } catch {
-      /* gracefully degrade to plain text input */
+      setPredictions([]);
+      setLookupStatus("unavailable");
+      setIsOpen(true);
+      setActiveIndex(-1);
     }
   }, []);
 
@@ -143,6 +162,7 @@ export function AddressAutocomplete({
       }
 
       setPredictions([]);
+      setLookupStatus("idle");
       setIsOpen(false);
       setActiveIndex(-1);
       sessionTokenRef.current = safeUUID();
@@ -201,44 +221,54 @@ export function AddressAutocomplete({
         aria-activedescendant={activeIndex >= 0 ? `${id}-option-${activeIndex}` : undefined}
         {...ariaProps}
       />
-      {isOpen && predictions.length > 0 && (
+      {isOpen && lookupStatus !== "idle" ? (
         <ul
           id={`${id}-listbox`}
           role="listbox"
           className="absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded-xl border border-gray-200 bg-white shadow-lg"
         >
-          {predictions.map((p, i) => (
-            <li
-              key={p.placeId}
-              id={`${id}-option-${i}`}
-              role="option"
-              aria-selected={i === activeIndex}
-              onMouseDown={() => handleSelect(p)}
-              onMouseEnter={() => setActiveIndex(i)}
-              className={`cursor-pointer px-4 py-2.5 text-sm ${
-                i === activeIndex
-                  ? "bg-blue-light font-semibold text-gray-900"
-                  : "text-gray-700 hover:bg-gray-50"
-              }`}
-            >
-              {p.structuredFormat ? (
-                <>
-                  <span className="font-medium text-gray-900">
-                    {p.structuredFormat.mainText.text}
-                  </span>
-                  <span className="ml-1 text-gray-500">
-                    {p.structuredFormat.secondaryText.text}
-                  </span>
-                </>
-              ) : (
-                p.text.text
+          {lookupStatus === "results"
+            ? predictions.map((p, i) => (
+                <li
+                  key={p.placeId}
+                  id={`${id}-option-${i}`}
+                  role="option"
+                  aria-selected={i === activeIndex}
+                  onMouseDown={() => handleSelect(p)}
+                  onMouseEnter={() => setActiveIndex(i)}
+                  className={`cursor-pointer px-4 py-2.5 text-sm ${
+                    i === activeIndex
+                      ? "bg-blue-light font-semibold text-gray-900"
+                      : "text-gray-700 hover:bg-gray-50"
+                  }`}
+                >
+                  {p.structuredFormat ? (
+                    <>
+                      <span className="font-medium text-gray-900">
+                        {p.structuredFormat.mainText.text}
+                      </span>
+                      <span className="ml-1 text-gray-500">
+                        {p.structuredFormat.secondaryText.text}
+                      </span>
+                    </>
+                  ) : (
+                    p.text.text
+                  )}
+                </li>
+              ))
+            : (
+                <li
+                  role="option"
+                  aria-selected="false"
+                  className="px-4 py-3 text-sm leading-6 text-gray-600"
+                >
+                  {lookupStatus === "empty" ? t("noMatches") : t("unavailable")}
+                </li>
               )}
-            </li>
-          ))}
           <li className="border-t border-gray-100 px-4 py-2">
             <Image
               src="https://developers.google.com/static/maps/documentation/images/powered_by_google_on_white.png"
-              alt="Powered by Google"
+              alt={t("poweredByGoogle")}
               width={120}
               height={14}
               className="h-3.5 w-auto"
@@ -246,7 +276,7 @@ export function AddressAutocomplete({
             />
           </li>
         </ul>
-      )}
+      ) : null}
     </div>
   );
 }

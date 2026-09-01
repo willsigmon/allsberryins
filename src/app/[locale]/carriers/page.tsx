@@ -4,7 +4,17 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { CtaBanner } from "@/components/sections/cta-banner";
 import { StructuredData } from "@/components/seo/structured-data";
+import {
+  LeftoverCatalogContext,
+  LeftoverCatalogEmpty,
+  LeftoverCatalogNotice,
+} from "@/components/ui/leftover-catalog-chrome";
 import { Link } from "@/i18n/navigation";
+import {
+  catalogLeftoverCopy,
+  firstQueryValue,
+  resolveCarrierCatalogLeftover,
+} from "@/lib/catalog-leftover";
 import { createPageMetadata } from "@/lib/metadata";
 import { createBreadcrumbSchema } from "@/lib/seo";
 import { carrierPartners } from "@/lib/site-data";
@@ -14,6 +24,7 @@ const path = "/carriers";
 
 type CarriersPageProps = {
   params: Promise<{ locale: string }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 };
 
 export async function generateMetadata({ params }: CarriersPageProps): Promise<Metadata> {
@@ -32,10 +43,27 @@ export async function generateMetadata({ params }: CarriersPageProps): Promise<M
   });
 }
 
-export default async function CarriersIndexPage({ params }: CarriersPageProps) {
+export default async function CarriersIndexPage({ params, searchParams }: CarriersPageProps) {
   const { locale } = await params;
   setRequestLocale(locale);
+  const query = await searchParams;
   const t = await getTranslations("carriersPage");
+  const tLeftover = await getTranslations("leftoverCatalog");
+  const catalog = resolveCarrierCatalogLeftover({
+    carriers: carrierPartners.map((carrier) => ({
+      name: carrier.name,
+      slug: slugify(carrier.name),
+    })),
+    rawCarrier: firstQueryValue(query.carrier),
+    rawLine: firstQueryValue(query.line),
+    rawName: firstQueryValue(query.name),
+  });
+  const visibleCarriers = carrierPartners.filter((carrier) =>
+    catalog.visibleSlugs.includes(slugify(carrier.name)),
+  );
+  const knownCarrier = visibleCarriers.length === 1 && catalog.leftovers.every((leftover) => leftover.kind !== "unknown-carrier")
+    ? visibleCarriers[0]
+    : undefined;
   const breadcrumb = createBreadcrumbSchema([
     { name: "Home", path: "/" },
     { name: "Carriers", path },
@@ -55,10 +83,42 @@ export default async function CarriersIndexPage({ params }: CarriersPageProps) {
           <p className="mt-5 text-lg text-gray-600">
             {t("subheading")}
           </p>
+          {catalog.leftovers.length > 0 ? (
+            <div className="mt-6 grid gap-3">
+              {catalog.leftovers.map((leftover) => {
+                const copy = catalogLeftoverCopy(leftover);
+                return (
+                  <LeftoverCatalogNotice key={`${leftover.kind}-${leftover.raw}`}>
+                    {tLeftover(copy.key, { requested: copy.requested })}
+                  </LeftoverCatalogNotice>
+                );
+              })}
+            </div>
+          ) : null}
+          {knownCarrier ? (
+            <div className="mt-6">
+              <LeftoverCatalogContext>
+                <p>{tLeftover("knownCarrier", { name: knownCarrier.name })}</p>
+                <Link
+                  href="/carriers"
+                  className="mt-2 inline-flex min-h-11 items-center text-sm font-bold text-blue underline-offset-4 hover:underline"
+                >
+                  {tLeftover("seeAllCarriers")}
+                </Link>
+              </LeftoverCatalogContext>
+            </div>
+          ) : null}
         </div>
 
+        {catalog.emptyCatalog || visibleCarriers.length === 0 ? (
+          <div className="mt-12">
+            <LeftoverCatalogEmpty title={tLeftover("emptyCarriersTitle")}>
+              {tLeftover("emptyCarriersBody")}
+            </LeftoverCatalogEmpty>
+          </div>
+        ) : (
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {carrierPartners.map((carrier) => {
+          {visibleCarriers.map((carrier) => {
             const slug = slugify(carrier.name);
             return (
               <Link
@@ -88,6 +148,7 @@ export default async function CarriersIndexPage({ params }: CarriersPageProps) {
             );
           })}
         </div>
+        )}
       </div>
       <div className="mt-20">
         <CtaBanner />

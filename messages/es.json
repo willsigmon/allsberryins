@@ -31,7 +31,7 @@
     "email": "Correo",
     "emailUs": "Escríbanos",
     "address": "Dirección",
-    "hours": "Lunes a viernes, 8:00 AM – 5:00 PM",
+    "hours": "Lunes a viernes, 8:00 AM – 5:00 PM hora del Pacífico",
     "hoursLabel": "Horario",
     "callsAndTexts": "Aceptamos llamadas y mensajes",
     "serviceArea": "Sur de California",
@@ -174,12 +174,17 @@
       "fastFollowUp": "Seguimiento rápido",
       "claimsGuidance": "Guía en reclamos",
       "allsberryClient": "Cliente de Allsberry",
-      "seeMoreCta": "Ver más reseñas"
+      "seeMoreCta": "Ver más reseñas",
+      "googleReviewsLabel": "Reseñas de Google",
+      "googleReviewsBody": "Lea o deje una reseña en el perfil de Google de la agencia. Esta página no publica una calificación de estrellas.",
+      "quotedFrom": "Citado de {source}",
+      "emptyHeading": "No hay citas de clientes listadas aquí.",
+      "emptyBody": "Aun así puede leer o dejar una reseña de Google en el perfil de la agencia."
     }
   },
   "about": {
     "metaTitle": "Nosotros",
-    "metaDescription": "Conozca al equipo bilingüe de Allsberry Insurance Agency — 10 agentes licenciados ayudando a familias y negocios del Sur de California desde 1994.",
+    "metaDescription": "Conozca al equipo bilingüe de Allsberry Insurance Agency en Corona, que ayuda a familias y negocios del Sur de California desde 1994.",
     "eyebrow": "Sobre la agencia",
     "heading": "Asesoría local, comunicación clara y cobertura que le queda a la vida real.",
     "intro": "Allsberry Insurance Agency ha servido al Sur de California desde 1994. Erin lidera la agencia desde 2009 con una idea sencilla: el seguro debe sentirse a la medida, entendible y realmente útil.",
@@ -187,7 +192,7 @@
     "stats": {
       "servingSinceLabel": "Sirviendo desde",
       "hoursLabel": "Lunes – Viernes",
-      "hoursValue": "8 AM – 5 PM",
+      "hoursValue": "8 AM – 5 PM PT",
       "bilingualLabel": "Se habla Español",
       "bilingualValue": "Equipo Bilingüe"
     },
@@ -283,6 +288,10 @@
     "preferredFollowUp": "Seguimiento preferido: {name}",
     "needProofIntro": "¿Necesita un certificado o comprobante de seguro en vez de una cotización? Use la ruta específica para",
     "needProofLink": "solicitar comprobante",
+    "unknownProductNotice": "No reconocimos ese tipo de cobertura en el enlace. Elija de la lista de este formulario — no inventamos un producto a partir de la URL.",
+    "knownCarrierNotice": "Abrió este formulario desde {carrier}. La solicitud sigue llegando a Allsberry; este formulario no fija la cotización a esa aseguradora.",
+    "unknownCarrierNotice": "No listamos esa aseguradora en este sitio. Aun así puede solicitar una cotización en el formulario.",
+    "unknownAgentNotice": "No reconocimos el enlace de ese agente. Si envía el formulario, la oficina igual recibe la cotización.",
     "faqs": {
       "heading": "Preguntas de cotización que respondemos antes de que envíe el formulario",
       "description": "Las preguntas que la gente hace antes de comenzar una cotización — respondidas desde el inicio, para que empiece con confianza.",
@@ -320,7 +329,9 @@
     "subheading": "Recursos en lenguaje sencillo para entender su cobertura.",
     "blogHeading": "Del blog",
     "guidesHeading": "Guías de cobertura",
-    "viewAll": "Ver todo"
+    "viewAll": "Ver todo",
+    "emptyHeading": "Aún no hay guías listadas aquí.",
+    "emptyBody": "Llame a la oficina o solicite una cotización. No inventamos tarjetas de recursos para llenar esta página."
   },
   "review": {
     "metaTitle": "Comparta su experiencia",
@@ -335,7 +346,13 @@
     "privateFeedbackIntro": "¿Algo no salió como esperaba?",
     "privateFeedbackLink": "Cuéntenos en privado",
     "privateFeedbackOutro": "— su nota llega directo a Erin.",
-    "callOfficeIntro": "O llame a la oficina directamente al"
+    "callOfficeIntro": "O llame a la oficina directamente al",
+    "leftoverUnknownAgent": "No inventamos una bandeja para “{raw}”. Las reseñas van al listado de Google de la agencia.",
+    "leftoverKnownAgent": "Las reseñas para {name} van al listado de Google de la agencia. No inventamos una bandeja privada.",
+    "leftoverUnknownSource": "No inventamos un formulario de reseñas “{raw}”. Esta página abre el listado de Google.",
+    "leftoverYelpSource": "Esta página abre el enlace de reseñas de Google. No inventamos un formulario de Yelp.",
+    "leftoverUnknownIntent": "No inventamos un flujo “{raw}”. Esta página es una reseña pública de Google.",
+    "leftoverFeedbackIntent": "Esta página abre una reseña pública de Google. Los comentarios privados son correo o una llamada — no inventamos un formulario aquí."
   },
   "evidenceOfInsurance": {
     "metaTitle": "Comprobante de Seguro",
@@ -382,11 +399,18 @@
     "keepMovingHomeAuto": "Comenzar cotización de casa o auto",
     "keepMovingBusiness": "Revisar cobertura de negocio",
     "keepMovingProof": "Solicitar comprobante de seguro",
+    "emptyHeading": "Aún no hay artículos publicados aquí.",
+    "emptyBody": "Mientras tanto, solicite una cotización o llame a la oficina. No inventamos artículos para llenar esta página.",
     "categories": {
       "tips": "Consejos",
       "guides": "Guías",
       "news": "Noticias de la agencia"
-    }
+    },
+    "leftoverUnknownTag": "No hay artículos con la etiqueta “{raw}”. No inventamos publicaciones.",
+    "leftoverUnknownCategory": "“{raw}” no es una categoría publicada. No inventamos una.",
+    "leftoverEmptyFilter": "Ningún artículo coincide con ese filtro residual. No inventamos publicaciones.",
+    "showingTag": "Mostrando artículos con la etiqueta {tag}.",
+    "showingCategory": "Mostrando artículos de {category}."
   },
   "agents": {
     "listHeading": "Nuestros agentes",
@@ -659,6 +683,11 @@
     "spanishHelper": "Sitio en español.",
     "switchingTo": "Cambiando a {name}"
   },
+  "addressLookup": {
+    "noMatches": "No hay direcciones que coincidan. Aun así puede escribir la calle y el código postal.",
+    "unavailable": "La búsqueda de direcciones no está disponible. Escriba la calle y el código postal.",
+    "poweredByGoogle": "Con la tecnología de Google"
+  },
   "a11y": {
     "skipToContent": "Saltar al contenido"
   },
@@ -747,5 +776,125 @@
       "md": "Estándar",
       "lg": "Grande"
     }
+  },
+  "forms": {
+    "insuranceKindLegend": "¿Qué tipo de seguro busca?",
+    "coverageNeedsLegend": "Cobertura que necesita",
+    "firstName": "Nombre",
+    "lastName": "Apellido",
+    "fullName": "Nombre",
+    "phone": "Teléfono",
+    "email": "Correo",
+    "address": "Dirección",
+    "zipCode": "Código postal",
+    "businessName": "Nombre del negocio",
+    "referralSource": "¿Cómo se enteró de nosotros?",
+    "employees": "Número de empleados",
+    "messageOptional": "Mensaje (opcional)",
+    "notesOptional": "Notas (opcional)",
+    "companyLender": "Empresa / prestamista / agencia",
+    "requestType": "Tipo de solicitud",
+    "requestedFor": "Solicitado para",
+    "dueDateOptional": "Fecha límite (opcional)",
+    "helpTopic": "¿En qué le puedo ayudar?",
+    "selectOne": "Seleccione una opción",
+    "firstNamePlaceholder": "Nombre",
+    "lastNamePlaceholder": "Apellido",
+    "fullNamePlaceholder": "Su nombre completo",
+    "phonePlaceholder": "(555) 555-5555",
+    "emailPlaceholder": "usted@ejemplo.com",
+    "addressPlaceholder": "123 Main St, Corona, CA",
+    "zipPlaceholder": "92878",
+    "businessNamePlaceholder": "Acme Plumbing LLC",
+    "companyPlaceholder": "¿Quién necesita el comprobante?",
+    "requestedForPlaceholder": "Escrow, prestamista, arrendador, proveedor, HOA o cliente",
+    "quoteMessagePlaceholder": "Cuéntenos cualquier detalle útil sobre la cobertura que necesita.",
+    "evidenceMessagePlaceholder": "Comparta número de préstamo, contexto de escrow, datos de la propiedad o instrucciones que nos ayuden a avanzar más rápido.",
+    "agentMessagePlaceholder": "Cuéntele a {firstName} un poco sobre lo que necesita.",
+    "quoteSubmit": "Obtener mi cotización",
+    "sendRequest": "Enviar solicitud",
+    "quoteSubmitNote": "Al enviar, pide y autoriza a nuestro equipo a darle seguimiento por llamada o correo sobre esta solicitud. Esto no autoriza mensajes de texto; los textos son opcionales y solo se envían si selecciona una opción arriba.",
+    "evidenceSubmitNote": "Esta solicitud es para certificados, comprobantes de cobertura y trámites urgentes con prestamistas o escrow.",
+    "quoteSuccess": "Gracias. Le contactaremos en un día hábil.",
+    "evidenceSuccess": "Gracias. Recibimos su solicitud y el equipo le dará seguimiento con la documentación correcta lo antes posible.",
+    "agentSuccess": "Gracias por escribirnos. {name} o alguien del equipo le contactará pronto.",
+    "submitError": "No pudimos enviar su solicitud. Llámenos al {phone}.",
+    "leftoverZip": "Ese código no es un ZIP de 5 dígitos de EE. UU. Escríbalo en el formulario. No inventamos un código postal.",
+    "leftoverAudience": "Ese enlace mencionó “{raw}”, que no es un tipo de solicitud que usamos. Díganos quién necesita el comprobante. No inventamos el destinatario.",
+    "audienceContext": "Contexto de la solicitud: {audience}",
+    "insuranceType": {
+      "personal": {
+        "label": "Personal",
+        "description": "Casa, auto, inquilinos, condo y cobertura paraguas"
+      },
+      "commercial": {
+        "label": "Comercial",
+        "description": "Cobertura de negocio y compensación laboral"
+      },
+      "life": {
+        "label": "Vida",
+        "description": "Seguro de vida para las personas que dependen de usted"
+      }
+    },
+    "referral": {
+      "realEstateAgent": "Agente de bienes raíces",
+      "onlineSearch": "Búsqueda en internet",
+      "referral": "Recomendación",
+      "socialMedia": "Redes sociales",
+      "other": "Otro"
+    },
+    "evidenceType": {
+      "proof": "Comprobante de seguro",
+      "businessCoi": "Comprobante de seguro comercial (COI)",
+      "bankLender": "Actualización para mi banco o prestamista",
+      "buyingSelling": "Papelería para comprar o vender una casa",
+      "other": "Otro"
+    },
+    "helpTopics": {
+      "home": "Seguro de casa",
+      "auto": "Seguro de auto",
+      "business": "Seguro comercial",
+      "workersComp": "Compensación laboral",
+      "life": "Seguro de vida",
+      "other": "Otro"
+    },
+    "errors": {
+      "insuranceType": "Elija seguro personal, comercial o de vida.",
+      "products": "Seleccione al menos un tipo de cobertura.",
+      "firstName": "El nombre es obligatorio.",
+      "lastName": "El apellido es obligatorio.",
+      "fullName": "Su nombre es obligatorio.",
+      "phoneRequired": "El teléfono es obligatorio.",
+      "phoneInvalid": "Ingrese un teléfono válido.",
+      "email": "Ingrese un correo válido.",
+      "addressLength": "La dirección debe tener menos de 200 caracteres.",
+      "zip": "Ingrese un código postal de 5 dígitos.",
+      "referral": "Díganos cómo se enteró de nosotros.",
+      "businessNameLength": "El nombre del negocio debe tener menos de 200 caracteres.",
+      "productsMismatch": "Elija coberturas que coincidan con el tipo de seguro seleccionado.",
+      "employees": "Elija el número de empleados.",
+      "businessNameRequired": "El nombre del negocio es obligatorio para cotizaciones comerciales.",
+      "messageLength": "El mensaje debe tener menos de 1000 caracteres.",
+      "company": "El nombre de la empresa, prestamista o agencia es obligatorio.",
+      "requestType": "Seleccione el tipo de solicitud.",
+      "requestedFor": "Díganos para quién es el comprobante.",
+      "helpTopic": "Seleccione cómo puede ayudar el agente."
+    }
+  },
+  "leftoverCatalog": {
+    "unknownAgent": "No inventamos un compañero llamado “{requested}.” Las personas en esta página salen de la plantilla de la agencia.",
+    "knownAgent": "Esta es la página Nosotros de la agencia — no la bandeja de {name}. Conozca a {firstName} en su perfil.",
+    "unknownCarrier": "No inventamos una aseguradora llamada “{requested}.” Esta página lista socios con nombre de la agencia.",
+    "knownCarrier": "Mostrando la ficha de {name} que sí está en la lista. Vea todos los socios con nombre en esta página.",
+    "seeAllCarriers": "Ver todas las aseguradoras nombradas",
+    "carrierLine": "Este catálogo es una lista de socios con nombre. No inventamos una línea “{requested}” ni un corte personal/comercial aquí.",
+    "unknownTopic": "No inventamos una sección “{requested}” en esta guía. Los encabezados de abajo son los que publicamos.",
+    "unknownCity": "No inventamos una página de la ciudad “{requested}.” La oficina de Corona está en la guía local de la agencia y en Contacto.",
+    "guideZip": "Esta guía no es un formulario de cotización, así que “{requested}” no es un código postal que podamos rellenar. Empiece una cotización si quiere una revisión local.",
+    "emptyRosterTitle": "No hay compañeros listados aquí",
+    "emptyRosterBody": "No inventamos una plantilla. Llame o escriba a la oficina para hablar con un agente con licencia.",
+    "emptyCarriersTitle": "No hay aseguradoras nombradas aquí",
+    "emptyCarriersBody": "No inventamos un mercado. Llame o escriba a la oficina y cotizamos con los socios que sí nombramos.",
+    "meetProfile": "Abrir el perfil de {firstName}"
   }
 }

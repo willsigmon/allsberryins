@@ -6,7 +6,8 @@ import { PageFaqSection } from "@/components/sections/page-faq-section";
 import { StructuredData } from "@/components/seo/structured-data";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { createPageMetadata } from "@/lib/metadata";
-import { agency, getAgentBySlug } from "@/lib/site-data";
+import { resolveQuoteEntryNotices, type QuoteEntryNotice } from "@/lib/quote-entry";
+import { agency, agents, carrierPartners, getAgentBySlug, productSelectionOptions } from "@/lib/site-data";
 import { buildTrackedHref, normalizeAgentSlug } from "@/lib/tracking";
 import { createBreadcrumbSchema, organizationSchema } from "@/lib/seo";
 import { absoluteUrl } from "@/lib/utils";
@@ -35,9 +36,18 @@ export default async function QuotePage({ params, searchParams }: QuotePageProps
   const product = typeof searchParamsValue.product === "string" ? searchParamsValue.product : undefined;
   const zip = typeof searchParamsValue.zip === "string" ? searchParamsValue.zip : undefined;
   const entryPoint = typeof searchParamsValue.entry === "string" ? searchParamsValue.entry : undefined;
-  const assignedAgentSlug =
-    typeof searchParamsValue.agent === "string" ? normalizeAgentSlug(searchParamsValue.agent) : undefined;
+  const carrier = typeof searchParamsValue.carrier === "string" ? searchParamsValue.carrier : undefined;
+  const rawAgent = typeof searchParamsValue.agent === "string" ? searchParamsValue.agent : undefined;
+  const assignedAgentSlug = rawAgent ? normalizeAgentSlug(rawAgent) : undefined;
   const assignedAgent = assignedAgentSlug ? getAgentBySlug(assignedAgentSlug) : undefined;
+  const entryNotices = resolveQuoteEntryNotices(
+    { agent: rawAgent, carrier, product },
+    {
+      agentSlugs: agents.map((item) => item.slug),
+      carrierNames: carrierPartners.map((item) => item.name),
+      productSlugs: productSelectionOptions,
+    },
+  );
 
   const pageFaqs = [
     { question: t("faqs.q1.question"), answer: t("faqs.q1.answer") },
@@ -100,6 +110,24 @@ export default async function QuotePage({ params, searchParams }: QuotePageProps
                   {t("preferredFollowUp", { name: assignedAgent.name })}
                 </div>
               ) : null}
+              {entryNotices.length ? (
+                <ul className="mt-5 grid gap-3">
+                  {entryNotices.map((notice) => (
+                    <li
+                      key={quoteEntryNoticeKey(notice)}
+                      className="rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm font-medium leading-6 text-amber-950"
+                    >
+                      {notice.kind === "known-carrier"
+                        ? t("knownCarrierNotice", { carrier: notice.carrierName })
+                        : notice.kind === "unknown-product"
+                          ? t("unknownProductNotice")
+                          : notice.kind === "unknown-carrier"
+                            ? t("unknownCarrierNotice")
+                            : t("unknownAgentNotice")}
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
               <p className="mt-5 text-sm leading-7 text-gray-600">
                 {t("needProofIntro")}{" "}
                 <a
@@ -146,4 +174,8 @@ export default async function QuotePage({ params, searchParams }: QuotePageProps
       </section>
     </div>
   );
+}
+
+function quoteEntryNoticeKey(notice: QuoteEntryNotice): string {
+  return notice.kind === "known-carrier" ? `${notice.kind}-${notice.carrierName}` : notice.kind;
 }
