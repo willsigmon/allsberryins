@@ -1,7 +1,30 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 
-import { readLeadSubmitError } from "./lead-submit-error.ts";
+import {
+  LeadSubmitError,
+  leadFormErrorMessage,
+  readLeadSubmitError,
+} from "./lead-submit-error.ts";
+
+describe("leadFormErrorMessage", () => {
+  it("surfaces API-sourced lead submit messages", () => {
+    assert.equal(
+      leadFormErrorMessage(
+        new LeadSubmitError("We couldn't deliver your request. Please call or email us directly."),
+        "Please call the office.",
+      ),
+      "We couldn't deliver your request. Please call or email us directly.",
+    );
+  });
+
+  it("keeps the office-contact fallback for raw fetch errors", () => {
+    assert.equal(
+      leadFormErrorMessage(new TypeError("Failed to fetch"), "Please call the office."),
+      "Please call the office.",
+    );
+  });
+});
 
 describe("readLeadSubmitError", () => {
   it("surfaces the API message instead of inventing a CRM status", async () => {

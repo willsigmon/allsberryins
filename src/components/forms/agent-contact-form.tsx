@@ -9,7 +9,11 @@ import { ReviewRequest } from "@/components/sections/review-request";
 import { SmsConsentFields } from "@/components/forms/sms-consent-fields";
 import { fireLeadConversion } from "@/lib/conversions";
 import { agentContactSchema, helpTopics, type AgentContactValues } from "@/lib/lead-schemas";
-import { readLeadSubmitError } from "@/lib/lead-submit-error";
+import {
+  LeadSubmitError,
+  leadFormErrorMessage,
+  readLeadSubmitError,
+} from "@/lib/lead-submit-error";
 import { agency } from "@/lib/site-data";
 import { readStoredMarketingAttribution } from "@/lib/tracking";
 
@@ -67,7 +71,7 @@ export function AgentContactForm({
       });
 
       if (!response.ok) {
-        throw new Error(
+        throw new LeadSubmitError(
           await readLeadSubmitError(
             response,
             `We couldn't send that request just now. Please call the office at ${agency.phone}.`,
@@ -81,9 +85,10 @@ export function AgentContactForm({
     } catch (error) {
       console.error("Agent contact form submission failed", error);
       setErrorMessage(
-        error instanceof Error
-          ? error.message
-          : `We couldn't send that request just now. Please call the office at ${agency.phone}.`,
+        leadFormErrorMessage(
+          error,
+          `We couldn't send that request just now. Please call the office at ${agency.phone}.`,
+        ),
       );
     }
   });

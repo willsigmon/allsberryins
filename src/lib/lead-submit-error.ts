@@ -1,3 +1,18 @@
+export class LeadSubmitError extends Error {
+  override readonly name = "LeadSubmitError";
+}
+
+export function leadFormErrorMessage(error: unknown, fallback: string): string {
+  if (error instanceof LeadSubmitError) {
+    const message = error.message.trim();
+    if (message) {
+      return message;
+    }
+  }
+
+  return fallback;
+}
+
 export async function readLeadSubmitError(
   response: Response,
   fallback: string,

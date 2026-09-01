@@ -12,7 +12,11 @@ import {
   evidenceRequestSchema,
   type EvidenceRequestValues,
 } from "@/lib/lead-schemas";
-import { readLeadSubmitError } from "@/lib/lead-submit-error";
+import {
+  LeadSubmitError,
+  leadFormErrorMessage,
+  readLeadSubmitError,
+} from "@/lib/lead-submit-error";
 import { agency, evidenceRequestTypes } from "@/lib/site-data";
 import { readStoredMarketingAttribution } from "@/lib/tracking";
 import { cn } from "@/lib/utils";
@@ -79,7 +83,7 @@ export function EvidenceRequestForm({
       });
 
       if (!response.ok) {
-        throw new Error(
+        throw new LeadSubmitError(
           await readLeadSubmitError(
             response,
             `We couldn't send that request just now. Please call the office at ${agency.phone}.`,
@@ -95,9 +99,10 @@ export function EvidenceRequestForm({
     } catch (error) {
       console.error("Evidence request submission failed", error);
       setErrorMessage(
-        error instanceof Error
-          ? error.message
-          : `We couldn't send that request just now. Please call the office at ${agency.phone}.`,
+        leadFormErrorMessage(
+          error,
+          `We couldn't send that request just now. Please call the office at ${agency.phone}.`,
+        ),
       );
     }
   });

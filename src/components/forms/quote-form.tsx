@@ -26,7 +26,11 @@ import {
   type QuoteInsuranceType,
   type QuoteProductSlug,
 } from "@/lib/quote-routing";
-import { readLeadSubmitError } from "@/lib/lead-submit-error";
+import {
+  LeadSubmitError,
+  leadFormErrorMessage,
+  readLeadSubmitError,
+} from "@/lib/lead-submit-error";
 import { readStoredMarketingAttribution } from "@/lib/tracking";
 import { cn } from "@/lib/utils";
 
@@ -136,7 +140,7 @@ export function QuoteForm({
       });
 
       if (!response.ok) {
-        throw new Error(
+        throw new LeadSubmitError(
           await readLeadSubmitError(
             response,
             `Something went wrong sending your request. Please call us at ${agency.phone}.`,
@@ -154,9 +158,10 @@ export function QuoteForm({
     } catch (error) {
       console.error("Quote form submission failed", error);
       setErrorMessage(
-        error instanceof Error
-          ? error.message
-          : `Something went wrong sending your request. Please call us at ${agency.phone}.`,
+        leadFormErrorMessage(
+          error,
+          `Something went wrong sending your request. Please call us at ${agency.phone}.`,
+        ),
       );
     }
   });
