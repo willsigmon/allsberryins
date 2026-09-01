@@ -2,6 +2,7 @@ import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { ImageResponse } from "next/og";
 
+import { missingCatalogOgCopy } from "@/lib/missing-catalog-slug";
 import { carrierPartners } from "@/lib/site-data";
 import { slugify } from "@/lib/utils";
 
@@ -18,7 +19,8 @@ export default async function CarrierOgImage({
   const carrier = carrierPartners.find(
     (candidate) => slugify(candidate.name) === slug,
   );
-  const carrierName = carrier?.name ?? "Carrier partner";
+  const leftoverOg = carrier ? null : missingCatalogOgCopy("carrier");
+  const carrierName = leftoverOg ? leftoverOg.heading : carrier?.name ?? "";
 
   const logoData = await readFile(
     join(process.cwd(), "public", "android-chrome-512x512.png"),
@@ -87,7 +89,7 @@ export default async function CarrierOgImage({
               color: "rgba(255,255,255,0.7)",
             }}
           >
-            Carrier partner
+            {leftoverOg ? leftoverOg.eyebrow : "Carrier partner"}
           </div>
         </div>
 
@@ -121,8 +123,9 @@ export default async function CarrierOgImage({
               maxWidth: "820px",
             }}
           >
-            Independent access to {carrierName} — compared against 20+ carriers for
-            Corona, Riverside, and Southern California clients.
+            {leftoverOg
+              ? leftoverOg.body
+              : `Independent access to ${carrierName} — compared against 20+ carriers for Corona, Riverside, and Southern California clients.`}
           </div>
         </div>
 
@@ -146,7 +149,7 @@ export default async function CarrierOgImage({
               boxShadow: "0 8px 24px -8px rgba(218,41,28,0.5)",
             }}
           >
-            Compare {carrierName} quote
+            {leftoverOg ? leftoverOg.cta : `Compare ${carrierName} quote`}
           </div>
           <div style={{ color: "rgba(255,255,255,0.5)", fontSize: "20px", fontWeight: 600 }}>
             allsberryagency.com/carriers

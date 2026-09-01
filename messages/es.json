@@ -415,6 +415,20 @@
     "lookslikeThisPageIsntHere": "Parece que esta página no está aquí.",
     "subheading": "Quizá el enlace quedó viejo o la página se movió. Aquí es a donde llega la mayoría de los visitantes — o llámenos al",
     "goHome": "Ir al inicio",
+    "leftover": {
+      "agent": {
+        "heading": "Esa página de agente no está en este sitio",
+        "body": "Solo listamos a las personas del equipo actual. Este enlace no es la página de un agente licenciado — o llámenos al"
+      },
+      "carrier": {
+        "heading": "Esa página de aseguradora no está en este sitio",
+        "body": "Solo listamos las aseguradoras de la página de socios. Este enlace no es una cita — o llámenos al"
+      },
+      "article": {
+        "heading": "Ese artículo no está publicado aquí",
+        "body": "No inventamos publicaciones para enlaces viejos. Aquí es a donde llega la mayoría de los visitantes — o llámenos al"
+      }
+    },
     "popularLinks": {
       "quoteLabel": "Obtener cotización",
       "quoteDesc": "Casa, auto, negocio, vida",
@@ -423,7 +437,7 @@
       "proofLabel": "Comprobante de seguro",
       "proofDesc": "Certificados y COIs",
       "carriersLabel": "Aseguradoras asociadas",
-      "carriersDesc": "Más de 20 aseguradoras comparadas",
+      "carriersDesc": "Socios listados en este sitio",
       "blogLabel": "Blog y guías",
       "blogDesc": "Información sobre cobertura",
       "contactLabel": "Contáctenos",

@@ -8,6 +8,7 @@ import { SeoPageCard } from "@/components/ui/seo-page-card";
 import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { createPageMetadata } from "@/lib/metadata";
+import { createMissingCatalogMetadata } from "@/lib/missing-catalog-slug";
 import { getSeoPagesBySlugs } from "@/lib/seo-content";
 import { blogPosts, getBlogPostBySlug } from "@/lib/site-data";
 import { createBreadcrumbSchema, organizationSchema } from "@/lib/seo";
@@ -28,7 +29,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   const post = getBlogPostBySlug(slug);
 
   if (!post) {
-    return {};
+    return createMissingCatalogMetadata("article");
   }
 
   return createPageMetadata({

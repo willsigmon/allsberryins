@@ -8,6 +8,7 @@ import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { createPageMetadata } from "@/lib/metadata";
 import { createBreadcrumbSchema } from "@/lib/seo";
+import { createMissingCatalogMetadata } from "@/lib/missing-catalog-slug";
 import { agency, carrierPartners } from "@/lib/site-data";
 import { absoluteUrl, slugify } from "@/lib/utils";
 
@@ -27,12 +28,7 @@ export async function generateMetadata({ params }: Params) {
   const { locale, slug } = await params;
   const carrier = getCarrierBySlug(slug);
   if (!carrier) {
-    return createPageMetadata({
-      title: "Carrier not found",
-      description: "That carrier page could not be located.",
-      path: `/carriers/${slug}`,
-      locale,
-    });
+    return createMissingCatalogMetadata("carrier");
   }
   return createPageMetadata({
     title: `${carrier.name} Insurance in Corona & Southern California`,

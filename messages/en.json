@@ -415,6 +415,20 @@
     "lookslikeThisPageIsntHere": "Looks like this page isn't here.",
     "subheading": "The link might be outdated, or it may have moved. Here's where most visitors head next — or give us a call at",
     "goHome": "Go Home",
+    "leftover": {
+      "agent": {
+        "heading": "That agent page is not on this site",
+        "body": "We only list people from the current team. This leftover link is not a licensed agent page — or give us a call at"
+      },
+      "carrier": {
+        "heading": "That carrier page is not on this site",
+        "body": "We only list partners from the carriers page. This leftover link is not an appointment — or give us a call at"
+      },
+      "article": {
+        "heading": "That article is not published here",
+        "body": "We do not invent posts for leftover links. Here's where most visitors head next — or give us a call at"
+      }
+    },
     "popularLinks": {
       "quoteLabel": "Get a quote",
       "quoteDesc": "Home, auto, business, life",
@@ -423,7 +437,7 @@
       "proofLabel": "Proof of insurance",
       "proofDesc": "Certificates & COIs",
       "carriersLabel": "Carrier partners",
-      "carriersDesc": "20+ carriers shopped",
+      "carriersDesc": "Listed partners on this site",
       "blogLabel": "Blog & guides",
       "blogDesc": "Coverage insights",
       "contactLabel": "Contact us",

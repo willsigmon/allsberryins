@@ -16,6 +16,7 @@ import { getSeoPagesForAgent } from "@/lib/seo-content";
 import { agency, agents, getAgentBySlug, primaryProducerSlug } from "@/lib/site-data";
 import { createBreadcrumbSchema, organizationSchema } from "@/lib/seo";
 import { getAgentQrDestination } from "@/lib/agent-qr";
+import { createMissingCatalogMetadata } from "@/lib/missing-catalog-slug";
 import { buildTrackedHref } from "@/lib/tracking";
 import { absoluteUrl } from "@/lib/utils";
 
@@ -35,7 +36,7 @@ export async function generateMetadata({ params }: AgentPageProps): Promise<Meta
   const agent = getAgentBySlug(slug);
 
   if (!agent) {
-    return {};
+    return createMissingCatalogMetadata("agent");
   }
 
   const tBio = await getTranslations({ locale, namespace: "agents.bios" });
