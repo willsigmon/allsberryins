@@ -18,6 +18,7 @@
     "test:node": "node --experimental-strip-types --test src/lib/quote-entry.test.ts src/lib/chat-response.test.ts src/lib/review-sources.test.ts src/lib/address-lookup.test.ts",
     "test:forms": "node --experimental-strip-types --test src/lib/form-copy.test.ts src/lib/form-i18n.test.ts",
     "test:query": "node --experimental-strip-types --test src/lib/office-hours.test.ts src/lib/locale-query.test.ts src/lib/review-query.test.ts src/lib/blog-filter.test.ts src/lib/places-honesty.test.ts",
+    "test:catalog": "node --experimental-strip-types --test src/lib/catalog-leftover.test.ts",
     "seo:indexnow": "node ./scripts/submit-indexnow.mjs"
   },
   "dependencies": {

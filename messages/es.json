@@ -880,5 +880,21 @@
       "requestedFor": "Díganos para quién es el comprobante.",
       "helpTopic": "Seleccione cómo puede ayudar el agente."
     }
+  },
+  "leftoverCatalog": {
+    "unknownAgent": "No inventamos un compañero llamado “{requested}.” Las personas en esta página salen de la plantilla de la agencia.",
+    "knownAgent": "Esta es la página Nosotros de la agencia — no la bandeja de {name}. Conozca a {firstName} en su perfil.",
+    "unknownCarrier": "No inventamos una aseguradora llamada “{requested}.” Esta página lista socios con nombre de la agencia.",
+    "knownCarrier": "Mostrando la ficha de {name} que sí está en la lista. Vea todos los socios con nombre en esta página.",
+    "seeAllCarriers": "Ver todas las aseguradoras nombradas",
+    "carrierLine": "Este catálogo es una lista de socios con nombre. No inventamos una línea “{requested}” ni un corte personal/comercial aquí.",
+    "unknownTopic": "No inventamos una sección “{requested}” en esta guía. Los encabezados de abajo son los que publicamos.",
+    "unknownCity": "No inventamos una página de la ciudad “{requested}.” La oficina de Corona está en la guía local de la agencia y en Contacto.",
+    "guideZip": "Esta guía no es un formulario de cotización, así que “{requested}” no es un código postal que podamos rellenar. Empiece una cotización si quiere una revisión local.",
+    "emptyRosterTitle": "No hay compañeros listados aquí",
+    "emptyRosterBody": "No inventamos una plantilla. Llame o escriba a la oficina para hablar con un agente con licencia.",
+    "emptyCarriersTitle": "No hay aseguradoras nombradas aquí",
+    "emptyCarriersBody": "No inventamos un mercado. Llame o escriba a la oficina y cotizamos con los socios que sí nombramos.",
+    "meetProfile": "Abrir el perfil de {firstName}"
   }
 }

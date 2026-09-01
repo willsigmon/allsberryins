@@ -47,6 +47,7 @@
     "node_modules_old",
     "node_modules_broken_20260316_1523",
     "node_modules_partial_20260316_1526",
+    "src/**/*.test.ts",
     ".next-build",
     ".next-demo-build",
     ".app-build"

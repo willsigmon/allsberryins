@@ -5,16 +5,27 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { PageFaqSection } from "@/components/sections/page-faq-section";
 import { StructuredData } from "@/components/seo/structured-data";
+import {
+  LeftoverCatalogContext,
+  LeftoverCatalogEmpty,
+  LeftoverCatalogNotice,
+} from "@/components/ui/leftover-catalog-chrome";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Link } from "@/i18n/navigation";
+import {
+  catalogLeftoverCopy,
+  firstQueryValue,
+  resolveAboutRosterLeftover,
+} from "@/lib/catalog-leftover";
 import { createPageMetadata } from "@/lib/metadata";
 import { agency, officialProfile, publicAgentRoster } from "@/lib/site-data";
 import { createBreadcrumbSchema, erinPersonSchema, organizationSchema } from "@/lib/seo";
 import { buildTrackedHref } from "@/lib/tracking";
-import { absoluteUrl } from "@/lib/utils";
+import { absoluteUrl, cn } from "@/lib/utils";
 
 type AboutPageProps = {
   params: Promise<{ locale: string }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 };
 
 export async function generateMetadata({ params }: AboutPageProps): Promise<Metadata> {
@@ -28,12 +39,22 @@ export async function generateMetadata({ params }: AboutPageProps): Promise<Meta
   });
 }
 
-export default async function AboutPage({ params }: AboutPageProps) {
+export default async function AboutPage({ params, searchParams }: AboutPageProps) {
   const { locale } = await params;
   setRequestLocale(locale);
+  const query = await searchParams;
   const t = await getTranslations("about");
   const tTeam = await getTranslations("home.team");
   const tBio = await getTranslations("agents.bios");
+  const tLeftover = await getTranslations("leftoverCatalog");
+  const rosterLeftover = resolveAboutRosterLeftover({
+    rawAgent: firstQueryValue(query.agent),
+    rawMember: firstQueryValue(query.member),
+    roster: publicAgentRoster,
+  });
+  const highlightedAgent = publicAgentRoster.find(
+    (agent) => agent.slug === rosterLeftover.highlightedSlug,
+  );
 
   const aboutPageFaqs: Array<{ question: string; answer: string }> = [
     { question: t("faqs.q1.question"), answer: t("faqs.q1.answer") },
@@ -96,6 +117,39 @@ export default async function AboutPage({ params }: AboutPageProps) {
             <p className="mt-6 max-w-2xl text-lg leading-8 text-gray-600">
               {t("intro")}
             </p>
+            {rosterLeftover.leftovers.length > 0 ? (
+              <div className="mt-6 grid gap-3">
+                {rosterLeftover.leftovers.map((leftover) => {
+                  const copy = catalogLeftoverCopy(leftover);
+                  return (
+                    <LeftoverCatalogNotice key={`${leftover.kind}-${leftover.raw}`}>
+                      {tLeftover(copy.key, { requested: copy.requested })}
+                    </LeftoverCatalogNotice>
+                  );
+                })}
+              </div>
+            ) : null}
+            {highlightedAgent ? (
+              <div className="mt-6">
+                <LeftoverCatalogContext>
+                  <p>
+                    {tLeftover("knownAgent", {
+                      firstName: highlightedAgent.firstName,
+                      name: highlightedAgent.name,
+                    })}
+                  </p>
+                  <Link
+                    href={buildTrackedHref(`/agents/${highlightedAgent.slug}`, {
+                      agent: highlightedAgent.slug,
+                      entry: "about-leftover-profile",
+                    })}
+                    className="mt-2 inline-flex min-h-11 items-center text-sm font-bold text-blue underline-offset-4 hover:underline"
+                  >
+                    {tLeftover("meetProfile", { firstName: highlightedAgent.firstName })}
+                  </Link>
+                </LeftoverCatalogContext>
+              </div>
+            ) : null}
             <div className="mt-8 grid gap-4 sm:grid-cols-3">
               {[
                 { label: t("stats.servingSinceLabel"), value: String(agency.founded) },
@@ -197,11 +251,21 @@ export default async function AboutPage({ params }: AboutPageProps) {
             description={t("teamSection.description")}
             align="center"
           />
+          {rosterLeftover.emptyRoster ? (
+            <div className="mt-12">
+              <LeftoverCatalogEmpty title={tLeftover("emptyRosterTitle")}>
+                {tLeftover("emptyRosterBody")}
+              </LeftoverCatalogEmpty>
+            </div>
+          ) : (
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {publicAgentRoster.map((agent) => (
               <div
                 key={agent.slug}
-                className="rounded-card border border-gray-100 bg-white p-5 shadow-[0_18px_45px_-38px_rgba(0,32,92,0.5)]"
+                className={cn(
+                  "rounded-card border border-gray-100 bg-white p-5 shadow-[0_18px_45px_-38px_rgba(0,32,92,0.5)]",
+                  highlightedAgent?.slug === agent.slug && "border-blue/30 ring-2 ring-blue/40",
+                )}
               >
                 <div className="flex items-center gap-4">
                   {agent.photo ? (
@@ -246,6 +310,7 @@ export default async function AboutPage({ params }: AboutPageProps) {
               </div>
             ))}
           </div>
+          )}
         </div>
       </section>
 
