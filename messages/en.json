@@ -57,6 +57,7 @@
     "products": "Products",
     "contactInfo": "Contact Info",
     "privacy": "Privacy Policy",
+    "terms": "Terms & Conditions",
     "accessibility": "Accessibility",
     "sslEncrypted": "SSL Encrypted",
     "wcagAccessible": "WCAG Accessible",
@@ -83,7 +84,7 @@
       "bundleBody": "Many clients save by combining home, auto, and other coverage into one plan. We'll show you the options.",
       "needProofTitle": "Need proof instead?",
       "needProofBody": "If your bank, landlord, or business partner needs insurance paperwork, skip the quote and request it here.",
-      "reviewCount": "5,000+",
+      "reviewCount": "Since 1994",
       "erinName": "Erin Allsberry",
       "erinTitle": "Owner & Principal Agent",
       "locationBadge": "Southern California",
@@ -95,10 +96,10 @@
     "trustBar": {
       "yearsUnit": "Years",
       "yearsLabel": "Serving Southern California",
-      "householdsUnit": "Households & Businesses",
-      "householdsLabel": "Protected across SoCal",
+      "teamUnit": "Named agents",
+      "teamLabel": "On this site",
       "carriersUnit": "Carriers",
-      "carriersLabel": "Markets we can shop"
+      "carriersLabel": "Listed partners"
     },
     "valueProps": {
       "eyebrow": "Why clients choose us",
@@ -118,7 +119,7 @@
     "productGrid": {
       "eyebrow": "Coverage lines",
       "title": "Let's Shop It Out",
-      "description": "We work with more than 200 carriers, so there's always a solution for your coverage and affordability needs.",
+      "description": "We shop Farmers and the other carriers listed on this site so you can compare coverage options that fit your situation.",
       "personalTitle": "Personal Insurance",
       "personalDescription": "Coverage for your home, your car, and the people who matter most.",
       "commercialTitle": "Commercial Insurance",
@@ -143,7 +144,7 @@
     "carrierLogos": {
       "eyebrow": "Carrier access",
       "title": "A Sample of the Markets We Can Shop",
-      "description": "These logos show a representative sample of the carrier access available through the agency. The full market access goes well beyond the {count}+ options shown in the trust bar.",
+      "description": "These logos are the {count} carrier partners listed on this site — the same roster you can open on the carriers page.",
       "carrierLogoAlt": "{carrier} logo",
       "carrierLearnMore": "{carrier} insurance — learn more",
       "seeAllCta": "See every carrier partner"
@@ -155,7 +156,8 @@
       "emailAgent": "Email {name}",
       "meetAgent": "Meet {name}",
       "emailShort": "Email",
-      "learnMore": "Learn more"
+      "learnMore": "Learn more",
+      "viewDirectory": "See the full team directory"
     },
     "ctaBanner": {
       "eyebrow": "Free quote",
@@ -164,6 +166,17 @@
       "coverageLines": "Home • Auto • Life • Business",
       "region": "Southern California",
       "cta": "Get Your Free Quote"
+    },
+    "leftover": {
+      "unknownAgent": "That old agent link is not a person on this homepage. We do not invent a teammate.",
+      "knownAgent": "This is the agency homepage, not {name}'s private inbox.",
+      "knownAgentCta": "Open {name}'s page",
+      "unknownProduct": "We do not invent a coverage line for that old product link.",
+      "knownProduct": "This homepage is not a quote form, and that line is not among the products above. {name} is listed — request it from the quote page.",
+      "knownProductCta": "Request a {name} quote",
+      "knownHeroProduct": "This homepage is not a quote form. {name} is selected above so you can start from there.",
+      "knownHeroProductCta": "Request a {name} quote",
+      "reset": "Show the regular homepage"
     },
     "reviewsSection": {
       "eyebrow": "Social proof",
@@ -256,6 +269,10 @@
     "requestProof": "Request Proof",
     "callCta": "Call {phone}",
     "connectWithUs": "Connect with us",
+    "officeAddress": "Office",
+    "openMap": "Open in Google Maps",
+    "feedbackHeading": "Private feedback",
+    "feedbackBody": "Email the office or call. This page does not publish a review.",
     "faqs": {
       "heading": "Contact questions we hear most often",
       "description": "Quick answers to the questions we hear most — so you can reach us the way that works best for you.",
@@ -283,7 +300,7 @@
     "subheading": "Tell us what you need and a licensed agent will follow up with options tailored to your situation.",
     "whatHappensNext": "What happens next",
     "next1": "We review the products you selected.",
-    "next2": "An agent follows up within 24 hours.",
+    "next2": "An agent follows up within one business day.",
     "next3": "We help compare coverage options and answer questions clearly.",
     "preferredFollowUp": "Preferred follow-up: {name}",
     "needProofIntro": "Need a certificate or proof of insurance instead of a quote? Use the dedicated",
@@ -313,9 +330,9 @@
   },
   "carriersPage": {
     "metaTitle": "Our Insurance Carriers",
-    "metaDescription": "Allsberry Insurance Agency shops Farmers, Travelers, The Hartford, Progressive, Liberty Mutual, Chubb, and other A-rated carriers for clients.",
+    "metaDescription": "Allsberry Insurance Agency shops Farmers, Travelers, The Hartford, Progressive, Liberty Mutual, Chubb, and the other carriers listed on this site.",
     "eyebrow": "Carriers",
-    "heading": "Access to 200+ trusted carriers",
+    "heading": "Carriers we work with",
     "subheading": "We shop the market so you don't have to. Below are some of the carriers we partner with to match you to the right coverage.",
     "cardHeading": "Work with {carrier}",
     "visitCarrier": "Visit {carrier}",
@@ -327,6 +344,7 @@
     "eyebrow": "Resources",
     "heading": "Insurance guides and tools",
     "subheading": "Plain-language resources to help you understand your coverage.",
+    "englishOnlyNotice": "These guides are currently published in English. If you'd prefer help in Spanish, call us and we'll walk through the details with you.",
     "blogHeading": "From the blog",
     "guidesHeading": "Coverage guides",
     "viewAll": "View all",
@@ -345,7 +363,7 @@
     "thankYou": "Thank you — it makes our week",
     "privateFeedbackIntro": "Something didn't land the way it should have?",
     "privateFeedbackLink": "Tell us privately",
-    "privateFeedbackOutro": "— a note goes straight to Erin.",
+    "privateFeedbackOutro": "— email or call the office. This site does not have a private-feedback form.",
     "callOfficeIntro": "Or call the office directly at",
     "leftoverUnknownAgent": "We do not invent an agent inbox for “{raw}”. Reviews go to the sourced Google listing.",
     "leftoverKnownAgent": "Reviews for {name} go to the agency Google listing. We do not invent a private review inbox.",
@@ -365,6 +383,7 @@
     "helpBullet2": "Add a due date if escrow or underwriting is waiting on it.",
     "helpBullet3": "Include any loan, property, or certificate notes you already have.",
     "preferredFollowUp": "Preferred follow-up: {name}",
+    "unknownAgentNotice": "That agent link is not on this site. The request still goes to the office — we will not invent a name or coverage type.",
     "callInstead": "Need to call instead? {phone}",
     "faqs": {
       "heading": "Documentation questions we can answer right here",
@@ -413,6 +432,9 @@
     "showingCategory": "Showing {category} articles."
   },
   "agents": {
+    "metaTitle": "Our Agents",
+    "metaDescription": "Meet the licensed Allsberry Insurance Agency team in Corona, California. Call, email, or start a quote with a local agent.",
+    "eyebrow": "Our team",
     "listHeading": "Our agents",
     "listSubheading": "Licensed, local, and easy to reach.",
     "backToTeam": "Back to the team",
@@ -439,6 +461,20 @@
     "lookslikeThisPageIsntHere": "Looks like this page isn't here.",
     "subheading": "The link might be outdated, or it may have moved. Here's where most visitors head next — or give us a call at",
     "goHome": "Go Home",
+    "leftover": {
+      "agent": {
+        "heading": "That agent page is not on this site",
+        "body": "We only list people from the current team. This old link is not a licensed agent page — or give us a call at"
+      },
+      "carrier": {
+        "heading": "That carrier page is not on this site",
+        "body": "We only list partners from the carriers page. This old link is not an appointment — or give us a call at"
+      },
+      "article": {
+        "heading": "That article is not published here",
+        "body": "We do not invent posts for old links. Here's where most visitors head next — or give us a call at"
+      }
+    },
     "popularLinks": {
       "quoteLabel": "Get a quote",
       "quoteDesc": "Home, auto, business, life",
@@ -447,7 +483,7 @@
       "proofLabel": "Proof of insurance",
       "proofDesc": "Certificates & COIs",
       "carriersLabel": "Carrier partners",
-      "carriersDesc": "20+ carriers shopped",
+      "carriersDesc": "Listed partners on this site",
       "blogLabel": "Blog & guides",
       "blogDesc": "Coverage insights",
       "contactLabel": "Contact us",
@@ -540,7 +576,7 @@
       "description": "Our team gives you straight answers so you can pick the right plan."
     },
     "topRated": {
-      "title": "Top-Rated Support",
+      "title": "Claims support",
       "description": "We're here before, during, and after you file a claim. You won't have to figure things out alone."
     }
   },
@@ -563,7 +599,7 @@
     },
     "q5": {
       "question": "Is my data private and secure?",
-      "answer": "Yes. Your phone calls, texts, and emails with us are all protected. We never share your personal information without your permission. You can read more about how we protect your data through the Farmers privacy center."
+      "answer": "We use the information you send to respond to your request and, when needed, to shop coverage with carriers. SMS opt-in numbers are not shared with third parties for marketing. Read our Privacy Policy for details."
     }
   },
   "reviews": {
@@ -641,13 +677,16 @@
     "zipPlaceholder": "Enter ZIP code",
     "bundleTitle": "Bundle and save",
     "bundleBody": "Many clients save by combining home, auto, and other coverage into one plan. We'll show you the options.",
+    "bundleSince": "Serving Southern California since {year}",
     "needProofTitle": "Need proof instead?",
     "needProofBody": "If your bank, landlord, or business partner needs insurance paperwork, skip the quote and request it here.",
     "startProofRequest": "Start proof request",
     "startQuote": "Start Quote",
-    "reviewCount": "5,000+",
-    "ratingAria": "Rated 5 out of 5 stars",
+    "reviewCount": "Since 1994",
+    "ratingAria": "Serving Southern California since 1994",
+    "sinceFounded": "Serving Southern California since {year}",
     "zipLabel": "ZIP code",
+    "zipLeftover": "Enter a 5-digit U.S. ZIP, or leave it blank. We will not invent a ZIP code.",
     "erinTitle": "Owner & Principal Agent",
     "primaryProducerLabel": "Main producer",
     "producerProofLabel": "Client focus",
@@ -704,19 +743,26 @@
     "logoAlt": "{carrier} logo",
     "eyebrow": "Carrier partner",
     "heading": "{carrier} insurance in Corona & Southern California",
-    "intro": "As an independent agency, Allsberry places coverage with {carrier} when it’s the right fit — and compares it against 20+ other carriers so you’re not locked into one quote.",
+    "intro": "As an independent agency, Allsberry places coverage with {carrier} when it’s the right fit — and compares it against the other carriers listed on this site so you’re not locked into one quote.",
     "howWeUse": "How we use {carrier}",
     "howWeUseBody": "Some carriers are strong on homeowners. Others on small business, commercial autos, umbrellas, or life. We match your situation to the carrier whose underwriting and price make sense for you — and revisit at renewal when markets shift.",
     "talkToPerson": "Talk to a real person",
     "talkToPersonBody": "Call the office at <phone></phone> or request a comparison quote online. Either way, you’ll get a licensed agent — not a call-center script.",
     "compareQuote": "Compare {carrier} quote",
     "whyIndependent": "Why go through an independent agent for {carrier}?",
-    "benefitCompare": "One comparison across {carrier} and 20+ other carriers — not a single direct quote.",
+    "benefitCompare": "One comparison across {carrier} and the other carriers listed on this site — not a single direct quote.",
     "benefitAdvocacy": "Local advocacy at claim time; we help you work with the {carrier} adjuster directly.",
     "benefitReview": "Free annual coverage review so your policy keeps up with life changes.",
     "benefitNoPressure": "No pressure to bundle — if {carrier} only makes sense for one line, we say so.",
     "otherCarriers": "Other carriers we work with",
     "seeAllCarriers": "See every carrier partner →"
+  },
+  "errorPage": {
+    "eyebrow": "Something broke",
+    "heading": "This page did not load.",
+    "body": "We did not invent a status or a ticket number. Try again, or reach the office at",
+    "tryAgain": "Try again",
+    "goHome": "Go home"
   },
   "blogPost": {
     "backToBlog": "Back to Blog",
@@ -727,7 +773,8 @@
     "requestProof": "Request proof",
     "relatedGuides": "Related California insurance guides",
     "relatedReading": "Related reading",
-    "relatedArticle": "Related article"
+    "relatedArticle": "Related article",
+    "byAuthor": "By {author}"
   },
   "agentProfile": {
     "directAgentPage": "Direct agent page",
@@ -814,7 +861,7 @@
     "quoteSubmit": "Get My Quote",
     "sendRequest": "Send Request",
     "quoteSubmitNote": "By submitting, you ask and authorize our team to follow up by live phone call or email about this specific request. This does not authorize text messages; texts are optional and only sent when you select an option above.",
-    "evidenceSubmitNote": "This request is built for certificates, proof of coverage, and time-sensitive lender or escrow follow-up.",
+    "evidenceSubmitNote": "This request is built for certificates, proof of coverage, and time-sensitive lender or escrow follow-up. By submitting, you ask and authorize our team to follow up by live phone call or email about this specific request. This does not authorize text messages; texts are optional and only sent when you select an option above.",
     "quoteSuccess": "Thank you! We'll be in touch within one business day.",
     "evidenceSuccess": "Thanks. We received your request and the team will follow up with the right documentation as quickly as possible.",
     "agentSuccess": "Thanks for reaching out. {name} or someone from the team will be in touch shortly.",

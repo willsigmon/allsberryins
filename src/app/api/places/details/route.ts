@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 import { placesMethodHonesty } from "@/lib/places-honesty";
+import { allowPlacesRequest } from "@/lib/places-rate-limit";
 import { agency } from "@/lib/site-data";
 
 export function POST() {
@@ -10,6 +11,13 @@ export function POST() {
 }
 
 export async function GET(req: NextRequest) {
+  if (!allowPlacesRequest(req)) {
+    return NextResponse.json(
+      { error: "Too many requests. Please slow down." },
+      { status: 429 },
+    );
+  }
+
   const placeId = req.nextUrl.searchParams.get("placeId");
   const sessionToken = req.nextUrl.searchParams.get("sessionToken");
 

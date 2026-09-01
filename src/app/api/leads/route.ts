@@ -2,9 +2,18 @@ import { NextResponse } from "next/server";
 
 import { sendLeadEmail } from "@/lib/lead-email";
 import { leadsApiSchema, leadTypeLabels } from "@/lib/lead-schemas";
+import { leadsGetHonesty } from "@/lib/leads-get-honesty";
+import { agency } from "@/lib/site-data";
 import { normalizeSmsConsent, smsConsentDisclosureVersion } from "@/lib/sms-consent";
 
 const zapierWebhookTimeoutMs = 8_000;
+
+export function GET() {
+  return NextResponse.json(leadsGetHonesty({ email: agency.email, phone: agency.phone }), {
+    headers: { Allow: "POST" },
+    status: 405,
+  });
+}
 
 export async function POST(request: Request) {
   let body;

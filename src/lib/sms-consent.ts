@@ -12,10 +12,12 @@ export function normalizeSmsConsent(value: boolean | undefined): boolean {
 }
 
 export const smsConsentCheckboxLabels = {
-  marketing: `By checking this box, you agree to receive insurance quotes, policy review reminders, renewal follow-ups, appointment reminders, customer care, billing or account-related inquiries, documentation requests, and marketing messages related to insurance products and services, including home and auto insurance bundle quote opportunities messages from ${agency.name}. You can reply STOP to opt out at any time. Reply HELP to ${agency.phone}. Messages and data rates may apply. Message frequency will vary.`,
-  nonMarketing:
-    "Yes, I would like to receive non-marketing text messages",
+  marketing: `By checking this box, you agree to receive insurance quotes, policy review reminders, renewal follow-ups, appointment reminders, customer care, billing or account-related inquiries, documentation requests, and marketing messages related to insurance products and services, including home and auto insurance bundle quote opportunities, from ${agency.name}. You can reply STOP to opt out at any time. Reply HELP to ${agency.phone}. Messages and data rates may apply. Message frequency will vary.`,
+  nonMarketing: `By checking this box, you agree to receive non-marketing text messages from ${agency.name} about this request, such as quotes, documentation, appointment reminders, and customer care. Reply STOP to opt out at any time. Reply HELP to ${agency.phone}. Messages and data rates may apply. Message frequency will vary.`,
 } as const;
+
+export const formPhoneEmailFollowUpDisclosure =
+  "By submitting, you ask and authorize our team to follow up by live phone call or email about this specific request. This does not authorize text messages; texts are optional and only sent when you select an option above.";
 
 export const legalPagePaths = {
   privacy: "/privacy",

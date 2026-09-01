@@ -8,6 +8,7 @@ import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { createPageMetadata } from "@/lib/metadata";
 import { createBreadcrumbSchema } from "@/lib/seo";
+import { createMissingCatalogMetadata } from "@/lib/missing-catalog-slug";
 import { agency, carrierPartners } from "@/lib/site-data";
 import { absoluteUrl, slugify } from "@/lib/utils";
 
@@ -27,16 +28,11 @@ export async function generateMetadata({ params }: Params) {
   const { locale, slug } = await params;
   const carrier = getCarrierBySlug(slug);
   if (!carrier) {
-    return createPageMetadata({
-      title: "Carrier not found",
-      description: "That carrier page could not be located.",
-      path: `/carriers/${slug}`,
-      locale,
-    });
+    return createMissingCatalogMetadata("carrier");
   }
   return createPageMetadata({
     title: `${carrier.name} Insurance in Corona & Southern California`,
-    description: `Get ${carrier.name} home, auto, business, or life insurance through Allsberry Insurance Agency — an independent Corona, CA agency comparing ${carrier.name} with 20+ other carriers for the right fit.`,
+    description: `Get ${carrier.name} home, auto, business, or life insurance through Allsberry Insurance Agency — an independent Corona, CA agency comparing ${carrier.name} with the other carriers listed on this site.`,
     path: `/carriers/${slug}`,
     keywords: [
       `${carrier.name} insurance agent near me`,

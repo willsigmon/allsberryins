@@ -376,20 +376,22 @@ export const products: Product[] = [
 
 export const heroProductSlugs: ProductSlug[] = ["home", "auto", "life", "business", "renters", "umbrella"];
 
-export const personalProducts = products.filter((product) =>
-  ["home", "auto", "renters", "life", "umbrella", "condo"].includes(product.slug),
-);
+export function isHomepagePersonalProduct(product: Product): boolean {
+  return product.category === "personal" && product.slug !== "other";
+}
 
-export const commercialProducts = products.filter((product) =>
-  [
-    "general-liability",
-    "workers-comp",
-    "commercial-property",
-    "commercial-auto",
-    "professional-liability",
-    "specialty-coverage",
-  ].includes(product.slug),
-);
+export function isHomepageCommercialProduct(product: Product): boolean {
+  return product.category === "commercial";
+}
+
+export const personalProducts = products.filter(isHomepagePersonalProduct);
+
+export const commercialProducts = [
+  ...products.filter((product) => product.slug === "business"),
+  ...products.filter(
+    (product) => product.category === "commercial" && product.slug !== "business",
+  ),
+];
 
 export const productSelectionOptions = [
   "home",
@@ -516,7 +518,7 @@ export const carrierPartners: CarrierPartner[] = [
   },
 ];
 
-export const carrierAccessStat = 200;
+export const listedCarrierCount = carrierPartners.length;
 
 export const agentMicrositeFeatures = [
   "Direct tap-to-call and email access",
@@ -741,7 +743,7 @@ export const homePageFaqs: HomePageFaq[] = [
   {
     question: "Is my data private and secure?",
     answer:
-      "Yes. Your phone calls, texts, and emails with us are all protected. We never share your personal information without your permission. You can read more about how we protect your data through the Farmers privacy center.",
+      "We use the information you send to respond to your request and, when needed, to shop coverage with carriers. SMS opt-in numbers are not shared with third parties for marketing. Read our Privacy Policy for details.",
   },
 ];
 
@@ -940,6 +942,14 @@ export const footerProducts = [
 
 export function getAgentBySlug(slug: string) {
   return agents.find((agent) => agent.slug === slug);
+}
+
+export function getAgentByName(name: string) {
+  return agents.find((agent) => agent.name === name);
+}
+
+export function yearsServingSouthernCalifornia(asOf = new Date()) {
+  return asOf.getFullYear() - agency.founded;
 }
 
 export function getBlogPostBySlug(slug: string) {

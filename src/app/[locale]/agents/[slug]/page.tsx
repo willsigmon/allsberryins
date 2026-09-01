@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowRight, Mail, Phone, QrCode, ShieldCheck } from "lucide-react";
 import { QRCodeSVG } from "qrcode.react";
@@ -10,12 +9,14 @@ import { AgentContactForm } from "@/components/forms/agent-contact-form";
 import { SaveContactButton } from "@/components/ui/save-contact-button";
 import { StructuredData } from "@/components/seo/structured-data";
 import { SeoPageCard } from "@/components/ui/seo-page-card";
+import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { createPageMetadata } from "@/lib/metadata";
 import { getSeoPagesForAgent } from "@/lib/seo-content";
 import { agency, agents, getAgentBySlug, primaryProducerSlug } from "@/lib/site-data";
 import { createBreadcrumbSchema, organizationSchema } from "@/lib/seo";
 import { getAgentQrDestination } from "@/lib/agent-qr";
+import { createMissingCatalogMetadata } from "@/lib/missing-catalog-slug";
 import { buildTrackedHref } from "@/lib/tracking";
 import { absoluteUrl } from "@/lib/utils";
 
@@ -35,7 +36,7 @@ export async function generateMetadata({ params }: AgentPageProps): Promise<Meta
   const agent = getAgentBySlug(slug);
 
   if (!agent) {
-    return {};
+    return createMissingCatalogMetadata("agent");
   }
 
   const tBio = await getTranslations({ locale, namespace: "agents.bios" });
@@ -62,6 +63,7 @@ export default async function AgentPage({ params, searchParams }: AgentPageProps
   const tBio = await getTranslations("agents.bios");
   const t = await getTranslations("agentProfile");
   const tAgents = await getTranslations("agents");
+  const tNav = await getTranslations("nav");
   const agentBio = tBio(agent.slug);
   const entryPoint = typeof query.entry === "string" ? query.entry : undefined;
   const qrDestination = getAgentQrDestination(agent.slug);
@@ -105,8 +107,8 @@ export default async function AgentPage({ params, searchParams }: AgentPageProps
     mainEntity: personSchema,
   };
   const breadcrumbSchema = createBreadcrumbSchema([
-    { name: "Home", path: "/" },
-    { name: "About", path: "/about" },
+    { name: tNav("home"), path: "/" },
+    { name: tNav("agents"), path: "/agents" },
     { name: agent.name, path: `/agents/${agent.slug}` },
   ]);
 
@@ -137,7 +139,13 @@ export default async function AgentPage({ params, searchParams }: AgentPageProps
               className="rounded-[1.75rem] border border-gray-100 p-6 shadow-[0_24px_60px_-52px_rgba(0,32,92,0.38)] lg:p-8"
               style={{ backgroundImage: "var(--panel-gradient)" }}
             >
-              <div className="inline-flex items-center gap-2 rounded-full border border-blue/10 bg-white px-3.5 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-blue shadow-sm">
+              <Link
+                href="/agents"
+                className="inline-flex min-h-11 items-center text-sm font-semibold text-blue transition hover:text-gray-900"
+              >
+                ← {tAgents("backToTeam")}
+              </Link>
+              <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-blue/10 bg-white px-3.5 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-blue shadow-sm">
                 <ShieldCheck className="h-3.5 w-3.5" />
                 {t("directAgentPage")}
               </div>
@@ -185,28 +193,28 @@ export default async function AgentPage({ params, searchParams }: AgentPageProps
               ) : null}
 
               <div className="mt-6 grid gap-3 sm:grid-cols-3">
-                <Link
+                <a
                   href={phoneHref}
-                  className="inline-flex items-center gap-3 rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm font-semibold text-gray-900 transition hover:border-blue hover:text-blue"
+                  className="inline-flex min-h-11 items-center gap-3 rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm font-semibold text-gray-900 transition hover:border-blue hover:text-blue"
                   aria-label={tAgents("callAgent", { name: agent.firstName })}
                 >
                   <Phone className="h-5 w-5 shrink-0 text-blue" />
                   {agent.phone}
-                </Link>
-                <Link
+                </a>
+                <a
                   href={`mailto:${agent.email}`}
-                  className="inline-flex items-center gap-3 rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm font-semibold text-gray-900 transition hover:border-blue hover:text-blue"
+                  className="inline-flex min-h-11 items-center gap-3 rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm font-semibold text-gray-900 transition hover:border-blue hover:text-blue"
                   aria-label={tAgents("emailAgent", { name: agent.firstName })}
                 >
                   <Mail className="h-5 w-5 shrink-0 text-blue" />
                   {t("emailFirstName", { firstName: agent.firstName })}
-                </Link>
+                </a>
                 <SaveContactButton
                   name={agent.name}
                   phone={agent.phone}
                   email={agent.email}
                   title={agent.title}
-                  address="355 N Sheridan St, Ste 100, Corona, CA 92878"
+                  address={agency.fullAddress}
                   variant="light"
                   className="rounded-2xl border-gray-200 bg-white px-4 py-3 text-sm"
                 />

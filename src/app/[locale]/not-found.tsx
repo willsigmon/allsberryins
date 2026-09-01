@@ -1,14 +1,41 @@
+"use client";
+
 import { useTranslations } from "next-intl";
 
-import { Link } from "@/i18n/navigation";
+import { Link, usePathname } from "@/i18n/navigation";
+import {
+  classifyMissingCatalogPath,
+  type MissingCatalogKind,
+} from "@/lib/missing-catalog-slug";
 import { agency } from "@/lib/site-data";
+
+function leftoverNotFoundCopy(
+  kind: MissingCatalogKind | null,
+  t: ReturnType<typeof useTranslations>,
+) {
+  switch (kind) {
+    case "agent":
+      return { heading: t("leftover.agent.heading"), body: t("leftover.agent.body") };
+    case "carrier":
+      return { heading: t("leftover.carrier.heading"), body: t("leftover.carrier.body") };
+    case "article":
+      return { heading: t("leftover.article.heading"), body: t("leftover.article.body") };
+    case null:
+      return null;
+    default: {
+      const exhaustive: never = kind;
+      return exhaustive;
+    }
+  }
+}
 
 export default function NotFound() {
   const t = useTranslations("notFound");
   const tCta = useTranslations("cta");
+  const leftoverCopy = leftoverNotFoundCopy(classifyMissingCatalogPath(usePathname()), t);
   const popularLinks = [
     { labelKey: "quoteLabel", descKey: "quoteDesc", href: "/quote" as const },
-    { labelKey: "teamLabel", descKey: "teamDesc", href: "/about" as const },
+    { labelKey: "teamLabel", descKey: "teamDesc", href: "/agents" as const },
     { labelKey: "proofLabel", descKey: "proofDesc", href: "/evidence-of-insurance" as const },
     { labelKey: "carriersLabel", descKey: "carriersDesc", href: "/carriers" as const },
     { labelKey: "blogLabel", descKey: "blogDesc", href: "/blog" as const },
@@ -22,10 +49,10 @@ export default function NotFound() {
           {t("heading")}
         </p>
         <h1 className="mt-5 font-display text-4xl font-extrabold text-gray-900">
-          {t("lookslikeThisPageIsntHere")}
+          {leftoverCopy?.heading ?? t("lookslikeThisPageIsntHere")}
         </h1>
         <p className="mt-4 text-lg leading-8 text-gray-600">
-          {t("subheading")}{" "}
+          {leftoverCopy?.body ?? t("subheading")}{" "}
           <a href={agency.phoneHref} className="font-semibold text-blue">
             {agency.phone}
           </a>
