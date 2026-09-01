@@ -35,9 +35,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/resources",
     "/carriers",
     "/review",
-    "/privacy",
-    "/terms",
   ];
+  const englishOnlyRoutes = ["/privacy", "/terms"];
 
   const staticEntries = routing.locales.flatMap((locale) =>
     staticRoutes.map((path) => ({
@@ -48,6 +47,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
       alternates: buildAlternates(path),
     })),
   );
+
+  const englishOnlyEntries = englishOnlyRoutes.map((path) => ({
+    url: localizedUrl(routing.defaultLocale, path),
+    lastModified: new Date(siteUpdatedAt),
+    changeFrequency: "monthly" as const,
+    priority: 0.8,
+    alternates: {
+      languages: {
+        en: localizedUrl(routing.defaultLocale, path),
+        "x-default": localizedUrl(routing.defaultLocale, path),
+      },
+    } satisfies MetadataRoute.Sitemap[number]["alternates"],
+  }));
 
   const carrierEntries = routing.locales.flatMap((locale) =>
     carrierPartners.map((carrier) => ({
@@ -89,5 +101,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
   );
 
-  return [...staticEntries, ...carrierEntries, ...agentEntries, ...blogEntries, ...seoEntries];
+  return [
+    ...staticEntries,
+    ...englishOnlyEntries,
+    ...carrierEntries,
+    ...agentEntries,
+    ...blogEntries,
+    ...seoEntries,
+  ];
 }
