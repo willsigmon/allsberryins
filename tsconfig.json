@@ -47,6 +47,7 @@
     "node_modules_partial_20260316_1526",
     ".next-build",
     ".next-demo-build",
-    ".app-build"
+    ".app-build",
+    "src/lib/schema-honesty.test.ts"
   ]
 }

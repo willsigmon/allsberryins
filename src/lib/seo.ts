@@ -1,3 +1,4 @@
+import { sourcedAreaServed } from "@/lib/schema-honesty";
 import { agency, agents, products } from "@/lib/site-data";
 import { absoluteUrl } from "@/lib/utils";
 
@@ -77,7 +78,6 @@ export const organizationSchema = {
   email: agency.email,
   image: absoluteUrl("/opengraph-image"),
   logo: absoluteUrl("/media/brand/logos/allsberry-deep-blue.png"),
-  priceRange: "$$",
   foundingDate: String(agency.founded),
   knowsLanguage: ["en", "es"],
   address: {
@@ -94,22 +94,14 @@ export const organizationSchema = {
     longitude: agency.geo.longitude,
   },
   hasMap: agency.socials.google,
-  areaServed: [
-    "Corona",
-    "Inland Empire",
-    "Southern California",
-    "Riverside County",
-    "Orange County",
-    "Los Angeles County",
-    "San Bernardino County",
-  ],
+  areaServed: [...sourcedAreaServed],
   contactPoint: [
     {
       "@type": "ContactPoint",
       contactType: "customer service",
       telephone: agency.phone,
       email: agency.email,
-      areaServed: "US",
+      areaServed: [...sourcedAreaServed],
       availableLanguage: ["English", "Spanish"],
     },
   ],
