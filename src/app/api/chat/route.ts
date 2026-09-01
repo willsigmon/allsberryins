@@ -1,7 +1,14 @@
 import { NextResponse } from "next/server";
 
-import { agency } from "@/lib/site-data";
+import { buildChatUnavailablePayload } from "@/lib/chat-response";
 import { chatRequestSchema } from "@/lib/lead-schemas";
+import { agency } from "@/lib/site-data";
+
+const unavailable = () => buildChatUnavailablePayload(agency.phone, agency.email);
+
+export async function GET() {
+  return NextResponse.json(unavailable());
+}
 
 export async function POST(request: Request) {
   let body;
@@ -29,10 +36,6 @@ export async function POST(request: Request) {
     return NextResponse.json({ success: true });
   }
 
-  // TODO: Replace this stub with the real AI chatbot provider and guardrail logic.
-
-  return NextResponse.json({
-    success: true,
-    message: `Thanks for reaching out! One of our agents will be in touch shortly. For immediate help, call us at ${agency.phone}.`,
-  });
+  // Vendor is not selected. Do not pretend a lead was captured.
+  return NextResponse.json(unavailable(), { status: 501 });
 }

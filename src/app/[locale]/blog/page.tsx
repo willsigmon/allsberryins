@@ -75,38 +75,45 @@ export default async function BlogPage({ params }: BlogPageProps) {
             {t("articlesInEnglishNotice")}
           </div>
         )}
-        <div className="mt-12 grid gap-6 lg:grid-cols-3">
-          {blogPosts.map((post) => (
-            <article
-              key={post.slug}
-              className="rounded-[2rem] border border-gray-100 p-6 shadow-[0_20px_50px_-42px_rgba(0,32,92,0.5)]"
-              style={{ backgroundImage: "var(--surface-card)" }}
-            >
-              <div className="flex flex-wrap items-center gap-3 text-sm text-gray-600">
-                <span>{new Date(post.publishedAt).toLocaleDateString(dateLocale, { month: "long", day: "numeric", year: "numeric" })}</span>
-                <span>•</span>
-                <span>{post.readingTime}</span>
-              </div>
-              <h2 className="mt-5 font-display text-2xl font-bold text-gray-900">{post.title}</h2>
-              <p className="mt-4 text-sm leading-7 text-gray-600">{post.excerpt}</p>
-              <div className="mt-5 flex flex-wrap gap-2">
-                {post.tags.map((tag) => (
-                  <span key={tag} className="rounded-full bg-blue-light px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-blue">
-                    {tag}
-                  </span>
-                ))}
-              </div>
-              <Link
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                href={`/blog/${post.slug}` as any}
-                className="mt-8 inline-flex items-center gap-2 font-semibold text-blue transition hover:text-gray-900"
+        {blogPosts.length ? (
+          <div className="mt-12 grid gap-6 lg:grid-cols-3">
+            {blogPosts.map((post) => (
+              <article
+                key={post.slug}
+                className="rounded-[2rem] border border-gray-100 p-6 shadow-[0_20px_50px_-42px_rgba(0,32,92,0.5)]"
+                style={{ backgroundImage: "var(--surface-card)" }}
               >
-                {t("readArticle")}
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </article>
-          ))}
-        </div>
+                <div className="flex flex-wrap items-center gap-3 text-sm text-gray-600">
+                  <span>{new Date(post.publishedAt).toLocaleDateString(dateLocale, { month: "long", day: "numeric", year: "numeric" })}</span>
+                  <span>•</span>
+                  <span>{post.readingTime}</span>
+                </div>
+                <h2 className="mt-5 font-display text-2xl font-bold text-gray-900">{post.title}</h2>
+                <p className="mt-4 text-sm leading-7 text-gray-600">{post.excerpt}</p>
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {post.tags.map((tag) => (
+                    <span key={tag} className="rounded-full bg-blue-light px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-blue">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                <Link
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  href={`/blog/${post.slug}` as any}
+                  className="mt-8 inline-flex items-center gap-2 font-semibold text-blue transition hover:text-gray-900"
+                >
+                  {t("readArticle")}
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </article>
+            ))}
+          </div>
+        ) : (
+          <div className="mt-12 rounded-[2rem] border border-gray-100 bg-gray-50 px-6 py-12 text-center">
+            <h2 className="font-display text-2xl font-bold text-gray-900">{t("emptyHeading")}</h2>
+            <p className="mx-auto mt-3 max-w-xl text-sm leading-7 text-gray-600">{t("emptyBody")}</p>
+          </div>
+        )}
 
         <section className="mt-16 rounded-[2.5rem] border border-gray-100 p-8 shadow-[0_26px_60px_-44px_rgba(0,32,92,0.45)]" style={{ backgroundImage: "var(--surface-card)" }}>
           <p className="text-sm font-semibold uppercase tracking-[0.22em] text-blue">

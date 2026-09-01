@@ -63,11 +63,18 @@ export default async function ResourcesPage({ params }: ResourcesPageProps) {
           description={t("subheading")}
           as="h1"
         />
-        <div className="mt-12 grid gap-6 lg:grid-cols-2 xl:grid-cols-3">
-          {seoPages.map((page) => (
-            <SeoPageCard key={page.slug} page={page} />
-          ))}
-        </div>
+        {seoPages.length ? (
+          <div className="mt-12 grid gap-6 lg:grid-cols-2 xl:grid-cols-3">
+            {seoPages.map((page) => (
+              <SeoPageCard key={page.slug} page={page} />
+            ))}
+          </div>
+        ) : (
+          <div className="mt-12 rounded-[2rem] border border-gray-100 bg-gray-50 px-6 py-12 text-center">
+            <h2 className="font-display text-2xl font-bold text-gray-900">{t("emptyHeading")}</h2>
+            <p className="mx-auto mt-3 max-w-xl text-sm leading-7 text-gray-600">{t("emptyBody")}</p>
+          </div>
+        )}
       </section>
     </div>
   );
