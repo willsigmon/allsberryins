@@ -37,11 +37,11 @@ export default async function QuotePage({ params, searchParams }: QuotePageProps
   const zip = typeof searchParamsValue.zip === "string" ? searchParamsValue.zip : undefined;
   const entryPoint = typeof searchParamsValue.entry === "string" ? searchParamsValue.entry : undefined;
   const carrier = typeof searchParamsValue.carrier === "string" ? searchParamsValue.carrier : undefined;
-  const assignedAgentSlug =
-    typeof searchParamsValue.agent === "string" ? normalizeAgentSlug(searchParamsValue.agent) : undefined;
+  const rawAgent = typeof searchParamsValue.agent === "string" ? searchParamsValue.agent : undefined;
+  const assignedAgentSlug = rawAgent ? normalizeAgentSlug(rawAgent) : undefined;
   const assignedAgent = assignedAgentSlug ? getAgentBySlug(assignedAgentSlug) : undefined;
   const entryNotices = resolveQuoteEntryNotices(
-    { agent: assignedAgentSlug, carrier, product },
+    { agent: rawAgent, carrier, product },
     {
       agentSlugs: agents.map((item) => item.slug),
       carrierNames: carrierPartners.map((item) => item.name),

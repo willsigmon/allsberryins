@@ -64,8 +64,14 @@ export function resolveQuoteEntryNotices(
     }
   }
 
-  if (agent && !catalogs.agentSlugs.includes(agent)) {
-    notices.push({ kind: "unknown-agent" });
+  if (agent) {
+    const agentSlug = slugifyName(agent);
+    const knownAgent = catalogs.agentSlugs.some(
+      (slug) => slugifyName(slug) === agentSlug,
+    );
+    if (!knownAgent) {
+      notices.push({ kind: "unknown-agent" });
+    }
   }
 
   return notices;

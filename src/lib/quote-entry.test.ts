@@ -42,6 +42,10 @@ describe("resolveQuoteEntryNotices", () => {
     ]);
   });
 
+  it("treats mixed-case known agent names as known", () => {
+    assert.deepEqual(resolveQuoteEntryNotices({ agent: "Erin" }, catalogs), []);
+  });
+
   it("ignores blank leftover params", () => {
     assert.deepEqual(
       resolveQuoteEntryNotices({ product: "  ", carrier: "", agent: undefined }, catalogs),

@@ -289,7 +289,7 @@
     "needProofIntro": "Need a certificate or proof of insurance instead of a quote? Use the dedicated",
     "needProofLink": "proof request flow",
     "unknownProductNotice": "We did not recognize that coverage type from the link. Choose from the list on this form — we will not invent a product from the URL.",
-    "knownCarrierNotice": "You opened this form from the {carrier} page. The request still goes to Allsberry; this form does not lock the quote to that carrier.",
+    "knownCarrierNotice": "You opened this form from {carrier}. The request still goes to Allsberry; this form does not lock the quote to that carrier.",
     "unknownCarrierNotice": "We do not list that carrier on this site. You can still request a quote from the form.",
     "unknownAgentNotice": "We did not recognize that agent link. The office still receives this quote if you submit the form.",
     "faqs": {
