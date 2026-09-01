@@ -172,7 +172,7 @@
       "unknownProduct": "No inventamos una línea de cobertura para ese enlace de producto.",
       "knownProduct": "Esta página de inicio no es un formulario de cotización, y esa línea no está arriba. {name} sí está listada: solicítela desde la página de cotización.",
       "knownProductCta": "Solicitar una cotización de {name}",
-      "knownHeroProduct": "Esta página de inicio no es un formulario de cotización. {name} queda seleccionada abajo para que pueda empezar desde ahí.",
+      "knownHeroProduct": "Esta página de inicio no es un formulario de cotización. {name} queda seleccionada arriba para que pueda empezar desde ahí.",
       "knownHeroProductCta": "Solicitar una cotización de {name}",
       "reset": "Ver la página de inicio habitual"
     },

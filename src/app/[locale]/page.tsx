@@ -49,6 +49,7 @@ export async function generateMetadata({ params }: HomePageProps): Promise<Metad
 function leftoverNoticeCopy(
   leftover: HomeLeftover,
   tLeftover: Awaited<ReturnType<typeof getTranslations>>,
+  tProducts: Awaited<ReturnType<typeof getTranslations>>,
 ) {
   switch (leftover.kind) {
     case "unknown-agent":
@@ -61,18 +62,22 @@ function leftoverNoticeCopy(
       };
     case "unknown-product":
       return { body: tLeftover("unknownProduct"), href: undefined, cta: undefined };
-    case "known-product":
+    case "known-product": {
+      const name = tProducts(`${leftover.productSlug}.name` as never);
       return {
-        body: tLeftover("knownProduct", { name: leftover.productName }),
+        body: tLeftover("knownProduct", { name }),
         href: `/quote?product=${leftover.productSlug}`,
-        cta: tLeftover("knownProductCta", { name: leftover.productName }),
+        cta: tLeftover("knownProductCta", { name }),
       };
-    case "known-hero-product":
+    }
+    case "known-hero-product": {
+      const name = tProducts(`${leftover.productSlug}.name` as never);
       return {
-        body: tLeftover("knownHeroProduct", { name: leftover.productName }),
+        body: tLeftover("knownHeroProduct", { name }),
         href: `/quote?product=${leftover.productSlug}`,
-        cta: tLeftover("knownHeroProductCta", { name: leftover.productName }),
+        cta: tLeftover("knownHeroProductCta", { name }),
       };
+    }
     default: {
       const exhaustive: never = leftover;
       return exhaustive;
@@ -166,12 +171,12 @@ export default async function Home({ params, searchParams }: HomePageProps) {
   return (
     <>
       <StructuredData data={[insuranceAgencySchema, websiteSchema, faqSchema]} />
-      <HeroSection initialProduct={initialProduct} />
+      <HeroSection key={leftoverHeroProduct ?? "preferred"} initialProduct={initialProduct} />
       {leftovers.length > 0 ? (
         <div className="bg-white px-4 pb-2 sm:px-6 lg:px-8">
           <div className="mx-auto flex max-w-7xl flex-col gap-3">
             {leftovers.map((leftover) => {
-              const copy = leftoverNoticeCopy(leftover, tLeftover);
+              const copy = leftoverNoticeCopy(leftover, tLeftover, t);
               const key =
                 leftover.kind === "known-agent"
                   ? `${leftover.kind}-${leftover.agentSlug}`

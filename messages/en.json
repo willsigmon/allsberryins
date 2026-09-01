@@ -172,7 +172,7 @@
       "unknownProduct": "We do not invent a coverage line for that old product link.",
       "knownProduct": "This homepage is not a quote form, and that line is not among the products above. {name} is listed — request it from the quote page.",
       "knownProductCta": "Request a {name} quote",
-      "knownHeroProduct": "This homepage is not a quote form. {name} is selected below so you can start from there.",
+      "knownHeroProduct": "This homepage is not a quote form. {name} is selected above so you can start from there.",
       "knownHeroProductCta": "Request a {name} quote",
       "reset": "Show the regular homepage"
     },
