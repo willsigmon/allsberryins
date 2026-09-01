@@ -174,12 +174,17 @@
       "fastFollowUp": "Seguimiento rápido",
       "claimsGuidance": "Guía en reclamos",
       "allsberryClient": "Cliente de Allsberry",
-      "seeMoreCta": "Ver más reseñas"
+      "seeMoreCta": "Ver más reseñas",
+      "googleReviewsLabel": "Reseñas de Google",
+      "googleReviewsBody": "Lea o deje una reseña en el perfil de Google de la agencia. Esta página no publica una calificación de estrellas.",
+      "quotedFrom": "Citado de {source}",
+      "emptyHeading": "No hay citas de clientes listadas aquí.",
+      "emptyBody": "Aun así puede leer o dejar una reseña de Google en el perfil de la agencia."
     }
   },
   "about": {
     "metaTitle": "Nosotros",
-    "metaDescription": "Conozca al equipo bilingüe de Allsberry Insurance Agency — 10 agentes licenciados ayudando a familias y negocios del Sur de California desde 1994.",
+    "metaDescription": "Conozca al equipo bilingüe de Allsberry Insurance Agency en Corona, que ayuda a familias y negocios del Sur de California desde 1994.",
     "eyebrow": "Sobre la agencia",
     "heading": "Asesoría local, comunicación clara y cobertura que le queda a la vida real.",
     "intro": "Allsberry Insurance Agency ha servido al Sur de California desde 1994. Erin lidera la agencia desde 2009 con una idea sencilla: el seguro debe sentirse a la medida, entendible y realmente útil.",
@@ -283,6 +288,10 @@
     "preferredFollowUp": "Seguimiento preferido: {name}",
     "needProofIntro": "¿Necesita un certificado o comprobante de seguro en vez de una cotización? Use la ruta específica para",
     "needProofLink": "solicitar comprobante",
+    "unknownProductNotice": "No reconocimos ese tipo de cobertura en el enlace. Elija de la lista de este formulario — no inventamos un producto a partir de la URL.",
+    "knownCarrierNotice": "Abrió este formulario desde {carrier}. La solicitud sigue llegando a Allsberry; este formulario no fija la cotización a esa aseguradora.",
+    "unknownCarrierNotice": "No listamos esa aseguradora en este sitio. Aun así puede solicitar una cotización en el formulario.",
+    "unknownAgentNotice": "No reconocimos el enlace de ese agente. Si envía el formulario, la oficina igual recibe la cotización.",
     "faqs": {
       "heading": "Preguntas de cotización que respondemos antes de que envíe el formulario",
       "description": "Las preguntas que la gente hace antes de comenzar una cotización — respondidas desde el inicio, para que empiece con confianza.",
@@ -320,7 +329,9 @@
     "subheading": "Recursos en lenguaje sencillo para entender su cobertura.",
     "blogHeading": "Del blog",
     "guidesHeading": "Guías de cobertura",
-    "viewAll": "Ver todo"
+    "viewAll": "Ver todo",
+    "emptyHeading": "Aún no hay guías listadas aquí.",
+    "emptyBody": "Llame a la oficina o solicite una cotización. No inventamos tarjetas de recursos para llenar esta página."
   },
   "review": {
     "metaTitle": "Comparta su experiencia",
@@ -382,6 +393,8 @@
     "keepMovingHomeAuto": "Comenzar cotización de casa o auto",
     "keepMovingBusiness": "Revisar cobertura de negocio",
     "keepMovingProof": "Solicitar comprobante de seguro",
+    "emptyHeading": "Aún no hay artículos publicados aquí.",
+    "emptyBody": "Mientras tanto, solicite una cotización o llame a la oficina. No inventamos artículos para llenar esta página.",
     "categories": {
       "tips": "Consejos",
       "guides": "Guías",
@@ -658,6 +671,11 @@
     "spanishLabel": "Español",
     "spanishHelper": "Sitio en español.",
     "switchingTo": "Cambiando a {name}"
+  },
+  "addressLookup": {
+    "noMatches": "No hay direcciones que coincidan. Aun así puede escribir la calle y el código postal.",
+    "unavailable": "La búsqueda de direcciones no está disponible. Escriba la calle y el código postal.",
+    "poweredByGoogle": "Con la tecnología de Google"
   },
   "a11y": {
     "skipToContent": "Saltar al contenido"
