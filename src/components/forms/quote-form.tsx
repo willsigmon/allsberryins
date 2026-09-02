@@ -92,7 +92,6 @@ export function QuoteForm({
       message: "",
       honeypot: "",
       marketingTextOptIn: false,
-      nonMarketingTextOptIn: false,
     }),
     [initialInsuranceType, leftoverZip, normalizedInitialProduct],
   );
@@ -543,10 +542,7 @@ export function QuoteForm({
 
         <SmsConsentFields formId={formId} register={register} errors={errors} />
 
-        <div className="grid gap-4 sm:grid-cols-[1fr_auto] sm:items-center">
-          <p className="text-sm leading-7 text-gray-600">
-            {t("quoteSubmitNote")}
-          </p>
+        <div className="flex justify-end">
           <button
             type="submit"
             disabled={isSubmitting}

@@ -6,14 +6,12 @@ import { Link } from "@/i18n/navigation";
 import {
   legalPagePaths,
   smsConsentCheckboxLabels,
-  smsConsentDisclosureIntro,
   smsConsentFieldNames,
 } from "@/lib/sms-consent";
 import { cn } from "@/lib/utils";
 
 export type SmsConsentFormValues = {
   marketingTextOptIn?: boolean;
-  nonMarketingTextOptIn?: boolean;
 };
 
 type SmsConsentFieldsProps<T extends SmsConsentFormValues> = {
@@ -30,61 +28,39 @@ export function SmsConsentFields<T extends SmsConsentFormValues>({
   className,
 }: SmsConsentFieldsProps<T>) {
   const marketingId = `${formId}-marketing-text-opt-in`;
-  const nonMarketingId = `${formId}-non-marketing-text-opt-in`;
+  const marketingPolicyId = `${marketingId}-policy`;
+  const marketingErrorId = `${marketingId}-error`;
 
   return (
-    <div className={cn("grid gap-4", className)}>
-      <p className="text-sm leading-6 text-gray-600">
-        {smsConsentDisclosureIntro}{" "}
-        <Link href={legalPagePaths.privacy} className="font-medium text-blue underline">
-          Privacy Policy
-        </Link>{" "}
-        and{" "}
-        <Link href={legalPagePaths.terms} className="font-medium text-blue underline">
-          Terms &amp; Conditions
-        </Link>
-        .
-      </p>
-
-      <label
-        htmlFor={marketingId}
-        className="flex min-h-11 items-start gap-3 py-2 text-sm font-medium text-gray-700"
-      >
+    <div className={cn("grid gap-2", className)}>
+      <div className="flex min-h-11 items-start gap-3 py-2 text-sm font-medium leading-6 text-gray-700">
         <input
           {...register(smsConsentFieldNames.marketingTextOptIn as Parameters<typeof register>[0])}
           id={marketingId}
           type="checkbox"
-          aria-describedby={
-            errors?.marketingTextOptIn ? `${marketingId}-error` : undefined
-          }
+          aria-describedby={`${marketingPolicyId}${
+            errors?.marketingTextOptIn ? ` ${marketingErrorId}` : ""
+          }`}
           className="mt-0.5 h-4 w-4 shrink-0 rounded border-gray-300 text-blue focus:ring-blue/30"
         />
-        <span>{smsConsentCheckboxLabels.marketing}</span>
-      </label>
-      {errors?.marketingTextOptIn ? (
-        <p id={`${marketingId}-error`} role="alert" className="text-sm text-red">
-          {String(errors.marketingTextOptIn.message)}
+        <p>
+          <label htmlFor={marketingId}>{smsConsentCheckboxLabels.marketing}</label>{" "}
+          <span id={marketingPolicyId}>
+            For more information, please review our{" "}
+            <Link href={legalPagePaths.privacy} className="font-medium text-blue underline">
+              Privacy Policy
+            </Link>{" "}
+            &amp;{" "}
+            <Link href={legalPagePaths.terms} className="font-medium text-blue underline">
+              Terms &amp; Conditions
+            </Link>
+            .
+          </span>
         </p>
-      ) : null}
-
-      <label
-        htmlFor={nonMarketingId}
-        className="flex min-h-11 items-start gap-3 py-2 text-sm font-medium text-gray-700"
-      >
-        <input
-          {...register(smsConsentFieldNames.nonMarketingTextOptIn as Parameters<typeof register>[0])}
-          id={nonMarketingId}
-          type="checkbox"
-          aria-describedby={
-            errors?.nonMarketingTextOptIn ? `${nonMarketingId}-error` : undefined
-          }
-          className="mt-0.5 h-4 w-4 shrink-0 rounded border-gray-300 text-blue focus:ring-blue/30"
-        />
-        <span>{smsConsentCheckboxLabels.nonMarketing}</span>
-      </label>
-      {errors?.nonMarketingTextOptIn ? (
-        <p id={`${nonMarketingId}-error`} role="alert" className="text-sm text-red">
-          {String(errors.nonMarketingTextOptIn.message)}
+      </div>
+      {errors?.marketingTextOptIn ? (
+        <p id={marketingErrorId} role="alert" className="text-sm text-red">
+          {String(errors.marketingTextOptIn.message)}
         </p>
       ) : null}
     </div>
