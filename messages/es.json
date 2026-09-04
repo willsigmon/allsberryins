@@ -26,7 +26,8 @@
     "continue": "Continuar"
   },
   "common": {
-    "phone": "Teléfono",
+  "phone": "Teléfono",
+  "phoneOptional": "Teléfono (opcional)",
     "phoneLabel": "{phone}",
     "email": "Correo",
     "emailUs": "Escríbanos",
@@ -911,7 +912,7 @@
       "firstName": "El nombre es obligatorio.",
       "lastName": "El apellido es obligatorio.",
       "fullName": "Su nombre es obligatorio.",
-      "phoneRequired": "El teléfono es obligatorio.",
+    "phoneRequiredForTexts": "Ingrese un teléfono para recibir mensajes de texto.",
       "phoneInvalid": "Ingrese un teléfono válido.",
       "email": "Ingrese un correo válido.",
       "addressLength": "La dirección debe tener menos de 200 caracteres.",

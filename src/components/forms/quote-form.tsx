@@ -385,16 +385,14 @@ export function QuoteForm({
             />
           </Field>
           <Field
-            label={t("phone")}
+            label={t("phoneOptional")}
             error={fieldError(errors.phone?.message)}
             inputId={`${formId}-phone`}
-            required
           >
             <input
               {...register("phone")}
               id={`${formId}-phone`}
               autoComplete="tel"
-              required
               aria-describedby={errors.phone ? `${formId}-phone-error` : undefined}
               aria-invalid={Boolean(errors.phone)}
               className={inputClassName}

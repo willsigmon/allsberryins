@@ -105,9 +105,7 @@ export default async function PrivacyPage({ params }: PrivacyPageProps) {
         <p>
           {agency.name} may collect your mobile phone number, SMS opt-in status, consent records,
           messaging preferences, and related information when you choose to receive text messages
-          from us. This information may be collected when you submit an online form, request an
-          insurance quote, communicate with us, or otherwise provide consent to receive SMS/text
-          messages.
+          from us. This information may be collected when you submit an online form.
         </p>
         <p>
           If you have opted in to receive SMS/text messages from {agency.name}, you may receive

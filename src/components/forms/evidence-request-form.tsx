@@ -164,7 +164,7 @@ export function EvidenceRequestForm({
             />
           </Field>
           <Field
-            label={t("phone")}
+            label={t("phoneOptional")}
             error={fieldError(errors.phone?.message)}
             inputId={`${formId}-phone`}
           >

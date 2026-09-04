@@ -42,6 +42,24 @@ describe("quoteFormSchema", () => {
     expect(parsed.success).toBe(false);
   });
 
+  it("allows visitors to omit a phone number unless they opt in to texts", () => {
+    const quoteWithoutPhone: Record<string, unknown> = { ...validPersonalQuote };
+    delete quoteWithoutPhone.phone;
+
+    expect(quoteFormSchema.safeParse({ ...validPersonalQuote, phone: "" }).success).toBe(true);
+    expect(quoteFormSchema.safeParse(quoteWithoutPhone).success).toBe(true);
+    expect(
+      leadsApiSchema.safeParse({ type: "quote-request", ...quoteWithoutPhone }).success,
+    ).toBe(true);
+    expect(
+      quoteFormSchema.safeParse({
+        ...validPersonalQuote,
+        phone: "",
+        marketingTextOptIn: true,
+      }).success,
+    ).toBe(false);
+  });
+
   it("requires a business name on commercial quotes", () => {
     const parsed = quoteFormSchema.safeParse({
       ...validPersonalQuote,
@@ -107,6 +125,29 @@ describe("leadsApiSchema", () => {
         name: "Ada Lopez",
         companyOrAgency: "Example Lender",
         phone: agency.phone,
+        email: "ada@example.com",
+        zipCode: "92878",
+        requestType: "Proof of Insurance",
+        requestedFor: "Ada Lopez",
+      }).success,
+    ).toBe(true);
+  });
+
+  it("allows blank phones on agent-contact and evidence-request forms", () => {
+    expect(
+      agentContactSchema.safeParse({
+        name: "Ada Lopez",
+        phone: "",
+        email: "ada@example.com",
+        helpTopic: "Home Insurance",
+      }).success,
+    ).toBe(true);
+
+    expect(
+      evidenceRequestSchema.safeParse({
+        name: "Ada Lopez",
+        companyOrAgency: "Example Lender",
+        phone: "",
         email: "ada@example.com",
         zipCode: "92878",
         requestType: "Proof of Insurance",

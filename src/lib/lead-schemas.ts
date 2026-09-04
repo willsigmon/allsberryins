@@ -40,10 +40,13 @@ export function countPhoneDigits(value: string): number {
 export const leadPhoneSchema = z
   .string()
   .trim()
-  .min(10, "Phone number is required.")
-  .refine((value) => /^[0-9()+\-\s]+$/.test(value) && countPhoneDigits(value) >= 10, {
-    message: "Enter a valid phone number.",
-  });
+  .refine(
+    (value) =>
+      !value ||
+      (/^[0-9()+\-\s]+$/.test(value) && countPhoneDigits(value) >= 10),
+    { message: "Enter a valid phone number." },
+  )
+  .optional();
 
 export const smsConsentSchema = z.object({
   marketingTextOptIn: z.boolean().optional(),
@@ -136,39 +139,58 @@ function validateQuoteFormFields(values: QuoteFormFieldValues, ctx: z.Refinement
       message: "Business name is required for commercial quotes.",
     });
   }
+
+  validateTextOptInPhone(values, ctx);
+}
+
+function validateTextOptInPhone(
+  values: { marketingTextOptIn?: boolean; phone?: string },
+  ctx: z.RefinementCtx,
+) {
+  if (values.marketingTextOptIn && !values.phone) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      path: ["phone"],
+      message: "Enter a phone number to receive texts.",
+    });
+  }
 }
 
 export const quoteFormSchema = quoteFormFieldsSchema.superRefine(validateQuoteFormFields);
 
 export type QuoteFormValues = z.infer<typeof quoteFormSchema>;
 
-export const agentContactSchema = z.object({
-  name: z.string().trim().min(2, "Your name is required."),
-  phone: leadPhoneSchema,
-  email: z.string().trim().email("Enter a valid email address."),
-  helpTopic: z.enum(helpTopics, { error: "Select how the agent can help." }),
-  message: optionalMessageSchema,
-  honeypot: honeypotSchema,
-  ...smsConsentSchema.shape,
-});
+export const agentContactSchema = z
+  .object({
+    name: z.string().trim().min(2, "Your name is required."),
+    phone: leadPhoneSchema,
+    email: z.string().trim().email("Enter a valid email address."),
+    helpTopic: z.enum(helpTopics, { error: "Select how the agent can help." }),
+    message: optionalMessageSchema,
+    honeypot: honeypotSchema,
+    ...smsConsentSchema.shape,
+  })
+  .superRefine(validateTextOptInPhone);
 
 export type AgentContactValues = z.infer<typeof agentContactSchema>;
 
-export const evidenceRequestSchema = z.object({
-  name: z.string().trim().min(2, "Your name is required."),
-  companyOrAgency: z.string().trim().min(2, "Company, lender, or agency name is required."),
-  phone: leadPhoneSchema,
-  email: z.string().trim().email("Enter a valid email address."),
-  zipCode: z.string().trim().regex(/^\d{5}$/, "Enter a valid 5-digit ZIP code."),
-  requestType: z.enum(evidenceRequestTypes, {
-    error: "Select the type of request.",
-  }),
-  requestedFor: z.string().trim().min(2, "Tell us who the proof is for."),
-  dueDate: z.string().trim().max(40).optional().or(z.literal("")),
-  message: optionalMessageSchema,
-  honeypot: honeypotSchema,
-  ...smsConsentSchema.shape,
-});
+export const evidenceRequestSchema = z
+  .object({
+    name: z.string().trim().min(2, "Your name is required."),
+    companyOrAgency: z.string().trim().min(2, "Company, lender, or agency name is required."),
+    phone: leadPhoneSchema,
+    email: z.string().trim().email("Enter a valid email address."),
+    zipCode: z.string().trim().regex(/^\d{5}$/, "Enter a valid 5-digit ZIP code."),
+    requestType: z.enum(evidenceRequestTypes, {
+      error: "Select the type of request.",
+    }),
+    requestedFor: z.string().trim().min(2, "Tell us who the proof is for."),
+    dueDate: z.string().trim().max(40).optional().or(z.literal("")),
+    message: optionalMessageSchema,
+    honeypot: honeypotSchema,
+    ...smsConsentSchema.shape,
+  })
+  .superRefine(validateTextOptInPhone);
 
 export type EvidenceRequestValues = z.infer<typeof evidenceRequestSchema>;
 
@@ -207,7 +229,10 @@ export const leadsApiSchema = z
   .superRefine((values, ctx) => {
     if (values.type === "quote-request") {
       validateQuoteFormFields(values, ctx);
+      return;
     }
+
+    validateTextOptInPhone(values, ctx);
   });
 
 export const chatRequestSchema = z.object({
