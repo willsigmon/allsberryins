@@ -128,7 +128,7 @@ export default async function ReviewPage({ params, searchParams }: ReviewPagePro
               {t("buttonLabel")}
               <span aria-hidden="true" className="text-xl">→</span>
             </div>
-            <p className="relative mt-6 text-[11px] font-semibold uppercase tracking-[0.22em] text-gray-400">
+            <p className="relative mt-6 text-[11px] font-semibold uppercase tracking-[0.22em] text-gray-500">
               {t("thankYou")}
             </p>
           </a>

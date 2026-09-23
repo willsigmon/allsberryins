@@ -230,7 +230,6 @@ export function QuoteForm({
           aria-describedby={
             errors.insuranceType ? `${formId}-insurance-type-error` : undefined
           }
-          aria-required="true"
           className="min-w-0"
         >
           <legend className="text-sm font-semibold uppercase tracking-[0.22em] text-gray-600">
@@ -262,7 +261,7 @@ export function QuoteForm({
                   <span className="text-base font-bold">
                     {t(`insuranceType.${option.value}.label` as never)}
                   </span>
-                  <span className="mt-1 text-xs font-medium leading-5 text-gray-500">
+                  <span className="mt-1 text-xs font-medium leading-5 text-gray-600">
                     {t(`insuranceType.${option.value}.description` as never)}
                   </span>
                 </label>
@@ -282,7 +281,6 @@ export function QuoteForm({
 
         <fieldset
           aria-describedby={errors.products ? `${formId}-products-error` : undefined}
-          aria-required="true"
           className="min-w-0"
         >
           <legend className="text-sm font-semibold uppercase tracking-[0.22em] text-gray-600">

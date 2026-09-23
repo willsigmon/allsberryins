@@ -184,7 +184,7 @@ export function AttributionWorkbench({ agents }: AttributionWorkbenchProps) {
           </div>
 
           <div className="mt-6 rounded-[1.5rem] border border-gray-100 bg-gray-50 px-4 py-4">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gray-400">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gray-500">
               QA checklist
             </p>
             <ul className="mt-3 grid gap-2 text-sm leading-6 text-gray-600 sm:grid-cols-2">
@@ -345,7 +345,7 @@ function DebugTile({
 }) {
   return (
     <div className="rounded-[1.5rem] border border-gray-100 bg-gray-50 px-4 py-4">
-      <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gray-400">{label}</p>
+      <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gray-500">{label}</p>
       <pre
         className={`mt-2 whitespace-pre-wrap break-words text-sm leading-6 text-gray-900 ${mono ? "font-mono" : "font-semibold"}`}
       >

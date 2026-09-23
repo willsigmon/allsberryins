@@ -19,7 +19,7 @@ Custom Next.js marketing + lead-capture site for Allsberry Insurance Agency (Cor
 - `messages/` — translation JSON
 - `public/` — illustrations, email-signatures, favicons
 - `scripts/` — bootstrap-local, build-local, clean-local, IndexNow submitter
-- `middleware.ts` — Basic Auth gate for `/team-attribution` when env set
+- `src/proxy.ts` — Basic Auth gate for `/team-attribution` when env set
 
 ## Deploy
 - Vercel (auto from main)
@@ -36,7 +36,7 @@ Custom Next.js marketing + lead-capture site for Allsberry Insurance Agency (Cor
 - Use `npm run setup` first when running off external `/Volumes/...` drive
 
 ## Do not touch
-- `middleware.ts` Basic Auth logic — env-driven by `TEAM_ATTRIBUTION_USERNAME`/`PASSWORD`
+- `src/proxy.ts` Basic Auth logic — env-driven by `TEAM_ATTRIBUTION_USERNAME`/`PASSWORD`
 - SITELEADS / Stealth ID tracking snippet integration — route-aware loader preserves agent attribution across client navigations
 - `OWNER_ACTIONS_FOR_ERIN.md`, `ERIN_HANDOFF_MESSAGE.md`, `BRAHM_ERIN_MEETING_PREP.md` — handoff docs, do not silently rewrite
 - `.next-build/` — local build output, ignored

@@ -27,7 +27,6 @@
   },
   "common": {
   "phone": "Phone",
-  "phoneOptional": "Phone (optional)",
     "phoneLabel": "{phone}",
     "email": "Email",
     "emailUs": "Email us",
@@ -832,6 +831,7 @@
     "lastName": "Last Name",
     "fullName": "Name",
     "phone": "Phone",
+    "phoneOptional": "Phone (optional)",
     "email": "Email",
     "address": "Address",
     "zipCode": "ZIP Code",

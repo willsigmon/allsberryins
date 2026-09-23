@@ -27,7 +27,6 @@
   },
   "common": {
   "phone": "Teléfono",
-  "phoneOptional": "Teléfono (opcional)",
     "phoneLabel": "{phone}",
     "email": "Correo",
     "emailUs": "Escríbanos",
@@ -832,6 +831,7 @@
     "lastName": "Apellido",
     "fullName": "Nombre",
     "phone": "Teléfono",
+    "phoneOptional": "Teléfono (opcional)",
     "email": "Correo",
     "address": "Dirección",
     "zipCode": "Código postal",
