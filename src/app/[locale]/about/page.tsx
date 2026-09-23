@@ -160,7 +160,7 @@ export default async function AboutPage({ params, searchParams }: AboutPageProps
                   key={stat.label}
                   className="rounded-card border border-gray-100 bg-gray-50 p-5"
                 >
-                  <p className="text-sm font-semibold uppercase tracking-[0.22em] text-gray-400">
+                  <p className="text-sm font-semibold uppercase tracking-[0.22em] text-gray-500">
                     {stat.label}
                   </p>
                   <p className="mt-3 font-display text-2xl font-bold text-gray-900">
@@ -230,7 +230,7 @@ export default async function AboutPage({ params, searchParams }: AboutPageProps
                       />
                     </div>
                     <div>
-                      <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gray-400">
+                      <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gray-500">
                         {t("recognitionLabel")}
                       </p>
                       <p className="mt-1 text-sm font-semibold text-gray-900">{badge.title}</p>

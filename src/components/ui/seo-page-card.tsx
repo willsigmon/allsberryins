@@ -21,7 +21,7 @@ export function SeoPageCard({ page }: SeoPageCardProps) {
     <Link
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       href={`/${page.slug}` as any}
-      className="group rounded-[2rem] border border-gray-100 bg-white p-6 shadow-[0_24px_55px_-45px_rgba(0,32,92,0.45)] transition hover:-translate-y-0.5 hover:border-blue/20 hover:shadow-[0_28px_70px_-45px_rgba(0,32,92,0.5)]"
+      className="group min-w-0 rounded-[2rem] border border-gray-100 bg-white p-6 shadow-[0_24px_55px_-45px_rgba(0,32,92,0.45)] transition hover:-translate-y-0.5 hover:border-blue/20 hover:shadow-[0_28px_70px_-45px_rgba(0,32,92,0.5)]"
     >
       <p className="text-xs font-semibold uppercase tracking-[0.24em] text-blue">
         {t(`pageType.${pageTypeLabelKeys[page.pageType]}`)}
@@ -34,7 +34,7 @@ export function SeoPageCard({ page }: SeoPageCardProps) {
         {page.keywords.slice(0, 2).map((keyword) => (
           <span
             key={keyword}
-            className="whitespace-nowrap rounded-full bg-blue-light px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-blue"
+            className="rounded-full bg-blue-light px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-blue"
           >
             {keyword}
           </span>

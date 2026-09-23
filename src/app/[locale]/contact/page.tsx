@@ -199,7 +199,7 @@ export default async function ContactPage({ params, searchParams }: ContactPageP
           </div>
 
           <div className="rounded-[2rem] border border-gray-100 bg-white p-6">
-            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-gray-400">
+            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-gray-500">
               {t("connectWithUs")}
             </p>
             <div className="mt-4 grid gap-3">

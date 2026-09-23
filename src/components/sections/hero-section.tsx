@@ -311,6 +311,7 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
                             alt={badge.image.alt}
                             width={1258}
                             height={658}
+                            sizes="36px"
                             className="h-full w-full object-contain"
                           />
                         </div>
@@ -327,6 +328,7 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
                           alt={officialProfile.recognition[1].image.alt}
                           width={2395}
                           height={2252}
+                          sizes="64px"
                           className="h-full w-full object-cover object-top"
                         />
                       </div>
