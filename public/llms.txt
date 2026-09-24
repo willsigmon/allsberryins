@@ -1,0 +1,20 @@
+# Allsberry Insurance Agency
+> Independent insurance agency serving Southern California with personal, commercial, auto, and home policies.
+
+## Summary & Identity
+- Website: https://allsberryagency.com
+- Vertical: Insurance
+- Primary Location: Murrieta / Temecula / Riverside, CA
+- Contact Phone: (951) 698-3486
+
+## AI Agent & Machine Interface
+- WebMCP Manifest: https://allsberryagency.com/.well-known/mcp.json
+- Full Documentation: https://allsberryagency.com/llms-full.txt
+
+## Interactive Tools & Capabilities (WebMCP)
+- `get_quote_estimate`: Initiate a personal or commercial insurance quote consultation
+- `list_coverage_types`: Get available personal, commercial, and specialty policy options
+
+## Direct Links & Booking
+- Homepage: https://allsberryagency.com
+- Contact: https://allsberryagency.com/contact

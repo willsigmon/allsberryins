@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "1.0.0",
+  "name": "Allsberry Insurance Agency",
+  "description": "Independent insurance agency serving Southern California with personal, commercial, auto, and home policies.",
+  "website": "https://allsberryagency.com",
+  "tools": [
+    {
+      "name": "allsberry_insurance_agency_get_quote_estimate",
+      "description": "Initiate a personal or commercial insurance quote consultation",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "policyType": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "home",
+              "commercial",
+              "life",
+              "umbrella"
+            ]
+          },
+          "fullName": {
+            "type": "string"
+          },
+          "phoneOrEmail": {
+            "type": "string"
+          },
+          "zipCode": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "policyType",
+          "fullName",
+          "phoneOrEmail"
+        ]
+      }
+    },
+    {
+      "name": "allsberry_insurance_agency_list_coverage_types",
+      "description": "Get available personal, commercial, and specialty policy options",
+      "inputSchema": {
+        "type": "object",
+        "properties": {}
+      }
+    }
+  ]
+}
