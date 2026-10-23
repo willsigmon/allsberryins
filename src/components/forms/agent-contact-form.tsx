@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 
 import { ReviewRequest } from "@/components/sections/review-request";
 import { SmsConsentFields } from "@/components/forms/sms-consent-fields";
+import { trackConversion } from "@/lib/conversion-events";
 import { fireLeadConversion } from "@/lib/conversions";
 import {
   helpTopicLabelKey,
@@ -87,6 +88,7 @@ export function AgentContactForm({
         );
       }
 
+      trackConversion("Form Submit", "agent-contact-form");
       reset();
       setSuccessMessage(t("agentSuccess", { name: agentName }));
       fireLeadConversion("agent-contact", { agent: agentSlug });

@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 
 import { ReviewRequest } from "@/components/sections/review-request";
 import { SmsConsentFields } from "@/components/forms/sms-consent-fields";
+import { trackConversion } from "@/lib/conversion-events";
 import { fireLeadConversion } from "@/lib/conversions";
 import {
   evidenceLeftoverAudience,
@@ -104,6 +105,7 @@ export function EvidenceRequestForm({
         );
       }
 
+      trackConversion("Form Submit", "evidence-request-form");
       reset(defaultValues);
       setSuccessMessage(t("evidenceSuccess"));
       fireLeadConversion("evidence-request", { requestType: values.requestType });

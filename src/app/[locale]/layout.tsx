@@ -1,4 +1,4 @@
-import { Analytics } from "@vercel/analytics/react";
+import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Caveat, DM_Sans, Inter, Plus_Jakarta_Sans } from "next/font/google";
 import { notFound } from "next/navigation";
@@ -8,6 +8,7 @@ import { setRequestLocale } from "next-intl/server";
 
 import "../globals.css";
 
+import { ConversionEvents } from "@/components/seo/conversion-events";
 import WebMcpProvider from "@/components/agent/WebMcpProvider";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
@@ -89,6 +90,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
         </NextIntlClientProvider>
         <WebMcpProvider />
         <Analytics />
+        <ConversionEvents />
         <SpeedInsights />
       </body>
     </html>

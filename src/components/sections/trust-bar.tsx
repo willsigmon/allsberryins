@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 import {
   listedCarrierCount,
@@ -12,12 +12,8 @@ import {
 
 function CountUp({ end, duration = 3.2 }: { end: number; duration?: number }) {
   const [count, setCount] = useState(0);
-  const hasStartedRef = useRef(false);
 
   useEffect(() => {
-    if (hasStartedRef.current) return;
-    hasStartedRef.current = true;
-
     if (
       typeof window !== "undefined" &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches
@@ -27,18 +23,25 @@ function CountUp({ end, duration = 3.2 }: { end: number; duration?: number }) {
     }
 
     const startTime = performance.now();
+    let frame: number;
+    let previous = 0;
     const animate = (now: number) => {
       const elapsed = now - startTime;
       const progress = Math.min(elapsed / (duration * 1000), 1);
       const eased = 1 - Math.pow(1 - progress, 3);
-      setCount(Math.floor(eased * end));
+      const next = Math.floor(eased * end);
+      if (next !== previous) {
+        previous = next;
+        setCount(next);
+      }
       if (progress < 1) {
-        requestAnimationFrame(animate);
+        frame = requestAnimationFrame(animate);
       } else {
         setCount(end);
       }
     };
-    requestAnimationFrame(animate);
+    frame = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(frame);
   }, [end, duration]);
 
   return <span>{count}</span>;

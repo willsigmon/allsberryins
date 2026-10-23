@@ -124,7 +124,7 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
   const currentWord = t(cyclingWordKeys[wordIndex]);
 
   return (
-    <section className="grain-overlay relative overflow-hidden pt-28 sm:pt-32" style={{ backgroundImage: "var(--hero-bg)" }}>
+    <section data-analytics-location="hero" className="grain-overlay relative overflow-hidden pt-28 sm:pt-32" style={{ backgroundImage: "var(--hero-bg)" }}>
       <div
         className="absolute inset-x-0 top-0 h-[38rem]"
         style={{ backgroundImage: "var(--hero-glow)" }}
@@ -402,6 +402,8 @@ export function HeroSection({ initialProduct }: HeroSectionProps) {
                 />
                 <button
                   className="cta-glow inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-xl bg-red px-5 text-sm font-bold text-white transition-all hover:bg-red-hover hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red focus-visible:ring-offset-2"
+                  data-analytics-event="Quote Tap"
+                  data-analytics-location="hero-quote"
                   onClick={() => { haptic("nudge"); startQuote(); }}
                   type="button"
                 >

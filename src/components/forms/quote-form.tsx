@@ -16,6 +16,7 @@ import {
   referralSources,
 } from "@/lib/site-data";
 import { ReviewRequest } from "@/components/sections/review-request";
+import { trackConversion } from "@/lib/conversion-events";
 import { fireLeadConversion } from "@/lib/conversions";
 import {
   quoteLeftoverZip,
@@ -158,6 +159,7 @@ export function QuoteForm({
         );
       }
 
+      trackConversion("Form Submit", "quote-form");
       reset(defaultValues);
       setSuccessMessage(t("quoteSuccess"));
       fireLeadConversion("quote-request", {

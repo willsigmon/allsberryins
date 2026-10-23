@@ -22,7 +22,14 @@ export function SiteHeader() {
   const tHeader = useTranslations("header");
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 80);
+    let previous: boolean | undefined;
+    const onScroll = () => {
+      const next = window.scrollY > 80;
+      if (next !== previous) {
+        previous = next;
+        setScrolled(next);
+      }
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);

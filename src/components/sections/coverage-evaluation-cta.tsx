@@ -15,7 +15,7 @@ export function CoverageEvaluationCta() {
   )}&body=${encodeURIComponent(t("emailBody"))}`;
 
   return (
-    <section className="py-12 sm:py-16">
+    <section data-analytics-location="coverage-evaluation" className="py-12 sm:py-16">
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <div className="parallax-card relative overflow-hidden rounded-[2.25rem] bg-[linear-gradient(160deg,#6b0f12_0%,#da291c_45%,#e8534a_80%,#f09080_100%)] p-8 text-center text-white shadow-[0_24px_70px_-30px_rgba(180,20,20,0.5),0_8px_20px_-8px_rgba(218,41,28,0.3)] sm:p-10">
           <div className="absolute -right-20 -top-20 h-60 w-60 rounded-full bg-white/6 blur-3xl" />

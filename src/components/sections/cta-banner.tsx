@@ -9,7 +9,7 @@ export function CtaBanner() {
   const t = useTranslations("home.ctaBanner");
 
   return (
-    <section className="relative overflow-hidden bg-[linear-gradient(135deg,#00205c_0%,#0a3578_30%,#00448f_54%,#0066b3_100%)] py-20 text-white">
+    <section data-analytics-location="cta-banner" className="relative overflow-hidden bg-[linear-gradient(135deg,#00205c_0%,#0a3578_30%,#00448f_54%,#0066b3_100%)] py-20 text-white">
       <svg
         aria-hidden="true"
         viewBox="0 0 1440 120"
