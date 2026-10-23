@@ -24,6 +24,16 @@ const defaultKeywords = [
   "evidence of insurance request",
 ];
 
+export const previewVideos = [
+  {
+    url: "https://allsberryagency.com/og/preview.mp4",
+    secureUrl: "https://allsberryagency.com/og/preview.mp4",
+    type: "video/mp4",
+    width: 1200,
+    height: 630,
+  },
+];
+
 export const sharedMetadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
@@ -76,6 +86,7 @@ export const sharedMetadata: Metadata = {
     locale: "en_US",
     alternateLocale: ["es_US"],
     type: "website",
+    videos: previewVideos,
     images: [
       {
         url: absoluteUrl("/opengraph-image"),

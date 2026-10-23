@@ -15,7 +15,7 @@ import { TrustBar } from "@/components/sections/trust-bar";
 import { ValuePropsSection } from "@/components/sections/value-props-section";
 import { StructuredData } from "@/components/seo/structured-data";
 import { Link } from "@/i18n/navigation";
-import { createPageMetadata } from "@/lib/metadata";
+import { createPageMetadata, previewVideos } from "@/lib/metadata";
 import {
   heroProductPreferenceCookieKey,
   resolveHeroProductPreference,
@@ -33,7 +33,7 @@ export async function generateMetadata({ params }: HomePageProps): Promise<Metad
   const { locale } = await params;
   const isSpanish = locale === "es";
 
-  return createPageMetadata({
+  const metadata = createPageMetadata({
     title: isSpanish
       ? "Allsberry Insurance Agency — Corona, CA Seguros"
       : "Allsberry Insurance Agency — Corona, CA Insurance",
@@ -44,6 +44,14 @@ export async function generateMetadata({ params }: HomePageProps): Promise<Metad
     locale,
     absoluteTitle: true,
   });
+
+  return {
+    ...metadata,
+    openGraph: {
+      ...metadata.openGraph,
+      videos: previewVideos,
+    },
+  };
 }
 
 function leftoverNoticeCopy(
