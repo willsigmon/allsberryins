@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { Caveat, Inter } from "next/font/google";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ChevronLeft, ChevronRight, Clock3, MapPin, Phone, Users } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
@@ -12,6 +13,21 @@ import { allsberryCampaign } from "@/lib/allsberry-campaign";
 
 import motionStyles from "./allsberry-agency-motion.module.css";
 import styles from "./allsberry-agency-campaign.module.css";
+
+// Keep campaign-only font preloads off the main marketing pages.
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
+const caveat = Caveat({
+  subsets: ["latin"],
+  weight: ["500", "600"],
+  variable: "--font-caveat",
+  display: "swap",
+});
 
 declare global {
   interface Navigator {
@@ -249,7 +265,7 @@ export function AllsberryAgencyCampaign({
   }, [metaPixelId]);
 
   return (
-    <div className={styles.root}>
+    <div className={`${inter.variable} ${caveat.variable} ${styles.root}`}>
       <header className={styles.header}>
         <Link href="/" className={styles.logo} aria-label="Allsberry Insurance Agency Inc">
           <Image
