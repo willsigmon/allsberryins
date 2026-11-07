@@ -60,7 +60,7 @@ export function QuoteForm({
   const tProducts = useTranslations("products");
   const leftoverZip = useMemo(() => quoteLeftoverZip(initialZip), [initialZip]);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
-  const turnstile = useTurnstile();
+  const { ref: turnstileRef, headers: turnstileHeaders } = useTurnstile();
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const fieldError = (message?: string) =>
     resolveFormValidationCopy(message, (key) => t(key as never));
@@ -148,7 +148,7 @@ export function QuoteForm({
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          ...turnstile.headers(),
+          ...turnstileHeaders(),
         },
         body: JSON.stringify(payload),
       });
@@ -517,7 +517,7 @@ export function QuoteForm({
           </Field>
         ) : null}
 
-        <div ref={turnstile.ref} />
+        <div ref={turnstileRef} />
         <input
           {...register("honeypot")}
           tabIndex={-1}

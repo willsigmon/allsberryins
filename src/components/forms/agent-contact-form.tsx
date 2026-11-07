@@ -38,7 +38,7 @@ export function AgentContactForm({
   const formId = useId();
   const t = useTranslations("forms");
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
-  const turnstile = useTurnstile();
+  const { ref: turnstileRef, headers: turnstileHeaders } = useTurnstile();
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const fieldError = (message?: string) =>
     resolveFormValidationCopy(message, (key) => t(key as never));
@@ -70,7 +70,7 @@ export function AgentContactForm({
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          ...turnstile.headers(),
+          ...turnstileHeaders(),
         },
         body: JSON.stringify({
           type: "agent-contact",
@@ -194,7 +194,7 @@ export function AgentContactForm({
           placeholder={t("agentMessagePlaceholder", { firstName: agentFirstName })}
         />
       </Field>
-      <div ref={turnstile.ref} />
+      <div ref={turnstileRef} />
       <input
         {...register("honeypot")}
         tabIndex={-1}

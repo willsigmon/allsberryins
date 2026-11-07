@@ -48,7 +48,7 @@ export function EvidenceRequestForm({
     [initialAudience],
   );
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
-  const turnstile = useTurnstile();
+  const { ref: turnstileRef, headers: turnstileHeaders } = useTurnstile();
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const fieldError = (message?: string) =>
     resolveFormValidationCopy(message, (key) => t(key as never));
@@ -87,7 +87,7 @@ export function EvidenceRequestForm({
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          ...turnstile.headers(),
+          ...turnstileHeaders(),
         },
         body: JSON.stringify({
           type: "evidence-request",
@@ -289,7 +289,7 @@ export function EvidenceRequestForm({
           />
         </Field>
 
-        <div ref={turnstile.ref} />
+        <div ref={turnstileRef} />
         <input
           {...register("honeypot")}
           tabIndex={-1}
