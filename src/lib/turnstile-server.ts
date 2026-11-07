@@ -1,6 +1,6 @@
 // Client Care form spam defense (Option A): per-IP rate limit + Cloudflare
 // Turnstile server verification. Enforced whenever TURNSTILE_SECRET_KEY is set
-// (fails closed); inert until then so the PR can ship before keys exist.
+// (fails closed). Without the secret: see policy below (prod always rejects).
 const SITEVERIFY_URL = "https://challenges.cloudflare.com/turnstile/v0/siteverify";
 export const TURNSTILE_ACTION = "contact";
 const RATE_LIMIT_MAX = 5;
@@ -63,8 +63,43 @@ export async function checkTurnstile(
     return { status: 429, message: "Too many tries. Please wait a few minutes, or call us." };
   }
   const secret = process.env.TURNSTILE_SECRET_KEY;
-  if (!secret) return null;
+  if (!secret) {
+    return turnstileUnconfiguredAllowed()
+      ? null
+      : { status: 503, message: "This form is temporarily unavailable. Please call or email us." };
+  }
   const token = request.headers.get("x-turnstile-token") || (typeof bodyToken === "string" ? bodyToken : "");
   const ok = await verifyTurnstile(secret, token, ip, productionHosts);
   return ok ? null : { status: 403, message: "We could not verify this request. Refresh the page and try again." };
+}
+
+// ---- Unconfigured-secret policy + readiness (Client Care Option A) ----
+// Missing TURNSTILE_SECRET_KEY: production ALWAYS fails closed (reject + log);
+// previews fail closed unless TURNSTILE_ALLOW_UNCONFIGURED=true is set on purpose;
+// local dev / unit tests (no VERCEL_ENV) are allowed.
+export function turnstileUnconfiguredAllowed(env: Record<string, string | undefined> = process.env, log = true): boolean {
+  if (env.VERCEL_ENV === 'production') {
+    if (log) console.error('[turnstile] TURNSTILE_SECRET_KEY missing in production: rejecting form submission');
+    return false;
+  }
+  if (env.VERCEL_ENV === 'preview') return env.TURNSTILE_ALLOW_UNCONFIGURED === 'true';
+  return true;
+}
+
+/** No secrets exposed: booleans only. */
+export function turnstileReadiness(env: Record<string, string | undefined> = process.env) {
+  const secretConfigured = Boolean(env.TURNSTILE_SECRET_KEY);
+  const siteKeyConfigured = Boolean(env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || env.TURNSTILE_SITE_KEY || env.VITE_TURNSTILE_SITE_KEY);
+  return {
+    environment: env.VERCEL_ENV || 'local',
+    secretConfigured,
+    siteKeyConfigured,
+    ready: secretConfigured && siteKeyConfigured,
+    enforcing: secretConfigured || !turnstileUnconfiguredAllowed(env, false),
+  };
+}
+
+// Readiness check at cold start: loud in production logs when keys are missing.
+if (process.env.VERCEL_ENV === 'production' && !turnstileReadiness().ready) {
+  console.error('[turnstile] NOT READY in production: set TURNSTILE_SECRET_KEY and the public site key. Forms are failing closed.');
 }
