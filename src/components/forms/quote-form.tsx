@@ -40,6 +40,7 @@ import {
 } from "@/lib/lead-submit-error";
 import { readStoredMarketingAttribution } from "@/lib/tracking";
 import { cn } from "@/lib/utils";
+import { useTurnstile } from "@/lib/useTurnstile";
 
 type QuoteFormProps = {
   assignedAgentSlug?: string;
@@ -59,6 +60,7 @@ export function QuoteForm({
   const tProducts = useTranslations("products");
   const leftoverZip = useMemo(() => quoteLeftoverZip(initialZip), [initialZip]);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const { ref: turnstileRef, headers: turnstileHeaders } = useTurnstile();
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const fieldError = (message?: string) =>
     resolveFormValidationCopy(message, (key) => t(key as never));
@@ -146,6 +148,7 @@ export function QuoteForm({
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          ...turnstileHeaders(),
         },
         body: JSON.stringify(payload),
       });
@@ -514,6 +517,7 @@ export function QuoteForm({
           </Field>
         ) : null}
 
+        <div ref={turnstileRef} />
         <input
           {...register("honeypot")}
           tabIndex={-1}

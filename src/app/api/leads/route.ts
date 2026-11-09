@@ -5,6 +5,9 @@ import { leadsApiSchema, leadTypeLabels } from "@/lib/lead-schemas";
 import { leadsGetHonesty } from "@/lib/leads-get-honesty";
 import { agency } from "@/lib/site-data";
 import { normalizeSmsConsent, smsConsentDisclosureVersion } from "@/lib/sms-consent";
+import { checkTurnstile } from "@/lib/turnstile-server";
+
+const TURNSTILE_HOSTS = ["allsberryagency.com", "www.allsberryagency.com"];
 
 const zapierWebhookTimeoutMs = 8_000;
 
@@ -40,6 +43,11 @@ export async function POST(request: Request) {
 
   if (parsed.data.honeypot) {
     return NextResponse.json({ success: true });
+  }
+
+  const spam = await checkTurnstile(request, TURNSTILE_HOSTS);
+  if (spam) {
+    return NextResponse.json({ success: false, message: spam.message }, { status: spam.status });
   }
 
   const submittedAt = new Date().toISOString();
