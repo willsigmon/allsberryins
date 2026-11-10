@@ -24,6 +24,31 @@ const defaultKeywords = [
   "evidence of insurance request",
 ];
 
+// Social-share media lives in public/share with a version in the filename.
+// Link-preview caches key on the URL, so bump the version when the files change.
+const shareMediaSize = { width: 1200, height: 630 } as const;
+const sharePosterUrl = absoluteUrl("/share/og-v1.jpg");
+const shareVideoUrl = absoluteUrl("/share/og-v1.mp4");
+
+const shareImages = [
+  {
+    url: sharePosterUrl,
+    secureUrl: sharePosterUrl,
+    type: "image/jpeg",
+    ...shareMediaSize,
+    alt: "Allsberry Insurance Agency serving Corona, the Inland Empire, and Southern California",
+  },
+];
+
+const shareVideos = [
+  {
+    url: shareVideoUrl,
+    secureUrl: shareVideoUrl,
+    type: "video/mp4",
+    ...shareMediaSize,
+  },
+];
+
 export const sharedMetadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
@@ -76,20 +101,14 @@ export const sharedMetadata: Metadata = {
     locale: "en_US",
     alternateLocale: ["es_US"],
     type: "website",
-    images: [
-      {
-        url: absoluteUrl("/opengraph-image"),
-        width: 1200,
-        height: 630,
-        alt: "Allsberry Insurance Agency serving Corona, the Inland Empire, and Southern California",
-      },
-    ],
+    images: shareImages,
+    videos: shareVideos,
   },
   twitter: {
     card: "summary_large_image",
     title: "Allsberry Insurance Agency | Corona, CA Insurance Guidance",
     description: defaultDescription,
-    images: [absoluteUrl("/twitter-image")],
+    images: [sharePosterUrl],
   },
 };
 
@@ -169,19 +188,13 @@ export function createPageMetadata(options: {
             .filter(([code]) => code !== (locale ?? "en"))
             .map(([, ogLocale]) => ogLocale)
         : undefined,
-      images: [
-        {
-          url: absoluteUrl("/opengraph-image"),
-          width: 1200,
-          height: 630,
-          alt: "Allsberry Insurance Agency serving Corona, the Inland Empire, and Southern California",
-        },
-      ],
+      images: shareImages,
+      videos: shareVideos,
     },
     twitter: {
       title: `${title} | Allsberry Insurance Agency`,
       description,
-      images: [absoluteUrl("/twitter-image")],
+      images: [sharePosterUrl],
     },
   };
 }
