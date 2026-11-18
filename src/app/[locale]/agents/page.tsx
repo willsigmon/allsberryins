@@ -109,7 +109,7 @@ export default async function AgentsIndexPage({ params }: AgentsIndexPageProps) 
                     {agent.title}
                   </p>
                   {agent.languages && agent.languages.length > 1 ? (
-                    <p className="mt-1 inline-flex items-center gap-1 text-xs font-semibold text-warm-accent">
+                    <p className="mt-1 inline-flex items-center gap-1 text-xs font-semibold text-warm-accent-strong">
                       <Globe className="h-3 w-3" />
                       {tTeam("seHablaEspanol")}
                     </p>
