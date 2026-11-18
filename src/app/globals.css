@@ -33,6 +33,7 @@
   --section-glow: radial-gradient(circle at top, rgba(0, 102, 179, 0.12), transparent 55%);
   --brand-stripe: linear-gradient(90deg, #00205c 0%, #0066b3 70%, #da291c 100%);
   --warm-accent: #c2610c;
+  --warm-accent-strong: #ad5a0b;
   --warm-accent-soft: #fef3e8;
   --personal-panel-gradient: linear-gradient(180deg, rgba(232, 240, 248, 0.92) 0%, rgba(255, 255, 255, 0.98) 58%);
   --commercial-panel-gradient: linear-gradient(180deg, rgba(254, 243, 232, 0.9) 0%, rgba(255, 255, 255, 0.98) 58%);
@@ -85,6 +86,7 @@
   --section-glow: radial-gradient(circle at top, rgba(93, 167, 223, 0.18), transparent 55%);
   --brand-stripe: linear-gradient(90deg, #5da7df 0%, #7fc9ff 56%, #f38b82 100%);
   --warm-accent: #f3bf7a;
+  --warm-accent-strong: #f3bf7a;
   --warm-accent-soft: #342311;
   --personal-panel-gradient: linear-gradient(180deg, rgba(18, 49, 88, 0.94) 0%, rgba(21, 34, 54, 0.98) 58%);
   --commercial-panel-gradient: linear-gradient(180deg, rgba(64, 42, 17, 0.94) 0%, rgba(21, 34, 54, 0.98) 58%);
@@ -118,6 +120,7 @@
   --color-gray-900: var(--gray-900);
   --color-gold: var(--gold);
   --color-warm-accent: var(--warm-accent);
+  --color-warm-accent-strong: var(--warm-accent-strong);
   --font-sans: var(--font-dm-sans);
   --font-display: var(--font-plus-jakarta);
 }
