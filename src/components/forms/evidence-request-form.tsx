@@ -28,6 +28,7 @@ import {
 import { agency, evidenceRequestTypes } from "@/lib/site-data";
 import { readStoredMarketingAttribution } from "@/lib/tracking";
 import { cn } from "@/lib/utils";
+import { useTurnstile } from "@/lib/useTurnstile";
 
 type EvidenceRequestFormProps = {
   assignedAgentSlug?: string;
@@ -47,6 +48,7 @@ export function EvidenceRequestForm({
     [initialAudience],
   );
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const { ref: turnstileRef, headers: turnstileHeaders } = useTurnstile();
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const fieldError = (message?: string) =>
     resolveFormValidationCopy(message, (key) => t(key as never));
@@ -85,6 +87,7 @@ export function EvidenceRequestForm({
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          ...turnstileHeaders(),
         },
         body: JSON.stringify({
           type: "evidence-request",
@@ -286,6 +289,7 @@ export function EvidenceRequestForm({
           />
         </Field>
 
+        <div ref={turnstileRef} />
         <input
           {...register("honeypot")}
           tabIndex={-1}

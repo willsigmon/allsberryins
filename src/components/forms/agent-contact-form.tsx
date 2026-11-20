@@ -22,6 +22,7 @@ import {
 } from "@/lib/lead-submit-error";
 import { agency } from "@/lib/site-data";
 import { readStoredMarketingAttribution } from "@/lib/tracking";
+import { useTurnstile } from "@/lib/useTurnstile";
 
 type AgentContactFormProps = {
   entryPoint?: string;
@@ -37,6 +38,7 @@ export function AgentContactForm({
   const formId = useId();
   const t = useTranslations("forms");
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const { ref: turnstileRef, headers: turnstileHeaders } = useTurnstile();
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const fieldError = (message?: string) =>
     resolveFormValidationCopy(message, (key) => t(key as never));
@@ -68,6 +70,7 @@ export function AgentContactForm({
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          ...turnstileHeaders(),
         },
         body: JSON.stringify({
           type: "agent-contact",
@@ -191,6 +194,7 @@ export function AgentContactForm({
           placeholder={t("agentMessagePlaceholder", { firstName: agentFirstName })}
         />
       </Field>
+      <div ref={turnstileRef} />
       <input
         {...register("honeypot")}
         tabIndex={-1}
