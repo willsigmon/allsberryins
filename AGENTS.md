@@ -54,3 +54,18 @@ Before substantive design or implementation, read the repository-root `brand.md`
 Verified local entrypoints: `/Volumes/SitHub/clients/allsberryins/brand.md`, `/Volumes/SitHub/clients/allsberryins/DESIGN.md`, `/Volumes/SitHub/clients/allsberryins/README.md`, `/Volumes/SitHub/clients/allsberryins/package.json`.
 
 For substantial visual work, use the live `sigdesign` skill and current capability routing. Keep brand decisions human-owned; keep accessibility, reduced motion, responsive behavior and screenshot-based verification explicit. A historical design example is not a default for this project.
+
+## Session routine (gold standard)
+
+Every coding session — agent or human — runs this loop:
+
+1. **Write the goal first.** Before touching code, state what "done" looks like:
+   acceptance criteria, the exact verification commands, and what you will
+   NOT change. No goal, no code.
+2. **Verify, don't claim.** Run this repo's own checks and report what the
+   tools actually said — not what you hoped. A green local build is not a
+   production deploy; a source build is not the uploaded build.
+3. **Every mistake becomes a rule.** When something breaks, misleads, or burns
+   an hour, add the lesson to this file in the same session — one bullet under
+   the right section, committed to git. That's how this file gets good.
+   That's how it stays good.
